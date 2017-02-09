@@ -28,7 +28,7 @@ end;
 /
 {% endhighlight %}
 
-<img src="https//dl.dropbox.com/s/xwa3njepyxz6mev/drop%20multiple%20table.PNG">
+<img src="https://dl.dropbox.com/s/xwa3njepyxz6mev/drop%20multiple%20table.PNG">
 
 <p>&nbsp;여기서 주의하실 점은 'loop execute ~' 이하의 문장은 '' 안에도 띄어쓰기를 정확히 쓰셔야 한다는 점입니다. 왜냐하면, 저 문장이</p>
 

@@ -32,7 +32,7 @@ image:
 <p>&nbsp;코딩을 하기에 앞서서 oauth가 어떤 것인지 먼저 알면 model과 controller를 구성할 때 왜 그렇게 구성했는지 이해하기 쉽습니다. 그래서 읽어보시면 좋을 자료를 알려드리자면, <a href="http://earlybird.kr/1584">http://earlybird.kr/1584</a>의 글을 한 번 읽어보길 권장합니다.</p>
 <p>&nbsp;복잡한 내용은 제쳐두고, 핵심만 알려드리자면, 다음 그림을 참고하시면 됩니다.</p>
 
-<img src="https//dl.dropbox.com/s/dgx0isn6contbjp/oauth2_triangle2.png">
+<img src="https://dl.dropbox.com/s/dgx0isn6contbjp/oauth2_triangle2.png">
 <p>출처는 <a href="http://earlybird.kr/1584">http://earlybird.kr/1584</a> 입니다.</p>
 
 <p>&nbsp;저희가 사용하는 <span style="font-weight:bold">oauth2.0</span>에는 다양한 로그인 방식이 있다고 나와있습니다. 그 중 기본은</p>
@@ -90,7 +90,7 @@ rails generate devise:controllers user
 
 <p>&nbsp;이 두 명령어는 Controller와 View를 Devise에 맞게 만들어주는 명령어입니다. 위 명령어를 치면 다음과 같은 Controller와 View가 생성됩니다.</p>
 
-<img src="https//dl.dropbox.com/s/kpegzzfivvzz4r7/devise_result.png">
+<img src="https://dl.dropbox.com/s/kpegzzfivvzz4r7/devise_result.png">
 
 <p>&nbsp;먼저 View의 경우 Devise를 써보았다면 로그인 페이지(/users/sign_in), 회원가입 페이지(/users/sign_up) 등의 페이지가 만들어지는데 그것을 수정할 수 있도록 해주는 view들입니다.</p>
 <p>&nbsp;다음으로 Controller의 경우 Devise로 할 수 있는 일들(로그인, 회원가입, 비밀번호 찾기, SNS 로그인 관리 등)을 나눠서 처리할 수 있는 Controllers들입니다.(그냥 사용하면 작동하지 않고, route.rb를 설정해주어야 사용할 수 있습니다. 이 부분은 뒤에서 자세히 설명하도록 하겠습니다.)</p>
@@ -239,7 +239,7 @@ end
 
 <p>&nbsp;<code>auth hash</code>란, 로그인 기능 provider들(즉, 페이스북, 구글)별로 얻을 수 있는 정보를 hash로 저장한 것을 말합니다.(정확한 정의는 아니고.. 제가 임의의로 이해한 내용입니다.) 그래서, 각각의 omniauth github 페이지를 들어가보면 다음과 같이 <code>auth hash</code> 섹션을 두고, 어떤 정보를 어떤 이름으로 제공하는지 보여줍니다. 아래 예시는 google-oauth2의 예시입니다.</p>
 
-<img src="https//dl.dropbox.com/s/jp7iir1sgx86os9/auth%20hash.png">
+<img src="https://dl.dropbox.com/s/jp7iir1sgx86os9/auth%20hash.png">
 
 <p>&nbsp;이 <code>auth hash</code>를 provider별로 살펴보면, 소셜 로그인을 제공하는 서비스들은 크게 두 가지로 나눌 수 있습니다. 하나는 이메일을 api로 제공하는 서비스, 다른 하나는 이메일을 제공하지 않는 서비스입니다. 페이스북과 구글, 네이버의 경우 이메일을 제공하고, 카카오나 트위터, 라인, 인스타그램은 이메일을 제공하지 않습니다. 여기서 문제가 되는 부분은 이메일이 없는 서비스들입니다. Devise는 기본적으로 이메일을 통해 회원들을 구분하는 기능을 가지고 있습니다. 하지만 이메일을 제공하지 않는 api로 로그인하는 회원들의 경우, 그 회원들은 이메일이 없으니 그들을 구분하는 방법이 없어집니다.(user 모델에 email_required? 부분은 이메일 필수 여부를 false로 만들어 일단 이메일이 없어도 로그인이 되도록 만들었습니다.)</p>
 <p>&nbsp;물론, 앞서 언급한 access token은 회원별로 이미 고유한 것들이기 때문에 시스템은 token으로 회원을 구분합니다. 하지만, 개발을 할 경우 일반적으로 token을 가지고 작업을 하기보다는 이메일 혹은 이름 같은 것들로 회원을 구별하기 때문에, 데이터베이스상에서 유일하게 존재하는 정보가 필요합니다.</p>
@@ -292,7 +292,7 @@ end
 
 <p>&nbsp;View같은 경우에는 css의 영향이 커서 모든 파일을 하나하나 설명하다보면 글이 지나치게 길어질 것 같아서 필수적으로 설명해야 하는 부분만 설명하고, 나머지는 링크로 대체하도록 하겠습니다. 여기서 제가 사용한 css framework은 <a href="http://semantic-ui.com/introduction/getting-started.html">semantic-ui</a>라는 것으로 다음과 같은 결과를 만들 수 있습니다.</p>
 
-<img src="https//dl.dropbox.com/s/5wecl37xbiek8jj/login.png">
+<img src="https://dl.dropbox.com/s/5wecl37xbiek8jj/login.png">
 
 <p>&nbsp;여기서 수정하는 view는 다음과 같습니다.</p>
 {% highlight html %}

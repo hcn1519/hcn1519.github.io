@@ -16,7 +16,7 @@ tags: [Java, Algorithm StressTesting, Coursera]
 <li>다음으로 배열에 들어갈 숫자들을 입력합니다.</li>
 <li>입력된 숫자들 중 가장 큰 두 개를 곱해서 최댓값을 출력합니다.</li>
 </ol>
-<img src="https//dl.dropbox.com/s/c8ph0eung4v4e9q/test.png">
+<img src="https://dl.dropbox.com/s/c8ph0eung4v4e9q/test.png">
 
 {% highlight java %}
 // MaxPairwiseProduct.java
@@ -134,7 +134,7 @@ public static void main(String[] args) {
 
 <p>&nbsp;위의 while문은 무한루프로서 두 메소드에서 나온 값이 실제로 같은 값인지 체크합니다. 둘이 다른 값이라면, Wrong Answer를 뿜습니다. 둘이 실제로 같은 값이라면, 계속 OK를 찍으면서 무한루프를 돌겠죠? 확인해보면 아래와 같습니다.</p>
 
-<img src="https//dl.dropbox.com/s/jnf7qflwlte5r2u/test2.png">
+<img src="https://dl.dropbox.com/s/jnf7qflwlte5r2u/test2.png">
 
 <p>&nbsp;캡처상으로는 보여드리는데 한계가 있지만 무한루프를 돌고 있습니다. 주어진 값 내에서는 두 메소드가 동일한 작업을 하는 것을 확인할 수 있습니다.</p>
 

@@ -27,4 +27,4 @@ java APlusB
 {% endhighlight %}
 
 <p>&nbsp;결과는 다음과 같습니다.</p>
-<img src="https//dl.dropbox.com/s/zce4iel68dbk91d/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202016-12-21%20%EC%98%A4%ED%9B%84%203.45.17.png">
+<img src="https://dl.dropbox.com/s/zce4iel68dbk91d/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202016-12-21%20%EC%98%A4%ED%9B%84%203.45.17.png">

@@ -19,7 +19,7 @@ date:   2016-02-05 13:30:00
 
 
 <h4>1. token과 관련된 문제(unexpected token)</h4>
-<img src="https//dl.dropbox.com/s/rsbv6mqcgrr6zsy/token.png">
+<img src="https://dl.dropbox.com/s/rsbv6mqcgrr6zsy/token.png">
 <p>&nbsp;이 오류는 아직 rails에 익숙하지 않아서 rails form을 사용하지 않고, html 태그를 사용하는 분들이 흔히 보는 오류 메세지입니다.(사실 저도 아직 잘 못 씁니다..) Rails에서는 기본적으로 입력 form을 생성할 때 보안을 강화하기 위해 문자열 인코딩 정보와 token이라는 일종의 암호문을 함께 전송합니다. 그런데 이 두가지는 rails에서 제공하는 form helper로 전송할 때는 자동으로 생성되지만, html태그로 전송될 때는 자동으로 생성되지 않습니다.</p>
 <p>간단한 예시로 무엇이 문제인지 알아보겠습니다.</p>
 {% highlight erb %}
