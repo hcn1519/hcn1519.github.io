@@ -31,6 +31,10 @@
      font-family: 'KoPub Dotum Medium';
      src: url(http://hcn1519.github.io/fonts/KoPubDotumMedium.ttf);
  }
+ @font-face {
+     font-family: 'KoPub Dotum Bold';
+     src: url(http://hcn1519.github.io/fonts/KoPubDotumBold.ttf);
+ }
 /*
  * Global resets
  *
@@ -48,7 +52,7 @@ html {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "KoPub Dotum Medium", sans-serif;
+  font-family: "KoPub Dotum Bold", sans-serif;
   font-weight: 400;
   color: #313131;
   letter-spacing: -.025rem;
@@ -151,7 +155,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 14rem;
   visibility: hidden;
   overflow-y: auto;
-  font-family: "PT Sans", Helvetica, Arial, sans-serif;
+  font-family: "KoPub Dotum Medium", serif;
   font-size: .875rem; /* 15px */
   color: rgba(255,255,255,.6);
   background-color: #202020;
@@ -371,7 +375,7 @@ a.sidebar-nav-item:focus {
   overflow: hidden; /* clearfix */
   margin-left: -1rem;
   margin-right: -1rem;
-  font-family: "PT Sans", Helvetica, Arial, sans-serif;
+  font-family: "KoPub Dotum Medium", serif;
   color: #ccc;
   text-align: center;
 }
