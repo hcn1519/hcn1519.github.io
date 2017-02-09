@@ -80,7 +80,7 @@ rails generate uploader S3
 {% endhighlight %}
 
 <p>&nbsp;아래에서 볼 수 있듯이 <code>app/uploaders/s3_uploader.rb</code>에 새로운 파일이 생성된 것을 확인할 수 있습니다.</p>
-<img src="http://dl.dropbox.com/s/e3xbpkna2rzgnmf/uploader.PNG">
+<img src="https//dl.dropbox.com/s/e3xbpkna2rzgnmf/uploader.PNG">
 
 <p>&nbsp;해당 파일에 들어가보면, carrierwave에서 제공하는 다양한 저장 옵션이 주석처리되어 있습니다.</p>
 {% highlight ruby %}
@@ -175,7 +175,7 @@ end
 
 <p>&nbsp;위 코드에서 id, key, region, 'name_of_directory'부분을 여러분들의 설정에 맞게 변경해주어야 합니다. 여기서 region은 서울의 경우 ap-northeast-2이며, 도쿄는 ap-northeast-1입니다. ID와 Key의 경우 s3 탭에서 설정하는 것이 아니고,</p>
 
-<img src="http://dl.dropbox.com/s/dpzkl7v69172vsb/aws_users.png">
+<img src="https//dl.dropbox.com/s/dpzkl7v69172vsb/aws_users.png">
 
 <p>&nbsp;우측 상단의 본인 계정탭의 Security Credentials에서 생성하는 것입니다. 그리고 Security Credentials에서 users탭을 누르고 user를 생성하되, 중간에 id와 key의 경우 따로 메모해두시고, <code>fog.rb</code>에 채워넣으시면 됩니다. 또한 Permissions 항목에서 Attach policy를 한 후 s3full_access로 한 개의 policy를 생성해야 s3에 정상적으로 사진을 저장할 수 있습니다.</p>
 <p>&nbsp;다음으로 fog_directory의 경우 S3의 Bucket 이름으로, 간단한 생성 방법을 알려주는 링크로 설명을 대신하겠습니다.</p>
@@ -218,7 +218,7 @@ end
 <% end %>
 {% endhighlight %}
 <p>&nbsp;이에 대한 결과물로 다음과 같은 form이 만들어집니다.</p>
-<img src="http://dl.dropbox.com/s/z76rqnc9sreneew/new.PNG">
+<img src="https//dl.dropbox.com/s/z76rqnc9sreneew/new.PNG">
 
 <p>&nbsp;form을 구성할 때 rails scaffold에서는 parameter를 두 번 체크하는 시스템을 가지고 있습니다. <code>app/controllers/posts_controller.rb</code>에는 다음과 같은 부분이 있습니다.</p>
 {% highlight ruby %}
@@ -289,10 +289,10 @@ end
 
 {% endhighlight %}
 <p>&nbsp;위의 결과물로 다음과 같은 <code>show.html.erb</code>가 만들어집니다.</p>
-<img src="http://dl.dropbox.com/s/7z11wm9fabya0td/show.png">
+<img src="https//dl.dropbox.com/s/7z11wm9fabya0td/show.png">
 
 <p>&nbsp;또한 AWS S3에 해당 이미지 파일이 잘 저장되어 있음을 확인할 수 있습니다.</p>
-<img src="http://dl.dropbox.com/s/xa6nzl9g4u5g11u/s3_check.png">
+<img src="https//dl.dropbox.com/s/xa6nzl9g4u5g11u/s3_check.png">
 
 <p>&nbsp;지금까지 기본적으로 이미지를 S3에 저장하는 방법을 알아보았습니다.</p>
 

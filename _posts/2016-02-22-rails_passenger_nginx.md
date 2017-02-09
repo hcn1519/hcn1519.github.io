@@ -40,14 +40,14 @@ image:
 <h4>1. AWS 인스턴스 환경설정</h4>
 
 <p>&nbsp;가장 먼저 AWS에 로그인을 해야겠죠? 로그인을 하시고, 왼쪽 상단에 service라는 탭이 있습니다. 그 중 EC2라는 탭을 선택합니다.</p>
-<img src="http://dl.dropbox.com/s/tqn7c89kxlzt4gz/aws_start.png">
+<img src="https//dl.dropbox.com/s/tqn7c89kxlzt4gz/aws_start.png">
 <p>&nbsp;그럼 다음과 같은 화면이 나오는데, Launch Instance로 인스턴스를 생성합니다.</p>
-<img src="http://dl.dropbox.com/s/1iik9ht3o667azy/aws2.png">
+<img src="https//dl.dropbox.com/s/1iik9ht3o667azy/aws2.png">
 <p>&nbsp;다음으로 리눅스 종류를 선택하라고 하는데, Amazon Linux를 선택합니다. 참고로, Ubuntu같은 리눅스 배포판을 아시는 분들도 있으실텐데요. 어떤 것으로 만들어도 큰 차이는 없습니다. 다만 Amazon Linux의 경우 <code>yum</code>이라는 명령어로 패키지(프로그램)를 설치하고, Ubuntu같은 경우에는 <code>apt-get</code> 명령어로 패키지를 설치합니다. 여기서는 yum을 사용하여 패키지를 설치하므로, ubuntu를 통해 설치하는 분들은 yum을 apt-get으로 바꿔서 설치를 진행하시면 됩니다.</p>
 <p>&nbsp;리눅스 배포판 선택 이외에 나머지 설정은 그대로 두시면 됩니다. 인스턴스 생성을 완료하면 다음과 같은 화면이 나옵니다.</p>
-<img src="http://dl.dropbox.com/s/uhyolr588tbn2vj/aws3.png">
+<img src="https//dl.dropbox.com/s/uhyolr588tbn2vj/aws3.png">
 <p>&nbsp;여기서 launch-wizard-7을 클릭하시면 Security Groups탭으로 넘어가게 됩니다. 그리고 아래 Inbound에서 edit을 클릭하여 설정을 아래와 같이 변경합니다.</p>
-<img src="http://dl.dropbox.com/s/22qrr7dklxmk3ec/aws4.png">
+<img src="https//dl.dropbox.com/s/22qrr7dklxmk3ec/aws4.png">
 <p>&nbsp;이는 인스턴스에 특정 port를 열어주는 것인데, http로 되어 있는 80번 포트는 production 모드를 위한 것이고, 3000번 포트는 development 모드용입니다.</p>
 
 
@@ -55,14 +55,14 @@ image:
 <h4>2. Ruby, Rails, Passenger gem 설치</h4>
 
 <p>&nbsp;이 다음으로 인스턴스를 실행하는 방법은 위에 소개한 putty를 이용하거나, ssh를 이용하여 인스턴스에 접속하면 됩니다. 접속에 성공하였다면, login-as:에 <code>ec2-user</code>를 입력하면 다음과 같이 출력됩니다.</p>
-<img src="http://dl.dropbox.com/s/m8e2xwkq9ugx167/ec2.png">
+<img src="https//dl.dropbox.com/s/m8e2xwkq9ugx167/ec2.png">
 <p>&nbsp;이제 Ruby, Rails, passenger를 순차적으로 설치해보도록 하겠습니다. Ruby와 Rails 설치 방법은 몇 가지가 있는데, 그 중 RVM(Ruby Version Manager)을 이용한 방법이 가장 쉽고, 무난한 방법입니다. RVM은 <a href="https://rvm.io/">https://rvm.io</a>에서 설치할 수 있습니다. 해당 사이트에 접속하여 스크롤을 조금 내리면 <code>installation documentation</code>이라는 탭이 있습니다.</p>
-<img src="http://dl.dropbox.com/s/rtw4koeruvx14px/ec22.png">
+<img src="https//dl.dropbox.com/s/rtw4koeruvx14px/ec22.png">
 <p>&nbsp;들어가보면, RVM 설치 옵션에 Ruby나 Rails를 같이 설치할 수 있는 항목이 있습니다. 그 중 위의 두 명령어만 입력합니다.</p>
-<img src="http://dl.dropbox.com/s/g6xqcivjfk26xj1/ec23.png">
+<img src="https//dl.dropbox.com/s/g6xqcivjfk26xj1/ec23.png">
 
 <p>&nbsp;아래 명령어를 입력하면 다음과 같은 화면이 나옵니다. Warning~~라고 나오는데, 해당 명령어도 써줍니다.</p>
-<img src="http://dl.dropbox.com/s/6gsbtekhl8b9i62/image1.png">
+<img src="https//dl.dropbox.com/s/6gsbtekhl8b9i62/image1.png">
 {% highlight html %}
 source ~/.profile
 {% endhighlight %}
@@ -72,7 +72,7 @@ source ~/.profile
 rvm -v
 {% endhighlight %}
 
-<img src="http://dl.dropbox.com/s/4whx5upbrz7kbv8/ec24.png">
+<img src="https//dl.dropbox.com/s/4whx5upbrz7kbv8/ec24.png">
 <p>&nbsp;다음과 같이 출력되면, 설치가 잘 된 것입니다. 이제 다음과 같은 명령어로 Ruby와 Rails를 설치합니다.</p>
 {% highlight html %}
 rvm install ruby-2.2.1(내 프로젝트에 맞는 ruby 버전 입력)
@@ -85,7 +85,7 @@ gem install rails -v 4.2.4(내 프로젝트에 맞는 rails 버전 입력)
 ruby -v
 rails -v
 {% endhighlight %}
-<img src="http://dl.dropbox.com/s/daiqp59rvhgxkmh/ec25.PNG">
+<img src="https//dl.dropbox.com/s/daiqp59rvhgxkmh/ec25.PNG">
 <p>&nbsp;저같은 경우 Ruby는 2.2.1버전을, Rails는 4.2.4 버전을 설치했기 때문에 위와 같이 나옵니다.</p>
 <p>&nbsp;여기까지가 Ruby, Rails 설치 과정입니다. 이제 프로젝트에 <code>passenger</code> gem을 설치할 차례입니다. 먼저 git으로 프로젝트를 clone한 후(다운 받은 후) passenger를 설치해야 하는데, git이 설치되어 있지 않았을 겁니다. 그래서</p>
 {% highlight html %}
@@ -129,7 +129,7 @@ sudo yum install nodejs npm --enablerepo=epel
 
 <p>&nbsp;그리고 다시 rake db:migrate해주시면 정상 작동하는 것을 보실 수 있습니다.</p>
 
-<img src="http://dl.dropbox.com/s/wg6kaomlnpw4qqd/image2.png">
+<img src="https//dl.dropbox.com/s/wg6kaomlnpw4qqd/image2.png">
 
 <p>&nbsp;여기까지 완료하면 Nginx 이외의 환경설정은 완료한 것입니다.</p>
 
@@ -147,21 +147,21 @@ su
 {% endhighlight %}
 <p>&nbsp;다음과 같이 입력하고 방금 설정한 비밀번호를 입력하면<code>ec2-user</code>로 되어 있던 사용자가 <code>root</code>로 변경됩니다.</p>
 
-<img src="http://dl.dropbox.com/s/m9ipotplov23lxq/image4.png">
+<img src="https//dl.dropbox.com/s/m9ipotplov23lxq/image4.png">
 
 <p>&nbsp;이제 Nginx를 설치하면 됩니다.</p>
 {% highlight html %}
 passenger-install-nginx-module
 {% endhighlight %}
 
-<img src="http://dl.dropbox.com/s/oarbbuxe9oebkfk/image5.png">
+<img src="https//dl.dropbox.com/s/oarbbuxe9oebkfk/image5.png">
 <p>&nbsp;처음에 이런 화면이 나올텐데, 사뿐히 Enter를 눌러주시고, 다음으로 ruby를 선택해줍니다.</p>
 
-<img src="http://dl.dropbox.com/s/7jsuje62zdo77o2/image6.png">
+<img src="https//dl.dropbox.com/s/7jsuje62zdo77o2/image6.png">
 
 <p>&nbsp;그리고 다음과 같은 경고문구가 나옵니다.</p>
 
-<img src="http://dl.dropbox.com/s/8bo18qb0ahxn7ms/image7.png">
+<img src="https//dl.dropbox.com/s/8bo18qb0ahxn7ms/image7.png">
 
 <p>&nbsp;내용을 읽어보시면 아시겠지만, 보안상의 문제로 Nginx가 특정 폴더에 접근할 수 없다고 합니다. 그러니 진행되던 설치를 종료하고, 해당 명령어를 입력하고 다시 설치를 해줍니다.</p>
 
@@ -173,7 +173,7 @@ passenger-install-nginx-module
 
 <p>&nbsp;다시 설치를 실행하면, 다음과 같은 새로운 오류창이 나옵니다.</p>
 
-<img src="http://dl.dropbox.com/s/kqaragj89gnjbv3/image8.png">
+<img src="https//dl.dropbox.com/s/kqaragj89gnjbv3/image8.png">
 
 <p>&nbsp;읽어보시면, curl과 관련된 소프트웨어가 설치가 안 되었다는 것을 알 수 있습니다. 설치 과정을 종료하고(ctrl + c), 해당 소프트웨어를 설치해줍니다.</p>
 
@@ -184,7 +184,7 @@ passenger-install-nginx-module
 
 <p>&nbsp;다시 설치를 시작하면, 이번에는 다음과 같은 경고가 나옵니다.</p>
 
-<img src="http://dl.dropbox.com/s/93jq7fo0gujk4q4/image9.png">
+<img src="https//dl.dropbox.com/s/93jq7fo0gujk4q4/image9.png">
 
 <p>&nbsp;내용을 보면, Phusion Passenger는 최소 1GB의 메모리가 필요한데, 네 가상메모리는 995MB(10MB 부족..)라서 메모리가 부족하다는 내용입니다. 그래서 다음과 같은 명령어를 실행해라라는 얘기인데, 쿨하게 따라 해줍니다.</p>
 
@@ -196,15 +196,15 @@ passenger-install-nginx-module
 {% endhighlight %}
 <p>&nbsp;그리고 다시 Nginx 설치를 하면, 이렇게 Nginx 설치 옵션과 관련하여 우리에게 질문을 합니다. 1번을 선택하고 진행합니다.</p>
 
-<img src="http://dl.dropbox.com/s/3xyuyr7i3udqrry/image10.png">
+<img src="https//dl.dropbox.com/s/3xyuyr7i3udqrry/image10.png">
 
 <p>&nbsp;다음으로 한 번 더 파일을 어디다가 저장하겠냐고 다음과 같이 질문하는데 그냥 enter를 누릅니다.</p>
 
-<img src="http://dl.dropbox.com/s/hxd5ktkiy7xbyw4/image11.png">
+<img src="https//dl.dropbox.com/s/hxd5ktkiy7xbyw4/image11.png">
 <p>&nbsp;그럼 이제 더 이상 질문 없이 Nginx가 설치됩니다.</p>
 
 
-<img src="http://dl.dropbox.com/s/wtvqbwu5qd1ehnc/image12.png">
+<img src="https//dl.dropbox.com/s/wtvqbwu5qd1ehnc/image12.png">
 
 <p>&nbsp;설치가 완료되면 <code>root</code>사용자에서 빠져나옵니다.</p>
 {% highlight html %}
@@ -358,8 +358,8 @@ esac
 sudo chmod +x /etc/rc.d/init.d/nginx
 {% endhighlight %}
 
-<img src="http://dl.dropbox.com/s/d8o4rzvl97w3t67/image13.png">
-<img src="http://dl.dropbox.com/s/tfjmia4dkhidtlt/image14.png">
+<img src="https//dl.dropbox.com/s/d8o4rzvl97w3t67/image13.png">
+<img src="https//dl.dropbox.com/s/tfjmia4dkhidtlt/image14.png">
 
 <p>&nbsp;저의 경우 root 페이지를 설정해놓지 않아서 다음과 같은 페이지가 나왔습니다. root 페이지를 설정해주시면, 올바르게 페이지가 나옵니다.</p>
 <h5>2) Ubuntu 설정</h5>

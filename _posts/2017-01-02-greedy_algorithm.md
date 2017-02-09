@@ -47,11 +47,11 @@ tags: [Java, Algorithm, Greedy, Coursera]
 
 <p>&nbsp;Greedy 알고리즘의 가장 대표적인 문제로 언급되는 것이 Knapsack 문제입니다. 문제는 다음과 같습니다.</p>
 
-<img src="http://dl.dropbox.com/s/5x37ekxmdsxtq7s/knapsack.png">
+<img src="https//dl.dropbox.com/s/5x37ekxmdsxtq7s/knapsack.png">
 
 >배낭을 매고 긴 여행을 떠난다. 배낭에 담을 수 있는 총 무게와 담을 수 있는 물건의 가짓수가 주어진다. 물건에는 모두 value가 있고, 가지고 있는 총량도 정해져 있다. 이 때 value가 최대가 되도록 가방을 싸고, 최대 value 값을 출력하시오.(ex) 물건 가짓수 : 3, 가능한 무게 : 50, 물건1 : value - 60, weights - 20, 물건2 : value - 100, weights - 50, 물건1 : value - 120, weights - 30 경우 180 출력)
 
-<img src="http://dl.dropbox.com/s/u7qe6w9dk6kvdx0/sample.png">
+<img src="https//dl.dropbox.com/s/u7qe6w9dk6kvdx0/sample.png">
 
 <p>&nbsp;이 문제를 풀 때 Greedy 알고리즘의 방식에 따라 가장 탐욕스러운 선택을 하되, 그 선택이 safe move인지 판단한 후 이를 반복하는 과정을 진행합니다. 여기서의 safe move는 바로, 무게당 value가 가장 큰 물건을 먼저 배낭에 담는 것입니다. 즉, value/weight의 값이 가장 큰 값을 먼저 가방에 집어 넣는 것이죠.</p>
 
