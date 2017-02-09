@@ -33,8 +33,13 @@
  }
  @font-face {
      font-family: 'KoPub Dotum Bold';
-     src: url(http://dl.dropbox.com/s/zo38pj6dwqtuxdy/KoPubDotumBold.ttf);
+     src: url(https://dl.dropbox.com/s/zo38pj6dwqtuxdy/KoPubDotumBold.ttf);
  }
+ @font-face {
+     font-family: 'KoPub Dotum Light';
+     src: url(https://www.dropbox.com/s/vftnk5gz314577r/KoPubDotumLight.ttf);
+ }
+
 /*
  * Global resets
  *
@@ -48,7 +53,7 @@ body {
 }
 
 html {
-  font-family: "KoPub Dotum Medium", serif;
+  font-family: "KoPub Dotum Light", serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
