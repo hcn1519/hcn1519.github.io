@@ -10,7 +10,7 @@ pre, code {
   font-size: 0.95em;
 }
 
-// 글 중간에 쓰는 블럭용
+/*글 중간에 쓰는 블럭용*/
 code {
   background: #eff0f1;
   padding: 3px 0px;
@@ -18,7 +18,7 @@ code {
   border-radius: 2px;
   white-space: inherit;
 }
-pre { // only apply for code blocks
+pre {
   color:#33333f;
   overflow: auto;
   display: block;
