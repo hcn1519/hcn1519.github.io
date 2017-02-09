@@ -55,7 +55,9 @@ body {
 html {
   font-family: "KoPub Dotum Light", serif;
 }
-
+p {
+  font-family: "KoPub Dotum Light", serif;
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: "KoPub Dotum Bold", sans-serif;
   font-weight: 400;
