@@ -335,10 +335,19 @@ a.sidebar-nav-item:focus {
 .post-title,
 .post-title a {
   color: #303030;
+  -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+        transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
 }
 .page-title,
 .post-title {
   margin-top: 0;
+}
+
+.page-title,
+.post-title,
+.post-title a:hover {
+  color: #3F51B5;
+  text-decoration: none;
 }
 
 /* Meta data line below post title */
