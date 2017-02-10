@@ -69,15 +69,7 @@ h4, h5, h6 {
   color: #313131;
   letter-spacing: -.025rem;
 }
-a {
-  color: #3F51B5;
-  -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
-        transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
-}
-a:hover {
-  color: #1A237E;
-  text-decoration: none;
-}
+
 /*
  * Wrapper
  *
