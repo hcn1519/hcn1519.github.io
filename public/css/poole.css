@@ -70,6 +70,7 @@ a {
   color: #3F51B5;
   -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
         transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+  text-decoration: none !important;
 }
 a:hover, a:focus {
   color: #1A237E;
