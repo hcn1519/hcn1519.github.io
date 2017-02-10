@@ -58,13 +58,17 @@ html {
 p {
   font-family: "KoPub Dotum Light", serif;
 }
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3 {
   font-family: "KoPub Dotum Bold", sans-serif;
   font-weight: 400;
   color: #313131;
   letter-spacing: -.025rem;
 }
-
+h4, h5, h6 {
+  font-family: "KoPub Dotum Bold", sans-serif;
+  color: #313131;
+  letter-spacing: -.025rem;
+}
 
 /*
  * Wrapper
@@ -87,7 +91,7 @@ h1, h2, h3, h4, h5, h6 {
  */
 
 .container {
-  max-width: 28rem;
+  max-width: 24rem;
 }
 @media (min-width: 38em) {
   .container {
@@ -96,7 +100,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 @media (min-width: 56em) {
   .container {
-    max-width: 38rem;
+    max-width: 50rem;
   }
 }
 
