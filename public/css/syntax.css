@@ -4,8 +4,15 @@
    font-weight: normal;
    src: url(https://dl.dropbox.com/s/gfpf7va26n1cenn/Menlo-Regular.woff);
 }
+@font-face {
+   font-family: 'D2 Coding';
+   font-style: normal;
+   font-weight: normal;
+   src: url(https://dl.dropbox.com/s/z9ojt7koei7qrsh/D2Coding.ttc);
+}
+
 pre, code {
-  font-family: 'Menlo Regular';
+  font-family: 'D2 Coding';
   padding: 0.2em;
   font-size: 0.95em;
 }
