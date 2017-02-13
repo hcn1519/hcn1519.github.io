@@ -10,14 +10,14 @@
   <meta property="og:image" content="{% if page.title %}{{ site.baseurl }}/public/assets/{{ page.image.feature }}{% else %}{{ site.baseurl }}/public/assets/blogThumb.png{% endif %}">
   <meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
-
+<!--
   <title>
     {% if page.title == "Home" %}
       {{ site.title }} &middot; {{ site.tagline }}
     {% else %}
       {{ page.title }} &middot; {{ site.title }}
     {% endif %}
-  </title>
+  </title> -->
 
   <!-- CSS -->
   <link rel="stylesheet" href="{{ site.baseurl }}/public/css/poole.css">
