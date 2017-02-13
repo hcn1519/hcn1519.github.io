@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Swift의 Struct와 Class"
 excerpt: "Swift의 Struct와 Class의 차이에 대해 알아봅니다."
-categories: swift language oop
+categories: Swift Language OOP
 date:   2017-02-01 00:30:00
 tags: [Swift, Language, OOP]
 image:

@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "OOP - Class와 Object"
 excerpt: "Java를 통해 Class와 Object에 대해 알아봅니다."
-categories: java OOP class
+categories: Java OOP Class
 date:   2017-01-24 00:30:00
 tags: [Java, OOP, Class]
 ---

@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Stress Testing에 대하여"
 excerpt: "알고리즘을 테스트하고, 고치고, 디버깅하는데 쓰이는 stress testing에 대해서 알아봅니다."
-categories: java algorithm stressTesting coursera
+categories: Java Algorithm Coursera
 date:   2016-12-21 00:30:00
 tags: [Java, Algorithm StressTesting, Coursera]
 ---

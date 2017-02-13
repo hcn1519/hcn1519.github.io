@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Rails에서 CSV 파일 import하기(by rake)"
 excerpt: "커맨드라인에서 rake 명령어를 통해 CSV 데이터를 Rails 프로젝트 안에 넣는 방법에 대해 알아봅니다."
-categories: rails rake csv
+categories: Rails Rake CSV
 date:   2016-11-27 00:30:00
 tags: [Rails, CSV, Rake]
 image:

@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Greedy algorithm(탐욕 알고리즘)"
 excerpt: "Greedy algorithm에 대해 알아봅니다."
-categories: java algorithm greedy_algorithm coursera
+categories: Java Algorithm Coursera
 date:   2017-01-02 00:30:00
 tags: [Java, Algorithm, Greedy, Coursera]
 ---

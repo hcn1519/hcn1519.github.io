@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Oracle(SQL)에서 여러 개의 테이블 한 번에 drop하기"
 excerpt: "SQL 명령어로 여러 개의 테이블을 한 번에 drop하는 방법에 대해 알아봅니다."
-categories: oracle sql language
+categories: Oracle Sql Language
 date:   2016-11-27 00:30:00
 tags: [SQL, Oracle, Language]
 ---

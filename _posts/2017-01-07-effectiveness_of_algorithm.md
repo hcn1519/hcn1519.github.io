@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Big-O notation"
 excerpt: "Big-O notation에 대해 알아봅니다."
-categories: java algorithm coursera Big-O
+categories: Java Algorithm Coursera Big-O
 date:   2017-01-07 00:30:00
 tags: [Java, Algorithm, Coursera, Big-O, logarithm]
 ---

@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Java Scanner의 에러 체크하기(Validation)"
 excerpt: "Java에서 Scanner Class의 에러를 체크하는 방법입니다."
-categories: java validation Language
+categories: Java Validation Language
 date:   2016-10-04 00:30:00
 tags: [Java, Scanner, Validation, Language]
 image:

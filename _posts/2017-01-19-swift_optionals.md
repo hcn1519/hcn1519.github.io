@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Swift optionals"
 excerpt: "Swift의 optionals에 대해 알아봅니다."
-categories: swift language
+categories: Swift Language
 date:   2017-01-19 00:30:00
 tags: [Swift, Language]
 image:

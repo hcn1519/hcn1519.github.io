@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Java파일 컴파일해서 실행하기"
 excerpt: "콘솔에서 java 파일을 컴파일해서 실행하는 방법을 알아봅니다."
-categories: java language
+categories: Java Language
 date:   2016-12-21 00:30:00
 tags: [Java, Language]
 ---

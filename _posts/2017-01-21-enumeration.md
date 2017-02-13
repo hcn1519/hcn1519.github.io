@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Enumeration 개념"
 excerpt: "Enumeration에 대해 알아봅니다."
-categories: java swift
+categories: Java Swift
 date:   2017-01-21 00:30:00
 tags: [Java, Swift, Language]
 ---

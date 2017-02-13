@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Swift underscore"
 excerpt: "Swift에서 쓰이는 underscore(_)에 대해 알아봅니다."
-categories: swift language
+categories: Swift Language
 date:   2017-01-22 00:30:00
 tags: [Swift, Language]
 image:
