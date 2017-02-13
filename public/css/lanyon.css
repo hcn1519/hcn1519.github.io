@@ -615,10 +615,10 @@ a.pagination-item:hover {
   cursor: pointer;
 }
 
-.tag-link {
+.tag-chips a.tag-link {
   color: rgba(0,0,0, 0.6) !important;
 }
 
-.tag-link:hover, .tag-link:focus {
+.tag-chips a.tag-link:hover, .tag-chips a.tag-link:focus {
   color: rgba(0,0,0, 0.6) !important;
 }
