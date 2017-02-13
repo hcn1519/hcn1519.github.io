@@ -355,7 +355,7 @@ a.sidebar-nav-item:focus {
 .post-date {
   display: inline-block;
   margin-top: 0rem;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   color: #9a9a9a;
 }
 

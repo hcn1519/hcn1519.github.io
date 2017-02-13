@@ -2,7 +2,7 @@
 #
 # Use of `relative_permalinks` ensures post links from the index work properly.
 permalink:         /articles/:year-:month/:title
-# Remove relative_permalinks
+url:               "https://hcn1519.github.io" # the base hostname & protocol for your site
 
 # Setup
 title:               "Changnam"
