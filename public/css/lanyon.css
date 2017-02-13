@@ -343,18 +343,19 @@ a.sidebar-nav-item:focus {
   margin-top: 0;
 }
 
-.page-title,
-.post-title,
 .post-title a:hover {
   color: #3F51B5;
   text-decoration: none;
 }
 
 /* Meta data line below post title */
+.post-title {
+  display: inline-block;
+}
 .post-date {
-  display: block;
-  margin-top: -.5rem;
-  margin-bottom: 1rem;
+  display: inline-block;
+  margin-top: 0rem;
+  margin-left: 1rem;
   color: #9a9a9a;
 }
 
@@ -375,14 +376,6 @@ a.sidebar-nav-item:focus {
   font-size: 75%;
   color: #999;
 }
-.related-posts li a:hover {
-  color: #268bd2;
-  text-decoration: none;
-}
-.related-posts li a:hover small {
-  color: inherit;
-}
-
 
 /*
  * Pagination
@@ -620,5 +613,9 @@ a.pagination-item:hover {
 }
 
 .tag-chips a.tag-link:hover, .tag-chips a.tag-link:focus {
+  color: rgba(0,0,0, 0.6) !important;
+}
+
+ul.related-posts {
   color: rgba(0,0,0, 0.6) !important;
 }
