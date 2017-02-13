@@ -358,7 +358,14 @@ a.sidebar-nav-item:focus {
   margin-left: 0.5rem;
   color: #9a9a9a;
 }
-
+@media(max-width: 415px) {
+  .post-date {
+    display: block;
+    margin-top: -0.5rem;
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+}
 /* Related posts */
 .related {
   padding-top: 2rem;
