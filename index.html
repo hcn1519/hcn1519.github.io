@@ -24,9 +24,9 @@ title: Home
     {% if post.tags %}
       {% for tag in post.tags %}
       <div class="tag-chips">
-        <span class="tag-chips-text">
+        <a class="tag-link" href="https://hcn1519.github.io/tags/#{{ tag }}">
           {{ tag }}
-        </span>
+        </a>
       </div>
       {% endfor %}
     {% endif %}
