@@ -588,3 +588,12 @@ a.pagination-item:hover {
 .layout-reverse.sidebar-overlay #sidebar-checkbox:checked ~ .sidebar {
   box-shadow: -.25rem 0 .5rem rgba(0,0,0,.1);
 }
+
+
+.tag-cloud {
+  list-style-type: none;
+}
+.tag-cloud li {
+  display: inline-block;
+  padding-right: 2px;
+}
