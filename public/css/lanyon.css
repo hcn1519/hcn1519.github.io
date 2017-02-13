@@ -602,24 +602,25 @@ a.pagination-item:hover {
 /*태그 칩 디자인*/
 .tag-chips {
   display: inline-block;
-  border-radius: 42px;
-  padding: 0;
-  height: 42px;
+  border-radius: 5px;
+  padding: 5px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -webkit-transition: .2s ease-out;
           transition: .2s ease-out;
+  color: rgba(0,0,0, 0.6);
+  background: rgba(0,0,0, 0.05);
 }
 
 .tag-chips:hover {
-  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+  background: rgba(0,0,0, 0.1);
   cursor: pointer;
 }
 
-.tag-chips-text {
+/*.tag-chips-text {
   display: inline-block;
   font-weight: 400;
   font-size: 16px;
   height: 42px;
   float: left;
   padding: 12px 18px 12px 10px;
-}
+}*/

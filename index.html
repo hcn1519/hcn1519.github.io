@@ -23,10 +23,8 @@ title: Home
     {% endif %}
     {% if post.tags %}
       {% for tag in post.tags %}
-        {% capture tag_name %}{{ tag | first }}{% endcapture %}
       <div class="tag-chips">
         <span class="tag-chips-text">
-          {{ tag_name }}
           {{ tag }}
         </span>
       </div>
