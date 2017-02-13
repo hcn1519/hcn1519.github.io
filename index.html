@@ -21,6 +21,13 @@ title: Home
       </p>
     </div>
     {% endif %}
+    {% if post.tags %}
+    <div class="tag-chips">
+      <span class="tag-chips-text">
+        {{ post.tags }}
+      </span>
+    </div>
+    {% endif %}
   </div>
   {% endfor %}
 </div>
