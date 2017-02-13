@@ -6,6 +6,11 @@
   <!-- Enable responsiveness on mobile devices-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
+  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }} {% endif %}">
+  <meta property="og:image" content="{% if page.title %}{{ site.baseurl }}/public/assets/{{ page.image.feature }}{% else %}{{ site.baseurl }}/public/assets/blogThumb.png{% endif %}">
+  <meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+
+
   <title>
     {% if page.title == "Home" %}
       {{ site.title }} &middot; {{ site.tagline }}
