@@ -23,9 +23,11 @@ title: Home
     {% endif %}
     {% if post.tags %}
     <div class="tag-chips">
-      <span class="tag-chips-text">
-        {{ post.tags }}
-      </span>
+      {% for tag in post.tags %}
+        <span class="tag-chips-text">
+          {{ tag | first }}
+        </span>
+      {% endif %}
     </div>
     {% endif %}
   </div>
