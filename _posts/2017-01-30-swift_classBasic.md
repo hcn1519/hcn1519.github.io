@@ -3,9 +3,9 @@ layout: post
 comments: true
 title:  "Swift Class 기본"
 excerpt: "Swift의 Class에서 쓰이는 constructor, getter, setter에 대해 알아봅니다."
-categories: Swift Language OOP
+categories: Swift Language OOP Class
 date:   2017-01-30 00:30:00
-tags: [Swift, Language, OOP]
+tags: [Swift, Language, OOP, Class]
 image:
   feature: swiftLogo.jpg
 ---
