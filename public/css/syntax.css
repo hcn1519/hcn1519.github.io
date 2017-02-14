@@ -8,7 +8,7 @@
    font-family: 'D2 Coding';
    font-style: normal;
    font-weight: normal;
-   src: url(https://dl.dropbox.com/s/z9ojt7koei7qrsh/D2Coding.ttc);
+   src: url({{ site.baseurl }}/public/fonts/D2Coding.ttc);
 }
 
 pre, code {

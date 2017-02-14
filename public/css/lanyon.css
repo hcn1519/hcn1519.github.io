@@ -29,15 +29,15 @@
 
  @font-face {
      font-family: 'KoPub Dotum Medium';
-     src: url(https://dl.dropbox.com/s/pdgxfxmbitj939m/KoPubDotumMedium.ttf);
+     src: url({{ site.baseurl }}/public/fonts/KoPubDotumMedium.ttf);
  }
  @font-face {
      font-family: 'KoPub Dotum Bold';
-     src: url(https://dl.dropbox.com/s/zo38pj6dwqtuxdy/KoPubDotumBold.ttf);
+     src: url({{ site.baseurl }}/public/fonts/KoPubDotumBlod.ttf);
  }
  @font-face {
      font-family: 'KoPub Dotum Light';
-     src: url(https://dl.dropbox.com/s/vftnk5gz314577r/KoPubDotumLight.ttf);
+     src: url({{ site.baseurl }}/public/fonts/KoPubDotumLight.ttf);
  }
 
 /*
