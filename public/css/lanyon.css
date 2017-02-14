@@ -29,15 +29,15 @@
 
  @font-face {
      font-family: 'KoPub Dotum Medium';
-     src: url({{ site.baseurl }}/public/fonts/KoPubDotumMedium.ttf);
+     src: url(https://hcn1519.github.io/public/fonts/KoPubDotumMedium.ttf);
  }
  @font-face {
      font-family: 'KoPub Dotum Bold';
-     src: url({{ site.baseurl }}/public/fonts/KoPubDotumBlod.ttf);
+     src: url(https://hcn1519.github.io/public/fonts/KoPubDotumBlod.ttf);
  }
  @font-face {
      font-family: 'KoPub Dotum Light';
-     src: url({{ site.baseurl }}/public/fonts/KoPubDotumLight.ttf);
+     src: url(https://hcn1519.github.io/public/fonts/KoPubDotumLight.ttf);
  }
 
 /*

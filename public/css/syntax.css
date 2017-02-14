@@ -2,13 +2,13 @@
    font-family: 'Menlo Regular';
    font-style: normal;
    font-weight: normal;
-   src: url(https://dl.dropbox.com/s/gfpf7va26n1cenn/Menlo-Regular.woff);
+   src: url(https://hcn1519.github.io/public/fonts/Menlo-Regular.woff);
 }
 @font-face {
    font-family: 'D2 Coding';
    font-style: normal;
    font-weight: normal;
-   src: url({{ site.baseurl }}/public/fonts/D2Coding.ttc);
+   src: url(https://hcn1519.github.io/public/fonts/D2Coding.ttc);
 }
 
 pre, code {
