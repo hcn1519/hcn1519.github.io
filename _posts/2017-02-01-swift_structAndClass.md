@@ -52,7 +52,7 @@ var truck1 = Truck(weight: 2000, mileage: 16)
 
 답은 바로, class는 <code>reference type</code>이고, struct는 <code>value type</code>이라는 점입니다. Swift 언어를 만든 Apple에서 제공하는 공식 블로그에서는 두 타입의 차이를 mutation(변하기 쉬움)의 측면에서 설명하고 있습니다. [Apple blog - Value and Reference Types](https://developer.apple.com/swift/blog/?id=10)
 
-위의 예제의 경우를 mutable 보면,
+위의 예제의 경우를 mutable 측면에서 살펴 보면,
 
 {% highlight swift %}
 var sportCar1 = SportsCar(brand: "포르쉐", model: "911")
@@ -80,7 +80,7 @@ print(truck1.weight) // 2000 출력
 
 &nbsp;정리하자면, class는 변수 자신이 자신의 속성을 바꾸는 것 이외에도 외부에서 속성을 변경할 수 있습니다.(sportCar2.brand를 바꾼 것이 sportCar1.brand를 변화시킨 것) 반면 struct는 자신의 속성은 자신이 바꾸어야 합니다. 그렇기 때문에 value type인 struct가 class보다 좀 더 mutation에 대해 안전하다고 할 수 있습니다.
 
-## 어떤 데이터를 사용해야 되나요?
+## 그렇다면 어떤 데이터를 사용해야 되나요?
 
 자 여기까지 보면 class를 사용하는 것이 안전을 보장하지 않으므로, value type인 struct를 사용하는 것이 좋아 보입니다. 하지만, 실제로 Swift의 대부분 API들은 class에 기반하고 있기 때문에 많은 경우 custom 데이터 타입을 만들 때 class를 사용해야 합니다. 그 이외에 상황에서는 특히 multi threads 환경과 같은 곳에서는 mutable한 속성은 잘못된 결과를 쉽게 야기할 수 있기 때문에 struct를 사용할 것은 권장합니다.(기본 데이터 타입인 Array, String, Dictionary 등도 모두 value type에 속합니다.)
 
