@@ -106,8 +106,9 @@ print(truck1.weight) // 2000 출력
 
 ## 그렇다면 어떤 데이터를 사용해야 되나요?
 
-많은 Swift의 API들은 class에 기반하고 있기 때문에 custom 데이터 타입을 만들 때 class를 무조건 사용해야 하는 경우가 빈번합니다. 하지만, 그 이외의 상황, 특히 multi threads 환경과 같은 곳에서는 mutable한 속성이 잘못된 결과를 쉽게 야기할 수 있기 때문에 struct를 사용할 것을 권장합니다.(기본 데이터 타입인 Array, String, Dictionary 등도 모두 value type에 속합니다.) 동일한 값을 **복사** 하는 것은 constant time 수준만을 필요로 합니다. 이는 일반적으로 reference type에서 주소를 통해 값에 접근하는 것보다 더 빠릅니다. 또한 이는 Apple이 내세운 Swift의 POP(Protocol Oriented Programming)과 밀접한 관련이 있으므로 잘 이해해 두는 것이 좋습니다.
+많은 Swift의 API들은 class에 기반하고 있기 때문에 custom 데이터 타입을 만들 때 class를 무조건 사용해야 하는 경우가 빈번합니다. 하지만, 그 이외의 상황, 특히 multi threads 환경과 같은 곳에서는 mutable한 속성이 잘못된 결과를 쉽게 야기할 수 있기 때문에 struct를 사용할 것을 권장합니다.(기본 데이터 타입인 Array, String, Dictionary 등도 모두 value type에 속합니다.) Struct를 통해 동일한 값을 **복사** 하는 것은 constant time 수준만을 필요로 하고, 안전하게 데이터를 전달할 수 있습니다.
 
+<br/>
 
 ##### 더 볼만한 추가 자료
 - [Apple blog - Value and Reference Types](https://developer.apple.com/swift/blog/?id=10)
