@@ -56,7 +56,21 @@ var truck1 = Truck(weight: 2000, mileage: 16)
 
 그렇다면 가장 근본적인 두 데이터 타입의 차이는 무엇일까요?
 
-답은 바로, class는 <code>reference type</code>이고, struct는 <code>value type</code>이라는 점입니다. Swift 언어를 만든 Apple에서 제공하는 공식 블로그에서는 두 타입의 차이를 mutation(변하기 쉬움)의 측면에서 설명하고 있습니다. [Apple blog - Value and Reference Types](https://developer.apple.com/swift/blog/?id=10)
+답은 바로, class는 <code>reference type</code>이고, struct는 <code>value type</code>이라는 점입니다.
+
+#### Reference type
+<div class="message">
+  Reference type은 생성자를 통해 초기화 되고 나면, 변수에 값을 할당 하거나, 함수에서 호출할 때, 동일한 인스턴스의 reference(주소)를 반환하는 데이터 type을 말합니다. ex) Object
+</div>
+
+
+#### Value type
+<div class="message">
+  Value type은 변수에 값을 할당 하거나, 함수에서 호출할 때, 새로운 인스턴스를 만드는(copy) 데이터 type을 말합니다. ex) primitive data type - Int, Double, Char ...
+</div>
+출처 : [Reference and Value Types in Swift - Andrea Prearo](https://medium.com/@andrea.prearo/reference-and-value-types-in-swift-dad40ea76226#.lnwbky1s3)
+
+Swift 언어를 만든 Apple에서 제공하는 공식 블로그에서는 두 타입의 차이를 mutation(변하기 쉬움)의 측면에서 설명하고 있습니다. [Apple blog - Value and Reference Types](https://developer.apple.com/swift/blog/?id=10)
 
 위의 예제의 경우를 mutable 측면에서 살펴 보면,
 
@@ -78,18 +92,24 @@ print(truck1.weight) // 2000 출력
 
 <img src="https://dl.dropbox.com/s/dbqmfztgx16ht1u/sportcar.png">
 
-먼저 class의 경우, <code>sportCar1</code>과 같은 변수가 SportsCar 객체의 값을 직접 저장하지 않습니다. 대신 <code>sportCar1</code> 변수는 <code>sportCar1</code> 객체의 데이터들이 저장된 장소의 **주소** 를 저장합니다. 그렇기 때문에, <code>sportCar2 = sportCar1</code>의 결과는 <code>sportCar2</code>에 <code>sportCar1</code>의 **주소** 를 복사합니다. 반면, struct는 <code>truck1</code> 변수가 저장한 값을 **unique** 하게 저장합니다.
+먼저 class의 경우, <code>sportCar1</code>과 같은 변수가 SportsCar 객체의 값을 직접 저장하지 않습니다. 대신 <code>sportCar1</code> 변수는 <code>sportCar1</code> 객체의 데이터들이 저장된 장소의 **주소** 를 저장합니다. 그렇기 때문에, <code>sportCar2 = sportCar1</code>의 결과는 <code>sportCar2</code>에 <code>sportCar1</code>의 **주소** 를 복사합니다. 반면, struct는 <code>truck1</code> 변수가 저장한 값을 통채로 복사하여 새로운 인스턴스를 생성하고 이를 <code>truck1</code>에 할당합니다.
 
 <img src="https://dl.dropbox.com/s/bbz6bcc7n21g67a/truck.png">
 
-그렇기 때문에 <code>truck2 = truck1</code>의 결과는 <code>truck2</code>에 <code>truck1</code>의 **값** 전체를 복사합니다. 그렇기 때문에, <code>truck2</code>와 <code>truck1</code>은 전혀 별개의 데이터가 되고 둘은 서로에게 영향을 미치지 않습니다. 이는 primitive data type인 Int, Double, Char 등과 유사하게 동작합니다.
+즉, <code>truck2 = truck1</code>의 결과는 <code>truck2</code>에 <code>truck1</code>의 **값** 전체를 복사합니다. 그렇기 때문에, <code>truck2</code>와 <code>truck1</code>은 전혀 **별개의 데이터** 가 되고 둘은 서로에게 영향을 미치지 않습니다.
 
-&nbsp;정리하자면, class는 변수 자신이 자신의 속성을 바꾸는 것 이외에도 외부에서 속성을 변경할 수 있습니다.(sportCar2.brand를 바꾼 것이 sportCar1.brand를 변화시킨 것) 반면 struct는 자신의 속성은 자신이 바꾸어야 합니다. 그렇기 때문에 value type인 struct가 class보다 좀 더 mutation에 대해 안전하다고 할 수 있습니다.
+<div class="message">
+  정리하자면, class는 변수 자신이 자신의 속성을 바꾸는 것 이외에도 외부에서 속성을 변경할 수 있습니다.(sportCar2.brand를 바꾼 것이 sportCar1.brand를 변화시킨 것) 반면 struct는 자신의 속성은 자신이 바꾸어야 합니다. 그렇기 때문에 value type인 struct가 class보다 좀 더 mutation에 대해 안전하다고 할 수 있습니다.
+</div>
 
 <br/>
 
 ## 그렇다면 어떤 데이터를 사용해야 되나요?
 
-많은 Swift의 API들은 class에 기반하고 있기 때문에 custom 데이터 타입을 만들 때 class를 무조건 사용해야 하는 경우가 빈번합니다. 하지만, 그 이외의 상황, 특히 multi threads 환경과 같은 곳에서는 mutable한 속성이 잘못된 결과를 쉽게 야기할 수 있기 때문에 struct를 사용할 것을 권장합니다.(기본 데이터 타입인 Array, String, Dictionary 등도 모두 value type에 속합니다.) 또한 이는 Apple이 내세운 Swift의 POP(Protocol Oriented Programming)과 밀접한 관련이 있으므로 잘 이해해 두는 것이 좋습니다.
+많은 Swift의 API들은 class에 기반하고 있기 때문에 custom 데이터 타입을 만들 때 class를 무조건 사용해야 하는 경우가 빈번합니다. 하지만, 그 이외의 상황, 특히 multi threads 환경과 같은 곳에서는 mutable한 속성이 잘못된 결과를 쉽게 야기할 수 있기 때문에 struct를 사용할 것을 권장합니다.(기본 데이터 타입인 Array, String, Dictionary 등도 모두 value type에 속합니다.) 동일한 값을 **복사** 하는 것은 constant time 수준만을 필요로 합니다. 이는 일반적으로 reference type에서 주소를 통해 값에 접근하는 것보다 더 빠릅니다. 또한 이는 Apple이 내세운 Swift의 POP(Protocol Oriented Programming)과 밀접한 관련이 있으므로 잘 이해해 두는 것이 좋습니다.
 
-> 참고 문서 : Apple Inc. The Swift Programming Language (Swift 3.0.1)
+
+##### 더 볼만한 추가 자료
+- [Apple blog - Value and Reference Types](https://developer.apple.com/swift/blog/?id=10)
+- [Reference and Value Types in Swift - Andrea Prearo](https://medium.com/@andrea.prearo/reference-and-value-types-in-swift-dad40ea76226#.lnwbky1s3)
+- [Stackoverflow - Why Choose Struct Over Class?](http://stackoverflow.com/a/24232845/5130783)
