@@ -10,12 +10,14 @@ image:
   feature: swiftLogo.jpg
 ---
 
+## Class와 Struct 기본 구조
+
 Class와 Struct는 매우 유사한 데이터 타입입니다. 형태도 유사하고, 쓰임새도 비슷합니다. Swift에서도 이러한 유사성은 유지되는데요. 그렇다면 구체적으로 어떤 부분에서 차이가 있을까요? 다음의 예제를 가지고 살펴보겠습니다.
 
 {% highlight swift %}
 class SportsCar {
-    var _brand: String
-    var _model: String
+    var brand: String
+    var model: String
 }
 struct Truck {
     var weight: Int
@@ -47,6 +49,9 @@ struct Truck {
 var sportCar1 = SportsCar(brand: "포르쉐", model: "911")
 var truck1 = Truck(weight: 2000, mileage: 16)
 {% endhighlight %}
+
+<br>
+## Class와 Struct의 차이
 
 그렇다면 가장 근본적인 두 데이터 타입의 차이는 무엇일까요?
 
@@ -80,10 +85,9 @@ print(truck1.weight) // 2000 출력
 
 &nbsp;정리하자면, class는 변수 자신이 자신의 속성을 바꾸는 것 이외에도 외부에서 속성을 변경할 수 있습니다.(sportCar2.brand를 바꾼 것이 sportCar1.brand를 변화시킨 것) 반면 struct는 자신의 속성은 자신이 바꾸어야 합니다. 그렇기 때문에 value type인 struct가 class보다 좀 더 mutation에 대해 안전하다고 할 수 있습니다.
 
+<br>
 ## 그렇다면 어떤 데이터를 사용해야 되나요?
 
-자 여기까지 보면 class를 사용하는 것이 안전을 보장하지 않으므로, value type인 struct를 사용하는 것이 좋아 보입니다. 하지만, 실제로 Swift의 대부분 API들은 class에 기반하고 있기 때문에 많은 경우 custom 데이터 타입을 만들 때 class를 사용해야 합니다. 그 이외에 상황에서는 특히 multi threads 환경과 같은 곳에서는 mutable한 속성은 잘못된 결과를 쉽게 야기할 수 있기 때문에 struct를 사용할 것은 권장합니다.(기본 데이터 타입인 Array, String, Dictionary 등도 모두 value type에 속합니다.)
+많은 Swift의 API들은 class에 기반하고 있기 때문에 custom 데이터 타입을 만들 때 class를 무조건 사용해야 하는 경우가 빈번합니다. 하지만, 그 이외의 상황, 특히 multi threads 환경과 같은 곳에서는 mutable한 속성이 잘못된 결과를 쉽게 야기할 수 있기 때문에 struct를 사용할 것을 권장합니다.(기본 데이터 타입인 Array, String, Dictionary 등도 모두 value type에 속합니다.) 또한 이는 Apple이 내세운 Swift의 POP(Protocol Oriented Programming)과 밀접한 관련이 있으므로 잘 이해해 두는 것이 좋습니다.
 
-이는 Apple이 내세운 Swift의 POP(Protocol Oriented Programming)과 밀접한 관련이 있으므로 잘 이해해 두는 것이 좋습니다.
-
-> 내용 출처 : Apple Inc. The Swift Programming Language (Swift 3.0.1)
+> 참고 문서 : Apple Inc. The Swift Programming Language (Swift 3.0.1)
