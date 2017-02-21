@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Swift Class 기본 &middot; Changnam
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>프로그래밍에 관하여 글을 쓰는 블로그입니다.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about">About</a>
+        
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/categories/">Categories</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/tags/">Tags</a>
+        
+      
+    
+
+    <span class="sidebar-nav-item">Currently v1.0.0</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2017. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="" title="Home">Changnam</a>
+            <small>Developer's Lab</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Swift Class 기본</h1>
+  <span class="post-date">30 Jan 2017</span>
+  <p>객체지향 개념을 가지고 있는 언어들은 대부분 <code>class</code>와 <code>object</code>를 가지고 있습니다. Swift도 class 개념을 가지고 있으며, class 구성의 기본인 <code>constructor, getter, setter</code> 개념을 지니고 있습니다. 간단하게 이를 알아보도록 하겠습니다.</p>
+
+<h4 id="1-constructor생성자">1. Constructor(생성자)</h4>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="kt">Rectangle</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">_width</span><span class="p">:</span> <span class="kt">Double</span><span class="o">!</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">_height</span><span class="p">:</span> <span class="kt">Double</span><span class="o">!</span>
+
+    <span class="nf">init</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Double</span><span class="p">){</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">_height</span> <span class="o">=</span> <span class="n">height</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">var</span> <span class="nv">r1</span> <span class="o">=</span> <span class="kt">Rectangle</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
+<span class="k">var</span> <span class="nv">r1</span> <span class="o">=</span> <span class="kt">Rectangle</span><span class="p">()</span> <span class="c1">// default 생성자가 없으므로 error</span></code></pre></figure>
+
+<p><code>Constructor</code>는 처음 Class를 생성할 때, 새로운 object를 만드는 메소드입니다. 즉, Class가 가진 멤버변수를 Class 생성과 함께 초기화하는 역할을 합니다. Swift에서는 이를 <code>init</code> 메소드로 호출하고, <code>self</code>를 통해서 object를 호출합니다. 여기서 object를 호출한다는 것의 의미는 생성된 object를 가져와서 멤버변수의 값을 설정하거나, 메소드에 활용하는 데 사용하는 것을 의미합니다. <code>self</code> 키워드는 자신이 속한 object의 주소값을 저장합니다.(<code>self</code>가 object를 reference한다고 표현하기도 합니다.)</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">r1</span> <span class="o">=</span> <span class="kt">Rectangle</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span></code></pre></figure>
+
+<p>즉, 다음과 같이 생성자를 사용할 때, r1 object를 우선적으로 만들고, 다음으로 constructor가 호출되어 생성된 r1을 불러와 r1의 멤버변수인 <code>_width</code>, <code>_height</code>을 설정하는 것입니다.<!--_--></p>
+
+<h4 id="2-getter--setter">2. getter &amp; setter</h4>
+
+<p>getter와 setter는 class의 <code>private</code>로 감싸진 멤버변수를 설정하기 위해 주로 사용됩니다. 저는 처음 getter와 setter를 java로 배웠는데, Swift가 getter &amp; setter의 코드 가독성 부분을 많이 보완했다고 생각합니다. 무슨 의미인지 아래 예제를 들어보겠습니다.</p>
+
+<h5 id="java-getter--setter">Java getter &amp; setter</h5>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Rectangle</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">double</span> <span class="n">_width</span><span class="o">;</span>
+
+    <span class="c1">// getter</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getWidth</span><span class="o">(){</span>
+      <span class="k">return</span> <span class="n">_width</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// setter</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setWidth</span><span class="o">(</span><span class="kt">double</span> <span class="n">width</span><span class="o">){</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">_width</span> <span class="o">=</span> <span class="n">width</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span><span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+    <span class="n">Rectangle</span> <span class="n">r1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Rectangle</span><span class="o">();</span>
+
+    <span class="c1">// getter &amp; setter</span>
+    <span class="n">r1</span><span class="o">.</span><span class="na">setWidth</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+    <span class="kt">double</span> <span class="n">width</span> <span class="o">=</span> <span class="n">r1</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>위의 코드는 일반적으로 Java에서 getter와 setter를 사용하는 경우입니다. <code>getWidth</code>와 <code>setWidth</code> 메소드로 getter와 setter를 설정하였습니다. 그런데, <code>getWidth()</code>와 <code>setWidth()</code> 메소드를 쓰는 것이 여러모로 불편할 때가 많습니다. 즉, <code>r1.width</code>로 쓰는 게 훨씬 직관적인데, 이를 사용하지 못 하게 되는 것이죠.</p>
+
+<h5 id="swift-getter--setter">Swift getter &amp; setter</h5>
+
+<p>Swift는 getter와 setter에서 바로 이 부분을 보완하였습니다. 아래의 Swift 코드를 봐보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">variableName</span><span class="p">:</span> <span class="n">dataType</span> <span class="p">{</span>
+    <span class="k">get</span> <span class="p">{</span>
+        <span class="c1">//code to execute</span>
+        <span class="k">return</span> <span class="n">someValue</span>
+    <span class="p">}</span>
+    <span class="nf">set</span><span class="p">(</span><span class="n">newValue</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//code to execute</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>출처 : <a href="https://syntaxdb.com/ref/swift/getters-setters">SyntaxDB</a></p>
+
+<p>기본적인 Getter와 Setter의 형태는 위와 같습니다. <code>variableName</code>에 들어가는 변수가 원하는 멤버변수 호출을 담당합니다. 즉, <code>className.variableName</code>의 표현으로 멤버변수의 값에 접근할 수 있게 됩니다. 위의 Java 코드와 동일한 코드를 Swift로 적게 되면 아래와 같이 나옵니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="kt">Rectangle</span> <span class="p">{</span>
+  <span class="kd">private</span> <span class="k">var</span> <span class="nv">_width</span><span class="p">:</span> <span class="kt">Double</span><span class="o">!</span>
+
+  <span class="k">var</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Double</span> <span class="p">{</span>
+    <span class="k">get</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">_width</span>
+    <span class="p">}</span> <span class="k">set</span> <span class="p">{</span>
+      <span class="n">_width</span> <span class="o">=</span> <span class="n">newValue</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">var</span> <span class="nv">r1</span> <span class="o">=</span> <span class="kt">Rectangle</span><span class="p">()</span>
+<span class="n">r1</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">width</span><span class="p">)</span> <span class="c1">// 10</span></code></pre></figure>
+
+<p>Swift는 <code>r1.width</code>라는 표현 하나로 getter와 setter 모두를 사용할 수 있게 해줍니다. 멤버변수를 <code>_width</code>로 선언했는데 어째서 <code>r1._width</code>가 아니고 <code>r1.width</code>인가요? 하고 생각하실 수 있습니다. 이는 <code>var width: Double...</code>로 선언되어 있기 때문에 그렇습니다. 즉, 우리가 선언한 변수명을 토대로 멤버변수에 접근하게 되고, <code>var width</code>는 어떤 다른 변수 명으로 바뀔 수 있습니다.<!--_--></p>
+
+<h5 id="little-bit-furthergetter">Little bit further(getter)</h5>
+
+<ul>
+  <li>Getter</li>
+</ul>
+
+<p>Getter를 사용하면서 변수와 관련하여 생각해봐야 할 부분은 <code>Optional</code>입니다. iOS 프로그램은 상당히 많은 부분에서 nil값을 허용하기 위해 <code>Optional</code>을 활용합니다. 그래서 getter를 설정할 때 nil값을 설정할 수 있는 <code>Optional</code>을 쓰는 변수에 대해서는 프로그램이 nil 오류가 나지 않도록 다음과 같이 많이 씁니다.(주로 String을 다룰 때 주의하세요.)</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// nil을 먼저 체크하여 빈 String으로 변환</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="o">!</span>
+<span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span>
+  <span class="k">get</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+      <span class="n">name</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">name</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>또한 getter는 setter 없이 쓰일 때 <code>get{}</code>를 생략할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="o">!</span>
+<span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">""</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">name</span>
+<span class="p">}</span></code></pre></figure>
+
+<ul>
+  <li>Setter</li>
+</ul>
+
+<p>Setter를 사용할 때는 파라미터(anyName)를 넘길 수도 있고 넘기지 않을 수도 있습니다. 이 때 파라미터를 넘기지 않으면 <code>newValue</code>가 예약어가 되어 변수 설정을 할 수 있도록 해줍니다. 특별히 변수 이름을 설정할 이유가 없다면 더 간단한 것을 쓰는 것이 나아 보입니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="nf">set</span><span class="p">(</span><span class="n">anyName</span><span class="p">){</span>
+  <span class="n">target</span> <span class="o">=</span> <span class="n">anyName</span>
+<span class="p">}</span>
+<span class="k">set</span> <span class="p">{</span>
+  <span class="n">target</span> <span class="o">=</span> <span class="n">newValue</span>
+<span class="p">}</span></code></pre></figure>
+
+<blockquote>
+  <p>내용 출처 : Apple Inc. The Swift Programming Language (Swift 3.0.1)</p>
+</blockquote>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/articles/2017-02/swift_structAndClass">
+            Swift의 Struct와 Class
+            <small>01 Feb 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/articles/2017-01/OOP_class_and_object_java">
+            OOP - Class와 Object
+            <small>24 Jan 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/articles/2017-01/uitableview">
+            iOS UITableView 기초
+            <small>22 Jan 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

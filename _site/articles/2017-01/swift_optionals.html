@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Swift optionals &middot; Changnam
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>프로그래밍에 관하여 글을 쓰는 블로그입니다.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about">About</a>
+        
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/categories/">Categories</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/tags/">Tags</a>
+        
+      
+    
+
+    <span class="sidebar-nav-item">Currently v1.0.0</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2017. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="" title="Home">Changnam</a>
+            <small>Developer's Lab</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Swift optionals</h1>
+  <span class="post-date">19 Jan 2017</span>
+  <h4 id="optionals-기본-개념">Optionals 기본 개념</h4>
+
+<p>Swift에는 optional이라는 개념이 있습니다. optional은 ‘?’을 통해 표현되는데, 그 의미는 다음과 같습니다. <strong>“이 변수에는 값이 들어갈 수도 있고, 아닐 수도 있어(nil)”</strong> Swift에서는 기본적으로 변수 선언시 nil 값이 들어가는 것을 허용하지 않습니다. 그러므로 첫 번째 줄의 코드는 에러이고, 두 번째 줄은 Optional type(String?)으로 선언했으므로 에러가 아닙니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">optionalString</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="k">var</span> <span class="nv">optionalString</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span></code></pre></figure>
+
+<p>다음 예시의 경우, String을 Int로 캐스팅하는 경우입니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">possibleNumber</span> <span class="o">=</span> <span class="s">"123"</span>
+<span class="k">let</span> <span class="nv">convertedNumber</span> <span class="o">=</span> <span class="kt">Int</span><span class="p">(</span><span class="n">possibleNumber</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">convertedNumber</span><span class="p">)</span>
+<span class="c1">// 출력 결과 : Optional(123)</span></code></pre></figure>
+
+<p>여기서 “123”은 String이기 때문에, Int(possibleNumber) 초기화에 실패합니다. 이 경우 바로 에러가 나와야한다고 생각하실 수 있지만, Swift는 이 경우 convertedNumber를 <strong>Optional Int</strong> 형(Int?)으로 선언합니다.(Int가 아닙니다.)</p>
+
+<h4 id="nil">nil</h4>
+
+<p><strong>nil</strong> 은 optional 변수 이외에서 사용할 수 없습니다. 그런데 iOS 개발을 할 경우 상당히 많은 부분에서 nil을 사용합니다. 그러므로 optional에 대해서 잘 알아두셔야 합니다. 또한 nil값은 따로 초기화하지 않아도 기본으로 설정됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">optionalString</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span>
+<span class="k">var</span> <span class="nv">optionalString2</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="c1">// 두 값 모두 nil</span></code></pre></figure>
+
+<p>다만 유의할 점은 Swift의 <strong>nil</strong> 은 다른 언어에서 pointer가 존재하지 않는 값을 가리키는 것과는 다릅니다. Swift의 <strong>nil</strong> 은 value가 없는 것을 의미합니다. 주소값 비교와 value값 비교정도로 이해하면 될 것 같습니다.</p>
+
+<h4 id="wrapping">Wrapping</h4>
+
+<p>Optional에 대해 보다보면, 많은 곳에서 <strong>wrapping</strong> 이라는 개념이 나옵니다. Optional 타입은 기본적으로 wrap되어 있는 상태입니다. 즉, Optional 변수들은 제대로된 value가 있는 것인지, nil인 것인지 wrap되어 있어서 모르는 상태라고 생각하시면 됩니다. 그렇기 때문에(컴파일러 입장에서는 변수가 nil일 수도 있기 때문에) wrap된 상태에서는 설령 변수에 value값이 있다고 하더라도 바로 value가 출력되지 않습니다. 아래 예제를 보시면,</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">optionalString</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="s">"Hello"</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">optionalString</span><span class="p">)</span>
+<span class="c1">// 출력 결과: Optional("Hello")</span></code></pre></figure>
+
+<p>이 경우, optionalString이 nil일 수도 있기 때문에, 결과값 “Hello”가 출력되지 않고, <strong>Optional(“Hello”)</strong> 가 출력됩니다.</p>
+
+<h4 id="forced-unwrapping">Forced Unwrapping</h4>
+
+<p>nil은 많은 곳에서 쓰이기 때문에, 변수를 optional로 사용하는 경우가 정말 많습니다. 그런데 앞선 예제에서처럼 출력 결과가 <strong>Optional(“Hello”)</strong> 처럼 나오는 것은 대부분의 경우 원하는 출력값이 아닙니다. 이 때 올바른 출력을 위해 사용하는 것이 <strong>!(exclamation mark)</strong>, 즉 느낌표입니다. 즉, optional로 선언했지만, <strong>무조건 변수가 있는 상황이 보장된 경우</strong> 느낌표(!)를 쓰면 우리가 원하는 Hello을 출력할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">optionalString</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="s">"Hello"</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">optionalString</span><span class="o">!</span><span class="p">)</span>
+<span class="c1">// 출력 결과: Hello</span></code></pre></figure>
+
+<p>변수명 뒤의 느낌표는 Optional을 <strong>unwrap</strong> 합니다. Optional은 unwrap된 상태에서만 값을 제대로 출력할 수 있습니다. 느낌표를 활용한 다른 예제를 살펴보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">value1</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="k">let</span> <span class="nv">value2</span><span class="p">:</span> <span class="kt">String</span><span class="o">!</span> <span class="o">=</span> <span class="kc">nil</span> <span class="c1">// 여기서는 에러가 아닙니다.</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c1">// nil 출력</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">value2</span><span class="p">)</span> <span class="c1">// error</span></code></pre></figure>
+
+<p>이 경우, value1과 value2는 모두 Optional 타입입니다. 다만 value1은 아직 wrap되어 있는 상태이므로 print에서 문제가 되지 않습니다. 다만 값이 있다면 <strong>Optional(값)</strong> 형태로 출력이 될 것입니다. 다음으로 value2의 경우, 느낌표에 의해 Optional 값이 자동으로 unwrap됩니다. unwrap된 상태에서 값을 출력하면 런타임 에러가 발생합니다. 그러므로 일반적으로 위처럼 value2가 unwrap된 상태로 print하도록 놔두기보다는 if를 통해 값이 nil인 경우를 체크하고 출력을 합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">value2</span><span class="p">:</span> <span class="kt">String</span><span class="o">!</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="k">if</span> <span class="n">value2</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">value2</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>이번에는 헷갈릴 수 있는 예제를 봐보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="kt">Square</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">sideLength</span><span class="p">:</span> <span class="kt">Double</span>
+
+    <span class="nf">init</span><span class="p">(</span><span class="nv">sideLength</span><span class="p">:</span> <span class="kt">Double</span><span class="p">){</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">sideLength</span> <span class="o">=</span> <span class="n">sideLength</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 클래스를 Optional 타입(?)으로 선언</span>
+<span class="c1">// sideLength1도 Optional 타입(?)으로 선언</span>
+<span class="c1">// 값 출력시 !를 쓰면 정상 출력</span>
+<span class="k">let</span> <span class="nv">optionalSquare1</span><span class="p">:</span> <span class="kt">Square</span><span class="p">?</span> <span class="o">=</span> <span class="kt">Square</span><span class="p">(</span><span class="nv">sideLength</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">sideLength1</span> <span class="o">=</span> <span class="n">optionalSquare1</span><span class="p">?</span><span class="o">.</span><span class="n">sideLength</span>
+
+<span class="c1">// 클래스를 Optional 타입(?)으로 선언</span>
+<span class="c1">// sideLength2를 Optional 타입(!)으로 선언</span>
+<span class="c1">// 값은 unwrap 상태이므로 !가 없어도 출력(있으면 !를 2번 쓰므로 에러)</span>
+<span class="k">let</span> <span class="nv">optionalSquare2</span><span class="p">:</span> <span class="kt">Square</span><span class="p">?</span> <span class="o">=</span> <span class="kt">Square</span><span class="p">(</span><span class="nv">sideLength</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">sideLength2</span> <span class="o">=</span> <span class="n">optionalSquare2</span><span class="o">!.</span><span class="n">sideLength</span>
+
+<span class="c1">// 클래스를 Optional 타입(!)으로 선언</span>
+<span class="c1">// sideLength3를 Optional 타입(!)으로 선언</span>
+<span class="c1">// 클래스와 sideLength3 모두 unwrap 상태이므로 !가 없어도 출력(있으면 !를 2번 쓰므로 에러)</span>
+<span class="k">let</span> <span class="nv">optionalSquare3</span><span class="p">:</span> <span class="kt">Square</span><span class="o">!</span> <span class="o">=</span> <span class="kt">Square</span><span class="p">(</span><span class="nv">sideLength</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">sideLength3</span> <span class="o">=</span> <span class="n">optionalSquare3</span><span class="o">!.</span><span class="n">sideLength</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">optionalSquare1</span><span class="p">)</span> <span class="c1">// Optional(Square)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">optionalSquare2</span><span class="p">)</span> <span class="c1">// Optional(Square)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">optionalSquare3</span><span class="p">)</span> <span class="c1">// Square</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">sideLength1</span><span class="p">)</span>  <span class="c1">// Optional(2.5)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">sideLength2</span><span class="p">)</span>  <span class="c1">// 2.5</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">sideLength3</span><span class="p">)</span>  <span class="c1">// 2.5</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">sideLength1</span><span class="o">!</span><span class="p">)</span> <span class="c1">// 2.5</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">sideLength2</span><span class="o">!</span><span class="p">)</span> <span class="c1">// error</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">sideLength3</span><span class="o">!</span><span class="p">)</span> <span class="c1">// error</span></code></pre></figure>
+
+<p><a href="http://stackoverflow.com/questions/24034483/what-is-an-unwrapped-value-in-swift">원글(stackoverflow) 자료 보기</a></p>
+
+<h4 id="optional-binding">Optional Binding</h4>
+
+<p>Optional Binding은 Optional 타입으로 선언된 변수에 값이 있는지 없는지를 확인할 수 있도록 해주는 기능입니다. Optional Binding을 사용하면 <strong>느낌표 없이</strong> Optional 타입의 변수 값을 출력할 수 있습니다. 기본적인 형태는 다음과 같습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">if</span> <span class="k">let</span> <span class="nv">변수명</span> <span class="o">=</span> <span class="kt">Optional</span> <span class="n">변수</span> <span class="p">{</span>
+  <span class="c1">// 임시 변수에 Optional 변수의 value값이 할당됩니다.</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>무슨 의미인지 알기 위해 예제를 살펴 보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// Optional type으로 선언한 myNumber</span>
+<span class="k">let</span> <span class="nv">myNumber</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="mi">1234</span>
+
+<span class="k">if</span> <span class="k">let</span> <span class="nv">actualNumber</span> <span class="o">=</span> <span class="n">myNumber</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">myNumber</span><span class="se">)</span><span class="s">은 실제로 </span><span class="se">\(</span><span class="n">actualNumber</span><span class="se">)</span><span class="s">입니다."</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">myNumber</span><span class="se">)</span><span class="s">는 변환될 수 없습니다."</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 출력 결과 : Optional(1234)은 실제로 1234입니다.</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">actualNumber</span><span class="p">)</span> <span class="c1">// error</span></code></pre></figure>
+
+<p>위의 예에서는 myNumber가 Optional 타입으로 선언되어 있습니다. 원래는 이 myNumber값을 출력하기 위해서는 !를 사용해야합니다. 하지만, Optional Binding은 먼저 이 myNumber의 값이 있는 경우와 없는 경우로 나누고, 값이 있는 경우 쉽게 사용할 수 있게 해줍니다. 즉, actualNumber에 myNumber의 값을 할당하고, 값이 있다면 actualNumber에 이를 넘겨주어 바로 실제 값으로 사용할 수 있도록 해줍니다. 특이한 점은 actualNumber가 if문 안에서만 할당되는 로컬 변수라는 점입니다. if 밖에서는 actualNumber를 사용할 수 없습니다. 또한,</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">if</span> <span class="k">let</span> <span class="nv">firstNumber</span> <span class="o">=</span> <span class="kt">Int</span><span class="p">(</span><span class="s">"4"</span><span class="p">),</span> <span class="k">let</span> <span class="nv">secondNumber</span> <span class="o">=</span> <span class="kt">Int</span><span class="p">(</span><span class="s">"42"</span><span class="p">),</span> <span class="n">firstNumber</span> <span class="o">&lt;</span> <span class="n">secondNumber</span> <span class="o">&amp;&amp;</span> <span class="n">secondNumber</span> <span class="o">&lt;</span> <span class="mi">100</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">firstNumber</span><span class="se">)</span><span class="s"> &lt; </span><span class="se">\(</span><span class="n">secondNumber</span><span class="se">)</span><span class="s"> &lt; 100"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 출력 결과: 4 &lt; 42 &lt; 100</span></code></pre></figure>
+
+<p>위의 경우처럼 Optional value가 nil인지 여부와 함께 boolean 결과를 콤마로 연결해서 사용할 수도 있습니다.</p>
+
+<blockquote>
+  <p>내용 출처 : The swift Programming Language(3.0.1), stackoverflow(what is an unwrapped value in swift)</p>
+</blockquote>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/articles/2017-02/swift_structAndClass">
+            Swift의 Struct와 Class
+            <small>01 Feb 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/articles/2017-01/swift_classBasic">
+            Swift Class 기본
+            <small>30 Jan 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/articles/2017-01/OOP_class_and_object_java">
+            OOP - Class와 Object
+            <small>24 Jan 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

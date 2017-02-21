@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Enumeration 개념 &middot; Changnam
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>프로그래밍에 관하여 글을 쓰는 블로그입니다.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about">About</a>
+        
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/categories/">Categories</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/tags/">Tags</a>
+        
+      
+    
+
+    <span class="sidebar-nav-item">Currently v1.0.0</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2017. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="" title="Home">Changnam</a>
+            <small>Developer's Lab</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Enumeration 개념</h1>
+  <span class="post-date">21 Jan 2017</span>
+  <h4 id="1-java-enumeration">1. Java Enumeration</h4>
+
+<p>Java에서 상수 집합을 정의하기 위해서 <strong>enum</strong> 이라는 것을 사용합니다. 상수라는 것은 고유한 요소로 프로그램이 돌아갈 때 바뀌지 않는 변수로 이해하면 됩니다.(상”수”라고 숫자가 아닙니다.) 하나의 변수 혹은 클래스가 정의한 순간 이후로 바뀌지 않도록 하기 위해 <strong>final</strong> 이라는 것을 사용합니다. 아래의 경우 <strong>Month</strong> class는 각각의 월을 상수로 사용하기 위해 만들어진 클래스입니다.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Month</span><span class="o">{</span>  
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Month</span> <span class="n">Jan</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Month</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Month</span> <span class="n">Feb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Month</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Month</span> <span class="n">Mar</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Month</span><span class="o">();</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>보시면 <strong>public static final Month</strong> 이라는 문구가 반복적으로 쓰여 있는 것을 확인할 수 있습니다. 이것이 비효율적이라고 생각되어 나온 것이 <strong>Enumeration</strong> 입니다. enum은 앞서 언급한 것처럼 상수를 열거한 집합입니다.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">enum</span> <span class="n">Day</span><span class="o">{</span>
+    <span class="n">MONDAY</span><span class="o">,</span><span class="n">TUESDAY</span><span class="o">,</span> <span class="n">WEDNESDAY</span><span class="o">,</span> <span class="n">THURSDAY</span><span class="o">,</span> <span class="n">FRIDAY</span><span class="o">,</span> <span class="n">SATURDAY</span><span class="o">,</span> <span class="n">SUNDAY</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EnumEx</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="n">Day</span> <span class="n">myDay</span> <span class="o">=</span> <span class="n">Day</span><span class="o">.</span><span class="na">MONDAY</span><span class="o">;</span>
+
+        <span class="k">switch</span> <span class="o">(</span><span class="n">myDay</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">case</span> <span class="nl">MONDAY:</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"월요일입니다."</span><span class="o">);</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="nl">TUESDAY:</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"화요일입니다."</span><span class="o">);</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="nl">WEDNESDAY:</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"수요일입니다."</span><span class="o">);</span>
+                <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>위의 예제에서 볼 수 있듯이 enum은 상수의 변하지 않는 속성 때문에 switch문에서 많이 사용합니다.</p>
+
+<p><a href="http://www.nextree.co.kr/p11686/">원문 출처: nextree</a></p>
+
+<h4 id="2-swift-switch문">2. Swift switch문</h4>
+
+<p>Swift에도 switch문이 있습니다. 기본 용법을 보면 다음과 같습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">vegetable</span> <span class="o">=</span> <span class="s">"red pepper"</span>
+<span class="k">switch</span> <span class="n">vegetable</span> <span class="p">{</span>
+  <span class="k">case</span> <span class="s">"celery"</span><span class="p">:</span>
+      <span class="nf">print</span><span class="p">(</span><span class="s">"Add some raisins and make ants on a log."</span><span class="p">)</span>
+  <span class="k">case</span> <span class="s">"cucumber"</span><span class="p">,</span> <span class="s">"watercress"</span><span class="p">:</span>
+      <span class="nf">print</span><span class="p">(</span><span class="s">"That would make a good tea sandwich."</span><span class="p">)</span>
+  <span class="k">case</span> <span class="k">let</span> <span class="nv">x</span> <span class="k">where</span> <span class="n">x</span><span class="o">.</span><span class="nf">hasSuffix</span><span class="p">(</span><span class="s">"pepper"</span><span class="p">):</span>
+      <span class="nf">print</span><span class="p">(</span><span class="s">"Is it a spicy </span><span class="se">\(</span><span class="n">x</span><span class="se">)</span><span class="s">?"</span><span class="p">)</span>
+  <span class="k">default</span><span class="p">:</span>
+      <span class="nf">print</span><span class="p">(</span><span class="s">"Everything tastes good in soup."</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Java의 switch문과 다른 점이 크게 2가지 있습니다.</p>
+
+<ol>
+  <li>switch문에 <strong>break</strong> 가 없다.(있어도 상관없습니다.)</li>
+  <li>case 조건문에서 임시 변수를 선언해서 조건문 안으로 보낼 수 있다.</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">vegetable</span> <span class="o">=</span> <span class="s">"red pepper"</span>
+<span class="k">switch</span> <span class="n">vegetable</span> <span class="p">{</span>
+  <span class="k">case</span> <span class="k">let</span> <span class="nv">x</span> <span class="k">where</span> <span class="n">x</span><span class="o">.</span><span class="nf">hasSuffix</span><span class="p">(</span><span class="s">"pepper"</span><span class="p">):</span>
+      <span class="nf">print</span><span class="p">(</span><span class="s">"Is it a spicy </span><span class="se">\(</span><span class="n">x</span><span class="se">)</span><span class="s">?"</span><span class="p">)</span>
+  <span class="k">default</span><span class="p">:</span>
+      <span class="nf">print</span><span class="p">(</span><span class="s">"Everything tastes good in soup."</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">myString</span><span class="p">:</span> <span class="kt">String</span><span class="o">!</span> <span class="o">=</span> <span class="s">"Swift Programming"</span>
+<span class="k">if</span> <span class="n">x</span> <span class="o">=</span> <span class="n">myString</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">x</span><span class="se">)</span><span class="s">은 재미있어요."</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><code>case let</code> 용법을 통해서 switch문에서 구문 안으로 임시 변수를 넣을 수 있습니다. Optional 타입의 <code>if let</code> 구문과 유사한 것 같네요.</p>
+
+<h4 id="3-swift-enumeration">3. Swift Enumeration</h4>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">enum</span> <span class="kt">Day</span><span class="p">{</span>
+    <span class="k">case</span> <span class="kt">MONDAY</span><span class="p">,</span><span class="kt">TUESDAY</span><span class="p">,</span> <span class="kt">WEDNESDAY</span><span class="p">,</span> <span class="kt">THURSDAY</span><span class="p">,</span> <span class="kt">FRIDAY</span><span class="p">,</span> <span class="kt">SATURDAY</span><span class="p">,</span> <span class="kt">SUNDAY</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">myDay</span> <span class="o">=</span> <span class="kt">Day</span><span class="o">.</span><span class="kt">MONDAY</span>
+<span class="k">switch</span> <span class="n">myDay</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="kt">Day</span><span class="o">.</span><span class="kt">MONDAY</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"월요일입니다."</span><span class="p">)</span> <span class="c1">// 출력 됩니다.</span>
+    <span class="k">case</span> <span class="kt">Day</span><span class="o">.</span><span class="kt">TUESDAY</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"화요일입니다."</span><span class="p">)</span>
+    <span class="k">case</span> <span class="kt">Day</span><span class="o">.</span><span class="kt">WEDNESDAY</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"수요일입니다."</span><span class="p">)</span>
+    <span class="k">default</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"요일이 아닙니다."</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Enumeration 개념은 Java나 Swift 모두 비슷한 것 같네요. 다른 예제를 봐보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">enum</span> <span class="kt">Rank</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">ace</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">case</span> <span class="n">two</span><span class="p">,</span> <span class="n">three</span><span class="p">,</span> <span class="n">four</span><span class="p">,</span> <span class="n">five</span><span class="p">,</span> <span class="n">six</span><span class="p">,</span> <span class="n">seven</span><span class="p">,</span> <span class="n">eight</span><span class="p">,</span> <span class="n">nine</span><span class="p">,</span> <span class="n">ten</span>
+    <span class="k">case</span> <span class="n">jack</span><span class="p">,</span> <span class="n">queen</span><span class="p">,</span> <span class="n">king</span>
+
+    <span class="kd">func</span> <span class="nf">simpleDescription</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+        <span class="k">switch</span> <span class="k">self</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">ace</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">"ace"</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">jack</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">"jack"</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">queen</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">"queen"</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">king</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">"king"</span>
+        <span class="k">default</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kt">String</span><span class="p">(</span><span class="k">self</span><span class="o">.</span><span class="n">rawValue</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">let</span> <span class="nv">ace</span> <span class="o">=</span> <span class="kt">Rank</span><span class="o">.</span><span class="n">ace</span> <span class="c1">// 결과 : "ace"</span>
+<span class="k">let</span> <span class="nv">aceRawValue</span> <span class="o">=</span> <span class="n">ace</span><span class="o">.</span><span class="n">rawValue</span> <span class="c1">// 결과 : "1"</span>
+<span class="k">let</span> <span class="nv">aceDescription</span> <span class="o">=</span> <span class="n">ace</span><span class="o">.</span><span class="n">simpleDescription</span> <span class="c1">// 결과 : "ace"</span></code></pre></figure>
+
+<p>이 경우 ace는 int 1로 선언됩니다. 기타 two, three 등은 “two”, “three”의 String으로 초기화 됩니다. 흥미로운 점은 <code>simpleDescription</code> 함수에 있습니다. 여기서 simpleDescription은 switch문을 호출합니다. 이 때 넘기는 인자는 <code>self</code>로 <code>Rank</code> 자신입니다. Swift는 이런 경우 축약형을 쓰는 것을 허용합니다. 즉, <code>case .ace:</code>만 써도 이를 <code>self.ace</code>로 인식하여 올바른 결과를 출력할 수 있게 해준다는 것입니다. 또한 다음과 같은 것도 가능합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">enum</span> <span class="kt">Rank</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">jack</span><span class="p">,</span> <span class="n">queen</span><span class="p">,</span> <span class="n">king</span>
+<span class="p">}</span>
+<span class="k">var</span> <span class="nv">x</span> <span class="o">=</span> <span class="kt">Rank</span><span class="o">.</span><span class="n">jack</span> <span class="c1">// x = "jack"</span>
+<span class="k">var</span> <span class="nv">x</span> <span class="o">=</span> <span class="o">.</span><span class="n">queen</span> <span class="c1">// x = "queen"</span>
+<span class="k">var</span> <span class="nv">x</span> <span class="o">=</span> <span class="o">.</span><span class="n">king</span><span class="c1">// x = "king"</span></code></pre></figure>
+
+<p>한 번 enum을 선언했던 변수에는 enum 객체 명(<code>Rank</code>)을 생략해도 올바른 결과가 나옵니다.</p>
+
+<blockquote>
+  <p>내용 출처 : The swift Programming Language(3.0.1), nextree - Java: enum의 뿌리를 찾아서…</p>
+</blockquote>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/articles/2017-02/swift_structAndClass">
+            Swift의 Struct와 Class
+            <small>01 Feb 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/articles/2017-01/swift_classBasic">
+            Swift Class 기본
+            <small>30 Jan 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/articles/2017-01/OOP_class_and_object_java">
+            OOP - Class와 Object
+            <small>24 Jan 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

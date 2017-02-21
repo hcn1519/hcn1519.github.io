@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Rails에서 carrierwave를 이용하여 AWS S3에 이미지 올리기 &middot; Changnam
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>프로그래밍에 관하여 글을 쓰는 블로그입니다.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about">About</a>
+        
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/categories/">Categories</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/tags/">Tags</a>
+        
+      
+    
+
+    <span class="sidebar-nav-item">Currently v1.0.0</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2017. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="" title="Home">Changnam</a>
+            <small>Developer's Lab</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Rails에서 carrierwave를 이용하여 AWS S3에 이미지 올리기</h1>
+  <span class="post-date">17 Feb 2016</span>
+  
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;h5&gt;</span>Carrierwave를 이용하여 AWS S3에 이미지 올리기<span class="nt">&lt;/h5&gt;</span>
+  <span class="nt">&lt;ol&gt;</span>
+    <span class="nt">&lt;li&gt;</span>프로젝트 진행을 위한 기본 scaffold 구성<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>carrierwave, mini_magick, fog 설치<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>carrierwave, mini_magick, fog 셋팅<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>효율적으로 이미지 사용하기<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;/ol&gt;</span></code></pre></figure>
+
+<p>&nbsp;정보의 대부분이 문자, 그림으로 이루어진 웹 어플리케이션에서 이미지를 다루는 것은 중요한 문제입니다. 이미지도 문자열과 마찬가지로, 서버에 저장되고 보여질 필요가 있습니다. 예컨데, 커뮤니티 게시판에 이미지가 포함된 글을 올린다고 했을 때, 내가 쓴 글의 제목과 내용이 특정 게시판에 가면 보여지듯이 이미지도 같이 보여져야만 합니다.</p>
+<p>&nbsp;그렇다면 이미지는 어떻게 저장해야 되는 걸까요? 여러가지 방법이 있습니다만, 여기서 소개하는 방법은 AWS(아마존 웹 서비스)에서 제공하는 클라우드 저장공간(S3)에 내가 만든 이미지를 저장해놓고, 저장시 생성되는 이미지 경로만 따로 우리 데이터베이스에 저장해서 이미지가 호출될 필요가 있을 때, 지속적으로 불러들이는 방법입니다. 간단하게 생각해서 구글드라이브나 드랍박스에 우리가 이미지를 저장하게 되면 특정 이미지 경로를 얻을 수 있는데, 여기서 이미지 경로만 데이터베이스에 저장하는 작업을 자동화하는 것이라고 생각하시면 됩니다.</p>
+<p>&nbsp;그리고 이 작업을 도와주는 rails의 gem들이 바로 <code>carrierwave</code>, <code>mini_magick</code>, <code>fog</code>입니다. 이 포스팅에서는 해당 gem들을 어떻게 사용할 수 있는지 알아보겠습니다. 작업에 사용된 ruby와 rails 버전은 각각 <code>ruby 2.2.2</code>, <code>rails 4.2.4</code>입니다.</p>
+
+<h4>1. 프로젝트 진행을 위한 기본 scaffold 구성</h4>
+<p>&nbsp;먼저 이미지를 올리기 위한 게시판을 scaffold로 간단하게 구성해보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">rails generate scaffold Post title:string content:text</code></pre></figure>
+
+<p>&nbsp;다음으로 scaffold로 만든 index페이지를 기본 페이지로 만들기 위해 <code>config/route.rb</code>에 root를 추가해줍니다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1">#config/route.rb</span>
+<span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">routes</span><span class="p">.</span><span class="nf">draw</span> <span class="k">do</span>
+  <span class="n">root</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">'posts#index'</span>
+  <span class="n">resources</span> <span class="ss">:posts</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>다음으로 migration 해주시면 기본 설정은 끝납니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">rake db:migrate</code></pre></figure>
+
+<h4>2. carrierwave, mini_magick, fog 설치</h4>
+<p>&nbsp;gem의 설치에 앞서서 각각의 gem이 어떤 역할을 하는지 간략하게 알아보면 다음과 같습니다.</p>
+<ol>
+  <li><code>Carreirwave</code>는 이미지 파일뿐만 아니라, 여러가지 파일을 업로드하는 것을 도와주는 gem입니다.</li>
+  <li><code>Minimagick</code>은 image_magick의 rails버전인데, 이미지를 만들고, 수정하고, 지우는 작업들을 도와주는 gem입니다.(유사품: Rmagick)</li>
+  <li><code>Fog</code>는 클라우드에 파일의 저장을 쉽게할 수 있도록 도와주는 gem입니다.</li>
+</ol>
+<p>&nbsp;각각의 gem이 하는 일을 보시면 이미지 업로드에 왜 해당 gem들이 필요한지 알 수 있을 것이라 생각됩니다. 이제 프로젝트에 각각의 gem을 설치해보도록 하겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1">#Gemfile</span>
+<span class="n">gem</span> <span class="s1">'carrierwave'</span><span class="p">,</span> <span class="ss">github: </span><span class="s1">'carrierwaveuploader/carrierwave'</span>
+<span class="n">gem</span> <span class="s1">'mini_magick'</span>
+<span class="n">gem</span> <span class="s1">'fog-aws'</span></code></pre></figure>
+
+<p>&nbsp;다음으로</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">bundle install</code></pre></figure>
+
+<p>&nbsp;까지 해주면 필요한 gem의 설치가 완료됩니다.</p>
+<p>&nbsp;또한 minimagick을 사용하기 위해서는 image_magick도 설치해주어야 합니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">sudo apt-get -y install imagemagick</code></pre></figure>
+
+<h4>2. carrierwave, mini_magick, fog 셋팅</h4>
+
+<p>&nbsp;다음으로 해당 gem들을 사용할 수 있도록, 각각의 github페이지에서 제공하는 사용법을 활용하여 해당 gem들을 사용해보도록 하겠습니다.</p>
+
+<h5>(1) Uploader 셋팅</h5>
+
+<p>&nbsp;가장 먼저 carrierwave uploader 셋팅을 위해</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">rails generate uploader S3</code></pre></figure>
+
+<p>&nbsp;아래에서 볼 수 있듯이 <code>app/uploaders/s3_uploader.rb</code>에 새로운 파일이 생성된 것을 확인할 수 있습니다.</p>
+<p><img src="https://dl.dropbox.com/s/e3xbpkna2rzgnmf/uploader.PNG" /></p>
+
+<p>&nbsp;해당 파일에 들어가보면, carrierwave에서 제공하는 다양한 저장 옵션이 주석처리되어 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">S3Uploader</span> <span class="o">&lt;</span> <span class="no">CarrierWave</span><span class="o">::</span><span class="no">Uploader</span><span class="o">::</span><span class="no">Base</span>
+
+  <span class="c1"># 이미지를 조정할 수 있는 툴 설정</span>
+  <span class="c1"># Include RMagick or MiniMagick support:</span>
+  <span class="c1"># include CarrierWave::RMagick</span>
+  <span class="kp">include</span> <span class="no">CarrierWave</span><span class="o">::</span><span class="no">MiniMagick</span>
+
+  <span class="c1"># 이미지를 저장할 장소의 종류를 설정</span>
+  <span class="c1"># Choose what kind of storage to use for this uploader:</span>
+  <span class="c1"># storage :file</span>
+  <span class="n">storage</span> <span class="ss">:fog</span>
+
+  <span class="c1">#이미지가 저장되는 위치</span>
+  <span class="c1"># Override the directory where uploaded files will be stored.</span>
+  <span class="c1"># This is a sensible default for uploaders that are meant to be mounted:</span>
+  <span class="k">def</span> <span class="nf">store_dir</span>
+    <span class="s2">"uploads/</span><span class="si">#{</span><span class="n">model</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">to_s</span><span class="p">.</span><span class="nf">underscore</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">mounted_as</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">model</span><span class="p">.</span><span class="nf">id</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+
+  <span class="c1"># 요청한 이미지가 없을 때 대체해서 사용하는 default 이미지 설정</span>
+  <span class="c1"># Provide a default URL as a default if there hasn't been a file uploaded:</span>
+  <span class="c1"># def default_url</span>
+  <span class="c1">#   # For Rails 3.1+ asset pipeline compatibility:</span>
+  <span class="c1">#   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))</span>
+  <span class="c1">#</span>
+  <span class="c1">#   "/images/fallback/" + [version_name, "default.png"].compact.join('_')</span>
+  <span class="c1"># end</span>
+
+  <span class="c1"># 이미지를 저장할 사이즈 조정</span>
+  <span class="c1"># Process files as they are uploaded:</span>
+  <span class="c1"># process scale: [200, 300]</span>
+  <span class="c1">#</span>
+  <span class="c1"># def scale(width, height)</span>
+  <span class="c1">#   # do something</span>
+  <span class="c1"># end</span>
+
+  <span class="c1"># 여러가지 이미지의 버전 설정</span>
+  <span class="c1"># Create different versions of your uploaded files:</span>
+  <span class="c1"># version :thumb do</span>
+  <span class="c1">#   process resize_to_fit: [50, 50]</span>
+  <span class="c1"># end</span>
+
+  <span class="c1"># 저장될 파일들의 확장자 설정</span>
+  <span class="c1"># Add a white list of extensions which are allowed to be uploaded.</span>
+  <span class="c1"># For images you might use something like this:</span>
+  <span class="k">def</span> <span class="nf">extension_whitelist</span>
+    <span class="sx">%w(jpg jpeg gif png)</span>
+  <span class="k">end</span>
+
+  <span class="c1"># 저장되는 파일의 이름 설정</span>
+  <span class="c1"># Override the filename of the uploaded files:</span>
+  <span class="c1"># Avoid using model.id or version_name here, see uploader/store.rb for details.</span>
+  <span class="c1"># def filename</span>
+  <span class="c1">#   "something.jpg" if original_filename</span>
+  <span class="c1"># end</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>&nbsp;각각의 옵션이 어떤 역할을 하는지 주석으로 간략하게 서술해 놓았는데, 필요한 부분에 대해서는 <a href="https://github.com/carrierwaveuploader/carrierwave" target="_blank">Carrierwave github 페이지</a>를 참조하시기 바랍니다. 여기서 설정은 위와 동일하게 하면 됩니다. 짚고 넘어갈 점은 mini_magick을 설정해두고, storage를 fog로 변경하여 s3에 이미지 업로드가 문제 없이 될 수 있도록 설정해두었다는 점입니다.</p>
+
+<h5>(2) Model 셋팅</h5>
+<p>&nbsp;다음으로 만들어놓은 Post model에 각각의 post가 이미지를 가져야 하기 때문에 이미지 링크가 저장될 공간을 확보해두어야 합니다. 그에 따라 기존 model에 새로운 문자열 저장 공간(column)을 만들어야 합니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">rails g migration add_s3_to_posts image:string
+rake db:migrate</code></pre></figure>
+
+<p>&nbsp;이렇게 명령어를 실행하면 post모델에 image라는 이름으로 string을 저장할 수 있는 공간이 생성됩니다. 또한 post 모델이 uploader를 사용할 수 있도록 mount 명령어를 추가해주어야 합니다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1">#app/models/post.rb</span>
+<span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">mount_uploader</span> <span class="ss">:image</span><span class="p">,</span> <span class="no">S3Uploader</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>&nbsp;여기까지가 carrierwave 관련 셋팅이고, 다음으로 fog 셋팅을 진행하도록 하겠습니다.</p>
+
+<h5>(3) config 설정</h5>
+<p>&nbsp;<code>fog-aws</code>를 사용하기 위해서는 <code>config/initializers</code>에 fog.rb 파일을 직접 생성해야 합니다. 그리고 다음의 코드를 해당 파일에 넣어주세요.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">CarrierWave</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="n">config</span><span class="p">.</span><span class="nf">fog_provider</span> <span class="o">=</span> <span class="s1">'fog/aws'</span>                        <span class="c1"># required</span>
+  <span class="n">config</span><span class="p">.</span><span class="nf">fog_credentials</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="ss">provider:              </span><span class="s1">'AWS'</span><span class="p">,</span>                        <span class="c1"># required</span>
+    <span class="ss">aws_access_key_id:     </span><span class="s1">'xxx'</span><span class="p">,</span>                        <span class="c1"># required</span>
+    <span class="ss">aws_secret_access_key: </span><span class="s1">'yyy'</span><span class="p">,</span>                        <span class="c1"># required</span>
+    <span class="ss">region:                </span><span class="s1">'ap-northeast-2'</span><span class="p">,</span>             <span class="c1"># optional, defaults to 'us-east-1'</span>
+  <span class="p">}</span>
+  <span class="n">config</span><span class="p">.</span><span class="nf">fog_directory</span>  <span class="o">=</span> <span class="s1">'name_of_directory'</span>            <span class="c1"># required</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>&nbsp;위 코드에서 id, key, region, 'name_of_directory'부분을 여러분들의 설정에 맞게 변경해주어야 합니다. 여기서 region은 서울의 경우 ap-northeast-2이며, 도쿄는 ap-northeast-1입니다. ID와 Key의 경우 s3 탭에서 설정하는 것이 아니고,</p>
+
+<p><img src="https://dl.dropbox.com/s/dpzkl7v69172vsb/aws_users.png" /></p>
+
+<p>&nbsp;우측 상단의 본인 계정탭의 Security Credentials에서 생성하는 것입니다. 그리고 Security Credentials에서 users탭을 누르고 user를 생성하되, 중간에 id와 key의 경우 따로 메모해두시고, <code>fog.rb</code>에 채워넣으시면 됩니다. 또한 Permissions 항목에서 Attach policy를 한 후 s3full_access로 한 개의 policy를 생성해야 s3에 정상적으로 사진을 저장할 수 있습니다.</p>
+<p>&nbsp;다음으로 fog_directory의 경우 S3의 Bucket 이름으로, 간단한 생성 방법을 알려주는 링크로 설명을 대신하겠습니다.</p>
+<p><a href="http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html" target="_blank">Creating a Bucket</a></p>
+
+<h5>(4) View에서 이미지 파일을 올리고  볼 수 있게 하는 parameter 셋팅</h5>
+
+<p>&nbsp;이제 파일을 저장할 수 있도록 <code>:image</code> parameter 전송 셋팅을 해주고, view에서 해당 이미지가 보이도록 설정해주겠습니다.</p>
+<p>&nbsp;가장 먼저 <code>app/views/posts/_form.html.erb</code>의 경우</p>
+
+<figure class="highlight"><pre><code class="language-erb" data-lang="erb"><span class="cp">&lt;%=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@post</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">any?</span> <span class="cp">%&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"error_explanation"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h2&gt;</span><span class="cp">&lt;%=</span> <span class="n">pluralize</span><span class="p">(</span><span class="vi">@post</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">count</span><span class="p">,</span> <span class="s2">"error"</span><span class="p">)</span> <span class="cp">%&gt;</span> prohibited this post from being saved:<span class="nt">&lt;/h2&gt;</span>
+
+      <span class="nt">&lt;ul&gt;</span>
+      <span class="cp">&lt;%</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">full_messages</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">message</span><span class="o">|</span> <span class="cp">%&gt;</span>
+        <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">message</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
+      <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"field"</span><span class="nt">&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">label</span> <span class="ss">:title</span> <span class="cp">%&gt;</span><span class="nt">&lt;br&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:title</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"field"</span><span class="nt">&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">label</span> <span class="ss">:content</span> <span class="cp">%&gt;</span><span class="nt">&lt;br&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">text_area</span> <span class="ss">:content</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"field"</span><span class="nt">&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">label</span> <span class="ss">:image</span> <span class="cp">%&gt;</span><span class="nt">&lt;br&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">file_field</span> <span class="ss">:image</span><span class="p">,</span> <span class="ss">accept: </span><span class="s1">'image/png,image/gif,image/jpeg'</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"actions"</span><span class="nt">&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">submit</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span></code></pre></figure>
+
+<p>&nbsp;이에 대한 결과물로 다음과 같은 form이 만들어집니다.</p>
+<p><img src="https://dl.dropbox.com/s/z76rqnc9sreneew/new.PNG" /></p>
+
+<p>&nbsp;form을 구성할 때 rails scaffold에서는 parameter를 두 번 체크하는 시스템을 가지고 있습니다. <code>app/controllers/posts_controller.rb</code>에는 다음과 같은 부분이 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">PostsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="kp">private</span>
+    <span class="c1"># Never trust parameters from the scary internet, only allow the white list through.</span>
+    <span class="k">def</span> <span class="nf">post_params</span>
+      <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:post</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:title</span><span class="p">,</span> <span class="ss">:content</span><span class="p">,</span> <span class="ss">:image</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>&nbsp;rails scaffold는 위의 <code>post_params</code>부분에서 view에서 넘어 온 parameter와 컨트롤러가 허용할 parameter를 비교하고, 허가 설정을 하지 않은 parameter에 대해서는 데이터를 넘기지 않습니다.(<a href="http://hcn1519.github.io/articles/2016-02/parameter" target="_blank">Strong parameter</a>) 따라서 위 처럼 <code>:image</code>를 추가해주어야 합니다.</p>
+
+<p>&nbsp;다음으로 <code>app/views/posts/index.html.erb</code>는</p>
+
+<figure class="highlight"><pre><code class="language-erb" data-lang="erb"><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"notice"</span><span class="nt">&gt;</span><span class="cp">&lt;%=</span> <span class="n">notice</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;h1&gt;</span>Listing Posts<span class="nt">&lt;/h1&gt;</span>
+
+<span class="nt">&lt;table&gt;</span>
+  <span class="nt">&lt;thead&gt;</span>
+    <span class="nt">&lt;tr&gt;</span>
+      <span class="nt">&lt;th&gt;</span>Title<span class="nt">&lt;/th&gt;</span>
+      <span class="nt">&lt;th&gt;</span>Content<span class="nt">&lt;/th&gt;</span>
+      <span class="nt">&lt;th</span> <span class="na">colspan=</span><span class="s">"3"</span><span class="nt">&gt;&lt;/th&gt;</span>
+    <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;/thead&gt;</span>
+
+  <span class="nt">&lt;tbody&gt;</span>
+    <span class="cp">&lt;%</span> <span class="vi">@posts</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span> <span class="cp">%&gt;</span>
+      <span class="nt">&lt;tr&gt;</span>
+        <span class="nt">&lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">post</span><span class="p">.</span><span class="nf">title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">post</span><span class="p">.</span><span class="nf">content</span> <span class="cp">%&gt;</span><span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">image_tag</span><span class="p">(</span><span class="s2">"</span><span class="si">#{</span><span class="n">post</span><span class="p">.</span><span class="nf">image</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'Show'</span><span class="p">,</span> <span class="n">post</span> <span class="cp">%&gt;</span><span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'Edit'</span><span class="p">,</span> <span class="n">edit_post_path</span><span class="p">(</span><span class="n">post</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'Destroy'</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="ss">method: :delete</span><span class="p">,</span> <span class="ss">data: </span><span class="p">{</span> <span class="ss">confirm: </span><span class="s1">'Are you sure?'</span> <span class="p">}</span> <span class="cp">%&gt;</span><span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;/tr&gt;</span>
+    <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/tbody&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+
+<span class="nt">&lt;br&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'New Post'</span><span class="p">,</span> <span class="n">new_post_path</span> <span class="cp">%&gt;</span></code></pre></figure>
+
+<p>&nbsp;마지막으로 <code>app/views/posts/show.html.erb</code>는</p>
+
+<figure class="highlight"><pre><code class="language-erb" data-lang="erb"><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"notice"</span><span class="nt">&gt;</span><span class="cp">&lt;%=</span> <span class="n">notice</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;p&gt;</span>
+  <span class="nt">&lt;strong&gt;</span>Title:<span class="nt">&lt;/strong&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">title</span> <span class="cp">%&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;p&gt;</span>
+  <span class="nt">&lt;strong&gt;</span>Content:<span class="nt">&lt;/strong&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">content</span> <span class="cp">%&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>
+  <span class="nt">&lt;strong&gt;</span>사진:<span class="nt">&lt;/strong&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="n">image_tag</span><span class="p">(</span><span class="s2">"</span><span class="si">#{</span><span class="vi">@post</span><span class="p">.</span><span class="nf">image</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="cp">%&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+
+<span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'Edit'</span><span class="p">,</span> <span class="n">edit_post_path</span><span class="p">(</span><span class="vi">@post</span><span class="p">)</span> <span class="cp">%&gt;</span> |
+<span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'Back'</span><span class="p">,</span> <span class="n">posts_path</span> <span class="cp">%&gt;</span></code></pre></figure>
+
+<p>&nbsp;위의 결과물로 다음과 같은 <code>show.html.erb</code>가 만들어집니다.</p>
+<p><img src="https://dl.dropbox.com/s/7z11wm9fabya0td/show.png" /></p>
+
+<p>&nbsp;또한 AWS S3에 해당 이미지 파일이 잘 저장되어 있음을 확인할 수 있습니다.</p>
+<p><img src="https://dl.dropbox.com/s/xa6nzl9g4u5g11u/s3_check.png" /></p>
+
+<p>&nbsp;지금까지 기본적으로 이미지를 S3에 저장하는 방법을 알아보았습니다.</p>
+
+<h4>4. 효율적으로 이미지 사용하기</h4>
+
+<p>&nbsp;위에서 소개한 방법만으로 이미지를 다루는 것도 간단한 이미지를 다루는데 전혀 무리가 없습니다. 하지만, 이미지 파일의 크기가 너무 커서 사이트 로딩에 지장을 주는 상황이면 어떻게 해야 할까요? 한 페이지에 많은 이미지를 로딩하는 서비스(ex - 소셜 커머스, 쇼핑몰 등)에서도 원본 사진을 그대로 사용하는 것은 올바른 방법일까요?</p>
+<p>&nbsp;물론 원본 사진을 그대로 써야하는 서비스도 분명 존재합니다. 하지만 대부분의 경우에는 사진의 퀄리티를 조금은 줄이더라도 속도를 개선하는 방향을 선택합니다. 그리고 사실 2MB 크기의 이미지를 200KB로 줄인다고 했을 때, 이미지 퀄리티가 우려할 정도로 많이 떨어지지 않습니다. 반면에  로딩속도는 엄청나게 빨라집니다.</p>
+
+<p>&nbsp;그렇다면 이미지 용량은 어떤 식으로 줄여야 할까요? 가장 중요한 요소는 사진의 해상도(크기)입니다. 즉 <code>1920x1080</code> 크기의 사진을 <code>480x270</code>의 사이즈로 줄이게 되면 용량이 많이 줄어듦니다. 사진 크기를 이렇게 많이 줄여도 되나?라고 생각할 수 있지만, 대부분의 스마트폰은 너비(width)가 최대 400px 수준입니다. 즉, 사진을 적절히 줄여서 사용하는 것은 효율적으로 이미지를 활용하는 것이라 할 수 있습니다.</p>
+<p>&nbsp;하지만, 데스크탑, 노트북에서 작은 이미지가 크게 늘여져서 나오는 현상도 바람직하지는 않습니다. 그런데, Carrierwave는 고맙게도 다양한 화면에서 적절한 이미지가 출력될 수 있도록 이미지를 여러가지 '버전'으로 저장할 수 있게 해줍니다. 즉, 큰 화면에는 큰 화면에 맞는 큰 이미지를 보여주고, 작은 화면에서는 작은 화면에 맞게 작은 이미지만 보여주는 것이 가능하다는 것입니다.</p>
+
+<p>&nbsp;그리고 여러가지 이미지 '버전'은 <code>app/uploaders/s3_uploader.rb</code>에 minimagick을 통해 설정할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">S3Uploader</span> <span class="o">&lt;</span> <span class="no">CarrierWave</span><span class="o">::</span><span class="no">Uploader</span><span class="o">::</span><span class="no">Base</span>
+  <span class="kp">include</span> <span class="no">CarrierWave</span><span class="o">::</span><span class="no">MiniMagick</span>
+  
+  <span class="n">version</span> <span class="ss">:detail</span> <span class="k">do</span>
+    <span class="n">process</span> <span class="ss">:resize_to_fit</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="mi">600</span><span class="p">,</span> <span class="mi">10000</span><span class="p">]</span>
+  <span class="k">end</span>
+  <span class="n">version</span> <span class="ss">:main</span> <span class="k">do</span>
+      <span class="n">process</span> <span class="ss">:resize_to_fill</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="mi">240</span><span class="p">,</span> <span class="mi">180</span><span class="p">]</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>&nbsp;위의 예시처럼 설정하면 Carrierwave는 detail이라는 버전의 이미지와 main이라는 이미지를 본래 이미지를 조건에 따라 S3 안에 저장합니다. 위의 예시의 경우 detail 버전의 사진은 너비를 600px로 고정하고, 세로를 맞춘 사진이 됩니다. main 버전의 경우 4:3 비율로 사진을 축소 저장한 것입니다. 각각의 버전별 사용방법은 간단합니다. 그냥 기존 이미지 경로에 <code>.detail</code>, <code>.main</code>만 추가해주면 됩니다. 위의  예시에서 <code>app/views/posts/show.html.erb</code>의 이미지 태그인 <code>&lt;%= image_tag("#{@post.image}") %&gt;</code>의 경우, <code>&lt;%= image_tag("#{@post.image.main}") %&gt;</code>이라는 형식으로 쓰게 되면, main사이즈로 저장된 이미지가 출력됩니다.&lt;/code&gt; 추가적으로 <code>:resize_to_fill</code>은 저 비율에 맞게 사진을 맞추는 것을 의미하고, <code>:resize_to_fit</code>은 짧은 길이에 맞춰서 나머지 부분을 조절하는 옵션입니다.</p>
+<h5>(참고)추가 커스터마이징</h5>
+
+<p>&nbsp;여기까지 잘 따라오셨으면, 이미지 버전에 대한 이해와 사용법까지 잘 이해했으리라 생각됩니다. 이 부분은 제가 Carrierwave를 사용할 때 맞닥뜨렸던 이슈와 관련된 추가 커스터마이징 내용입니다.</p>
+<p>&nbsp;당시 프로젝트에서 저는 사용자가 스마트폰 사진을 웹에 올릴 수 있도록 하는 기능을 넣었습니다. 그런데 최근 나오는 아이폰6, 갤럭시S6, G4 등의 스마트폰은 모두 해상도가 어마어마합니다.(아이폰 <code>1920x1080</code>, 안드로이드 <code>2560x1440</code>) 그래서 위에서 사용한 방식대로 사진 사이즈를 줄여야 했는데, 문제는 스마트폰 사진 유형이 <strong>두 가지</strong>가 있다는 점이었습니다. 그래서 다음과 같은 코드를 새롭게 추가하였습니다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">S3Uploader</span> <span class="o">&lt;</span> <span class="no">CarrierWave</span><span class="o">::</span><span class="no">Uploader</span><span class="o">::</span><span class="no">Base</span>
+  <span class="kp">include</span> <span class="no">CarrierWave</span><span class="o">::</span><span class="no">MiniMagick</span>
+  
+  <span class="n">version</span> <span class="ss">:detail</span> <span class="k">do</span>
+    <span class="n">process</span> <span class="ss">:resize_to_fit</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="mi">600</span><span class="p">,</span> <span class="mi">10000</span><span class="p">]</span>
+  <span class="k">end</span>
+  <span class="n">version</span> <span class="ss">:main</span> <span class="k">do</span>
+      <span class="n">process</span> <span class="ss">:resize_to_fill</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="mi">240</span><span class="p">,</span> <span class="mi">180</span><span class="p">]</span> <span class="p">,</span><span class="ss">:if</span> <span class="o">=&gt;</span> <span class="ss">:horizontal?</span>
+      <span class="n">process</span> <span class="ss">:resize_to_fill</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="mi">240</span><span class="p">,</span> <span class="mi">320</span><span class="p">]</span>  <span class="p">,</span><span class="ss">:if</span> <span class="o">=&gt;</span> <span class="ss">:vertical?</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">horizontal?</span><span class="p">(</span><span class="n">new_file</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="no">MiniMagick</span><span class="o">::</span><span class="no">Image</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nf">file</span><span class="p">.</span><span class="nf">file</span><span class="p">)</span>
+    <span class="kp">true</span> <span class="k">if</span> <span class="n">image</span><span class="p">[</span><span class="ss">:height</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">image</span><span class="p">[</span><span class="ss">:width</span><span class="p">]</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">vertical?</span><span class="p">(</span><span class="n">new_file</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="no">MiniMagick</span><span class="o">::</span><span class="no">Image</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nf">file</span><span class="p">.</span><span class="nf">file</span><span class="p">)</span>
+    <span class="kp">true</span> <span class="k">if</span> <span class="n">image</span><span class="p">[</span><span class="ss">:height</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">image</span><span class="p">[</span><span class="ss">:width</span><span class="p">]</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>&nbsp;참고로 저는 <code>:main</code>버전에 대해서만 이 기능이 필요했기 때문에, <code>:main</code>에만 추가 코드를 작성했습니다. 의미는 다음과 같습니다. "사진이 가로가 긴 사진이면, <code>240x180</code>사이즈를 <code>:main</code>으로 저장하고, 세로가 긴 사진이면 <code>240x320</code>을 <code>:main</code>으로 저장해라!" 즉, 사진의 비율을 4:3로 만들고 사진 해상도를 줄이는 작업을 한 것이죠.&lt;/code&gt;</p>
+
+<p>&nbsp;여기까지해서 Rails 프로젝트에 Carrierwave를 사용해서 AWS S3에 이미지를 올리는 방법에 대해 알아보았습니다. 글이 조금이라도 도움이 되셨길 바라며, 피드백, 수정 사항은 언제든지 환영합니다. 소스코드는 Github에서 확인하실 수 있습니다.</p>
+<p><a href="https://github.com/hcn1519/carrierwave_aws_s3" target="_blank">Carreirwave로 AWS S3에 이미지 올리기</a></p>
+
+<h5>더 볼만한 추가 자료</h5>
+
+<ul>
+  <li><a href="https://github.com/carrierwaveuploader/carrierwave" target="_blank">Carrierwave github 페이지</a></li>
+  <li><a href="https://rorlab.gitbooks.io/railsguidebook/content/contents/walkthrough/gallery_layout.html" target="_blank">초보자를 위한 레일즈 가이드북, Carrierwave - 한글 파일 인코딩 자료 포함</a></li>
+  <li><a href="http://lifesforlearning.com/uploading-images-with-carrierwave-to-s3-on-rails/" target="_blank">인도 형님이 쓰신 Carrierwave 자료 - 이미지 버전 설명 관련</a></li>
+</ul>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/articles/2017-02/swift_structAndClass">
+            Swift의 Struct와 Class
+            <small>01 Feb 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/articles/2017-01/swift_classBasic">
+            Swift Class 기본
+            <small>30 Jan 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/articles/2017-01/OOP_class_and_object_java">
+            OOP - Class와 Object
+            <small>24 Jan 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

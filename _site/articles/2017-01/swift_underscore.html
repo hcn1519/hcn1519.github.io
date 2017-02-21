@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Swift underscore &middot; Changnam
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>프로그래밍에 관하여 글을 쓰는 블로그입니다.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about">About</a>
+        
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/categories/">Categories</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/tags/">Tags</a>
+        
+      
+    
+
+    <span class="sidebar-nav-item">Currently v1.0.0</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2017. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="" title="Home">Changnam</a>
+            <small>Developer's Lab</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Swift underscore</h1>
+  <span class="post-date">22 Jan 2017</span>
+  <h4 id="함수에서의-_-underscore">함수에서의 _ (underscore)</h4>
+
+<p>Swift에서 함수를 보다보면 정체불명의 _ 가 있습니다. 이 _ 가 의미하는 것은 무엇일까요? 먼저 일반적인 함수 선언을 봐보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">greet</span><span class="p">(</span><span class="nv">person</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">day</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s">"Hello </span><span class="se">\(</span><span class="n">person</span><span class="se">)</span><span class="s">, today is </span><span class="se">\(</span><span class="n">day</span><span class="se">)</span><span class="s">."</span>
+<span class="p">}</span>
+<span class="nf">greet</span><span class="p">(</span><span class="nv">person</span><span class="p">:</span> <span class="s">"Bob"</span><span class="p">,</span> <span class="nv">day</span><span class="p">:</span> <span class="s">"Tuesday"</span><span class="p">)</span></code></pre></figure>
+
+<p>위의 예제에서는 간단한 함수 <code>greet</code>이 선언되어 있습니다. 별 문제 없어 보입니다.(실제로 별 문제 없습니다.) 다음은 _ 이 있는 함수를 봐보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span> <span class="nv">person</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">day</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s">"Hello </span><span class="se">\(</span><span class="n">person</span><span class="se">)</span><span class="s">, today is </span><span class="se">\(</span><span class="n">day</span><span class="se">)</span><span class="s">."</span>
+<span class="p">}</span>
+
+<span class="nf">greet</span><span class="p">(</span><span class="s">"John"</span><span class="p">,</span> <span class="nv">on</span><span class="p">:</span> <span class="s">"Wednesday"</span><span class="p">)</span></code></pre></figure>
+
+<p>동일한 함수 <code>greet</code>를 작성했는데 이번에는 _ 이 있습니다. 물론 이 함수도 정상 작동합니다. 둘 사이의 차이는 무엇일까요? 눈썰미가 좋은 분들은 이미 보셨겠지만, 함수 호출에서 그 차이가 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="nf">greet</span><span class="p">(</span><span class="nv">person</span><span class="p">:</span> <span class="s">"Bob"</span><span class="p">,</span> <span class="nv">day</span><span class="p">:</span> <span class="s">"Tuesday"</span><span class="p">)</span>
+<span class="nf">greet</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"John"</span><span class="p">,</span> <span class="s">"Wednesday"</span><span class="p">)</span></code></pre></figure>
+
+<p>뭔가 다르다!</p>
+
+<p>네, Swift에서는 함수를 호출할 때, 함수로 전달하는 인자(argument)의 라벨이 있어야 합니다. 즉, <strong>person: “Bob”</strong> 에서 person 부분이 있어야 한다는 것입니다. 그렇다면 <strong>person</strong> 과 <strong>day</strong> 라벨은 어디서 온 것일까요? <strong>바로 함수 선언시 argument의 이름입니다.</strong> Swift는 함수의 argument 앞에 특정 라벨을 붙일 것을 요구합니다.(argument의 이름을 붙인다고 생각하면 쉬울 것 같습니다.) 다만, 따로 라벨을 쓰지 않으면 <strong>default값으로 함수 선언시 사용한 argument를 라벨로 사용합니다.</strong></p>
+
+<p>그렇다면 두 번째 함수 호출은 어떻게 된 것일까요? 먼저 <strong>name:</strong> 부분은 argument 작성시 <strong>name person: String</strong> 부분에서 따로 라벨을 설정해준 것을 확인할 수 있습니다. 자 그 다음은 _ 입니다. 보이나요? greet 함수 호출시 파라미터 앞에 라벨이 없습니다. 네 _ 는 이처럼 argument에 라벨을 따로 붙이고 싶지 않을 때 사용합니다. 정리하자면,</p>
+
+<blockquote>
+  <p>Swift는 함수 호출시 넘기는 파라미터 앞에 라벨을 생략하기 위해 _ 를 사용한다.</p>
+</blockquote>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">iGotIt</span><span class="p">(</span><span class="n">_</span> <span class="nv">understand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">argument</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">label</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s">"Are </span><span class="se">\(</span><span class="n">understand</span><span class="se">)</span><span class="s"> </span><span class="se">\(</span><span class="n">argument</span><span class="se">)</span><span class="s"> </span><span class="se">\(</span><span class="n">label</span><span class="se">)</span><span class="s">?"</span>
+<span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="nf">iGotIt</span><span class="p">(</span><span class="s">"you"</span><span class="p">,</span> <span class="s">"understand"</span><span class="p">,</span> <span class="s">"label"</span><span class="p">))</span></code></pre></figure>
+
+<p>마지막 예제처럼 기이하게 함수를 호출해도 무슨 말인지 이해하시겠죠?</p>
+
+<p><a href="http://stackoverflow.com/questions/30876068/what-is-in-swift-telling-me">
+  참고한 stackoverflow 원글 보기
+</a></p>
+
+<h4 id="for-loop에서의-_-underscore">for loop에서의 _ (underscore)</h4>
+
+<p>이 _ 는 for loop에서도 종종 발견됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..&lt;</span><span class="mi">4</span> <span class="p">{</span>
+  <span class="nf">print</span><span class="p">(</span><span class="s">"hello"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">for</span> <span class="n">index</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..&lt;</span><span class="mi">4</span> <span class="p">{</span>
+  <span class="nf">print</span><span class="p">(</span><span class="s">"hello"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>위의 _ 는 for loop에서 인덱스를 할당하지 않겠다는 의미로 사용됩니다.</p>
+
+<blockquote>
+  <p>내용 출처 : The swift Programming Language(3.0.1), stackoverflow(what is in swift telling me)</p>
+</blockquote>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/articles/2017-02/swift_structAndClass">
+            Swift의 Struct와 Class
+            <small>01 Feb 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/articles/2017-01/swift_classBasic">
+            Swift Class 기본
+            <small>30 Jan 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/articles/2017-01/OOP_class_and_object_java">
+            OOP - Class와 Object
+            <small>24 Jan 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>
