@@ -17,7 +17,7 @@ vim .gitignore
 이렇게 하면 <code>.gitignore</code> 파일이 생성되고, 해당 파일 안에 제외하고자 하는 파일을 넣어주면 됩니다.
 
 {% highlight shell %}
-// .gitignore
+# .gitignore
 Info.plist
 Pods/
 xcuserdata/
@@ -30,10 +30,14 @@ xcuserdata/
 
 ## 이미 올라간 파일들을 github에서 제외하기
 
-사실 처음에 이렇게 제외할 파일들을 미리 설정하지 않고 <code>commit</code>을 해버리는 경우가 종종 발생합니다. 이 때는 캐시된 파일들을 <code>refresh</code>해주고 새롭게 <code>add</code>를 해야합니다.
+처음부터 <code>.gitignore</code>을 생성하고 작업을 진행한 경우 위의 작업만 하면 되지만, 이미 프로젝트를 <code>commit</code>했을 경우에는 위의 작업을 진행해도 올바르게 <code>.gitignore</code>이 작동하지 않습니다. 이 때는 캐시된 파일들을 <code>refresh</code>(github에서 파일을 삭제)해주고 새롭게 <code>add</code>를 해야합니다. 이 때 이미 올라간 파일을 지우는 명령어는 다음과 같습니다.
 
 {% highlight shell %}
 git rm --cached -r .
 {% endhighlight %}
 
-이렇게 해주고 나서, 다시 <code>add</code>, <code>commit</code>, <code>push</code>의 단계를 거치면 <code>gitignore</code>가 정상 작동하게 됩니다.
+위 명령어를 치면 다음과 같이 변경된 파일들의 목록들이 쭉 나타납니다.
+
+<img src="https://dl.dropbox.com/s/p41b9a8qdk6jiby/ignore.png">
+
+이 후 다시 <code>add</code>, <code>commit</code>, <code>push</code>의 단계를 거치면 <code>gitignore</code>가 정상 작동하게 됩니다.
