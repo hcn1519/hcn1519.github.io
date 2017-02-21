@@ -64,7 +64,7 @@ if let roomCount = john.residence?.numberOfRooms {
 # residence is nil 출력
 {% endhighlight %}
 
-위의 코드를 보시면 unwrap과 다르게 <code>?</code>(<code>john.residence?.numberOfRooms</code>)를 사용하는 것을 볼 수 있습니다. 이 때, <code>if let roomCount = john.residence?.numberOfRooms</code> 문장은 각각의 chain에(residence?와 numberOfRooms) 값이 있는지 없는지를 체크하고, **하나라도** 없으면 false를 반환합니다.
+위의 코드를 보시면 unwrap과 다르게 <code>?</code>(<code>john.residence?.numberOfRooms</code>)를 사용하는 것을 볼 수 있습니다. 이 때, <code>if let roomCount = john.residence?.numberOfRooms</code>은 해당 chain에(<code>residence?</code>와 <code>numberOfRooms</code>) 값이 있는지 없는지를 체크하고, **하나라도** 없으면 false를 반환합니다.
 
 정리하자면,
 <div class="message">
