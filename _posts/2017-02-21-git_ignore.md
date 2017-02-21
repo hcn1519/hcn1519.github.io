@@ -8,7 +8,7 @@ date:   2017-02-21 00:30:00
 tags: [Git, Ignore]
 ---
 
-git을 사용할 때, github에 올리면 안되는 파일 혹은 폴더들이 있습니다. 이런 파일들이 github에 올라가지 않도록 도와주는 것이 <code>.gitignore</code>입니다. .gitignore을 사용하는 것은 간단합니다. 먼저 프로젝트의 root 폴더에서 .gitignore 파일을 생성합니다.
+git을 사용할 때, github에 올리면 안되는 파일 혹은 폴더들이 있습니다. 이런 파일들이 github에 올라가지 않도록 도와주는 것이 <code>.gitignore</code>입니다. <code>.gitignore</code>을 사용하는 것은 간단합니다. 먼저 프로젝트의 root 폴더에서 <code>.gitignore</code>파일을 생성합니다.
 
 {% highlight shell %}
 vim .gitignore
@@ -25,6 +25,8 @@ xcuserdata/
 {% endhighlight %}
 
 특정 파일을 제외시키고자 할 때는 파일명을 그대로 써주면 됩니다. 폴더의 경우에는 <code>Pods/</code>처럼 뒤에 <code>/</code>를 붙여주어야 합니다. 특정 확장자를 가진 모든 파일을 제외하고자 할 경우에는 <code>*.lock</code>처럼 <code>*</code>를 사용하면 됩니다.
+
+<br/>
 
 ## 이미 올라간 파일들을 github에서 제외하기
 
