@@ -15,7 +15,7 @@ image:
 
 <code>Property</code>라는 개념은 다른 언어의 멤버변수와 같은 개념입니다. 엄밀한 의미에서 <code>property = 멤버변수</code>를 의미하지 않습니다만, 거의 같은 개념으로 이해하셔도 무방합니다. property는 class뿐만 아니라 structure, enum에서도 쓰입니다. 그 중 가장 기본이 되는 <code>property</code>는 <code>stored property</code>입니다.
 
-#### 1. Stored Property
+## 1. Stored Property
 
 {% highlight swift %}
 class Info {
@@ -31,7 +31,7 @@ var r1 = Rectangle().tag // <- 이 시점에 tag에 대한 데이터들을 가�
 
 위의 코드에서 바로 <code>_width</code>와 <code>_height</code>가 바로 <code>stored property</code>에 해당합니다. 말 그대로 값을 저장하는 속성입니다. 위의 코드에서 독특한 것이 바로 <code>lazy</code>입니다. <code>stored property</code>는 원래 인스턴스 생성시 바로 선언됩니다. 하지만, 앞에 <code>lazy</code> 키워드가 들어가게 되면 해당 <code>property</code>는 인스턴스 생성시 선언되지 않고, 해당  <code>property</code>를 호출하였을 때 선언됩니다. 이는 데이터가 많은 <code>property</code>를 저장할 때, 필요한 경우에 불러 올 수 있는 장점이 있습니다.<!--_-->
 
-#### 2. Computed property
+## 2. Computed property
 
 <code>Computed property</code>는 getter와 setter의 개념을 포함한 property입니다. 즉, <code>Computed property</code>를 통해서 단순히 변수 값을 받아오거나 설정하는 것을 넘어서서, 값을 내부적으로 조작하는 것, 다른 property들로 값을 넘겨주는 것 등의 일을 할 수 있게 해주는 것이 <code>Computed property</code>입니다. 그 기본 형태는 아래와 같습니다.
 
@@ -104,7 +104,7 @@ var progress : CGFloat {
 
 위의 코드의 경우에는 <code>_innerProgress</code>값을 설정하기 이전에 0부터 1 사이의 값인지를 체크하여 값을 0과 1사이의 값으로 고정하는 작업(Compute)을 수행합니다.<!--_-->
 
-#### 3. Property Observer
+## 3. Property Observer
 
 <code>Property Observer</code>는 stored property에 달 수 있는 것으로, 값의 변화를 주시하여 값이 변하기 직전(<code>willSet</code>)과 직후(<code>didSet</code>)에 어떤 행동을 할 수 있게 해주는 것입니다.
 
@@ -132,7 +132,7 @@ stepCounter.totalSteps = 360
 
 위의 경우와 같이 어떤 값을 설정할 경우 <code>Property Observer</code>는 그 값의 변화를 관찰하고, 값이 변하면 어떤 행동을 하는 것을 가능하게 해줍니다.
 
-#### 4. Type Property
+## 4. Type Property
 
 <code>Type Property</code>는 <code>static</code>을 통해 설정하는 class 변수로 이해해도 무방합니다.
 

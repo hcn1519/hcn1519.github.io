@@ -12,7 +12,7 @@ image:
 
 객체지향 개념을 가지고 있는 언어들은 대부분 <code>class</code>와 <code>object</code>를 가지고 있습니다. Swift도 class 개념을 가지고 있으며, class 구성의 기본인 <code>initializer, getter, setter</code> 개념을 지니고 있습니다. 간단하게 이를 알아보도록 하겠습니다.
 
-#### 1. Initializer(생성자)
+## 1. Initializer(생성자)
 
 {% highlight swift %}
 class Rectangle {
@@ -36,11 +36,11 @@ var r1 = Rectangle(width: 10, height: 20)
 
 즉, 다음과 같이 생성자를 사용할 때, r1 object를 우선적으로 만들고, 다음으로 Initializer가 호출되어 생성된 r1을 불러와 r1의 property인 <code>_width</code>, <code>_height</code>을 설정하는 것입니다.<!--_-->
 
-#### 2. getter & setter
+## 2. getter & setter
 
 getter와 setter는 class의 <code>private</code>로 감싸진 property를 설정하기 위해 주로 사용됩니다. 저는 처음 getter와 setter를 java로 배웠는데, Swift가 getter & setter의 코드 가독성 부분을 많이 보완했다고 생각합니다. 무슨 의미인지 아래 예제를 들어보겠습니다.
 
-##### Java getter & setter
+#### Java getter & setter
 
 {% highlight java %}
 class Rectangle {
@@ -68,7 +68,7 @@ public class Main{
 
 위의 코드는 일반적으로 Java에서 getter와 setter를 사용하는 경우입니다. <code>getWidth</code>와 <code>setWidth</code> 메소드로 getter와 setter를 설정하였습니다. 그런데, <code>getWidth()</code>와 <code>setWidth()</code> 메소드를 쓰는 것이 여러모로 불편할 때가 많습니다. 즉, <code>r1.width</code>로 쓰는 게 훨씬 직관적인데, 이를 사용하지 못 하게 되는 것이죠.
 
-##### Swift getter & setter
+#### Swift getter & setter
 
 Swift는 getter와 setter에서 바로 이 부분을 보완하였습니다. 아래의 Swift 코드를 봐보겠습니다.
 
@@ -107,7 +107,7 @@ print(r1.width) // 10
 
 Swift는 <code>r1.width</code>라는 표현 하나로 getter와 setter 모두를 사용할 수 있게 해줍니다. property를 <code>_width</code>로 선언했는데 어째서 <code>r1._width</code>가 아니고 <code>r1.width</code>인가요? 하고 생각하실 수 있습니다. 이는 <code>var width: Double...</code>로 선언되어 있기 때문에 그렇습니다. 즉, 우리가 선언한 변수명을 토대로 property에 접근하게 되고, <code>var width</code>는 어떤 다른 변수 명으로 바뀔 수 있습니다.<!--_-->
 
-##### Little bit further(getter)
+## Little bit further
 
 * Getter
 

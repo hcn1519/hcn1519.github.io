@@ -8,7 +8,7 @@ date:   2017-01-24 00:30:00
 tags: [Java, OOP, Class]
 ---
 
-#### Class와 Object
+## Class와 Object
 
 Class는 하나의 **데이터 타입** 입니다. 즉, Class는 배열처럼 하나의 데이터를 저장하는 공간인 것이죠. Object는 Class에서 생성되는 하나의 **데이터** 입니다. 조금 더 자세하게 알아보기 위해 Class와 Object에 대한 추가적인 자료를 덧붙입니다.
 
