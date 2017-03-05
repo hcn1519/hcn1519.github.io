@@ -112,3 +112,5 @@ print(truck1.weight) // 2000 출력
 - [Apple blog - Value and Reference Types](https://developer.apple.com/swift/blog/?id=10)
 - [Reference and Value Types in Swift - Andrea Prearo](https://medium.com/@andrea.prearo/reference-and-value-types-in-swift-dad40ea76226#.lnwbky1s3)
 - [Stackoverflow - Why Choose Struct Over Class?](http://stackoverflow.com/a/24232845/5130783)
+
+> 참고자료 : Apple Inc. The Swift Programming Language (Swift 3.0.1)

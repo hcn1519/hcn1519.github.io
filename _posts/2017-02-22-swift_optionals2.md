@@ -110,4 +110,4 @@ print(john.residence!.numberOfRooms)
 
 <br/>
 
-> 내용 출처 : Apple Inc. The Swift Programming Language (Swift 3.0.1)
+> 참고자료 : Apple Inc. The Swift Programming Language (Swift 3.0.1)

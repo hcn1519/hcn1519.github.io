@@ -2,7 +2,7 @@
 layout: post
 comments: true
 title:  "Swift Class 기본"
-excerpt: "Swift의 Class에서 쓰이는 constructor, getter, setter에 대해 알아봅니다."
+excerpt: "Swift의 Class에서 쓰이는 Initializer, getter, setter에 대해 알아봅니다."
 categories: Swift Language OOP Class
 date:   2017-01-30 00:30:00
 tags: [Swift, Language, OOP, Class]
@@ -10,9 +10,9 @@ image:
   feature: swiftLogo.jpg
 ---
 
-객체지향 개념을 가지고 있는 언어들은 대부분 <code>class</code>와 <code>object</code>를 가지고 있습니다. Swift도 class 개념을 가지고 있으며, class 구성의 기본인 <code>constructor, getter, setter</code> 개념을 지니고 있습니다. 간단하게 이를 알아보도록 하겠습니다.
+객체지향 개념을 가지고 있는 언어들은 대부분 <code>class</code>와 <code>object</code>를 가지고 있습니다. Swift도 class 개념을 가지고 있으며, class 구성의 기본인 <code>initializer, getter, setter</code> 개념을 지니고 있습니다. 간단하게 이를 알아보도록 하겠습니다.
 
-#### 1. Constructor(생성자)
+#### 1. Initializer(생성자)
 
 {% highlight swift %}
 class Rectangle {
@@ -28,17 +28,17 @@ var r1 = Rectangle(width: 10, height: 20)
 var r1 = Rectangle() // default 생성자가 없으므로 error
 {% endhighlight %}
 
-<code>Constructor</code>는 처음 Class를 생성할 때, 새로운 object를 만드는 메소드입니다. 즉, Class가 가진 멤버변수를 Class 생성과 함께 초기화하는 역할을 합니다. Swift에서는 이를 <code>init</code> 메소드로 호출하고, <code>self</code>를 통해서 object를 호출합니다. 여기서 object를 호출한다는 것의 의미는 생성된 object를 가져와서 멤버변수의 값을 설정하거나, 메소드에 활용하는 데 사용하는 것을 의미합니다. <code>self</code> 키워드는 자신이 속한 object의 주소값을 저장합니다.(<code>self</code>가 object를 reference한다고 표현하기도 합니다.)
+<code>Initializer</code>는 처음 Class를 생성할 때, 새로운 object를 만드는 메소드입니다. 즉, Class가 가진 property를 Class 생성과 함께 초기화하는 역할을 합니다. Swift에서는 이를 <code>init</code> 메소드로 호출하고, <code>self</code>를 통해서 object를 호출합니다. 여기서 object를 호출한다는 것의 의미는 생성된 object를 가져와서 property의 값을 설정하거나, 메소드에 활용하는 데 사용하는 것을 의미합니다. <code>self</code> 키워드는 자신이 속한 object의 주소값을 저장합니다.(<code>self</code>가 object를 reference한다고 표현하기도 합니다.)
 
 {% highlight swift %}
 var r1 = Rectangle(width: 10, height: 20)
 {% endhighlight %}
 
-즉, 다음과 같이 생성자를 사용할 때, r1 object를 우선적으로 만들고, 다음으로 constructor가 호출되어 생성된 r1을 불러와 r1의 멤버변수인 <code>_width</code>, <code>_height</code>을 설정하는 것입니다.<!--_-->
+즉, 다음과 같이 생성자를 사용할 때, r1 object를 우선적으로 만들고, 다음으로 Initializer가 호출되어 생성된 r1을 불러와 r1의 property인 <code>_width</code>, <code>_height</code>을 설정하는 것입니다.<!--_-->
 
 #### 2. getter & setter
 
-getter와 setter는 class의 <code>private</code>로 감싸진 멤버변수를 설정하기 위해 주로 사용됩니다. 저는 처음 getter와 setter를 java로 배웠는데, Swift가 getter & setter의 코드 가독성 부분을 많이 보완했다고 생각합니다. 무슨 의미인지 아래 예제를 들어보겠습니다.
+getter와 setter는 class의 <code>private</code>로 감싸진 property를 설정하기 위해 주로 사용됩니다. 저는 처음 getter와 setter를 java로 배웠는데, Swift가 getter & setter의 코드 가독성 부분을 많이 보완했다고 생각합니다. 무슨 의미인지 아래 예제를 들어보겠습니다.
 
 ##### Java getter & setter
 
@@ -86,7 +86,7 @@ var variableName: dataType {
 
 출처 : <a href="https://syntaxdb.com/ref/swift/getters-setters">SyntaxDB</a>
 
-기본적인 Getter와 Setter의 형태는 위와 같습니다. <code>variableName</code>에 들어가는 변수가 원하는 멤버변수 호출을 담당합니다. 즉, <code>className.variableName</code>의 표현으로 멤버변수의 값에 접근할 수 있게 됩니다. 위의 Java 코드와 동일한 코드를 Swift로 적게 되면 아래와 같이 나옵니다.
+기본적인 Getter와 Setter의 형태는 위와 같습니다. <code>variableName</code>에 들어가는 변수가 원하는 property 호출을 담당합니다. 즉, <code>className.variableName</code>의 표현으로 property의 값에 접근할 수 있게 됩니다. 위의 Java 코드와 동일한 코드를 Swift로 적게 되면 아래와 같이 나옵니다.
 
 {% highlight swift %}
 class Rectangle {
@@ -105,7 +105,7 @@ r1.width = 10
 print(r1.width) // 10
 {% endhighlight %}
 
-Swift는 <code>r1.width</code>라는 표현 하나로 getter와 setter 모두를 사용할 수 있게 해줍니다. 멤버변수를 <code>_width</code>로 선언했는데 어째서 <code>r1._width</code>가 아니고 <code>r1.width</code>인가요? 하고 생각하실 수 있습니다. 이는 <code>var width: Double...</code>로 선언되어 있기 때문에 그렇습니다. 즉, 우리가 선언한 변수명을 토대로 멤버변수에 접근하게 되고, <code>var width</code>는 어떤 다른 변수 명으로 바뀔 수 있습니다.<!--_-->
+Swift는 <code>r1.width</code>라는 표현 하나로 getter와 setter 모두를 사용할 수 있게 해줍니다. property를 <code>_width</code>로 선언했는데 어째서 <code>r1._width</code>가 아니고 <code>r1.width</code>인가요? 하고 생각하실 수 있습니다. 이는 <code>var width: Double...</code>로 선언되어 있기 때문에 그렇습니다. 즉, 우리가 선언한 변수명을 토대로 property에 접근하게 되고, <code>var width</code>는 어떤 다른 변수 명으로 바뀔 수 있습니다.<!--_-->
 
 ##### Little bit further(getter)
 
@@ -152,4 +152,4 @@ set {
 {% endhighlight %}
 
 
-> 내용 출처 : Apple Inc. The Swift Programming Language (Swift 3.0.1)
+> 참고자료 : Apple Inc. The Swift Programming Language (Swift 3.0.1)
