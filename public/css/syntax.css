@@ -49,7 +49,12 @@ pre code {
 }
 
 .highlight .hll { background-color: #373b41 }
-.highlight  { background: #1d1f21; color: #c5c8c6 }
+.highlight  {
+  background: #1d1f21;
+  color: #c5c8c6;
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+ }
 .highlight .c { color: #969896 } /* Comment */
 .highlight .err { color: #cc6666 } /* Error */
 .highlight .k { color: #b294bb } /* Keyword */
