@@ -7,7 +7,7 @@ categories: iOS UIKit UITableView
 date:   2017-01-22 00:30:00
 tags: [iOS, UIKit, UITableView]
 image:
-  feature: ios10.jpg
+  feature: iOS10.png
 ---
 
 #### tableView의 기본 구조
