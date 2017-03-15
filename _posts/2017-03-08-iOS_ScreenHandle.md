@@ -10,7 +10,7 @@ image:
   feature: iOS10.png
 ---
 
-iOS에서 디바이스별로 다양한 화면을 지원함에 따라 view를 설정할 때, 세부적으로 해야할 필요성이 늘어나고 있습니다. iPhone 종류만 iPhone 7, iPhone 7 plus, iPhone SE가 있고, iPad도 프로 모델까지 합하면 설정시 못 해도 6개 이상을 해주어야 합니다. iOS에서는 여러 화면에 대응할 수 있도록 <code>UIDevice</code>를 통해 화면별로 코드를 수정할 수 있도록 해줍니다.
+iOS에서 디바이스별로 다양한 화면을 지원함에 따라 view를 세부적으로 설정 해야할 필요성이 늘어나고 있습니다. iPhone 종류만 iPhone 7, iPhone 7 plus, iPhone SE가 있고, iPad도 프로 모델까지 합하면 설정시 못 해도 6개 이상을 해주어야 합니다. iOS에서는 여러 화면에 대응할 수 있도록 <code>UIDevice</code>를 통해 화면별로 코드를 수정할 수 있도록 해줍니다.
 
 {% highlight swift %}
 // ScreenExtesion.swift
