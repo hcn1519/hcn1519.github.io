@@ -31,7 +31,7 @@ pre {
   display: block;
   padding: 1em;
   margin: 0 0 1em;
-  line-height: 1.5;
+  line-height: 1.4;
   word-break: break-all;
   word-wrap: break-word;
   border-radius: 0;
@@ -54,6 +54,7 @@ pre code {
    color: #c5c8c6;
    margin-left: 5px !important;
    margin-right: 5px !important;
+   border-radius: 5px;
 }
  .highlight .c { color: #969896 } /* Comment */
  .highlight .err { color: #cc6666 } /* Error */
@@ -68,7 +69,7 @@ pre code {
  .highlight .cs { color: #969896 } /* Comment.Special */
  .highlight .gd { color: #cc6666 } /* Generic.Deleted */
 .highlight .gu { color: #8abeb7; font-weight: bold } /* Generic.Subheading */
- .highlight .kc { color: #b294bb } /* Keyword.Constant */
+ .highlight .kc { color: #7e8ebc } /* Keyword.Constant */
  .highlight .kd { color: #b294bb } /* Keyword.Declaration */
  .highlight .kn { color: #8abeb7 } /* Keyword.Namespace */
  .highlight .kp { color: #b294bb } /* Keyword.Pseudo */
