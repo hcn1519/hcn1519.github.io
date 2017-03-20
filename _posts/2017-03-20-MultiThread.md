@@ -26,7 +26,7 @@ image:
 여기서 도입되는 것이 **Thread** 입니다. 먼저 **Thread** 의 기본 개념 및 구성에 대해 살펴보면 다음과 같습니다.
 
 <div class="message">
-Thread는 CPU 이용의 기본 단위 입니다. Thread는 스레드 ID, 프로그램 카운터, 레지스터 집합, 스택으로 구성되며, 같은 프로세스에 속한 다른 스레드와 코드, 데이터 섹션 외 운영체제 자원을 공유합니다.
+Thread는 <span style="font-weight: bold">CPU 이용의 기본 단위</span> 입니다. Thread는 스레드 ID, 프로그램 카운터, 레지스터 집합, 스택으로 구성되며, 같은 프로세스에 속한 다른 스레드와 코드, 데이터 섹션 외 운영체제 자원을 공유합니다.
 </div>
 
 <img src="https://hcn1519.github.io/public/assets/thread.png">
@@ -45,7 +45,7 @@ Thread는 CPU 이용의 기본 단위 입니다. Thread는 스레드 ID, 프로�
 즉, 웹 서버에 동시에 여러 사람이 요청을 보내올 때 하나의 프로세스가 각각의 클라이언트에 응대하는 것이 아니라, 각각의 반복적인 업무를 가지고 있는 여러 개의 **Thread** 를 생성하여 동시다발적으로 클라이언트에 대응(listen)하는 형태인 것입니다.
 
 <div class="message">
-정리하자면, **Thread** 는 프로세스에서 이뤄지는 여러 가지 반복되는 일들을 세분화하여 작업을 수행하는 것이라고 할 수 있습니다.
+정리하자면, <span style="font-weight: bold">Thread</span> 는 프로세스에서 이뤄지는 여러 가지 반복되는 일들을 세분화하여 작업을 수행하는 것이라고 할 수 있습니다.
 </div>
 
 #### Thread의 장점
