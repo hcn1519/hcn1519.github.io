@@ -4,7 +4,7 @@ comments: true
 title:  "iOS fastlane 스냅샷"
 excerpt: "iOS에서 fastlane의 스냅샷 기능을 활용하여 디바이스별 스크린샷을 찍는 방법에 대해 알아봅니다."
 categories: iOS UITest Fastlane
-date:   2017-03-16 00:30:00
+date:   2017-03-19 00:30:00
 tags: [iOS, UITest, Fastlane]
 image:
   feature: fastlane.png
@@ -24,11 +24,17 @@ iOS에서 앱을 배포하기 위해서는 기본적으로 앱의 모든 페이�
 
 네, 말 그대로 시뮬레이터를 바꿔가면서 노가다를 해야합니다. 각 시뮬레이터를 켜면서
 
-
 <figure class="animated_gif_frame" data-caption="GIF (2MB)">
-  <img class="animated_gif" src="https://dl.dropboxusercontent.com/s/rmpcoi2cmvky85p/EAF4E0DD-C36F-4E0C-A12B-744E4B97D4A9-786-0000015E0F6EE379.gif" data-source="https://dl.dropboxusercontent.com/s/rmpcoi2cmvky85p/EAF4E0DD-C36F-4E0C-A12B-744E4B97D4A9-786-0000015E0F6EE379.gif" width="800" height="450">
-  <figcaption>Click to play</figcaption>
+  <img class="animated_gif" src="https://dl.dropboxusercontent.com/s/rdibs8vuntn2i6o/64EAB836-54E2-48D0-91CD-19351B438D3D-786-000001C18EFEB2E3.gif" data-source="https://dl.dropboxusercontent.com/s/rdibs8vuntn2i6o/64EAB836-54E2-48D0-91CD-19351B438D3D-786-000001C18EFEB2E3.gif" width="800" height="450">
 </figure>
+
+한땀한땀 스크린샷을 찍어줘야 하는 것이죠. Fastlane snapshot은 이러한 지루하고 오래 걸리는 반복적인 과정을 자동화해주는 역할을 담당합니다. 테스트 결과 40장의 스크린샷도 컴퓨터만 켜놓으면 10분만에 찍어주는 퍼포먼스를 보여줍니다.
+
+<img src="https://dl.dropbox.com/s/ymzuli6cx1hzekw/snapshotde.png">
+
+## Fastlane with UITests
+
+
 
 func testSnapshot() {
 

@@ -2,7 +2,7 @@
 layout: post
 comments: true
 title:  "다중 Thread 프로그래밍"
-excerpt: "Operating System Concepts, Ch4에 기반한 정리입니다."
+excerpt: "Operating System Concepts에 기반한 정리입니다."
 categories: OS Thread Java
 date:   2017-03-20 00:30:00
 tags: [OS, Thread, Java]
