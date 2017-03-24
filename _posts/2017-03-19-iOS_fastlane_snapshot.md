@@ -25,7 +25,7 @@ iOS에서 앱을 배포하기 위해서는 기본적으로 앱의 모든 페이�
 네, 말 그대로 시뮬레이터를 바꿔가면서 노가다를 해야합니다. 각 시뮬레이터를 켜면서
 
 <figure class="animated_gif_frame" data-caption="GIF (2MB)">
-  <img class="animated_gif" src="https://dl.dropboxusercontent.com/s/rdibs8vuntn2i6o/64EAB836-54E2-48D0-91CD-19351B438D3D-786-000001C18EFEB2E3.gif" data-source="https://dl.dropboxusercontent.com/s/rdibs8vuntn2i6o/64EAB836-54E2-48D0-91CD-19351B438D3D-786-000001C18EFEB2E3.gif" width="800" height="450">
+  <img class="animated_gif" src="https://dl.dropboxusercontent.com/s/10zogh25lzvi1gw/20A9F3A5-C2F1-4C06-AB66-87CD0BBEA107-786-0000075D1354DBCC.gif" data-source="https://dl.dropboxusercontent.com/s/10zogh25lzvi1gw/20A9F3A5-C2F1-4C06-AB66-87CD0BBEA107-786-0000075D1354DBCC.gif" width="800" height="450">
 </figure>
 
 한땀한땀 스크린샷을 찍어줘야 하는 것이죠. Fastlane snapshot은 이러한 지루하고 오래 걸리는 반복적인 과정을 자동화해주는 역할을 담당합니다. 테스트 결과 40장의 스크린샷도 컴퓨터만 켜놓으면 10분만에 찍어주는 퍼포먼스를 보여줍니다.
