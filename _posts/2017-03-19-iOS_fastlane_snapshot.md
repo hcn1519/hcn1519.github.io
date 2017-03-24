@@ -32,9 +32,30 @@ iOS에서 앱을 배포하기 위해서는 기본적으로 앱의 모든 페이�
 
 <img src="https://dl.dropbox.com/s/ymzuli6cx1hzekw/snapshotde.png">
 
+## Fastlane snapshot 설치
+
+Fastlane은 맥에 기본적으로 사용되는 ruby gem을 통해 설치됩니다.
+
+{% highlight Bash shell scripts %}
+sudo gem install fastlane
+{% endhighlight %}
+
+설치가 완료되면, 터미널에서 프로젝트 루트로 이동합니다. 그 후,
+
+{% highlight Bash shell scripts %}
+fastlane init
+{% endhighlight %}
+
+다음 명령어를 치게 되면, 3개의 파일(<code>snapfile</code>, <code>SnapshotHelper.swift</code>, <code>SnapshotHelper2-3.swift</code>)이 생성됩니다. 다음으로 스냅샷이 저장될 폴더를 생성합니다.
+
+{% highlight Bash shell scripts %}
+mkdir snapshots
+{% endhighlight %}
+
+
 ## Fastlane with UITests
 
-
+fastlane snapshot은 Xcode의 <code>UITest</code>라는 기능을 통해 작동합니다. 그렇기 때문에 UITest에 대한 기본적인 지식을 알아야 fastlane을 정상 작동
 
 func testSnapshot() {
 
