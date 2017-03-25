@@ -25,7 +25,7 @@ iOS에서 앱을 배포하기 위해서는 기본적으로 앱의 모든 페이�
 네, 말 그대로 시뮬레이터를 바꿔가면서 노가다를 해야합니다. 각 시뮬레이터를 켜면서
 
 <figure class="animated_gif_frame" data-caption="GIF (2MB)">
-  <img class="animated_gif" src="https://dl.dropboxusercontent.com/s/10zogh25lzvi1gw/20A9F3A5-C2F1-4C06-AB66-87CD0BBEA107-786-0000075D1354DBCC.gif" data-source="https://dl.dropboxusercontent.com/s/10zogh25lzvi1gw/20A9F3A5-C2F1-4C06-AB66-87CD0BBEA107-786-0000075D1354DBCC.gif" width="800" height="450">
+  <img class="animated_gif" src="https://dl.dropboxusercontent.com/s/10zogh25lzvi1gw/20A9F3A5-C2F1-4C06-AB66-87CD0BBEA107-786-0000075D1354DBCC.gif" data-source="https://dl.dropboxusercontent.com/s/10zogh25lzvi1gw/20A9F3A5-C2F1-4C06-AB66-87CD0BBEA107-786-0000075D1354DBCC.gif" width="100%" height="auto">
 </figure>
 
 한땀한땀 스크린샷을 찍어줘야 하는 것이죠. Fastlane snapshot은 이러한 지루하고 오래 걸리는 반복적인 과정을 자동화해주는 역할을 담당합니다. 테스트 결과 40장의 스크린샷도 컴퓨터만 켜놓으면 10분만에 찍어주는 퍼포먼스를 보여줍니다.
@@ -111,7 +111,7 @@ clear_previous_screenshots true
 <code>UITests</code>는 말 그대로 UI들이 제대로 작동하는지를 테스트할 수 있게 도와주는 툴입니다. fastlane snapshots은 <code>UITests</code>를 통해 작동하는데 구체적으로 어떻게 하는지에 대해 알아보겠습니다. 먼저 Xcode에서 <code>ProjectNameUITests.swift</code>으로 이동합니다. 그리고 <code>커서</code>를 <code>testSnapshot()</code> 안으로 넣어둡니다. 그리고 밑에 보이는 빨간 버튼(레코드 버튼)을 누르게 되면, <code>UITests</code>가 구동되면서 시뮬레이터가 켜집니다. 그리고 켜진 시뮬레이터에서 버튼을 누르거나 하는 액션을 취하면 놀랍게도, 실시간으로 코드가 생성됩니다.
 
 <figure class="animated_gif_frame" data-caption="GIF (2MB)">
-  <img class="animated_gif" src="https://dl.dropboxusercontent.com/s/c4l55l2nhxkt4yv/5CE7B06E-28C6-43C0-8690-70237BCBF3FC-786-0000058543E86FAC.gif" data-source="https://dl.dropboxusercontent.com/s/c4l55l2nhxkt4yv/5CE7B06E-28C6-43C0-8690-70237BCBF3FC-786-0000058543E86FAC.gif" width="800" height="450">
+  <img class="animated_gif" src="https://dl.dropboxusercontent.com/s/c4l55l2nhxkt4yv/5CE7B06E-28C6-43C0-8690-70237BCBF3FC-786-0000058543E86FAC.gif" data-source="https://dl.dropboxusercontent.com/s/c4l55l2nhxkt4yv/5CE7B06E-28C6-43C0-8690-70237BCBF3FC-786-0000058543E86FAC.gif" width="100%" height="auto">
 </figure>
 
 이 방식을 사용해서 스크린샷을 찍을 화면이 모두 나오도록 액션을 생성합니다. 다음으로 snapshot을 찍을 구간에 <code>snapshot("main")</code> 다음과 같이 snapshot 이름을 설정하여 코드를 집어넣습니다. 예시로
