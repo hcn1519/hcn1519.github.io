@@ -12,7 +12,7 @@
   background-color: #212121;
   padding-left: 100px;
   box-sizing: border-box;
-  transform: translate3d(-330px, -210px, 0px)  rotate(45deg);
+  transform: translate3d(-330px, -220px, 0px)  rotate(45deg);
   margin: 0;
   position: relative;
   transition: all .3s ease-in-out;
@@ -20,6 +20,7 @@
 
 nav.active .menu-container {
   height: 200%;
+  width: 100%;
   transform: translate3d(-100px, 0px, 0px)  rotate(0deg);
 }
 
@@ -101,9 +102,4 @@ nav.active .menu-link{
 .menu.active .menu-hamburger:after{
   transform: rotate(45deg);
   bottom: 0px;
-}
-
-.menu.active {
-  height: 100%;
-  width: 100%;
 }
