@@ -1,5 +1,6 @@
 .menu{
-  height: 11%;
+  height: 5rem;
+  width: 5rem;
   overflow: hidden;
   position: fixed;
 }
@@ -100,4 +101,9 @@ nav.active .menu-link{
 .menu.active .menu-hamburger:after{
   transform: rotate(45deg);
   bottom: 0px;
+}
+
+.menu.active {
+  height: 100%;
+  width: 100%;
 }
