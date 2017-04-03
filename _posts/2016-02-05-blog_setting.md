@@ -5,7 +5,7 @@ title:  "Github Blog 플랫폼 선택!"
 excerpt: "jekyll 기반의 github 블로그 선택과 관련된 이야기입니다."
 categories: Jekyll
 date: 2016-02-05 11:00:00
-tags: [jekyll, 지킬, github 블로그]
+tags: [Jekyll, BlogTheme]
 image:
   feature: jekyll.jpg
 ---
