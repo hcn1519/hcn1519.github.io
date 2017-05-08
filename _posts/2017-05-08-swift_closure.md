@@ -149,6 +149,69 @@ var multiply: (Int, Int) -> Int = (*)
 
 다음과 같습니다. `sorted(by:)` 메소드는 항상 **두 값의 크기 비교를 통해 Bool을 반환** 하므로 연산자(`<`)만 쓰는 것으로도 그 의미를 알 수 있습니다. 또한 `multiply`의 경우에도 항상 **두 값을 곱한 값을 반환** 하므로 연산자(`*`)만으로도 연산을 모두 알 수 있습니다. 그렇기 때문에 위와 같은 축약이 가능합니다.
 
+## 함수로 Closure 전달하기
+
+Closure는 `변수`에 저장되기 때문에 변수를 함수에 넘길 수 있는 것처럼, Closure도 함수로 넘길 수 있습니다. 그 형태는 일반적인 변수를 넘기는 것과 동일하여 `func  함수명(label 변수명: 변수타입)` 이 조건에 맞게만 써주면 됩니다.
+
+{% highlight swift %}
+var hello: () -> Void = { print("Hello~") }
+
+func runClosure(name aClosure: () -> Void) {
+    aClosure()
+}
+
+runClosure(name: hello) // Hello~
+{% endhighlight %}
+
+#### Trailing Closure를 활용한 Syntax Sugar
+
+Trailing Closure는 함수의 호출시 Closure를 인자로 넘겨야 하는데 Closure가 지나치게 길어질 경우 이를 함수와 분리해서 쓸 수 있는 Syntax Sugar입니다. 즉 위의 코드는 몇 가지 형태로 호출될 수 있습니다.
+
+{% highlight swift %}
+// 인자를 전달하는 형태
+runClosure(name: hello) // Hello~
+runClosure(name: { print("anther closure") })
+
+runClosure() {
+  print("trailing1")
+}
+
+// 인자가 Closure밖에 없다면 ()를 생략할 수 있습니다.
+runClosure {
+  print("trailing2")
+}
+{% endhighlight %}
+
+인자가 한 개가 아닌 경우는 다음과 같이 사용할 수 있습니다.
+
+{% highlight swift %}
+func runClosure2(index: Int, name aClosure: () -> Void) {
+
+}
+runClosure2(index: 2) {
+    print(index) // 에러입니다.
+    print("hi")
+}
+{% endhighlight %}
+
+`Alamofire`를 사용할 때 completionHandler로 나타나는 Closure 같은 것들은 이 때문에 몇 가지 형태로 쓸 수 있습니다.
+
+{% highlight swift %}
+// 인자를 전달하는 형태
+Alamofire.request(URL).responseJSON(completionHandler: { response in
+  // do something
+  completed()
+})
+
+// Trailing Closure 활용한 형태
+Alamofire.request(URL).responseJSON { response in
+  // do something
+  completed()
+})
+{% endhighlight %}
+
+## Map Method
+
 
 ## 참고자료
 - Apple Inc. The Swift Programming Language (Swift 3.1)
