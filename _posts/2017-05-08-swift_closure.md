@@ -39,7 +39,7 @@ addCounter()
 print(counter) // 결과 2
 {% endhighlight %}
 
-Closure는 변수에 값을 선언하는 대신에 변수에 **함수** 를 선언하는 것입니다. 여기서는 `addCounter` 변수에 함수를 선언하였습니다. 그리고 이 변수는 함수처럼 호출을 할 수 있습니다.(`addCounter()` 형태)
+Closure는 변수에 값을 선언하는 대신에 변수에 **함수** 를 선언합니다. 여기서는 `addCounter` 변수에 함수를 선언하였습니다. 그리고 이 변수는 함수처럼 호출을 할 수 있습니다.(`addCounter()` 형태)
 
 ## Closure 기본 형태
 
@@ -86,9 +86,11 @@ var reverse2 = names.sorted(by: { (s1: String, s2: String) -> Bool in return s1 
 
 Closure의 짧지만 직관적인 코드 작성에 크게 기여하는 것이 바로 축약형입니다. 반대로, 어떤 경우 축약을 하는지 모른다면 어떻게 Closure가 작동하는지 모르게 되는 상황에 직면하게 됩니다. 여기서는 Closure에서 어떤 경우 표현을 생략할 수 있는지 알아보겠습니다.
 
-#### Type Inferring
+#### 1. Type Inferring
 
-Closure는 어떤 타입의 데이터가 인자로 들어오고, return 값이 어떤 것인지 미리 알고 있다면 이를 생략할 수 있습니다.
+<div class="message">
+  Closure는 어떤 타입의 데이터가 인자로 들어오고, return 값이 어떤 것인지 미리 알고 있다면 이를 생략할 수 있습니다.
+</div>
 
 {% highlight swift %}
 names.sorted(by: { (s1: String, s2: String) -> Bool in return s1 < s2 })
@@ -101,34 +103,42 @@ names.sorted(by: { (s1, s2) in return s1 < s2 })
 
 {% highlight swift %}
 var multiply: (Int, Int) -> Int = { (a: Int, b: Int) in return a * b }
+
+// 데이터 타입 생략
 var multiply: (Int, Int) -> Int = { (a, b) return a * b }
 {% endhighlight %}
 
 위에서 `multiply`는 받은 두 값을 곱한 값을 반환하는 변수입니다. 이 때, 여기서는 변수를 선언할 때 타입을 `(Int, Int) -> Int`로 명시를 했기 때문에, Closure에서 이미 어떤 데이터 타입이 인자로 오고 어떤 데이터 타입을 리턴하는지 알고 있습니다. 그러므로 Closure 내부에서는 이를 생략할 수 있습니다.
 
-#### Single Expression Closure의 "return" keyword 생략
+#### 2. Single Expression Closure의 "return" keyword 생략
 
-Single Expression Closure는 `return` 키워드를 생략할 수 있습니다. 그래서,
+<div class="message">
+  Single Expression Closure는 `return` 키워드를 생략할 수 있습니다.
+</div>
 
 {% highlight swift %}
+// return 키워드 생략
 names.sorted(by: { (s1, s2) in s1 < s2 })
 var multiply: (Int, Int) -> Int = { (a, b) a * b }
 {% endhighlight %}
 
 다음과 같이 `return` 키워드 없이 Closure를 작성할 수 있습니다.
 
-#### Short-hand argument name
+#### 3. Short-hand argument name
 
-Closure 내부로 들어오는 인자들은 항상 이름을 정의하지 않아도, 순서대로 `$0`, `$1`의 이름으로 사용할 수 있습니다. 즉,
+<div class="message">
+  Closure 내부로 들어오는 인자들은 항상 이름을 정의하지 않아도, 순서대로 `$0`, `$1`의 이름으로 사용할 수 있습니다.
+</div>
 
 {% highlight swift %}
+// 축약형 인자 이름 사용
 names.sorted(by: { $0 < $1 })
 var multiply: (Int, Int) -> Int = { $0 * $1 }
 {% endhighlight %}
 
 다음과 같은 형태로 사용할 수 있습니다.
 
-#### Operator Methods를 통한 축약
+#### 4. Operator Methods를 통한 축약
 
 위의 경우까지는 Closure에서 자주 통용될 수 있는 방법이고, operator(연산자)를 이용한 축약은 두 값을 연산하는 것이 결과로 나오는 특별한 경우이기 때문에 사용할 수 있는 축약입니다. 그 형태를 살펴보면,
 
@@ -137,7 +147,7 @@ names.sorted(by: <)
 var multiply: (Int, Int) -> Int = (*)
 {% endhighlight %}
 
-다음과 같습니다. `sorted(by:)` 메소드는 항상 **두 값의 크기 비교를 통해 Bool을 반환** 하므로 연산자(<)만 쓰는 것으로도 그 의미를 알 수 있습니다. 또한 `multiply`의 경우에도 항상 **두 값을 곱한 값을 반환** 하므로 연산자(*)만으로도 연산을 모두 알 수 있습니다. 그렇기 때문에 위와 같은 축약이 가능합니다.
+다음과 같습니다. `sorted(by:)` 메소드는 항상 **두 값의 크기 비교를 통해 Bool을 반환** 하므로 연산자(`<`)만 쓰는 것으로도 그 의미를 알 수 있습니다. 또한 `multiply`의 경우에도 항상 **두 값을 곱한 값을 반환** 하므로 연산자(`*`)만으로도 연산을 모두 알 수 있습니다. 그렇기 때문에 위와 같은 축약이 가능합니다.
 
 
 ## 참고자료
