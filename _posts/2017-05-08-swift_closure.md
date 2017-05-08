@@ -165,7 +165,7 @@ runClosure(name: hello) // Hello~
 
 #### Trailing Closure를 활용한 Syntax Sugar
 
-Trailing Closure는 함수의 호출시 Closure를 인자로 넘겨야 하는데 Closure가 지나치게 길어질 경우 이를 함수와 분리해서 쓸 수 있는 Syntax Sugar입니다. 즉 위의 코드는 몇 가지 형태로 호출될 수 있습니다.
+Trailing Closure는 함수의 호출시 Closure를 인자로 넘길 때, Closure가 지나치게 길어질 경우 이를 함수와 분리해서 쓸 수 있는 Syntax Sugar입니다. 즉 위의 코드는 몇 가지 형태로 호출될 수 있습니다.
 
 {% highlight swift %}
 // 인자를 전달하는 형태
@@ -173,6 +173,7 @@ runClosure(name: hello) // Hello~
 runClosure(name: { print("anther closure") })
 
 runClosure() {
+  // aClosure()가 호출된 시점에서 실행됩니다.
   print("trailing1")
 }
 
@@ -186,10 +187,10 @@ runClosure {
 
 {% highlight swift %}
 func runClosure2(index: Int, name aClosure: () -> Void) {
-
+  aClosure()
 }
 runClosure2(index: 2) {
-    print(index) // 에러입니다.
+  // index는 2로 넘기고, aClosure()가 호출된 시점에서 hi 출력
     print("hi")
 }
 {% endhighlight %}
