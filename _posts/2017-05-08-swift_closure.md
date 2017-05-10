@@ -215,5 +215,5 @@ Alamofire.request(URL).responseJSON { response in
 
 
 ## 참고자료
-- Apple Inc. The Swift Programming Language (Swift 3.1)
-- Raywenderlich - Closure
+* Apple Inc. The Swift Programming Language (Swift 3.1)
+* Raywenderlich - Closure
