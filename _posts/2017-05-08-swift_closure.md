@@ -190,7 +190,7 @@ func runClosure2(index: Int, name aClosure: () -> Void) {
   aClosure()
 }
 runClosure2(index: 2) {
-  // index는 2로 넘기고, aClosure()가 호출된 시점에서 hi 출력
+    // index는 2로 넘기고, aClosure()가 호출된 시점에서 hi 출력
     print("hi")
 }
 {% endhighlight %}
