@@ -195,7 +195,7 @@ runClosure2(index: 2) {
 }
 {% endhighlight %}
 
-`Alamofire`를 사용할 때 completionHandler로 나타나는 Closure 같은 것들은 이 때문에 몇 가지 형태로 쓸 수 있습니다.
+`Alamofire`를 사용할 때 completionHandler로 나타나는 Closure 같은 것들은 이 때문에 trailing closure 형태로도 쓸 수 있습니다.
 
 {% highlight swift %}
 // 인자를 전달하는 형태
@@ -211,8 +211,51 @@ Alamofire.request(URL).responseJSON { response in
 })
 {% endhighlight %}
 
-## Map Method
+#### Map Method
 
+Trailing closure 형태로 사용하는 대표적인 메소드 중 하나로 `map(_:)` 메소드가 있습니다. `map(_:)`은 collection 데이터 타입 안의 모든 객체(혹은 일부)를 수정할 때 사용하는 메소드입니다. 일종의 루프라고 할 수 있는데, 일반적인 루프라기 보다는 값을 새롭게 `mapping`하는데 목적이 강합니다.
+
+{% highlight swift %}
+var numbers = [4,3,2,6,1]
+
+numbers = numbers.map { (value) -> Int in
+  var newVal = value + 1
+  return newVal
+}
+{% endhighlight %}
+
+위의 예시는 `numbers` 배열의 값들을 기존 값+1의 값들로 새롭게 `mapping`한 것을 보여줍니다. 이 때, 위처럼 기존과 동일한 리턴 타입을 가질 수도 있지만, 그렇지 않아도 됩니다. 또한 배열로 딕셔너리를 만들 수도 있고, 반대의 경우도 가능합니다.
+
+{% highlight swift %}
+let digitNames = [
+    0: "Zero", 1: "One", 2: "Two",   3: "Three", 4: "Four",
+    5: "Five", 6: "Six", 7: "Seven", 8: "Eight", 9: "Nine"
+]
+
+let oddOrEvenArr = digitNames.map { (key, value) -> String in
+    var str = ""
+    if key % 2 == 0 {
+      str = "짝수"
+    } else {
+      str = "홀수"
+    }
+    return str
+}
+// oddOrEvenArr = ["짝수", "홀수", ...] (순서가 보장되지는 않습니다.)
+
+let oddOrEvenDict = digitNames.map { (key, value) -> [Int, String] in
+    var str = ""
+    if key % 2 == 0 {
+      str = "짝수"
+    } else {
+      str = "홀수"
+    }
+    return [key: str]
+}
+// oddOrEvenDict = [0:"짝수", 1:"홀수", ...] (순서가 보장되지는 않습니다.)
+{% endhighlight %}
+
+위의 예시의 경우 `oddOrEvenArr`과 `oddOrEvenDict`은 각각 `digitNames`을 새롭게 `mapping`하여 만든 배열과 딕셔너리입니다.
 
 ## 참고자료
 * Apple Inc. The Swift Programming Language (Swift 3.1)
