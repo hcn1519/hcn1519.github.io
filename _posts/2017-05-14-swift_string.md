@@ -146,11 +146,11 @@ let rangeOfWorld = str.index(str.endIndex, offsetBy: -6)..<str.endIndex
 str.removeSubrange(rangeOfWorld) // 결과 : Hello
 {% endhighlight %}
 
-여기서 `remove(_:at:)` 메소드는 직관적으로 이해할 수 있습니다. 반면 `range`의 경우에는 아무 `range`나 사용해서는 안됩니다. 하나의 배열도 `range`가 될 수 있습니다. 여기서 말하는 `range`는 **String.index** 를 사용하여 닫힌 `range`를 의미합니다. 즉 위의 예시처럼, `str.index` 혹은 `str.endIndex` 같은 것들로 닫힌 `range`를 지칭하는 것입니다.
+여기서 `remove(_:at:)` 메소드는 직관적으로 이해할 수 있습니다. 반면 `range`의 경우에는 아무 `range`나 사용해서는 안됩니다.(하나의 배열도 `range`가 될 수 있습니다.) 여기서 말하는 `range`는 **String.index** 를 사용하여 닫힌 `range`를 의미합니다. 즉 위의 예시처럼, `str.index` 혹은 `str.endIndex` 같은 것들로 닫힌 `range`를 지칭하는 것입니다.
 
 ## Prefix와 Suffix(접두사, 접미사)
 
-`hasPrefix(_:)` 메소드와 `hasSuffix(_:)` 메소드는 String의 앞쪽 혹은 뒷쪽에 해당 문자가 있는지를 `Bool` 데이터를 리턴합니다.
+`hasPrefix(_:)` 메소드와 `hasSuffix(_:)` 메소드는 String의 앞쪽 혹은 뒷쪽에 찾고자 하는 문자가 있는지를 확인할 수 있도록 해주는 메소드입니다. 특정 문자열이 앞에서부터(혹은 뒤에서부터) 포함되어 있는지 확인할 때 좋은 메소드라고 생각됩니다.
 
 {% highlight swift %}
 var s = "한글"
@@ -167,3 +167,6 @@ if s.hasSuffix("한글") {
 }
 
 {% endhighlight %}
+
+## 참고자료
+* Apple Inc. The Swift Programming Language (Swift 3.1)
