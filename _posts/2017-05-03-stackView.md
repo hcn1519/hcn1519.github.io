@@ -66,5 +66,8 @@ StackView 내부의 Views에 접근하기 위해서는 앞서 언급한 arranged
 stackView.arrangedSubviews[0].heightAnchor.constraint(equalTo: stackView.arrangedSubviews[0].widthAnchor).isActive = true
 {% endhighlight %}
 
+
+-----
+
 ## 참고 자료
 * [UIStackView - Apple API Reference](https://developer.apple.com/reference/uikit/uistackview)

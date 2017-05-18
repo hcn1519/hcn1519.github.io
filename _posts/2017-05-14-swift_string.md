@@ -168,5 +168,8 @@ if s.hasSuffix("한글") {
 
 {% endhighlight %}
 
+
+-----
+
 ## 참고자료
 * Apple Inc. The Swift Programming Language (Swift 3.1)

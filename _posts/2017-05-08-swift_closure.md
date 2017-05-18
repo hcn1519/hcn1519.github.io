@@ -257,6 +257,9 @@ let oddOrEvenDict = digitNames.map { (key, value) -> [Int, String] in
 
 위의 예시의 경우 `oddOrEvenArr`과 `oddOrEvenDict`은 각각 `digitNames`을 새롭게 `mapping`하여 만든 배열과 딕셔너리입니다.
 
+
+-----
+
 ## 참고자료
 * Apple Inc. The Swift Programming Language (Swift 3.1)
 * Raywenderlich - Closure

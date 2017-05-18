@@ -245,6 +245,9 @@ func checkValidation() {
 
 `guard`를 사용하면, 중첩으로 조건문을 사용하는 것을 방지할 수 있고 코드의 가독성이 좋아집니다. 이외에도 json 데이터를 parsing할 경우에도 누락된 데이터를 파악하기 위한 조건문을 작성할 때 코드의 가독성이 높아지게 만들 수 있습니다.
 
+
+-----
+
 ## 참고자료
 * Apple Inc. The Swift Programming Language (Swift 3.1)
 * Raywenderlich - Optional
