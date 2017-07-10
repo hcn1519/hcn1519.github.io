@@ -4,27 +4,46 @@ comments: true
 title:  "Swift String 다루기"
 excerpt: "Swift의 String method들에 대해 알아봅니다."
 categories: Swift String
-date:   2017-05-15 00:30:00
+date:   2017-07-05 00:30:00
 tags: [Swift, Language, String]
 image:
   feature: swiftLogo.jpg
 ---
 
-이번 포스팅에서는 Swift의 String에 대해 알아보고자 합니다. Swift의 String의 가장 기본적인 특징은 다음과 같습니다.
+## Swift String 형태
 
-
-<div class="message">
-  Swift에서 String의 Character들은 인덱스로 접근할 수 없다.
-</div>
-
-아시다시피, String 데이터는 배열에 하나하나의 문자를 저장한 형태입니다. 그렇기 때문에 일반적으로 다음과 같은 표현이 가능합니다.
+이번 포스팅에서는 Swift의 String에 대해 알아보고자 합니다. Swift에서 문자열을 다음과 같은 형태를 지닙니다.
 
 {% highlight swift %}
 let str = "hello"
-print(str[2]) // error
 {% endhighlight %}
 
-하지만 Swift에서는 위와 같이 각각의 **Character에 인덱스로 접근할 수 없습니다.** 그 이유가 무엇일까요?
+기존 Swift3에서는 한 줄 문자열밖에 없었는데, Swift4에서 여러 줄을 통해 이뤄진 문자열을 `"""`를 통해 생성할 수 있습니다.
+
+{% highlight swift %}
+let multiLine = """
+The White Rabbit put on his sectacles, "Where sall I begin, please begin your Majesty?" he asked.
+
+"Begin at the beginning,"
+
+    Indent가 들어갑니다.
+        또다른 indent
+"""
+
+print(multiLine)
+
+/* 출력 결과
+The White Rabbit put on his sectacles, "Where sall I begin, please begin your Majesty?" he asked.
+
+"Begin at the beginning,"
+
+    Indent가 들어갑니다.
+        또다른 indent
+*/
+{% endhighlight %}
+
+여러 줄을 통해 이뤄진 문자열의 앞에 있는 whiteSpace는 출력할 때 생략됩니다. 다만, 시작하는 문장보다 뒷쪽으로 들여쓰기가 들어가는 경우, 해당 들여쓰기는 적용됩니다.
+
 
 ## Extended Grapheme Clusters(확장적 문자소 집합)
 
@@ -94,12 +113,12 @@ print(str[str.index(str.endIndex, offsetBy: -3)]) // r
 
 #### 루프를 통해 전체 String에 접근하기
 
-다음은 루프를 통한 String 접근입니다. 크게 3가지 방법이 있습니다. 첫 번째는 `str.character`를 사용하여 개별 문자(value)에 접근하는 방식입니다.
+다음은 루프를 통한 String 접근입니다. 크게 3가지 방법이 있습니다. 첫 번째는 `str`를 사용하여 개별 문자(value)에 접근하는 방식입니다.
 
 {% highlight swift %}
 let str = "Hello"
 
-for char in str.character {
+for char in str {
   print(char) // H e l l o 각각 접근
 }
 {% endhighlight %}
@@ -107,7 +126,7 @@ for char in str.character {
 다음은 `indice`를 활용하여 인덱스에 접근하는 방식입니다.
 
 {% highlight swift %}
-for index in str.character.indice {
+for index in str.indice {
   // 정수 인덱스가 아닌 Swift에서 만들어낸 인덱스에 접근합니다.
   print(index) // Index(_base: Swift.String.UnicodeScalarView.Index(_position: 0), _countUTF16: 1)...
 }
@@ -116,7 +135,7 @@ for index in str.character.indice {
 마지막으로 인덱스와 개별 문자에 동시에 접근하는 방식입니다.
 
 {% highlight swift %}
-for (index, value) in str.characters.enumerated() {
+for (index, value) in str.enumerated() {
     // index는 정수입니다.
     print("index: \(index), value : \(value)")  // index: 0, value : H
 }
@@ -169,7 +188,27 @@ if s.hasSuffix("한글") {
 {% endhighlight %}
 
 
+## Substring
+
+
+`Substring`은 말그대로 String의 일부를 지칭합니다. 
+
+{% highlight swift %}
+let str = "Hello"
+let str2 = "Hello World"
+{% endhighlight %}
+
+다음과 같은 두 개의 string이 있다고 할 경우 str은 str2에 포함된 패턴으로 일종의 substring이라고 생각할 수 있습니다. 하지만 두 string은 서로 다른 메모리를 사용하기 때문에 메모리 측면에서는 다른 서로 포함 관계가 아닙니다. 이번에 추가된 `Substring`을 통해서는 하나의 String에서 내용으로 보나, 메모리 측면에서 보나 포함된 `Substring`을 만들 수 있게 해줍니다. Substring은 원래 string에서 인덱스의 범위를 지정해주는 형태로 만들 수 있습니다.
+
+{% highlight swift %}
+let str = "Hello World"
+let range = str[str.startIndex...str.index(str.startIndex, offsetBy: 4)]
+let subStr = str[range]
+{% endhighlight %}
+
+위에서 만든 `subStr`은 새로운 메모리를 해당 변수에 할당하지 않고, 기존의 str 변수의 메모리를 재사용합니다. 이런 메모리 재사용은 메모리 할당 비용을 줄여줍니다. 하지만, 이와 같은 활용은 장기로 string을 저장하는 경우에 적합하지 않으므로 장기로 string을 사용할 경우 새로운 string을 만드는 것이 좋습니다.
+
 -----
 
 ## 참고자료
-* Apple Inc. The Swift Programming Language (Swift 3.1)
+* Apple Inc. The Swift Programming Language (Swift 4 Beta)
