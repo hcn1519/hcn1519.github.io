@@ -193,23 +193,21 @@ class ViewController: UIViewController {
             let imageData = try Data(contentsOf: imageURL)
 
             return UIImage(data: imageData)
-
         } catch let err as NSError {
             print("이미지 로딩 에러 : \(err)")
         }
-
         return nil
     }
 }
 {% endhighlight %}
 
-흐름은 간단합니다. 로컬에 있는 **apple.jpg** 파일을 가져와서 `UIImage` 인스턴스를 만든 후, 이 인스턴스를 통해 뷰에 만든 imageView에 이미지를 보여줍니다. 하지만 앱을 컴파일하고 실행해보면 해당 파일을 찾을 수 없다고 나옵니다. 분명 우리는 이미지를 `Documents`에 놔두었고, `url(for:in:)` 메소드를 `.documentsDirectory`로 잘 설정해두었는데도 말이죠.
+흐름은 간단합니다. 먼저 로컬에 있는 **apple.jpg** 파일을 가져와서 `UIImage` 인스턴스를 만듭니다. 그리고 이 인스턴스를 통해 뷰에 만든 imageView에 이미지를 출력합니다. 하지만 앱을 컴파일하고 실행해보면 해당 파일을 찾을 수 없다고 나옵니다. 분명 이미지를 `Documents`에 놔두었고, `url(for:in:)` 메소드를 `.documentsDirectory`로 잘 설정해두었는데도 말이죠.
 
-이 문제는 해당 경로를 출력해보면 쉽게 알 수 있습니다. 위에서 출력된 `imageURL`은 `/Users/Documents/apple.jpg`가 되어야 우리가 원하는 결과를 도출할 수 있는데, 실제로는 `file:///Users/userName/Library/Developer/CoreSimulator/Devices/52EFC32B-305F-4EB6-8C73-2B2F7A4680E8/data/Containers/Data/Application/E28F4A30-935D-4EFE-815C-213A08B6D2DF/Documents/apple.jpg
-`과 같은 경로가 출력됩니다. 경로를 간단히 살펴보면 `FileManager`는 시뮬레이터 안에 있는 documents에 접근하는 것을 확인할 수 있습니다. 그렇기 때문에 `apple.jpg` 파일은 해당 경로로 옮겨주어야 합니다. 터미널을 실행하여 Documents 디렉토리에 있는 `apple.jpg`를 위의 경로로 옮기도록 하겠습니다. 단, 위의 Devices 이하의 경로는 시뮬레이터마다 다르므로 그대로 복사하면 안 되고, 경로를 한 번 출력해보고 그 곳에 가져다 놓으면 됩니다.
+이 문제는 해당 경로를 출력해보면 그 이유를 알 수 있습니다. 위에서 출력된 `imageURL`은 `/Users/Documents/apple.jpg`가 되어야 원하는 결과가 나옵니다. 하지만, 실제로는 `file:///Users/userName/Library/Developer/CoreSimulator/Devices/52EFC32B-305F-4EB6-8C73-2B2F7A4680E8/data/Containers/Data/Application/E28F4A30-935D-4EFE-815C-213A08B6D2DF/Documents/apple.jpg
+`과 같은 경로가 출력됩니다. 경로를 살펴보면 `FileManager`는 시뮬레이터 안에 있는 documents에 접근하는 것을 확인할 수 있습니다. 그렇기 때문에 `apple.jpg` 파일은 해당 경로로 옮겨주어야 합니다. 터미널을 실행하여 Documents 디렉토리에 있는 `apple.jpg`를 위의 경로로 옮기도록 하겠습니다. 단, 위의 Devices 이하의 경로는 시뮬레이터마다 다르므로 그대로 복사하면 안 되고, 경로를 한 번 출력해보고 그 경로를 사용해야 합니다.
 
 {% highlight swift %}
-$ mv Documents/apple.jpg /Users/userName/Library/Developer/CoreSimulator/Devices/52EFC32B-305F-4EB6-8C73-2B2F7A4680E8/data/Containers/Data/Application/E28F4A30-935D-4EFE-815C-213A08B6D2DF/Documents/apple.jpg
+$ mv Documents/apple.jpg /Users/userName/Library/Developer/CoreSimulator/Devices/52EFC32B-305F-4EB6-8C73-2B2F7A4680E8/data/Containers/Data/Application/E28F4A30-935D-4EFE-815C-213A08B6D2DF/Documents
 {% endhighlight %}
 
 이제 다시 실행하면 이미지가 올바르게 뜨는 것을 확인할 수 있습니다.
