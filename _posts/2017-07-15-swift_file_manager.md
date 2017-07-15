@@ -152,9 +152,9 @@ catch let error as NSError {
 
 위의 내용들을 사용하여 간단히 로컬에 있는 이미지를 iOS 앱에서 보여주는 프로젝트를 만들어 보겠습니다. 결과 앱은 다음과 같습니다.
 
-![결과 앱](https://dl.dropbox.com/s/0jx630j5j4lxmmk/result.png)
+<img src="https://dl.dropbox.com/s/0jx630j5j4lxmmk/result.png" style="width: 50%; border: 1px solid gray; margin: 0 auto; padding: 10px">
 
-먼저 테스트 이미지 파일은 아래 링크에서 가져와서 `/Users/Documents`에 저장해주세요.
+먼저 테스트 이미지 파일은 아래 링크에서 다운받고, `/Users/Documents`에 저장합니다.
 
 [이미지 샘플](https://dl.dropboxusercontent.com/s/rnmu9em96d3840u/apple.jpg)
 
