@@ -58,8 +58,7 @@ do {
 }
 {% endhighlight %}
 
-`contentsOfDirectory(atPath:)` 메소드는 설정한 경로의 디렉토리 안에 있는 파일들을 `[String]` 형태로 반환합니다. 또한, `subpathsOfDirectory(atPath:)`와 같은 메소드는 설정한 경로에 있는 디렉토리들을 모두 탐색하여 그 안에 있는 파일들을 `[String]` 형태로 반환합니다.
-
+`contentsOfDirectory(atPath:)` 메소드는 설정한 경로의 디렉토리 안에 있는 파일들을 `[String]` 형태로 반환합니다. 또한, `subpathsOfDirectory(atPath:)`와 같은 메소드는 설정한 경로에 있는 디렉토리들을 모두 탐색하여 그 안에 있는 파일까지 모두 포함한 배열을 반환합니다.
 
 #### Directory 생성하기
 
