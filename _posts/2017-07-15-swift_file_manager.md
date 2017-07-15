@@ -1,8 +1,8 @@
 ---
 layout: post
 comments: true
-title:  "Swift로 Local file 다루기"
-excerpt: "Swift의 FileManager를 이용하여 Local에 있는 file들을 다루는 법에 대해 알아봅니다."
+title:  "Swift로 파일 다루기"
+excerpt: "Swift의 FileManager를 이용하여 Local에 있는 File들을 다루는 법에 대해 알아봅니다."
 categories: Swift FileManager
 date:   2017-07-15 00:30:00
 tags: [Swift, Foundation, FileManager]
