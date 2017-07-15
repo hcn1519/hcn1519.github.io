@@ -87,17 +87,16 @@ do {
 
 과정은 다음과 같습니다.
 1. `urls(for:in:)` 메소드를 통해 특정 경로에 접근한다.
-
+2. 해당 경로에 추가 경로를 지정하는 방식으로 디렉토리 명을 추가한다.
+3. 디렉토리를 생성한다.
 
 `urls(for:in:)` 메소드는 `SearchPathDirectory`와 `SearchPathDomainMask`를 파라미터로 받고, `SearchPathDomainMask`의 범위에서 `SearchPathDirectory`를 찾는 메소드입니다. `SearchPathDirectory`는 enum 형태로 구현되어 있으며 `.desktopDirectory`, `.documentDirectory`, `.downloadsDirectory`처럼 실제로 사용자가 사용하는 디렉토리 경로를 지칭합니다.
 
 `SearchPathDomainMask`의 경우 `.userDomainMask`, `.systemDomainMask`, `localDomainMask`처럼 앞서 언급했던 `domain`을 기준으로 만들어져 있습니다. 파일 시스템 설명에서 알 수 있듯이 domain은 directory보다 큰 개념입니다. 또, `domainMask`라는 것은 존재하는 상위 URL을 숨기는 것을 의미합니다. 정리하자면, `SearchPathDomainMask`를 `userDomainMask`로 설정하면, `/Users`보다 위에 있는 디렉토리는 접근할 수 없게 됩니다. 또한 `SearchPathDomainMask`보다 상위에 있는 디렉토리를 찾으려고 한다면 에러가 나게 됩니다.
 
-2. 해당 경로에 추가 경로를 지정하는 방식으로 디렉토리 명을 추가한다.
 
 다음으로 `appendingPathComponent(_:)`를 사용하면, 경로 URL에 추가적인 경로를 붙일 수 있습니다. 위에서는 접근한 디렉토리 아래에 새롭게 생성할 디렉토리 명을 추가했습니다.
 
-3. 디렉토리를 생성한다.
 
 다음으로 디렉토리의 생성입니다. `createDirectory(atPath:withIntermediateDirectories:attributes:)`는 `atPath`에서 설정된 경로에 디렉토리를 생성합니다. 디렉토리의 경로는 확장자 없이 끝나는 형태이어야 합니다.
 
