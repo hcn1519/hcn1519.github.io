@@ -16,7 +16,8 @@ image:
 
 macOS의 파일 시스템은 domain(영역)으로 파일들의 위치를 결정합니다. 어떤 파일이 특정 domain에 속해 있는 경우 그 파일은 무조건 해당 domain의 루트 디렉토리보다 아래에 위치해야 합니다. 바꿔말하면, domain을 설정해주면 다른 domain의 파일들이 변경되는 것을 미리 방지할 수 있다는 말입니다. macOS에는 기본적으로 `user`, `local`, `network`, `system` domain을 제공합니다. 아래 그림을 통해 domain과 디렉토리, 파일들의 관계를 쉽게 이해할 수 있습니다.
 
-![FileSystem Domain](https://dl.dropbox.com/s/jk555owekupnw3w/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202017-07-15%20%EC%98%A4%ED%9B%84%209.08.01.png)
+<img src="https://dl.dropbox.com/s/jk555owekupnw3w/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202017-07-15%20%EC%98%A4%ED%9B%84%209.08.01.png" style="width: 50%;margin: 0 auto;">
+
 
 macOS에서 로그인 후 터미널에서 최상단 루트에서 `pwd` 명령어를 치면 나오는 경로는 `/Users/userName`의 형태입니다. 즉, 사용자들은 기본적으로 `user` domain에 속해서 대부분의 작업들을 수행하는 것이죠. 좀 더 자세한 내용을 확인하고 싶다면 아래 링크를 확인해주세요.
 
