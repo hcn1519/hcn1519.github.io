@@ -28,7 +28,7 @@ Swift에서는 파일들을 다루기 위한 클래스로 `FileManager`를 제�
 
 <div class="message">
   The preferred way to specify the location of a file or directory is to use the NSURL class. Although the NSString class has many methods related to path creation, URLs offer a more robust way to locate files and directories. For apps that also work with network resources, URLs also mean that you can use one type of object to manage items located on a local file system or on a network server.
-</dive>
+</div>
 
 [FileManager](https://developer.apple.com/documentation/foundation/filemanager)
 
