@@ -4,7 +4,7 @@ comments: true
 title:  "iOS URLSession 이해하기"
 excerpt: "iOS에서 네트워킹을 도와주는 URLSession API에 대해 알아봅니다."
 categories: iOS URLSession Networking
-date:   2017-07-29 00:30:00
+date:   2017-07-30 00:30:00
 tags: [iOS, URLSession, Networking]
 image:
   feature: iOS10.png
@@ -49,7 +49,7 @@ Task 객체는 일반적으로 Session 객체가 서버로 요청을 보낸 후,
 3. Upload Task - data를 파일의 형태로 전환 후 업로드하는 Task입니다.
 
 
-## URLSession 사용하기
+## URLSession dataTask 사용하기
 
 URLSession과 같은 네트워킹용 API는 일반적으로 앱 전역에서 사용됩니다. 그렇기 때문에 ViewController에 메소드를 작성하기보다는 하나의 모듈(class)을 만들고 그 안에 static 함수들을 만들어 사용하는 것이 좋습니다.
 
