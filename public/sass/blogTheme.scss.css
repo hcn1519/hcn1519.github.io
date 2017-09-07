@@ -146,8 +146,8 @@ blockquote p:last-child {
 /* image */
 img {
   display: block;
-  max-width: 70%;
-  margin:0 auto;
+  max-width: 100%;
+  margin:0;
   margin-bottom: 1rem;
   border-radius: 5px;
 }

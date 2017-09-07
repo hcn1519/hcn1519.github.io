@@ -34,7 +34,7 @@ UIApplicationMain 정의 - Creates the application object and the application de
 ## Main Run Loop
 Main Run Loop라는 것은 유저가 일으키는 이벤트들을 처리하는 프로세스입니다. `UIApplication` 객체는 앱이 실행될 때, Main Run Loop를 실행하고, 이 Main Run Loop를 View와 관련된 이벤트나 View의 업데이트에 활용합니다. 또한, Main Run Loop는 View와 관련되어 있기 때문에 Main 쓰레드에서 실행됩니다.
 
-![Main Run Loop](https://dl.dropbox.com/s/i6ed655jlzrizs1/IMG_1006.PNG)
+<img src="https://dl.dropbox.com/s/i6ed655jlzrizs1/IMG_1006.PNG" style="max-width: 70%; margin: 0 auto;">
 출처: [App Programming Guide for iOS - The App Life Cycle](https://developer.apple.com/library/content/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/TheAppLifeCycle/TheAppLifeCycle.html)
 
 유저가 일으키는 이벤트의 처리 과정을 다음과 같은 순서로 정리할 수 있습니다.
@@ -51,7 +51,7 @@ Main Run Loop라는 것은 유저가 일으키는 이벤트들을 처리하는 �
 #### App State
 앱의 상태라는 것은 여러가지 의미를 내포한 폭넓은 의미로 받아들여질 수 있습니다만, Apple에서 정의하는 앱의 상태(App State)는 크게 5가지로 구분됩니다.
 
-![App State](https://dl.dropbox.com/s/wpmf59gfnaiuafr/IMG_1008.PNG)
+<img src="https://dl.dropbox.com/s/wpmf59gfnaiuafr/IMG_1008.PNG" style="max-width: 70%; margin: 0 auto;">
 출처: [App Programming Guide for iOS - The App Life Cycle](https://developer.apple.com/library/content/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/TheAppLifeCycle/TheAppLifeCycle.html)
 
 * Not Running: 아무것도 실행하지 않은 상태
