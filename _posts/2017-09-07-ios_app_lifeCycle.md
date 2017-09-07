@@ -31,7 +31,6 @@ UIApplicationMain 정의 - Creates the application object and the application de
 
 ## Main Run Loop
 Main Run Loop라는 것은 유저가 일으키는 이벤트들을 처리하는 프로세스입니다. `UIApplication` 객체는 앱이 실행될 때, Main Run Loop를 실행하고, 이 Main Run Loop를 View와 관련된 이벤트나 View의 업데이트에 활용합니다. 또한, Main Run Loop는 View와 관련되어 있기 때문에 Main 쓰레드에서 실행됩니다.
-[image:99BB7642-B54F-4AD4-8D8F-87F761CAD028-607-0000006B7DCC049E/image.png]
 
 ![Main Run Loop](https://dl.dropbox.com/s/i6ed655jlzrizs1/IMG_1006.PNG)
 출처: [App Programming Guide for iOS - The App Life Cycle](https://developer.apple.com/library/content/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/TheAppLifeCycle/TheAppLifeCycle.html)
@@ -109,3 +108,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 ## 참고자료
 * [App Programming Guide for iOS - The App Life Cycle](https://developer.apple.com/library/content/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/TheAppLifeCycle/TheAppLifeCycle.html)
+* [UIApplication](https://developer.apple.com/documentation/uikit/uiapplication)
+* [UIApplicationMain](https://developer.apple.com/documentation/uikit/1622933-uiapplicationmain?language=objc)
+* [UIApplicationDelegate](https://developer.apple.com/documentation/uikit/uiapplicationdelegate)
