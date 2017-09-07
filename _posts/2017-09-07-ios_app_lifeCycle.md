@@ -10,7 +10,7 @@ tags: [iOS, LifeCycle, UIApplication, AppDelegate]
 
 
 <div class="message">
-  Notice: 본 글은 Apple에서 제공하는 공식문서를 이해하고 정리하고자 작성한 글입니다.
+  Notice: 본 글은 Apple에서 제공하는 공식문서를 정리하고 이해하고자 작성한 글입니다.
 </div>
 ## iOS에서 앱을 실행하면 무슨 일이 벌어질까요?
 
