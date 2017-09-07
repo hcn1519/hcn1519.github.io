@@ -3,9 +3,9 @@ layout: post
 comments: true
 title:  "iOS Application Life Cycle 이해하기"
 excerpt: "iOS 앱을 실행하면 일어나는 일들과 이를 설정하는 방법에 대해 알아 봅니다."
-categories: iOS, LifeCycle, AppDelegate
+categories: iOS, LifeCycle, UIApplication, AppDelegate
 date:   2017-09-07 00:30:00
-tags: [iOS, LifeCycle, AppDelegate]
+tags: [iOS, LifeCycle, UIApplication, AppDelegate]
 ---
 
 
