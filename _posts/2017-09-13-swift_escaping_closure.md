@@ -10,7 +10,7 @@ image:
   feature: swiftLogo.jpg
 ---
 
-## Escaping Closure 개념
+## 1. Escaping Closure 개념
 
 본 글은 Closure에 대한 기본 개념을 알고 있다는 전제 하에 글을 진행합니다. 그러니 Closure에 대한 이해가 부족하다면 [Swift Closure](https://hcn1519.github.io/articles/2017-05/swift_closure) 이 글을 먼저 읽고 본 글을 읽어주세요.
 
@@ -20,7 +20,7 @@ image:
 
 클로저가 함수로부터 `Escape`한다는 것은 해당 함수의 인자로 클로저가 전달되지만, **함수가 반환된 후 실행** 되는 것을 의미합니다. 함수의 인자가 함수의 영역을 탈출하여 함수 밖에서 사용할 수 있는 개념은 기존에 우리가 알고 있던 변수의 `scope` 개념을 무시합니다. 왜냐하면 함수에서 선언된 로컬 변수가 로컬 변수의 영역을 뛰어넘어 **함수 밖** 에서도 유효하기 때문입니다.
 
-사실 일반 로컬 변수(주로 값들: `Int`, `String` 등등)가 함수 밖에서 살아있는 것은 전역 변수를 함수에 가져와서 값을 새로 주는 것과 크게 다르지 않기 떄문에 이와 같은 `Escape` 개념이 크게 의미가 없어 보입니다. 하지만, 클로저의 `Escaping`은 `A 함수가 마무리된 상태에서만 B 함수가 실행되도록` 구현할 수 있다는 점에서 유용합니다.
+사실 일반 로컬 변수(주로 값들: `Int`, `String` 등등)가 함수 밖에서 살아있는 것은 전역 변수를 함수에 가져와서 값을 새로 주는 것과 크게 다르지 않기 떄문에 이와 같은 `Escape` 개념이 크게 의미가 없어 보입니다. 하지만, 클로저의 `Escaping`은 `A 함수가 마무리된 상태에서만 B 함수가 실행되도록` 함수를 작성할 수 있다는 점에서 유용합니다.
 
 > Escaping Closure를 활용하면 통해서 함수 사이에 실행 순서를 정할 수 있습니다.
 
@@ -54,7 +54,7 @@ Alamofire.request(urlRequest).responseJSON { response in
 
 여기서부터는 `Escaping Closure`으로 작성한 코드를 살펴보고자 합니다. 먼저 Apple의 공식 문서에서 `Escaping Closure`를 설명하는 예시를 살펴보겠습니다.
 
-#### 클로저를 함수 외부에 저장하기
+## 2. 클로저를 함수 외부에 저장하기
 
 {% highlight swift %}
 // 함수 외부에 클로저를 저장하는 예시
@@ -94,7 +94,7 @@ print(mc.x)
   Note: 이 때, 클로저가 탈출한다는 의미는 해당 함수의 실행을 중간에 끊고, 탈출(escape)하는 의미가 아닙니다. 여기서의 탈출(escape)은 클로저를 외부로 보낼 수 있다는 의미입니다.
 </div>
 
-## Async Inside Async
+## 3. Async Inside Async
 
 앞서 언급한 것처럼 `Escaping Closure`는 HTTP 통신에서 `completionHandler`로 많이 사용됩니다. 다만, 서버에 요청하는 Restful API 기반의 `Request`들은 앱의 이곳저곳에서 사용되는 경우가 많기 때문에 따로 클래스를 만들어 사용하는 것이 유용한 경우가 많습니다. 여기서는 이를 구현하는 방식중 하나로 하나의 `class` 안에서 통신 메소드들을 `static`함수 형태로 관리하는 것을 보이고자 합니다.
 
