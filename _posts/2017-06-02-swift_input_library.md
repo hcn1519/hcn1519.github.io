@@ -20,23 +20,19 @@ image:
 // Swift 3.1
 import Foundation
 
-protocol StandardInput {
-    mutating func read() -> String
-    mutating func readInt() -> Int
-    mutating func readDouble() -> Double
-    mutating func readLineToArray() -> [String]
-}
-
-struct ReadInput: StandardInput {
+struct ReadInput {
 
     private var currentIndex: Int = 0
     private var inputArray: [String] = []
 
     // 데이터를 배열로 변환
     public mutating func readLineToArray() -> [String] {
-        let result = readLine()!
-        let resultArray = result.components(separatedBy: " ")
-        return resultArray
+
+        guard let result = readLine() else {
+            return []
+        }
+
+        return result.components(separatedBy: " ")
     }
 
     // 띄어쓰기 단위로 String 읽기
@@ -51,6 +47,7 @@ struct ReadInput: StandardInput {
             self.inputArray.removeAll()
             self.currentIndex = 0
         }
+
         return result
     }
 
@@ -71,29 +68,17 @@ struct ReadInput: StandardInput {
 
         return result
     }
-
 }
 {% endhighlight %}
 
-코드를 사용하기 위해서는 `Foundation`을 import해야 합니다. 굳이 `protocol`을 쓸 필요는 없지만.. 한 번 써봤습니다. 제공하는 메소드는 크게 4가지입니다.
-
-{% highlight swift %}
-protocol StandardInput {
-    mutating func read() -> String // 개별 String 읽기
-    mutating func readInt() -> Int // 개별 Int 읽기
-    mutating func readDouble() -> Double // 개별 Double 읽기
-    mutating func readLineToArray() -> [String] // 한 라인 배열로 변환
-}
-{% endhighlight %}
-
-메소드들은 자바의 `next()`, `nextInt()` 등의 기능과 비슷합니다. `read()`는 단일 String을 읽고, `readInt()`, `readDouble()`은 숫자를, `readLineToArray()`는 읽은 라인을 배열로 변환한 데이터를 리턴합니다.
+코드를 사용하기 위해서는 `Foundation`을 import해야 합니다. 제공하는 메소드는 크게 4가지입니다. 메소드들은 자바의 `next()`, `nextInt()` 등의 기능과 비슷합니다. `read()`는 단일 String을 읽고, `readInt()`, `readDouble()`은 숫자를, `readLineToArray()`는 읽은 라인을 배열로 변환한 데이터를 리턴합니다.
 
 ## 사용법
 
 사용법은 매우 간단합니다.
 
 {% highlight swift %}
-let ri = ReadInput()
+var ri = ReadInput()
 
 let str1 = ri.read() // String 리턴
 let num1 = ri.readInt() // Int 리턴
