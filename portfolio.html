@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Changnam Hong's Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400" rel="stylesheet">
+    <link rel="stylesheet" href="./public/portfolio/layer.css">
+    <link rel="stylesheet" href="./public/portfolio/profile.css">
+    <link rel="stylesheet" href="./public/portfolio/mainBody.css">
+
+    <script src="https://use.fontawesome.com/ac677f9a77.js"></script>
+    <script src="./public/portfolio/menu.js"></script>
+  </head>
+
+  <body>
+    <aside class="profile">
+      <header>
+        <span class="image">
+          <img src="https://avatars1.githubusercontent.com/u/13018877?s=460&v=4" alt="" />
+        </span>
+        <div class="nameLine"></div>
+        <div class="nameBox">
+          <h1 id="name">Changnam Hong</h1>
+          <p id="nameIntro">Welcome!</p>
+        </div>
+        <div class="nameLine"></div>
+      </header>
+      <nav class="nav">
+        <ul>
+          <li id="menu1" class="selected" onclick="selectMenu(1)"><a href="#title1">About</a></li>
+          <li id="menu2" onclick="selectMenu(2)"><a href="#title2">My Projects</a></li>
+          <li id="menu3" onclick="selectMenu(3)"><a href="#title3">Contact</a></li>
+        </ul>
+      </nav>
+
+    <div class="centerBox">
+      <ul id="media">
+        <li><a href="https://github.com/hcn1519"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+        <li><a href="https://stackoverflow.com/users/5130783/changnam-hong"><i class="fa fa-stack-overflow" aria-hidden="true"></i></a></li>
+        <li><a href="https://www.facebook.com/hcn1519"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
+      </ul>
+    </div>
+
+    </aside>
+
+    <section id="main">
+        <section id="banner-image">
+          <img src="https://dl.dropbox.com/s/q0u5qtet91nhd5y/bb.jpg" alt="">
+        </section>
+
+        <section class="wrapper">
+          <div class="container">
+            <section class="page">
+              <h1 id="title1">About</h1>
+              <div class="separator"></div>
+
+              <p style="line-height: 150%">Hi, This is Changnam Hong. I want to be a S/W Engineer.<br/>
+                To achieve this, I made this portfolio site.
+              </p>
+
+              <table class="about-table" align="center">
+                <tr align="center">
+                  <th>Main Language</th>
+                  <th>Education</th>
+                  <th>Technical Blog</th>
+                </tr>
+
+                <tr>
+                  <td>
+                    <img src="./public/portfolio/lang.png" alt="" style="width: 75px">
+                  </td>
+                  <td>
+                    Sogang University, Seoul<br/>
+                    Major - Business, Convergence software
+                  </td>
+                  <td>
+                    <a href="https://hcn1519.github.io">https://hcn1519.github.io</a>
+                  </td>
+                </tr>
+              </table>
+
+            </section>
+
+
+          </div>
+        </section>
+
+        <section class="wrapper">
+          <div class="container">
+            <h1 id="title2">My Projects</h1>
+            <div class="separator"></div>
+
+            <h2>1. Baemin Waiting - 2017</h2>
+            <blockquote style="padding: 16px 40px 16px 40px; margin:0; margin-bottom: 10px">
+              Baemin Waiting lets you reserve your place in line from virtually anywhere.
+            </blockquote>
+            <article class="media">
+              <h2 style="text-align: center">Mobile App Demo video</h2>
+              <div class="video-box">
+              <video width="350" controls>
+                <source src="./public/portfolio/demo0830.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              </div>
+            </article>
+
+            <article class="media">
+              <h2 style="text-align: center">Mobile App Image</h2>
+              <div class="image-box">
+                  <img src="./public/portfolio/waitingApp.png" alt="App image" width="100%">
+
+              </div>
+              <div style="margin: 20px">
+                  <span style="font-weight: 300">You can see restaurants around you(1.5km), and can wait in line where you want.</span>
+              </div>
+
+            </article>
+
+
+            <article class="media">
+            <h2>2. Circuit Watch - 2017</h2>
+            <blockquote style="padding: 16px 40px 16px 40px; margin:0; margin-bottom: 10px; line-height: 150%">
+              Circuit Watch is an iOS App that supports your Circuit Training</br>
+              <a href="https://goo.gl/Jf8Uv0" style="font-weight: 100">iTunes Link</a>
+            </blockquote>
+
+            <img src="./public/portfolio/circuit.png" alt="" style="width: 100%">
+            </article>
+
+            <article class="media">
+              <h2 style="text-align: center">Mobile App Image</h2>
+              <div class="image-box">
+                  <img src="./public/portfolio/circuitApp.png" alt="App image" width="100%">
+              </div>
+              <div style="margin: 20px">
+                  <span style="font-weight: 300">You can set training time that gives you an alarm sounds every time you finish your workout.</span>
+              </div>
+            </article>
+
+            <article class="media">
+              <h2>3. Ficnic - Doing</h2>
+              <blockquote style="padding: 16px 40px 16px 40px; margin:0; margin-bottom: 10px; line-height: 150%">
+                Ficnic is an messaging style contents platform.</br>
+              </blockquote>
+
+              <img src="./public/portfolio/Ficnic.png" alt="" style="width: 100%">
+              <div style="margin: 20px">
+                  <span style="font-weight: 300">You can see lots of fictions based on message style.</span>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <section class="wrapper" style="padding-bottom: 40px">
+          <div class="container">
+            <h1 id="title3">Contact</h1>
+            <div class="separator"></div>
+
+            <div class="contact-card">
+              <div class="">
+                <i style="margin-right: 10px;" class="fa fa-envelope" aria-hidden="true"></i>
+              </div>
+               hcn1519@gmail.com
+            </div>
+
+          </div>
+        </section>
+
+    </section>
+  </body>
+</html>

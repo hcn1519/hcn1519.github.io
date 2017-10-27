@@ -1,0 +1,11 @@
+body {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+a:visited {
+  color: #000000;
+}
