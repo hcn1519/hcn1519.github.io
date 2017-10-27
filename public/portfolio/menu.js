@@ -18,10 +18,21 @@ function selectMenu(i) {
     break;
   }
 }
+function toMenu(i) {
+  switch (i) {
+    case 1:
+      location.href = "#title1"
+      break;
+    case 2:
+    location.href = "#title2"
+      break;
+    default:
+    location.href = "#title3"
+    break;
+  }
+}
 
 window.onscroll = function() {
-    var menu = document.getElementById('menu');
-
     var menuOffset1 = document.getElementById("menu1").offsetTop
     var menuOffset2 = document.getElementById("menu2").offsetTop
     var menuOffset3 = document.getElementById("menu3").offsetTop
