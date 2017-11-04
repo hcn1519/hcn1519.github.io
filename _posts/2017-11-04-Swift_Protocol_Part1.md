@@ -2,7 +2,7 @@
 layout: post
 comments: true
 title:  "Swift Protocol - Part1"
-excerpt: "Swift의 Protocol의 기본에 대해 알아봅니다."
+excerpt: "Swift의 Protocol의 기본 개념 및 사용법과 delegation 패턴에 대해 알아봅니다."
 categories: Swift Protocol Delegation
 date:   2017-11-03 00:30:00
 tags: [Swift, Protocol, Delegation]
@@ -10,7 +10,7 @@ image:
   feature: swiftLogo.jpg
 ---
 
-이번 포스팅에서는 Swift의  `Protocol`에 대해 알아보고자 합니다.
+이번 포스팅에서는 Swift의 `Protocol` 기본 개념 및 사용법과 이에 기반한 delegation 패턴에 대해 알아 보고자 합니다.
 
 <div class="message">
 A protocol defines a blueprint of methods, properties, and other requirements that suit a particular task or piece of functionality.
