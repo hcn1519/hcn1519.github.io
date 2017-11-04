@@ -53,11 +53,13 @@ enum Fuel {
     case oil
     case electronic
 }
+
 protocol Transportation {
     var mileage: Int { get set }
     var maxSpeed: Int { get }
     var engineType: Fuel { get }
 }
+
 protocol Car: Transportation {
     var navigation: String? { get }
 }
@@ -88,6 +90,7 @@ enum Fuel {
     case oil
     case electronic
 }
+
 protocol Transportation {
     var mileage: Int { get set }
     let maxSpeed: Int { get }
@@ -96,9 +99,11 @@ protocol Transportation {
     // 값을 변경 시키는 메소드는 mutating 키워드를 사용해야 합니다.
     mutating func isRunning()
 }
+
 protocol Car: Transportation {
     var navigation: String? { get }
 }
+
 struct FeatureOfCar: Car {
     var mileage: Int
     let maxSpeed: Int
@@ -141,6 +146,7 @@ protocol Transportation {
 
     mutating func isRunning()
 }
+
 protocol Car: Transportation {
     var navigation: String? { get }
 }
@@ -189,6 +195,7 @@ enum CarState {
     case running
     case stop
 }
+
 protocol CarDelegate {
     var stateOfCar: CarState { get set }
     func carDidStarted(car: Car)
