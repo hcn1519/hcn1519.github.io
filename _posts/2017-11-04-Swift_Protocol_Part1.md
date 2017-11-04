@@ -53,10 +53,12 @@ enum Fuel {
     case oil
     case electronic
 }
-protocol Vehicle {
+protocol Transportation {
     var mileage: Int { get set }
     var maxSpeed: Int { get }
     var engineType: Fuel { get }
+}
+protocol Car: Transportation {
     var navigation: String? { get }
 }
 {% endhighlight %}
@@ -64,14 +66,15 @@ protocol Vehicle {
 1. Protocol에서 Property는 모두 `var`로 선언됩니다.(어떤 프로퍼티를 immutable하게 선언하고 싶다면 get-only 프로퍼티로 선언하고 사용하면 됩니다.)
 2. Protocol은 어떤 **조건** 이기 때문에, 변수의 이름과 타입만 쓰고 변수의 값은 쓰지 않습니다.
 3. Protocol은 변수가 `gettable` 여부, `settable` 여부를 위의 예시처럼 표현합니다.
+4. Protocol끼리도 서로 conform할 수 있습니다. 이 때, 따르는 프로토콜을 참조하는 객체는 모든 프로퍼티를 구현해주어야 합니다.
 
 위의 Protocol을 따르는 객체를 생성하면 다음과 같이 될 수 있습니다.
 
 {% highlight swift %}
-struct Sonata: Vehicle {
+struct FeatureOfCar: Car {
     var mileage: Int
-    var maxSpeed: Int
-    var engineType: Fuel
+    let maxSpeed: Int
+    let engineType: Fuel
     var navigation: String?
 }
 {% endhighlight %}
@@ -85,20 +88,21 @@ enum Fuel {
     case oil
     case electronic
 }
-protocol Vehicle {
+protocol Transportation {
     var mileage: Int { get set }
-    var maxSpeed: Int { get }
-    var engineType: Fuel { get }
-    var navigation: String? { get }
+    let maxSpeed: Int { get }
+    let engineType: Fuel { get }
 
     // 값을 변경 시키는 메소드는 mutating 키워드를 사용해야 합니다.
     mutating func isRunning()
 }
-
-struct BMW: Vehicle {
+protocol Car: Transportation {
+    var navigation: String? { get }
+}
+struct FeatureOfCar: Car {
     var mileage: Int
-    var maxSpeed: Int
-    var engineType: Fuel
+    let maxSpeed: Int
+    let engineType: Fuel
     var navigation: String?
 
     mutating func isRunning() {
@@ -107,20 +111,20 @@ struct BMW: Vehicle {
 }
 {% endhighlight %}
 
-위의 예시에서 `isRunning`이라는 메소드를 `Vehicle` 프로토콜에 추가하였습니다. 이 때 `isRunning`은 객체의 프로퍼티를 변경하기 때문에 mutating 키워드를 써주어야 합니다.
+위의 예시에서 `isRunning`이라는 메소드를 `Transportation` 프로토콜에 추가하였습니다. 이 때 `isRunning`은 객체의 프로퍼티를 변경하기 때문에 mutating 키워드를 써주어야 합니다.
 
 ## 3. Protocol Type
 
 프로토콜은 데이터 타입으로도 사용될 수 있습니다. 이 말은 프로토콜이 우리가 사용하는 `Int`, `String` 같은 자리에 올 수 있다는 것을 의미합니다.
 
 {% highlight swift %}
-// 위의 예시의 Vehicle Protocol을 사용합니다.
-let feature: Vehicle
+// 위의 예시의 Car Protocol을 사용합니다.
+let feature: Car
 {% endhighlight %}
 
-여기서 생기는 의문이 있습니다. 그 변수의 자리에는 무엇이 와야하는 것인가요? 단순하게 생각하면 `Vehicle` 인스턴스가 와야합니다. 그런데 프로토콜로는 인스턴스를 생성할 수 없습니다.
+여기서 생기는 의문이 있습니다. 그 변수의 자리에는 무엇이 와야하는 것인가요? 단순하게 생각하면 `Car` 인스턴스가 와야합니다. 그런데 프로토콜로는 인스턴스를 생성할 수 없습니다.
 
-> 프로토콜 데이터 타입에는 어떤 값이 들어갈 수 있는건가요? 바로 해당 프로토콜을 따르는 객체입니다.
+> 프로토콜 데이터 타입에는 어떤 값이 들어갈 수 있는건가요? 바로 해당 프로토콜을 따르는(conform) 객체입니다.
 
 코드에서 이 개념을 알아보겠습니다.
 
@@ -130,19 +134,21 @@ enum Fuel {
     case electronic
 }
 
-protocol Vehicle {
+protocol Transportation {
     var mileage: Int { get set }
-    var maxSpeed: Int { get }
-    var engineType: Fuel { get }
-    var navigation: String? { get }
+    let maxSpeed: Int { get }
+    let engineType: Fuel { get }
 
     mutating func isRunning()
 }
+protocol Car: Transportation {
+    var navigation: String? { get }
+}
 
-struct BMW: Vehicle {
+struct FeatureOfCar: Car {
     var mileage: Int
-    var maxSpeed: Int
-    var engineType: Fuel
+    let maxSpeed: Int
+    let engineType: Fuel
     var navigation: String?
 
     mutating func isRunning() {
@@ -151,14 +157,15 @@ struct BMW: Vehicle {
 }
 
 struct MiniCooper {
-    let feature: Vehicle
+    let feature: Car
 }
 
-let miniCooperFeature = BMW(mileage: 20, maxSpeed: 150, engineType: Fuel.oil, navigation: nil)
-let miniCooper = MiniCooper(feature: miniCooperFeature)
+let miniCooperFeature = FeatureOfCar(mileage: 20, maxSpeed: 150, engineType: Fuel.oil, navigation: "카카오 네비")
+var miniCooper = MiniCooper(feature: miniCooperFeature)
+
 {% endhighlight %}
 
-위의 예시에서 `MiniCooper` struct는 `Vehicle` 프로토콜 타입의 변수 `feature`를 갖습니다. 이 `feature`의 자리에는 `Vehicle`을 따르는 객체 중 무엇이든 올 수 있습니다. 그래서 여기서는 `BMW` 구조체가 `Vehicle` 프로토콜을 따르기 때문에, `BMW`의 인스턴스인 `miniCooperFeature`가 `feature`의 자리에 올 수 있습니다.
+위의 예시에서 `MiniCooper` struct는 `Car` 프로토콜 타입의 변수 `feature`를 갖습니다. 이 `feature`의 자리에는 `Car`을 따르는 객체 중 무엇이든 올 수 있습니다. 그래서 여기서는 `FeatureOfCar` 구조체가 `Car` 프로토콜을 따르기 때문에, `FeatureOfCar`의 인스턴스인 `miniCooperFeature`가 `feature`의 자리에 올 수 있습니다.
 
 ## 4. Delegation
 
@@ -184,26 +191,26 @@ enum CarState {
 }
 protocol CarDelegate {
     var stateOfCar: CarState { get set }
-    func carDidStarted(car: Vehicle)
-    func carDidStopped(car: Vehicle)
+    func carDidStarted(car: Car)
+    func carDidStopped(car: Car)
 }
 
 struct MiniCooper {
-    let feature: Vehicle
+    let feature: Car
     var delegate: CarDelegate?
 }
 
 struct StateOfCar: CarDelegate {
     var stateOfCar: CarState {
-       didSet {
-           print("차의 상태가 변경되었습니다. 상태: \(self.stateOfCar)")
-       }
+        didSet {
+            print("차의 상태가 변경되었습니다. 상태: \(self.stateOfCar)")
+        }
     }
 
-    func carDidStopped(car: Vehicle) {
+    func carDidStopped(car: Car) {
         print("자동차가 멈춤니다")
     }
-    func carDidStarted(car: Vehicle) {
+    func carDidStarted(car: Car) {
         print("자동차에 시동이 걸렸습니다.")
     }
 }
@@ -213,9 +220,9 @@ struct StateOfCar: CarDelegate {
 
 이제 이 코드의 사용에 대해 알아보겠습니다.
 
-
 {% highlight swift %}
-let miniCooperFeature = BMW(mileage: 20, maxSpeed: 150, engineType: Fuel.oil, navigation: "카카오 네비")
+let miniCooperFeature = FeatureOfCar(mileage: 20, maxSpeed: 150, engineType: Fuel.oil, navigation: "카카오 네비")
+
 // 1
 var miniCooper = MiniCooper(feature: miniCooperFeature, delegate: nil)
 // 2
