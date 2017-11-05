@@ -10,15 +10,17 @@ image:
   feature: swiftLogo.jpg
 ---
 
-이번 포스팅에서는 Swift의 `Protocol` 기본 개념 및 사용법과 이에 기반한 delegation 패턴에 대해 알아 보고자 합니다.
+이번 포스팅에서는 Swift의 `Protocol` 기본 개념 및 사용법과 이에 기반한 delegation 패턴에 대해 알아 보고자 합니다. 먼저 Protocol의 정의부터 살펴보겠습니다.
 
 <div class="message">
 A protocol defines a blueprint of methods, properties, and other requirements that suit a particular task or piece of functionality.
 </div>
 
-Protocol은 자신을 따르는 어떤 객체가 구현해야 하는 필요 요건을 서술한 것입니다.   
+Protocol은 자신을 따르는 어떤 객체가 구현해야 하는 **필요 요건** 을 서술한 것입니다.   
 1. 여기서 객체가 의미하는 것은 `class` 뿐만 아니라, `struct`, `enum`을 포함합니다.
 2. 객체들이 Protocol을 따르게 되면 컴파일시 이 필요 요건을 충족하는 지 확인합니다.
+
+이 때, 객체들이 Protocol을 따른다는 표현을 썼는데, 이는 애플의 스위프트 공식 가이드 문서에서 conform이라는 단어로 표현됩니다. 또한 이와 같이 나오는 단어로 adopt가 있는데 이는 채택하다라는 의미로 사용됩니다. 어떤 프로토콜을 따르는 객체는 해당 프로토콜을 채택하였다고 표현됩니다.
 
 ## 1. Protocol Syntax
 Protocol은 다음과 같은 문법으로 사용됩니다.
@@ -43,10 +45,12 @@ class 어떤_클래스: 부모클래스, 프로토콜1, 프로토콜2 {
 Protocol은 `class` 상속과 유사한 형태로 사용됩니다. 다만 Swift에서 하나의 `class`만 상속할 수 있는 것을 달리 객체는 복수의 Protocol을  따를 수 있습니다. 또한, 특정 `class`는 부모클래스를 상속하면서 Protocol도 따르는 형태로 구현될 수도 있습니다.
 
 ## 2. Requirements
-Protocol을 따르는 객체가 충족시켜야하는 요건이라는 것은 일반적으로 **특정 프로퍼티를 필수로 구현해야 하는 것**, 혹은 **특정 메소드를 필수로 구현해아 하는 것** 과 그 의미가 거의 같습니다. 그렇기 때문에 Protocol에는 이를 따르는 객체들의 구현해야 할 프로퍼티와 메소드의 조건이 쓰여져야 합니다.
+Protocol을 따르는 객체가 충족시켜야하는 요건이라는 것은 일반적으로 **특정 프로퍼티 혹은 메소드를 필수로 구현해야 하는 것** 과 그 의미가 거의 같습니다. 그렇기 때문에 Protocol에는 이를 따르는 객체들이 구현해야 할 프로퍼티와 메소드의 조건이 쓰여져야 합니다.
 
 ### Property Requirements
 먼저 Property가 Protocol에서 어떻게 쓰여야하는지 살펴 보겠습니다.
+
+> 앞으로 사용되는 예시는
 
 {% highlight swift %}
 enum Fuel {
@@ -62,6 +66,7 @@ protocol Transportation {
 
 protocol Car: Transportation {
     var navigation: String? { get }
+    var wheels: Int { get }
 }
 {% endhighlight %}
 
@@ -78,6 +83,7 @@ struct FeatureOfCar: Car {
     let maxSpeed: Int
     let engineType: Fuel
     var navigation: String?
+    var wheels: Int
 }
 {% endhighlight %}
 
@@ -102,6 +108,7 @@ protocol Transportation {
 
 protocol Car: Transportation {
     var navigation: String? { get }
+    var wheels: Int { get }
 }
 
 struct FeatureOfCar: Car {
@@ -109,6 +116,7 @@ struct FeatureOfCar: Car {
     let maxSpeed: Int
     let engineType: Fuel
     var navigation: String?
+    var wheels: Int
 
     mutating func isRunning() {
         self.mileage += 2
@@ -127,9 +135,7 @@ struct FeatureOfCar: Car {
 let feature: Car
 {% endhighlight %}
 
-여기서 생기는 의문이 있습니다. 그 변수의 자리에는 무엇이 와야하는 것인가요? 단순하게 생각하면 `Car` 인스턴스가 와야합니다. 그런데 프로토콜로는 인스턴스를 생성할 수 없습니다.
-
-> 프로토콜 데이터 타입에는 어떤 값이 들어갈 수 있는건가요? 바로 해당 프로토콜을 따르는(conform) 객체입니다.
+여기서 생기는 의문이 있습니다. 그럼 프로토콜 타입의 변수에는 무엇이 와야하는 것인가요? 단순하게 생각하면 `Car` 인스턴스가 올 수 있지만, 프로토콜로는 인스턴스를 생성할 수 없습니다. 프로토콜 타입의 변수에는 그 프로토콜을 따르는 인스턴스가 올 수 있습니다.
 
 코드에서 이 개념을 알아보겠습니다.
 
@@ -149,6 +155,7 @@ protocol Transportation {
 
 protocol Car: Transportation {
     var navigation: String? { get }
+    var wheels: Int { get }
 }
 
 struct FeatureOfCar: Car {
@@ -156,12 +163,12 @@ struct FeatureOfCar: Car {
     let maxSpeed: Int
     let engineType: Fuel
     var navigation: String?
+    var wheels: Int
 
     mutating func isRunning() {
         self.mileage += 2
     }
 }
-
 struct MiniCooper {
     let feature: Car
 }
@@ -175,11 +182,7 @@ var miniCooper = MiniCooper(feature: miniCooperFeature)
 
 ## 4. Delegation
 
-프로토콜이 데이터 타입으로 쓰이는 특징은 iOS에서 많이 사용되는 `Delegate` 패턴의 기반이 됩니다. `Delegation`의 이해를 위해 그 단어의 뜻을 찾아보면 다음과 같습니다.
-
-> Delegation이라는 영어 단어는 위임이라는 뜻을 가지고 있습니다. 무언가를 다른 사람에게 위임한다는 것은 원래는 자기가 해야되는 일인데, 이를 다른 사람이 하도록 만드는 것입니다.
-
-위의 뜻에서 사람을 객체로 치환하여, 아래 `Delegate` 패턴의 정의를 읽어보면 의미가 더 쉽게 와닿을 수 있습니다.
+프로토콜이 데이터 타입으로 쓰이는 특징은 iOS에서 많이 사용되는 `Delegate` 패턴의 기반이 됩니다. `Delegation`이라는 영어 단어는 자신이 해야하는 무언가를 다른 사람에게 위임하는 것을 의미합니다. 가이드북에 서술된 정의는 아래와 같습니다.
 
 <div class="message">
 Delegateion is a design pattern that enables a class or structure to hand off(or delegate) some of its responsibilities to an instance of another type.
