@@ -293,6 +293,28 @@ miniCooper.delegate?.carDidStopped(car: miniCooper.feature)
 
 > miniCooper는 CarState의 변화에 대한 코드를 직접 작성하지 않고, delegate 프로퍼티를 가지는 것만으로 그 기능을 확장하였습니다. 반대로 state는 자신이 구현하도록 위임 받은 기능을 CarDelegate를 따르며 구현하였습니다. 이와 같은 delegation(위임)을 통해 책임을 전가하는 프로토콜을 작성하는 것이 delegate 디자인 패턴입니다.
 
+##### Delegate 재사용하기
+
+Delegate 패턴의 가장 큰 장점 중 하나는 기능을 재사용할 수 있는 단위로 분할하여 코드를 작성할 수 있다는 점입니다. 앞의 자동차 예제를 다시 들고 와보겠습니다.
+
+{% highlight swift %}
+var miniCooper = MiniCooper(feature: miniCooperFeature, delegate: nil)
+var state = StateOfCar()
+miniCooper.delegate = state
+
+
+struct A8 {
+    var feature: Car
+    var delegate: CarDelegate?
+    var color: String
+}
+
+let a8Feature = FeatureOfCar(mileage: 30, maxSpeed: 120, engineType: Fuel.oil, navigation: "네이버 지도", stateOfCar: .running)
+var a8 = A8(feature: a8Feature, delegate: state, color: "Silver")
+{% endhighlight %}
+
+위의 코드에서는 `MiniCooper` 구조체와 `A8` 구조체 모두 `StateOfCar`를 `delegate`로 사용할 수 있습니다. 즉, `MiniCooper`, `A8` 구조체 각각에 `CarDelegate` 메소드를 작성하는 것이 아니라, `StateOfCar`를 재사용한 것입니다.
+
 #### UITableViewDataSource의 delegate 패턴
 
 이제 위의 개념을 통해 UITableView를 사용할 때, 소위 말해서 `tableView.dataSource = self`라는 코드가 어떤 의미를 담고 있는지 파악할 수 있습니다. 먼저 `UITableView`에는 어떤 변수들이 선언되어 있는지 살펴보면 다음과 같습니다.
