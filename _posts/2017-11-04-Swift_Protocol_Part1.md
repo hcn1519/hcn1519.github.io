@@ -4,7 +4,7 @@ comments: true
 title:  "Swift Protocol - Part1"
 excerpt: "Swift의 Protocol의 기본 개념 및 사용법과 delegation 패턴에 대해 알아봅니다."
 categories: Swift Protocol Delegation
-date:   2017-11-03 00:30:00
+date:   2017-11-11 00:30:00
 tags: [Swift, Protocol, Delegation]
 image:
   feature: swiftLogo.jpg
@@ -45,14 +45,15 @@ class 어떤_클래스: 부모클래스, 프로토콜1, 프로토콜2 {
 Protocol은 `class` 상속과 유사한 형태로 사용됩니다. 다만 Swift에서 하나의 `class`만 상속할 수 있는 것을 달리 객체는 복수의 Protocol을  따를 수 있습니다. 또한, 특정 `class`는 부모클래스를 상속하면서 Protocol도 따르는 형태로 구현될 수도 있습니다.
 
 ## 2. Requirements
-Protocol을 따르는 객체가 충족시켜야하는 요건이라는 것은 일반적으로 **특정 프로퍼티 혹은 메소드를 필수로 구현해야 하는 것** 과 그 의미가 거의 같습니다. 그렇기 때문에 Protocol에는 이를 따르는 객체들이 구현해야 할 프로퍼티와 메소드의 조건이 쓰여져야 합니다.
+Protocol을 따르는 객체가 충족시켜야하는 요건이라는 것은 일반적으로 **특정 프로퍼티 혹은 메소드를 필수로 구현해야 하는 것** 과 그 의미가 거의 같습니다. 그렇기 때문에 Protocol에는 이를 따르는 객체들이 구현해야 할 프로퍼티와 메소드의 **조건** 이 쓰여져야 합니다.
 
-### Before Start
-
-각각에 대한 설명을 작성하기 이전에 아래에서 사용한 예시는 다음과 같습니다.
+3. `FeatureOfCar` 구조체는
 
 ### Property Requirements
 먼저 Property가 Protocol에서 어떻게 쓰여야하는지 살펴 보겠습니다.
+
+* 여기서 `Transportation` 프로토콜은 운송수단이면 가져야하는 프로퍼티들을 가지고 있습니다.
+* `Car` 프로토콜은 운송수단을 상속하여 운송수단의 속성도 가지면서, 이와 별도로 자동차만의 프로퍼티를 가지고 있습니다.
 
 {% highlight swift %}
 enum Fuel {
@@ -64,8 +65,6 @@ protocol Transportation {
     var mileage: Int { get set }
     var maxSpeed: Int { get }
     var engineType: Fuel { get }
-
-    mutating func isRunning()
 }
 
 protocol Car: Transportation {
@@ -82,12 +81,19 @@ protocol Car: Transportation {
 
 위의 Protocol을 따르는 객체를 생성하면 다음과 같이 될 수 있습니다.
 
+* 여기서 `FeatureOfCar` 구조체는 `Car` 프로토콜을 따르고, 이에 따라 `Car` 프로토콜이 요구하는 프로퍼티들을 구현해야 합니다.
+
 {% highlight swift %}
 struct FeatureOfCar: Car {
     var mileage: Int
     let maxSpeed: Int
     var engineType: Fuel
     var navigation: String?
+    var stateOfCar: CarState {
+        didSet {
+            print("자동차의 상태가 변경됩니다.", self.stateOfCar)
+        }
+    }
 }
 {% endhighlight %}
 
@@ -119,6 +125,12 @@ struct FeatureOfCar: Car {
     var engineType: Fuel
     var navigation: String?
 
+    var stateOfCar: CarState {
+        didSet {
+            print("자동차의 상태가 변경됩니다.", self.stateOfCar)
+        }
+    }
+
     mutating func isRunning() {
         self.mileage += 2
     }
@@ -139,6 +151,8 @@ let feature: Car
 여기서 생기는 의문이 있습니다. 그럼 프로토콜 타입의 변수에는 무엇이 와야하는 것인가요? 단순하게 생각하면 `Car` 인스턴스가 올 수 있지만, 프로토콜로는 인스턴스를 생성할 수 없습니다. 프로토콜 타입의 변수에는 그 프로토콜을 따르는 인스턴스가 올 수 있습니다.
 
 코드에서 이 개념을 알아보겠습니다.
+
+* 여기서는 `Car` 프로토콜 타입을 가지고 있는 `MiniCooper` 구조체를 생성하였습니다.
 
 {% highlight swift %}
 enum Fuel {
@@ -165,6 +179,12 @@ struct FeatureOfCar: Car {
     var engineType: Fuel
     var navigation: String?
 
+    var stateOfCar: CarState {
+        didSet {
+            print("자동차의 상태가 변경됩니다.", self.stateOfCar)
+        }
+    }
+
     mutating func isRunning() {
         self.mileage += 2
     }
@@ -173,9 +193,6 @@ struct FeatureOfCar: Car {
 struct MiniCooper {
     var feature: Car
 }
-
-let miniCooperFeature = FeatureOfCar(mileage: 20, maxSpeed: 150, engineType: Fuel.oil, navigation: "카카오 네비")
-var miniCooper = MiniCooper(feature: miniCooperFeature)
 {% endhighlight %}
 
 위의 예시에서 `MiniCooper` struct는 `Car` 프로토콜 타입의 변수 `feature`를 갖습니다. 이 `feature`의 자리에는 `Car`을 따르는 객체 중 무엇이든 올 수 있습니다. 그래서 여기서는 `FeatureOfCar` 구조체가 `Car` 프로토콜을 따르기 때문에, `FeatureOfCar`의 인스턴스인 `miniCooperFeature`가 `feature`의 자리에 올 수 있습니다.
@@ -185,7 +202,7 @@ var miniCooper = MiniCooper(feature: miniCooperFeature)
 프로토콜이 데이터 타입으로 쓰이는 특징은 iOS에서 많이 사용되는 `Delegate` 패턴의 기반이 됩니다. `Delegation`이라는 영어 단어는 자신이 해야하는 무언가를 다른 사람에게 위임하는 것을 의미합니다. 가이드북에 서술된 정의는 아래와 같습니다.
 
 <div class="message">
-Delegateion is a design pattern that enables a class or structure to hand off(or delegate) some of its responsibilities to an instance of another type.
+Delegation is a design pattern that enables a class or structure to hand off(or delegate) some of its responsibilities to an instance of another type.
 </div>
 
 Delegate 패턴에서 하나의 객체가 자신의 책임을 위임한다는 것은 책임을 전가 받은 객체로 자신이 구현해야 하는 것들(프로퍼티, 메소드)을 위임하는 것을 의미합니다. 예를 들어 VC라는 `ViewController`가 있고, VC가 `CLLocationDelegate`(B)의 기능을 사용하고 싶다고 생각해보겠습니다. 이 때, VC는 B를 자신이 직접 구현하지 않고 다른 객체에 위임할 수 있습니다.(이와 관련된 자주 쓰는 `delegate=self`와 같은 표현은 뒤에서 다룹니다.) 즉, B를 구현해놓은 `LocationManager`같은 형태의 객체를 만들면 VC가 이것을 가져다 쓸 수 있는 것입니다. 이렇게 기능을 분할해놓는 것은 B라는 기능이 VC뿐만 아니라 다른 곳에서도 사용될 수 있다는 것이 큰 장점입니다.
