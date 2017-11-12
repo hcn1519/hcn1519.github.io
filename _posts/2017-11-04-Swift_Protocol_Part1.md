@@ -47,6 +47,10 @@ Protocol은 `class` 상속과 유사한 형태로 사용됩니다. 다만 Swift�
 ## 2. Requirements
 Protocol을 따르는 객체가 충족시켜야하는 요건이라는 것은 일반적으로 **특정 프로퍼티 혹은 메소드를 필수로 구현해야 하는 것** 과 그 의미가 거의 같습니다. 그렇기 때문에 Protocol에는 이를 따르는 객체들이 구현해야 할 프로퍼티와 메소드의 조건이 쓰여져야 합니다.
 
+### Before Start
+
+각각에 대한 설명을 작성하기 이전에 아래에서 사용한 예시는 다음과 같습니다.
+
 ### Property Requirements
 먼저 Property가 Protocol에서 어떻게 쓰여야하는지 살펴 보겠습니다.
 
@@ -60,12 +64,15 @@ protocol Transportation {
     var mileage: Int { get set }
     var maxSpeed: Int { get }
     var engineType: Fuel { get }
+
+    mutating func isRunning()
 }
 
 protocol Car: Transportation {
     var navigation: String? { get }
-    var wheels: Int { get }
+    var stateOfCar: CarState { get set }
 }
+
 {% endhighlight %}
 
 1. Protocol에서 Property는 모두 `var`로 선언됩니다.(어떤 프로퍼티를 immutable하게 선언하고 싶다면 get-only 프로퍼티로 선언하고 사용하면 됩니다.)
@@ -79,9 +86,8 @@ protocol Car: Transportation {
 struct FeatureOfCar: Car {
     var mileage: Int
     let maxSpeed: Int
-    let engineType: Fuel
+    var engineType: Fuel
     var navigation: String?
-    var wheels: Int
 }
 {% endhighlight %}
 
@@ -97,24 +103,21 @@ enum Fuel {
 
 protocol Transportation {
     var mileage: Int { get set }
-    let maxSpeed: Int { get }
-    let engineType: Fuel { get }
+    var maxSpeed: Int { get }
+    var engineType: Fuel { get }
 
-    // 값을 변경 시키는 메소드는 mutating 키워드를 사용해야 합니다.
     mutating func isRunning()
 }
-
 protocol Car: Transportation {
     var navigation: String? { get }
-    var wheels: Int { get }
+    var stateOfCar: CarState { get set }
 }
 
 struct FeatureOfCar: Car {
     var mileage: Int
     let maxSpeed: Int
-    let engineType: Fuel
+    var engineType: Fuel
     var navigation: String?
-    var wheels: Int
 
     mutating func isRunning() {
         self.mileage += 2
@@ -145,35 +148,34 @@ enum Fuel {
 
 protocol Transportation {
     var mileage: Int { get set }
-    let maxSpeed: Int { get }
-    let engineType: Fuel { get }
+    var maxSpeed: Int { get }
+    var engineType: Fuel { get }
 
     mutating func isRunning()
 }
 
 protocol Car: Transportation {
     var navigation: String? { get }
-    var wheels: Int { get }
+    var stateOfCar: CarState { get set }
 }
 
 struct FeatureOfCar: Car {
     var mileage: Int
     let maxSpeed: Int
-    let engineType: Fuel
+    var engineType: Fuel
     var navigation: String?
-    var wheels: Int
 
     mutating func isRunning() {
         self.mileage += 2
     }
 }
+
 struct MiniCooper {
-    let feature: Car
+    var feature: Car
 }
 
 let miniCooperFeature = FeatureOfCar(mileage: 20, maxSpeed: 150, engineType: Fuel.oil, navigation: "카카오 네비")
 var miniCooper = MiniCooper(feature: miniCooperFeature)
-
 {% endhighlight %}
 
 위의 예시에서 `MiniCooper` struct는 `Car` 프로토콜 타입의 변수 `feature`를 갖습니다. 이 `feature`의 자리에는 `Car`을 따르는 객체 중 무엇이든 올 수 있습니다. 그래서 여기서는 `FeatureOfCar` 구조체가 `Car` 프로토콜을 따르기 때문에, `FeatureOfCar`의 인스턴스인 `miniCooperFeature`가 `feature`의 자리에 올 수 있습니다.
@@ -186,7 +188,7 @@ var miniCooper = MiniCooper(feature: miniCooperFeature)
 Delegateion is a design pattern that enables a class or structure to hand off(or delegate) some of its responsibilities to an instance of another type.
 </div>
 
-Delegate 패턴에서 하나의 객체가 자신의 책임을 위임한다는 것은 책임을 전가 받은 객체로 자신이 구현해야 하는 것들(프로퍼티, 메소드)을 위임하는 것을 의미합니다. 즉, A라는 객체가 어떤 기능을 쓰기 위해 구현해야 하는 프로퍼티나 메소드들을 A가 직접 구현하지 않고, B라는 객체에 구현된 것을 A에서 가져다가 쓸 수 있도록 하는 것이 Delegate 패턴의 핵심입니다.
+Delegate 패턴에서 하나의 객체가 자신의 책임을 위임한다는 것은 책임을 전가 받은 객체로 자신이 구현해야 하는 것들(프로퍼티, 메소드)을 위임하는 것을 의미합니다. 예를 들어 VC라는 `ViewController`가 있고, VC가 `CLLocationDelegate`(B)의 기능을 사용하고 싶다고 생각해보겠습니다. 이 때, VC는 B를 자신이 직접 구현하지 않고 다른 객체에 위임할 수 있습니다.(이와 관련된 자주 쓰는 `delegate=self`와 같은 표현은 뒤에서 다룹니다.) 즉, B를 구현해놓은 `LocationManager`같은 형태의 객체를 만들면 VC가 이것을 가져다 쓸 수 있는 것입니다. 이렇게 기능을 분할해놓는 것은 B라는 기능이 VC뿐만 아니라 다른 곳에서도 사용될 수 있다는 것이 큰 장점입니다.
 
 앞서서 사용했던 자동차 예제를 다시 가져와 보겠습니다.
 
@@ -196,60 +198,83 @@ enum CarState {
     case running
     case stop
 }
+struct FeatureOfCar: Car {
+    var mileage: Int
+    let maxSpeed: Int
+    var engineType: Fuel
+    var navigation: String?
+
+    var stateOfCar: CarState {
+        didSet {
+            print("자동차의 상태가 변경됩니다.", self.stateOfCar)
+        }
+    }
+
+    mutating func isRunning() {
+        self.mileage += 2
+    }
+}
+
+struct MiniCooper {
+    var feature: Car
+    var delegate: CarDelegate?
+}
 
 protocol CarDelegate {
-    var stateOfCar: CarState { get set }
     func carDidStarted(car: Car)
     func carDidStopped(car: Car)
 }
 
-struct MiniCooper {
-    let feature: Car
-    var delegate: CarDelegate?
-}
-
 struct StateOfCar: CarDelegate {
-    var stateOfCar: CarState {
-        didSet {
-            print("차의 상태가 변경되었습니다. 상태: \(self.stateOfCar)")
-        }
+    func carDidStopped(car: Car) {
+        var car = car
+        car.stateOfCar = .stop
+        print("자동차가 멈춤니다.\n")
     }
 
-    func carDidStopped(car: Car) {
-        print("자동차가 멈춤니다")
-    }
     func carDidStarted(car: Car) {
-        print("자동차에 시동이 걸렸습니다.")
+        var car = car
+        car.stateOfCar = .running
+        print("자동차에 시동이 걸렸습니다.\n")
     }
 }
 {% endhighlight %}
 
-위의 미니쿠퍼 예제에서 자동차의 주행 여부와 현재 주행 상태에 대해서 알 수 있는 `CarDelegate`를 추가하였습니다. `MiniCooper` 구조체에는 새로운 변수인 `delegate`가 추가되었고, 이는 `CarDelegate` 타입입니다. 앞서서 Protocol의 타입에서 설명한 것을 다시 떠올려보면, 이 `delegate` 변수에는 `CarDelegate`을 따르는 어떤 것이든 올 수 있습니다. 이제 `MiniCooper`에게 필요한 것은 자신의 `delegate` 변수를 채워줄 객체입니다. 여기서는 그 객체가 `StateOfCar`입니다. `StateOfCar`는 `CarDelegate`를 따르기 때문에 `MiniCooper`의 `delegate` 변수 자리에 올 수 있는 자격을 지니고 있습니다. `StateOfCar`에 적절한 `CarDelegate`의 필수 요건을 채웠기 때문에 컴파일 에러는 나지 않습니다.
+위의 미니쿠퍼 예제에서 자동차의 주행 여부와 현재 주행 상태에 대해서 알 수 있는 `CarDelegate`를 추가하였습니다. `CarDelegate`의 역할은 자동차에 시동이 걸린 시점, 시동이 꺼진 시점을 반환하는 메소드를 가지고 있습니다. `MiniCooper` 구조체에는 새로운 프로퍼티인 `delegate`만 추가되었고, 자동차의 시동이 걸린(꺼진) 시점을 알 수 있는 메소드를 위한 코드는 하나도 작성되어 있지 않습니다. 그렇지만 `delegate` 프로퍼티가 `CarDelegate` 타입이기 때문에 적절한 인스턴스만 해당 프로퍼티에 넣어주면 자동차의 시동이 걸린(꺼진) 시점을 `miniCooper` 인스턴스로부터 알 수 있게 됩니다.
+
+앞서서 Protocol의 타입에서 설명한 것을 다시 떠올려보면, 이 `delegate` 프로퍼티에는 `CarDelegate`을 따르는 어떤 인스턴스이든 전부 올 수 있습니다. 이제 `MiniCooper`에게 필요한 것은 자신의 `delegate` 변수를 채워줄 인스턴스입니다. 여기서는 그 인스턴스를 위해 만든 객체가 `StateOfCar`입니다. `StateOfCar`는 `CarDelegate`를 따르기 때문에 `MiniCooper`의 `delegate` 변수 자리에 올 수 있는 자격을 지니고 있습니다. `StateOfCar`에 적절한 `CarDelegate`의 필수 요건을 채웠기 때문에 컴파일 에러는 나지 않습니다.
 
 이제 이 코드의 사용에 대해 알아보겠습니다.
 
 {% highlight swift %}
-let miniCooperFeature = FeatureOfCar(mileage: 20, maxSpeed: 150, engineType: Fuel.oil, navigation: "카카오 네비")
+let miniCooperFeature = FeatureOfCar(mileage: 20, maxSpeed: 150, engineType: Fuel.oil, navigation: "카카오 네비", stateOfCar: .stop)
 
 // 1
 var miniCooper = MiniCooper(feature: miniCooperFeature, delegate: nil)
 // 2
-var state = StateOfCar(stateOfCar: .stop)
+var state = StateOfCar()
 
 // 3
 miniCooper.delegate = state
 
 // 4
-miniCooper.delegate?.carDidStarted(car: miniCooper.feature) // 자동차에 시동이 걸렸습니다.
-state.stateOfCar = .running // 차의 상태가 변경되었습니다. 상태: running
-state.stateOfCar = .stop // 차의 상태가 변경되었습니다. 상태: stop
-miniCooper.delegate?.carDidStopped(car: miniCooper.feature) // 자동차가 멈춤니다.
+miniCooper.delegate?.carDidStarted(car: miniCooper.feature)
+miniCooper.delegate?.carDidStopped(car: miniCooper.feature)
+
+// print
+// 자동차의 상태가 변경됩니다. running
+// 자동차에 시동이 걸렸습니다.
+//
+// 자동차의 상태가 변경됩니다. stop
+// 자동차가 멈춤니다.
 {% endhighlight %}
 
 1. 앞선 경우에서처럼 `miniCooper` 인스턴스를 생성하였습니다. 이 때는 `delegate`를 없는 상태로 인스턴스를 생성하였습니다.
 2. `CarDelegate`를 따르는 `StateOfCar` 구조체 인스턴스를 `state`로 생성하였습니다.
-3. `state`는 `CarDelegate`를 따르기 때문에 `miniCooper`의 `delegate`에 할당될 수 있습니다.
-4. 이제 `miniCooper`는 자신이 직접 `CarDelegate`를 구현하지 않고, `StateOfCar`를 통해 `CarDelegate`의 프로퍼티나 메소드를 사용할 수 있게 되었습니다.
+3. `state`는 `CarDelegate`를 따르기 때문에 `miniCooper`의 `delegate` 프로퍼티에 할당될 수 있습니다.
+4. 이제 `miniCooper`는 자신이 직접 `CarDelegate`를 구현하지 않고, `StateOfCar`를 통해 `CarDelegate`의 프로퍼티나 메소드를 사용할 수 있게 되었습니다. 심지어, delegate 안에 구현된 값으로 `miniCooper` 인스턴스의 값도 변경할 수 있습니다.
+
+> miniCooper는 CarState의 변화에 대한 코드를 직접 작성하지 않고, delegate 프로퍼티를 가지는 것만으로 그 기능을 확장하였습니다. 반대로 state는 자신이 구현하도록 위임 받은 기능을 CarDelegate를 따르며 구현하였습니다. 이와 같은 delegation(위임)을 통해 책임을 전가하는 프로토콜을 작성하는 것이 delegate 디자인 패턴입니다.
 
 #### UITableViewDataSource의 delegate 패턴
 
@@ -302,7 +327,7 @@ class VC: UIViewController, UITableViewDataSource {
 {% endhighlight %}
 
 1. `VC` 클래스는 흔히 사용되는 `UIViewController`로 `UITableViewDataSource`를 따릅니다. 그렇기 떄문에 `numberOfRowsInSection`과 `cellForRowAt`을 필수적으로 구현해주어야 합니다.
-2. 앞서 살펴보았듯이, `UITableView` 안에는 `dataSource`라는 변수가 `UITableViewDataSource` 타입으로 선언되어 있었습니다. 여기서 `self`는 `VC`를 지칭하는 것으로 `VC`가 `UITableViewDataSource`를 따르고 있기 때문에, 해당 `dataSource`는 `VC`에 구현된 dataSource 메소드(`numberOfRowsInSection`과 `cellForRowAt`)들과 연결됩니다.
+2. 앞서 살펴보았듯이, `UITableView` 안에는 `dataSource`라는 변수가 `UITableViewDataSource` 타입으로 선언되어 있었습니다. 여기서 `self`는 `VC`를 지칭하는 것으로 `VC`가 `UITableViewDataSource`를 따르고 있기 때문에, 해당 `dataSource`는 `VC`(self)에 구현된 dataSource 메소드(`numberOfRowsInSection`과 `cellForRowAt`)들과 연결됩니다.
 
 > 참고로 UITableViewController는 UITableViewController dataSource와 delegate이 Interface Builder에서 설정되어 있기 때문에 따로 dataSource를 설정하지 않아도 됩니다.
 
