@@ -5,7 +5,7 @@ permalink:         /articles/:year-:month/:title
 url:               "https://hcn1519.github.io" # the base hostname & protocol for your site
 
 # Setup
-title:               "Changnam"
+title:               "Eth"
 tagline:             "Developer's Lab"
 description:         "프로그래밍에 관하여 글을 쓰는 블로그입니다."
 paginate:            5
