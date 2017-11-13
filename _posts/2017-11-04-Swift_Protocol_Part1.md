@@ -187,7 +187,9 @@ struct MiniCooper {
 
 위의 예시에서 `MiniCooper` struct는 `Car` 프로토콜 타입의 변수 `feature`를 갖습니다. 이 `feature`의 자리에는 `Car`을 따르는 객체 중 무엇이든 올 수 있습니다. 그래서 여기서는 `FeatureOfCar` 구조체가 `Car` 프로토콜을 따르기 때문에, `FeatureOfCar`의 인스턴스인 `miniCooperFeature`가 `feature`의 자리에 올 수 있습니다.
 
-> 이와 같은 사실에서 알 수 있는 것은 객체가 어떤 프로토콜을 사용하는 것은 해당 프로토콜을 따르는 방법과 프로토콜을 프로퍼티로 가지고 있는 방법이 있다는 것입니다. 즉, 객체 스스로가 해당 프로토콜을 요구조건을 만족하도록 모든 프로퍼티, 메소드들을 구현할 수도 있고(따르는 방법), 자신은 프로토콜이 무엇을 하는지 모른채로 프로퍼티로만 가질 수도 있는 것(가지는 방법)입니다.
+<div class="message">
+  객체가 어떤 프로토콜을 사용하는 것은 해당 프로토콜을 따르는 방법과 프로토콜을 프로퍼티로 가지고 있는 방법이 있습니다. 즉, 객체 스스로가 해당 프로토콜을 요구조건을 만족하도록 모든 프로퍼티, 메소드들을 구현할 수도 있고(따르는 방법), 프로토콜을 프로퍼티로만 가질 수도 있는 것(가지는 방법)입니다.
+</div>
 
 ## 4. 프로토콜의 다형성과 Value Type의 확장
 
@@ -255,7 +257,11 @@ let car2 = MiniCooper2(feature: b)
 Delegation is a design pattern that enables a class or structure to hand off(or delegate) some of its responsibilities to an instance of another type.
 </div>
 
-Delegate 패턴에서 하나의 객체가 자신의 책임을 위임한다는 것은 책임을 전가 받은 객체로 자신이 구현해야 하는 것들(프로퍼티, 메소드)을 위임하는 것을 의미합니다. 예를 들어 VC라는 `ViewController`가 있고, VC가 `CLLocationDelegate`(B)의 기능을 사용하고 싶다고 생각해보겠습니다. 이 때, VC는 B를 자신이 직접 구현하지 않고 다른 객체에 위임할 수 있습니다.(이와 관련된 자주 쓰는 `tableView.delegate=self`와 같은 표현은 뒤에서 다룹니다.) 즉, B를 구현해놓은 `LocationManager: CLLocationDelegate`(C)같은 형태의 객체를 만들면 VC가 이것을 가져다 쓸 수 있는 것입니다. 심지어, VC는 C가 무엇을 하는 객체인지 몰라도 됩니다. 그저 C가 B의 요구사항을 만족하기 위해 필요한 모든 프로퍼티나 메소드를 구현하기만 했으면 됩니다. 이처럼 delegate 프로토콜을 통해 기능 구현의 책임을 다른 객체로 위임하는 것을 객체의 책임이 캡슐화되었다고 표현합니다.
+Delegate 패턴에서 하나의 객체가 자신의 책임을 위임한다는 것은 책임을 전가 받은 객체로 자신이 구현해야 하는 것들(프로퍼티, 메소드)을 위임하는 것을 의미합니다. 예를 들어 VC라는 `ViewController`가 있고, VC가 `CLLocationDelegate`(B)의 기능을 사용하고 싶다고 생각해보겠습니다. 이 때, VC는 B를 자신이 직접 구현하지 않고 다른 객체에 위임할 수 있습니다.(이와 관련된 자주 쓰는 `tableView.delegate=self`와 같은 표현은 뒤에서 다룹니다.) 즉, B를 구현해놓은 `LocationManager: CLLocationDelegate`(C)같은 형태의 객체를 만들면 VC가 이것을 가져다 쓸 수 있는 것입니다. 심지어, VC는 C가 어떻게 일을 처리하는 객체인지 몰라도 됩니다. 그저 C가 B의 요구사항을 만족하기 위해 필요한 모든 프로퍼티나 메소드를 구현하기만 했으면 됩니다. 이처럼 delegate 프로토콜을 통해 기능 구현의 책임을 다른 객체로 위임하는 것을 객체의 책임이 캡슐화되었다고 표현합니다.
+
+<div class="message">
+  프로토콜 타입을 프로퍼티로 가지는 A 객체는 그 자리에 오는 B 객체가 프로퍼티나 메소드들이 어떻게 작성되어 있는지 모릅니다.(캡슐화) 하지만, A는 프로토콜 타입 프로퍼티에 오는 B가 그 프로토콜을 따른다라는 사실은 알고 있습니다. 그렇기 때문에 A는 B의 프로퍼티나 메소드를 호출할 수 있게 됩니다.
+</div>
 
 앞서서 사용했던 자동차 예제를 다시 가져와 보겠습니다.
 
@@ -351,7 +357,6 @@ Delegate 패턴의 가장 큰 장점 중 하나는 기능을 재사용할 수 �
 var miniCooper = MiniCooper(feature: miniCooperFeature, delegate: nil)
 var state = StateOfCar()
 miniCooper.delegate = state
-
 
 struct A8 {
     var feature: Car
