@@ -42,11 +42,11 @@ Swift는 `module`과 `source file`을 구분 기준으로 5가지의 접근 제�
 
 위에서 살펴본 특징 이외에도 따로 언급하지 않아도 적용되는 몇 가지 암묵적인 룰이 있습니다.
 
-1. 아무 접근 제어자도 적지 않으면 `internal`이 됩니다.
+- 아무 접근 제어자도 적지 않으면 `internal`이 됩니다.
 
 아무런 조건 없이 클래스, 변수 등을 만들면 해당 `entity`의 접근제어자는 기본적으로 `internal`이 됩니다.
 
-2. 어떠한 entity도 더 제한적인 접근제어자를 가진 entity로 정의 될 수 없습니다.
+- 어떠한 entity도 더 제한적인 접근제어자를 가진 entity로 정의 될 수 없습니다.
 
 {% highlight swift %}
 private struct Car {
@@ -59,7 +59,7 @@ private struct Car {
 
 #### 유용한 기타 사항
 
-1. Unit Test는 `@testable` 키워드로 모듈을 import하여 public과 open이 아닌 entity들을 사용할 수 있도록 해줍니다.
+- Unit Test는 `@testable` 키워드로 모듈을 import하여 public과 open이 아닌 entity들을 사용할 수 있도록 해줍니다.
 
 {% highlight swift %}
 @testable import {target_name}
@@ -67,4 +67,33 @@ private struct Car {
 
 특정 Unit test의 파일의 상단에 위처럼 선언을 하면 해당 모듈의 entity를 `internal` 형태로 사용할 수 있도록 해줍니다.
 
-2. Getter와 Setter에는 서로 다른 접근제어자를 적용할 수 있습니다.
+- Getter와 Setter에는 서로 다른 접근제어자를 적용할 수 있습니다.
+
+Swift에서는 Setter를 Getter보다 더 제한적으로 설정할 수 있습니다.(반대는 불가능합니다.) 이 기능은 getter, setter를 모두 따로 작성하지 않아도 되는 매우 큰 장점을 제공합니다.
+
+{% highlight swift %}
+private(set) var name: String
+{% endhighlight %}
+
+다른 조건 없이 위와 같이 변수를 작성하였다면, getter는 `internal`이 되고, setter는 `private`이 됩니다.
+
+{% highlight swift %}
+public struct Car {
+  fileprivate var _engine: String
+
+  public var engine: String {
+    get {
+        return self._engine
+    } set {
+        self._engine = newValue
+    }
+  }
+}
+
+// 위의 코드를 getter와 setter에 대해 더 간결하고, 명확하게 정의할 수 있습니다.
+public struct Car {
+  fileprivate(set) var engine: String
+}
+{% endhighlight %}
+
+다른 예시로 변수를 감싸고 있는 entity의 접근제어자가 `public`이면, 그 내부 entity들은 기본적으로 이를 따라가기 때문에 engine의 getter는 `public`, setter는 `fileprivate`이 됩니다.
