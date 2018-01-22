@@ -26,12 +26,12 @@ Swift의 접근 제어자(Access Control)에 대해서 간단히 정리해보고
 
 #### Swift의 5가지 접근 제어자
 
-Swift는 `module`과 `source file`을 구분 기준으로 5가지의 접근 제어자를 제공합니다.
+이제 `module`과 `source file`을 기준으로 나뉘는 5가지 접근 제어자를 알아보고자 합니다. 그리고 여기서는 특정 접근 제어자가 적용되는 대상을 `entity`로 서술합니다. `entity`는 접근제어자를 작성할 수 있는 property, method, class, struct 등의 집합을 의미합니다.
 
-1. `open`과 `public`은 프로젝트 내의 모든 `module`에서 접근 가능하게 합니다.
-2. `internal`은 `default` 접근 제어자로, 특정 `module`에서 접근할 수 있도록 합니다.
-3. `fileprivate`는 `source file`에서 접근할 수 있도록 합니다. 서로 다른 클래스가 같은 파일안에 있고 `fileprivate`로 선언되어 있다면 둘은 서로 접근할 수 있습니다.
-4. `private`는 특정 객체에서만(extension 포함) 사용할 수 있도록 하는 가장 제한적인 접근제어자입니다. `fileprivate`과 달리 같은 파일 안에 있어도 서로 다른 객체가 `private`로 선언되어 있다면 둘은 서로 접근할 수 없습니다.
+1. `open`, `public` - 프로젝트 내의 모든 `module` 해당 entity에 접근할 수 있습니다.
+2. `internal` - `default` 접근 제어자로, entity가 작성된 `module`에서만 접근할 수 있습니다.
+3. `fileprivate` - entity가 작성된 `source file`에서만 접근할 수 있도록 합니다. 서로 다른 클래스가 같은 파일안에 있고 `fileprivate`로 선언되어 있다면 둘은 서로 접근할 수 있습니다.
+4. `private` - 특정 객체에서만 사용할 수 있도록 하는 가장 제한적인 접근제어자입니다. `fileprivate`과 달리 같은 파일 안에 있어도 서로 다른 객체가 `private`로 선언되어 있다면 둘은 서로 접근할 수 없습니다.
 
 
 #### open과 public의 차이
@@ -97,3 +97,29 @@ public struct Car {
 {% endhighlight %}
 
 다른 예시로 변수를 감싸고 있는 entity의 접근제어자가 `public`이면, 그 내부 entity들은 기본적으로 이를 따라가기 때문에 engine의 getter는 `public`, setter는 `fileprivate`이 됩니다.
+
+- protocol에서 선언된 변수의 접근제어자는 조건을 만족한 경우에만 사용할 수 있습니다.
+
+먼저 상황별로 관련된 예제는 다음 [링크](https://stackoverflow.com/a/38281420/5130783)에서 확인할 수 있습니다. 그 중 가장 필요하다고 생각되는 부분은 `private(set)`과 관련된 부분입니다. 즉, 아래 예제의 상황에서 protocol에 `private(set)`에 어떤 식으로 들어가야 하는지에 대한 문제입니다.
+
+{% highlight swift %}
+protocol Car {
+  // 무엇이 들어가야 할까?
+}
+
+struct CarModel: Car {
+  private(set) var engine: String
+}
+{% endhighlight %}
+
+이는 protocol의 "변수가 `gettable`, `settable`하다."는 말에 "**외부 entity**에서 `gettable`, `settable`하다."라는 의미를 추가하면 문제를 해결할 수 있습니다. 즉, `private(set)`은 외부에서 `settable`하지 않기 때문에 protocol에는 `gettable`만 들어가게 됩니다.
+
+{% highlight swift %}
+protocol Car {
+  var engine: String { get }
+}
+
+struct CarModel: Car {
+  private(set) var engine: String
+}
+{% endhighlight %}
