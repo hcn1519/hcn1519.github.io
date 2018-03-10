@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "이미지 타일링"
-excerpt: "iOS 플랫폼에서 타일 이미지로 고해상도 이미지를 랜더링하는 방법에 대해 알아봅니다."
+title: "이미지 타일링을 통한 고해상도 이미지 로딩"
+excerpt: "타일 이미지를 활용하여 고해상도 이미지를 랜더링하는 방법에 대해 알아봅니다."
 categories: TiledImage, Display
 date: "2018-03-08 18:28:51 +0900"
-tags: [TiledImage, Display]
+tags: [TiledImage, Display, Swift]
 image:
   feature: tiledimage.png
 ---
@@ -59,7 +59,7 @@ th: 100%; margin: 0 auto;">
 
 ## Image Tiling과 Gaussian Pyramids
 
-위에서 알아본 Image Tiling과 Gaussian Pyramids를 결합하여 고해상도 이미지 로딩을 위한 타일 이미지를 생성합니다. 즉, 각각의 피라미드 레벨에 해당하는 피라미드 이미지마다 타일이미지를 생성하는 것입니다. 이런 방식으로 타일 이미지를 생성하는 것은 기존 Image Tiling이 (x,y)의 좌표값만을 파라미터로 사용한 것에서 이미지 scale 값을 새로운 파라미터로 사용하는 것이라고 이해하면 됩니다. 그래서 타일을 자를 때 각각의 이미지는 자신의 위치를 위한 이미지 내에서의 (x,y) 값과 더불어 scale(줌 레벨) 값을 알고 있어야 합니다.
+위에서 알아본 Image Tiling과 Gaussian Pyramids를 결합하여 고해상도 이미지 로딩을 위한 타일 이미지를 생성합니다. 즉, 각각의 피라미드 레벨에 해당하는 피라미드 이미지마다 타일이미지를 생성하는 것입니다. 이런 방식으로 타일 이미지를 생성하는 것은 기존 Image Tiling이 (x,y)의 좌표값만을 파라미터로 사용한 것에서 이미지 scale 값을 새로운 파라미터로 추가한 것이라고 이해하면 됩니다. 그래서 타일을 자를 때 각각의 타일 이미지는 자신의 위치를 위한 이미지 내에서의 (x,y) 값과 더불어 scale(줌 레벨) 값을 알고 있어야 합니다.
 
 <img src="https://dl.dropbox.com/s/n507zqwlvc4co6h/Image_Tiling-21.jpg" style="max-width: 100%; margin: 0 auto;">
 출처: [Working with Image Objects - Dartmouth edu](http://northstar-www.dartmouth.edu/doc/idl/html_6.2/Image_Tiling.html)
@@ -67,7 +67,9 @@ th: 100%; margin: 0 auto;">
 위의 그림은 점선으로 표현된 실제 기기에서 보여지는 부분이 이미지의 scale(사용자가 줌인 한 수준)에 따라 전체 이미지의 어떤 부분을 표현하는 것인지를 보여주는 그림입니다. 여기서는 줌을 확대할 수록(level 0에 가까울 수록) 원본 이미지에 가까워지게 되고, 줌을 축소할 수록(level 2에 가까울 수록) 저화질의 이미지가 화면에 나오게 됩니다.
 
 
-## 코드로 구현(THTiledImageView)
+## 코드 구현(THTiledImageView, Swift)
+
+여기까지 일반적인 타일이미지 활용을 위한 지식에 대해 알아보았습니다. 여기서부터는 위의 내용을 활용하여 실제로 iOS 플랫폼에서 위의 내용에 기반한 이미지뷰를 만든 방식에 대해 설명하고자 합니다. 먼저 코드는 [THTiledImageView](https://github.com/TileImageTeamiOS/THTiledImageView)에 CocoaPod을 통해 배포되고 있습니다. 그리고 구체적인 사용 예시는 [THStorytellingView](https://github.com/TileImageTeamiOS/THStorytellingView)에서 확인할 수 있습니다.
 
 
 -----
