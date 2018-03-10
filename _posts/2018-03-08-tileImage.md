@@ -39,35 +39,40 @@ image:
 * 타일 이미지는 자신이 표현하는 부분에 대해서는 전체 이미지보다 우선적으로 로딩될 수 있습니다.
 
 <img src="https://dl.dropbox.com/s/j8qdm0q64d00hvn/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202018-03-09%20%EC%98%A4%ED%9B%84%209.37.32.png" style="max-width: 70%; margin: 0 auto;">
-출처: [Working with Image Objects - Dartmouth edu](http://northstar-www.dartmouth.edu/doc/idl/html_6.2/Image_Tiling.html)
 
 타일 이미지는 전체 이미지의 부분이기 때문에 `타일 이미지 용량 <= 전체 이미지 용량`이라는 등식은 항상 성립합니다. 그래서 기본적으로 타일 이미지 로딩은 전체 이미지 로딩보다 빠릅니다. 현대의 디바이스 혹은 브라우저들은 비동기 UI 업데이트를 지원합니다. 그래서 로딩이 완료된 타일 이미지는 우선적으로 화면에 업데이트 될 수 있습니다. 이는 사용자가 이미지의 특정 부분을 빠르게 볼 수 있도록 합니다.
 
+## 3. Image Pyramids
 
-## Image Pyramids
+이미지 타일링 기법만으로도 큰 이미지를 로딩할 수 있지만, 이미지 타일링만으로는 이미지 로딩속도가 충분히 빠르지 않습니다. 그래서 이를 보완하기 위해 서로 다른 **scale**의 이미지를 활용합니다. **Image Scaling**이라는 것은 이미지의 사이즈를 재조정하는 것을 의미하는데, 이 때 기본 이미지를 서로 다른 크기로 scaling한 일련의 이미지 집합을 **Image Pyramids**라고 합니다. 이 때, scale의 크기는 이미지의 크기와 반비례 값을 갖습니다.
 
-이미지 타일링 기법만으로도 큰 이미지를 로딩할 수 있지만, 이미지 타일링만으로는 이미지 로딩속도가 충분히 빠르지 않습니다. 그래서 이를 보완하기 위해 서로 다른 **scale**의 이미지를 활용합니다. **Image Scaling**이라는 것은 이미지의 사이즈를 재조정하는 것을 의미하는데, 이 때 기본 이미지를 서로 다른 크기로 scaling한 일련의 이미지 집합을 **Image Pyramids**라고 합니다. 이 때, scale이 크기는 이미지의 크기와 반비례 값을 갖습니다.
-
-<img src="https://dl.dropbox.com/s/1uuol5qdlba0snp/img_pyrm.gif" style="max-wid
+<img src="https://dl.dropbox.com/s/i7cmu15sl93bdtt/img_pyrm.gif" style="max-wid
 th: 100%; margin: 0 auto;">
+출처: [Working with Image Objects - Dartmouth edu](http://northstar-www.dartmouth.edu/doc/idl/html_6.2/Image_Tiling.html)
 
 ### Gaussian Pyramids
 
-**Image Pyramids**도 그 종류가 여러가지인데 그 중 **Gaussian Pyramids**은 이미지를 스케일링하는(사이즈 축소) 것뿐만 아니라, 이미지의 일정 픽셀을 버려서 이미지를 sub sampling하는(용량 축소) 방식으로 이미지 집합을 만든 피라미드입니다. 그래서 **Gaussian Pyramids** 레벨마다 이미지의 크기가 매우 빠르게 줄어드는 특징을 가지고 있습니다.
+**Image Pyramids**도 그 종류가 여러가지인데 그 중 **Gaussian Pyramids**은 이미지를 스케일링하는(사이즈 축소) 것뿐만 아니라, 이미지의 일정 픽셀을 버려서 이미지를 sub sampling하는(해상도 축소) 방식으로 이미지 집합을 만든 피라미드입니다. 그래서 **Gaussian Pyramids** 레벨마다 이미지의 크기가 매우 빠르게 줄어드는 특징을 가지고 있습니다.
 
-<img src="https://dl.dropbox.com/s/i409yl3tipn0hkp/pyramid.png" style="max-width: 100%; margin: 0 auto;">
+<img src="https://dl.dropbox.com/s/i409yl3tipn0hkp/pyramid.png" style="max-width: 80%; margin: 0 auto;">
 출처: [Pyramid (image processing) - Wikipedia](https://en.wikipedia.org/wiki/Pyramid_(image_processing))
 
-## Image tiling with Image Pyramids
+## Image Tiling과 Gaussian Pyramids
 
-
+위에서 알아본 Image Tiling과 Gaussian Pyramids를 결합하여 고해상도 이미지 로딩을 위한 타일 이미지를 생성합니다. 즉, 각각의 피라미드 레벨에 해당하는 피라미드 이미지마다 타일이미지를 생성하는 것입니다. 이런 방식으로 타일 이미지를 생성하는 것은 기존 Image Tiling이 (x,y)의 좌표값만을 파라미터로 사용한 것에서 이미지 scale 값을 새로운 파라미터로 사용하는 것이라고 이해하면 됩니다. 그래서 타일을 자를 때 각각의 이미지는 자신의 위치를 위한 이미지 내에서의 (x,y) 값과 더불어 scale(줌 레벨) 값을 알고 있어야 합니다.
 
 <img src="https://dl.dropbox.com/s/n507zqwlvc4co6h/Image_Tiling-21.jpg" style="max-width: 100%; margin: 0 auto;">
 출처: [Working with Image Objects - Dartmouth edu](http://northstar-www.dartmouth.edu/doc/idl/html_6.2/Image_Tiling.html)
+
+위의 그림은 점선으로 표현된 실제 기기에서 보여지는 부분이 이미지의 scale(사용자가 줌인 한 수준)에 따라 전체 이미지의 어떤 부분을 표현하는 것인지를 보여주는 그림입니다. 여기서는 줌을 확대할 수록(level 0에 가까울 수록) 원본 이미지에 가까워지게 되고, 줌을 축소할 수록(level 2에 가까울 수록) 저화질의 이미지가 화면에 나오게 됩니다.
+
+
+## 코드로 구현(THTiledImageView)
 
 
 -----
 
 ## 참고자료
 * [Display in iOS](https://developer.apple.com/library/content/documentation/DeviceInformation/Reference/iOSDeviceCompatibility/Displays/Displays.html)
-[Working with Image Objects - Dartmouth edu](http://northstar-www.dartmouth.edu/doc/idl/html_6.2/Image_Tiling.html)
+* [Working with Image Objects - Dartmouth edu](http://northstar-www.dartmouth.edu/doc/idl/html_6.2/Image_Tiling.html)
+* [Scale Space와 이미지 피라미드(image pyramid)](http://darkpgmr.tistory.com/137)
