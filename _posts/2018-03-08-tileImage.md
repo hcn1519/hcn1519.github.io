@@ -67,9 +67,68 @@ th: 100%; margin: 0 auto;">
 위의 그림은 점선으로 표현된 실제 기기에서 보여지는 부분이 이미지의 scale(사용자가 줌인 한 수준)에 따라 전체 이미지의 어떤 부분을 표현하는 것인지를 보여주는 그림입니다. 여기서는 줌을 확대할 수록(level 0에 가까울 수록) 원본 이미지에 가까워지게 되고, 줌을 축소할 수록(level 2에 가까울 수록) 저화질의 이미지가 화면에 나오게 됩니다.
 
 
-## 코드 구현(THTiledImageView, Swift)
+# 코드 구현(THTiledImageView, Swift)
 
 여기까지 일반적인 타일이미지 활용을 위한 지식에 대해 알아보았습니다. 여기서부터는 위의 내용을 활용하여 실제로 iOS 플랫폼에서 위의 내용에 기반한 이미지뷰를 만든 방식에 대해 설명하고자 합니다. 먼저 코드는 [THTiledImageView](https://github.com/TileImageTeamiOS/THTiledImageView)에 CocoaPod을 통해 배포되고 있습니다. 그리고 구체적인 사용 예시는 [THStorytellingView](https://github.com/TileImageTeamiOS/THStorytellingView)에서 확인할 수 있습니다.
+
+## 들어가기 전에
+
+먼저 코드를 살펴보기 전에 코드를 수월하게 이해하기 위한 간단한 개념들을 살펴보고자 합니다. 이미 아는 내용이라면 건너뛰어도 무방합니다.
+
+### View와 Layer
+
+첫 번째로 `View`와 `Layer`에 대한 구분입니다. iOS에서 화면에 무엇인가를 표시하기 위해 기본적으로 `View` 클래스를 사용합니다.  
+
+#### View
+
+<div class="message">
+  UIView - An object that manages the content for a rectangular area on the screen. Views are the fundamental building blocks of your app's user interface, and the UIView class defines the behaviors that are common to all views ...
+</div>
+출처: [UIKit - UIView](https://developer.apple.com/documentation/uikit/uiview)
+
+애플에서 설명하는 정의해서 알 수 있듯이, `View`는 화면의 사각형 반경 내의 UI를 구성할 때 쓰이는 클래스를 통칭합니다. 일반적으로 MVC 패턴을 얘기할 때 V가 이 View를 의미하는 것으로 View는 사용자와의 직접적인 커뮤니케이션(보고, 터치하고 등)을 담당합니다. 그래서 iOS에서 `View`는 크게 다음과 같은 3가지 기능을 담당한다고 말할 수 있습니다.
+
+1. Drawing and animation - 먼저 `View`는 UIKit이나 Core Graphics를 통해 View 안의 콘텐츠를 그릴 수 있습니다.(THTiledImageView는 이 방식을 통해 타일 이미지를 업데이트합니다.)
+2. Layout and subview management - `View`는 `SubView`를 포함할 수 있어서 계층 구조 형태로 화면 레이아웃을 구성할 수 있도록 해줍니다.
+3. Event handling - `View`는 터치나 다른 이벤트를 사용할 수 있습니다.
+
+#### Layer
+
+앞서서 View에 대해 알아보았으니 이번에는 `Layer`를 알아보겠습니다.
+
+<div class="message">
+  An object that manages image-based content and allows you to perform animations on that content. Layers are often used to provide the backing store for views but can also be used without a view to display content.
+</div>
+출처: [QuartzCore - CALayer](https://developer.apple.com/documentation/quartzcore/calayer)
+
+`Layer`는 콘텐츠의 시각적인 부분을 담당하는 객체입니다. `Layer`는 View와는 다르게 Layer는 이벤트를 관리할 수 없고, 전적으로 콘텐츠의 Drawing, Animation 을 담당합니다. 앞서서 `View`가 콘텐츠의 Drawing, Animation을 담당한다고 서술하였는데, 이는 `View` 안에 기본적으로 포함되어 있는 `Layer`를 통해 이뤄지는 작업입니다. 즉, 하나의 `View`에는 기본적으로 해당 `View`의 bounds만큼을 차지하는 `Layer`가 있고, 이 `Layer`가 콘텐츠의 Drawing, Animation을 담당합니다. 애플은 `Layer`를 다양한 화면 구성을 할 수 있도록 여러가지 `Layer`를 제공합니다. 해당 `Layer`들의 종류와 쓰임새는 다음  [raywenderlich - CALayer Tutorial for iOS: Getting Started](https://www.raywenderlich.com/169004/calayer-tutorial-ios-getting-started)에서 확인할 수 있습니다.
+
+### CGRect, CGPoint, CGSize
+
+화면에 어떤 네모난
+
+다음으로는 화면에 어떤 위치에 View가 들어가기 위해 필요한 좌표 및 View의 사이즈를 담당하는 객체 소개하고자 합니다.
+
+<div class="message">
+  CGRect - A structure that contains the location and dimensions of a rectangle.
+  CGPoint - A structure that contains a point in a two-dimensional coordinate system.
+  CGSize - A structure that contains width and height values.
+</div>
+
+View가 화면안에서 표현되기 위해서는 위치와 사이즈 값을 갖고 있어야 하는데 이를 `frame`이라고 합니다. 그리고 이 `frame`은 `CGRect` 타입으로 모든 View는 이 값을 갖고 있어야 화면에 표현될 수 있습니다.
+
+<img src="https://dl.dropbox.com/s/5rwfsqzsawe1e33/rect.png" style="max-width: 80%; margin: 0 auto;">
+
+iOS에서는 기본적으로 좌측 상단이 (x,y)값이 (0,0)인 좌표시스템을 갖고 있습니다. 그래서 위의 경우에서 파란색 View는 다음과 같은 CGRect 값을 지닙니다.
+
+{% highlight swift %}
+blueView.frame = CGRect(origin: CGPoint(30, 120), size: CGSize(width: 240, height: 120))
+{% endhighlight %}
+
+## Image Tiling in THTiledImageView
+
+여기서부터는 `THTiledImageView`에서 어떤 방식으로 타일 이미지를 화면에 불러내는지에 대해 코드를 통해 설명하고자 합니다. 여기서 설명하고자 하는 코드는 [THTileImageView.swift](https://github.com/TileImageTeamiOS/THTiledImageView/blob/master/THTiledImageView/THTiledImageView/THTileImageView.swift)에 있는 코드들입니다.
+
 
 
 -----
@@ -78,3 +137,5 @@ th: 100%; margin: 0 auto;">
 * [Display in iOS](https://developer.apple.com/library/content/documentation/DeviceInformation/Reference/iOSDeviceCompatibility/Displays/Displays.html)
 * [Working with Image Objects - Dartmouth edu](http://northstar-www.dartmouth.edu/doc/idl/html_6.2/Image_Tiling.html)
 * [Scale Space와 이미지 피라미드(image pyramid)](http://darkpgmr.tistory.com/137)
+* [UIKit - UIView](https://developer.apple.com/documentation/uikit/uiview)
+* [QuartzCore - CALayer](https://developer.apple.com/documentation/quartzcore/calayer)
