@@ -105,13 +105,13 @@ th: 100%; margin: 0 auto;">
 
 ### CGRect, CGPoint, CGSize
 
-화면에 어떤 네모난
-
-다음으로는 화면에 어떤 위치에 View가 들어가기 위해 필요한 좌표 및 View의 사이즈를 담당하는 객체 소개하고자 합니다.
+다음으로 화면에 어떤 위치에 View가 들어가기 위해 필요한 좌표 및 View의 사이즈를 담당하는 객체를 소개하고자 합니다.
 
 <div class="message">
   CGRect - A structure that contains the location and dimensions of a rectangle.
+
   CGPoint - A structure that contains a point in a two-dimensional coordinate system.
+  
   CGSize - A structure that contains width and height values.
 </div>
 
@@ -119,7 +119,7 @@ View가 화면안에서 표현되기 위해서는 위치와 사이즈 값을 갖
 
 <img src="https://dl.dropbox.com/s/5rwfsqzsawe1e33/rect.png" style="max-width: 80%; margin: 0 auto;">
 
-iOS에서는 기본적으로 좌측 상단이 (x,y)값이 (0,0)인 좌표시스템을 갖고 있습니다. 그래서 위의 경우에서 파란색 View는 다음과 같은 CGRect 값을 지닙니다.
+iOS에서는 기본적으로 좌측 상단이 (x,y)값이 (0,0)인 좌표시스템을 갖고 있습니다. 그래서 위의 경우에서 파란색 View는 다음과 같은 `frame` 값을 지닙니다.
 
 {% highlight swift %}
 blueView.frame = CGRect(origin: CGPoint(30, 120), size: CGSize(width: 240, height: 120))
