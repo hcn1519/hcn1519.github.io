@@ -79,7 +79,7 @@ th: 100%; margin: 0 auto;">
 
 ### View와 Layer
 
-첫 번째로 `View`와 `Layer`에 대한 구분입니다. iOS에서 화면에 무엇인가를 표시하기 위해 기본적으로 `View` 클래스를 사용합니다.  
+첫 번째로 `View`와 `layer`에 대한 구분입니다. iOS에서 화면에 무엇인가를 표시하기 위해 기본적으로 `View` 클래스를 사용합니다.  
 
 #### View
 
@@ -96,24 +96,28 @@ th: 100%; margin: 0 auto;">
 
 #### Layer
 
-앞서서 View에 대해 알아보았으니 이번에는 `Layer`를 알아보겠습니다.
+앞서서 View에 대해 알아보았으니 이번에는 `layer`를 알아보겠습니다.
 
 <div class="message">
   An object that manages image-based content and allows you to perform animations on that content. Layers are often used to provide the backing store for views but can also be used without a view to display content.
 </div>
 출처: [QuartzCore - CALayer](https://developer.apple.com/documentation/quartzcore/calayer)
 
-`Layer`는 콘텐츠의 시각적인 부분을 담당하는 객체입니다. `Layer`는 View와는 다르게 Layer는 이벤트를 관리할 수 없고, 전적으로 콘텐츠의 Drawing, Animation 을 담당합니다. 앞서서 `View`가 콘텐츠의 Drawing, Animation을 담당한다고 서술하였는데, 이는 `View` 안에 기본적으로 포함되어 있는 `Layer`를 통해 이뤄지는 작업입니다. 즉, 하나의 `View`에는 기본적으로 해당 `View`의 bounds만큼을 차지하는 `Layer`가 있고, 이 `Layer`가 콘텐츠의 Drawing, Animation을 담당합니다. 애플은 `Layer`를 다양한 화면 구성을 할 수 있도록 여러가지 `Layer`를 제공합니다. 해당 `Layer`들의 종류와 쓰임새는 다음  [raywenderlich - CALayer Tutorial for iOS: Getting Started](https://www.raywenderlich.com/169004/calayer-tutorial-ios-getting-started)에서 확인할 수 있습니다.
+`layer`는 콘텐츠의 시각적인 부분을 담당하는 객체입니다. `layer`는 View와는 다르게 Layer는 이벤트를 관리할 수 없고, 전적으로 콘텐츠의 Drawing, Animation 을 담당합니다. 앞서서 `View`가 콘텐츠의 Drawing, Animation을 담당한다고 서술하였는데, 이는 `View` 안에 기본적으로 포함되어 있는 `layer`를 통해 이뤄지는 작업입니다. 즉, 하나의 `View`에는 기본적으로 해당 `View`의 bounds만큼을 차지하는 `layer`가 있고, 이 `layer`가 콘텐츠의 Drawing, Animation을 담당합니다. 애플은 `layer`를 다양한 화면 구성을 할 수 있도록 여러가지 `layer`를 제공합니다. 해당 `layer`들의 종류와 쓰임새는 다음  [raywenderlich - CALayer Tutorial for iOS: Getting Started](https://www.raywenderlich.com/169004/calayer-tutorial-ios-getting-started)에서 확인할 수 있습니다.
 
 ### CGRect, CGPoint, CGSize
 
 다음으로 화면에 어떤 위치에 View가 들어가기 위해 필요한 좌표 및 View의 사이즈를 담당하는 객체를 소개하고자 합니다.
 
-{% highlight shell %}
+<div class="message">
 CGRect - A structure that contains the location and dimensions of a rectangle.
+</div>
+<div class="message">
 CGPoint - A structure that contains a point in a two-dimensional coordinate system.
+</div>
+<div class="message">
 CGSize - A structure that contains width and height values.
-{% endhighlight %}
+</div>
 
 View가 화면안에서 표현되기 위해서는 위치와 사이즈 값을 갖고 있어야 하는데 이를 `frame`이라고 합니다. 그리고 이 `frame`은 `CGRect` 타입으로 모든 View는 이 값을 갖고 있어야 화면에 표현될 수 있습니다.
 
@@ -161,6 +165,30 @@ convenience init(dataSource: THTiledImageViewDataSource) {
     layer.tileSize = tileSize[0]
 
     frame = CGRect(origin: CGPoint.zero, size: dataSource.originalImageSize)
+}
+{% endhighlight %}
+
+#### CATiledLayer
+
+애플에서는 앞서 언급한 것처럼 다양한 종류의 Layer를 제공하는데 그 중 타일 이미지를 로딩할 수 있도록 도와주는 `CATiledLayer`라는 layer를 제공합니다.
+
+{% highlight swift %}
+open class CATiledLayer : CALayer {
+    open class func fadeDuration() -> CFTimeInterval
+    open var levelsOfDetail: Int
+    open var levelsOfDetailBias: Int
+    open var tileSize: CGSize
+}
+{% endhighlight %}
+
+`CATiledLayer`가 제공하는 property 혹은 메소드는 위와 같습니다. `THTiledImageView`에서는 전체 View를 관리하는 layer를 `CATiledLayer`로 선언하여 MaxZoomLevel과 TileSize 같은 것들이 올바르게 작동하도록 만들었습니다.
+
+{% highlight swift %}
+class THTiledImageView: UIView {
+    override class var layerClass: AnyClass {
+        // TiledLayer는 CATiledLayer를 상속하는 클래스입니다.
+        return TiledLayer.self
+    }
 }
 {% endhighlight %}
 
