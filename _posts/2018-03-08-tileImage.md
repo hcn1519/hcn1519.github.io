@@ -196,7 +196,7 @@ class THTiledImageView: UIView {
 
 #### draw(rect:)
 
-`THTiledImageView`는 View를 사용하는 여러가지 방법중에 `Drawing(draw(rect: CGRect))`을 사용합니다. 이는 `THTiledImageView`가 하나의 이미지 파일로 이뤄진 것이 아니라, 하나의 UIView 안에 여러 타일 이미지를 보여주어야 하기 때문입니다. `draw(rect:)` 함수는 최대 60hz(1초에 60번) 호출되는 함수로 업데이트 되어야 하는 `rect`를 갖고 호출됩니다.
+`THTiledImageView`는 View를 사용하는 여러가지 방법중에 `Drawing(draw(rect: CGRect))`을 사용합니다. 이것을 사용하는 이유는 `THTiledImageView`가 하나의 이미지 파일로 이뤄진 것이 아니라, 하나의 UIView 안에 여러 이미지를 layer를 업데이트하는 형태로 보여주어야 하기 때문입니다. `draw(rect:)` 함수는 최대 60hz(1초에 60번) 호출되는 함수로 업데이트 되어야 하는 `rect`를 갖고 호출됩니다.
 
 {% highlight swift %}
 class THTiledImageView: UIView {
@@ -206,11 +206,21 @@ class THTiledImageView: UIView {
 }
 {% endhighlight %}
 
-`draw(rect:)`는 시스템에서 업데이트가 필요할 때 우선적으로 호출되고 모든 화면의 업데이트가 끝나면 더이상 호출되지 않습니다. 바꿔말하면, 화면에 나타나는 부분이 모두 업데이트 되면 메소드는 종료됩니다. 그래서 해당 View의 화면을 이동하고 나서 추가적으로 로딩이 필요한 View를 업데이트 하기 위해서는 `setNeedsDisplay(rect:)`를 호출합니다. 이 함수를 호출하면 해당 rect에 대해서 `draw(rect:)`가 재호출됩니다.
+`draw(rect:)`는 시스템에서 업데이트가 필요할 때 우선적으로 호출되고 모든 화면의 업데이트가 끝나면 더이상 호출되지 않습니다. 바꿔말하면, 화면에 나타나는 부분이 모두 업데이트 되면 메소드는 종료됩니다. 그래서 만약 디바이스에서 화면을 이동하여 추가적으로 화면을 업데이트할 필요가 있는 경우에는 `setNeedsDisplay(rect:)`를 호출합니다. 이 함수를 호출하면 해당 rect에 대해서 `draw(rect:)`가 재호출됩니다.
 
 #### CTM
 
-iOS에서는 사용자가 사용하는 (x, y) 좌표값을 화면에 출력될 위치로 변환하기 위해 `Current Transformation Matrix(이하 CTM)`라는 3x3 행렬을 사용합니다. 여기서 x값에 관여하는 값이 ctm 행렬의 a이고 이를 통해 화면상에서의 이미지 scale 값을 도출할 수 있습니다.
+iOS에서는 사용자가 사용하는 (x, y) 좌표값을 화면에 출력될 위치로 변환하기 위해 `Current Transformation Matrix(이하 CTM)`라는 3x3 행렬을 사용합니다.
+
+<img src="http://bit.ly/2Dhr7hK" align="center" border="0" alt=" \begin{bmatrix}  x' & y' & 1 \end{bmatrix} =  \begin{bmatrix}  x & y & 1 \end{bmatrix} * \begin{bmatrix}a & b & 0 \\c & d & 0 \\ t_{x}  & t_{y} & 1 \end{bmatrix} " width="311" height="65" />
+
+위의 식에서 마지막에 있는 행렬이 CTM으로 CTM은 하나의 (x, y)를 (x', y')으로 변환하는 역할을 합니다. 디스플레이상에서 변환되는 두 좌표는 User Space(document page)와 Device Space(native resolution of a device) 상의 좌표입니다. `THTiledImageView`에서 CTM으로부터 얻어내야 하는 정보는 scale값입니다. 여기서 x값에 관여하는 값이 ctm 행렬의 a이고 이를 통해 화면상에서의 이미지 scale 값을 도출할 수 있습니다. 이 값을 도출하는 것은 애플의 샘플코드에 그 설명이 나와 있습니다.
+
+<div class="message">
+Get the scale from the context by getting the current transform matrix, then asking for its "a" component, which is one of the two scale components. We could also ask for "d". This assumes (safely) that the view is being scaled equally in both dimensions.
+</div>
+출처: [Guide and Sample Code - TilingView.m](https://developer.apple.com/library/content/samplecode/PhotoScroller/Listings/Classes_TilingView_m.html)
+
 
 {% highlight swift %}
 override func draw(_ rect: CGRect) {
@@ -225,6 +235,7 @@ override func draw(_ rect: CGRect) {
     let level = dataSource.maxTileLevel + Int(x)
 }
 {% endhighlight %}
+
 
 #### Tile Loading
 
