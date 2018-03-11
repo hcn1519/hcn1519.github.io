@@ -57,7 +57,7 @@ th: 100%; margin: 0 auto;">
 <img src="https://dl.dropbox.com/s/i409yl3tipn0hkp/pyramid.png" style="max-width: 80%; margin: 0 auto;">
 출처: [Pyramid (image processing) - Wikipedia](https://en.wikipedia.org/wiki/Pyramid_(image_processing))
 
-## Image Tiling과 Gaussian Pyramids
+## 4. Image Tiling과 Gaussian Pyramids
 
 위에서 알아본 Image Tiling과 Gaussian Pyramids를 결합하여 고해상도 이미지 로딩을 위한 타일 이미지를 생성합니다. 즉, 각각의 피라미드 레벨에 해당하는 피라미드 이미지마다 타일이미지를 생성하는 것입니다. 이런 방식으로 타일 이미지를 생성하는 것은 기존 Image Tiling이 (x,y)의 좌표값만을 파라미터로 사용한 것에서 이미지 scale 값을 새로운 파라미터로 추가한 것이라고 이해하면 됩니다. 그래서 타일을 자를 때 각각의 타일 이미지는 자신의 위치를 위한 이미지 내에서의 (x,y) 값과 더불어 scale(줌 레벨) 값을 알고 있어야 합니다.
 
@@ -66,10 +66,12 @@ th: 100%; margin: 0 auto;">
 
 위의 그림은 점선으로 표현된 실제 기기에서 보여지는 부분이 이미지의 scale(사용자가 줌인 한 수준)에 따라 전체 이미지의 어떤 부분을 표현하는 것인지를 보여주는 그림입니다. 여기서는 줌을 확대할 수록(level 0에 가까울 수록) 원본 이미지에 가까워지게 되고, 줌을 축소할 수록(level 2에 가까울 수록) 저화질의 이미지가 화면에 나오게 됩니다.
 
+<br>
+<br>
 
 # 코드 구현(THTiledImageView, Swift)
 
-여기까지 일반적인 타일이미지 활용을 위한 지식에 대해 알아보았습니다. 여기서부터는 위의 내용을 활용하여 실제로 iOS 플랫폼에서 위의 내용에 기반한 이미지뷰를 만든 방식에 대해 설명하고자 합니다. 먼저 코드는 [THTiledImageView](https://github.com/TileImageTeamiOS/THTiledImageView)에 CocoaPod을 통해 배포되고 있습니다. 그리고 구체적인 사용 예시는 [THStorytellingView](https://github.com/TileImageTeamiOS/THStorytellingView)에서 확인할 수 있습니다.
+여기서부터는 위의 내용을 활용하여 실제로 iOS 플랫폼에서 위의 내용에 기반한 이미지뷰를 만든 방식에 대해 설명하고자 합니다. 먼저 코드는 [THTiledImageView](https://github.com/TileImageTeamiOS/THTiledImageView)에 CocoaPod을 통해 배포되고 있습니다. 그리고 구체적인 사용 예시는 [THStorytellingView](https://github.com/TileImageTeamiOS/THStorytellingView)에서 확인할 수 있습니다.
 
 ## 들어가기 전에
 
@@ -107,13 +109,11 @@ th: 100%; margin: 0 auto;">
 
 다음으로 화면에 어떤 위치에 View가 들어가기 위해 필요한 좌표 및 View의 사이즈를 담당하는 객체를 소개하고자 합니다.
 
-<div class="message">
-  CGRect - A structure that contains the location and dimensions of a rectangle.
-
-  CGPoint - A structure that contains a point in a two-dimensional coordinate system.
-
-  CGSize - A structure that contains width and height values.
-</div>
+{% highlight shell %}
+CGRect - A structure that contains the location and dimensions of a rectangle.
+CGPoint - A structure that contains a point in a two-dimensional coordinate system.
+CGSize - A structure that contains width and height values.
+{% endhighlight %}
 
 View가 화면안에서 표현되기 위해서는 위치와 사이즈 값을 갖고 있어야 하는데 이를 `frame`이라고 합니다. 그리고 이 `frame`은 `CGRect` 타입으로 모든 View는 이 값을 갖고 있어야 화면에 표현될 수 있습니다.
 
@@ -125,6 +125,8 @@ iOS에서는 기본적으로 좌측 상단이 (x,y)값이 (0,0)인 좌표시스�
 blueView.frame = CGRect(origin: CGPoint(30, 120), size: CGSize(width: 240, height: 120))
 {% endhighlight %}
 
+<br>
+
 ## Image Tiling in THTiledImageView
 
 여기서부터는 `THTiledImageView`에서 어떤 방식으로 타일 이미지를 화면에 불러내는지에 대해 코드를 통해 설명하고자 합니다. 여기서 설명하고자 하는 코드는 [THTileImageView.swift](https://github.com/TileImageTeamiOS/THTiledImageView/blob/master/THTiledImageView/THTiledImageView/THTileImageView.swift)에 있는 코드들입니다.
@@ -133,7 +135,6 @@ blueView.frame = CGRect(origin: CGPoint(30, 120), size: CGSize(width: 240, heigh
 
 `THTiledImageView`는 `UIView` 클래스를 상속합니다. 그리고, View를 그리기 위한 정보는 `THTiledImageViewDataSource` 객체가 가지고 있고, `THTiledImageView`는 이를 reference 형태로 가지고 있습니다.
 
-
 {% highlight swift %}
 class THTiledImageView: UIView {
     var dataSource: THTiledImageViewDataSource?
@@ -141,6 +142,27 @@ class THTiledImageView: UIView {
 {% endhighlight %}
 
 그래서 `THTiledImageView` 만들 때, 생성자(init)에서 전체 이미지 사이즈(originalImageSize), 사용할 타일 이미지의 레벨 범위(minTileLevel, maxTileLevel)를 지정합니다.
+
+{% highlight swift %}
+convenience init(dataSource: THTiledImageViewDataSource) {
+    self.init(frame: CGRect(origin: CGPoint.zero, size: dataSource.originalImageSize))
+
+    guard let layer = self.layer as? TiledLayer else { return }
+
+    let scale = UIScreen.main.scale
+    layer.contentsScale = scale
+
+    let min = dataSource.minTileLevel
+    let max = dataSource.maxTileLevel
+
+    layer.levelsOfDetail = max - min + 1
+
+    let tileSize = dataSource.tileSize
+    layer.tileSize = tileSize[0]
+
+    frame = CGRect(origin: CGPoint.zero, size: dataSource.originalImageSize)
+}
+{% endhighlight %}
 
 ### THTiledImageView Drawing
 
