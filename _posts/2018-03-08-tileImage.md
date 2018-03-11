@@ -111,7 +111,7 @@ th: 100%; margin: 0 auto;">
   CGRect - A structure that contains the location and dimensions of a rectangle.
 
   CGPoint - A structure that contains a point in a two-dimensional coordinate system.
-  
+
   CGSize - A structure that contains width and height values.
 </div>
 
@@ -129,7 +129,90 @@ blueView.frame = CGRect(origin: CGPoint(30, 120), size: CGSize(width: 240, heigh
 
 여기서부터는 `THTiledImageView`에서 어떤 방식으로 타일 이미지를 화면에 불러내는지에 대해 코드를 통해 설명하고자 합니다. 여기서 설명하고자 하는 코드는 [THTileImageView.swift](https://github.com/TileImageTeamiOS/THTiledImageView/blob/master/THTiledImageView/THTiledImageView/THTileImageView.swift)에 있는 코드들입니다.
 
+### THTiledImageView의 구조
 
+`THTiledImageView`는 `UIView` 클래스를 상속합니다. 그리고, View를 그리기 위한 정보는 `THTiledImageViewDataSource` 객체가 가지고 있고, `THTiledImageView`는 이를 reference 형태로 가지고 있습니다.
+
+
+{% highlight swift %}
+class THTiledImageView: UIView {
+    var dataSource: THTiledImageViewDataSource?
+}
+{% endhighlight %}
+
+그래서 `THTiledImageView` 만들 때, 생성자(init)에서 전체 이미지 사이즈(originalImageSize), 사용할 타일 이미지의 레벨 범위(minTileLevel, maxTileLevel)를 지정합니다.
+
+### THTiledImageView Drawing
+
+#### draw(rect:)
+
+`THTiledImageView`는 View를 사용하는 여러가지 방법중에 `Drawing(draw(rect: CGRect))`을 사용합니다. 이는 `THTiledImageView`가 하나의 이미지 파일로 이뤄진 것이 아니라, 하나의 UIView 안에 여러 타일 이미지를 보여주어야 하기 때문입니다. `draw(rect:)` 함수는 최대 60hz(1초에 60번) 호출되는 함수로 업데이트 되어야 하는 `rect`를 갖고 호출됩니다.
+
+{% highlight swift %}
+class THTiledImageView: UIView {
+  override func draw(_ rect: CGRect) {
+    // 아이폰 기준으로 최대 60hz 수준으로 호출됩니다.
+  }
+}
+{% endhighlight %}
+
+`draw(rect:)`는 시스템에서 업데이트가 필요할 때 우선적으로 호출되고 모든 화면의 업데이트가 끝나면 더이상 호출되지 않습니다. 바꿔말하면, 화면에 나타나는 부분이 모두 업데이트 되면 메소드는 종료됩니다. 그래서 해당 View의 화면을 이동하고 나서 추가적으로 로딩이 필요한 View를 업데이트 하기 위해서는 `setNeedsDisplay(rect:)`를 호출합니다. 이 함수를 호출하면 해당 rect에 대해서 `draw(rect:)`가 재호출됩니다.
+
+#### CTM
+
+iOS에서는 사용자가 사용하는 (x, y) 좌표값을 화면에 출력될 위치로 변환하기 위해 `Current Transformation Matrix(이하 CTM)`라는 3x3 행렬을 사용합니다. 여기서 x값에 관여하는 값이 ctm 행렬의 a이고 이를 통해 화면상에서의 이미지 scale 값을 도출할 수 있습니다.
+
+{% highlight swift %}
+override func draw(_ rect: CGRect) {
+    // ctm 사용을 위한 context 호출
+    let context = UIGraphicsGetCurrentContext()!
+
+    // 디바이스 scale 고려하여 zoomScale 도출
+    let scaleX = context.ctm.a / UIScreen.main.scale
+
+    // 사용자의 zoomScale 값
+    let x = round(log2(Double(scaleX)))
+    let level = dataSource.maxTileLevel + Int(x)
+}
+{% endhighlight %}
+
+#### Tile Loading
+
+이렇게 이미지의 zoomLevel을 파악하고 난 후 타일 이미지를 화면에 맞게 호출합니다. 개별 타일 이미지는 사이즈 정보와 어떤 level(scale)에서, 어떤 (x,y)에 쓰이는지 정확히 알 수 있도록 `{imageName_imageSize_level_x_y}.jpg`의 형태로 이름을 갖고 있습니다. 이미지는 2차원 형태이기 때문에 전체 사각형 안에서 2중 루프를 돌면서 타일을 채워야 합니다. `draw(rect:)` 함수는 비동기로 작동하여 화면을 업데이트 하기 때문에 화면은 루프 순서대로 업데이트 되지는 않습니다.
+
+{% highlight swift %}
+// 부가적인 부분은 제거한 코드입니다.
+override func draw(_ rect: CGRect) {
+    let firstColumn = Int(rect.minX / length)
+    let lastColumn = Int(rect.maxX / length)
+    let firstRow = Int(rect.minY / length)
+    let lastRow = Int(rect.maxY / length)
+
+    for row in firstRow...lastRow {
+        for column in firstColumn...lastColumn {
+          if let tile = imageForTileAtColumn(imageSize: size[level - 1], tileRect: tileRect, column, row: row, level: level) {
+              tile.tileImage.draw(in: tileRect)
+          }      
+        }
+    }
+}
+
+private func imageForTileAtColumn(imageSize: CGSize, tileRect: CGRect, _ column: Int, row: Int, level: Int) -> THTile? {
+    guard let dataSource = dataSource else { return nil }
+
+    let sizeInt = Int(imageSize.width)
+    // 타일 이미지 Key 값
+    let imageKey = dataSource.thumbnailImageName + "_\(sizeInt)_\(level)_\(column)_\(row).\(dataSource.imageExtension)"
+
+    if let image = THImageCacheManager.default.retrieveTiles(key: imageKey) {
+        return THTile(tileImage: image, tileRect: tileRect)
+    } else {
+        return nil
+    }
+}
+{% endhighlight %}
+
+> 타일 이미지를 서버로부터 다운로드 받아서 처리하는 것은 downloadAndRedrawImages 함수에서 수행됩니다. 가장 먼저 이미지가 캐싱되어 있는지 확인하고, 이미지 다운로드가 진행됩니다. 그리고 그 이후는 타일마다 이미지 다운로드 -> 캐싱 -> setNeedsDisplay(rect:) 호출 -> draw(rect:) -> 다운로드된 이미지 업데이트 순서로 수행됩니다.
 
 -----
 
