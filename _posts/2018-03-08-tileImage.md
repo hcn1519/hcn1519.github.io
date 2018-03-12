@@ -2,9 +2,9 @@
 layout: post
 title: "이미지 타일링을 통한 고해상도 이미지 로딩"
 excerpt: "타일 이미지를 활용하여 고해상도 이미지를 랜더링하는 방법에 대해 알아봅니다."
-categories: TiledImage, Display
+categories: TiledImage, Display, CoreGraphics, Swift
 date: "2018-03-08 18:28:51 +0900"
-tags: [TiledImage, Display, Swift]
+tags: [TiledImage, Display, Swift, THStorytellingView, THTiledImageView]
 image:
   feature: tiledimage.png
 ---
@@ -66,7 +66,6 @@ th: 100%; margin: 0 auto;">
 
 위의 그림은 점선으로 표현된 실제 기기에서 보여지는 부분이 이미지의 scale(사용자가 줌인 한 수준)에 따라 전체 이미지의 어떤 부분을 표현하는 것인지를 보여주는 그림입니다. 여기서는 줌을 확대할 수록(level 0에 가까울 수록) 원본 이미지에 가까워지게 되고, 줌을 축소할 수록(level 2에 가까울 수록) 저화질의 이미지가 화면에 나오게 됩니다.
 
-<br>
 <br>
 
 # 코드 구현(THTiledImageView, Swift)
