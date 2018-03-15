@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "네트워크 기본 정리"
-excerpt: "네트워크 강의를 정리하는 글입니다."
-categories: Network 패킷스위칭
-tags: [Network, PacketSwitching, CircuitSwitching]
+excerpt: "네트워크 강의 정리 1"
+categories: Network PacketSwitching PacketLoss NetworkDelay
+tags: [Network, PacketSwitching, CircuitSwitching, PacketLoss, NetworkDelay]
 date: "2018-03-15 20:54:59 +0900"
 ---
 
@@ -20,7 +20,7 @@ date: "2018-03-15 20:54:59 +0900"
 </div>
 출처: [Circuit Switching - wikipedia](https://en.wikipedia.org/wiki/Circuit_switching)
 
-Circuit Switching은 통신 방법 중 두개의 노드가 서로 통신을 예약해두고 정해진 회선을 사용하는 형태로 데이터를 교환하는 방법입니다. 일반적으로 유선전화 같은 것이 이와 같은 통신 방법을 사용합니다.
+`Circuit Switching`은 통신 방법 중 두개의 노드가 서로 통신을 예약해두고 정해진 회선을 사용하는 형태로 데이터를 교환하는 방법입니다. 일반적으로 유선전화 같은 것이 이와 같은 통신 방법을 사용합니다.
 
 ## Packet Switching
 
@@ -41,7 +41,7 @@ Circuit Switching은 통신 방법 중 두개의 노드가 서로 통신을 예�
 
 이와 같이 통신 속도가 느려지는 현상을 세분화해서 나눠보면 다음과 같이 구분할 수 있습니다.
 
-#### Packet Switching delay
+#### Network Delay
 
 1. Processing delay - 최종 목적지에 따라 클라이언트에서 어디로 보낼지 파악할 때
 2. Queueing delay - 다른 패킷이 이미 라우터의 큐에 등록되어 있어서 기다려야 하는 경우
