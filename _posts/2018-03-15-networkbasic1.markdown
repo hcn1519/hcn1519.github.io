@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "네트워크 기본 정리"
+title: "네트워크 정리 1"
 excerpt: "네트워크 강의 정리 1"
 categories: Network PacketSwitching PacketLoss NetworkDelay
 tags: [Network, PacketSwitching, CircuitSwitching, PacketLoss, NetworkDelay]

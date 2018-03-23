@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "네트워크 기본 정리"
+title: "네트워크 정리 2"
 excerpt: "네트워크 강의 정리 2"
 categories: Network ApplicationLayer HTTP
 tags: [Network, ApplicationLayer, HTTP, Cookie, WebCache]
