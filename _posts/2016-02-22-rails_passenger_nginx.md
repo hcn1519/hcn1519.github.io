@@ -3,39 +3,38 @@ layout: post
 comments: true
 title:  "Passenger-Nginx를 이용하여 AWS에 Rails 앱 배포하기"
 excerpt: "Passenger gem과 Nginx를 이용하여 git에 올린 Rails 앱을 AWS를 이용하여 배포하는 것에 대해 이야기합니다."
-categories: Rails AWS Nginx 
+categories: Rails AWS Nginx
 date:   2016-02-25 00:30:00
 tags: [Rails, Passenger, Nginx]
 image:
   feature: nginx.jpg
 ---
-{% highlight html %}
-<h5>Passenger gem과 Nginx를 이용하여 Rails 앱 배포하기</h5>
-  <ol>
-    <li>AWS 인스턴스 환경설정</li>
-    <li>Ruby, Rails, Passenger gem 설치</li>
-    <li>Nginx 설치</li>
-    <li>Nginx 기본 셋팅</li>
-    <li>앱을 조금 더 빠르게 만드는 Nginx 셋팅</li>
-  </ol>
-{% endhighlight %}
-
-<p>&nbsp;두어달 전 쯤에 처음 AWS에 Nginx를 사용해서 Rails 앱을 배포한 적이 있었습니다. 당시 앱을 배포하기 전까지 궁금했던 점이 몇 가지 있었습니다. 그 중에서 가장 궁금했던 점은</p>
-<h5>Development 모드에서 개발을 할 때 <code>rails s</code>라는 명령어로 서버를 켰다가 껐다가 하는데, 실제 Production 모드에서도 이런 식으로 서버를 켰다가 껐다가 하나요? 만약 그렇다면, 서버를 키기 위해서 컴퓨터를 계속 켜놔야 되는데 전 서버를 돌릴만한 여유 컴퓨터가 없는데요?</h5>
-<p>&nbsp;쓰고보니, 다른 분들은 이것에 대해 고민할 지에 대해 새로운 고민이 생기긴 했는데, 결론부터 얘기하자면 그럴 필요가 없습니다. 그리고 Rails 앱을 위해(Rails에만 쓸 수 있는 것은 아닙니다.) 컴퓨터를 계속 켜놓을 필요가 없게 만들어주는 것이 Nginx라는 웹 서버입니다. 생활코딩 페이지(<a href="https://opentutorials.org/module/384/3462" target="_blank">생활코딩 Nginx</a>)에 자세한 설명이 되어 있으니 참고하시기 바랍니다.</p>
+**목차
+<ol>
+  <li><h4>AWS 인스턴스 환경설정</h4></li>
+  <li><h4>Ruby, Rails, Passenger gem 설치</h4></li>
+  <li><h4>Nginx 설치</h4></li>
+  <li><h4>Nginx 기본 셋팅</h4></li>
+  <li><h4>앱을 조금 더 빠르게 만드는 Nginx 셋팅</h4></li>
+</ol>
 
 
-<p>&nbsp;다시 돌아와서, 이 Nginx는 Rails 앱을 Production 모드로 배포할 수 있게 해줍니다. 그리고 Rails 앱을 배포할 수 있도록 도와주는 gem에는 <code>Passenger</code>와 <code>Unicorn</code>이 있습니다. <p>여기서는 그 중 <code>Passenger</code>라는 gem을 이용하여 AWS 인스턴스에 Nginx를 설치하고, 할당받은 ip주소를 입력하면 내가 만든 Rails 앱이 배포되는 작업을 해보도록 하겠습니다.</p>
+두어달 전 쯤에 처음 AWS에 Nginx를 사용해서 Rails 앱을 배포한 적이 있었습니다. 당시 앱을 배포하기 전까지 궁금했던 점이 몇 가지 있었습니다. 그 중에서 가장 궁금했던 점은 아래 내용이었습니다.
+<div class="message">
+Development 모드에서 개발을 할 때 <code>rails s</code>라는 명령어로 서버를 켰다가 껐다가 하는데, 실제 Production 모드에서도 이런 식으로 서버를 켰다가 껐다가 하나요? 만약 그렇다면, 서버를 키기 위해서 컴퓨터를 계속 켜놔야 되는데 전 서버를 돌릴만한 여유 컴퓨터가 없는데요?
+</div>
 
+쓰고보니, 다른 분들은 이것에 대해 고민할 지에 대해 새로운 고민이 생기긴 했는데, 결론부터 얘기하자면 그럴 필요가 없습니다. 그리고 Rails 앱을 위해(Rails에만 쓸 수 있는 것은 아닙니다.) 컴퓨터를 계속 켜놓을 필요가 없게 만들어주는 것이 Nginx라는 웹 서버입니다. 생활코딩 페이지(<a href="https://opentutorials.org/module/384/3462" target="_blank">생활코딩 Nginx</a>)에 자세한 설명이 되어 있으니 참고하시기 바랍니다.
+
+
+다시 돌아와서, 이 Nginx는 Rails 앱을 Production 모드로 배포할 수 있게 해줍니다. 그리고 Rails 앱을 배포할 수 있도록 도와주는 gem에는 `Passenger`와 `Unicorn`이 있습니다. 여기서는 그 중 `Passenger`라는 gem을 이용하여 AWS 인스턴스에 Nginx를 설치하고, 할당받은 ip주소를 입력하면 내가 만든 Rails 앱이 배포되는 작업을 해보도록 하겠습니다.
 
 <h4>목표 - Passenger gem과 Nginx를 이용하여 Rails 앱 배포하기</h4>
 
-<p>&nbsp;참고로, 여기서는 서버를 띄우는 데 필수적인 AWS 인스턴스 환경설정에 대해서는 설명하지만, putty를 사용해서 인스턴스에 접근하는 방법이나, Mac 터미널을 이용하여 인스턴스를 실행하는 것에 대해서는 설명하지 않으려고 합니다. AWS에서 제공하는 사용법을 따라하시면, (사실 쉽지는 않지만) 충분히 하실 수 있으리라 생각합니다. 또한 자신의 github에 이미 Rails 프로젝트가 있다는 가정으로 글을 진행하도록 하겠습니다.</p>
+참고로, 여기서는 서버를 띄우는 데 필수적인 AWS 인스턴스 환경설정에 대해서는 설명하지만, putty를 사용해서 인스턴스에 접근하는 방법이나, Mac 터미널을 이용하여 인스턴스를 실행하는 것에 대해서는 설명하지 않으려고 합니다. AWS에서 제공하는 사용법을 따라하시면, (사실 쉽지는 않지만) 충분히 하실 수 있으리라 생각합니다. 또한 자신의 github에 이미 Rails 프로젝트가 있다는 가정으로 글을 진행하도록 하겠습니다.
 
-<ul>
-  <li><a href="http://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/putty.html" target="_blank">윈도우 사용자들의 putty를 활용한 인스턴스 접속</a></li>
-  <li><a href="http://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html" target="_blank">맥 사용자들의 ssh를 활용한 인스턴스 접속</a></li>
-</ul>
+* <a href="http://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/putty.html" target="_blank">윈도우 사용자들의 putty를 활용한 인스턴스 접속
+* <a href="http://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html" target="_blank">맥 사용자들의 ssh를 활용한 인스턴스 접속
 
 <h4>1. AWS 인스턴스 환경설정</h4>
 
@@ -95,21 +94,20 @@ git clone https://github.com/hcn1519/myproject.git(자신의 프로젝트 url)
 
 <p>&nbsp;이렇게 하면 github에 올려놓았던 프로젝트가 인스턴스에 넘어옵니다. 프로젝트 clone이 완료되면 해당 프로젝트에 들어 가서 <code>passenger</code> gem을 설치합니다.</p>
 
-{% highlight html %}
+```ruby
 cd myproject
 gem install passenger
-{% endhighlight %}
+```
 
 <p>&nbsp;새로운 프로젝트를 만들면 gem들이 제대로 설치되지 않았을 겁니다. 그러므로 기존 프로젝트의 gem을 한 번 더 설치해주고, 마이그레이션도 해줍니다.</p>
 
-{% highlight html %}
+```ruby
 bundle install
 rake db:migrate
-{% endhighlight %}
+```
 
 <p>&nbsp;이렇게하면 다음과 같은 에러가 뜨는데, nodejs가 설치되어 있지 않기 때문에 나오는 오류입니다. 그러므로 nodejs를 설치해주어야 하는데요.</p>
-
-{% highlight html %}
+```shell
 rake aborted!
 Bundler::GemRequireError: There was an error while trying to load the gem 'uglifier'.
 /home/ec2-user/.rvm/gems/ruby-2.2.1/gems/bundler-1.11.2/lib/bundler/runtime.rb:80:in `rescue in block (2 levels) in require'
@@ -120,12 +118,12 @@ Bundler::GemRequireError: There was an error while trying to load the gem 'uglif
 /home/ec2-user/.rvm/gems/ruby-2.2.1/gems/bundler-1.11.2/lib/bundler/runtime.rb:61:in `require'
 /home/ec2-user/.rvm/gems/ruby-2.2.1/gems/bundler-1.11.2/lib/bundler.rb:99:in `require'
 /home/ec2-user/myproject/config/application.rb:7:in `<top (required)>'
-{% endhighlight %}
+```
 
 <p>&nbsp;간단한 디버깅으로 nodejs를 설치해줍니다.</p>
-{% highlight html %}
+```shell
 sudo yum install nodejs npm --enablerepo=epel
-{% endhighlight %}
+```
 
 <p>&nbsp;그리고 다시 rake db:migrate해주시면 정상 작동하는 것을 보실 수 있습니다.</p>
 
@@ -137,14 +135,16 @@ sudo yum install nodejs npm --enablerepo=epel
 
 
 <p>&nbsp;이제 Nginx를 설치할 차례입니다. Nginx는 리눅스의 관리자인 <code>root</code> 사용자를 통해서 설치할 수 있습니다. 그러므로 기존 <code>ec2-user</code>로 설정되어 있는 사용자를 root로 변경해야 합니다.</p>
-
-{% highlight html %}
+```shell
 sudo passwd
-{% endhighlight %}
+```
+
 <p>&nbsp;먼저 <code>root</code>사용자의 비밀번호를 설정합니다. 저는 간단하게 password로 설정했습니다. 다음으로,</p>
-{% highlight html %}
+
+```shell
 su
-{% endhighlight %}
+```
+
 <p>&nbsp;다음과 같이 입력하고 방금 설정한 비밀번호를 입력하면<code>ec2-user</code>로 되어 있던 사용자가 <code>root</code>로 변경됩니다.</p>
 
 <img src="https://dl.dropbox.com/s/m9ipotplov23lxq/image4.png">
@@ -244,8 +244,8 @@ sudo fuser -k 80/tcp
 <p>&nbsp;첫 번째 명령어는 서버를 키는 명령어이고, 두 번째 명령어는 서버를 끄는 명령어입니다. 간단히 생각해서 <code>rails s</code>와 <code>ctrl + c</code>의 명령어라고 생각하시면 됩니다. 그런데 Production 모드에서는 서버를 무조건 껐다가 켜야 새롭게 설정한 내용들이 적용됩니다. 그래서, 서버를 자주 켰다가 꺼야하기 때문에 명령어가 좀 더 직관적이고 쉬우면(start, stop, restart, reload) 좋습니다.</p>
 
 {% highlight html %}
-sudo service nginx stop 
-sudo service nginx start 
+sudo service nginx stop
+sudo service nginx start
 sudo service nginx restart
 sudo service nginx reload
 {% endhighlight %}
@@ -387,16 +387,16 @@ sudo /usr/sbin/update-rc.d -f nginx defaults
 server{
   #gzip 설정 적용
   gzip  on;
-  
+
   #압축 수준(1부터 9까지)
   gzip_comp_level  6;
-  
+
   #모든 파일을 압축하는 것이 아니라, 크기가 좀 있는 파일만 압축하도록 만듦
   gzip_min_length  1000;
-  
+
   #프록시 서버를 통해 접속하는 사용자에 대한 gzip 설정
   gzip_proxied     any;
-  
+
   #압축할 파일 확장자 설정
   gzip_types  text/plain text/css application/x-javascript application/json text/javascript text/xml text/css application/xml image/png image/jpeg image/jpg image/gif;
 }
@@ -463,7 +463,7 @@ http {
     listen 80;
     passenger_enabled on;
     root /home/ec2-user/myproject/public;
-    
+
     client_max_body_size 8M;
     client_body_buffer_size 10K;
     client_header_buffer_size 1k;
