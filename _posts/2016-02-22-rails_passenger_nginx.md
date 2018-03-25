@@ -9,13 +9,14 @@ tags: [Rails, Passenger, Nginx]
 image:
   feature: nginx.jpg
 ---
-**목차
+## 목차
+
 <ol>
-  <li><h4>AWS 인스턴스 환경설정</h4></li>
-  <li><h4>Ruby, Rails, Passenger gem 설치</h4></li>
-  <li><h4>Nginx 설치</h4></li>
-  <li><h4>Nginx 기본 셋팅</h4></li>
-  <li><h4>앱을 조금 더 빠르게 만드는 Nginx 셋팅</h4></li>
+  <li>AWS 인스턴스 환경설정</li>
+  <li>Ruby, Rails, Passenger gem 설치</li>
+  <li>Nginx 설치</li>
+  <li>Nginx 기본 셋팅</li>
+  <li>앱을 조금 더 빠르게 만드는 Nginx 셋팅</li>
 </ol>
 
 
@@ -50,7 +51,6 @@ Development 모드에서 개발을 할 때 <code>rails s</code>라는 명령어�
 <p>&nbsp;이는 인스턴스에 특정 port를 열어주는 것인데, http로 되어 있는 80번 포트는 production 모드를 위한 것이고, 3000번 포트는 development 모드용입니다.</p>
 
 
-
 <h4>2. Ruby, Rails, Passenger gem 설치</h4>
 
 <p>&nbsp;이 다음으로 인스턴스를 실행하는 방법은 위에 소개한 putty를 이용하거나, ssh를 이용하여 인스턴스에 접속하면 됩니다. 접속에 성공하였다면, login-as:에 <code>ec2-user</code>를 입력하면 다음과 같이 출력됩니다.</p>
@@ -62,35 +62,39 @@ Development 모드에서 개발을 할 때 <code>rails s</code>라는 명령어�
 
 <p>&nbsp;아래 명령어를 입력하면 다음과 같은 화면이 나옵니다. Warning~~라고 나오는데, 해당 명령어도 써줍니다.</p>
 <img src="https://dl.dropbox.com/s/6gsbtekhl8b9i62/image1.png">
-{% highlight html %}
+```shell
 source ~/.profile
-{% endhighlight %}
+```
 
 <p>&nbsp;이렇게 하면 RVM 설치가 완료되는데 RVM이 잘 설치되었는지 확인할 필요가 있습니다.</p>
-{% highlight html %}
+```shell
 rvm -v
-{% endhighlight %}
+```
 
 <img src="https://dl.dropbox.com/s/4whx5upbrz7kbv8/ec24.png">
 <p>&nbsp;다음과 같이 출력되면, 설치가 잘 된 것입니다. 이제 다음과 같은 명령어로 Ruby와 Rails를 설치합니다.</p>
-{% highlight html %}
+
+```shell
 rvm install ruby-2.2.1(내 프로젝트에 맞는 ruby 버전 입력)
 gem install rails -v 4.2.4(내 프로젝트에 맞는 rails 버전 입력)
-{% endhighlight %}
+```
 
 <p>&nbsp;이렇게 굳이 Ruby와 Rails의 버전을 자신의 프로젝트와 일치시켜 주는 이유는 설치된 패키지와 자신의 프로젝트의 패키지간의 충돌이 일어날 수 있기 때문입니다. 충돌이 일어나면 RVM을 통해 버전을 관리할 수 있지만, 디버깅이 좀 필요합니다.(사실 저는 처음 이 작업을 할 떄, 이 문제 때문에 하루종일 인스턴스를 10번정도 만들었다 지운 적이 있습니다. 이런저런 rvm 명령어를 써야하는 작업이니, 기존 프로젝트와 버전을 맞춰서 Ruby와 Rails를 설치할 것을 권장합니다.)</p>
 <p>&nbsp;어쨌든 설치가 완료되면, Ruby와 Rails 버전을 체크합니다.</p>
-{% highlight html %}
+
+```shell
 ruby -v
 rails -v
-{% endhighlight %}
+```
+
 <img src="https://dl.dropbox.com/s/daiqp59rvhgxkmh/ec25.PNG">
 <p>&nbsp;저같은 경우 Ruby는 2.2.1버전을, Rails는 4.2.4 버전을 설치했기 때문에 위와 같이 나옵니다.</p>
 <p>&nbsp;여기까지가 Ruby, Rails 설치 과정입니다. 이제 프로젝트에 <code>passenger</code> gem을 설치할 차례입니다. 먼저 git으로 프로젝트를 clone한 후(다운 받은 후) passenger를 설치해야 하는데, git이 설치되어 있지 않았을 겁니다. 그래서</p>
-{% highlight html %}
+
+```shell
 sudo yum install git-all
 git clone https://github.com/hcn1519/myproject.git(자신의 프로젝트 url)
-{% endhighlight %}
+```
 
 <p>&nbsp;이렇게 하면 github에 올려놓았던 프로젝트가 인스턴스에 넘어옵니다. 프로젝트 clone이 완료되면 해당 프로젝트에 들어 가서 <code>passenger</code> gem을 설치합니다.</p>
 
@@ -101,13 +105,14 @@ gem install passenger
 
 <p>&nbsp;새로운 프로젝트를 만들면 gem들이 제대로 설치되지 않았을 겁니다. 그러므로 기존 프로젝트의 gem을 한 번 더 설치해주고, 마이그레이션도 해줍니다.</p>
 
-```ruby
+```rails
 bundle install
 rake db:migrate
 ```
 
 <p>&nbsp;이렇게하면 다음과 같은 에러가 뜨는데, nodejs가 설치되어 있지 않기 때문에 나오는 오류입니다. 그러므로 nodejs를 설치해주어야 하는데요.</p>
-```shell
+
+```rails
 rake aborted!
 Bundler::GemRequireError: There was an error while trying to load the gem 'uglifier'.
 /home/ec2-user/.rvm/gems/ruby-2.2.1/gems/bundler-1.11.2/lib/bundler/runtime.rb:80:in `rescue in block (2 levels) in require'
@@ -121,6 +126,7 @@ Bundler::GemRequireError: There was an error while trying to load the gem 'uglif
 ```
 
 <p>&nbsp;간단한 디버깅으로 nodejs를 설치해줍니다.</p>
+
 ```shell
 sudo yum install nodejs npm --enablerepo=epel
 ```
@@ -135,6 +141,7 @@ sudo yum install nodejs npm --enablerepo=epel
 
 
 <p>&nbsp;이제 Nginx를 설치할 차례입니다. Nginx는 리눅스의 관리자인 <code>root</code> 사용자를 통해서 설치할 수 있습니다. 그러므로 기존 <code>ec2-user</code>로 설정되어 있는 사용자를 root로 변경해야 합니다.</p>
+
 ```shell
 sudo passwd
 ```
@@ -150,9 +157,10 @@ su
 <img src="https://dl.dropbox.com/s/m9ipotplov23lxq/image4.png">
 
 <p>&nbsp;이제 Nginx를 설치하면 됩니다.</p>
-{% highlight html %}
+
+```shell
 passenger-install-nginx-module
-{% endhighlight %}
+```
 
 <img src="https://dl.dropbox.com/s/oarbbuxe9oebkfk/image5.png">
 <p>&nbsp;처음에 이런 화면이 나올텐데, 사뿐히 Enter를 눌러주시고, 다음으로 ruby를 선택해줍니다.</p>
@@ -165,11 +173,11 @@ passenger-install-nginx-module
 
 <p>&nbsp;내용을 읽어보시면 아시겠지만, 보안상의 문제로 Nginx가 특정 폴더에 접근할 수 없다고 합니다. 그러니 진행되던 설치를 종료하고, 해당 명령어를 입력하고 다시 설치를 해줍니다.</p>
 
-{% highlight html %}
+```shell
 ctrl + c
 sudo chmod o+x "/home/ec2-user"
 passenger-install-nginx-module
-{% endhighlight %}
+```
 
 <p>&nbsp;다시 설치를 실행하면, 다음과 같은 새로운 오류창이 나옵니다.</p>
 
@@ -177,10 +185,10 @@ passenger-install-nginx-module
 
 <p>&nbsp;읽어보시면, curl과 관련된 소프트웨어가 설치가 안 되었다는 것을 알 수 있습니다. 설치 과정을 종료하고(ctrl + c), 해당 소프트웨어를 설치해줍니다.</p>
 
-{% highlight html %}
+```shell
 sudo yum install libcurl-devel.x86_64
 passenger-install-nginx-module
-{% endhighlight %}
+```
 
 <p>&nbsp;다시 설치를 시작하면, 이번에는 다음과 같은 경고가 나옵니다.</p>
 
@@ -188,12 +196,13 @@ passenger-install-nginx-module
 
 <p>&nbsp;내용을 보면, Phusion Passenger는 최소 1GB의 메모리가 필요한데, 네 가상메모리는 995MB(10MB 부족..)라서 메모리가 부족하다는 내용입니다. 그래서 다음과 같은 명령어를 실행해라라는 얘기인데, 쿨하게 따라 해줍니다.</p>
 
-{% highlight html %}
+```shell
 sudo dd if=/dev/zero of=/swap bs=1M count=1024
 sudo mkswap /swap
 sudo swapon /swap
 passenger-install-nginx-module
-{% endhighlight %}
+```
+
 <p>&nbsp;그리고 다시 Nginx 설치를 하면, 이렇게 Nginx 설치 옵션과 관련하여 우리에게 질문을 합니다. 1번을 선택하고 진행합니다.</p>
 
 <img src="https://dl.dropbox.com/s/3xyuyr7i3udqrry/image10.png">
@@ -207,9 +216,10 @@ passenger-install-nginx-module
 <img src="https://dl.dropbox.com/s/wtvqbwu5qd1ehnc/image12.png">
 
 <p>&nbsp;설치가 완료되면 <code>root</code>사용자에서 빠져나옵니다.</p>
-{% highlight html %}
+
+```shell
 exit
-{% endhighlight %}
+```
 
 
 <h4>4. Nginx 기본 셋팅</h4>
@@ -217,9 +227,9 @@ exit
 <p>&nbsp;이제 드디어 Nginx를 셋팅할 차례입니다. Nginx와 관련해서 이런저런 글들을 보면서 Passenger와 Nginx에 대하여 조금은 설명하고 설정에 대해 서술하려고 했으나, 이게 짧지가 않다보니 여기다가 설명내용을 추가하면 글이 너무 길어질 것 같아서, Passenger와 Nginx와 관련된 보다 자세한 내용은 다음 글에서 쓰겠습니다. 여기서는 그것보다 바로 셋팅해서 Nginx를 사용해서 ip address를 실제 서버에 올리는 작업을 해보도록 하겠습니다.</p>
 <p>&nbsp;Nginx 설치과정에서 특별한 설정을 하지 않았다면(설치시 enter만 눌렀다면), Nginx 파일들은 <code>/opt/nginx/</code> 안에 있습니다. 그 중 Nginx 환경설정(configuration) 파일은 <code>/opt/nginx/conf/nginx.conf</code> 안에 있습니다. 그리고 서버 설정을 위해서는 해당 파일에 들어가서 추가적인 내용을 써줘야 합니다.</p>
 
-{% highlight html %}
+```shell
 sudo vi /opt/nginx/conf/nginx.conf
-{% endhighlight %}
+```
 
 <p>&nbsp;해당 파일에 들어가면 어떤 것은 #으로 주석처리 되어 있고, 아닌 것도 있습니다. 이건 rails에서 여러가지 파일(class)에 들어가면 다양한 옵션들을 간단히 주석을 해제하여 쓸 수 있도록 해주는 것과 마찬가지의 것들입니다. 여기서 눈여겨 보아야 하는 설정은 http와 server입니다.</p>
 <p>&nbsp;기본 서버 설정은 다음과 같이 하면 됩니다.</p>
@@ -237,29 +247,29 @@ http {
 <p>&nbsp;즉, 37번 째 줄에 새로운 <code>server{}</code>블록을 만들고 해당 내용을 추가하면 됩니다. <code>root</code>에 쓴 경로의 경우, public폴더에 들어가서 pwd 명령어를 치면 나오는 경로를 그대로 적어 넣으면 됩니다.</p>
 <p>&nbsp;이렇게 설정하고 해당 파일을 저장하고 나오면 가장 기본적인 Nginx 셋팅은 끝났습니다. 이제 서버를 키고 꺼봐야겠죠? 해당 설정에서 서버를 키고 끄는 명령어는 다음과 같습니다.</p>
 
-{% highlight html %}
+```
 sudo /opt/nginx/sbin/nginx
 sudo fuser -k 80/tcp
-{% endhighlight %}
+```
 <p>&nbsp;첫 번째 명령어는 서버를 키는 명령어이고, 두 번째 명령어는 서버를 끄는 명령어입니다. 간단히 생각해서 <code>rails s</code>와 <code>ctrl + c</code>의 명령어라고 생각하시면 됩니다. 그런데 Production 모드에서는 서버를 무조건 껐다가 켜야 새롭게 설정한 내용들이 적용됩니다. 그래서, 서버를 자주 켰다가 꺼야하기 때문에 명령어가 좀 더 직관적이고 쉬우면(start, stop, restart, reload) 좋습니다.</p>
 
-{% highlight html %}
+```shell
 sudo service nginx stop
 sudo service nginx start
 sudo service nginx restart
 sudo service nginx reload
-{% endhighlight %}
+```
 
 <p>&nbsp;위와 같은 명령어로 서버를 켰다 껐다를 할 수 있습니다. 하지만 해당 명령어를 입력해보면, 아마 <code>command not found</code>와 같은 명령어가 나올 겁니다. 이를 해결하기 위해서 간단한 설정을 해주어야 하는데, Amazon Linux(Redhat 계열)와 Ubuntu(Debian 계열)에서 이를 설정하는 방법이 다릅니다.</p>
 
 <h5>1) Amazon Linux(ec2-user) 설정</h5>
 <p>&nbsp;아래 명령어로 파일을 열고,</p>
-{% highlight html %}
+```shell
 sudo vi /etc/rc.d/init.d/nginx
-{% endhighlight %}
+```
 <p>&nbsp;기존 내용은 모두 지우고, 아래 내용을 붙여넣으면 됩니다.</p>
 
-{% highlight html %}
+```shell
 #!/bin/sh
 . /etc/rc.d/init.d/functions
 . /etc/sysconfig/network
@@ -351,12 +361,12 @@ rh_status_q || exit 0
 echo $"Usage: $0 {start|stop|status|restart|condrestart|try-restart|reload|force-reload|configtest}"
 exit 2
 esac
-{% endhighlight %}
+```
 
 <p>&nbsp;그리고 아래 명령어를 치면 정상 작동합니다.</p>
-{% highlight html %}
+```shell
 sudo chmod +x /etc/rc.d/init.d/nginx
-{% endhighlight %}
+```
 
 <img src="https://dl.dropbox.com/s/d8o4rzvl97w3t67/image13.png">
 <img src="https://dl.dropbox.com/s/tfjmia4dkhidtlt/image14.png">
@@ -364,12 +374,12 @@ sudo chmod +x /etc/rc.d/init.d/nginx
 <p>&nbsp;저의 경우 root 페이지를 설정해놓지 않아서 다음과 같은 페이지가 나왔습니다. root 페이지를 설정해주시면, 올바르게 페이지가 나옵니다.</p>
 <h5>2) Ubuntu 설정</h5>
 
-{% highlight html %}
+```shell
 wget -O init-deb.sh http://library.linode.com/assets/660-init-deb.sh
 sudo mv init-deb.sh /etc/init.d/nginx
 sudo chmod +x /etc/init.d/nginx
 sudo /usr/sbin/update-rc.d -f nginx defaults
-{% endhighlight %}
+```
 
 <p>&nbsp;여기까지 해서 Nginx 기본 셋팅에 대해 알아보았습니다.</p>
 
