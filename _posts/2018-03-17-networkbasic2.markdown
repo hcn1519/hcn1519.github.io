@@ -9,11 +9,11 @@ date: "2018-03-17 23:24:00 +0900"
 
 > 본 내용은 kocw의 한양대학교 이석복 교수님 강의인 [컴퓨터 네트워크](http://www.kocw.net/home/search/kemView.do?kemId=1223614)를 듣고 정리한 내용입니다.
 
-## Application Layer
+# Application Layer
 
 `Application Layer`는 OSI 7계층 중 사용자가 인터넷을 사용하면서 실제 체감할 수 있는 서비스를 제공합니다. 여기서 말하는 서비스를 제공한다는 것은 특정 프로토콜을 지원한다는 의미로 이해하면 되는데, `Application Layer`에서 제공하는 가장 대표적인 프로토콜이 `HTTP` 프로토콜입니다.
 
-### HTTP
+## HTTP
 
 <div class="message">
   HTTP - Hypertext Transfer Protocol, 하이퍼텍스트를 전송하는 프로토콜
@@ -47,6 +47,21 @@ date: "2018-03-17 23:24:00 +0900"
 쿠키는 서버가 클라이언트의 특징을 파악하는데 도움을 주지만, 쿠키 데이터가 컴퓨터에 과도하게 쌓이게 되면 웹 브라우징 성능 저하의 원인이 됩니다. 그렇기 때문에 웹 브라우저 성능 개선을 위해 주로 삭제하는 데이터이기도 합니다.
 
 ### Web Caches(프록시 서버)
+
+<div class="message">
+  A web cache (or HTTP cache) is an information technology for the temporary storage (caching) of web documents, such as HTML pages and images, to reduce server lag. A web cache system stores copies of documents passing through it; subsequent requests may be satisfied from the cache if certain conditions are met. A web cache system can refer either to an appliance, or to a computer program.
+</div>
+출처: [HTTP Web Cache - wikipedia](https://en.wikipedia.org/wiki/Web_cache)
+
+웹 캐시는 클라이언트의 요청을 대신해서 서버쪽으로 전달해주는 역할을 하는 일종의 중간 서버입니다. 그래서 실제 서버로부터 받아온 응답을 자신이 소유하고 있다가 클라이언트가 동일한 서버에 접속하게 되면 자신이 소유하고 있는 응답을 보냅니다.(Forward Position System)
+
+웹 캐시의 장점은 다음과 같습니다.
+
+1. 클라이언트 측에서 속도가 빠르다.
+2. 서버 측에서는 서버 부하가 적다.
+3. 외부로 트래픽이 적게 나가기 떄문에 비용이 적게 든다.
+
+하지만 웹 캐시는 갱신된 정보가 업데이트되지 않는 문제(Consistency)를 갖고 있습니다. 즉, 실제로 서버쪽에서 정보가 변경되었는데 웹 캐시에서는 변경사항을 반영하지 않는 문제가 발생할 수 있는 것입니다. 이러한 문제를 극복하기 위해, 즉 웹 캐시의 데이터를 최신의 것으로 업데이트하기 위해 HTTP 헤더에서 `if-modified-since` 필드에 현재 날짜를 보냅니다. 그리고 이 요청에 대한 응답으로 `200 OK`이 오면 웹 캐시를 새롭게 업데이트를 하고, `304 Not Modified`가 오게 되면 현재 웹 캐시가 죄신이기 떄문에 업데이트를 할 필요가 없습니다. 
 
 -----
 

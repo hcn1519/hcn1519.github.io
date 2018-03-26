@@ -105,14 +105,14 @@ gem install passenger
 
 <p>&nbsp;새로운 프로젝트를 만들면 gem들이 제대로 설치되지 않았을 겁니다. 그러므로 기존 프로젝트의 gem을 한 번 더 설치해주고, 마이그레이션도 해줍니다.</p>
 
-```rails
+```ruby
 bundle install
 rake db:migrate
 ```
 
 <p>&nbsp;이렇게하면 다음과 같은 에러가 뜨는데, nodejs가 설치되어 있지 않기 때문에 나오는 오류입니다. 그러므로 nodejs를 설치해주어야 하는데요.</p>
 
-```rails
+```
 rake aborted!
 Bundler::GemRequireError: There was an error while trying to load the gem 'uglifier'.
 /home/ec2-user/.rvm/gems/ruby-2.2.1/gems/bundler-1.11.2/lib/bundler/runtime.rb:80:in `rescue in block (2 levels) in require'
