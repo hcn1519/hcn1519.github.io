@@ -60,6 +60,9 @@ extension UIImage {
         return UIGraphicsGetImageFromCurrentImageContext()!
     }
 }
+
+let scaledImage = image.resizeImage(size: CGSize(width: 26, height: 26)).withRenderingMode(.alwaysOriginal).roundedImage
+self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: scaledImage, style: .plain, target: nil, action: nil)
 {% endhighlight %}
 
 위의 방식은 `Graphic Context` 위에 이미지를 `UIBezierPath` 안에만 그리는 방식입니다. 그런데.. 이 방식은 *비트맵 방식으로 이미지를 그린다*는 큰 문제가 있습니다. 그래서 이미지가 원형으로 나오지만, 이미지 테두리가 비트맵 때문에 오돌토돌하게 나타납니다. 그래서 위의 방식으로 원형 이미지 버튼을 만들면 안됩니다.
