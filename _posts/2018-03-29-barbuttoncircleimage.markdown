@@ -3,15 +3,15 @@ layout: post
 title: "UIBarButtonItem에 Circle Image Button 넣기"
 date: "2018-03-29 21:52:11 +0900"
 excerpt: "UIBarButtonItem에 원형 이미지 버튼을 넣는 방법에 대해 알아봅니다."
-categories: UIBarButtonItem
-tags: [UIBarButtonItem]
+categories: Debugging UIBarButtonItem
+tags: [Debugging, UIBarButtonItem]
 ---
 
 이번 글에서는 `UINavigationBar`에 사각형 이미지를 가지고 원형 이미지 버튼을 만드는 방법에 대해 알아보고자 합니다. 그렇게 어려운 내용은 아니지만, 처음에 잘못 접근한 부분이 있어서 이를 기록으로 남깁니다.
 
 ## 1. Core Graphics로 이미지 버튼 추가하기(잘못된 방법)
 
-`UINavigationBar`에 버튼을 추가하려면 `UIBarButtonItem`을 활용하여 버튼을 추가해야 합니다. 그래서 이미지 버튼을 만들어야하기 떄문에 다음과 같은 방식으로 버튼을 추가하는 것을 생각해볼 수 있습니다.
+`UINavigationBar`에 버튼을 추가하려면 `UIBarButtonItem`을 활용하여 버튼을 추가해야 합니다. 그래서 이미지 버튼을 만들어야하기 때문에 다음과 같은 방식으로 버튼을 추가하는 것을 생각해볼 수 있습니다.
 
 {% highlight swift %}
 self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: nil, action: nil)
@@ -62,7 +62,7 @@ extension UIImage {
 }
 {% endhighlight %}
 
-위의 방식은 `Graphic Context` 위에 이미지를 `UIBezierPath` 안에만 그리는 방식입니다. 그런데.. 이 방식은 *비트맵 방식으로 이미지를 그린다*는 큰 문제가 있습니다. 그래서 이미지가 원형으로 나오지만, 이미지 테두리가 비트맵 떄문에 오돌토돌하게 나타납니다. 그래서 위의 방식으로 원형 이미지 버튼을 만들면 안됩니다.
+위의 방식은 `Graphic Context` 위에 이미지를 `UIBezierPath` 안에만 그리는 방식입니다. 그런데.. 이 방식은 *비트맵 방식으로 이미지를 그린다*는 큰 문제가 있습니다. 그래서 이미지가 원형으로 나오지만, 이미지 테두리가 비트맵 때문에 오돌토돌하게 나타납니다. 그래서 위의 방식으로 원형 이미지 버튼을 만들면 안됩니다.
 
 ## 2. UIImageView로 이미지 넣기
 
