@@ -18,7 +18,7 @@ tags: [CoreGraphics]
 1. 각각의 연속적인 Drawing(그림)은 layer에 그려지고, 이 그림은 canvas(page)에 표현된다.
 2. 이 page에 표현된 그림은 추가적인 그림을 겹치는 형태로 수정된다.
 
-<img src="https://dl.dropbox.com/s/70doq0y7d4rlpaa/coreGraphicsFig1.png" margin: 0 auto;">
+<img src="https://dl.dropbox.com/s/70doq0y7d4rlpaa/coreGraphicsFig1.png" style="margin: 0 auto;">
 
 이러한 과정은 여러개의 그림을 투명한 종이에 그려놓고 이 그림을 겹쳐서 하나의 그림을 만든다고 생각하면 이해가 쉽습니다. 다만 이 때 특정 그림을 앞에 두어서 뒤에 있는 그림이 가려지는 경우가 생기는데 *Painter* model도 그 영향을 받아서 그림을 그리는 순서를 잘 지켜야 원하는 그래픽을 얻을 수 있습니다.
 
@@ -30,7 +30,7 @@ tags: [CoreGraphics]
 
 `Graphic Context`은 Quartz가 출력 기기(pdf, bitmap, display 등)에 이미지를 그리기 위한 정보들을 담고 있는 데이터 타입입니다. 그래서 `Graphic Context`은 그래픽 drawing parameters나 기기별 page의 paint 정보가 담겨 있습니다. `Graphic Context`는 그래픽 출력 형식에 따라 다른 타입을 사용합니다.
 
-<img src="https://dl.dropbox.com/s/j4qhae761uypuan/core2.png" margin: 0 auto;">
+<img src="https://dl.dropbox.com/s/j4qhae761uypuan/core2.png" style="margin: 0 auto;">
 
 이렇게 `Graphic Context`가 기기별로 이미지를 그리기 위한 정보를 담고 있기 때문에, 이는 그림이 표현되는 목적지로 이해가 될 수 있습니다. 이 말은 `Graphic Context` 자체가 디바이스별 이미지 정보를 모두 담고 있기 때문에 `Graphic Context`만 알아도 이미지가 어떻게 출력될 것인지 알 수 있다는 것을 의미합니다. 그래서 사용자가 하나의 이미지를 여러 기기에 출력하고 싶을 때 상황별 `Graphic Context`만 제공하면 `Quartz`가 기기별 차이 계산을 알아서 수행합니다.
 
