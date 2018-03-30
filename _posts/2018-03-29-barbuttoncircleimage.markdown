@@ -23,11 +23,15 @@ self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .p
 
 {% highlight swift %}
 extension UIImage {
-    func resizeImage(size: CGSize) -> UIImage {
-        let originalSize = self.size
-        let ratio = 1 / (size.width / originalSize.width)
-        return UIImage(cgImage: self.cgImage!, scale: self.scale * ratio, orientation: self.imageOrientation)
-    }
+  func resizeImage(size: CGSize) -> UIImage {
+    let originalSize = self.size
+    let ratio: CGFloat = {
+        return originalSize.width > originalSize.height ? 1 / (size.width / originalSize.width) :
+                                                          1 / (size.height / originalSize.height)
+    }()
+
+    return UIImage(cgImage: self.cgImage!, scale: self.scale * ratio, orientation: self.imageOrientation)
+  }
 }
 // 원하는 사이즈 적용
 let scaledImage = image.resizeImage(size: CGSize(width: 26, height: 26))
