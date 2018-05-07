@@ -1,0 +1,15 @@
+---
+layout: page
+title:  Archives
+permalink: /archives/
+---
+<ul>
+{% for post in site.posts %}
+<li>
+  <article class="tag-item">
+    <a class="tag-item-title" href="{{ site.url }}{{ post.url }}">{{post.title}}</a>
+    <p style="display: inline-block; font-size: 13px">{{post.date | date: '%Y-%m-%d'}}</p>
+  </article>
+</li>
+{% endfor %}
+</ul>
