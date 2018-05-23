@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "AVFoundation으로 비디오의 Thumbnail 생성하기"
+title: "AVFoundation으로 비디오의 Thumbnail 이미지 생성하기"
+excerpt: "영상에서 썸네일 이미지를 생성하는 방식에 대해 다룹니다."
 date: "2018-05-22 00:09:34 +0900"
 categories: AVFoundation UIImagePickerController AVAssetImageGenerator
 tags: [AVFoundation, UIImagePickerController, AVAssetImageGenerator]
@@ -13,7 +14,7 @@ tags: [AVFoundation, UIImagePickerController, AVAssetImageGenerator]
 1. 사용자의 앨범에서 비디오를 선택한다.
 2. 선택된 비디오의 썸네일을 추출한다.
 
-### 앨범에서 비디오 선택하기
+## 앨범에서 비디오 선택하기
 
 미디어 파일을 처리하기 위해 바로 `ViewController`에서 `UIImagePickerController` 인스턴스를 만들고 이를 처리할 수 있지만, 미디어 파일 선택은 앱에서 다양한 상황에서 사용될 수 있기 때문에 따로 `Manager`를 생성하여 관리하는 것도 재사용 측면에서 나쁘지 않은 방법입니다. 그래서 저는 여기서 `MediaPickerManager`를 생성하여 이를 파일 선택과 파일 처리를 하는 역할을 담당하도록 하였습니다.
 
@@ -102,7 +103,7 @@ extension ViewController: MediaPickerDelegate {
 3. `MediaPickerDelegate`을 통해 앨범에서 파일 선택시 호출되는 함수입니다.
 
 
-### 비디오에서 썸네일 추출하기
+## 비디오에서 썸네일 추출하기
 
 비디오에서 썸네일을 추출하기 위해 `AVFoundation`에서는 `AVAssetImageGenerator` 클래스를 제공합니다. `AVAssetImageGenerator`는 인스턴스 생성시 `AVAsset`이 반드시 필요하며, `AVAsset`은 local, remote URL을 통해 정의됩니다.
 
@@ -163,4 +164,4 @@ extension MediaPickerManager {
 
 ---
 
-이와 관련한 [예시 코드](https://github.com/hcn1519/AVFoundationFrameCapture)에 실제 동작하는 데모 프로젝트를 올려두었습니다.
+`AVAssetImageGenerator`는 썸네일을 생성하기 위한 메소드를 두 가지 제공합니다. 먼저 위에서 설명한 예시가 첫 번째이고, 두 번째는 `imageGenerator.copyCGImage(at:,actualTime:)`입니다. 둘의 가장 차이는 비동기로 썸네일을 여러 개 생성할 것인지, 아니면 동기로 썸네일을 1개씩 생성할 것인지입니다. 이와 관련한 부분은 [전체 예시 코드](https://github.com/hcn1519/AVFoundationFrameCapture)에서 확인하세요.
