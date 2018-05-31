@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Concurrency programming과 GCD"
+title: "Concurrenct programming과 GCD"
 date: "2018-05-24 23:04:09 +0900"
 ---
 
@@ -84,6 +84,33 @@ DispatchQueue에 등록하는 작업들은 `block(closure)` 형태로 작성되�
 
 
 ## Asynchronous Design Techniques
+
+앱에서 Concorrency를 지원하는 것은 동일한 시간에 많은 작업을 하는데 도움을 주는 것은 맞지만, 오버헤드가 생길 가능성이 있고, 코드가 복잡해지는 문제가 있습니다. 또한 코드를 잘못 짜면 오히려 속도가 느려질 수도 있습니다. 그렇기 때문에 코드 작성 전에 달성하고자 하는 목표를 명확히 하고, 그 과정에서 어느 부분에서 Concurrency를 지원할 것인지에 대해 생각해보아야 합니다.
+
+여기서는 이러한 과정에서 어떻게 코드를 적절히 작성하기 위한 가이드라인을 단계별로 제시합니다.
+
+1. Define Your Application’s Expected Behavior
+
+먼저 High level 수준의 앱의 task를 작성합니다. 이 task는 코드로 작성하는 것이 아니라, 추상적인 형태로 작성합니다. 그리고 각각의 task를 세분화하여 task가 성공적으로 동작하기 위한 단계를 구분합니다. 이 때 task에서 필요한 적절한 자료구조들에 대해 생각해보고 적용할 필요가 있습니다.
+
+이와 같은 작업을 하게 되면 concurrency를 통해 효과를 얻을 수 있는 지점에 대해 파악할 수 있게 됩니다.
+
+2. Factor Out Executable Units of Work
+
+이렇게 task를 명확히 구분한 뒤, 해당 작업들을 `block(closure)`, `NSOperation` 단위로 코드를 작성합니다.
+
+3. Identify the Queues You Need
+
+다음은 작성된 task를 어떤 큐에서 작업할지 결정합니다. 이 때, 작업의 순서를 변경하면 결과가 바뀔 수 있는 task는 순차적으로 수행하고(`serial`), 그렇지 않으면 `concurrent`하게 수행하도록 합니다.
+
+
+## Tips for improving efficiency
+
+1. **Consider computing values directly within your task if memory usage is a factor.**
+2. **Identify serial tasks early and do what you can to make them more concurrent.**
+3. **Avoid using locks.**
+4. **Rely on the system frameworks whenever possible.**
+
 
 ---
 
