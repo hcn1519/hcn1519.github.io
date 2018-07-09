@@ -1,14 +1,18 @@
 ---
 layout: post
 title: "GCD - Dispatch Queue"
+excerpt: "Dispatch Queue에 대한 정리"
 date: "2018-07-08 20:04:49 +0900"
 categories: Concurrent GCD
 tags: [Concurrent, GCD]
 ---
 
+> 이 글을 읽기 전 [Concurrenct programming과 GCD](https://hcn1519.github.io/articles/2018-05/concurrent_programming)을 먼저 읽으면 이해가 쉽습니다.
+
 <div class="message">
   Dispatch queues are a C-based mechanism for executing custom tasks.
 </div>
+
 
 Dispatch Queue는 임의의 tasks를 sync/async하게 작동하도록 도와주는 object-like structure로 tasks의 제출과 실행을 통해 동작하는 API입니다.
 
@@ -157,3 +161,6 @@ task 2 ⚽️ Index: 3
 * 일반적으로 Main Queue는 작업의 동기화를 수행하는 공간으로 활용됩니다.
 
 ---
+
+## 참고자료
+* [Concurrency and Application Design](https://developer.apple.com/library/content/documentation/General/Conceptual/ConcurrencyProgrammingGuide/ConcurrencyandApplicationDesign/ConcurrencyandApplicationDesign.html#//apple_ref/doc/uid/TP40008091-CH100-SW1)
