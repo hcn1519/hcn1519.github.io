@@ -195,28 +195,28 @@ Concurrent Queue도 `Serial Queue`와 마찬가치로 동일한 쓰레드에서 
 
 #### 공통점
 
-1. `Serial Queue`와 `Concurrent Queue` 모두 Concurrent하게 돌아간다.
+a. `Serial Queue`와 `Concurrent Queue` 모두 Concurrent하게 돌아간다.
 
-* `Concurrent Queue`가 Concurrent(병렬적)하게 돌아간다는 것은 쉽게 이해할 수 있지만, `Serial Queue`가 Concurrent하게 돌아간다는 것은 다소 이해가 어려울 수 있습니다.  Queue 앞의 접두어로 들어가는 `Serial`과 `Concurrent`는  Queue가 tasks를 수행하는 방식을 의미하는 것이지,  Queue가 어떻게 돌아가는지를 의미하는 것이 아닙니다. Dispatch Queue는 코드가 모두 Concurrent하게 돌아가도록 하고, tasks가 sync/async하게 동작할지 여만 선택할 수 있습니다.
+* `Concurrent Queue`가 Concurrent(병렬적)하게 돌아간다는 것은 쉽게 이해할 수 있지만, `Serial Queue`가 Concurrent하게 돌아간다는 것은 다소 이해가 어려울 수 있습니다.  Queue 앞의 접두어로 들어가는 `Serial`과 `Concurrent`는  Queue가 tasks를 수행하는 방식을 의미하는 것이지,  Queue가 어떻게 돌아가는지를 의미하는 것이 아닙니다. Dispatch Queue는 코드가 모두 Concurrent하게 돌아가도록 하고, tasks가 sync/async하게 동작할지 여부만 선택할 수 있습니다.
 
-2. `Serial Queue`와 `Concurrent Queue` 모두 sync/async 코드 동작을 지원하고, sync로 수행할 경우 Main Thread가 작업 수행을 기다린다.
+b. `Serial Queue`와 `Concurrent Queue` 모두 sync/async 코드 동작을 지원하고, sync로 수행할 경우 Main Thread가 작업 수행을 기다린다.
 
-3. `Serial Queue`와 `Concurrent Queue` 모두 동일한 쓰레드에서 동작하는 것을 보장하지 않는다.
+c. `Serial Queue`와 `Concurrent Queue` 모두 동일한 쓰레드에서 동작하는 것을 보장하지 않는다.
 
 * Dispatch Queue에서 동일한 쓰레드에서 동작하도록 고안된 것은 `Main Queue`밖에 없습니다.
 
-4. `Serial Queue`와 `Concurrent Queue` 모두 하드웨어적인 parallel을 보장하지 않는다.
+d. `Serial Queue`와 `Concurrent Queue` 모두 하드웨어적인 parallel을 보장하지 않는다.
 
 * 하드웨어적으로 코드가 병렬적으로 돌아간다는 것은 하나의 프로세스 내에서 여러 개의 쓰레드가 돌아가는 것을 의미합니다. 하지만, GCD에 할당된 tasks가 몇 개의 쓰레드에서 돌아갈 것인지는 시스템의 환경이 결정합니다. 즉, 시스템의 환경에 따라 여러 개의 쓰레드에서 코드가 동작할 수도 있지만, 그렇지 않은 경우도 발생할 수 있다는 것입니다.
 
 
 #### 차이점
 
-1. `Serial Queue`는 한 번에 하나의 task만 하지만, `Concurrent Queue`는 동시에 여러 tasks를 수행한다.
+a. `Serial Queue`는 한 번에 하나의 task만 하지만, `Concurrent Queue`는 동시에 여러 tasks를 수행한다.
 
 * 앞선 예제에서 확인한 것처럼 `Serial Queue`는 항상 한 가지 task를 하고 있다는 것이 보장됩니다. 여기서 task의 단위는 하나의 코드 블럭(closure) 혹은 `DispatchWorkItem`를 의미합니다. 하지만 `Concurrent Queue`는 동시에 여러 개의 tasks를 수행합니다.
 
-2. `Serial Queue`는 작업의 동기화에 주로 사용되고, `Concurrent Queue`는 작업의 수행에 주로 사용된다.
+b. `Serial Queue`는 작업의 동기화에 주로 사용되고, `Concurrent Queue`는 작업의 수행에 주로 사용된다.
 
 
 ---
