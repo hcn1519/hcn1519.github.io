@@ -218,6 +218,7 @@ a. `Serial Queue`는 한 번에 하나의 task만 하지만, `Concurrent Queue`�
 
 b. `Serial Queue`는 작업의 동기화에 주로 사용되고, `Concurrent Queue`는 작업의 수행에 주로 사용된다.
 
+* `Serial Queue`가 하나의 task만 수행하는 것은 작업의 수행 순서가 보장된 것이기 때문에, 여러 작업들의 동기화를 수행할 때 사용할 수 있습니다. `Concurrent Queue`는 자원을 병렬적으로 사용할 수 있도록 돕기 때문에 주로 일반적인 작업의 수행에 활용됩니다.
 
 ---
 
