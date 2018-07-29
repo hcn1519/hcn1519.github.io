@@ -2,9 +2,11 @@
 layout: post
 title: "Swift ARC"
 date: "2018-07-25 23:10:45 +0900"
-excerpt: "Automatic Reference Counting에 대해 알아봅니다."
+excerpt: "Swift의 Automatic Reference Counting에 대해 알아봅니다."
 categories: Memory ARC
-tags: [Memory, ARC]
+tags: [Swift, Memory, ARC]
+image:
+  feature: swiftLogo.jpg
 ---
 
 Swift에서는 메모리를 관리할 때 ARC(Automatic Reference Counting)라는 메모리 관리 전략을 사용합니다. 이번 글에서는 이 전략이 어떤 것이고 어떻게 사용되는지에 대해 알아보겠습니다.
@@ -69,6 +71,7 @@ house = nil
 강한 상호 참조를 없애는 핵심 원리는 **strong** reference count를 세지 않는 것입니다. 여기서 중요한 것은 reference count를 아예 세지 않는 것이 아니라, **strong** reference count를 세지 않는 것입니다. 즉, `weak`, 혹은 `unowned`를 사용하여 property를 선언하게 되면 해당 인스턴스에 대해서는 **strong** reference count를 카운팅하지 않고, weak reference count를 카운팅합니다. 이를 Swift 공식 문서에서는 weak reference, unowned referece가 property에 대해 strong hold를 하지 않는다고 표현합니다.
 
 > Weak and unowned references enable one instance in a reference cycle to refer to the other instance without keeping a strong hold on it.
+
 [The Swift Programming Language (Swift 4.1)](https://itunes.apple.com/kr/book/the-swift-programming-language-swift-4-1/id881256329?mt=11)
 
 ![img](https://dl.dropbox.com/s/ct7p10tglou2zkh/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202018-07-07%20%EC%98%A4%ED%9B%84%207.29.35.png)
@@ -218,6 +221,14 @@ person = nil
 
 ## weak과 unowned의 차이
 
+강한 상호 참조를 해결하기 위해 `weak`과 `unowned`를 사용할 수 있다고 하였는데, 위에서는 `unowned`를 전혀 사용하지 않았습니다. 사실 위의 예제에서 `weak`을 `unowned`로 변경해도 강한 상호 참조를 해결할 수 있습니다. 두 키워드는 모두 약한 상호 참조를 위해 사용되고, 그 차이점은 lifetime에 있습니다.
+
+> Like a weak reference, an unowned reference does not keep a strong hold on the instance it refers to. Unlike a weak reference, however, an unowned reference is used when the other instance has the same lifetime or a longer lifetime.
+
+[The Swift Programming Language (Swift 4.1)](https://itunes.apple.com/kr/book/the-swift-programming-language-swift-4-1/id881256329?mt=11)
 
 
 ---
+
+## 참고자료
+* [The Swift Programming Language (Swift 4.1)](https://itunes.apple.com/kr/book/the-swift-programming-language-swift-4-1/id881256329?mt=11)
