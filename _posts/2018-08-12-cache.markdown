@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "캐시 메모리와 NSCache"
+title: "캐시 메모리"
 date: "2018-08-12 23:50:59 +0900"
-excerpt: "캐시 메모리의 일반적인 개념과 NSCache에 대해 알아봅니다."
-categories: iOS Memory Cache NSCache
-tags: [iOS, Memory, Cache, NSCache]
+excerpt: "캐시 메모리의 일반적인 개념에 대해 알아봅니다."
+categories: Memory Cache
+tags: [Memory, Cache]
 ---
 
 ## 정의
@@ -67,6 +67,3 @@ CPU의 클럭 속도가 증가함에 따라 DRAM에서 CPU의 속도를 따라�
 
 * [캐시 메모리 - 나무위키](https://namu.wiki/w/캐시%20메모리)
 * [캐시 - 위키피디아](https://ko.wikipedia.org/wiki/캐시)
-* [NSCache - Apple Documentation](https://developer.apple.com/documentation/foundation/nscache)
-* [Caching and Purgeable Memory](https://developer.apple.com/library/archive/documentation/Performance/Conceptual/ManagingMemory/Articles/CachingandPurgeableMemory.html)
-* [NSHipster - NSCache](https://nshipster.com/nscache/)
