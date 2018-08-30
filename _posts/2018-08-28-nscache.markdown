@@ -1,0 +1,120 @@
+---
+layout: post
+title: "NSCache"
+date: "2018-08-28 18:45:41 +0900"
+excerpt: "NSCache에 대해 알아봅니다."
+categories: iOS Memory NSCache Swift
+tags: [iOS, Memory, NSCache, Swift]
+---
+
+
+# NSCache
+
+* `NSCache`는 Cocoa에서 사용할 수 있는 캐싱을 위한 클래스입니다. `NSCache`는 `NSDictionary`처럼 `key-value` 형태로 되어 있습니다.
+* `NSCache`는 메모리가 충분할 때는 주어진 모든 데이터를 캐싱합니다. 반면, 가용 메모리가 적을 때는 다른 앱을 위해 캐싱된 데이터를 자동으로 버립니다.
+
+> 이렇게 버려진 데이터는 필요할 때 다시 캐싱해야 합니다.
+
+## NSCache Property
+
+1. countLimit - `NSCache`는 캐싱하는 데이터의 개수를 제한할 수 있습니다. 만약 countLimit이 10으로 설정되어 있는데, 11개의 데이터를 `NSCache`에 넣게 되면 1개는 자동으로 버립니다.
+2. totalCostLimit - `NSCache`는 객체를 추가할 때 cost(`Int`)를 함께 설정할 수 있습니다. 이 때, `totalCostLimit`은 cost들의 총합의 최댓값입니다. 즉, `NSCache`에 추가된 데이터들의 cost가 `totalCostLimit`에 도달하거나 넘게 되면 `NSCache`는 데이터를 버립니다. 이 버리는 작업은 언제 진행된다는 보장이 없기 때문에 신중하게 사용해야 합니다.
+
+```swift
+let cache: NSCache<NSString, UIImage> = NSCache()
+cache.countLimit = 허용하는 key의 개수
+cache.totalCostLimit = cost 합계의 최댓값
+```
+
+## NSCache 구현
+
+NSCache가 어떻게 구현되어 있는지는 애플에서 공개한 [Foundation - NSCache](https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSCache.swift)를 살펴보면 파악할 수 있습니다.
+
+`NSCache`는 기본적으로 연결리스트로 데이터를 캐싱합니다. 연결리스트로 데이터를 캐싱하는 이유에 대해서 명확히 서술되어 있지는 않지만, 캐시는 중간에 있는 데이터 추가, 삭제가 빈번하기 때문에 이를 효율적으로 하기 위해(배열로 해당 작업을 수행시 데이터를 앞으로 당기거나, 뒤로 데이터를 모두 밀어야 하는 작업이 추가적으로 발생합니다.) 연결리스트로 구현된 것이라고 생각해볼 수 있습니다.
+
+한편, `NSCache`는 별도로 Dictionary를 두어 데이터의 접근도 O(1)에 수행할 수 있도록 제공하고 있습니다.
+
+{% highlight swift %}
+// NSCache
+open class NSCache<KeyType : AnyObject, ObjectType : AnyObject> : NSObject {
+
+    private var _entries = Dictionary<NSCacheKey, NSCacheEntry<KeyType, ObjectType>>()
+    private var _head: NSCacheEntry<KeyType, ObjectType>?
+}
+{% endhighlight %}
+
+## NSCache 데이터 교체 알고리즘
+
+일반적으로 캐시는 캐싱된 데이터를 버리는 방식에 있어서 용도에 따라 서로 다른 페이지 교체 알고리즘을 사용합니다. 흔히, FIFO, LRU, LFU 등의 메모리 페이지 교체 알고리즘들이 사용되는데, `NSCache`는 이와는 조금 다른 방식으로 데이터를 취하고 버립니다.
+
+`NSCache`에는 개별 데이터마다 cost 값을 부여할 수 있습니다. `NSCache`는 이 cost값의 오름차순으로 데이터를 추가할 때 정렬을 수행합니다. 실제 코드를 살펴보면 다음과 같습니다.
+
+{% highlight swift %}
+private func insert(_ entry: NSCacheEntry<KeyType, ObjectType>) {
+    guard var currentElement = _head else {
+        // The cache is empty
+        entry.prevByCost = nil
+        entry.nextByCost = nil
+
+        _head = entry
+        return
+    }
+
+    guard entry.cost > currentElement.cost else {
+        // Insert entry at the head
+        entry.prevByCost = nil
+        entry.nextByCost = currentElement
+        currentElement.prevByCost = entry
+
+        _head = entry
+        return
+    }
+
+    while let nextByCost = currentElement.nextByCost, nextByCost.cost < entry.cost {
+        currentElement = nextByCost
+    }
+
+    // Insert entry between currentElement and nextElement
+    let nextElement = currentElement.nextByCost
+
+    currentElement.nextByCost = entry
+    entry.prevByCost = currentElement
+
+    entry.nextByCost = nextElement
+    nextElement?.prevByCost = entry
+}
+{% endhighlight %}
+
+위의 코드를 보면 `NSCache`에 데이터를 추가할 때, cost값을 기준으로 정렬을 수행하는 것을 확인할 수 있습니다. 또한 삭제의 경우, 새로운 값을 추가할 때, 값이 작은 데이터들을 순차적으로 제거하여 totalCostLimit을 유지하는 방식을 활용하고 있습니다.
+
+{% highlight swift %}
+// open func setObject(_ obj: ObjectType, forKey key: KeyType, cost g: Int)의 일부 발췌
+// CostLimit에 기반하여 데이터 제거(Purging)
+// purgeAmount = 줄여야 하는 cost의 총량
+var purgeAmount = (totalCostLimit > 0) ? (_totalCost - totalCostLimit) : 0
+while purgeAmount > 0 {
+    if let entry = _head {
+        delegate?.cache(unsafeDowncast(self, to:NSCache<AnyObject, AnyObject>.self), willEvictObject: entry.value)
+
+        // 작은(head쪽) cost의 데이터들부터 제거해나감
+        _totalCost -= entry.cost
+        purgeAmount -= entry.cost
+
+        remove(entry) // _head will be changed to next entry in remove(_:)
+        _entries[NSCacheKey(entry.key)] = nil
+    } else {
+        break
+    }
+}
+{% endhighlight %}
+
+전체 코드는 [Foundation - NSCache](https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSCache.swift)에서 확인하실 수 있으니, 이를 참고하시면 좋을 것 같습니다.
+
+---
+
+# 참고 자료
+
+* [NSCache - Apple Documentation](https://developer.apple.com/documentation/foundation/nscache)
+* [Caching and Purgeable Memory](https://developer.apple.com/library/archive/documentation/Performance/Conceptual/ManagingMemory/Articles/CachingandPurgeableMemory.html)
+* [NSHipster - NSCache](https://nshipster.com/nscache/)
+* [Foundation - NSCache](https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSCache.swift)
