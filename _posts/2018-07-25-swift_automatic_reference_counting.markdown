@@ -227,6 +227,7 @@ person = nil
 
 [The Swift Programming Language (Swift 4.1)](https://itunes.apple.com/kr/book/the-swift-programming-language-swift-4-1/id881256329?mt=11)
 
+`weak`으로 설정된 인스턴스는 다른 인스턴스가  unowned로 설정된 property는
 
 ---
 
