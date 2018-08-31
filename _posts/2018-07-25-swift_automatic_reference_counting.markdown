@@ -227,7 +227,78 @@ person = nil
 
 [The Swift Programming Language (Swift 4.1)](https://itunes.apple.com/kr/book/the-swift-programming-language-swift-4-1/id881256329?mt=11)
 
-`weak`으로 설정된 인스턴스는 다른 인스턴스가  unowned로 설정된 property는
+`weak`과 `unowned`의 차이는 예시를 통해서 이해하는 것이 이해가 빠릅니다.
+
+* `weak` - Person과 Apartment의 관계
+
+다음의 두 객체 Person과 Apartment가 있다고 가정하겠습니다.
+
+{% highlight swift %}
+class Person {
+
+}
+class Apartment {
+
+}
+{% endhighlight %}
+
+먼저 사람은 아파트에 입주할 수도 있고 그렇지 않을 수도 있습니다. 그래서 Person 객체는 Apartment 인스턴스를 옵셔널로 가지고 있게 됩니다.
+
+{% highlight swift %}
+class Person {
+    var apartment: Apartment?
+}
+{% endhighlight %}
+
+아파트의 경우에도 입주자가 존재할 수도 있고, 그렇지 않을 수도 있습니다.
+
+{% highlight swift %}
+class Apartment {
+    var person: Person?
+}
+{% endhighlight %}
+
+하지만 이런 경우에 두 인스턴스를 모두 strong으로 생성할 경우 강한 상호 참조 문제가 있다는 것을 알 수 있습니다. 그렇기 때문에 한 쪽의 참조를 `weak` 혹은 `unowned`으로 선언해주어야 합니다. 이 때, Apartment의 인스턴스를 약한 참조로 변경한다고 하였을 때, 생각해보아야 하는 부분은 lifetime입니다. 즉, 아파트는 입주자가 있어야만 존재할 수 있는가?에 대한 질문을 수행하여 아파트와 입주자 사이의 lifetime을 파악해야 합니다. 아파트의 경우 입주자가 없어도 존재할 수 있기 때문에 아파트 내의 사람 인스턴스의 lifetime은 아파트보다 짧습니다. 이런 경우 weak을 사용합니다.
+
+{% highlight swift %}
+class Apartment {
+    weak var person: Person?
+}
+{% endhighlight %}
+
+> 객체에서 property로 가지고 있는 인스턴스의 생명주기가 객체보다 짧다면 해당 property를 weak으로 사용합니다.
+
+* `unowned` - Person과 Credit Card의 관계
+
+앞의 예시와 비슷하게 다음의 두 객체 Person과 Credit Card가 있다고 가정하겠습니다.
+
+{% highlight swift %}
+class Person {
+
+}
+class CreditCard {
+
+}
+{% endhighlight %}
+
+이 때도 사람은 신용카드를 가지고 있을 수도 있고, 그렇지 않을 수도 있습니다. 그렇기 때문에 Person은 CreditCard 인스턴스를 옵셔널로 가지고 있습니다.
+
+{% highlight swift %}
+class Person {
+  var creditCard: CreditCard?
+}
+{% endhighlight %}
+
+CreditCard의 경우, 아파트와는 다르게 명의자라는 것이 반드시 존재해야 합니다. 그렇기 때문에 CreditCard는 Person 정보를 가지고 있지만, Person과 lifetime이 같거나 더 깁니다. 그렇기 때문에 이 때, 강한 상호참조를 피하면서 lifetime을 적절히 표현하기 위해 `weak` 대신, `unowned` 키워드를 사용합니다.
+
+{% highlight swift %}
+class CreditCard {
+  unowned var person: Person?
+}
+{% endhighlight %}
+
+> 객체에서 property로 가지고 있는 인스턴스의 생명주기가 객체보다 길거나 같다면 해당 property를 unowned로 사용합니다.
+
 
 ---
 
