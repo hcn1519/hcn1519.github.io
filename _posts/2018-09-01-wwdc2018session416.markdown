@@ -1,0 +1,110 @@
+---
+layout: post
+title: "iOS Memory Deep Dive 정리"
+excerpt: "WWDC의 iOS Memory Deep Dive 세션을 정리하였습니다."
+date: "2018-09-01 02:36:19 +0900"
+categories: iOS WWDC Memory Instrument
+tags: [iOS, WWDC, Memory, Instrument]
+---
+
+본 글은 2018년 WWDC의 [iOS Memory Deep Dive](https://developer.apple.com/videos/play/wwdc2018/416) 세션을 정리한 글입니다. 내용을 위주로 정리하였으며, 데모 부분은 보면서 필요한 부분만 정리하였으니, 전체 데모를 확인하고자 한다면, 본 세션을 확인해주시기 바랍니다.
+
+> iOS Memory Deep Dive 세션 요약 - Discover how memory graphs can be used to get a close up look at what is contributing to an app's memory footprint. Understand the true memory cost of an image. Learn some tips and tricks for reducing the memory footprint of an app.
+
+# Memory Footprint
+
+![img1](https://dl.dropbox.com/s/nzj80i6b4nv08d1/m01.png)
+
+* 메모리 사용의 최소 단위는 Page이다. 그리고 이 Page는 16KB이다.
+* Page는 `Clean Page`, `Dirty Page`가 있고 이는 Page가 write 되었는지 아닌지에 따라서 구분된다.
+* 실제 메모리 사용량 = 사용된 Page 수 * Page의 크기와 같다.
+
+![img2](https://dl.dropbox.com/s/4hpgp5nq40ag3x1/m02.png)
+
+* 위처럼 배열을 allocate하게 되면 시스템은 6개의 Page를 배열에 할당한다. 이 Page는 모두 `Clean Page`이다.
+* 그리고 이 배열에 새로운 값을 할당(write)하게 되면 해당 값이 포함된 Page는 `Dirty Page`가 된다.
+
+![img3](https://dl.dropbox.com/s/v2j0xlfi87les86/m03.png)
+
+* Memory Mapped Files - 디스크에 있는 파일이지만, 메모리 위에 올라가 있는 파일
+
+![img4](https://dl.dropbox.com/s/odmqrlp8k2nnd45/m04.png)
+
+* 다음과 같이 50KB 크기의 jpeg 이미지가 있다고 하였을 때, 이 파일은 다음과 같이 메모리에 적재된다.
+
+## Memory Profile
+
+![img5](https://dl.dropbox.com/s/rrx9g7tffmhpuzf/m05.png)
+
+* 메모리는 다음과 같이 (read, write 관점에서) Dirty, Compressed, Clean 영역으로 구분할 수 있다.
+
+### Clean Memory
+
+![img7](https://dl.dropbox.com/s/9q1zqkgbo5c8l25/m07.png)
+
+* Clean Memory는 기록될(page out, writable) 수 있는 메모리를 의미한다. Clean Memory의 데이터는 아직 write되지 않았기 때문에 디스크의 데이터와 동일하다.
+* Memory Mapped File, 프레임워크의 일부 등이 이에 해당한다.
+
+### Dirty Memory
+
+![img8](https://dl.dropbox.com/s/ct7r6vtodshkvhf/m08.png)
+
+* Dirty Memory는 App에 의해 쓰여진(written) 메모리를 의미한다. 사용자에 의해 기록되었기 때문에 디스크와 메모리가 동일한 데이터를 가지고 있지 않다.
+* heap의 메모리 할당, decode된 이미지 버퍼, 프레임워크의 일부 등이 이에 해당한다.
+
+### Compressed Memory
+
+![img9](https://dl.dropbox.com/s/kjhz617nph1b81y/m09.png)
+
+* iOS에는 전통적인 Disk Swap System이 없다.
+* 그 대신 Memory Compressor라는 것을 iOS 7부터 사용한다.
+
+![img10](https://dl.dropbox.com/s/lw8ciazap1sjrxk/m10.png)
+
+Memory Compressor는
+1. 접근이 되지 않은 page를 squeeze down(압축)하여, 더 많은 공간을 생성한다.
+2. 접근이 일어날 경우 압축을 해제하여 메모리 writing이 일어날 수 있도록 한다.
+
+### Memory Warning
+
+![img11](https://dl.dropbox.com/s/4uk5yianc4zruly/m11.png)
+
+* 시스템은 사용 가능한 메모리가 부족할 때, 앱의 메모리를 정리하고, 이 때, 앱 내로 Notification(`didReceiveMemoryWarning`)을 전달한다.
+* 앱은 이 때 적절히 메모리 사용량을 줄이는 작업을 수행할 필요가 있다.(i.e. 메모리에 캐싱된 데이터 제거)
+
+![img12](https://dl.dropbox.com/s/4sodj6iu3q89tdq/m12.png)
+
+* 캐시의 경우 `NSCache`를 사용하게 되면, 데이터를 thread safe(여러 쓰레드에서 동시에 접근해도 안전하다)하게 저장할 수 있고, 메모리에 저장된 데이터는 항상 purgeable(버릴 수 있는)하기 때문에 `NSDictionary`보다 `NSCache`를 사용하는 것을 권장한다.
+
+![img13](https://dl.dropbox.com/s/id1pkvdjin8ljf7/m13.png)
+
+1. 메모리 footprint의 한계치는 디바이스마다 다르다.
+2. extension 앱은 더 제약이 많다.
+3. 이 한계를 넘게되면 `EXC_RESOURCE_EXCEPTION`이 에러로 나온다.
+
+---
+
+# Tools for Profiling Footprint
+
+![img14](https://dl.dropbox.com/s/bk78hv2nlslgaya/m14.png)
+![img15](https://dl.dropbox.com/s/6l9kcfw3o46u36b/m15.png)
+![img16](https://dl.dropbox.com/s/lum6g2ji78u5v4p/m16.png)
+![img17](https://dl.dropbox.com/s/97gs3ngym5arrlt/m17.png)
+![img18](https://dl.dropbox.com/s/f11r8elm2yabapf/m18.png)
+![img19](https://dl.dropbox.com/s/b368oqcr4s8jdpi/m19.png)
+![img20](https://dl.dropbox.com/s/8diax1u4jd0yw13/m20.png)
+![img21](https://dl.dropbox.com/s/496lyosix767us7/m21.png)
+![img22](https://dl.dropbox.com/s/oudiggpievpi4pa/m22.png)
+![img23](https://dl.dropbox.com/s/2073gk2wlifxlar/m23.png)
+![img24](https://dl.dropbox.com/s/vg6tqxxaf5d03ce/m24.png)
+![img25](https://dl.dropbox.com/s/ghat35b89q30ibj/m25.png)
+![img26](https://dl.dropbox.com/s/qh2sz7toj94ix2d/m26.png)
+![img27](https://dl.dropbox.com/s/p2dbkxojlmgn0wa/m27.png)
+![img28](https://dl.dropbox.com/s/qk6een6r97lcsa4/m28.png)
+![img29](https://dl.dropbox.com/s/41xxv9jfy51d1gq/m29.png)
+![img30](https://dl.dropbox.com/s/rrgduwwo1jo917g/m30.png)
+![img31](https://dl.dropbox.com/s/vj5m4bfi4rn6ym6/m31.png)
+![img32](https://dl.dropbox.com/s/9bauv0c28rzf25x/m32.png)
+![img33](https://dl.dropbox.com/s/a9u83rpcz7am9g6/m33.png)
+![img34](https://dl.dropbox.com/s/hlqhsa7bd01oy0q/m34.png)
+![img35](https://dl.dropbox.com/s/7qxioe0wcg9qvl2/m35.png)
