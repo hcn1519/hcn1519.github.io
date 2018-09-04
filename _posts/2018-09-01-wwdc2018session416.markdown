@@ -7,7 +7,7 @@ categories: iOS WWDC Memory Instrument
 tags: [iOS, WWDC, Memory, Instrument]
 ---
 
-본 글은 2018년 WWDC의 [iOS Memory Deep Dive](https://developer.apple.com/videos/play/wwdc2018/416) 세션을 정리한 글입니다. 내용을 위주로 정리하였으며, 데모 부분은 보면서 필요한 부분만 정리하였으니, 전체 데모를 확인하고자 한다면, 본 세션을 확인해주시기 바랍니다.
+본 글은 2018년 WWDC의 [iOS Memory Deep Dive](https://developer.apple.com/videos/play/wwdc2018/416) 세션을 정리한 글입니다. 내용을 위주로 정리하였으며, 데모 부분은 별도로 정리하지 않았습니다. 전체 데모를 확인하고자 한다면, 본 세션을 확인해주시기 바랍니다.
 
 > iOS Memory Deep Dive 세션 요약 - Discover how memory graphs can be used to get a close up look at what is contributing to an app's memory footprint. Understand the true memory cost of an image. Learn some tips and tricks for reducing the memory footprint of an app.
 
@@ -182,7 +182,8 @@ vmmap --pages app.memgraph | grep '.dylib' | awk '{ sum += $6 } END { print "Tot
 
 * 예시 - Strong Reference Cycle을 가지고 있는 3개의 객체 구현
 
-* 다음의 명령어 실행
+* 다음의 명령어를 실행한다.
+
 ```bash
 leaks app.memorygraph
 ```
