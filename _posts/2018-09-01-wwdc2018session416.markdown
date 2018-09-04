@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "iOS Memory Deep Dive 정리"
+title: "iOS Memory Footprint 분석 방법"
 excerpt: "WWDC의 iOS Memory Deep Dive 세션을 정리하였습니다."
 date: "2018-09-01 02:36:19 +0900"
 categories: iOS WWDC Memory Instrument

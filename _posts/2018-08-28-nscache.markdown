@@ -7,24 +7,27 @@ categories: iOS Memory NSCache Swift
 tags: [iOS, Memory, NSCache, Swift]
 ---
 
-
-# NSCache
-
 * `NSCache`는 Cocoa에서 사용할 수 있는 캐싱을 위한 클래스입니다. `NSCache`는 `NSDictionary`처럼 `key-value` 형태로 되어 있습니다.
 * `NSCache`는 메모리가 충분할 때는 주어진 모든 데이터를 캐싱합니다. 반면, 가용 메모리가 적을 때는 다른 앱을 위해 캐싱된 데이터를 자동으로 버립니다.
 
-> 이렇게 버려진 데이터는 필요할 때 다시 캐싱해야 합니다.
+> 이렇게 버려진 데이터는 필요할 때 다시 캐싱해야 합니다. 바꿔말하면, 캐싱된 데이터가 없어도 앱이 적절히 동작(i.e. 다시 데이터 캐싱)할 수 있도록 구조를 설계해야 합니다.
 
 ## NSCache Property
 
-1. countLimit - `NSCache`는 캐싱하는 데이터의 개수를 제한할 수 있습니다. 만약 countLimit이 10으로 설정되어 있는데, 11개의 데이터를 `NSCache`에 넣게 되면 1개는 자동으로 버립니다.
-2. totalCostLimit - `NSCache`는 객체를 추가할 때 cost(`Int`)를 함께 설정할 수 있습니다. 이 때, `totalCostLimit`은 cost들의 총합의 최댓값입니다. 즉, `NSCache`에 추가된 데이터들의 cost가 `totalCostLimit`에 도달하거나 넘게 되면 `NSCache`는 데이터를 버립니다. 이 버리는 작업은 언제 진행된다는 보장이 없기 때문에 신중하게 사용해야 합니다.
+* countLimit - `NSCache`는 캐싱하는 데이터의 개수를 제한할 수 있습니다. 만약 countLimit이 10으로 설정되어 있는데, 11개의 데이터를 `NSCache`에 넣게 되면 1개는 자동으로 버립니다.
+* totalCostLimit - `NSCache`는 객체를 추가할 때 cost(`Int`)를 함께 설정할 수 있습니다. 이 때, `totalCostLimit`은 cost들의 총합의 최댓값입니다. 즉, `NSCache`에 추가된 데이터들의 cost가 `totalCostLimit`에 도달하거나 넘게 되면 `NSCache`는 데이터를 버립니다.
 
 ```swift
 let cache: NSCache<NSString, UIImage> = NSCache()
 cache.countLimit = 허용하는 key의 개수
 cache.totalCostLimit = cost 합계의 최댓값
 ```
+
+* evictsObjectsWithDiscardedContent - `NSCache`는 시스템에서 메모리를 너무 많이 사용하지 않도록 디자인되어 있습니다. 그래서 캐싱된 데이터를 자동으로 지우는 다양한 정책을 사용하고 있고, 캐싱된 데이터가 너무 많은 메모리를 사용하면 시스템은 캐싱된 데이터를 삭제합니다.
+
+> The NSCache class incorporates various auto-eviction policies, which ensure that a cache doesn’t use too much of the system’s memory. If memory is needed by other applications, these policies remove some items from the cache, minimizing its memory footprint.
+
+> 이 부분은 좀 더 알아보고 구체적인 서술을 하고자 합니다.
 
 ## NSCache 구현
 
@@ -107,6 +110,8 @@ while purgeAmount > 0 {
     }
 }
 {% endhighlight %}
+
+데이터 추가 삭제를 cost 중심으로 설명하였는데, count를 통해서도 해당 작업을 수행합니다. 이 부분은 여기서 따로 서술하지 않습니다.(cost를 중심으로 데이터를 추가 삭제하는 것과 크게 다르지 않습니다.)
 
 전체 코드는 [Foundation - NSCache](https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSCache.swift)에서 확인하실 수 있으니, 이를 참고하시면 좋을 것 같습니다.
 
