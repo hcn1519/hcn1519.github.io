@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Concurrenct programming과 GCD"
+title: "Concurrent programming과 GCD"
 date: "2018-05-24 23:04:09 +0900"
 categories: Concurrent GCD
 tags: [Concurrent, GCD]
