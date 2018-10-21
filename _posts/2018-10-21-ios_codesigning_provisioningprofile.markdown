@@ -1,13 +1,13 @@
 ---
 layout: post
-title: " iOS 기기에 내가 만든 앱 설치하고 실행하기"
+title: " iOS 앱 배포 1 - 기기에 내가 만든 앱 설치하고 실행하기"
+excerpt: "앱을 iOS 기기에 설치하기 위해 필요한 Certificate, Provisioning Profile 등에 대해 알아 봅니다."
 date: "2018-10-21 17:01:31 +0900"
 categories: iOS ProvisioningProfile Certificate
 tags: [iOS ProvisioningProfile Certificate]
 ---
 
 iOS에서 자신이 만든 앱을 시뮬레이터가 아닌 실제 단말기에서 구동하는 방식을 찾아보게 되면, 그 과정이 쉽지 않다는 것을 알 수 있습니다. 이 글에서는 내가 만든 앱을 기기에서 실행하는 과정에서 필요한 것들에 대해 알아보고자 합니다.
-
 
 우선 iOS 기기에 자신이 만든 앱을 등록하는 과정이 어떤 것인지 대략적으로 이해하면 좋습니다.
 
@@ -51,6 +51,7 @@ CSR 파일은 이름에서 알 수 있듯이 애플에 인증서를 요청하기
 애플에서 정의한 Provisioning Profile은 다음과 같습니다.
 
 > provisioning profile is a type of system profile used to launch one or more apps on devices and use certain services.
+
 [Provisioning profile](https://help.apple.com/xcode/mac/current/#￼/dev46a99ba04)
 
 Provisioning Profile은 기기와 개발자 계정 사이를 연결하는 역할을 담당하는 profile입니다. Provisioning Profile에는 다음과 같은 것들이 들어갑니다.
@@ -59,7 +60,7 @@ Provisioning Profile은 기기와 개발자 계정 사이를 연결하는 역할
 
 1. Certificate - 앞서서 만든 인증서가 Provisioning Profile에 들어갑니다.
 2. App ID - 모든 iOS 앱은 앱 스토어에 등록되기 위해 Bundle Identifier 기반의 App ID가 필요합니다. 즉, App ID는 앱 스토어에서 사용되는 앱의 고유 ID라고 생각하면 됩니다.
-3. Device - 모든 iOS 기기는 고유의 UDID(Unique Device Identifier)를 가지고 있고, 이 기기를 developer 사이트에 등록해두어야 테스트하려는 앱을 기기에 설치할 수 있습니다.
+3. Device - 모든 iOS 기기는 고유의 UDID(Unique Device Identifier)를 가지고 있고, 이 기기를 developer 사이트(멤버 센터)에 등록해두어야 테스트하려는 앱을 기기에 설치할 수 있습니다.
 
 
 ### Provisioning Profile 생성하기
@@ -92,6 +93,23 @@ Provisioning Profile은 기기와 개발자 계정 사이를 연결하는 역할
 * `Provisioning Profile`은 App ID마다 1개씩 생성할 수 있습니다.
 * 기기의 UDID를 한 번 등록하면, 하나의 계정에서 여러 개의 앱을 만들 때, 별도의 등록 과정은 필요 없습니다.
 * 개발 인증서와 배포 인증서가 나뉘어 있듯이 Provisioning Profile도 개발, 배포용이 나뉘어 있습니다.(유료 등록자가 아니면 배포용은 모두 만들 수 없습니다.)
+
+## 앱 빌드와 기기에서 앱 실행시 동작 과정
+
+이제 앞서서 언급한 2가지 조건(인증 받은 개발자, 기기에 인증 내용 전달)을 충족하였으므로 기기에 앱을 빌드할 수 있습니다. 빌드시 어떤 파일들이 생겨나는지 살펴보기 위해 커맨드 라인을 통해 앱을 빌드합니다.
+
+```
+$ xcodebuild -project myProject.xcodeproj
+```
+
+빌드를 진행하고, 성공적으로 완료되면 `build` 디렉토리가 생성됩니다. 여기서,
+
+> build > Release-iPhoneOS > myProject
+
+경로로 이동하고, myProject 파일을 오른쪽 클릭하여 패키지 내용 보기로 열어줍니다. 그러면 그 안에는 다음과 유사한 파일들이 있습니다.
+
+![build](https://dl.dropbox.com/s/2zukk7yuqd1qm5y/build.png)
+
 
 ---
 
