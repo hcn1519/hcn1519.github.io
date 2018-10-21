@@ -92,3 +92,10 @@ Provisioning Profile은 기기와 개발자 계정 사이를 연결하는 역할
 * `Provisioning Profile`은 App ID마다 1개씩 생성할 수 있습니다.
 * 기기의 UDID를 한 번 등록하면, 하나의 계정에서 여러 개의 앱을 만들 때, 별도의 등록 과정은 필요 없습니다.
 * 개발 인증서와 배포 인증서가 나뉘어 있듯이 Provisioning Profile도 개발, 배포용이 나뉘어 있습니다.(유료 등록자가 아니면 배포용은 모두 만들 수 없습니다.)
+
+---
+
+# 참고 자료
+
+[iOS 인증서와 코드 사이닝 이해하기](http://la-stranger.blogspot.com/2014/04/ios.html)
+[What is a provisioning profile & code signing in iOS?](https://medium.com/@abhimuralidharan/what-is-a-provisioning-profile-in-ios-77987a7c54c2)
