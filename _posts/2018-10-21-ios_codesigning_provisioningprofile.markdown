@@ -3,8 +3,8 @@ layout: post
 title: " iOS 인증서, Provisioning Profile"
 excerpt: "앱을 iOS 기기에 설치하기 위해 필요한 Certificate, Provisioning Profile 등에 대해 알아 봅니다."
 date: "2018-10-21 17:01:31 +0900"
-categories: iOS ProvisioningProfile Certificate
-tags: [iOS ProvisioningProfile Certificate]
+categories: iOS ProvisioningProfile Certificate Distribution
+tags: [iOS, ProvisioningProfile, Certificate, Distribution]
 ---
 
 iOS에서 자신이 만든 앱을 시뮬레이터가 아닌 실제 단말기에서 구동하는 방식을 찾아보게 되면, 그 과정이 쉽지 않다는 것을 알 수 있습니다. 이 글에서는 내가 만든 앱을 기기에서 실행하는 과정에서 필요한 것들에 대해 알아보고자 합니다.
@@ -112,8 +112,8 @@ $ xcodebuild -project myProject.xcodeproj
 
 이 중에서 인증과 설치 허가와 관련된 것은 `_CodeSignature`와 `embedded.mobileProvision`입니다.
 
-`_CodeSignature` 디렉토리에는 `CodeResources`라는 파일이 담겨 있고, 이는 코드 서명자(개발자)의 코드 서명이 담긴 해시 값이 담겨 있습니다. 이 해시 값은 iOS 시스템 내의 코드 서명 소프트웨어가 만들어낸 해시 값과 비교를 통해 코드 서명 시점으로부터 코드에 변경사항이 있는지 체크하여, 인증 절차를 수행합니다.
-`embedded.mobileProvision`은 빌드시 사용된 `Provisioning Profile`의 복사본으로 인증서와 기기를 연결합니다.
+`_CodeSignature` 디렉토리에는 `CodeResources`라는 파일이 담겨 있고, 이는 코드 서명자(개발자)의 코드 서명이 담긴 해시 값이 담겨 있습니다. 이 해시 값은 iOS 시스템 내의 코드 서명 소프트웨어가 만들어낸 해시 값과 비교를 통해 코드 서명 시점으로부터 코드에 변경사항이 있는지 체크하는 방식으로 인증 절차를 수행합니다.
+`embedded.mobileProvision`은 빌드시 사용된 `Provisioning Profile`의 복사본으로 애플의 서명을 확인하는 용도로 사용됩니다. 즉, `Provisioning Profile`은 컴파일, 설치, 그리고 실행 3단계에서 체크됩니다.
 
 ---
 
