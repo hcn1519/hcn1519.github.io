@@ -1,6 +1,6 @@
 ---
 layout: post
-title: " iOS 앱 배포 1 - 기기에 내가 만든 앱 설치하고 실행하기"
+title: " iOS 인증서, Provisioning Profile"
 excerpt: "앱을 iOS 기기에 설치하기 위해 필요한 Certificate, Provisioning Profile 등에 대해 알아 봅니다."
 date: "2018-10-21 17:01:31 +0900"
 categories: iOS ProvisioningProfile Certificate
@@ -14,7 +14,7 @@ iOS에서 자신이 만든 앱을 시뮬레이터가 아닌 실제 단말기에�
 1. 개발자는 애플로부터 iOS 기기에 앱을 설치할 수 있는 권한을 얻어야 합니다. 즉, 개발자는 애플에서 인증 받은 개발자가 되어야 합니다. 이 인증서를 통해 애플은 개발자를 식별할 수 있고, 앱 서명에 대한 권한을 얻을 수 있습니다.
 2. 자신의 앱을 기기에 설치할 때, 기기에는 항상 만든 사람의 서명(signing)이 포함됩니다. 이 서명은 권한 정보가 포함되고, 애플에서 인증 받은 개발자만 앱을 기기에 설치할 수 있습니다.
 
-아래에서는 위에서 설명한 과정에서 필요한 것들과 이들을 어떻게 만드는지 하나하나씩 알아보겠습니다.
+아래에서는 위에서 설명한 과정에서 필요한 것들과 이들을 어떻게 만드는지 하나하나 알아보겠습니다.
 
 ## 애플에서 Certificate 발급 받기
 
@@ -43,7 +43,7 @@ CSR 파일은 이름에서 알 수 있듯이 애플에 인증서를 요청하기
 
 # 기기로부터 신뢰 확보하기
 
-위의 과정을 거치면 개발자는 `애플에서 인증 받은 개발자`가 되었다고 할 수 있습니다. 즉, 이제 개발자는 자신이 만든 앱에 서명할 때 애플의 인증 절차를 통과할 수 있습니다. 이제 `우리가 인증 받았다`라는 사실을 기기에 전달하기만 하면 되는데, 그 과정에서 우리가 인증 받은 개발자라는 것을 기기에 알리기 위해서는 `Provisioning Profile`이 필요합니다.
+위의 과정을 거치면 개발자는 `애플에서 인증 받은 개발자`가 되었다고 할 수 있습니다. 즉, 이제 개발자는 자신이 만든 앱에 서명할 때 애플의 인증 절차를 통과할 수 있습니다. 이제 `우리가 인증 받았다`라는 사실을 기기에 전달하기만 하면 되는데, 이를 위해 `Provisioning Profile`이 필요합니다.
 
 
 ## Provisioning Profile
@@ -54,7 +54,7 @@ CSR 파일은 이름에서 알 수 있듯이 애플에 인증서를 요청하기
 
 [Provisioning profile](https://help.apple.com/xcode/mac/current/#￼/dev46a99ba04)
 
-Provisioning Profile은 기기와 개발자 계정 사이를 연결하는 역할을 담당하는 profile입니다. Provisioning Profile에는 다음과 같은 것들이 들어갑니다.
+Provisioning Profile은 기기와 개발자 계정 사이를 연결하는 역할을 담당하는 profile입니다. 이 profile은 `myProfile.mobileProvision`의 형태의 파일입니다. Provisioning Profile에는 다음과 같은 것들이 들어갑니다.
 
 ![img1](https://dl.dropbox.com/s/nvvezw4tes2thrf/1%2A602qCx1Hyn_Ef7T1jrhS1w.png)
 
@@ -110,10 +110,14 @@ $ xcodebuild -project myProject.xcodeproj
 
 ![build](https://dl.dropbox.com/s/2zukk7yuqd1qm5y/build.png)
 
+이 중에서 인증과 설치 허가와 관련된 것은 `_CodeSignature`와 `embedded.mobileProvision`입니다.
+
+`_CodeSignature` 디렉토리에는 `CodeResources`라는 파일이 담겨 있고, 이는 코드 서명자(개발자)의 코드 서명이 담긴 해시 값이 담겨 있습니다. 이 해시 값은 iOS 시스템 내의 코드 서명 소프트웨어가 만들어낸 해시 값과 비교를 통해 코드 서명 시점으로부터 코드에 변경사항이 있는지 체크하여, 인증 절차를 수행합니다.
+`embedded.mobileProvision`은 빌드시 사용된 `Provisioning Profile`의 복사본으로 인증서와 기기를 연결합니다.
 
 ---
 
 # 참고 자료
 
-[iOS 인증서와 코드 사이닝 이해하기](http://la-stranger.blogspot.com/2014/04/ios.html)
-[What is a provisioning profile & code signing in iOS?](https://medium.com/@abhimuralidharan/what-is-a-provisioning-profile-in-ios-77987a7c54c2)
+* [iOS 인증서와 코드 사이닝 이해하기](http://la-stranger.blogspot.com/2014/04/ios.html)
+* [What is a provisioning profile & code signing in iOS?](https://medium.com/@abhimuralidharan/what-is-a-provisioning-profile-in-ios-77987a7c54c2)
