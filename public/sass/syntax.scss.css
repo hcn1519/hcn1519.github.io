@@ -8,9 +8,9 @@ pre, code {
 /* 글 중간에 쓰는 블럭용 */
 code {
   background: #eff0f1;
-  padding: 3px 0px;
+  padding: 3px 2px;
   margin: 0;
-  border-radius: 2px;
+  border-radius: 4px;
   white-space: inherit;
 }
 pre {
@@ -79,7 +79,7 @@ pre code {
  .highlight .nx { color: #81a2be } /* Name.Other */
  .highlight .py { color: #c5c8c6 } /* Name.Property */
  .highlight .nt { color: #8abeb7 } /* Name.Tag */
- .highlight .nv { color: #000000 } /* Name.Variable */
+ .highlight .nv { color: #ab2525 } /* Name.Variable */
  .highlight .ow { color: #8abeb7 } /* Operator.Word */
  .highlight .w { color: #c5c8c6 } /* Text.Whitespace */
  .highlight .mf { color: #de935f } /* Literal.Number.Float */
