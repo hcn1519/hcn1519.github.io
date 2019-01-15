@@ -11,7 +11,7 @@ tags: [ObjectiveC, RunTime]
 
 동적 바인딩(Dynamic Binding)은 객체에 호출되는 실제 메소드를 알아내는 시기를 컴파일 시점이 아니라, 프로그램 실행(런타임) 중으로 미루는 방법을 의미합니다. 예시를 통해 살펴보겠습니다.
 
-{% highlight objective_c %}
+```objective_c
 // IntPoint.h
 #import <Foundation/Foundation.h>
 
@@ -46,11 +46,11 @@ tags: [ObjectiveC, RunTime]
     return result;
 }
 @end
-{% endhighlight %}
+```
 
 위와 같은 `IntPoint`라는 클래스를 생성하고, 아래와 같이 해당 클래스를 사용할 수 있습니다.
 
-```objectivec
+```objective_c
 // Test
  id dataValue;
 
@@ -76,7 +76,7 @@ dataValue = [point1 add:point2]; // 1
 
 객체의 타입을 명시적으로 지정하지 않고,(데이터 타입을 id로 지정) 런타임에서 객체의 타입을 설정하도록 하는 것을 동적 타이핑(Dynamic Typing)이라고 합니다. 이런 동적 타이핑이 가능한 이유는 ObjectiveC의 객체는 `isa`라는 클래스 타입(클래스 객체를 가리킴)을 지칭하는 포인터가 존재하기 때문입니다. 즉, 인스턴스가 id 타입이라도, 런타임에서 해당 인스턴스의 타입은 언제나 알 수 있습니다. `isa` 포인터는 `class()` 메소드를 통해 접근할 수 있습니다.
 
-```objectivec
+```objective_c
 id dataValue;
 IntPoint *point = [[IntPoint alloc] init];
 dataValue = point;
@@ -88,7 +88,7 @@ NSLog(@"%@", [dataValue class]); // IntPoint
 * 동적 타이핑 - 컴파일 시점이 아니라, **프로그램이 실행되는 단계에서 객체의 타입을 파악하는 방식**을 의미합니다.
 * 정적 타이핑 - **특정 클래스의 객체로 타입을 지정**하는 것으로, 컴파일 타임에 변수의 타입을 지정하는 것을 의미합니다.
 
-```objectivec
+```objective_c
 // 동적 타이핑
  id dataValue;
 
@@ -98,7 +98,7 @@ IntPoint dataValue;
 
 동적 타이핑된 변수에 메시지를 전달할 때는 반드시 해당 변수가 메시지에 대해 respond 할 수 있어야 합니다. 그렇기 때문에 동적 타이핑된 인스턴스에 메시지 전달시에는 `respondsToSelector(SEL)`을 통해 예외처리를 해주는 것이 좋습니다.
 
-```objectivec
+```objective_c
 id dataValue;
 IntPoint *point = [[IntPoint alloc] init];
 [point set:10 and:20];
