@@ -51,9 +51,9 @@ pre code {
  .highlight .n { color: #000000 } /* Name */ 
  .highlight .o { color: #9e9d9d } /* Operator */ 
  .highlight .p { color: #000000 } /* Punctuation */
- .highlight .cm { color: #33CC33 } /* Comment.Multiline */
+ .highlight .cm { color: #969896 } /* Comment.Multiline */
  .highlight .cp { color: #969896 } /* Comment.Preproc */
- .highlight .c1 { color: #33CC33 } /* Comment.Single */
+ .highlight .c1 { color: #969896 } /* Comment.Single */
  .highlight .cs { color: #969896 } /* Comment.Special */
  .highlight .gd { color: #cc6666 } /* Generic.Deleted */
 .highlight .gu { color: #8abeb7; font-weight: bold } /* Generic.Subheading */
