@@ -21,3 +21,6 @@ author:
 version:             1.0.0
 plugins:
   - jekyll-feed
+
+markdown: kramdown
+highlighter: rouge
