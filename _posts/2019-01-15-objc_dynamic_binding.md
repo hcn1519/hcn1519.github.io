@@ -5,6 +5,8 @@ excerpt: "ObjectiveC의 동적 바인딩, 타이핑에 대해 알아봅니다."
 date: "2019-01-15 01:03:19 +0900"
 categories: ObjectiveC RunTime Binding Type
 tags: [ObjectiveC, RunTime]
+image:
+  feature: objc.png
 ---
 
 ## 동적 바인딩
