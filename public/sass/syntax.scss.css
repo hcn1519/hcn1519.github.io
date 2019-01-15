@@ -7,7 +7,7 @@ pre, code {
 
 /* 글 중간에 쓰는 블럭용 */
 code {
-  background: #eff0f1;
+  background: #f6f8fa;
   padding: 3px 2px;
   margin: 0;
   border-radius: 4px;
@@ -82,10 +82,10 @@ pre code {
  .highlight .nv { color: #ab2525 } /* Name.Variable */
  .highlight .ow { color: #8abeb7 } /* Operator.Word */
  .highlight .w { color: #c5c8c6 } /* Text.Whitespace */
- .highlight .mf { color: #de935f } /* Literal.Number.Float */
- .highlight .mh { color: #de935f } /* Literal.Number.Hex */
- .highlight .mi { color: #de935f } /* Literal.Number.Integer */
- .highlight .mo { color: #de935f } /* Literal.Number.Oct */
+ .highlight .mf { color: #da7027 } /* Literal.Number.Float */
+ .highlight .mh { color: #da7027 } /* Literal.Number.Hex */
+ .highlight .mi { color: #da7027 } /* Literal.Number.Integer */
+ .highlight .mo { color: #da7027 } /* Literal.Number.Oct */
  .highlight .sb { color: #b5bd68 } /* Literal.String.Backtick */
  .highlight .sc { color: #c5c8c6 } /* Literal.String.Char */
  .highlight .sd { color: #969896 } /* Literal.String.Doc */
