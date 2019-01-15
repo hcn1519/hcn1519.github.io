@@ -52,7 +52,7 @@ tags: [ObjectiveC, RunTime]
 
 ```objective_c
 // Test
- id dataValue;
+id dataValue;
 
 IntPoint *point1 = [[IntPoint alloc] init];
 IntPoint *point2 = [[IntPoint alloc] init];
@@ -91,7 +91,7 @@ NSLog(@"%@", [dataValue class]); // IntPoint
 id dataValue;
 
 // 정적 타이핑
-IntPoint dataValue;
+IntPoint *dataValue;
 ```
 
 동적 타이핑된 변수에 메시지를 전달할 때는 반드시 해당 변수가 메시지에 대해 respond 할 수 있어야 합니다. 그렇기 때문에 동적 타이핑된 인스턴스에 메시지 전달시에는 `respondsToSelector(SEL)`을 통해 예외처리를 해주는 것이 좋습니다.
