@@ -11,9 +11,7 @@ tags: [ObjectiveC, RunTime]
 
 동적 바인딩(Dynamic Binding)은 객체에 호출되는 실제 메소드를 알아내는 시기를 컴파일 시점이 아니라, 프로그램 실행(런타임) 중으로 미루는 방법을 의미합니다. 예시를 통해 살펴보겠습니다.
 
-{% highlight objectivec %}
-
-
+{% highlight objective-c %}
 // IntPoint.h
 #import <Foundation/Foundation.h>
 
