@@ -3,8 +3,8 @@ layout: post
 title: "Objc selector"
 excerpt: "ObjectiveC의 selector에 대해 알아봅니다."
 date: "2019-01-16 01:03:20 +0900"
-categories: ObjectiveC selector
-tags: [ObjectiveC, selector]
+categories: ObjectiveC selector, Language
+tags: [ObjectiveC, selector, Language]
 image:
   feature: objc.png
 ---

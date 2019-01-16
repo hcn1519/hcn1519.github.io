@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Swift Property"
 excerpt: "Swift의 property에 대해 알아봅니다."
-categories: Swift property
+categories: Swift property Language
 date:   2017-03-02 00:30:00
 tags: [Swift, Language, Property]
 image:

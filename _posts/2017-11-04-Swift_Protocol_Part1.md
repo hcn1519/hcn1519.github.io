@@ -3,9 +3,9 @@ layout: post
 comments: true
 title:  "Swift Protocol - Part1"
 excerpt: "Swift의 Protocol의 기본 개념 및 사용법과 delegation 패턴에 대해 알아봅니다."
-categories: Swift Protocol Delegation
+categories: Swift Protocol Delegation Language
 date:   2017-11-11 00:30:00
-tags: [Swift, Protocol, Delegation]
+tags: [Swift, Protocol, Delegation, Language]
 image:
   feature: swiftLogo.jpg
 ---

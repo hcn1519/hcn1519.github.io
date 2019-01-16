@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Swift의 함수 사용"
 excerpt: "Swift의 함수 사용에서 특별한 기능들을 알아봅니다."
-categories: Swift Function
+categories: Swift Function Language
 date:   2017-05-23 00:30:00
 tags: [Swift, Language, Function]
 image:

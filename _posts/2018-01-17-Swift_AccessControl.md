@@ -3,9 +3,9 @@ layout: post
 comments: true
 title:  "Swift 접근 제어자(Access Control)"
 excerpt: "Swift의 접근제어자에 대해 간단히 정리했습니다."
-categories: Swift AccessControl
+categories: Swift AccessControl Language
 date:   2018-01-16 00:30:00
-tags: [Swift, AccessControl]
+tags: [Swift, AccessControl, Language]
 image:
   feature: swiftLogo.jpg
 ---

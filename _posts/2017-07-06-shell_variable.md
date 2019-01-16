@@ -3,9 +3,9 @@ layout: post
 comments: true
 title:  "Shell에서 변수 사용하기"
 excerpt: "예제를 통해 Shell 변수에 대해 알아보겠습니다."
-categories: Shell Linux
+categories: Shell Linux Language
 date:   2017-07-06 00:30:00
-tags: [Shell, Linux]
+tags: [Shell, Linux, Language]
 image:
   feature: linux.png
 ---
