@@ -5,6 +5,8 @@ excerpt: "WWDC의 iOS Memory Deep Dive 세션을 정리하였습니다."
 date: "2018-09-01 02:36:19 +0900"
 categories: iOS WWDC Memory Instrument
 tags: [iOS, WWDC, Memory, Instrument]
+image:
+  feature: iOS.png
 ---
 
 본 글은 2018년 WWDC의 [iOS Memory Deep Dive](https://developer.apple.com/videos/play/wwdc2018/416) 세션을 정리한 글입니다. 내용을 위주로 정리하였으며, 데모 부분은 별도로 정리하지 않았습니다. 전체 데모를 확인하고자 한다면, 본 세션을 확인해주시기 바랍니다.
@@ -13,53 +15,53 @@ tags: [iOS, WWDC, Memory, Instrument]
 
 # Memory Footprint
 
-![img1](https://dl.dropbox.com/s/nzj80i6b4nv08d1/m01.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m01.png">
 
 * 메모리 사용의 최소 단위는 Page이다. 그리고 이 Page는 16KB이다.
 * Page는 `Clean Page`, `Dirty Page`가 있고 이는 Page가 write 되었는지 아닌지에 따라서 구분된다.
 * 실제 메모리 사용량 = 사용된 Page 수 * Page의 크기와 같다.
 
-![img2](https://dl.dropbox.com/s/4hpgp5nq40ag3x1/m02.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m02.png">
 
 * 위처럼 배열을 allocate하게 되면 시스템은 6개의 Page를 배열에 할당한다. 이 Page는 모두 `Clean Page`이다.
 * 그리고 이 배열에 새로운 값을 할당(write)하게 되면 해당 값이 포함된 Page는 `Dirty Page`가 된다.
 
-![img3](https://dl.dropbox.com/s/v2j0xlfi87les86/m03.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m03.png">
 
 * Memory Mapped Files - 디스크에 있는 파일이지만, 메모리 위에 올라가 있는 파일
 
-![img4](https://dl.dropbox.com/s/odmqrlp8k2nnd45/m04.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m04.png">
 
 * 다음과 같이 50KB 크기의 jpeg 이미지가 있다고 하였을 때, 이 파일은 다음과 같이 메모리에 적재된다.
 
 ## Memory Profile
 
-![img5](https://dl.dropbox.com/s/rrx9g7tffmhpuzf/m05.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m05.png">
 
 * 메모리는 다음과 같이 (read, write 관점에서) Dirty, Compressed, Clean 영역으로 구분할 수 있다.
 
 ### Clean Memory
 
-![img7](https://dl.dropbox.com/s/9q1zqkgbo5c8l25/m07.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m07.png">
 
 * Clean Memory는 기록될(page out, writable) 수 있는 메모리를 의미한다. Clean Memory의 데이터는 아직 write되지 않았기 때문에 디스크의 데이터와 동일하다.
 * Memory Mapped File, 프레임워크의 일부 등이 이에 해당한다.
 
 ### Dirty Memory
 
-![img8](https://dl.dropbox.com/s/ct7r6vtodshkvhf/m08.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m08.png">
 
 * Dirty Memory는 App에 의해 쓰여진(written) 메모리를 의미한다. 사용자에 의해 기록되었기 때문에 디스크와 메모리가 동일한 데이터를 가지고 있지 않다.
 * heap의 메모리 할당, decode된 이미지 버퍼, 프레임워크의 일부 등이 이에 해당한다.
 
 ### Compressed Memory
 
-![img9](https://dl.dropbox.com/s/kjhz617nph1b81y/m09.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m09.png">
 
 * iOS에는 전통적인 Disk Swap System이 없다.
 * 그 대신 Memory Compressor라는 것을 iOS 7부터 사용한다.
 
-![img10](https://dl.dropbox.com/s/lw8ciazap1sjrxk/m10.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m10.png">
 
 Memory Compressor는
 1. 접근이 되지 않은 page를 squeeze down(압축)하여, 더 많은 공간을 생성한다.
@@ -67,16 +69,16 @@ Memory Compressor는
 
 ### Memory Warning
 
-![img11](https://dl.dropbox.com/s/4uk5yianc4zruly/m11.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m11.png">
 
 * 시스템은 사용 가능한 메모리가 부족할 때, 앱의 메모리를 정리하고, 이 때, 앱 내로 Notification(`didReceiveMemoryWarning`)을 전달한다.
 * 앱은 이 때 적절히 메모리 사용량을 줄이는 작업을 수행할 필요가 있다.(i.e. 메모리에 캐싱된 데이터 제거)
 
-![img12](https://dl.dropbox.com/s/4sodj6iu3q89tdq/m12.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m12.png">
 
 * 캐시의 경우 `NSCache`를 사용하게 되면, 데이터를 thread safe(여러 쓰레드에서 동시에 접근해도 안전하다)하게 저장할 수 있고, 메모리에 저장된 데이터는 항상 purgeable(버릴 수 있는)하기 때문에 `NSDictionary`보다 `NSCache`를 사용하는 것을 권장한다.
 
-![img13](https://dl.dropbox.com/s/id1pkvdjin8ljf7/m13.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m13.png">
 
 1. 메모리 footprint의 한계치는 디바이스마다 다르다.
 2. extension 앱은 더 제약이 많다.
@@ -86,24 +88,24 @@ Memory Compressor는
 
 # Tools for Profiling Footprint
 
-![ex1](https://dl.dropbox.com/s/iq1xo3kyz5yu6bb/ex1.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/ex1.png">
 
 * Xcode에서 앱의 메모리 사용량을 빠르게 확인하려면 Debug Navigator에서 메모리 사용량을 보면 된다.
 
 ## Instrument
 
-![img14](https://dl.dropbox.com/s/bk78hv2nlslgaya/m14.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m14.png">
 
 * 이 때, 메모리 사용량에 대해 좀 더 자세히 디버깅하기 위해서는 Instrument를 사용한다.
 
-![img15](https://dl.dropbox.com/s/6l9kcfw3o46u36b/m15.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m15.png">
 
 * Instrument는 메모리 사용량을 추적하기 위한 여러 가지 템플릿을 제공하고, 많은 개발자들이 이미 `Allocation`과 `leaks`에 대해서는 알고 있고, 이를 활용하고 있다.
 * 다만, `VM Tracker`, `Virtual Memory Trace`에 대해서는 모르는 개발자도 많다.
 
 ### VM Tracker
 
-![img16](https://dl.dropbox.com/s/lum6g2ji78u5v4p/m16.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m16.png">
 
 * VM Tracker는 앞서서 설명했던, Dirty Memory Size, Swapped Size(iOS의 경우 Compressed Memory)를 제공한다.
 
@@ -113,7 +115,7 @@ Memory Compressor는
 
 ### Virtual Memory Trace
 
-![custom1](https://dl.dropbox.com/s/m0qpr1ft0ip4mmq/custom1.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/custom1.png">
 
 (발표자료가 너무 안보여서 대체하였습니다.)
 
@@ -122,14 +124,13 @@ Memory Compressor는
 
 > Note: Virtual Memory Activity는 실제 구동시 상당히 느리고, Allocation 템플릿처럼 실시간으로 쌓이는 모습을 확인하기 어려웠습니다.(Xcode 9.3.1) 그래서 템플릿을 켠 상태로, 앱 녹화를 모두 마치고 종료 후 확인이 가능합니다.(이마저도 Instrument가 강제 종료되는 문제가 있으니 유의하세요.)
 
-![img17](https://dl.dropbox.com/s/97gs3ngym5arrlt/m17.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m17.png">
 
 * Xcode 10에서는 Instrument에서 나오는 `EXC_RESOURCE_EXCEPTION`를 캐치하여, 앱을 일시정지하는 기능을 제공한다.
 
 ## Memory Graph(vmmap)
 
-
-![custom2](https://dl.dropbox.com/s/ublwcdrxhz0i6fg/custom2.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/custom2.png">
 
 * Xcode에서는 메모리의 allocation을 그림으로 보여주는 Memory graph 기능을 제공한다.
 * 또한 이 Memory Graph를 활용하여 Xcode의 Command Line Tool들을 사용할 수 있도록 기능을 제공하고 있다.
@@ -137,7 +138,7 @@ Memory Compressor는
 Command Line Tool을 활용하기 위한 과정은 다음과 같습니다.
 
 * Export Memory Graph
-![custom3](https://dl.dropbox.com/s/jpiid2wl2iua96v/custom3.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/custom3.png">
 
 * Terminal
 
@@ -148,27 +149,26 @@ vmmap —summary App.memgraph
 
 * 구동 화면은 다음과 같습니다.(summary)
 
-![img18](https://dl.dropbox.com/s/f11r8elm2yabapf/m18.png)
-
-![img19](https://dl.dropbox.com/s/b368oqcr4s8jdpi/m19.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m18.png">
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m19.png">
 
 * 여러가지 사이즈에 대한 정보를 제공하는데, 이 때 Swapped Size는 Precompressed Size를 의미한다.
 
 ### More Detail
-![img20](https://dl.dropbox.com/s/8diax1u4jd0yw13/m20.png)
+
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m20.png">
 
 * 좀 더 상세한 내용을 보기 위해서는 `--summary` 를 제거하면 된다.
 
-
-![img21](https://dl.dropbox.com/s/496lyosix767us7/m21.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m21.png">
 
 * 예시1. 메모리의 Text Section(None writable)
 
-![img22](https://dl.dropbox.com/s/oudiggpievpi4pa/m22.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m22.png">
 
 * 예시2. 메모리의 Data Section
 
-![img23](https://dl.dropbox.com/s/2073gk2wlifxlar/m23.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m23.png">
 
 ```bash
 vmmap --pages app.memgraph | grep '.dylib' | awk '{ sum += $6 } END { print "Total Dirty Pages: " sum } '
@@ -178,7 +178,7 @@ vmmap --pages app.memgraph | grep '.dylib' | awk '{ sum += $6 } END { print "Tot
 
 ## Leak
 
-![img24](https://dl.dropbox.com/s/vg6tqxxaf5d03ce/m24.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m24.png">
 
 * 예시 - Strong Reference Cycle을 가지고 있는 3개의 객체 구현
 
@@ -187,18 +187,18 @@ vmmap --pages app.memgraph | grep '.dylib' | awk '{ sum += $6 } END { print "Tot
 ```bash
 leaks app.memorygraph
 ```
-
-![img26](https://dl.dropbox.com/s/qh2sz7toj94ix2d/m26.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m26.png">
 
 * leak이 일어나고 있는 객체에 대한 정보와 Retain Cycle에 대한 정보를 보여준다.
 
-![img25](https://dl.dropbox.com/s/ghat35b89q30ibj/m25.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m25.png">
 
 * 또한 malloc stack logging이 켜져 있을 경우, root node의 backtrace도 보여준다.
 
 ## Heap
 
-![img28](https://dl.dropbox.com/s/qk6een6r97lcsa4/m28.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m28.png">
+
 
 * heap allocation에서는 어떤 객체의 크기가 큰지, 혹은 어떤 동일한 객체가 반복적으로 생성되는지 보여준다.
 
@@ -207,37 +207,36 @@ heap App.memgraph
 heap App.memgraph -sortBySize
 heap App.memgraph -addresses all | <classes-pattern>
 ```
-
-![img29](https://dl.dropbox.com/s/41xxv9jfy51d1gq/m29.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m29.png">
 
 * 예시 화면은 다음과 같습니다.
 * 기본적으로 heap은 count를 기준으로 sorting되며, 이 옵션은 변경할 수 있다.
 
-![img30](https://dl.dropbox.com/s/rrgduwwo1jo917g/m30.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m30.png">
 
 * 여기서는 `NSConcrteData` 클래스가 매우 큰 것을 확인할 수 있다.
 
-![img31](https://dl.dropbox.com/s/vj5m4bfi4rn6ym6/m31.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m31.png">
 
 * 위의 클래스가 어디서부터 왔는지 파악하는 과정은 다음과 같다.
 * 먼저, 객체의 주소값을 확인한다.(`--addresses` 옵션을 활용한다.)
 
-![img32](https://dl.dropbox.com/s/9bauv0c28rzf25x/m32.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m32.png">
 
 * 다음으로 Malloc stack logging을 활용한다.
 * 프로젝트 빌드시 Malloc stack logging 옵션을 켤 경우, 시스템은 각각의 allocation에 대한 모든 backtrace를 기록한다.
 
-![img33](https://dl.dropbox.com/s/a9u83rpcz7am9g6/m33.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m33.png">
 
 * `malloc_history` 옵션을 활용하면 해당 주소의 backtrace를 확인할 수 있다.
 
-![img34](https://dl.dropbox.com/s/hlqhsa7bd01oy0q/m34.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m34.png">
 
 * 이를 실행하면 다음과 같은 backtrace를 확인할 수 있다.
 
 ## Tool 선택
 
-![img35](https://dl.dropbox.com/s/7qxioe0wcg9qvl2/m35.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/m35.png">
 
 * 어떤 툴을 선택하여 메모리 사용을 디버깅할 것인지에 대해 다음 가이드라인을 참고할 수 있다.
 
@@ -245,66 +244,65 @@ heap App.memgraph -addresses all | <classes-pattern>
 
 # Image
 
-![i1](https://dl.dropbox.com/s/0cygv6i8prtgylu/i1.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i1.png">
 
 * 이미지의 메모리 사용량은 이미지 파일 크기와 관련되어 있는 것이 아니라, 이미지의 크기와 관련되어 있다.
 
-![i2](https://dl.dropbox.com/s/oux6o5px4kcw2qi/i2.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i2.png">
 
 * 다음과 같은 이미지가 있을 때 이 이미지의 메모리 사용량은 어떻게 될까요?
 
-![i3](https://dl.dropbox.com/s/s17r8h6rsf3eec0/i3.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i3.png">
 
 * 정답은 대략 10MB입니다.
 
-![i4](https://dl.dropbox.com/s/y5umum5khocqnwv/i4.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i4.png">
 
 * 왜 이렇게 많은 메모리를 사용하는지는 iOS에서 이미지를 어떻게 다루는지 살펴보면 알 수 있다.
 * 이미지를 메모리에 올리기 위해서는 Load, Decode, Render Phase를 거친다.
 
-![i5](https://dl.dropbox.com/s/4nvf2zlrrpp6pc3/i5.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i5.png">
 
 * Load Phase에서 iOS는 압축된 이미지 사이즈를 메모리에 올린다.
 
-![i6](https://dl.dropbox.com/s/5sbe400krxewj90/i06.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i06.png">
 
 * 다음으로 Decode Phase에서 GPU가 이미지를 읽을 수 있도록 JPEG 파일의 포멧을 변경한다. 이 과정은 이미지의 압축을 모두 풀어야 하기 때문에, 이제 이미지의 사이즈는 10MB가 된다.
 
-![i7](https://dl.dropbox.com/s/n3edhenpemjv2a1/i07.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i07.png">
 
 * 이 이미지는 이제 우리가 원하는대로 render된다.
 
 ## Image Rendering Formats
 
-![i8](https://dl.dropbox.com/s/6n5j7i117cvwfpr/i08.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i08.png">
 
 * 이미지 랜더링 포멧 중에서 SRGB 포맷은 가장 대표적인 포맷 중 하나이다.
 * 이는 픽셀당 4 Byte이며, RGBA 각각 1 Byte를 차지한다.
 
-![i9](https://dl.dropbox.com/s/ad1npdczdoxeccv/i09.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i09.png">
 
 * iOS는 이제 Wide 포맷을 사용하여 SRGB 포맷보다 더 많은 색을 표현할 수 있다.
 * Wide 포맷은 픽셀당 8 Bytes이며, SRGB보다 좀 더 정확한 색을 표현할 수 있다.
 * 다만, Wide 포맷은 필요한 경우에만 사용하면 된다.
 
-![i10](https://dl.dropbox.com/s/wqb78krcphim62g/i10.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i10.png">
 
 * SRGB 포맷보다 더 작은 Luminance and alpha 8 포맷도 존재한다.
 * 이는 픽셀당 2 Bytes이고, grayscale 값과 alpha 값만 지원한다.
 
-
-![i11](https://dl.dropbox.com/s/diiciuf00ps1ba3/i11.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i11.png">
 
 * SRGB 포맷보다 75% 더 작은 Alpha 8 포맷도 존재한다.
 * 이미지 마스킹, monochrome 이미지 혹은 텍스트에서 유용하게 사용할 수 있다.
 
-![i12](https://dl.dropbox.com/s/epvb0jh996gs1xn/i12.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i12.png">
 
 * 이처럼, 우리에게는 많은 이미지 포맷이 있고, 우리는 올바른 이미지 포맷을 선택할 필요가 있다.
 
 ## Picking the right format
 
-![i13](https://dl.dropbox.com/s/syhn84an94j8fpj/i13.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i13.png">
 
 * 이미지 포맷을 선택하는 좋은 방법은 우리가 포맷을 선택하는 것이 아니라, 포맷이 우리를 선택하도록 하는 것이다.
 * `UIGraphicsBeginImageContextWithOptions` 는 모든 이미지를 픽셀당 4 Bytes(항상 SRGB)의 크기로 설정하고 이미지를 처리한다.
@@ -312,13 +310,12 @@ heap App.memgraph -addresses all | <classes-pattern>
 
 ### 예시
 
-![i14](https://dl.dropbox.com/s/s7bkuilynmpc46x/i14.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i14.png">
 
 * 기존의 `UIGraphicsBeginImageContextWithOptions`를 사용하여 검은색 원을 그리는 예시이다.
 * 이 때, `UIGraphicsBeginImageContextWithOptions`를 사용하였기 때문에 drawing시 픽셀당 4 Bytes를 사용한다.
 
-
-![i15](https://dl.dropbox.com/s/kcxwhyqj68ugmb9/i15.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i15.png">
 
 * `UIGraphicsImageRender` 사용하여 동일하게 검은색 원을 그릴 수 있다.
 * 이 때는 `UIGraphicsImageRender`가 검은색만 사용한 것을 파악하였기 때문에 drawing시 픽셀당 1 Bytes만 사용할 수 있도록 해준다.
@@ -327,17 +324,17 @@ heap App.memgraph -addresses all | <classes-pattern>
 
 ## Down Sampling
 
-![i16](https://dl.dropbox.com/s/fm62ixlqitp4ifh/i16.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i16.png">
 
 * 메모리 사용량을 줄이기 위해 이미지를 down sampling할 때, UIImage를 직접 down sampling하는 것은 앞서서 본 것처럼 Image Decompressing 작업을 하기 때문에 메모리 사용량이 높다.
 * `UIKit` 대신에 `ImageIO` 프레임워크를 사용하면, 데이터 Writing 작업 없이 이미지의 사이즈와 메타 데이터 정보를 읽을 수 있다.
 
-![i17](https://dl.dropbox.com/s/03mqm7uu2mqaqi4/i17.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i17.png">
 
 * 위의 코드는 `UIImage`를 곧바로 사용하여 이미지를 리사이징하는 코드이다.
 * 위의 코드에는 memory spike가 존재한다.
 
-![i18](https://dl.dropbox.com/s/19hveatbyu6b276/i18.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i18.png">
 
 * 다음 코드는 `ImageIO`를 활용하여 이미지를 리사이징하는 코드이다.
 * 이 코드는 low level API이기 때문에 일부 설정을 해주어야 한다.
@@ -348,22 +345,22 @@ heap App.memgraph -addresses all | <classes-pattern>
 
 ## Optimizing When In the background
 
-![i19](https://dl.dropbox.com/s/ipnk8ihd9jqny4q/i19.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i19.png">
 
 * 앱에서 현재 보이지 않는 부분의 이미지는 unload하면 메모리를 절약할 수 있다.
 
-![i20](https://dl.dropbox.com/s/ipetjq26dryxvdj/i20.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i20.png">
 
 * 방식 1. `UIApplicationWillEnterForeground`, `UIApplicationDidEnterBackground` Notification을 활용하여 이미지 로딩을 관리한다.
 
-![i21](https://dl.dropbox.com/s/o4cmc8tkb1t7e34/i21.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i21.png">
 
 * 방식 2. `UIViewController`의 생명주기를 활용하여(`viewWillAppear`, `viewDidDisapper`) 이미지 로딩을 관리한다.
 
 ---
 
 # Summary
-![i22](https://dl.dropbox.com/s/wcwdj54ah4zc8p0/i22.png)
+<img src="{{ site.imageUrl}}/2018-09/wwdc2018session416/i22.png">
 
 ---
 
