@@ -4,6 +4,8 @@
 permalink:         /articles/:year-:month/:title
 url:               "https://hcn1519.github.io" # the base hostname & protocol for your site
 
+imageUrl: "https://hcn1519.github.io/public/postImages"
+
 # Setup
 title:               "Eth"
 tagline:             "Developer's Lab"
@@ -24,3 +26,4 @@ plugins:
 
 markdown: kramdown
 highlighter: rouge
+

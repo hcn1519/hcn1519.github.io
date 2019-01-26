@@ -42,10 +42,7 @@ tags: [iOS, CodeSigning, ProvisioningProfile, Certificate]
 * 앱의 bundle에 있는 데이터 컴포넌트(ex: `Info.plist` 등)에도 서명을 할 수 있습니다. 이 서명은 `_CodeSignature/CodeResources`에 들어가 있습니다.
 * 라이브러리, 툴 등 앱 안에 있는 코드들도 서명될 수 있고 이 내용도 `_CodeSignature/CodeResources`에 들어갑니다.
 
-![Code Signing1](public/postImages/2018-10/codesigningprocess/codeSigning.png)
-![Code Signing2](codeSigning.png)
-![Code Signing3](./codeSigning.png)
-
+<img src="{{ site.imageUrl}}/2018-10/codesigningprocess/codeSigning.png">
 
 위의 그림은 `_CodeSignature/CodeResources`의 일부분을 캡쳐한 것입니다. 자세히 들여다보면 각 파일 이름으로 key가 설정되어 있고, 일정한 해시가 value로 들어가 있는 것을 확인할 수 있습니다.
 
