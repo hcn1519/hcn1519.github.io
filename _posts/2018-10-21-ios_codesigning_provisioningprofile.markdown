@@ -26,7 +26,9 @@ CSR 파일은 이름에서 알 수 있듯이 애플에 인증서를 요청하기
 
 > 키체인 접근 > 인증서 요청 > 인증 기관에서 인증서 요청
 
-![csr1](https://dl.dropbox.com/s/dcepybw4qujsmeq/createCSR.png)
+![csr1](https://dl.dropbox.com/s/dcepybw4qujsmeq/)
+
+<img src="{{ site.imageUrl}}/2018-10/ios_codesigning_provisioningprofile/createCSR.png">
 
 인증서 생성은 다음과 같은 작업을 수행합니다.
 
@@ -35,8 +37,7 @@ CSR 파일은 이름에서 알 수 있듯이 애플에 인증서를 요청하기
 
 이렇게 CSR 파일을 생성 후, 애플 개발자 페이지에서 해당 CSR을 업로드하면 인증서(`myCertificate.cer` 형태)를 발급 받을 수 있습니다.
 
-![csr2](https://dl.dropbox.com/s/8155k2ehxs2upwa/createCSR2.png)
-
+<img src="{{ site.imageUrl}}/2018-10/ios_codesigning_provisioningprofile/createCSR2.png">
 
 이렇게 만든 인증서를 다운로드 후, 더블 클릭하면 인증서가 맥에 등록됩니다. 등록이 올바르게 되었는지 확인하기 위해서는 키체인 접근(`키체인 접근 > 키 카테고리 > 설정한 일반이름(개인키) > 등록한 인증서 확인`) 앱을 확인하면 됩니다.
 
@@ -56,12 +57,11 @@ CSR 파일은 이름에서 알 수 있듯이 애플에 인증서를 요청하기
 
 Provisioning Profile은 기기와 개발자 계정 사이를 연결하는 역할을 담당하는 profile입니다. 이 profile은 `myProfile.mobileProvision`의 형태의 파일입니다. Provisioning Profile에는 다음과 같은 것들이 들어갑니다.
 
-![img1](https://dl.dropbox.com/s/nvvezw4tes2thrf/1%2A602qCx1Hyn_Ef7T1jrhS1w.png)
+<img src="{{ site.imageUrl}}/2018-10/ios_codesigning_provisioningprofile/provisioningProfile.png">
 
 1. Certificate - 앞서서 만든 인증서가 Provisioning Profile에 들어갑니다.
 2. App ID - 모든 iOS 앱은 앱 스토어에 등록되기 위해 Bundle Identifier 기반의 App ID가 필요합니다. 즉, App ID는 앱 스토어에서 사용되는 앱의 고유 ID라고 생각하면 됩니다.
 3. Device - 모든 iOS 기기는 고유의 UDID(Unique Device Identifier)를 가지고 있고, 이 기기를 developer 사이트(멤버 센터)에 등록해두어야 테스트하려는 앱을 기기에 설치할 수 있습니다.
-
 
 ### Provisioning Profile 생성하기
 
@@ -71,18 +71,17 @@ Provisioning Profile은 기기와 개발자 계정 사이를 연결하는 역할
 
 먼저 생성할 종류의 `Provisioning Profile`을 선택합니다.
 
-![prov1](https://dl.dropbox.com/s/589b94dwof3vwmw/createProvision1.png)
-
+<img src="{{ site.imageUrl}}/2018-10/ios_codesigning_provisioningprofile/createProvision1.png">
 
 다음으로 생성한 App ID를 선택합니다.
 
-![prov2](https://dl.dropbox.com/s/mc9w6jy3rlco78c/createProvision2.png)
+<img src="{{ site.imageUrl}}/2018-10/ios_codesigning_provisioningprofile/createProvision2.png">
 
 > App ID의 경우 위에서 별도로 생성 방식을 설명하지 않았지만, developer 사이트 > App ID 탭에서 필요한 서비스 선택 후 쉽게 생성할 수 있습니다.
 
 그리고 연결할 Certificate를 선택합니다.
 
-![prov3](https://dl.dropbox.com/s/pa0mogxwmu2u9eu/createProvision3.png)
+<img src="{{ site.imageUrl}}/2018-10/ios_codesigning_provisioningprofile/createProvision3.png">
 
 이렇게 하면 `Provisioning Profile`을 생성할 수 있습니다.
 
@@ -108,7 +107,7 @@ $ xcodebuild -project myProject.xcodeproj
 
 경로로 이동하고, myProject 파일을 오른쪽 클릭하여 패키지 내용 보기로 열어줍니다. 그러면 그 안에는 다음과 유사한 파일들이 있습니다.
 
-![build](https://dl.dropbox.com/s/2zukk7yuqd1qm5y/build.png)
+<img src="{{ site.imageUrl}}/2018-10/ios_codesigning_provisioningprofile/build.png">
 
 이 중에서 인증과 설치 허가와 관련된 것은 `_CodeSignature`와 `embedded.mobileProvision`입니다.
 
