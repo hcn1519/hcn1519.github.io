@@ -91,7 +91,7 @@ tags: [MVC, Cocoa, DesignPattern]
 
 그리고 이를 그림으로 나타낸 것이 아래 그림입니다.
 
-![Traditional MVC](https://dl.dropbox.com/s/9jbct8rd29t297n/f1.png)
+<img src="{{ site.imageUrl}}/2018-06/mvc_design_pattern/f1.png">
 
 ### Cocoa MVC
 
@@ -99,16 +99,15 @@ tags: [MVC, Cocoa, DesignPattern]
 
 Cocoa MVC에서 전통적인 MVC에 대해 문제를 제기하는 부분은 바로 Model과 View의 Notification으로 연결된 관계입니다. Model과 View는 일반적으로 앱에서 재사용이 많이 될 수 있는 코드들입니다. 그런데 위와 같이 둘 사이를 Notification 연결하면 두 객체 사이의 데이터는 Notification Center를 통해 전달해야 합니다. 그래서 두 객체 사이에는 상호 의존성이 생기게 되고 이는 객체의 재사용성을 저해합니다.
 
-그래서 Cocoa MVC에서는 이러한 문제를 해결하기 위해 Model과 View의 연결이 Controller를 통해 이뤄지도록 디자인하였습니다. 즉, Cocoa MVC는 Model이 변경된 것에 대한 notification을 controller를 통해서 View로 전달합니다. 이러한 디자인 패턴을 Mediator(중재자) Design Pattern이라고 합니다.
+그래서 Cocoa MVC에서는 이러한 문제를 해결하기 위해 Model과 View의 연결이 Controller를 통해 이뤄지도록 디자인하였습니다. 즉, Cocoa MVC는 Model이 변경된 것에 대한 notification을 controller를 통해서 View로 전달합니다. 이러한 디자인 패턴을 Mediator(중재자) Design Pat
 
-![Cocoa MVC](https://dl.dropbox.com/s/0dzzf2gy18v9fgy/f2.png)
+<img src="{{ site.imageUrl}}/2018-06/mvc_design_pattern/f2.png">
 
 #### Practical Problem
 
 전통적인 MVC는 실제 코드 구현에 있어서도 문제가 있습니다. Cocoa MVC에서 Mediating Controller의 역할을 수행하도록 만들어진 것이 `NSController`의 SubClass입니다. 이 클래스는 Mediating Design Pattern을 적용할 수 있도록 기능을 제공합니다. 그런데 이를 사용하지 않는다면 View는 Model의 notification에 대해 반응하는 코드를 custom으로 작성해야 합니다.
 
-![custom notification](https://dl.dropbox.com/s/yslgl542okbcbu9/f3.png)
-
+<img src="{{ site.imageUrl}}/2018-06/mvc_design_pattern/f3.png">
 
 ## Massive View Controller?
 
@@ -117,7 +116,6 @@ Cocoa MVC에서 전통적인 MVC에 대해 문제를 제기하는 부분은 바�
 * View의 Customization은 View에서 작성한다.
 * DataSource, Delegate은 `ViewController` 안에 작성하는 것이 아니라, 별개의 객체를 생성하여 관리한다.
 * 너무 많은 Property를 가지고 있다면, 이를 여러 개의 `ViewController`로 나누어 처리하거나 새로운 `UIView`를 만드는 것을 생각해본다.
-
 
 ---
 

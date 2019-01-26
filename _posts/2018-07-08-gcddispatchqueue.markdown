@@ -5,6 +5,8 @@ excerpt: "Dispatch Queue에 대한 정리"
 date: "2018-07-08 20:04:49 +0900"
 categories: Concurrent GCD DispatchQueue
 tags: [Concurrent, GCD, DispatchQueue]
+image:
+  feature: iOS.png
 ---
 
 > 이 글을 읽기 전 [Concurrenct programming과 GCD](https://hcn1519.github.io/articles/2018-05/concurrent_programming)을 먼저 읽으면 이해가 쉽습니다.
@@ -112,7 +114,7 @@ Dispatch Queue 객체를 생성시 기본적으로 생성되는 것은 `Serial Q
 3. utility - 📗 low 우선순위, 다운로드와 같은 오래 걸리는 작업을 처리하기에 적합하다.
 4. Background - 📘 background 우선순위, 사용자의 눈에 보이지 않는 작업을 수행하기에 적합하다.
 
-![img](https://dl.dropbox.com/s/ghb8lnx1yn4x1qx/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202018-07-13%20%EC%98%A4%EC%A0%84%2012.50.12.png)
+<img src="{{ site.imageUrl}}/2018-07/gcddispatchqueue/qos.png">
 
 이제 `Concurrent Queue`의 예제를 살펴보겠습니다. `Serial Queue`의 에제와 동일하지만, 동작하는 Queue의 종류만 변경한 것입니다.
 

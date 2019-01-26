@@ -7,7 +7,7 @@ categories: iOS l10n
 date:   2017-03-16 00:30:00
 tags: [iOS, l10n]
 image:
-  feature: iOS10.png
+  feature: iOS.png
 ---
 
 ## Localization 설정
