@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Swift Closure"
 excerpt: "Swift의 closure에 대해 알아봅니다."
-categories: Swift Closure
+categories: Swift Closure Language
 date:   2017-05-08 00:30:00
 tags: [Swift, Language, Closure]
 image:

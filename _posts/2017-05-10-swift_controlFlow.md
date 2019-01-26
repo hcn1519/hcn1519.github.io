@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Swift ControlFlow"
 excerpt: "Swift의 Value binding, fallthrough, Labeled Statement, guard에 대해 알아봅니다."
-categories: Swift ControlFlow Optional
+categories: Swift ControlFlow Optional Language
 date:   2017-05-10 00:30:00
 tags: [Swift, Language, ControlFlow, Optional]
 image:
