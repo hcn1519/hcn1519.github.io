@@ -6,18 +6,20 @@ excerpt: "UIStackView의 기본에 대해 알아봅니다."
 categories: iOS UIStackView
 date:   2017-05-03 00:30:00
 tags: [iOS, UIStackView]
+image:
+  feature: iOS.png
 ---
 
 **UIStackView** 는 iOS 9에서 나온 개념으로 여러 개의 View를 한 셋트로 만들어주는 역할을 하는 View입니다. 그래서 항상 StackView 안에는 몇 개의 View 들이 있는데, 이를 **arrangedSubViews** 라고 합니다. 이 subView들은 일정한 규칙에 따라 StackView 안에서 배치됩니다. 그리고 이 규칙은 크게 4가지가 있습니다.(axis, alignment, distribution, spacing) 이는 StackView를 스토리보드에서 생성하면 Attribute Indicator 최상단에서 다음과 같이 확인할 수 있습니다.
 
-<img src="https://dl.dropbox.com/s/mhbfbf5c88mi5jj/stackviewComponents.png">
+<img src="{{ site.imageUrl}}/2017-05/stackView/stackviewComponents.png">
 
 - axis는 StackView의 가로, 세로 형태를 설정합니다.
 - alignment는 StackView안의 view들이 Y축 정렬을 설정합니다.
 - distribution은 StackView안의 view들이 X축 정렬을 설정합니다.
 - spacing은 view들간의 간격을 설정합니다.
 
-<img src="https://dl.dropbox.com/s/8kgt5zkpn4fnr3a/stackViewComponents2.png">
+<img src="{{ site.imageUrl}}/2017-05/stackView/stackViewComponents2.png">
 
 ## UIStackView AutoLayout
 

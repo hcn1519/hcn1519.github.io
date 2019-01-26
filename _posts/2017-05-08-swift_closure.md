@@ -50,7 +50,7 @@ var closure = { header in body }
 
 여기서 header에서는 인자와 리턴타입을 명시합니다. body에서는 호출시 실행되는 함수의 내용을 작성합니다. `in` 키워드는 header와 body를 나누는 키워드입니다.
 
-<img src="https://dl.dropbox.com/s/vtfw9hc6pavmzxl/closure%20Expression.png">
+<img src="{{ site.imageUrl}}/2017-05/swift_closure/closure Expression.png">
 
 애플의 Swift 공식 가이드 문서에서는 Closure를 `sorted(by:)` 메소드를 통해 설명합니다. `sorted(by:)` 메소드는 Swift 내장 메소드로 배열을 by 이하의 기준에 따라 정렬하는 메소드입니다. 이 때 그 기준은 배열에 있는 데이터 타입들 간의 **대소 비교** 를 통해 이뤄집니다. 즉, 배열의 두 값을 가져와 그 크기를 비교하여 앞의 값이 뒤의 값보다 이전에 와야하면 `true`를 그렇지 않으면 `false`를 반환하는 것을 반복하고(오름차순 기준) 그 결과에 따라 정렬합니다.
 

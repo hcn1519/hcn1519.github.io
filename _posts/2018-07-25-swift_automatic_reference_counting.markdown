@@ -74,7 +74,7 @@ house = nil
 
 [The Swift Programming Language (Swift 4.1)](https://itunes.apple.com/kr/book/the-swift-programming-language-swift-4-1/id881256329?mt=11)
 
-![img](https://dl.dropbox.com/s/ct7p10tglou2zkh/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202018-07-07%20%EC%98%A4%ED%9B%84%207.29.35.png)
+<img src="{{ site.imageUrl}}/2018-07/swift_automatic_reference_counting/swift_object.png">
 
 앞서서 Swift의 객체는 retain count를 가지고 있고, ARC는 이를 기반으로 메모리 관리를 한다고 서술하였습니다. 이를 좀 더 자세하게 표현하면 ARC는 메모리의 유지, 해제를 retain count 중 strong reference count를 통해 관리합니다. 즉, count가 0이 되어 없어지는 객체는 strong referece count가 0이 된 객체입니다. 또한, ARC는 strong referece count가 0이 된 객체의 property 중 weak 혹은 unowned로 설정된 객체를 함께 메모리에서 해제합니다.
 
