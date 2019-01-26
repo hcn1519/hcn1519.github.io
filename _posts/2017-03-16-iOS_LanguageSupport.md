@@ -12,33 +12,32 @@ image:
 
 ## Localization 설정
 
-이 포스트에서는 iOS에서 아이폰에 설정된 언어에 따라서 앱의 언어를 바꾸는 방법에 대해 알아보겠습니다. 먼저 프로젝트 최상단 파일을 선택 후, Project를 선택합니다. 그리고 <code>Localization</code> 파트에서 원하는 언어를 추가합니다.
+이 포스트에서는 iOS에서 아이폰에 설정된 언어에 따라서 앱의 언어를 바꾸는 방법에 대해 알아보겠습니다. 먼저 프로젝트 최상단 파일을 선택 후, Project를 선택합니다. 그리고 `Localization` 파트에서 원하는 언어를 추가합니다.
 
-<img src="https://dl.dropbox.com/s/tnx1lgvoy8uxh63/lang1.png">
+<img src="{{ site.imageUrl}}/2017-03/iOS_LanguageSupport/lang1.png">
 
 이렇게 추가를 하게 되면 타겟을 설정하라고 나올텐데, 그냥 생성하시면 됩니다.(참고: Launch Screen Story Board의 글씨는 Localization 지원이 되지 않습니다. 따라서 이에 대한 설명은 생략합니다.)
 
-<img src="https://dl.dropbox.com/s/95ikeq2o2w13x6e/lang2.png">
+<img src="{{ site.imageUrl}}/2017-03/iOS_LanguageSupport/lang2.png">
 
-Localization을 적용하면 다음과 같이 <code>Main Story Board</code>와 <code>Launch Screen Story Board</code>에 다음과 같이 <code>Main.strings (Korean)</code>와 <code>Launch Screen Story Board.strings (Korean)</code>이라고 생성된 것을 확인할 수 있습니다.
+Localization을 적용하면 다음과 같이 `Main Story Board`와 `Launch Screen Story Board`에 다음과 같이 `Main.strings (Korean)`와 `Launch Screen Story Board.strings (Korean)`이라고 생성된 것을 확인할 수 있습니다.
 
-<img src="https://dl.dropbox.com/s/lu2jaus11ol7epa/lang3.png">
+<img src="{{ site.imageUrl}}/2017-03/iOS_LanguageSupport/lang3.png">
 
-다음으로 <code>Localizable.strings</code> 파일을 생성해야 합니다.
+다음으로 `Localizable.strings` 파일을 생성해야 합니다.
 
-<img src="https://dl.dropbox.com/s/cbbrv3e40wy7my0/lang5.png">
+<img src="{{ site.imageUrl}}/2017-03/iOS_LanguageSupport/lang5.png">
 
+위처럼 프로젝트에서 string file을 생성하고 이름을 `Localizable.strings`으로 지정합니다. 각각의 파일들의 역할은 다음과 같습니다.
 
-위처럼 프로젝트에서 string file을 생성하고 이름을 <code>Localizable.strings</code>으로 지정합니다. 각각의 파일들의 역할은 다음과 같습니다.
+* `Main.strings (Korean)` - 스토리보드 상의 label들에 대한 번역
+* `Localizable.strings` - 프로젝트 곳곳에 있는 string들에 대한 번역
 
-* <code>Main.strings (Korean)</code> - 스토리보드 상의 label들에 대한 번역
-* <code>Localizable.strings</code> - 프로젝트 곳곳에 있는 string들에 대한 번역
+`Main.strings (Korean)` 파일은 스토리보드에서 생성한 label들에 대한 번역 내용들을 담고 있습니다. 다만 label들이 코드로 내용이 바뀌게 된다면 해당 label의 내용은 `Localizable.strings`에서 변경해주어야 합니다. `Localizable.strings`에는 각각의 문자열들이 어떤 내용으로 바뀌어야 하는지에 대한 서술을 넣습니다.
 
-<code>Main.strings (Korean)</code> 파일은 스토리보드에서 생성한 label들에 대한 번역 내용들을 담고 있습니다. 다만 label들이 코드로 내용이 바뀌게 된다면 해당 label의 내용은 <code>Localizable.strings</code>에서 변경해주어야 합니다. <code>Localizable.strings</code>에는 각각의 문자열들이 어떤 내용으로 바뀌어야 하는지에 대한 서술을 넣습니다.
+이제 Localization이 제대로 작동하도록 각각의 파일에 Localize 옵션을 추가해줍니다.(`Main.storyboard (Base)`와 `Localizable.strings` 모두 적용)
 
-이제 Localization이 제대로 작동하도록 각각의 파일에 Localize 옵션을 추가해줍니다.(<code>Main.storyboard (Base)</code>와 <code>Localizable.strings</code> 모두 적용)
-
-<img src="https://dl.dropbox.com/s/lvl5f7y72g3java/lang4.png">
+<img src="{{ site.imageUrl}}/2017-03/iOS_LanguageSupport/lang4.png">
 
 이 때, 기본적으로 Base는 영어로 되어 있으므로, 영어와 한국어를 지원하도록 만든다고 하면, 한국어만 체크해주시면 됩니다.
 
@@ -71,7 +70,7 @@ editLabel.text = String(format: NSLocalizedString("Edit", comment: "")) // 이�
 
 ### Swift 스타일 Localization
 
-Swift에서는 <code>extension</code>을 통해 위 코드보다 좀 더 간결하게 코드를 작성할 수 있습니다. 이를 위해서 <code>StringExtension.swift</code> 파일을 생성하고 아래 코드를 넣어줍니다.
+Swift에서는 `extension`을 통해 위 코드보다 좀 더 간결하게 코드를 작성할 수 있습니다. 이를 위해서 `StringExtension.swift` 파일을 생성하고 아래 코드를 넣어줍니다.
 
 {% highlight swift %}
 // StringExtension.swift
@@ -84,7 +83,7 @@ extension String {
 }
 {% endhighlight %}
 
-이렇게 써넣으면, <code>"myString".localized</code>를 통해 좀 더 간결하게 구현할 수 있습니다.
+이렇게 써넣으면, `"myString".localized`를 통해 좀 더 간결하게 구현할 수 있습니다.
 
 {% highlight swift %}
 editLabel.text = "Edit"
@@ -105,4 +104,4 @@ titleLabel.text = String(format: NSLocalizedString("Hello %@, This is %@", comme
 titleLabel.text = String(format: NSLocalizedString("Hello %d", comment: ""), myNum) // Hello 10
 {% endhighlight %}
 
-String 타입의 경우 <code>%@</code>를 Int 타입의 경우 <code>%d</code>를 넣으면 해당 변수가 올바르게 출력되는 것을 확인할 수 있습니다.
+String 타입의 경우 `%@`를 Int 타입의 경우 `%d`를 넣으면 해당 변수가 올바르게 출력되는 것을 확인할 수 있습니다.

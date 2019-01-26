@@ -25,12 +25,14 @@ iOS에서 앱을 배포하기 위해서는 기본적으로 앱의 모든 페이�
 네, 말 그대로 시뮬레이터를 바꿔가면서 노가다를 해야합니다. 각 시뮬레이터를 켜면서
 
 <figure class="animated_gif_frame" data-caption="GIF (2MB)">
-  <img class="animated_gif" src="https://dl.dropboxusercontent.com/s/10zogh25lzvi1gw/20A9F3A5-C2F1-4C06-AB66-87CD0BBEA107-786-0000075D1354DBCC.gif" data-source="https://dl.dropboxusercontent.com/s/10zogh25lzvi1gw/20A9F3A5-C2F1-4C06-AB66-87CD0BBEA107-786-0000075D1354DBCC.gif" width="100%" height="auto">
+  <img class="animated_gif" src="{{ site.imageUrl}}/2017-03/iOS_fastlane_snapshot/takeSnapshot.gif"
+  data-source="{{ site.imageUrl}}/2017-03/iOS_fastlane_snapshot/takeSnapshot.gif" width="100%" height="auto">
 </figure>
+
 
 한땀한땀 스크린샷을 찍어줘야 하는 것이죠. Fastlane snapshot은 이러한 지루하고 오래 걸리는 반복적인 과정을 자동화해주는 역할을 담당합니다. 테스트 결과 40장의 스크린샷도 컴퓨터만 켜놓으면 10분만에 찍어주는 퍼포먼스를 보여줍니다.
 
-<img src="https://dl.dropbox.com/s/ymzuli6cx1hzekw/snapshotde.png">
+<img src="{{ site.imageUrl}}/2017-03/iOS_fastlane_snapshot/snapshotde.png">
 
 ## Fastlane snapshot 설치
 
@@ -56,7 +58,7 @@ mkdir snapshots
 
 fastlane snapshot은 Xcode의 <code>UITest</code>라는 기능을 통해 작동합니다. 그러므로 UITest를 프로젝트에 추가하고 이에 대한 설정을 해주어야 올바르게 작동합니다.먼저 프로젝트에 <code>UITest</code>를 추가하도록 하겠습니다. 최상단 메뉴바에서 <code>File > New > Target</code>을 선택합니다. 다음으로, <code>UITestBundle</code>을 프로젝트에 추가합니다. 이렇게 하면 <code>ProjectNameUITests</code> 형태로 폴더가 생성됩니다.
 
-<img src="https://dl.dropbox.com/s/asyjzz23c6zl70x/target.png">
+<img src="{{ site.imageUrl}}/2017-03/iOS_fastlane_snapshot/target.png">
 
 다음으로 이전에 생성했던 <code>SnapshotHelper.swift</code>을 새롭게 생성된 <code>ProjectNameUITests</code>로 넣어줍니다. 그리고 폴더 안에 있는 <code>ProjectNameUITests.swift</code>의 코드를 변경합니다.
 
@@ -111,7 +113,8 @@ clear_previous_screenshots true
 <code>UITests</code>는 말 그대로 UI들이 제대로 작동하는지를 테스트할 수 있게 도와주는 툴입니다. fastlane snapshots은 <code>UITests</code>를 통해 작동하는데 구체적으로 어떻게 하는지에 대해 알아보겠습니다. 먼저 Xcode에서 <code>ProjectNameUITests.swift</code>으로 이동합니다. 그리고 <code>커서</code>를 <code>testSnapshot()</code> 안으로 넣어둡니다. 그리고 밑에 보이는 빨간 버튼(레코드 버튼)을 누르게 되면, <code>UITests</code>가 구동되면서 시뮬레이터가 켜집니다. 그리고 켜진 시뮬레이터에서 버튼을 누르거나 하는 액션을 취하면 놀랍게도, 실시간으로 코드가 생성됩니다.
 
 <figure class="animated_gif_frame" data-caption="GIF (2MB)">
-  <img class="animated_gif" src="https://dl.dropboxusercontent.com/s/c4l55l2nhxkt4yv/5CE7B06E-28C6-43C0-8690-70237BCBF3FC-786-0000058543E86FAC.gif" data-source="https://dl.dropboxusercontent.com/s/c4l55l2nhxkt4yv/5CE7B06E-28C6-43C0-8690-70237BCBF3FC-786-0000058543E86FAC.gif" width="100%" height="auto">
+  <img class="animated_gif" src="{{ site.imageUrl}}/2017-03/iOS_fastlane_snapshot/setUITest.gif"
+  data-source="{{ site.imageUrl}}/2017-03/iOS_fastlane_snapshot/setUITest.gif" width="100%" height="auto">
 </figure>
 
 이 방식을 사용해서 스크린샷을 찍을 화면이 모두 나오도록 액션을 생성합니다. 다음으로 snapshot을 찍을 구간에 <code>snapshot("main")</code> 다음과 같이 snapshot 이름을 설정하여 코드를 집어넣습니다. 예시로
@@ -128,7 +131,7 @@ circuitwatchMainvcNavigationBar.buttons["Done"].tap()
 fastlane snapshot --stop_after_first_error
 {% endhighlight %}
 
-<img src="https://dl.dropbox.com/s/t1nxq4bj9x1u3b7/errorResult.png">
+<img src="{{ site.imageUrl}}/2017-03/iOS_fastlane_snapshot/errorResult.png">
 
 잘 되나요? 아마 위와 유사한 오류 메세지를 보게 될 것입니다. 결과가 다음과 같이 나오는 이유는 UITests에서 버튼들이 특정 언어에 한정되도록 설정되어 있기 때문입니다. 즉, 위에서 <code>"Edit"</code> 버튼은 한글 설정된 기기에서 <code>"편집"</code>으로 나올 경우 <code>UITests</code>가 같은 버튼으로 인식하지 못 하는 것입니다.
 
@@ -175,11 +178,11 @@ fastlane snapshot
 
 결과 이미지는 다음과 같습니다.
 
-<img src="https://dl.dropbox.com/s/m9li2qrbis6qozh/fastlaneResultTerminal.png">
+<img src="{{ site.imageUrl}}/2017-03/iOS_fastlane_snapshot/fastlaneResultTerminal.png">
 
 이렇게 나오고, fastlane은 이미지가 모두 포함된 HTML 파일도 생성해줍니다.
 
-<img src="https://dl.dropbox.com/s/dz5ykw2g64n04pz/fastlaneResulthtml.png">
+<img src="{{ site.imageUrl}}/2017-03/iOS_fastlane_snapshot/fastlaneResulthtml.png">
 
 ## Trouble Shooting
 
