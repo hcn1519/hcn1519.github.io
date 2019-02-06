@@ -47,11 +47,11 @@ let car = Car(brand: "BMW", price: 10000)
 
 ## Initializer Delegation
 
-`Initializer Delegation`의 개념은 `Initializer`가 다른 `Initializer`를 호출하여 인스턴스 생성을 완료하는 것을 의미합니다. `Initializer Delegation`은 struct와 class인지 여부에 따라 적용되는 부분이 다르고, struct가 class에 비해 상대적으로 더 간단합니다.
+`initializer delegation`의 개념은 `initializer`가 다른 `initializer`를 호출하여 인스턴스 생성을 완료하는 것을 의미합니다. `initializer delegation`은 struct와 class인지 여부에 따라 적용되는 부분이 다르고, struct가 class에 비해 상대적으로 더 간단합니다.
 
 ### Struct
 
-struct가 class에 비해 `Initializer Delegation`이 간단한 이유는 struct는 상속이 되지 않기 때문입니다. struct는 delegation용으로 `self.init()` 형태의 initializer만 호출합니다. 아래는 이에 대한 예시입니다.
+struct가 class에 비해 `initializer delegation`이 간단한 이유는 struct는 상속이 되지 않기 때문입니다. struct는 delegation용으로 `self.init()` 형태의 initializer만 호출합니다. 아래는 이에 대한 예시입니다.
 
 ```swift
 struct Car {
@@ -85,9 +85,9 @@ class의 initialize delegation을 얘기하기 위해서는 우선적으로 `des
 
 > Convenience initializers are secondary, supporting initializers for a class. You can define a convenience initializer to call a designated initializer from the same class as the convenience initializer with some of the designated initializer’s parameters set to default values. You can also define a convenience initializer to create an instance of that class for a specific use case or input value type
 
-#### Class initialize delegation
+#### Class initializer delegation
 
-class의 initialize delegation은 상속을 고려해야 하기 때문에 struct에 비해 복잡합니다. 기본 rule에 대해 살펴보면 다음과 같습니다.
+class의 `initialize delegation`은 상속을 고려해야 하기 때문에 struct에 비해 복잡합니다. 기본 rule에 대해 살펴보면 다음과 같습니다.
 
 * Rule 1 - `designated initializer`는 `superClass`의 `designated initialzer`를 반드시 호출해야 한다.
 * Rule 2 - `convenience initializer`는 동일 클래스의 initializer를 호출해야 한다.
