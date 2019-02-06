@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Swift init 기본"
+title: "Swift init 1부"
 date: "2019-02-05 23:10:45 +0900"
 excerpt: "Swift의 객체 초기화 방식에 대해 알아 봅니다."
 categories: Swift init Language
@@ -8,8 +8,6 @@ tags: [Swift, init, Language]
 image:
   feature: swiftLogo.jpg
 ---
-
-## Basic
 
 생성자(initializer, constructor)는 객체를 생성하는 메소드를 지칭합니다. 객체는 일반적으로 클래스를 통해 추상화된 형태로 description을 작성합니다. 그리고 클래스를 실제로 사용하기 위해서는 실제 메모리에 올라가는 객체의 인스턴스를 만들어야 합니다. 이 때, 객체의 인스턴스를 만드는 메소드가 생성자입니다. 다만, Swift에서는 클래스뿐만 아니라, struct에 대해서도 생성자를 지원합니다.
 
