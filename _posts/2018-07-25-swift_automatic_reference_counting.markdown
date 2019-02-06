@@ -3,7 +3,7 @@ layout: post
 title: "Swift ARC"
 date: "2018-07-25 23:10:45 +0900"
 excerpt: "Swift의 Automatic Reference Counting에 대해 알아봅니다."
-categories: Memory ARC Language
+categories: Swift Memory ARC Language
 tags: [Swift, Memory, ARC, Language]
 image:
   feature: swiftLogo.jpg
