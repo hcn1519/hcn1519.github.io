@@ -9,16 +9,15 @@ image:
   feature: swiftLogo.jpg
 ---
 
+* [Two Phase Initialization](https://hcn1519.github.io/articles/2019-02/swift-init-class-deep#two-phase-initialization)
+
+* [Two Phase Initialization - Code Example](https://hcn1519.github.io/articles/2019-02/swift-init-class-deep#two-phase-initialization---code-example)
+
+* [Two Phase init 과정에서의 Safety Check](https://hcn1519.github.io/articles/2019-02/swift-init-class-deep#two-phase-init-과정에서의-safety-check)
+
 Swift의 객체 초기화 과정은 앞서서 언급한 것처럼 class의 경우에서 복잡해집니다. 여기서는 Swift의 class init의 과정에 대해 좀 더 살펴보겠습니다. 이전 글인 [Swift init 1부](https://hcn1519.github.io/articles/2019-02/swift-init-basic)를 미리 살펴보면 더 좋습니다.
 
-* [1. Two Phase Initialization](https://hcn1519.github.io/articles/2019-02/swift-init-class-deep#1.-two-phase-initialization)
-
-* [2. Two Phase Initialization - Code Example](https://hcn1519.github.io/articles/2019-02/swift-init-class-deep#1.-two-phase-initialization---code-example)
-
-* [3. Two Phase init 과정에서의 Safety Check](https://hcn1519.github.io/articles/2019-02/swift-init-class-deep#3.-two-phase-init-과정에서의-safety-check)
-
-
-## 1. Two Phase Initialization
+## Two Phase Initialization
 
 Swift class의 초기화 과정은 공식 문서에서 **Two Phase Initialization**을 거친다고 말합니다. 그래서 다음의 2가지의 과정을 거쳐 class 객체가 초기화 됩니다.
 
@@ -42,7 +41,7 @@ Swift class의 초기화 과정은 공식 문서에서 **Two Phase Initializatio
 
 > Note: Two Phase Initialization에서 Phase의 구분을 self 접근을 기준으로 나누는 설명도 존재합니다. 즉, self 접근이 가능한 Phase -> Phase 1 단계, 그렇지 않은 경우 -> Phase 2 단계로 나누는 것입니다. 이러한 구분은 초깃값을 설정하는 것과 혼동(designated initializer에서 모든 stored property에 값이 설정되기 전에 사용되는 self는  초깃값 설정용입니다.)이 될 수 있기 때문에 위의 방식으로 이해하는 것이 좋아 보입니다.
 
-## 2. Two Phase Initialization - Code Example
+## Two Phase Initialization - Code Example
 
 이제는 **Two Phase Initialization**의 과정을 코드에서 살펴보겠습니다. 과정을 자세히 살펴보기 위해 breakpoint를 찍어서 각각을 살펴보겠습니다.
 
@@ -117,7 +116,7 @@ let coke = Coke(size: "large", price: 2000)
 
 이후에는 계층구조를 타고 내려오면서 객체에게 값 변경이나 메소드 호출의 기회가 주어집니다.
 
-## 3. Two Phase init 과정에서의 Safety Check
+## Two Phase init 과정에서의 Safety Check
 
 Swift는 init의 과정에서 개발자가 생성자를 좀 더 안전하게 사용할 수 있도록 Safety Check 규칙을 제공합니다. 즉, 이 룰을 지키지 않으면 Swift 컴파일러는 컴파일 에러를 일으키고, 코드를 수정하도록 가이드합니다.
 
