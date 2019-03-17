@@ -28,7 +28,7 @@ image:
 
 > racing condition - 공유 자원에 대해 여러 개의 프로세스가 동시에 접근을 시도할 때 접근의 타이밍이나 순서 등이 결과값에 영향을 줄 수 있는 상태
 
-* 출처: [위키 피디아 - 경쟁 상태](https://ko.wikipedia.org/wiki/경쟁_상태)
+아래 코드는 `reference type` 인스턴스가 Thread Safe하지 않은 것을 보여줍니다.
 
 ```swift
 class Bird {}
@@ -41,8 +41,6 @@ DispatchQueue.global().async {
 while true { single = Bird() }
 // error - malloc: Double free of object 0x102887200
 ```
-
-출처: [swift doc - Concurrency.rst](https://github.com/apple/swift/blob/master/docs/proposals/Concurrency.rst)
 
 위의 예시는 에러 메시지에서 확인할 수 있듯이 이미 해제된 인스턴스를 다시 dealloc하는 시도가 이뤄졌기 때문에 crash가 발생합니다. 즉, 서로 다른 쓰레드에서 dealloc된 인스턴스 정보를 공유하지 않기 때문에 위의 문제가 발생합니다.
 
@@ -104,7 +102,7 @@ Thread Safe를 달성하기 위해서 제안되는 것들이 몇 가지 있습�
 
 ## Swift와 Thread Safe
 
-> 이하의 내용은 [swift doc - Concurrency.rst](https://github.com/apple/swift/blob/master/docs/proposals/Concurrency.rst)에 있는 내용을 기반으로 작성하였습니다. 그런데 본 문서의 서두에 not accepted proposal이라는 언급이 있습니다. 이는 async-await에 대한 feature가 거절된 것일뿐, Swift 언어 자체에 대한 분석 내용이 문제가 있는 것이 아닙니다. 여기서는 async-await에 대한 것을 다루는 것이 아니라, Swift의 Thread Safe 구현에 대한 것만 다룹니다.
+> 이하의 내용은 [swift doc - Concurrency.rst](https://github.com/apple/swift/blob/master/docs/proposals/Concurrency.rst)에 있는 내용을 기반으로 작성하였습니다. 그런데 본 문서의 서두에 not accepted proposal이라는 언급이 있습니다. 이는 async-await에 대한 feature가 거절된 것일뿐, Swift의 Thread Safe에 대해 분석한 내용이 문제가 있는 것이 아닙니다.
 
 일반적으로 Thread Safe는 공유된 mutable한 자원(shared mutable memory)이 존재할 때 발생합니다. 그렇기 때문에 Swift는 Thread Safe를 달성하기 위해 쓰레드간의 메모리를 공유하는 것을 방지하는 장치가 몇 가지 존재합니다.
 
