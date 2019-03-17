@@ -102,8 +102,6 @@ Thread Safe를 달성하기 위해서 제안되는 것들이 몇 가지 있습�
 
 출처: [위키 피디아 - Thread Safety](https://en.wikipedia.org/wiki/Thread_safety)
 
-앞선 예시에서 살펴보았듯이 단순히 하나의 조건을 만족시켰다고 하여, 모든 작업이 Thread Safe해지는 것은 아닙니다. 또한 ImMutable Object로만 만드는 것은 Thread Safe 달성을 수월하게 할 수 있도록 도와주지만, 현실적으로 모든 객체를 ImMutable하게 만드는 것은 불가능합니다.
-
 ## Swift와 Thread Safe
 
 > 이하의 내용은 [swift doc - Concurrency.rst](https://github.com/apple/swift/blob/master/docs/proposals/Concurrency.rst)에 있는 내용을 기반으로 작성하였습니다. 그런데 본 문서의 서두에 not accepted proposal이라는 언급이 있습니다. 이는 async-await에 대한 feature가 거절된 것일뿐, Swift 언어 자체에 대한 분석 내용이 문제가 있는 것이 아닙니다. 여기서는 async-await에 대한 것을 다루는 것이 아니라, Swift의 Thread Safe 구현에 대한 것만 다룹니다.
