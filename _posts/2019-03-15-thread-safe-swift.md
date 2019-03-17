@@ -80,29 +80,33 @@ sleep(2)
 print("result", readFile(txtFileUrl: txtFileUrl)!)
 // 원하는 결과 1a 2a 3a ... 100a 1b 2b 3b ... 100b
 /* 예시 결과 -  결과는 조금씩 다릅니다.
-result 1a 2a 3a 4a 5a 6a 7a 8a 9a 10a 11a 12a 13a 14a 15a 16a 15b 16b 17b 18b 19b 20b 
-21b 22b 23b 24b 25b 26b 27b 28b 29b 30b 31b 32b 33b 34b 36a 37a 38a 39a 40a 
-41a 42a 43a 44a 45a 46a 47a 48a 49a 48b 49b 50b 51b 52b 54a 55a 56a 57a 58a 59a 60a 
-61a 62a 63a 64a 65a 65b 66b 67b 68b 69b 70a 71a 72a 73a 73b 74b 75b 76b 77a 78a 79a 80a 
-81a 82a 83a 84a 85a 86a 87a 88a 89a 89b 90b 91b 92a 93a 94a 95a 96a 97a 98a 99a 100a 100b 
+result 1a 2a 3a 4a 5a 6a 7a 8a 9a 10a 11a 12a 13a 14a 15a 16a 15b 16b 17b 18b 19b 20b
+21b 22b 23b 24b 25b 26b 27b 28b 29b 30b 31b 32b 33b 34b 36a 37a 38a 39a 40a
+41a 42a 43a 44a 45a 46a 47a 48a 49a 48b 49b 50b 51b 52b 54a 55a 56a 57a 58a 59a 60a
+61a 62a 63a 64a 65a 65b 66b 67b 68b 69b 70a 71a 72a 73a 73b 74b 75b 76b 77a 78a 79a 80a
+81a 82a 83a 84a 85a 86a 87a 88a 89a 89b 90b 91b 92a 93a 94a 95a 96a 97a 98a 99a 100a 100b
 */
 ```
 
-위의 예시는 File I/O 작업이 항상 최신의 데이터에 항상 접근될 수 없기 때문에 Thread Safe하지 않다는 것을 보여주는 예시입니다. 여기서 눈여겨 볼 부분은 File에 내용을 write하는 작업이 `atomic`하게 수행되었음에도 위와 같은 결과가 나왔다는 점입니다. 여기서 Thread Safe가 달성되지 못 하는 근본적인 원인은 공유 자원(여기서는 sample.txt라는 파일)에 동시에 접근하려고 시도하여 권한을 획득한 task가 자신의 작업을 수행하기 때문입니다.
+위의 예시는 File I/O 작업이 항상 최신의 데이터에 항상 접근될 수 없기 때문에 Thread Safe하지 않다는 것을 보여주는 예시입니다. 여기서 눈여겨 볼 부분은 File에 내용을 write하는 작업이 `atomic`하게 수행되었음에도 위와 같은 결과가 나왔다는 점입니다. 여기서 Thread Safe가 달성되지 못 하는 근본적인 원인은 공유 자원(여기서는 sample.txt라는 파일)에 동시에 접근하려고 시도하여 작업 순서에 관계 없이 권한을 획득한 task가 자신의 작업을 수행하기 때문입니다.
 
 ## Thread Safe 달성하기
 
 Thread Safe를 달성하기 위해서 제안되는 것들이 몇 가지 있습니다. 아래의 내용은 일반적으로 Thread Safe를 달성하기 위해 제안되는 방법들입니다.
 
 1. Mutual Exclusion - 쓰레드에 락이나 세마포어를 걸어서 공유자원에 하나의 쓰레드만 접근하도록 한다.
-2. Thread Local Storage - 특정 쓰레드에서만 사용 가능한 저장소를 만든다.
-3. ReEntrancy - 쓰레드에서 동작하는 코드가 동일 쓰레드에서 재수행되거나, 다른 쓰레드에서 해당 코드를 동시에 수행해도 동일한 결과값을 얻을 수 있도록 코드를 작성하는 것입니다. 이는 쓰레드 진입시 local state를 저장하고 이를 atomic하게 사용하여 구현될 수 있습니다.
+2. Thread Local Storage - 특정 쓰레드에서만 접근 가능한 저장소를 만든다.
+3. ReEntrancy - 쓰레드에서 동작하는 코드가 동일 쓰레드에서 재수행되거나, 다른 쓰레드에서 해당 코드를 동시에 수행해도 동일한 결과값을 얻을 수 있도록 코드를 작성한다. 이는 쓰레드 진입시 local state를 저장하고 이를 atomic하게 사용하여 구현될 수 있습니다.
 4. Atomic Opertaion - 데이터 변경시 atomic하게 데이터에 접근되도록 만든다.(참고 - [atomic/non-atomic](https://hcn1519.github.io/articles/2019-03/atomic))
 5. ImMutable Object - 객체 생성 이후에 값을 변경할 수 없도록 만든다.
 
+출처: [위키 피디아 - Thread Safety](https://en.wikipedia.org/wiki/Thread_safety)
+
+앞선 예시에서 살펴보았듯이 단순히 하나의 조건을 만족시켰다고 하여, 모든 작업이 Thread Safe해지는 것은 아닙니다. 또한 ImMutable Object로만 만드는 것은 Thread Safe 달성을 수월하게 할 수 있도록 도와주지만, 현실적으로 모든 객체를 ImMutable하게 만드는 것은 불가능합니다.
+
 ## Swift와 Thread Safe
 
-> 이하의 내용은 [swift doc - Concurrency.rst](https://github.com/apple/swift/blob/master/docs/proposals/Concurrency.rst)에 있는 내용을 기반으로 작성하였습니다. 그런데 본 문서의 서두에 not accepted proposal이라는 언급이 있습니다. 이는 async-await에 대한 feature가 거절된 것일뿐, Swift 언어 자체에 대한 분석 내용이 문제가 있는 것이 아닙니다.
+> 이하의 내용은 [swift doc - Concurrency.rst](https://github.com/apple/swift/blob/master/docs/proposals/Concurrency.rst)에 있는 내용을 기반으로 작성하였습니다. 그런데 본 문서의 서두에 not accepted proposal이라는 언급이 있습니다. 이는 async-await에 대한 feature가 거절된 것일뿐, Swift 언어 자체에 대한 분석 내용이 문제가 있는 것이 아닙니다. 여기서는 async-await에 대한 것을 다루는 것이 아니라, Swift의 Thread Safe 구현에 대한 것만 다룹니다.
 
 일반적으로 Thread Safe는 공유된 mutable한 자원(shared mutable memory)이 존재할 때 발생합니다. 그렇기 때문에 Swift는 Thread Safe를 달성하기 위해 쓰레드간의 메모리를 공유하는 것을 방지하는 장치가 몇 가지 존재합니다.
 
