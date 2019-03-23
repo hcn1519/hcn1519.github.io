@@ -2,9 +2,11 @@
 layout: post
 title: "Thread Safe"
 date: "2019-03-21 00:10:45 +0900"
-excerpt: "Thread Safe에 대해 공부한 것들을 작성하였습니다."
+excerpt: "Thread Safe에 대해 알아 봅니다."
 categories: Swift ThreadSafe atomic OS Thread Language
 tags: [Swift, ThreadSafe, atomic, OS, Thread, Language]
+image:
+  feature: blogThumb.png
 ---
 
 ## 목차
@@ -66,7 +68,7 @@ while true { single = Bird() }
 
 위의 코드는 실행시 매우 빠르게 크래시가 발생합니다. 이 크래시는 다중 쓰레드 환경에서 A 쓰레드가 B 쓰레드의 인스턴스 해제 정보를 알지 못 하기 때문에 발생합니다.
 
-Swift의 Class 인스턴스의 `reference count` 값은 `atomic`하게 업데이트 되어, `racing condition`에 빠지지 않습니다. 하지만, `atomic`하게 데이터를 업데이트 하는 것이 보장되는 것은 `reference type` 인스턴스의 생성(해제) 도중에 다른 쓰레드가 인스턴스에 접근하지 못 하도록 하는데 도움을 줍니다. 하지만, 여전히 인스턴스 생성 이후, 생성 이전에는 다른 쓰레드에서 접근이 가능합니다. 이 때, 다른 쓰레드는 alloc/dealloc 정보를 모르기 때문에 `reference type` 인스턴스의 생성은 Thread Safe하지 않습니다.
+Swift의 Class 인스턴스의 `reference count` 값은 `atomic`하게 업데이트 되어, `racing condition`에 빠지지 않습니다. 하지만, `atomic`하게 데이터를 업데이트 하는 것이 보장하는 것은 `reference type` 인스턴스의 생성(해제) 도중에 다른 쓰레드가 인스턴스에 접근하지 못 하도록 하는 것입니다. 이 경우 여전히 인스턴스 생성 이후, 생성 이전에는 다른 쓰레드에서 인스턴스에 접근이 가능합니다. 이 때, 다른 쓰레드는 alloc/dealloc 정보를 모르기 때문에 `reference type` 인스턴스의 생성과 해제는 Thread Safe하지 않습니다.
 
 > racing condition - 공유 자원에 대해 여러 개의 프로세스가 동시에 접근을 시도할 때 접근의 타이밍이나 순서 등이 결과값에 영향을 줄 수 있는 상태
 
