@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Thread Safe"
-date: "2019-03-22 00:10:45 +0900"
+date: "2019-03-21 00:10:45 +0900"
 excerpt: "Thread Safe에 대한 것들을 작성하였습니다."
 categories: Swift ThreadSafe, atomic Language
 tags: [Swift, ThreadSafe, atomic, Language]
@@ -14,7 +14,6 @@ Thread Safe 여부를 판단하는 것은 다중 쓰레드 환경에서 코드�
 ## Thread Safe 개념
 
 > A data type or static method is threadsafe if it behaves correctly when used from multiple threads, regardless of how those threads are executed, and without demanding additional coordination from the calling code. 출처 - [Thread Safety - MIT](http://web.mit.edu/6.005/www/fa15/classes/20-thread-safety)
-
 
 데이터 타입이나 static 메소드가 Thread Safe하다라고 하는 것은 다음의 조건을 만족할 때 성립합니다.
 
@@ -42,7 +41,6 @@ func updateCell() {
 
 이 경우에 `endUpdates()`은 반드시 `beginUpdates()` 이후에 호출되어야 하는 전제 조건이 있습니다. 이런 조건이 없는 것이 호출자에 전제 조건이 없는 것입니다.
 
-
 ## Thread Safe 판단 예시
 
 ### 1. Swift Class Instance
@@ -66,7 +64,6 @@ while true { single = Bird() }
 Swift의 Class 인스턴스의 `reference count` 값은 `atomic`하게 업데이트 되어, `racing condition`*에 빠지지 않습니다. 하지만, `atomic`한 데이터라도 `reference type` 인스턴스의 alloc/dealloc 정보는 쓰레드 단위로 공유되지 않습니다. 위의 예시에서는 이미 해제된 인스턴스를 다시 dealloc하는 시도가 이뤄졌기 때문에 crash가 발생합니다.
 
 > racing condition - 공유 자원에 대해 여러 개의 프로세스가 동시에 접근을 시도할 때 접근의 타이밍이나 순서 등이 결과값에 영향을 줄 수 있는 상태
-
 
 ### 2. File read/write
 
