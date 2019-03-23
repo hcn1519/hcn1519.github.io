@@ -5,9 +5,14 @@ date: "2019-03-21 00:10:45 +0900"
 excerpt: "Thread Safe에 대한 것들을 작성하였습니다."
 categories: Swift ThreadSafe atomic OS Thread Language
 tags: [Swift, ThreadSafe, atomic, OS, Thread, Language]
-image:
-  feature: swiftLogo.jpg
 ---
+
+## 목차
+
+1. [Thread Safe 개념](https://hcn1519.github.io/articles/2019-03/thread-safe#thread-safe-개념)
+2. [Thread Safe 판단 예시](https://hcn1519.github.io/articles/2019-03/thread-safe#thread-safe-판단-예시)
+3. [Thread Safe 달성하기](https://hcn1519.github.io/articles/2019-03/thread-safe#thread-safe-달성하기)
+4. [Swift와 Thread Safe](https://hcn1519.github.io/articles/2019-03/thread-safe#thread-safe-개념)
 
 Thread Safe 여부를 판단하는 것은 다중 쓰레드 환경에서 코드를 작성할 때, 반드시 이해해야 하는 부분 중 하나입니다.이번 포스팅에서는 Thread Safe가 무엇이고, 어떻게 Thread Safe를 판단하는지에 대해 살펴보고자 합니다.
 
