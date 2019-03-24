@@ -20,7 +20,7 @@ Thread Safe 여부를 판단하는 것은 다중 쓰레드 환경에서 코드�
 
 ## Thread Safe 개념
 
-Thread Safe에 대해서는 다음 글([Thread Safety - MIT](http://web.mit.edu/6.005/www/fa15/classes/20-thread-safety)에서 자세히 서술되어 있습니다. 아래의 내용은 이 글의 일부를 발췌하여 정리하였습니다. 원글에서는 Thread Safe에 대한 정의를 아래와 같이 서술하고 있습니다.
+Thread Safe에 대해서는 다음 글([Thread Safety - MIT](http://web.mit.edu/6.005/www/fa15/classes/20-thread-safety))에서 자세히 서술되어 있습니다. 아래의 내용은 이 글의 일부를 발췌하여 정리하였습니다. 원글에서는 Thread Safe에 대한 정의를 아래와 같이 서술하고 있습니다.
 
 > A data type or static method is threadsafe if it behaves correctly when used from multiple threads, regardless of how those threads are executed, and without demanding additional coordination from the calling code.
 
@@ -54,7 +54,7 @@ func updateCell() {
 
 ### 1. Swift Class Instance
 
-reference type의 인스턴스를 새로 만드는 것은 메모리 delloc 후에 alloc이 이루어져야 합니다. 하지만, 다중 쓰레드 환경에서 `reference type` 인스턴스의 alloc/dealloc 정보는 쓰레드 단위로 공유되지 않습니다.
+reference type의 인스턴스를 새로 만드는 것은 메모리 delloc 후에 `alloc`이 이루어져야 합니다. 하지만, 다중 쓰레드 환경에서 `reference type` 인스턴스의 `alloc`/`dealloc` 정보는 쓰레드 단위로 공유되지 않습니다.
 
 ```swift
 class Bird {}
@@ -70,13 +70,13 @@ while true { single = Bird() }
 
 위의 코드는 실행시 매우 빠르게 크래시가 발생합니다. 이 크래시는 다중 쓰레드 환경에서 A 쓰레드가 B 쓰레드의 인스턴스 해제 정보를 알지 못 하기 때문에 발생합니다.
 
-Swift의 Class 인스턴스의 `reference count` 값은 `atomic`하게 업데이트 되어, `racing condition`에 빠지지 않습니다. 하지만, `atomic`하게 데이터를 업데이트 하는 것이 보장하는 것은 `reference type` 인스턴스의 생성(해제) 도중에 다른 쓰레드가 인스턴스에 접근하지 못 하도록 하는 것입니다. 이 경우 여전히 인스턴스 생성 이후, 생성 이전에는 다른 쓰레드에서 인스턴스에 접근이 가능합니다. 이 때, 다른 쓰레드는 alloc/dealloc 정보를 모르기 때문에 `reference type` 인스턴스의 생성과 해제는 Thread Safe하지 않습니다.
+Swift의 Class 인스턴스의 `reference count` 값은 `atomic`하게 업데이트 되어, `racing condition`에 빠지지 않습니다. 하지만, `atomic`하게 데이터를 업데이트 하는 것이 보장하는 것은 `reference type` 인스턴스의 생성(해제) 도중에 다른 쓰레드가 인스턴스에 접근하지 못 하도록 하는 것입니다. 이 경우 여전히 인스턴스 생성 이후, 생성 이전에는 다른 쓰레드에서 인스턴스에 접근이 가능합니다. 이 때, 다른 쓰레드는 `alloc`/`dealloc` 정보를 모르기 때문에 `reference type` 인스턴스의 생성과 해제는 Thread Safe하지 않습니다.
 
 > racing condition - 공유 자원에 대해 여러 개의 프로세스가 동시에 접근을 시도할 때 접근의 타이밍이나 순서 등이 결과값에 영향을 줄 수 있는 상태
 
 ### 2. File read/write
 
-파일에 데이터를 읽고 쓰는 작업이 Thread Safe한가에 대해서는 고려할 때, 타이밍 이슈를 생각해 볼 수 있습니다. 파일의 내용은 `read()`, `write()`의 순서에 따라 그 결과가 항상 변합니다. 즉, 
+파일에 데이터를 읽고 쓰는 작업이 Thread Safe한가에 대해서는 고려할 때, 타이밍 이슈를 생각해 볼 수 있습니다. 파일의 내용은 `read()`, `write()`의 순서에 따라 그 결과가 항상 변합니다. 즉,
 
 * `read()` 이후에 `write()`
 * `write()` 이후에 `read()`
