@@ -20,9 +20,11 @@ Thread Safe 여부를 판단하는 것은 다중 쓰레드 환경에서 코드�
 
 ## Thread Safe 개념
 
-> A data type or static method is threadsafe if it behaves correctly when used from multiple threads, regardless of how those threads are executed, and without demanding additional coordination from the calling code. 출처 - [Thread Safety - MIT](http://web.mit.edu/6.005/www/fa15/classes/20-thread-safety)
+Thread Safe에 대해서는 다음 글([Thread Safety - MIT](http://web.mit.edu/6.005/www/fa15/classes/20-thread-safety)에서 자세히 서술되어 있습니다. 아래의 내용은 이 글의 일부를 발췌하여 정리하였습니다. 원글에서는 Thread Safe에 대한 정의를 아래와 같이 서술하고 있습니다.
 
-데이터 타입이나 static 메소드가 Thread Safe하다라고 하는 것은 다음의 조건을 만족할 때 성립합니다.
+> A data type or static method is threadsafe if it behaves correctly when used from multiple threads, regardless of how those threads are executed, and without demanding additional coordination from the calling code.
+
+이를 정리하면 다음과 같습니다. 데이터 타입이나 static 메소드가 Thread Safe하다라고 하는 것은 다음의 조건을 만족할 때 성립합니다.
 
 1. 다중 쓰레드의 동작에 관계 없이 항상 올바르게 동작한다.
 2. 호출에 있어서 추가적인 조건이 없다.
@@ -32,9 +34,9 @@ Thread Safe 여부를 판단하는 것은 다중 쓰레드 환경에서 코드�
 * **올바르게 동작 한다는 것**은 명세를 만족시키고 객체의 표현 불변성을 유지하는 것을 의미합니다.(`representation invariant`)
 * 호출에 있어서 **추가적인 조건이 없다**는 것은 데이터 타입이 타이밍과 관련하여 호출자에 전제 조건을 지정할 수 없음을 의미합니다.
 
-위 내용만으로는 제 스스로 Thread Safe에 대한 정의를 완전히 이해하기 어려워서 관련하여 좀 더 내용을 알아보고, 이에 대해 정리하였습니다.
+위 내용만으로는 제 스스로 Thread Safe에 대한 정의를 완전히 이해하기 어려워서 😭 관련하여 좀 더 내용을 알아보고, 이에 대해 정리하였습니다.
 
-* `representation invariant`(표현 불변성)이라는 말은 어떤 클래스에서 항상 변하지 않는 것을 지칭합니다. 주사위를 굴리는 것을 예로 생각해보겠습니다. 주사위를 굴릴 때 눈금은 항상 1 에서 6 사이입니다. 한 개의 주사위를 굴리는 행위로는 1에서 6 사이의 자연수 이외의 숫자를 결과로 내놓을 수 없습니다. 바꿔 말하면, `Dice` 클래스에서 `throwDice()`라는 메소드는 `Dice` 클래스의 `representation invariant`을 유지한다고 할 수 있습니다.
+* `representation invariant`(표현 불변성)이라는 말은 어떤 클래스에서 항상 변하지 않는 것을 지칭합니다. 주사위를 굴리는 것을 예로 생각해보겠습니다. 주사위를 굴릴 때 눈금은 항상 1 에서 6 사이입니다. 한 개의 주사위를 굴리는 행위로는 1에서 6 사이의 자연수 이외의 숫자를 결과로 내놓을 수 없습니다. 바꿔 말하면, `Dice🎲` 클래스에서 `throwDice()`라는 메소드는 `Dice🎲` 클래스의 `representation invariant`을 유지한다고 할 수 있습니다.
 
 * 타이밍과 관련하여 호출자에 전제 조건이 있는 것은 다음과 같은 경우입니다. `UITableView`는 특정 cell만 reload하기 위해 다음과 같이 코드를 작성합니다.
 
