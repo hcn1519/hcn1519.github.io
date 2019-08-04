@@ -28,7 +28,7 @@ switch myCondition {
 case let con:
     print("Condition이 \(con)입니다.")
 case let con:
-    print("Condition2 : \(con)")    
+    print("Condition2 : \(con)")
 default:
   print("Switch default")
 }
@@ -78,38 +78,37 @@ default:
 
 ## Fallthrough
 
-`fallthrough`는 `switch`와 연관된 키워드로 `switch`를 사용할 때, `default` case가 항상 작동하도록 해주는 키워드입니다. Swift는 `switch`를 사용할 때 case별로 `break`를 따로 작성해주지 않아도 해당 case의 조건을 만족한다면, 그 case의 내용만 실행하고 `switch`에서 빠져나오게 됩니다. 그런데 여기서 `fallthrough`는 `fallthrough`가 작성된 시점에서 case를 더이상 실행하지 않고, 바로 `default`로 넘어가도록 해줍니다.
+`fallthrough`는 `switch`와 연관된 키워드로 `switch`를 사용할 때, 코드 순서상의 다음 조건문을 실행시켜 줍니다. 이 때, 다음 조건문이 없다면 컴파일 에러가 발생합니다. Swift의 `switch`는 case별로 `break`를 따로 작성해주지 않아도 해당 case의 조건을 만족한다면, 그 case의 내용만 실행하고 `switch`에서 빠져나오게 됩니다. 그런데 여기서 `fallthrough`는 `fallthrough`가 작성된 시점에서 case를 더이상 실행하지 않고, 바로 다음 조건문을 실행하고, `switch`를 종료합니다.
 
 {% highlight swift %}
-let myCondition = 10
-
-switch myCondition {
-case 10:
-    print("Condition이 10입니다.")
-    fallthrough
-default:
-    print("Switch 종료")
+enum MyCase {
+    case a, b, c
 }
-// 결과 : Condition이 10입니다.
-//        Switch 종료
+
+let myCase = MyCase.a
+
+switch myCase {
+case .a:
+    print("a")
+    fallthrough
+    print("after a") // will never be executed
+case .c:
+    print("c")
+case .b:
+    print("b")
+}
+
+// 결과 : a c
+
+switch myCase {
+case .a, .b, .c:
+    print("a b c")
+    fallthrough // 'fallthrough' without a following 'case' or 'default' block
+}
 {% endhighlight %}
 
-위의 예의 경우 `fallthrough`가 없다면 `Condition이 10입니다.`만 실행하고 switch는 종료됩니다. 하지만, `fallthrough`가 있기 때문에 `default` case도 함께 실행됩니다.
-
-{% highlight swift %}
-let myCondition = 10
-
-switch myCondition {
-case 10:
-    fallthrough
-    print("Condition이 10입니다.")
-default:
-    print("Switch 종료")
-}
-// 결과 : Switch 종료
-{% endhighlight %}
-
-두 번째 예에서는 `fallthrough`가 `print("Condition이 10입니다.")`보다 앞에 작성되어 있습니다. `fallthrough`를 만나면 바로 `default` case로 넘어가므로 해당 print문은 실행되지 않고 `default` case의 print만 실행됩니다.
+1. `fallthrough`는 조건문 작성 순서에 영향을 받습니다. 위의 예시에서 a 다음 b가 아닌 c가 출력된 것에서 이를 확인할 수 있습니다. 조건을 a 다음 b로 쓴다면 a, b가 출력됩니다.
+1. `fallthrough`는 실행할 다음 조건문이 없다면 컴파일 에러가 발생합니다.
 
 ## Labeled Statement
 
