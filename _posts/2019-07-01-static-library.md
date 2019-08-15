@@ -55,4 +55,4 @@ static library는 앱의 라이브러리와 `static linker`를 통해 앱과 연
 
 * [Overview of Dynamic Libraries - Apple Doc](https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/OverviewOfDynamicLibraries.html#//apple_ref/doc/uid/TP40001873-SW1)
 * [http://www.vadimbulavin.com/static-dynamic-frameworks-and-libraries/](http://www.vadimbulavin.com/static-dynamic-frameworks-and-libraries/)
-* [](https://medium.com/@StueyGK/static-libraries-vs-dynamic-libraries-af78f0b5f1e4)
+* [Static Libraries vs. Dynamic Libraries](https://medium.com/@StueyGK/static-libraries-vs-dynamic-libraries-af78f0b5f1e4)
