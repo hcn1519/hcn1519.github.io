@@ -24,7 +24,9 @@ Dynamic Library는 앱에서 사용되기 위해 Link와 Load의 과정을 거�
 > In computing, a dynamic linker is the part of an operating system that loads and links the shared libraries needed by an executable when it is executed (at "run time"), by copying the content of libraries from persistent storage to RAM, filling jump tables and relocating pointers.
 
 `Dynamic Linker`는 `executable` 실행시 외부로부터 필요한 라이브러리를 연결하는 역할을 담당합니다. macOS와 iOS의 기반인 Darwin OS에서는 executable을 빌드시점에서 소스코드 컴파일 이후에 라이브러리를 Link합니다. 이 Link Time 시점에서 `Dynamic Linker` 파일 경로는 앱 번들에 포함됩니다.(`executable` target인 프로젝트 빌드시 Mach-O 명령어가 호출됩니다.) 이 때, executable이 필요로 하는 Dynamic Library의 파일 경로(`someLib.dylib`)도 함께 앱 번들에 포함됩니다.
+
 또한 `Dynamic Linker`는 Link Time에서 executable이 필요로 하는 라이브러리를 알 수 있도록 메모리에 각각의 라이브러리를 호출하는 machine code functions를 메모리에 로드해놓습니다. 그래서 Link Time 시점에서 executable은 필요로하는 라이브러리의 주소를 Dynamic Linker를 통해 획득할 수 있습니다.
+
 이러한 일련의 과정은 런타임에서 수행되고, `Dynamic Linker`는 Library를 이미 실행되고 있는 프로세스(`executable`)에 연결합니다. 이러한 과정은 `Dynamic Linking`이라고 부릅니다.
 
 정리하면 다음과 같습니다.
@@ -86,6 +88,7 @@ typedef struct dl_info {
 ## 참고자료
 
 * [Overview of Dynamic Libraries - Apple Doc](https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/OverviewOfDynamicLibraries.html#//apple_ref/doc/uid/TP40001873-SW1)
+* [Dynamic Library Usage Guidelines - Apple Doc](https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/DynamicLibraryUsageGuidelines.html#//apple_ref/doc/uid/TP40001928-SW10)
 * [http://www.vadimbulavin.com/static-dynamic-frameworks-and-libraries/](http://www.vadimbulavin.com/static-dynamic-frameworks-and-libraries/)
 * [Static Libraries vs. Dynamic Libraries](https://medium.com/@StueyGK/static-libraries-vs-dynamic-libraries-af78f0b5f1e4)
 * [Dynamic_linker#macOS_and_iOS](https://en.wikipedia.org/wiki/Dynamic_linker#macOS_and_iOS)
