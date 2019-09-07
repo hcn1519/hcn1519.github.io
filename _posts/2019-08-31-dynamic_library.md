@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Dynamic Library"
-date: "2019-08-31 00:53:17 +0900"
+date: "2019-09-06 00:53:17 +0900"
 excerpt: "Dynamic Library 대해 학습한 내용을 정리합니다."
 categories: iOS, OS, Library, Framework
 tags: [iOS, OS, Library, Framework]
@@ -23,18 +23,20 @@ Dynamic Library는 앱에서 사용되기 위해 Link와 Load의 과정을 거�
 
 > In computing, a dynamic linker is the part of an operating system that loads and links the shared libraries needed by an executable when it is executed (at "run time"), by copying the content of libraries from persistent storage to RAM, filling jump tables and relocating pointers.
 
-`Dynamic Linker`는 `executable` 실행시 외부로부터 필요한 라이브러리를 연결하는 역할을 담당합니다. macOS와 iOS의 기반인 Darwin OS에서는 executable을 빌드시점에서 소스코드 컴파일 이후에 라이브러리를 Link합니다. 이 Link Time 시점에서 `Dynamic Linker` 파일 경로는 앱 번들에 포함됩니다.(`executable` target인 프로젝트 빌드시 Mach-O 명령어가 호출됩니다.) 이 때, executable이 필요로 하는 Dynamic Library의 파일 경로(`someLib.dylib`)도 함께 앱 번들에 포함됩니다.
+`Dynamic Linker`는 `executable` 실행시 외부로부터 필요한 라이브러리를 연결하는 역할을 담당합니다. macOS와 iOS의 기반인 Darwin OS에서는 프로젝트 빌드 시점에서 소스코드 컴파일 이후에 라이브러리를 Link합니다. 이 Link Time 시점에서 `Dynamic Linker` 파일 경로는 앱 번들에 포함됩니다.(`executable` target인 프로젝트 빌드시 Mach-O 명령어가 호출됩니다.) 이 때, executable이 필요로 하는 Dynamic Library의 파일 경로(`someLib.dylib`)도 함께 앱 번들에 포함됩니다.
 
-또한 `Dynamic Linker`는 Link Time에서 executable이 필요로 하는 라이브러리를 알 수 있도록 메모리에 각각의 라이브러리를 호출하는 machine code functions를 메모리에 로드해놓습니다. 그래서 Link Time 시점에서 executable은 필요로하는 라이브러리의 주소를 Dynamic Linker를 통해 획득할 수 있습니다.
+> Note: executable 외부는 빌드된 `Example.app` 번들의 외부를 의미하는 것이 아니라, 해당 번들 안에서 컴파일된 소스코드의 외부를 의미합니다. 그래서 `Dynamic Library`를 적용한다고 하여서 앱의 사이즈가 줄어드는 것은 아닙니다.(오히려 늘어날 수 있습니다.) executable(실행 바이너리)이 줄어드는 것과 앱 번들이 줄어드는 것의 차이를 이해하면 좋습니다.
 
-이러한 일련의 과정은 런타임에서 수행되고, `Dynamic Linker`는 Library를 이미 실행되고 있는 프로세스(`executable`)에 연결합니다. 이러한 과정은 `Dynamic Linking`이라고 부릅니다.
+또한 `Dynamic Linker`는 Link Time 시점에 `executable`이 필요로 하는 라이브러리를 알 수 있도록 메모리에 각각의 라이브러리를 호출하는 `machine code functions`를 메모리에 로드해놓습니다. 그래서 Link Time 시점에서 `executable`은 필요로하는 라이브러리의 주소를 `Dynamic Linker`를 통해 획득할 수 있습니다.
+
+이러한 일련의 과정은 런타임에서 수행되고, `Dynamic Linker`는 Library를 이미 실행되고 있는 프로세스(`executable`)에 연결합니다. 이러한 과정을 `Dynamic Linking`이라고 부릅니다.
 
 정리하면 다음과 같습니다.
 
-1. 개발자가 앱 빌드 실행
-2. 소스코드 컴파일 진행
-3. `executable`과 라이브러리의 Link 진행
-4. Link 과정에서 `executable`이 필요로 하는 라이브러리의 주소를 `Dynamic Linker`가 제공
+1. 개발자가 앱을 빌드합니다.
+2. 소스코드 컴파일이 진행됩니다.
+3. 소스코드가 컴파일되면 컴파일된 파일에서 필요로하는 라이브러리의 Link를 진행합니다.
+4. Link 과정에서 `executable`이 필요로 하는 라이브러리의 주소를 `Dynamic Linker`가 제공합니다.
 
 ## Dynamic Libraries Load
 
@@ -48,7 +50,7 @@ Dynamic Library는 메모리 로드 시점 및 메모리 로드 방식에 따라
 
 앱이 실행되는 과정에서 `Dependent Library`가 로드되는 과정은 다음과 같습니다.
 
-1. 앱이 실행될 때 커널은 새로운 프로세스를 위해 할당된 주소 공간에 앱의 코드와 데이터를 로드합니다. 커널은 `Dynamic Loader`를 앱과 함께 로드하고, `Dynamic Loader`는 `Dependent Library`를 메모리에 로드합니다.
+1. 앱이 실행될 때 커널은 새로운 프로세스를 위해 할당된 주소 공간에 앱의 코드와 데이터를 로드합니다. 커널은 `Dynamic Loader`를 앱과 함께 로드하고, `Dynamic Loader`는 `Dependent Library`를 메모리에 로드합니다.(`Dynamic Linking` 과정에서 `executable`이 획득한 주소값을 활용하여 `machine code functions`를 호출합니다.)
 2. `Static Linker`는 앱이 `Dependent Library`와 링크될 때마다 해당 `Dependent Library`를 사용한 소스코드 파일명을 기록합니다. 이 파일명은 `install name`이라고 부릅니다. `Dynamic Loader`는 `install name`을 활용하여 파일 시스템에 라이브러리의 위치를 설정합니다.
 3. `Dynamic Loader`는 정의되지 않은 외부 symbols를 앱 실행 시점에 처리하고, 그 이외의 symbols는 앱이 실제로 사용할 때까지 방치됩니다.
 

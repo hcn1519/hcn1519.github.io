@@ -22,11 +22,11 @@ Xcode에서는 `Static library`를 만드는 템플릿을 제공하고 있으며
 
 > Mach-O is the native executable format of binaries in OS X and is the preferred format for shipping code. An executable format determines the order in which the code and data in a binary file are read into memory.
 
-* https://developer.apple.com/library/archive/documentation/Performance/Conceptual/CodeFootprint/Articles/MachOOverview.html
+* [Overview of the Mach-O Executable Format - Apple Doc](https://developer.apple.com/library/archive/documentation/Performance/Conceptual/CodeFootprint/Articles/MachOOverview.html)
 
 ### Static Library의 동작 과정
 
-앱의 빌드 과정에서 object file은 linker(`static linker`)를 통해서 `executable` 파일로 합쳐집니다. `executable`  file은 앱이 메모리에 올라갈 준비가 완료된 형태의 파일로, 일반적인 Application 생성 프로젝트는 빌드의 결과물로 `executable`file을 생성합니다. 
+앱의 빌드 과정에서 object file은 linker(`static linker`)를 통해서 `executable` 파일로 합쳐집니다. `executable`  file은 앱이 메모리에 올라갈 준비가 완료된 형태의 파일로, 일반적인 Application 생성 프로젝트는 빌드의 결과물로 `executable`file을 생성합니다.
 
 <img width="420" alt="스크린샷 2019-06-24 오전 1 43 02" src="https://user-images.githubusercontent.com/13018877/59979337-8ae71d00-9621-11e9-979d-94fba9111ae4.png">
 
