@@ -23,6 +23,7 @@ author:
 version:             1.0.0
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
 
 markdown: kramdown
 highlighter: rouge
