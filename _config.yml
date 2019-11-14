@@ -14,16 +14,15 @@ paginate:            7
 
 timezone:          Asia/Seoul
 # About/contact
-author:
-  name:              Changnam Hong
-  url:               https://www.github.com/hcn1519
-  email:             hcn1519@gmail.com
+author: Changnam Hong
 
 # Custom vars
 version:             1.0.0
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate
 
 markdown: kramdown
 highlighter: rouge
