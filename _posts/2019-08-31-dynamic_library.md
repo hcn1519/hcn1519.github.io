@@ -58,6 +58,11 @@ Dynamic Library는 메모리 로드 시점 및 메모리 로드 방식에 따라
 
 `Runtime Loaded Library`는 `Dynamic Library`중 클라이언트가 런타임에서 직접 로드(`dl_open()` 호출)하는 라이브러리를 의미합니다. 클라이언트는 `Runtime Loaded Library`를 `static linker`에 연결된 라이브러리로 해당 라이브러리를 포함시키지 않고, 이 때문에 `Dynamic Loader`는 `Runtime Loaded Library`을 앱 실행시 로드하지 않습니다. 클라이언트는 앱에서 `Runtime Loaded Library`를 통해 export된 symbols를 사용할 때, 해당 라이브러리를 메모리에 로드합니다.
 
+> Note: iOS에서는 Runtime Loaded library를 구현해서 테스트해 볼 수는 있지만, 실제로 이 기능을 사용하여 앱을 배포할 수 없습니다.(앱 스토어 심사 거절 사유) 애플 앱스토어 규정에 따르면 앱 실행 과정에서 동적으로 로드되는 코드는 그 실행에 있어서 많은 제약을 받습니다. 이 글은 iOS에 국한된 것이 아니라, Darwin OS 기반으로 설명을 작성하였기 때문에 위의 설명을 함께 정리하였습니다.
+
+* [App Review GuideLine Software Requirements 2.5.2](https://developer.apple.com/app-store/review/guidelines/#software-requirements)
+* [참고 소스코드 - ios runtime loading dynamic framework](https://github.com/patriknyblad/ios-runtime-loading-dynamic-framework)
+
 #### 참고 - 다양한 플랫폼 대응 - DLC(Dynamic Loader Compatibility)
 
 플랫폼마다 `Dynamic Loader`를 구현한 방법이 다르기 때문에, `Dynamic Loader`가 동작하기 위해서는 플랫폼별 인터페이스가 필요합니다. 이런 인터페이스를 제공하는 것이 DLC(Dynamic Loader Compatibility, `dlfcn.h`에 위치한다)입니다. DLC는 아래와 같은 메서드를 제공합니다.
