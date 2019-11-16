@@ -14,18 +14,18 @@
 }
 
 /* 폰트 설정 */
- @font-face {
-     font-family: 'KoPub Dotum Medium';
-     src: url("/public/fonts/KoPubDotumMedium.ttf");
- }
- @font-face {
-     font-family: 'KoPub Dotum Bold';
-     src: url("/public/fonts/KoPubDotumBold.ttf");
- }
- @font-face {
-     font-family: 'KoPub Dotum Light';
-     src: url("/public/fonts/KoPubDotumLight.ttf");
- }
+@font-face {
+  font-family: 'NotoSansKR-Light';
+  src: url("/public/fonts/NotoSansKR-Light.otf");
+}
+@font-face {
+  font-family: 'NotoSansKR-Regular';
+  src: url("/public/fonts/NotoSansKR-Regular.otf");
+}
+@font-face {
+  font-family: 'NotoSansKR-Medium';
+  src: url("/public/fonts/NotoSansKR-Medium.otf");
+}
 
 /* 원하는 코드 블럭 폰트를 적용하세요 */
  @font-face {
@@ -34,13 +34,6 @@
     font-weight: normal;
     src: url("/public/fonts/Menlo-Regular.woff");
  }
- @font-face {
-    font-family: 'D2 Coding';
-    font-style: normal;
-    font-weight: normal;
-    src: url("/public/fonts/D2Coding.ttc");
- }
-
 /* Components 설정 */
 
 * {
@@ -59,8 +52,10 @@ body {
 html {
   font-size: 16px;
   line-height: 1.65;
-  font-family: "KoPub Dotum Light", serif;
+  font-family: "NotoSansKR-Light", Helvetica, sans-serif;
+  letter-spacing: -0.5pt;
 }
+
 @media (min-width: 38em) {
   html {
     font-size: 16px;
@@ -80,7 +75,9 @@ a {
   -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
         transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
   text-decoration: none !important;
+  font-family: "NotoSansKR-Regular", Helvetica, sans-serif;
 }
+
 a:hover, a:focus {
   color: #1A237E;
   text-decoration: none;
@@ -93,9 +90,9 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.25;
   color: #313131;
   text-rendering: optimizeLegibility;
-  font-family: "KoPub Dotum Bold", sans-serif;
+  font-family: "NotoSansKR-Medium", sans-serif;
   font-weight: 400;
-  letter-spacing: -.025rem;
+  letter-spacing: -0.5pt;
 }
 h1 {
   font-size: 2rem;
@@ -118,12 +115,15 @@ h5, h6 {
 p {
   margin-top: 0;
   margin-bottom: 1rem;
-  font-family: "KoPub Dotum Light", serif;
+  font-family: "NotoSansKR-Light", Helvetica, sans-serif;
   line-height: 165%;
+  letter-spacing: -0.5pt;
 }
 
 strong {
   color: #303030;
+  font-family: "NotoSansKR-Medium", Helvetica, sans-serif;
+  letter-spacing: -0.5pt;
 }
 
 
@@ -385,7 +385,7 @@ abbr[title] {
   overflow: hidden; /* clearfix */
   margin-left: -1rem;
   margin-right: -1rem;
-  font-family: "KoPub Dotum Medium", Helvetica, Arial, sans-serif;
+  font-family: "NotoSansKR-Regular", Helvetica, Arial, sans-serif;
   color: #ccc;
   text-align: center;
 }
@@ -445,4 +445,5 @@ a.pagination-item:hover {
   color: inherit;
   background-color: transparent;
   border-radius: 0;
+  letter-spacing: -1pt;
 }
