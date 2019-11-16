@@ -240,7 +240,7 @@ abbr[title] {
    color: rgba(0,0,0, 0.6) !important;
  }
 
- div.related-posts {
+ li.related-posts {
    color: rgba(0,0,0, 0.6) !important;
  }
 
@@ -357,7 +357,9 @@ abbr[title] {
  }
  .related-posts {
    padding-left: 0;
-   list-style: none;
+ }
+ .related-posts li {
+  margin-left: 30pt;
  }
  .related-posts h3 {
    margin-top: 0;
