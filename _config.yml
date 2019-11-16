@@ -23,6 +23,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-paginate
+  - jekyll-last-modified-at
 
 markdown: kramdown
 highlighter: rouge

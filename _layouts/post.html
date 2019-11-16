@@ -22,6 +22,31 @@ layout: default
   </div><!-- /.image-wrap -->
   {% endif %}
 
+    {% capture page_date %}
+    {{ page.date | date: '%s' }}
+    {% endcapture %}
+
+    {% capture last_modified_at %}
+    {{ page.last_modified_at | date: '%s' }}
+    {% endcapture %}
+
+    {% capture page_date_ym %}
+    {{ page.date | date: '%Y-%m' }}
+    {% endcapture %}
+
+    {% capture page_last_modified_at_ym %}
+    {{ page.last_modified_at | date: '%Y-%m' }}
+    {% endcapture %}
+
+    <!-- 마지막 업데이트 날짜는 수정한 연도와 월이 다를 경우에만 노출한다 -->
+    {% unless page_date_ym contains page_last_modified_at_ym %}
+      {% if page_date < last_modified_at %}
+      <div class="message">
+        이 글은 {{ page.last_modified_at | date: '%Y년 %m월 %d일' }}에 마지막으로 업데이트 되었습니다.
+      </div>
+      {% endif %}
+    {% endunless %}
+  
   {{ content }}
 
   <div class="back-home">

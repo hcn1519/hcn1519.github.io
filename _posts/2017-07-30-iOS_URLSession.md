@@ -6,8 +6,6 @@ excerpt: "iOS에서 네트워킹을 도와주는 URLSession API에 대해 알아
 categories: iOS URLSession Networking
 date:   2017-07-30 00:30:00
 tags: [iOS, URLSession, Networking]
-image:
-  feature: iOS10.png
 ---
 
 iOS 앱에서 서버와 통신하기 위해 애플은 `URLSession`이라는 API를 제공하고 있습니다. `URLSession`은 iOS 앱 통신에서 유명한 라이브러리인 `Alamofire`, `SDWebImage` 등의 기반이 되는 API로 서버와의 데이터 교류를 위해서는 필수적으로 알아야 하는 API입니다. `URLSession`은 HTTP를 포함한 몇 가지 프로토콜을 지원하고, 인증, 쿠키 관리, 캐시 관리 등을 지원합니다.
@@ -25,33 +23,32 @@ iOS 앱에서 서버와 통신하기 위해 애플은 `URLSession`이라는 API�
 1. `Session` configuration을 결정하고, `Session`을 생성한다.
 2. 통신할 URL과 Request 객체를 설정한다.
 3. 사용할 `Task`를 결정하고, 그에 맞는 `Completion Handler`나 `Delegate` 메소드들을 작성한다.
-4. 해당 Task를 실행한다.
+4. 해당 `Task`를 실행한다.
 5. Task 완료 후 `Completion Handler`가 실행된다.
 
-#### Session
+### 1. Session
 
 `URLSession`은 크게 3가지 종류의 Session을 지원합니다.
 
-1. Default Session: 기본적인 Session으로 디스크 기반 캐싱을 지원합니다.
-2. Ephemeral Session: 어떠한 데이터도 저장하지 않는 형태의 세션입니다.
-3. Background Session: 앱이 종료된 이후에도 통신이 이뤄지는 것을 지원하는 세션입니다.
+1. `Default Session`: 기본적인 Session으로 디스크 기반 캐싱을 지원합니다.
+2. `Ephemeral Session`: 어떠한 데이터도 저장하지 않는 형태의 세션입니다.
+3. `Background Session`: 앱이 종료된 이후에도 통신이 이뤄지는 것을 지원하는 세션입니다.
 
-#### Request
+### 2. Request
 
 `URLRequest`를 통해서는 서버로 요청을 보낼 때 어떻게 데이터를 캐싱할 것인지, 어떤 HTTP 메소드를 사용할 것인지(Get, Post 등), 어떤 내용을 전송할 것인지 등을 설정할 수 있습니다.
 
-#### Task
+### 3. Task
 
 Task 객체는 일반적으로 Session 객체가 서버로 요청을 보낸 후, 응답을 받을 때 URL 기반의 내용들을 받는(retrieve) 역할을 합니다. 3가지 종류의 Task가 지원됩니다.
 
-1. Data Task - Data 객체를 통해 데이터 주고받는 Task입니다.
-2. Download Task - data를 파일의 형태로 전환 후 다운 받는 Task입니다. 백그라운드 다운로드 지원
-3. Upload Task - data를 파일의 형태로 전환 후 업로드하는 Task입니다.
-
+1. `Data Task` - Data 객체를 통해 데이터 주고받는 Task입니다.
+2. `Download Task` - data를 파일의 형태로 전환 후 다운 받는 Task입니다. 백그라운드 다운로드 지원
+3. `Upload Task` - data를 파일의 형태로 전환 후 업로드하는 Task입니다.
 
 ## URLSession dataTask 사용하기
 
-URLSession과 같은 네트워킹용 API는 일반적으로 앱 전역에서 사용됩니다. 그렇기 때문에 ViewController에 메소드를 작성하기보다는 하나의 모듈(class)을 만들고 그 안에 static 함수들을 만들어 사용하는 것이 좋습니다.
+`URLSession`과 같은 네트워킹용 API는 일반적으로 앱 전역에서 사용됩니다. 그렇기 때문에 ViewController에 메소드를 작성하기보다는 하나의 모듈(class)을 만들고 그 안에 static 함수들을 만들어 사용하는 것이 좋습니다.
 
 ```swift
 // Swift 5.1, iOS 13 환경에서 정상적으로 동작합니다.
