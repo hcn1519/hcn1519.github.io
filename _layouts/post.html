@@ -101,7 +101,7 @@ layout: default
 
   {% endfor %}
   </ul>
-  
+
   {% if maxRelatedCounter == 0 %}
     <h2>블로그 최근 글</h2>
     <ul class="related-posts">
@@ -119,10 +119,14 @@ layout: default
   {% endif %}
 </div>
 
+<div
+  class="just-comments"
+  data-allowguests="true"
+  data-apikey="c4441b04-e8a2-4d8d-bf8c-e96d8d05d28b">
+</div>
+
 <div class="back-home">
     <a href="{{ site.url }}/">< 홈으로</a>
     <p>잘못된 정보나 궁금하신 점은 hcn1519@gmail.com으로 알려주시면 감사하겠습니다.</p>
   </div>
 </div>
-
-  
