@@ -4,7 +4,7 @@ title: "Thread Safe"
 date: "2019-03-21 00:10:45 +0900"
 excerpt: "Thread Safe에 대해 알아 봅니다."
 categories: Swift ThreadSafe atomic OS Thread Language
-tags: [Swift, ThreadSafe, atomic, OS, Thread, Language]
+tags: [Swift, ThreadSafe, atomic, OS, Thread]
 image:
   feature: blogThumb.png
 ---

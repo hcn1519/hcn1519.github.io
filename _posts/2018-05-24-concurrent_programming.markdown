@@ -2,8 +2,8 @@
 layout: post
 title: "Concurrent programming과 GCD"
 date: "2018-05-24 23:04:09 +0900"
-categories: Concurrent GCD iOS
-tags: [Concurrent, GCD, iOS]
+categories: Concurrent GCD iOS Thread
+tags: [Concurrent, GCD, iOS, Thread]
 ---
 
 > 이 글은 애플의 [Concurrency and Application Design](https://developer.apple.com/library/content/documentation/General/Conceptual/ConcurrencyProgrammingGuide/ConcurrencyandApplicationDesign/ConcurrencyandApplicationDesign.html#//apple_ref/doc/uid/TP40008091-CH100-SW1) 문서를 정리한 내용을 담고 있습니다.

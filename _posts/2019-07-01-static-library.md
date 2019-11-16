@@ -4,7 +4,7 @@ title: "Static Library"
 date: "2019-07-01 00:53:17 +0900"
 excerpt: "Static Library 대해 학습한 내용을 정리합니다."
 categories: iOS, OS, Library, Framework
-tags: [iOS, OS, Library, Framework]
+tags: [iOS, macOS, OS, Library, Framework]
 image:
   feature: iOS.png
 ---

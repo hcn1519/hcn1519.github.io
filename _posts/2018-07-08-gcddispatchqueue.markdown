@@ -3,8 +3,8 @@ layout: post
 title: "GCD - Dispatch Queue"
 excerpt: "Dispatch Queue에 대한 정리"
 date: "2018-07-08 20:04:49 +0900"
-categories: Concurrent GCD DispatchQueue iOS
-tags: [Concurrent, GCD, DispatchQueue, iOS]
+categories: Concurrent GCD DispatchQueue iOS OS Thread
+tags: [Concurrent, GCD, DispatchQueue, iOS, OS, Thread]
 image:
   feature: iOS.png
 ---
