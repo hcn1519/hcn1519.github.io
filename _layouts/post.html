@@ -49,25 +49,78 @@ layout: default
   
   {{ content }}
 
-  <div class="back-home">
-    <a href="{{ site.url }}/">< 홈으로</a>
-    <p>잘못된 정보나 궁금하신 점은 hcn1519@gmail.com으로 알려주시면 감사하겠습니다.</p>
-  </div>
-</div>
-
-
 <div class="related">
-  <h2>Related Posts</h2>
-  <ul class="related-posts">
-    {% for post in site.related_posts limit:3 %}
-      <li>
+  
+  {% assign maxRelated = 4 %}
+  {% assign minCommonTags =  2 %}
+  {% assign maxRelatedCounter = 0 %}
+  
+  {% assign visiblePostCounts = 0 %}
+
+  {% for post in site.posts %}
+
+    {% assign sameTagCount = 0 %}
+    {% assign commonTags = '' %}
+
+    {% for tag in post.tags %}
+      {% if post.url != page.url %}
+        {% if page.tags contains tag %}
+          {% assign sameTagCount = sameTagCount | plus: 1 %}
+          {% capture tagmarkup %} 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#{{ tag }}">
+                {{ tag }}
+              </a>
+            </div>
+          {% endcapture %}
+          {% assign commonTags = commonTags | append: tagmarkup %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% if sameTagCount >= minCommonTags %}
+      {% if maxRelatedCounter == 0 %}
+      <h2>읽어 볼만한 다른 글</h2>
+      {% endif %}
+
+      <div class="related-posts">
         <h3>
           <a href="{{ site.baseurl }}{{ post.url }}">
             {{ post.title }}
             <small>{{ post.date | date_to_string }}</small>
           </a>
+          <small>{{ commonTags }}</small>
         </h3>
-      </li>
-    {% endfor %}
-  </ul>
+      </div>
+      {% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
+      {% if maxRelatedCounter >= maxRelated %}
+        {% break %}
+      {% endif %}
+    {% endif %}
+
+  {% endfor %}
+
+  {% if maxRelatedCounter == 0 %}
+    <h2>블로그 최근 글</h2>
+    <ul class="related-posts">
+      {% for post in site.related_posts limit:3 %}
+        <li>
+          <h3>
+            <a href="{{ site.baseurl }}{{ post.url }}">
+              {{ post.title }}
+              <small>{{ post.date | date_to_string }}</small>
+            </a>
+          </h3>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 </div>
+
+<div class="back-home">
+    <a href="{{ site.url }}/">< 홈으로</a>
+    <p>잘못된 정보나 궁금하신 점은 hcn1519@gmail.com으로 알려주시면 감사하겠습니다.</p>
+  </div>
+</div>
+
+  
