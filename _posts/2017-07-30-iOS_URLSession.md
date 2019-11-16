@@ -53,51 +53,52 @@ Task 객체는 일반적으로 Session 객체가 서버로 요청을 보낸 후,
 
 URLSession과 같은 네트워킹용 API는 일반적으로 앱 전역에서 사용됩니다. 그렇기 때문에 ViewController에 메소드를 작성하기보다는 하나의 모듈(class)을 만들고 그 안에 static 함수들을 만들어 사용하는 것이 좋습니다.
 
-{% highlight swift %}
+```swift
+// Swift 5.1, iOS 13 환경에서 정상적으로 동작합니다.
 class NetworkHandler {
-  class func getData(resource: String) {
-    // 세션 생성, 환경설정
-      let defaultSession = URLSession(configuration: .default)
+    class func getData(resource: String) {
+        // 세션 생성, 환경설정
+        let defaultSession = URLSession(configuration: .default)
 
-      guard let url = URL(string: "\(resourceURL)") else {
+        guard let url = URL(string: "\(resource)") else {
             print("URL is nil")
             return
-      }
+        }
 
-      // Request
-      let request = URLRequest(url: url)
+        // Request
+        let request = URLRequest(url: url)
 
-      // dataTask
-      let dataTask = defaultSession.dataTask(with: request) { data, response, error in
-        // getting Data Error
-          guard error == nil else {
-              print("Error occur: \(String(describing: error))")
-              return
-          }
+        // dataTask
+        let dataTask = defaultSession.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+            // getting Data Error
+            guard error == nil else {
+                print("Error occur: \(String(describing: error))")
+                return
+            }
 
-          if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
-              // 통신에 성공한 경우 data에 Data 객체가 전달됩니다.
+            guard let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                return
+            }
 
-              // 받아오는 데이터가 json 형태일 경우,
-              // json을 serialize하여 json 데이터를 swift 데이터 타입으로 변환
-              // json serialize란 json 데이터를 String 형태로 변환하여 Swift에서 사용할 수 있도록 하는 것을 말합니다.
-              guard let jsonToArray = try? JSONSerialization.jsonObject(with: data, options: []) else {
-                    print("json to Any Error")
-                    return
-              }
+            // 통신에 성공한 경우 data에 Data 객체가 전달됩니다.
 
-              // 원하는 작업
-          }
-
-      }
-
-      dataTask.resume()
-  }
+            // 받아오는 데이터가 json 형태일 경우,
+            // json을 serialize하여 json 데이터를 swift 데이터 타입으로 변환
+            // json serialize란 json 데이터를 String 형태로 변환하여 Swift에서 사용할 수 있도록 하는 것을 말합니다.
+            guard let jsonToArray = try? JSONSerialization.jsonObject(with: data, options: []) else {
+                print("json to Any Error")
+                return
+            }
+            // 원하는 작업
+            print(jsonToArray)
+        }
+        dataTask.resume()
+    }
 }
 
 NetworkHandler.getData(resource: "http://www.example.com")
-{% endhighlight %}
+```
 
-Swift4에서는 JSON Serialize 작업이 객체 단위로 가능해졌습니다. 자세한 내용은 아래 링크를 참고하세요.
+Swift4에서는 JSON Serialize 작업이 객체 단위(`Codable`)로 가능해졌습니다. 자세한 내용은 아래 링크를 참고하세요.
 
 [Swift4 JSON Serialize 사용하기 예시](https://gist.github.com/hcn1519/0d685b1f0aba74ed9577e9cab1b02b6f)
