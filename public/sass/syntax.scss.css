@@ -12,6 +12,7 @@ code {
   margin: 0;
   border-radius: 4px;
   white-space: inherit;
+  color: #101010;
 }
 pre {
   color:#33333f;
