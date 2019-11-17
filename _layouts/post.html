@@ -22,30 +22,26 @@ layout: default
   </div><!-- /.image-wrap -->
   {% endif %}
 
-    {% capture page_date %}
-    {{ page.date | date: '%s' }}
-    {% endcapture %}
+  {% capture page_date %}
+  {{ page.date | date: '%s' }}
+  {% endcapture %}
 
-    {% capture last_modified_at %}
-    {{ page.last_modified_at | date: '%s' }}
-    {% endcapture %}
+  {% capture last_modified_at %}
+  {{ page.last_modified_at | date: '%s' }}
+  {% endcapture %}
 
-    {% capture page_date_ym %}
-    {{ page.date | date: '%Y-%m' }}
-    {% endcapture %}
+  {% assign last_modified_at_num = last_modified_at | plus:0 %}
+  {% assign page_date_num = page_date | plus:0 %}
 
-    {% capture page_last_modified_at_ym %}
-    {{ page.last_modified_at | date: '%Y-%m' }}
-    {% endcapture %}
-
-    <!-- 마지막 업데이트 날짜는 수정한 연도와 월이 다를 경우에만 노출한다 -->
-    {% unless page_date_ym contains page_last_modified_at_ym %}
-      {% if page_date < last_modified_at %}
-      <div class="message">
-        이 글은 {{ page.last_modified_at | date: '%Y년 %m월 %d일' }}에 마지막으로 업데이트 되었습니다.
-      </div>
-      {% endif %}
-    {% endunless %}
+  {% assign days_between_create_and_modify = last_modified_at_num | minus:page_date_num %}      
+  {% assign days_in_sec_30 = 24 | times:3600 | times:30 %}
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  {% if page_date < last_modified_at and days_between_create_and_modify > days_in_sec_30 %}
+  <div class="message">
+    이 글은 {{ page.last_modified_at | date: '%Y년 %m월 %d일' }}에 마지막으로 업데이트 되었습니다.
+  </div>
+  {% endif %}
   
   {{ content }}
 
