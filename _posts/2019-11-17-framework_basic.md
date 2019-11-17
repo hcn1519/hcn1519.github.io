@@ -48,8 +48,8 @@ let image = UIImage(named: "sampleImg", in: bundle, compatibleWith: nil)
 
 - Framework은 라이브러리보다 효율적으로 리소스를 관리할 수 있게 해줍니다.
 - Framework은 리소스를 패키징된 형태로 함께 제공할 수 있지만, 라이브러리는 소스코드만 포함할 수 있습니다.
-- Framework는 여러 버전을 동일한 Bundle에 포함하여 하위 버전 호환성을 지원할 수 있습니다.
-- 물리적으로 메모리의 한 군데에서만 코드가 read-only 형태로 실행되기 때문에 메모리 사용량을 줄일 수 있습니다.
+- Framework은 여러 버전을 동일한 Bundle에 포함하여 하위 버전 호환성을 지원할 수 있습니다.
+- Framework은 물리적으로 메모리의 한 군데에서만 코드가 read-only 형태로 실행되기 때문에 메모리 사용량을 줄일 수 있습니다.
 
 ## Framework 구조
 
