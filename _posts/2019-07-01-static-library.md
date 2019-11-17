@@ -20,7 +20,9 @@ Xcode에서는 `Static library`를 만드는 템플릿을 제공하고 있으며
     2. Load Commands - 파일의 논리적 흐름에 대한 정보를 명시한다.
     3. Raw Segment Data - raw code와 data
 
-> Mach-O is the native executable format of binaries in OS X and is the preferred format for shipping code. An executable format determines the order in which the code and data in a binary file are read into memory.
+<div class="message">
+Mach-O is the native executable format of binaries in OS X and is the preferred format for shipping code. An executable format determines the order in which the code and data in a binary file are read into memory.
+</div>
 
 * [Overview of the Mach-O Executable Format - Apple Doc](https://developer.apple.com/library/archive/documentation/Performance/Conceptual/CodeFootprint/Articles/MachOOverview.html)
 
@@ -48,8 +50,6 @@ static library는 앱의 라이브러리와 `static linker`를 통해 앱과 연
 * 앱의 초기 런칭 속도 저하
 * 앱의 초기 메모리 사용량 증가
 * `Static Library`의 버전 업데이트시 개발자는 앱의 object files를 새로운 버전의 `Static Library`로 연결해야 합니다. `Static Library`는 새로운 버전으로 빌드가 되어야 업데이트된 라이브러리를 사용할 수 있습니다.
-
----
 
 ## 참고자료
 

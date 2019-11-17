@@ -18,7 +18,9 @@ image:
 
 ### 1. Framework 정의
 
-> A framework is a hierarchical directory that encapsulates shared resources, such as a dynamic shared library, nib files, image files, localized strings, header files, and reference documentation in a single package.
+<div class="message">
+A framework is a hierarchical directory that encapsulates shared resources, such as a dynamic shared library, nib files, image files, localized strings, header files, and reference documentation in a single package.
+</div>
 
 `Framework`는 공유 자원(`dynamic shared library`, nib 파일, 이미지 파일 등)을 단일 패키지 형태로 담고 있는 디렉토리입니다. `Framework`는 library와 달리 리소스를 포함할 수 있고 이는 `Framework`을 모듈 배포에 있어서 더 많이 활용할 수 있도록 해줍니다.
 
@@ -26,7 +28,7 @@ image:
 
 `Framework`는 실행 바이너리를 포함한 디렉토리입니다. `Framework`는 파일 시스템의 Bundle로 패키징되어 Core Foundation Bundle Service를 이용할 수 있고, NSBundle class로 접근할 수 있습니다.
 
-리소스는 해당 Bundle의 포함 여부에 따라 접근 가능 여부가 결정됩니다. 외부에서 `Framework` 사용시 `Framework`의 리소스에 접근하기 위해서는 해당 리소스가 포함된 bundle(Framework)을 명시해주어야 합니다. 이 말은 바꿔 말하면, 서로 다른 `Framework`에 포함된 동일한 리소스는 하나의 리소스로 인식되지 않고, 서로 다른 리소스로 인식된다는 것을 의미합니다..
+리소스는 해당 Bundle의 포함 여부에 따라 접근 가능 여부가 결정됩니다. 외부에서 `Framework` 사용시 `Framework`의 리소스에 접근하기 위해서는 해당 리소스가 포함된 bundle(Framework)을 명시해주어야 합니다. 이 말은 바꿔 말하면, 서로 다른 `Framework`에 포함된 동일한 리소스는 하나의 리소스로 인식되지 않고, 서로 다른 리소스로 인식된다는 것을 의미합니다.
 
 `Framework`에 이미지 리소스가 포함되어 있을 때 해당 `Framework`를 사용하는 앱에서는 이 리소스에 다음과 같이 접근할 수 있습니다.
 

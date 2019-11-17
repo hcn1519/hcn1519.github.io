@@ -21,7 +21,9 @@ Dynamic Library는 앱에서 사용되기 위해 Link와 Load의 과정을 거�
 
 `Dynamic Library` 사용에서 핵심적인 역할을 담당하는 것으로 `Dynamic Linker`가 있습니다. `Dynamic Linker`에 대해서 wiki에 정의된 내용은 다음과 같습니다.
 
-> In computing, a dynamic linker is the part of an operating system that loads and links the shared libraries needed by an executable when it is executed (at "run time"), by copying the content of libraries from persistent storage to RAM, filling jump tables and relocating pointers.
+<div class="message">
+In computing, a dynamic linker is the part of an operating system that loads and links the shared libraries needed by an executable when it is executed (at "run time"), by copying the content of libraries from persistent storage to RAM, filling jump tables and relocating pointers.
+</div>
 
 `Dynamic Linker`는 `executable` 실행시 외부로부터 필요한 라이브러리를 연결하는 역할을 담당합니다. macOS와 iOS의 기반인 Darwin OS에서는 프로젝트 빌드 시점에서 소스코드 컴파일 이후에 라이브러리를 Link합니다. 이 Link Time 시점에서 `Dynamic Linker` 파일 경로는 앱 번들에 포함됩니다.(`executable` target인 프로젝트 빌드시 Mach-O 명령어가 호출됩니다.) 이 때, executable이 필요로 하는 Dynamic Library의 파일 경로(`someLib.dylib`)도 함께 앱 번들에 포함됩니다.
 
@@ -46,7 +48,9 @@ Dynamic Library는 메모리 로드 시점 및 메모리 로드 방식에 따라
 
 `Dependent Library`는 `Dynamic Library`중 앱 자체가 의존성을 가지고 있어서 앱 시작시 바로 메모리에 로드되는 라이브러리를 의미합니다.
 
-> A dependent library, from the client’s point of view, is a dynamic library the client is linked with. Dependent libraries are loaded into the same process the client is being loaded into as part of its load process. For example, when an app is launched, its dependent libraries are loaded as part of the launch process, before the main function is executed.
+<div class="message">
+A dependent library, from the client’s point of view, is a dynamic library the client is linked with. Dependent libraries are loaded into the same process the client is being loaded into as part of its load process. For example, when an app is launched, its dependent libraries are loaded as part of the launch process, before the main function is executed.
+</div>
 
 앱이 실행되는 과정에서 `Dependent Library`가 로드되는 과정은 다음과 같습니다.
 
