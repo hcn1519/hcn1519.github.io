@@ -27,14 +27,16 @@ image:
 
 `Framework`는 실행 바이너리를 포함한 디렉토리입니다. `Framework`는 파일 시스템의 Bundle로 패키징되어 Core Foundation Bundle Service를 이용할 수 있고, NSBundle class로 접근할 수 있습니다.
 
-Bundle은 모듈 사이의 구분선을 긋는 큰 기준이 됩니다. 외부에서 `Framework`에서 제공하는 API를 사용하기 위해서는 해당 `Framework`를 import해야 합니다. 또한, `Framework`의 리소스에 접근하기 위해서는 해당 리소스가 포함된 bundle(Framework)을 명시해주어야 합니다. 만약 `Framework`에 이미지 리소스가 포함되어 있을 때 해당 `Framework`를 사용하는 앱에서는 이 리소스에 다음과 같이 접근할 수 있습니다.
+리소스는 해당 Bundle의 포함 여부에 따라 접근 가능 여부가 결정됩니다. 외부에서 `Framework` 사용시 `Framework`의 리소스에 접근하기 위해서는 해당 리소스가 포함된 bundle(Framework)을 명시해주어야 합니다. 이 말은 바꿔 말하면, 서로 다른 `Framework`에 포함된 동일한 리소스는 하나의 리소스로 인식되지 않고, 서로 다른 리소스로 인식됩니다.
+
+`Framework`에 이미지 리소스가 포함되어 있을 때 해당 `Framework`를 사용하는 앱에서는 이 리소스에 다음과 같이 접근할 수 있습니다.
 
 ```swift
 let bundle = Bundle(identifier: "com.hcn1519.ExampleFramework") // 해당 Framework의 Bundle Identifier 작성
 let image = UIImage(named: "sampleImg", in: bundle, compatibleWith: nil)
 ```
 
-> 여기서 `UIViewController`나 `UIImage`와 같은 클래스의 인스턴스를 생성할 때 왜 리소스 이름뿐만 아니라 bundle을 지정하는 파라미터가 있는지 알 수 있습니다. xib나 image 파일 등의 리소스를 필요로하는 인스턴스는 bundle 설정 없이는 접근할 수 없습니다.(이를 지정하지 않는 경우에 대부분 default 설정은 mainBundle이 됩니다) Bundle과 관련해서는 [Package, Bundle, NSBundle](https://hcn1519.github.io/articles/2018-12/bundle)에서도 관련 내용을 확인할 수 있습니다.
+> 여기서 `UIViewController`나 `UIImage`와 같은 클래스의 인스턴스를 생성할 때 왜 리소스 이름뿐만 아니라 bundle을 지정하는 파라미터가 왜 항상 붙어 있는지 이해할 수 있습니다. xib나 image 파일 등의 리소스를 필요로하는 인스턴스는 bundle 설정 없이는 접근할 수 없습니다.(이를 지정하지 않는 경우에 대부분 default 설정은 mainBundle이 됩니다) Bundle과 관련해서는 [Package, Bundle, NSBundle](https://hcn1519.github.io/articles/2018-12/bundle)에서도 관련 내용을 확인할 수 있습니다.
 
 ### 3. Framework는 Opaque Data Type이 아닙니다.
 
