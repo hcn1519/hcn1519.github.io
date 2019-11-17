@@ -148,7 +148,8 @@ blockquote p:last-child {
 img {
   display: block;
   max-width: 100%;
-  margin:0;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 1rem;
   border-radius: 5px;
 }
@@ -269,7 +270,7 @@ abbr[title] {
 }
 @media (min-width: 56em) {
   .container {
-    max-width: 50rem;
+    max-width: 60rem;
     padding-left:  1rem;
     padding-right: 1rem;
   }
