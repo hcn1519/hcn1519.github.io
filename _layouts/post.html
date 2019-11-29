@@ -115,11 +115,22 @@ layout: default
   {% endif %}
 </div>
 
-<div
-  class="just-comments"
-  data-allowguests="true"
-  data-apikey="c4441b04-e8a2-4d8d-bf8c-e96d8d05d28b">
-</div>
+
+<script>
+  {% assign themeName = "github-light" %}
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    {% assign themeName = "github-dark" %}
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme={{ themeName }}
+        crossorigin="anonymous"
+        async>
+</script>
 
 <div class="back-home">
     <a href="{{ site.url }}/">< 홈으로</a>
