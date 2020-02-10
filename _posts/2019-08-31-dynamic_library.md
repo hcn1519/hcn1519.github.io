@@ -3,8 +3,8 @@ layout: post
 title: "Dynamic Library"
 date: "2019-09-06 00:53:17 +0900"
 excerpt: "Dynamic Library 대해 학습한 내용을 정리합니다."
-categories: iOS, OS, Library, Framework
-tags: [iOS, macOS, OS, Library, Framework]
+categories: iOS, OS, BuildSystem, Library, Framework
+tags: [iOS, macOS, OS, BuildSystem, Library, Framework]
 image:
   feature: iOS.png
 ---
