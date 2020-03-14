@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Crash Report 분석하기 1"
+title: "Crash Report Symbolication"
 date: "2020-02-09 00:53:17 +0900"
-excerpt: "Crash Report에 대해 학습한 내용을 정리합니다."
+excerpt: "Crash Report의 Symbolication에 대해 알아 봅니다."
 categories: iOS, OS, BuildSystem, Symbol, CrashReport
 tags: [iOS, macOS, OS, BuildSystem, Symbol, CrashReport]
 image:
@@ -16,7 +16,7 @@ image:
 3. [Crash Report Symbolication](./crash_report_symbolication#3-crash-report-symbolication)
 4. [Appendix](./crash_report_symbolication#4-appendix)
 
-이번 글에서는 앱에서 발생하는 크래시 리포트가 어떻게 생성되고, 이를 어떻게 활용하여 크래시 문제를 해결할 수 있는지 알아보고자 합니다. 
+이번 글에서는 앱에서 크래시 리포트가 어떻게 생성되고, 이를 AppStore Connect에서 확인할 수 있는지 알아보고자 합니다.
 
 > Note: 시작하기에 앞서 이 글의 많은 내용이 [Understanding and Analyzing Application Crash Reports - Apple Doc](https://developer.apple.com/library/archive/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-INTRODUCTION)의 내용을 정리한 내용임을 밝혀둡니다.
 
@@ -118,7 +118,7 @@ Symbolication is the process of resolving backtrace addresses to source code met
 
 <img width="1018" alt="스크린샷 2020-01-28 오전 2 25 59" src="https://user-images.githubusercontent.com/13018877/73197982-a39a5100-4175-11ea-8f90-fe21f809494c.png">
 
-# 참고 자료
+## 참고 자료
 
 * [Understanding and Analyzing Application Crash Reports - Apple Doc](https://developer.apple.com/library/archive/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-INTRODUCTION)
 * [Symbol](https://en.wikipedia.org/wiki/Symbol_(programming))
