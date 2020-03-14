@@ -11,17 +11,19 @@ image:
 
 다크모드 도입에 있어서 필요한 정보를 조사하면서 실제 구현과 관련된 내용을 정리해보았습니다. 공식 문서 및 영상을 보면서 관련 내용을 같이 참고하시면 좋을 것 같습니다.(해당 내용의 대부분은 [WWDC - Implement Dark Mode](https://developer.apple.com/videos/play/wwdc2019/214/)을 기반으로 작성되었습니다.)
 
-### 목차
+## 목차
 
-1. [UITraitCollection](./ios_darkmode#uitraitcollection)
-    1. [UITraitCollection.current](./ios_darkmode#uitraitcollectioncurrent)
-    1. [traitCollectionDidChange(_:)](./ios_darkmode#traitcollectiondidchange)
-    1. [`TraitCollection`을 활용하여 라이트/다크 모드 강제 설정하기](./ios_darkmode#traitcollection을-활용하여-라이트다크-모드-강제-설정하기)
+#### 1. UITraitCollection
 
-1. [다크모드 주요 구현 대상](./ios_darkmode#다크모드-주요-구현-대상)
-    1. [색상](./ios_darkmode#1-색상)
-    1. [이미지](./ios_darkmode#2-이미지)
-    1. [기타 Components](./ios_darkmode#3-기타-components)
+1. [UITraitCollection.current](./ios_darkmode#1-uitraitcollectioncurrent)
+1. [traitCollectionDidChange(_:)](./ios_darkmode#2-traitcollectiondidchange)
+1. [`TraitCollection`을 활용하여 라이트/다크 모드 강제 설정하기](./ios_darkmode#3-raitcollection을-활용하여-라이트다크-모드-강제-설정하기)
+
+#### 2. 다크모드 주요 구현 대상
+
+1. [색상](./ios_darkmode#1-색상)
+1. [이미지](./ios_darkmode#2-이미지)
+1. [기타 Components](./ios_darkmode#3-기타-components)
 
 ## UITraitCollection
 
@@ -34,7 +36,7 @@ image:
 
 ![dark2](https://user-images.githubusercontent.com/13018877/76678329-373aba80-661a-11ea-910e-bb681c887511.png)
 
-### UITraitCollection.current
+### 1. UITraitCollection.current
 
 - [UITraitCollection.current](https://developer.apple.com/documentation/uikit/uitraitcollection/3238080-current)은 iOS 13에서 추가된 static 변수로 현재의 `traitCollection`을 알려줍니다. UIKit은 UIView를 그릴 때 `UITraitCollection.current`를 해당 View의 `traitCollection`으로 설정하여 `UITraitCollection.current`이 현재의 View에 대한 `traitCollection`을 나타낼 수 있도록 합니다.
 
@@ -103,7 +105,7 @@ layer.borderColor = UIColor.label.cgColor
 UITraitCollection.current = savedTraitCollection
 ```
 
-### traitCollectionDidChange
+### 2. traitCollectionDidChange
 
 - [traitCollectionDidChange(_:)](https://developer.apple.com/documentation/uikit/uitraitenvironment/1623516-traitcollectiondidchange)은 인터페이스 환경 변화에 대한 옵저빙 메소드로 `UITraitCollection`이 변경될 때마다 호출이 됩니다.
 - iOS 13에서 `traitCollectionDidChange(_:)`는 초기화 과정에서 모든 traitCollection이 결정된 이후에만 호출되도록 API가 변경되었습니다. 이 때문에, 하위 버전에서 `traitCollectionDidChange(_:)`이 호출되던 케이스인데 iOS 13에서는 호출되지 않는 상황이 발생할 수 있습니다.
@@ -122,7 +124,7 @@ override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollect
 
 ![dark5](https://user-images.githubusercontent.com/13018877/76678335-46ba0380-661a-11ea-926a-f34c76da0fea.png)
 
-### TraitCollection을 활용하여 라이트/다크 모드 강제 설정하기
+### 3. TraitCollection을 활용하여 라이트/다크 모드 강제 설정하기
 
 - iOS 13부터 UIView와 UIViewController는 `overrideUserInterfaceStyle`이라는 property를 새롭게 제공합니다. 이 값에 대해서 `.light`, `.dark`와 같이 지정할 경우 그 하위의 SubView까지 스타일 값이 오버라이딩 됩니다.
 - 전체 앱에 대해서 라이트/다크 모드를 강제하려면 Info.plist에 `UIUserInterfaceStyle` 값을 `.light`, `.dark`와 같이 설정해주면 됩니다.
