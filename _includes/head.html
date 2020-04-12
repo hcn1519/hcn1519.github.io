@@ -8,9 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   <!-- Primary Meta Tags -->
-  <title>Changnam's Blog</title>
+  <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="author" content="{{ site.author }}">
-  <meta name="title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }} {% endif %}">
+  <meta name="title" content="{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}">
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
   <!-- Open Graph / Facebook -->
@@ -23,9 +23,6 @@
   <link rel="stylesheet" href="{{ site.baseurl }}/public/sass/blogTheme.scss.css" async>
   <link rel="stylesheet" href="{{ site.baseurl }}/public/sass/menu.scss.css" async>
   <link rel="stylesheet" href="{{ site.baseurl }}/public/sass/syntax.scss.css" async>
-  <!-- <link rel="stylesheet" href="{{ site.baseurl }}/public/sass/newSyntax2.css"> -->
-  <!-- <link rel="stylesheet" href="{{ site.baseurl }}/public/sass/gifAnimation.scss.css">
-   -->
   <!-- Icons -->
   <link rel="apple-touch-icon" sizes="57x57" href="{{ site.baseurl }}/public/favicon/apple-icon-57x57.png" async>
   <link rel="apple-touch-icon" sizes="60x60" href="{{ site.baseurl }}/public/favicon/apple-icon-60x60.png" async>
