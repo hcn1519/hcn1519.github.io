@@ -80,8 +80,8 @@
 @media (prefers-color-scheme: dark) {
   /* 글 중간에 쓰는 블럭용 */
   code.highlighter-rouge {
-    background: #000000;
-    color: #81d4fa;
+    color: var(--message-color);
+    background-color: var(--message-bg-color);
   }
   .highlight .hll { background-color: #000000 }
   .highlight  {

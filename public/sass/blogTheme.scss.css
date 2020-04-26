@@ -156,20 +156,20 @@ tbody tr:nth-child(odd) th {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --main-bg-color: #202020;
-    --main-text-color: #ededed;
+    --main-bg-color: #1d1d1d;
+    --main-text-color: #e5e5e5;
     --post-title-color: #f2f2f2;
     --tag-chips-color: rgba(255, 255, 255, 0.7);
     --tag-chips-bg-color: rgba(255, 255, 255, 0.1);
     --tag-chips-bg-hover-color: rgba(255, 255, 255, 0.5);
-    --link-color: #82b1ff;
-    --link-hover-color: #b6e3ff;
+    --link-color: rgb(10, 132, 255);
+    --link-hover-color: #81d4fa;
     --header-title-color: #f4f4f4;
-    --blockquote-color: #afafaf;
-    --blockquote-border-left-color: #afafaf;
+    --blockquote-color: #928e9c;
+    --blockquote-border-left-color: #928e9c;
     --strong-color: #f5f5f5;
-    --message-color: #ffffffb3;
-    --message-bg-color: #000000;
+    --message-color: #e5e5e5;
+    --message-bg-color: #343434;
     --pagination-item-border-color: #868585;
     --pagination-item-hover-bg-color: #000000;
     --masthead-title-color: #888888;
