@@ -20,7 +20,7 @@ image:
 
 클로저가 함수로부터 `Escape`한다는 것은 해당 함수의 인자로 클로저가 전달되지만, **함수가 반환된 후 실행** 되는 것을 의미합니다. 함수의 인자가 함수의 영역을 탈출하여 함수 밖에서 사용할 수 있는 개념은 기존에 우리가 알고 있던 변수의 `scope` 개념을 무시합니다. 왜냐하면 함수에서 선언된 로컬 변수가 로컬 변수의 영역을 뛰어넘어 **함수 밖** 에서도 유효하기 때문입니다.
 
-사실 일반 로컬 변수(주로 값들: `Int`, `String` 등등)가 함수 밖에서 살아있는 것은 전역 변수를 함수에 가져와서 값을 새로 주는 것과 크게 다르지 않기 떄문에 이와 같은 `Escape` 개념이 크게 의미가 없어 보입니다. 하지만, 클로저의 `Escaping`은 `A 함수가 마무리된 상태에서만 B 함수가 실행되도록` 함수를 작성할 수 있다는 점에서 유용합니다.
+일반 로컬 변수(주로 값들: `Int`, `String` 등등)가 함수 밖에서 살아있는 것은 전역 변수를 함수에 가져와서 값을 새로 주는 것과 크게 다르지 않아 보입니다. 그래서 이와 같은 `Escape` 개념이 크게 의미가 없어 보입니다. 하지만, 클로저의 `Escaping`은 `A 함수가 마무리된 상태에서만 B 함수가 실행되도록` 함수를 작성할 수 있다는 점에서 유용합니다.
 
 > Escaping Closure를 활용하면 통해서 함수 사이에 실행 순서를 정할 수 있습니다.
 
@@ -146,6 +146,7 @@ Server.getPerson { (isSuccess, persons) in
 ---
 
 ## 참고자료
+
 * Apple Inc. The Swift Programming Language (Swift 3.1) - Escaping Closure
 * [escaping closure swift3](https://learnappmaking.com/escaping-closures-swift-3/)
 * [What do mean @escaping and @nonescaping closures in Swift?](https://medium.com/@kumarpramod017/what-do-mean-escaping-and-nonescaping-closures-in-swift-d404d721f39d)
