@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Core Graphics 1"
+title: "Core Graphics"
 date: "2018-03-24 00:53:17 +0900"
 excerpt: "Core Graphics에 대해 학습한 내용을 정리합니다."
 categories: CoreGraphics iOS
