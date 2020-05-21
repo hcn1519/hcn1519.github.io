@@ -3,8 +3,8 @@ layout: post
 title: "Bitcode 도입하기"
 date: "2020-05-21 00:53:17 +0900"
 excerpt: "Bitcode 도입을 위해 알아야 하는 것들에 대해 정리해보았습니다."
-categories: Bitcode, AppStore, Xcode, iOS, Terminology
-tags: [Bitcode, AppStore, Xcode, iOS, Terminology]
+categories: Bitcode, AppStore, Xcode, iOS, BuildSystem, Symbol, CrashReport
+tags: [Bitcode, AppStore, Xcode, iOS, BuildSystem, Symbol, CrashReport]
 image:
   feature: iOS.png
 ---
