@@ -44,11 +44,17 @@ Quartz는 현재의 `Graphic state`에 따라서 drawing의 결과를 수정합�
 
 ## Quartz 2D Coordinate systems
 
-Coordinate system(좌표 시스템)은 그래픽의 위치와 크기를 정의하는 것으로 floating-value(CGFloat) 형태로 정의됩니다. Quartz는 Current Transformation Matrix(CTM)을 사용하여 사용자가 지정한 그래픽의 위치와 사이즈를 기기별로 독립적인 좌표 시스템을 사용하는 화면의 device space로 매핑합니다.
+Coordinate system(좌표 시스템)은 화면에 그려지는 객체의 위치와 크기를 정의하는 것으로 각각의 좌표는 floating-value(CGFloat) 형태로 정의됩니다. 하나의 객체를 디바이스 화면에 그릴 때 있어서 문제가 되는 부분 중 하나는 기기별로 그래픽을 표현하는 스펙이 다르다는 점입니다. 동일한 300x300의 이미지를 해상도가 서로 다른 기기에 그린다고 할 때, 동일한 형태로 이미지가 나오는 것을 기대하기 어렵습니다. 즉, 좌표 시스템을 디바이스 레벨에서 정의하게 되면 객체가 왜곡된 형태로 표현될 수 있습니다.
 
-> 간단히 생각하면, Quartz는 UIView에서 지정한 Frame 값을 디바이스의 적절한 위치에 놓아 화면에 나타나도록 하는 역할을 담당한다고 보면 됩니다.
+Quartz는 이러한 문제를 해결하기 위해 사용자가 사용하는 별도의 좌표 시스템을 두고, 이를 디바이스별로 적절하게 변환해주는 행렬을 하나 정의합니다. 이 행렬이 `Current Transformation Matrix(CTM)`입니다.
 
-CTM은 Affine Transform이라는 매트릭스 타입의 한 종류로 하나의 좌표를 다른 하나의 좌표로 전환하는 역할을 수행합니다. 그리고 이 때, CTM은  translation, rotation, scaling operations를 활용하여 대상이 그려지는 형태를 변환하는 역할도 맡습니다. 예를 들어서 박스를 45도 기울인 형태로 그리고 싶으면 박스를 그리기 전에 ctm을 45도 기울이면 됩니다.
+1. 사용자가 사용하는 user-space Coordinate system 정의
+2. 기기에서 사용하는 device-space Coordinate system 정의
+3. user-space의 point 값을 CTM을 활용하여 device-space point 값으로 변환
+
+이와 같이 user-space, device-space 좌표 시스템을 분리해서 정의하게 되면, 사용자는 하나의 좌표 시스템을 사용하면서도 기기별로 객체가 다르게 노출되는 문제를 고민하지 않아도 됩니다.
+
+> CTM은 Affine Transform이라는 매트릭스 타입의 한 종류로 하나의 좌표를 다른 하나의 좌표로 전환하는 역할을 수행합니다. 그리고 이 때, CTM은 translation, rotation, scaling operations를 활용하여 대상이 그려지는 형태를 변환하는 역할도 맡습니다. 예를 들어서 박스를 45도 기울인 형태로 그리고 싶으면 박스를 그리기 전에 ctm을 45도 기울이면 됩니다.
 
 {% highlight swift %}
 import UIKit
