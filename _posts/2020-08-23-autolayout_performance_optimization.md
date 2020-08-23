@@ -25,21 +25,27 @@ image:
 
 AutoLayout이 나오기 이전에 iOS에서 View의 Layout은 Frame 기반(Size와 Position)으로 정의되었습니다. Frame 중심으로 View의 위치를 결정하는 것은 직관적으로 이해가 가능한 것이 가장 큰 장점입니다. 하지만, Frame 기반 Layout 시스템은 해상도가 다른 디바이스에서는 각 해상도별 Size와 Position별로 각 View의 Frame을 설정해주어야 하는 문제가 있습니다. 이 문제는 하나의 Layout 코드로 지원해야 하는 디바이스가 늘어남에 따라 큰 문제가 되었습니다.
 
-AutoLayout은 이러한 기존 Frame 기반 Layout 시스템의 문제를 해결하기 위해 Constraint 기반 Layout 시스템을 사용합니다. Constraint은 단어 그대로 제약을 의미하는데, 이 제약은 View의 관계에 대한 제약을 의미합니다. 그래서 Constraint을 설정한다라는 것은 대부분* 2개의 View 사이에 Layout 관계를 설정하여 View가 동적으로 화면에 나타날 수 있도록 하는 것을 의미합니다.
+AutoLayout은 이러한 기존 Frame 기반 Layout 시스템의 문제를 해결하기 위해 Constraint 기반 Layout 시스템을 사용합니다. Constraint은 단어 그대로 제약을 의미하는데, 이 제약은 View의 관계에 대한 제약을 의미합니다. 그래서 AutoLayout을 사용할 경우, View 사이의 다양한 Constraint을 설정합니다. 예를 들어, A View의 top이 B View의 bottom과 20pt 떨어져 있도록 하는 것이 하나의 Constraint이 됩니다.
 
-> Note: 대부분이라는 표현을 사용한 것은 단일 View에도 Constraint를 적용할 수 있기 때문입니다. 예를 들어, View의 width, height을 특정 값으로 고정하는 것이 대표적인 단일 View에다가 Constraint을 적용하는 케이스입니다.
+이렇게 Constraint을 통해 View의 Layout을 결정하는 것의 큰 장점은 View의 크기나 위치를 정적인 값으로 설정하지 않아도 된다는 점입니다. AutoLayout에서 View의 크기나 위치는 설정된 Constriant을 기반으로 환경에 맞추어 동적으로 계산됩니다. 동적으로 View의 Layout을 결정하는 것은 디바이스 파편화로 인해 일어나는 많은 문제를 해결해줍니다. 예를 들어, 화면을 일정 마진 값만 남기고 나머지를 채우는 View의 Layout을 구현할 때, 각 해상도별로 View의 사이즈를 지정하지 않아도 각각의 마진 값을 Constraint으로 설정하기만 하면 AutoLayout이 이를 기반으로 View의 Layout을 설정해줍니다.*
 
-한편, Constraint을 통해 나타나는 두 개 View 사이의 관계는 1개의 일차 방정식으로 정의될 수 있습니다. 예를 들어, RedView의 trailing과 BlueView의 Leading 사이의 간격을 8pt로 설정할 경우 아래와 같은 방정식이 설립됩니다.
+> AutoResizingMask도 유사한 기능을 지원하지만, 상대적으로 간단한 UI에서만 적용될 수 있습니다.
+
+## 2. AutoLayout Engine과 Layout 업데이트
+
+### AutoLayout과 방정식
+
+Constraint을 통해 나타나는 두 개 View 사이의 관계는 1개의 일차 방정식(Single Equation)으로 정의될 수 있습니다. 예를 들어, RedView의 trailing과 BlueView의 Leading 사이의 간격을 8pt로 설정할 경우 아래와 같은 방정식이 설립됩니다.
 
 ![view_formula_2x](https://user-images.githubusercontent.com/13018877/90341628-04b74280-e03c-11ea-9007-fbab21946612.png)
 
 AutoLayout은 이렇게 정의된 일차 방정식들의 해를 구하는 작업을 수행합니다. 그리고 모든 해가 정확히 1개의 답을 가지거나, 1개의 가능한 답*을 가지게 될 때, 각각의 View는 그 위치가 결정됩니다.
 
-> Note: AutoLayout은 Priority 설정이나, inEquality 설정 등을 통해서 방정식의 답이 여러 개가 존재할 수 있는 상황을 만들어 낼 수 있습니다. 이 때, AutoLayout은 Error Minimization을 통해 1개의 최적해를 구하고, 해당 해를 사용합니다.
+> Note: AutoLayout은 Priority 설정이나, inEquality 설정 등을 통해서 방정식의 답이 여러 개가 존재할 수 있는 상황을 만들어 낼 수 있습니다. 이 때, AutoLayout은 Error Minimization을 통해 1개의 최적해를 구하고, 해당 값을 사용합니다.
 
-## 2. AutoLayout Engine과 Layout 업데이트
+### AutoLayout Engine
 
-앞서서 AutoLayout 시스템에서는 설정된 여러 개의 일차 방정식을 계산하여 View의 Layout을 구성한다고 언급하였습니다. 그리고 여기서 방정식을 계산을 담당하는 것이 AutoLayout Engine입니다. 이 Engine은 아래와 같이 동작합니다.
+AutoLayout Engine은 설정된 여러 개의 일차 방정식을 계산하는 코어 모듈입니다. 이 Engine은 아래와 같이 동작합니다.
 
 1. View는 Constraint을 추가합니다. 이 때 View는 추가된 Constraint을 방정식으로 변환하고 이를 Engine쪽으로 전달합니다.
 2. Engine은 전달 받은 방정식을 계산합니다. 여기서 Engine은 우리가 방정식의 해를 구하는 것처럼 각각의 변수를 계산합니다.
