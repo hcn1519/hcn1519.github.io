@@ -61,7 +61,7 @@ Engine은 각각의 Variable에 값을 설정할 때마다, Variable의 값이 �
 
 ### 1. 관계가 없는 View 사이에 Constraint 설정하지 않기
 
-Engine은 서로 관계가 없는(dependency가 없음) View의 Constraint을 별개로 인지합니다. 그래서 View끼리 Constraint이 걸려 있지 않을 때, Constraint 계산 비용은 선형적으로(leaner) 증가합니다. 바꿔 말하면, 여러 개의 View에 독립적으로 걸려 있는 Constraint을 하나의 View로 묶어서 처리하는 방식은 Constraint 계산 비용을 증가시킬 수 있습니다. 그러므로, View의 Constraint은 필요한 경우에만 서로 관련되도록 처리하는 것이 성능적으로 좀 더 좋습니다.
+Engine은 서로 관계가 없는(dependency가 없음) View의 Constraint을 별개로 인지합니다. 그래서 View끼리 Constraint이 걸려 있지 않을 때, Constraint 계산 비용은 선형적으로(linear) 증가합니다. 바꿔 말하면, 여러 개의 View에 독립적으로 걸려 있는 Constraint을 하나의 View로 묶어서 처리하는 방식은 Constraint 계산 비용을 증가시킬 수 있습니다. 그러므로, View의 Constraint은 필요한 경우에만 서로 관련되도록 처리하는 것이 성능적으로 좀 더 좋습니다.
 
 ![스크린샷 2020-08-22 오후 11 25 03](https://user-images.githubusercontent.com/13018877/90958329-ba681280-e4ce-11ea-88e9-d1ecf276c7f8.png)
 
