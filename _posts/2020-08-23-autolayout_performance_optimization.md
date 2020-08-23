@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "AutoLayout 성능 최적화 Tips"
+title: "AutoLayout 성능 최적화하기"
 date: "2020-08-23 00:53:17 +0900"
-excerpt: "성능 관점 AutoLayout을 적절히 사용하는 방법에 대해 살펴봅니다."
-categories: iOS, AutoLayout
-tags: [iOS, AutoLayout]
+excerpt: "성능 관점에서 AutoLayout을 적절히 사용하는 방법에 대해 살펴봅니다."
+categories: iOS, AutoLayout, UIKit, UIView
+tags: [iOS, AutoLayout, UIKit, UIView]
 image:
   feature: iOS.png
 ---
@@ -63,11 +63,11 @@ Engine은 서로 관계가 없는(dependency가 없음) View의 Constraint을 �
 
 - 억지로 Constraint을 적게 사용하지 않기
 
-Constraint은 직관적으로 필요한 만큼 추가되는 것이 좋습니다. 억지로 Constraint을 적게 설정하려고 한다면 오히려 Constraint 계산 비용이 커지는 경우가 발생할 수 있습니다. 예를 들어 Constraint 최적화를 위해 Constraint를 추가/제거하는 작업은 계산 비용을 낮춘다고 생각할 수 있지만 오히려 비용을 크게 만드는 경우가 많습니다. 이런 경우에는 오히려 Constraint을 여러 개 두는 것이 나을 수도 있습니다.
+Constraint은 직관적으로 필요한 만큼 추가되는 것이 좋습니다. 억지로 Constraint을 적게 설정하려고 한다면 오히려 Constraint 계산 비용이 커지는 경우가 발생할 수 있습니다. 예를 들어, Constraint 최적화를 위해 Constraint를 반복적으로 추가/제거하는 방법을 고려할 수 있지만, 이는 비용을 크게 만드는 경우가 많습니다. 이런 경우에는 오히려 Constraint을 여러 개 두는 것이 나을 수도 있습니다.
 
 - 두 개의 Layouts을 하나의 View로 표현하기 위해, Constraint을 복잡하게 설정하지 않기
 
-때때로 두개의 Layout을 하나의 View로 표현하기 위해 복잡한 Constraint을 설정하는 경우가 발생할 수 있습니다. 추가되는 Constraint이 많으면 많아질수록 Constraint을 통해 나타나는 Layout을 직관적으로 확인하기 어렵습니다. 이런 경우에는 직관적으로 View가 Constraint을 통해 명확히 표현될 수 있는가를 중점에 두고, Constraint을 설정하는 것이 좋습니다.(별도의 View로 나누거나, 새로운 SubView를 추가하여 Constraint 복잡도를 줄이거나 등의 방법을 사용)
+때때로 두개의 Layout을 하나의 View로 표현하기 위해 복잡한 Constraint을 설정하는 경우가 발생할 수 있습니다. 추가되는 Constraint이 많으면 많아질수록 Constraint을 통해 나타나는 Layout은 직관적으로 이해하기 어렵습니다. 이런 경우에는 직관적으로 View가 Constraint을 통해 명확히 표현될 수 있는가를 중점에 두고, Constraint을 설정하는 것이 좋습니다.(별도의 View로 나누거나, 새로운 SubView를 추가하여 Constraint 복잡도를 줄이거나 등의 방법을 사용)
 
 ![스크린샷 2020-08-23 오전 3 27 23](https://user-images.githubusercontent.com/13018877/90963169-95849700-e4f0-11ea-9ce6-ce141655464f.png)
 
