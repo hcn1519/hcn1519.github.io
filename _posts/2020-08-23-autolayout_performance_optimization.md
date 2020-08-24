@@ -27,7 +27,7 @@ AutoLayout이 나오기 이전에 iOS에서 View의 Layout은 Frame 기반(Size�
 
 AutoLayout은 이러한 기존 Frame 기반 Layout 시스템의 문제를 해결하기 위해 Constraint 기반 Layout 시스템을 사용합니다. Constraint은 단어 그대로 제약을 의미하는데, 이 제약은 View의 관계에 대한 제약을 의미합니다. 그래서 AutoLayout을 사용할 경우, View 사이의 다양한 Constraint을 설정합니다. 예를 들어, A View의 top이 B View의 bottom과 20pt 떨어져 있도록 하는 것이 하나의 Constraint이 됩니다.
 
-이렇게 Constraint을 통해 View의 Layout을 결정하는 것의 큰 장점은 View의 크기나 위치를 정적인 값으로 설정하지 않아도 된다는 점입니다. AutoLayout에서 View의 크기나 위치는 설정된 Constriant을 기반으로 환경에 맞추어 동적으로 계산됩니다. 동적으로 View의 Layout을 결정하는 것은 디바이스 파편화로 인해 일어나는 많은 문제를 해결해줍니다. 예를 들어, 화면을 일정 마진 값만 남기고 나머지를 채우는 View의 Layout을 구현할 때, 각 해상도별로 View의 사이즈를 지정하지 않아도 각각의 마진 값을 Constraint으로 설정하기만 하면 AutoLayout이 이를 기반으로 View의 Layout을 설정해줍니다.*
+이렇게 Constraint을 통해 View의 Layout을 결정하는 것의 큰 장점은 View의 크기나 위치를 정적인 값으로 설정하지 않아도 된다는 점입니다. AutoLayout에서 View의 크기나 위치는 설정된 Constriant을 기반으로 환경에 맞추어 동적으로 계산됩니다. 동적으로 View의 Layout을 결정하는 것은 디바이스 파편화로 발생하는 많은 문제를 해결해줍니다. 예를 들어, 화면을 일정 마진 값만 남기고 나머지를 채우는 View의 Layout을 구현할 때, 각 해상도별로 View의 사이즈를 지정하지 않아도 각각의 마진 값을 Constraint으로 설정하기만 하면 AutoLayout이 이를 기반으로 View의 Layout을 설정해줍니다.*
 
 > AutoResizingMask도 유사한 기능을 지원하지만, 상대적으로 간단한 UI에서만 적용될 수 있습니다.
 
@@ -37,7 +37,7 @@ AutoLayout은 이러한 기존 Frame 기반 Layout 시스템의 문제를 해결
 
 Constraint을 통해 나타나는 두 개 View 사이의 관계는 1개의 일차 방정식(Single Equation)으로 정의될 수 있습니다. 예를 들어, RedView의 trailing과 BlueView의 Leading 사이의 간격을 8pt로 설정할 경우 아래와 같은 방정식이 설립됩니다.
 
-![view_formula_2x](https://user-images.githubusercontent.com/13018877/90341628-04b74280-e03c-11ea-9007-fbab21946612.png)
+![some2](https://user-images.githubusercontent.com/13018877/91072672-d0173c80-e674-11ea-8641-65e9ac89e3c8.png)
 
 AutoLayout은 이렇게 정의된 일차 방정식들의 해를 구하는 작업을 수행합니다. 그리고 모든 해가 정확히 1개의 답을 가지거나, 1개의 가능한 답*을 가지게 될 때, 각각의 View는 그 위치가 결정됩니다.
 
@@ -79,7 +79,7 @@ Constraint은 직관적으로 필요한 만큼 추가되는 것이 좋습니다.
 
 - 두 개의 Layout을 하나의 View로 표현하기 위해, Constraint을 복잡하게 설정하지 않기
 
-때때로 두개의 Layout을 하나의 View로 표현하기 위해 복잡한 Constraint을 설정하는 경우가 발생할 수 있습니다. 추가되는 Constraint이 많으면 많아질수록 Constraint을 통해 표현되는 Layout은 직관적으로 이해하기 어렵습니다. 이런 경우에는 직관적으로 View가 Constraint을 통해 명확히 표현될 수 있는가를 중점에 두고, Constraint을 설정하는 것이 좋습니다.(별도의 View로 나누거나, 새로운 SubView를 추가하여 Constraint 복잡도를 줄이거나 등의 방법을 사용)
+때때로 두개의 Layout을 하나의 View로 표현하기 위해 복잡한 Constraint을 설정하는 경우가 발생할 수 있습니다. 추가되는 Constraint이 많으면 많아질수록 Constraint을 통해 표현되는 Layout은 직관적으로 이해하기 어렵습니다. 이런 경우에는 직관적으로 View가 Constraint을 통해 명확히 표현될 수 있는가를 중점에 두고, Constraint을 설정하는 것이 좋습니다.(별도의 View로 나누거나, 새로운 SubView를 추가하여 Constraint 복잡도를 줄이는 방법들을 사용)
 
 ![스크린샷 2020-08-23 오전 3 27 23](https://user-images.githubusercontent.com/13018877/90963169-95849700-e4f0-11ea-9ce6-ce141655464f.png)
 
@@ -95,7 +95,7 @@ AutoLayout Engine이 View로부터 계산된 Variable을 제공해줄 것을 요
 
 ### 4. Constraint Churn 없애기
 
-`Constraint Churn`이라는 것은 **시각적으로는 동일한 Layout 결과물**을 불필요하게 복잡한 Constraint 설정, 반복적으로 Constraint을 추가/제거하여 뒤섞는 것을 의미합니다. 즉, 실제 View의 레이아웃 변경은 없지만, Engine이 더 많은 일을 하게 만드는 경우 `Constraint Churn`이 있다고 말합니다. `Constraint Churn`이 많아질 경우 AutoLayout의 성능에 악영향을 끼칠 수 있습니다. `Constraint Churn`은 다음과 같은 작업을 수행할 경우 주로 발생하게 됩니다.
+`Constraint Churn`이라는 것은 **시각적으로는 동일한 Layout 결과물**을 불필요하게 복잡한 Constraint을 설정하거나, 반복적으로 Constraint을 추가/제거하여 뒤섞는 것을 의미합니다. 즉, 실제 View의 레이아웃 변경은 없지만, Engine이 더 많은 일을 하게 만드는 경우 `Constraint Churn`이 있다고 말합니다. `Constraint Churn`이 많아질 경우 AutoLayout의 성능에 악영향을 끼칠 수 있습니다. `Constraint Churn`은 다음과 같은 작업을 수행할 경우 주로 발생하게 됩니다.
 
 - 모든 Constraint 제거 후 다시 설정
 - 변경이 필요하지 않은 Constraint 변경
@@ -104,9 +104,11 @@ AutoLayout Engine이 View로부터 계산된 Variable을 제공해줄 것을 요
 이를 반대로 얘기하면 아래와 같은 방식으로 AutoLayout을 처리할 경우 `Constraint Churn`을 줄일 수 있습니다.
 
 - 모든 Constraint을 제거하지 않기
-- 동적으로 추가되지 않아도 되는 Constraint은 항상 init 과정 등에서 정적으로 추가하기
+- 동적으로 추가되지 않아도 되는 Constraint은 항상 init 과정 등에서 정적으로 한 번만 추가하기
 - 변경이 필요한 Constraint만 변경하기
-- Add/Remove(Activate/Deactivate)를 하기보다는 View를 Hidden 처리하는 방식을 활용하기
+- Add/Remove(Activate/Deactivate)를 하기보다는 View를 Hidden 처리하는 방식을 활용하기*
+
+> Note: Constraint은 그대로 두고 View를 Hidden하는 비용이 Constraint을 변경하거나 추가/제거를 하는 작업보다 비용이 훨씬 작습니다. 따라서, View를 숨김 처리하는 것만으로 레이아웃이 올바르게 표현될 수 있다면 Constraint은 변경하지 않는 것이 성능적으로 좋습니다.
 
 #### Constraint Churn과 Render Loop
 
