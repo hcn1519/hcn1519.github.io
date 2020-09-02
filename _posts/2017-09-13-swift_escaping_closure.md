@@ -3,9 +3,9 @@ layout: post
 comments: true
 title:  "Swift Escaping Closure 이해하기"
 excerpt: "Swift의 Escaping Closure에 대해 알아봅니다."
-categories: Swift Closure, EscapingClosure Language
+categories: Swift Closure, EscapingClosure Language Networking
 date:   2017-09-12 00:30:00
-tags: [Swift, Closure, EscapingClosure, Language]
+tags: [Swift, Closure, EscapingClosure, Language, Networking]
 image:
   feature: swiftLogo.jpg
 ---

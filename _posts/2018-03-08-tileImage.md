@@ -2,9 +2,9 @@
 layout: post
 title: "이미지 타일링을 통한 고해상도 이미지 로딩"
 excerpt: "타일 이미지를 활용하여 고해상도 이미지를 랜더링하는 방법에 대해 알아봅니다."
-categories: TiledImage, Display, CoreGraphics, Swift
+categories: TiledImage, Display, CoreGraphics, Swift, UIKit
 date: "2018-03-08 18:28:51 +0900"
-tags: [TiledImage, Display, Swift, THStorytellingView, THTiledImageView]
+tags: [TiledImage, Display, Swift, THStorytellingView, THTiledImageView, UIKit]
 image:
   feature: tiledimage.png
 ---

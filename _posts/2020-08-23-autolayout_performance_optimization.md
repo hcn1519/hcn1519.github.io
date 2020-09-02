@@ -3,8 +3,8 @@ layout: post
 title: "AutoLayout 성능 최적화하기"
 date: "2020-08-23 00:53:17 +0900"
 excerpt: "성능 관점에서 AutoLayout을 적절히 사용하는 방법에 대해 살펴봅니다."
-categories: iOS, AutoLayout, UIKit, UIView
-tags: [iOS, AutoLayout, UIKit, UIView]
+categories: iOS, WWDC, AutoLayout, UIKit, UIView
+tags: [iOS, WWDC, AutoLayout, UIKit, UIView]
 image:
   feature: iOS.png
 ---

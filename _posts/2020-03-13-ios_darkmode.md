@@ -3,8 +3,8 @@ layout: post
 title: "iOS 다크모드 알아보기"
 date: "2020-03-13 00:53:17 +0900"
 excerpt: "iOS에서 다크모드를 적용하기 위해 알아야 하는 내용을 정리하였습니다."
-categories: iOS, DarkMode
-tags: [iOS, DarkMode]
+categories: iOS, WWDC, DarkMode, UIKit
+tags: [iOS, WWDC, DarkMode, UIKit]
 image:
   feature: iOS.png
 ---
