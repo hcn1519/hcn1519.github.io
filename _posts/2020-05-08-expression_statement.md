@@ -54,7 +54,7 @@ tags: [Expression, Statement, Language, C, Terminology]
 * `expression`이 evaluate 되면 하나의 value가 도출된다.
 * `expression`은 side effect를 만든다.
 
-위 정의에서 가장 중요한 것은 `expression`이 항상 **단일한 value** 가 된다는 점입니다.(여기서 말하는 value는 ([명확한 정의를 확인하기 쉽지 않지만](https://stackoverflow.com/questions/3300726/what-is-a-value-in-the-context-of-programming)) 메모리에 저장되어 있는 정보(객체)를 의미합니다.) 즉, `expression`은 언제나 그 결과가 하나의 저장된 값으로 귀결되어, 해당 `expression`이 수행되는 시점에 언제나 값이 존재해야 합니다.
+위 정의에서 가장 중요한 것은 `expression`이 항상 **단일한 value** 가 된다는 점입니다.(여기서 말하는 value는 ([명확한 정의를 확인하기 쉽지 않지만](https://stackoverflow.com/questions/3300726/what-is-a-value-in-the-context-of-programming)) 메모리에 저장되어 있는 정보(객체)를 의미합니다. 즉, `expression`은 언제나 그 결과가 하나의 저장된 값으로 귀결되어, 해당 `expression`이 수행되는 시점에 언제나 값이 존재해야 합니다.
 
 가장 대표적인 `expression`의 예시로는 수식이 있습니다. `2 + 3`과 같은 수식은 결과 값(value)이 `5`가 됩니다. 위 수식이 아니더라도 모든 수식은 하나의 단일한 값으로 귀결됩니다. 그래서 수식은 모두 `expression`이라고 할 수 있습니다. 또한 `a + 3`와 같은 변수를 포함하는 수식도 `expression`입니다. `a + 3`은 `a`라는 변수를 포함하지만, 해당 수식이 실제로 수행되는 시점에서 `a`의 값은 언제나 하나입니다. 그렇기 때문에 `a + 3`도 항상 하나의 값을 가진다고 얘기할 수 있습니다.
 
@@ -142,7 +142,7 @@ We don't normally expect operators to modify their operands, since operators in 
     If a side effect on a scalar object is unsequenced relative to either a different side effect on the same scalar object or a value computation using the value of the same scalar object, the behavior is undefined.
 </div>
 
-C에서 expression의 evaluation 과정에서 발생하는 side effect간의 우선순위를 결정하지 못 하여(컴파일러마다 다를 때), 하나의 value가 도출될 수 없을 때, undefined behavior가 발생하였다고 말합니다. 아래의 예시와 같은 경우에 undefined behavior가 발생하였다고 할 수 있습니다.
+C에서 `expression`의 evaluation 과정에서 발생하는 Side Effect 사이의 우선순위를 결정하지 못 하여(컴파일러마다 다를 때) 하나의 value가 도출될 수 없을 때, Undefined Behavior가 발생하였다고 말합니다. 아래의 예시와 같은 경우에 Undefined Behavior가 발생하였다고 할 수 있습니다.
 
 ```c
 int a, b, c;
@@ -191,7 +191,7 @@ else
     statement
 ```
 
-예시로 든 if `statement와` 같은 조건문 처리뿐만 아니라(`Selection statement`), 반복문도 `while`, `for` 등과 같은 keyword를 사용하고 그 문법에 맞춰 명령을 수행하여 `statement`에 해당(`Iteration statement`)됩니다.
+예시로 든 if `statement`와 같은 조건문 처리뿐만 아니라(`Selection statement`), 반복문도 `while`, `for` 등과 같은 keyword를 사용하고 그 문법에 맞춰 명령을 수행하여 `statement`에 해당(`Iteration statement`)됩니다.
 
 또한, C에서 모든 expression은 마지막에 세미콜론(`;`)을 붙이는 것을 통해 `statement`가 될 수 있습니다. 이렇게 세미콜론이 붙은 `expression`은 `expression statement`라고 합니다. C 컴파일러는 `expression statement`의 경우에 expression에 대한 evaluation을 수행하여, value를 도출하는 명령을 수행합니다. 이 때, 일반적으로 side effect가 발생하게 되는데, 그렇지 않은 경우 C 컴파일러에서는 `Expression result unused`와 같은 warning 메시지를 보여줍니다.
 
