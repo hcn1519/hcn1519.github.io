@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
+ruby '2.7.5'
+
 source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-# gem "rails"
-
-gem "jekyll", "~> 3.8.7"
-gem 'github-pages', "~> 206", group: :jekyll_plugins
+gem "jekyll", "3.9.0"
+gem 'github-pages', "219", group: :jekyll_plugins
 
 
 group :jekyll_plugins do
