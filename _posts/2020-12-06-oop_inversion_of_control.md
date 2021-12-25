@@ -23,7 +23,7 @@ image:
 
 > 여기에서 사용하는 예시는 [InversionOfControl - Martin Fowler](https://martinfowler.com/bliki/InversionOfControl.html)의 예시를 약간 변형한 것임을 밝힙니다.
 
-{% splash %}
+```swift
 class ScreenPresenter {
     var name: String = ""
     var quest: String = ""
@@ -46,7 +46,7 @@ class User {
         presenter.displayQuest()
     }
 }
-{% endsplash %}
+```
 
 위 코드의 실행 순서는 다음과 같습니다.
 
