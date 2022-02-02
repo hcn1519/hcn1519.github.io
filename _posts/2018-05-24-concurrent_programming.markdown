@@ -6,6 +6,19 @@ categories: Concurrent GCD iOS Thread
 tags: [Concurrent, GCD, iOS, Thread]
 ---
 
+## Table of Contents
+
+1. [과거 이야기(싱글 코어 시절)](./concurrent_programming#과거-이야기(싱글-코어-시절))
+1. [멀티 코어 프로세서의 시대](./concurrent_programming#멀티-코어-프로세서의-시대)
+1. [전통적인 접근 방식](./concurrent_programming#1-전통적인-접근-방식)
+1. [Move away from threads](./concurrent_programming#move-away-from-threads)
+1. [Grand Central Dispatch(GCD)](./concurrent_programming#grand-central-dispatch(gcd))
+    1. [Dispatch Queue](./concurrent_programming#dispatch-queue)
+    1. [Dispatch Sources](./concurrent_programming#dispatch-sources)
+    1. [Operation Queue](./concurrent_programming#operation-queue)
+1. [Asynchronous Design Techniques](./concurrent_programming#asynchronous-design-techniques)
+1. [Tips for improving efficiency](./concurrent_programming#tips-for-improving-efficiency)
+
 > 이 글은 애플의 [Concurrency and Application Design](https://developer.apple.com/library/content/documentation/General/Conceptual/ConcurrencyProgrammingGuide/ConcurrencyandApplicationDesign/ConcurrencyandApplicationDesign.html#//apple_ref/doc/uid/TP40008091-CH100-SW1) 문서를 정리한 내용을 담고 있습니다.
 
 ## 과거 이야기(싱글 코어 시절)
@@ -18,7 +31,7 @@ tags: [Concurrent, GCD, iOS, Thread]
 
 이제 컴퓨터 성능은 얼마나 코어들이 일을 잘 배분하여 수행하는 지에 달려 있습니다. 그런데 이것이 쉬운 일이 아닙니다. 자칫 잘못하면 하나의 코어만 일하고 나머지는 노는(그러다가 시스템이 죽는) 현상이 발생합니다. 이러한 한계를 극복하기 위해 개발자들은 많은 노력을 기울였습니다.
 
-### 1. 전통적인 접근 방식
+## 전통적인 접근 방식
 
 <div class="message">
   코어 개수를 늘렸으니 쓰레드 개수를 늘리자
@@ -26,11 +39,11 @@ tags: [Concurrent, GCD, iOS, Thread]
 
 전통적인 접근 방식은 코어의 개수를 늘렸으니 그에 상응하여 쓰레드의 개수도 늘리는 것입니다. 쉽고 명쾌한 해결방안 같지만, 이는 다음과 같은 문제가 있습니다.
 
-1. 쓰레드 기반의 코드는 임의의 코어 개수에 대해 항상 최적의 성능을 보장하지 않는다.
+- 쓰레드 기반의 코드는 임의의 코어 개수에 대해 항상 최적의 성능을 보장하지 않는다.
 
 컴퓨터의 성능은 코어의 개수에 따라 매우 제각각입니다. 그래서 코어 개수에 따라서 적절한 양의 쓰레드를 사용할 필요가 있는데 쓰레드 기반의 코드는 코어 개수에 따라 최적화된 성능을 보여주지 못 했습니다. 즉, 코어 개수에 따라 쓰레드의 개수가 적절히 늘어나거나 줄어들어야 하는데 그렇게 만들 수가 없었습니다.
 
-2. 위의 문제로 인해 개발자가 처리해야 하는 것이 너무 많아졌다.
+- 위의 문제로 인해 개발자가 처리해야 하는 것이 너무 많아졌다.
 
 위의 문제 때문에 개발자는 할 일이 너무 많아졌습니다. 먼저 개발자는 쓰레드와 코어의 개수간의 상관관계를 파악해야 합니다. 그리고 이를 설령 알아냈다고 하더라도 쓰레드의 효율적인 동작을 처리하는 것도 해주어야 했습니다. 즉, 쓰레드를 적절히 활용하기 위해서는 개발자가 **직접** 시스템 상태에 따른 쓰레드의 생성과 소멸을 조절하고 효율적 동작도 처리해야 했습니다. 😭
 
@@ -51,7 +64,7 @@ GCD는 개발자가 작성한 어떤 코드든 쓰레드 관리를 해주면서 
 
 앞서서 tasks를 큐에 등록하면 된다고 하였는데, 이 때 큐가 `Dispatch Queue`만 있는 것은 아닙니다. 크게 `Dispatch Queue`, `Dispatch Sources`, `Operation Queue`가 있습니다. 이들에 대해 간단하게 살펴보겠습니다.
 
-#### Dispatch Queue
+### Dispatch Queue
 
 <div class="message">
   Dispatch queues are a C-based mechanism for executing custom tasks.
@@ -68,7 +81,7 @@ GCD는 개발자가 작성한 어떤 코드든 쓰레드 관리를 해주면서 
 
 DispatchQueue에 등록하는 작업들은 `block(closure)` 형태로 작성되어야 하며, 작업 실행시 함수의 본래 스코프를 벗어나서 heap에 해당 작업들을 복사하여 작업을 수행합니다. 그래서 다양한 방식으로 코드를 작성할 수 있고, 기존에 비해 코드 작성이 쉽습니다.
 
-#### Dispatch Sources
+### Dispatch Sources
 
 <div class="message">
   Dispatch sources are a C-based mechanism for processing specific types of system events asynchronously.
@@ -83,7 +96,6 @@ DispatchQueue에 등록하는 작업들은 `block(closure)` 형태로 작성되�
 </div>
 
 `Operation Queue`는 Concurrent Dispatch Queue와 동일하지만, Priority Queue의 기능을 가지고 있어서 작업의 우선순위를 정할 수 있는 큐입니다. `Operation Queue`의 작업들은 `NSOperation` 인스턴스 형태이어야 합니다. `NSOperation` KVO 기반으로 notification을 전달하고 수행과정을 모니터링할 수 있도록 해줍니다.
-
 
 ## Asynchronous Design Techniques
 
@@ -104,7 +116,6 @@ DispatchQueue에 등록하는 작업들은 `block(closure)` 형태로 작성되�
 * Identify the Queues You Need
 
 다음은 작성된 task를 어떤 큐에서 작업할지 결정합니다. 이 때, 작업의 순서를 변경하면 결과가 바뀔 수 있는 task는 순차적으로 수행하고(`serial`), 그렇지 않으면 `concurrent`하게 수행하도록 합니다.
-
 
 ## Tips for improving efficiency
 

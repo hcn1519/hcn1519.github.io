@@ -10,6 +10,16 @@ image:
   feature: swiftLogo.jpg
 ---
 
+## Table of Contents
+
+1. [기본적인 macOS 파일 시스템](./swift_file_manager#기본적인-macos-파일-시스템)
+1. [FileManager](./swift_file_manager#filemanager)
+    1. [Directory 접근하기](./swift_file_manager#directory-접근하기)
+    1. [Directory 생성하기](./swift_file_manager#directory-생성하기)
+    1. [파일 만들고 쓰기](./swift_file_manager#파일-만들고-쓰기)
+    1. [파일 읽기](./swift_file_manager#파일-읽기)
+1. [번외 : iOS 프로젝트에서 로컬 이미지 읽고 보여주기](./swift_file_manager#번외-:-ios-프로젝트에서-로컬-이미지-읽고-보여주기)
+
 이번 포스팅에서는 Swift를 통해 로컬(macOS)에 있는 파일들을 다루는 방법에 대해 알아보고자 합니다.
 
 ## 기본적인 macOS 파일 시스템
@@ -33,7 +43,7 @@ Swift에서는 파일들을 다루기 위한 클래스로 `FileManager`를 제�
 
 [FileManager](https://developer.apple.com/documentation/foundation/filemanager)
 
-#### Directory 접근하기
+### Directory 접근하기
 
 가장 먼저 디렉토리의 내용을 보는 방법을 알아보겠습니다. 가장 쉬운 방법은 `contentsOfDirectory(atPath:)` 메소드를 쓰는 것입니다.
 
@@ -60,7 +70,7 @@ do {
 
 `contentsOfDirectory(atPath:)` 메소드는 설정한 경로의 디렉토리 안에 있는 파일들을 `[String]` 형태로 반환합니다. 또한, `subpathsOfDirectory(atPath:)`와 같은 메소드는 설정한 경로에 있는 디렉토리들을 모두 탐색하여 그 안에 있는 파일까지 모두 포함한 배열을 반환합니다.
 
-#### Directory 생성하기
+### Directory 생성하기
 
 디렉토리를 생성하는 방법도 접근하는 것과 크게 다르지 않습니다. 여기서는 `createDirectory(atPath:withIntermediateDirectories:attributes:)` 메소드를 사용합니다.
 
@@ -99,7 +109,7 @@ do {
 
 다음으로 디렉토리의 생성입니다. `createDirectory(atPath:withIntermediateDirectories:attributes:)`는 `atPath`에서 설정된 경로에 디렉토리를 생성합니다. 디렉토리의 경로는 확장자 없이 끝나는 형태이어야 합니다.
 
-#### 파일 만들고 쓰기
+### 파일 만들고 쓰기
 
 `FileManger()`를 사용하여 파일 생성과 텍스트 쓰기도 가능합니다.
 {% highlight swift %}
@@ -122,8 +132,7 @@ do {
 
 파일 생성과 쓰기의 경우에도 파일을 만들 디렉토리를 지정하고, 그 경로에 텍스트를 쓰면 됩니다. 이 때, `String.write(to:atomically:encoding:)` 메소드를 사용하면 됩니다.
 
-
-#### 파일 읽기
+### 파일 읽기
 
 파일 읽기도 읽을 때 `String(contentsOf:encoding:)` 메소드를 쓰는 것만 제외하면, 쓰기와 그 과정이 동일합니다.
 
