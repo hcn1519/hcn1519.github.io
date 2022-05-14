@@ -2,7 +2,7 @@
 layout: post
 title: "DiffableDataSource로 안전하게 UIKit List 업데이트하기"
 date: "2022-05-13 00:53:17 +0900"
-excerpt: "iOS에서 다크모드를 적용하기 위해 알아야 하는 내용을 정리하였습니다."
+excerpt: "UIKit의 DiffableDataSource를 사용하기 위한 방법에 대해 정리하였습니다."
 categories: iOS, WWDC, DiffableDataSource, UIKit
 tags: [iOS, WWDC, DiffableDataSource, UIKit]
 image:

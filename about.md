@@ -3,10 +3,8 @@ layout: page
 title: About
 ---
 
-<p class="message">
-  개발과 관련한 다양한 이야기들을 담고 있습니다.
-</p>
+이 블로그는 과거의 나가 알고 있던 것들을 미래의 나가 기억할 수 있도록 글을 남기는 공간입니다.
 
-아래 내용은 지속적으로 추가하도록 하겠습니다.
-
-해당 테마는 다음 [GitHub](https://github.com/poole/lanyon)에서 확인하실 수 있습니다. 개인적으로 커스터마이징 한 부분도 있으니 참고하세요.
+- [다른 블로그](https://velog.io/@hcn1519)
+- [github](https://github.com/hcn1519)
+- [링크드인](https://www.linkedin.com/in/changnam-hong/)
