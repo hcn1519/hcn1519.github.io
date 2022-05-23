@@ -16,7 +16,7 @@ image:
 
 # WWDC - Advances in UI Data Sources
 
-`Diffable Data Source`는 `UICollectionView`와 `UITableView`의 DataSource 업데이트를 좀 더 안전하고, 편리하게 수행할 수 있도록 만들어진 API입니다. 이 글에서는 `Diffable Data Source`는 iOS 13부터 지원되는 WWDC 주요 내용([Advances in UI Data Sources](https://developer.apple.com/videos/play/wwdc2019/220))을 소개하고, 이를 적용한 후기에 대해 정리해보았습니다.
+`Diffable Data Source`는 `UICollectionView`와 `UITableView`의 DataSource 업데이트를 좀 더 안전하고, 편리하게 수행할 수 있도록 만들어진 API입니다. 이 글에서는 iOS 13부터 지원되는 `Diffable Data Source`를 소개하는 WWDC 주요 내용([Advances in UI Data Sources](https://developer.apple.com/videos/play/wwdc2019/220))을 정리하고, 이를 적용한 후기에 대해 작성해보았습니다.
 
 ## Current state-of-the-art
 
@@ -24,14 +24,14 @@ image:
 
 ![no1](https://user-images.githubusercontent.com/13018877/168228135-ae120e52-5c14-479f-814e-3cf9c3d26409.jpeg)
 
-UI를 업데이트하고자 할 때에는 `reloadData()`나 `performBatchUpdates()` 사용해야 합니다. 전체 데이터를 갱신하는 `reloadData()` 는 작은 데이터를 갱신할 때에는 유용하지만, 보여주는 데이터의 양이 많아지거나 일부 Cell만 업데이트하고자 할 때에는 `performBatchUpdates()`를 통해 개별 Section, 혹은 Item을 업데이트해주어야 합니다. 하지만, `performBatchUpdates()` 업데이트가 잘못 되었을 때 아래와 같은 크래시를 매우 자주 일으킵니다.
+그리고 이 DataSource를 업데이트하기 위해서는 `reloadData()`나 `performBatchUpdates()` 사용해야 합니다. 전체 데이터를 갱신하는 `reloadData()` 는 작은 데이터를 갱신할 때에는 유용하지만, 보여주는 데이터의 양이 많아지거나 일부 Cell만 업데이트하고자 할 때에는 `performBatchUpdates()`를 통해 개별 Section, 혹은 Item을 업데이트해주어야 합니다. 하지만, `performBatchUpdates()` 업데이트가 잘못 되었을 때 아래와 같은 크래시가 발생합니다.
 
 ![no2](https://user-images.githubusercontent.com/13018877/168228171-19ff6cf6-5f89-4b23-8051-7873f535507e.jpeg)
 
 ## Diffable DataSource
 
-- `Diffable DataSource`는 UI의 업데이트를 간단하고, 에러 없이 수행할 수 있도록 하기 위해 iOS 13에서 새롭게 소개된 API입니다.
-- `Diffable DataSource`는 Cell의 insert, delete 등의 동작을 사용자가 직접 수행하지 않도록 합니다. 그리고, 데이터의 업데이트를 Snapshot을 적용(apply)하는 방식으로 수행하도록 합니다.
+- `Diffable DataSource`는 UI의 업데이트를 간단하고, 크래시 없이 수행할 수 있도록 하기 위해 iOS 13에서 새롭게 소개된 API입니다.
+- `Diffable DataSource`는 Cell의 insert, delete 등의 동작을 사용자가 직접 수행하지 않도록 합니다. 그리고, 데이터의 업데이트를 `Snapshot`을 적용(apply)하는 방식으로 수행하도록 합니다.
 
 ![no3](https://user-images.githubusercontent.com/13018877/168228193-7237ae99-6c74-444b-b52d-59a8c4b81d52.jpeg)
 
@@ -48,7 +48,7 @@ UI 업데이트가 필요할 경우 새로운 `Snapshot`을 만들거나, 기존
 
 ### 1. Diffable DataSource property 정의
 
-UIKit에서는 `UICollectionView`, `UITableView`에 맞는 Diffable DataSource를 정의하여 다음과 같이 제공합니다.
+UIKit에서는 `UICollectionView`, `UITableView`에 맞는 `Diffable DataSource`를 정의하여 다음과 같이 제공합니다.
 
 ```swift
 @available(iOS 13.0, tvOS 13.0, *)
@@ -96,6 +96,7 @@ class ViewController: UIViewController {
         } else {
             tableView.dataSource = self
         }
+    }
 }
 ```
 
