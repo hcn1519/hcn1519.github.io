@@ -4,10 +4,11 @@ title: "GCD - Dispatch Queue"
 excerpt: "Dispatch Queue에 대한 정리"
 date: "2018-07-08 20:04:49 +0900"
 categories: Concurrent GCD DispatchQueue iOS OS Thread
-tags: [Concurrent, GCD, DispatchQueue, iOS, OS, Thread]
+tags: [Concurrency, GCD, DispatchQueue, iOS, OS, Thread]
 image:
   feature: iOS.png
 ---
+
 
 > 이 글을 읽기 전 [Concurrenct programming과 GCD](https://hcn1519.github.io/articles/2018-05/concurrent_programming)을 먼저 읽으면 이해가 쉽습니다.
 

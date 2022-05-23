@@ -5,7 +5,7 @@ title:  "Git ignore"
 excerpt: "github에 프로젝트를 올릴 때 파일을 제외하는 방법을 알아봅니다."
 categories: Git Github Ignore
 date:   2017-02-21 00:30:00
-tags: [Git, Ignore, Github]
+tags: [Git]
 ---
 
 git을 사용할 때, github에 올리면 안되는 파일 혹은 폴더들이 있습니다. 이런 파일들이 github에 올라가지 않도록 도와주는 것이 <code>.gitignore</code>입니다. <code>.gitignore</code>을 사용하는 것은 간단합니다. 먼저 프로젝트의 root 폴더에서 <code>.gitignore</code>파일을 생성합니다.

@@ -3,7 +3,7 @@ layout: post
 title: "Concurrent programming과 GCD"
 date: "2018-05-24 23:04:09 +0900"
 categories: Concurrent GCD iOS Thread
-tags: [Concurrent, GCD, iOS, Thread]
+tags: [Concurrency, GCD, iOS, Thread]
 ---
 
 ## Table of Contents
