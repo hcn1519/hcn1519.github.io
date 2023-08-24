@@ -7,7 +7,7 @@ url:               "https://hcn1519.github.io" # the base hostname & protocol fo
 imageUrl: "https://hcn1519.github.io/public/postImages"
 
 # Setup
-title:               "Eth Dev Post"
+title:               "hcn1519 Dev Post"
 tagline:             "Dev Post"
 description:         "프로그래밍에 관하여 글을 쓰는 블로그입니다."
 paginate:            10
