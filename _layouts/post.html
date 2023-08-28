@@ -36,13 +36,6 @@ layout: default
   {% assign days_between_create_and_modify = last_modified_at_num | minus:page_date_num %}      
   {% assign days_in_sec_30 = 24 | times:3600 | times:30 %}
   
-  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
-  {% if page_date < last_modified_at and days_between_create_and_modify > days_in_sec_30 %}
-  <div class="message">
-    이 글은 {{ page.last_modified_at | date: '%Y년 %m월 %d일' }}에 마지막으로 업데이트 되었습니다.
-  </div>
-  {% endif %}
-  
   {{ content }}
 
 <div class="related">
@@ -64,7 +57,7 @@ layout: default
           {% assign sameTagCount = sameTagCount | plus: 1 %}
           {% capture tagmarkup %} 
             <div class="tag-chips">
-              <a class="tag-link" href="https://hcn1519.github.io/tags/#{{ tag }}">
+              <a class="tag-link" href="{{ site.baseurl }}/tags/#{{ tag }}">
                 {{ tag }}
               </a>
             </div>
@@ -76,7 +69,11 @@ layout: default
 
     {% if sameTagCount >= minCommonTags %}
       {% if maxRelatedCounter == 0 %}
-      <h2>읽어 볼만한 다른 글</h2>
+        {% if site.lang == "en" %}
+        <h2>What to Read More</h2>
+        {% else %}
+        <h2>읽어 볼만한 다른 글</h2>
+        {% endif %}
       <ul class="related-posts">
       {% endif %}
         <li>
@@ -99,7 +96,11 @@ layout: default
   </ul>
 
   {% if maxRelatedCounter == 0 %}
-    <h2>Lastest Posts</h2>
+    {% if site.lang == "en" %}
+    <h2>Latest Posts</h2>
+    {% else %}
+    <h2>최근 글</h2>
+    {% endif %}
     <ul class="related-posts">
       {% for post in site.related_posts limit:3 %}
         <li>

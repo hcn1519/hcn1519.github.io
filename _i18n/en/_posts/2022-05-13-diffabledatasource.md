@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Safely Updating UIKit Lists with DiffableDataSource"
+title: "Updating UIKit Lists Safely with DiffableDataSource"
 date: "2022-05-13 00:53:17 +0900"
 excerpt: "This article summarizes the use of UIKit's DiffableDataSource for iOS development."
 categories: iOS, WWDC, DiffableDataSource, UIKit
