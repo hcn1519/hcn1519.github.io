@@ -147,3 +147,7 @@ Swift는 Task Group에 포함되지 않은 Task를 생성하는 것을 지원합
 ### Task Cancellation
 
 Swift에서 각각의 Task는 동작 과정에서 적절한 시점에 스스로가 취소되었는지를 확인하는 작업을 수행합니다. 이 때, Task는 error를 throwing하거나 빈 collection 혹은 nil을 리턴하거나, 부분적으로 완료된 task를 리턴합니다. Task는 [Task.checkCancellation()](https://developer.apple.com/documentation/swift/task/3814826-checkcancellation)나 [Task.isCancelled](https://developer.apple.com/documentation/swift/task/3814832-iscancelled)를 통해 취소 여부를 확인할 수 있습니다.
+
+# 참고자료
+
+- [The Swift Programming Language (5.5) - Concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html)

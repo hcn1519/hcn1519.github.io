@@ -24,7 +24,11 @@ plugins:
   - jekyll-seo-tag
   - jekyll-paginate
   - jekyll-last-modified-at
+  - jekyll-multiple-languages-plugin
 
 markdown: kramdown
 highlighter: rouge
 
+# languages: ["en","ko"]
+languages: ["ko", "en"]
+exclude_from_localizations: ["javascript", "images", "css"]

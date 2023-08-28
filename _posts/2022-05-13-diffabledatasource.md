@@ -245,6 +245,6 @@ func applySnapshot(newItems: [ViewModel]) {
 }
 ```
 
-## 참고자료
+# 참고자료
 
 - [Advances in UI Data Sources](https://developer.apple.com/videos/play/wwdc2019/220)
