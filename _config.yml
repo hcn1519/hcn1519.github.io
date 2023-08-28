@@ -3,7 +3,7 @@
 # Use of `relative_permalinks` ensures post links from the index work properly.
 permalink:         /articles/:year-:month/:title
 url:               "https://hcn1519.github.io" # the base hostname & protocol for your site
-baseurl: "/"
+baseurl:           ""
 
 imageUrl: "https://hcn1519.github.io/public/postImages"
 
