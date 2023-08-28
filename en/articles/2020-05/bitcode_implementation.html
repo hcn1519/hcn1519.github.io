@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Introducing Bitcode - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Introducing Bitcode - hcn1519 Dev Post">
+  <meta name="description" content="I've compiled information about what you need to know to introduce Bitcode.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Introducing Bitcode">
+  <meta property="og:image" content="/en/public/assets/iOS.png">
+  <meta property="og:description" content="I've compiled information about what you need to know to introduce Bitcode.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/en/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/en/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/en/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/en/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/en/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/en/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/en/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/en/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/en/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/en/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/en/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/en/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/en/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/en/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/en/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/en/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/en/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/en/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/en/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="https://hcn1519.github.io" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Introducing Bitcode</h1>
+  <span class="post-date">21 May 2020</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/en/public/assets/iOS.png"
+    
+    alt="Introducing Bitcode feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="./bitcode_implementation#about-bitcode">About Bitcode</a>
+    <ol>
+      <li><a href="./bitcode_implementation#bitcode-upload-process">Bitcode Upload Process</a></li>
+      <li><a href="./bitcode_implementation#symbolication-for-apps-with-bitcode-enabled">Symbolication for Apps with Bitcode Enabled</a></li>
+      <li><a href="./bitcode_implementation#bcsymbolmap">bcsymbolmap</a></li>
+    </ol>
+  </li>
+  <li><a href="./bitcode_implementation#xcode-build-setting-for-bitcode">Xcode Build Settings for Bitcode</a>
+    <ol>
+      <li><a href="./bitcode_implementation#enable_bitcode">ENABLE_BITCODE</a></li>
+      <li><a href="./bitcode_implementation#bitcode_generation_mode">BITCODE_GENERATION_MODE</a></li>
+    </ol>
+  </li>
+  <li><a href="./bitcode_implementation#library-bitcode-support">Library Bitcode Support</a>
+    <ol>
+      <li><a href="./bitcode_implementation#checking-binary-bitcode-support">Checking Binary Bitcode Support</a></li>
+      <li><a href="./bitcode_implementation#library-bitcode-support-via-cocoapods">Library Bitcode Support via CocoaPods</a></li>
+    </ol>
+  </li>
+</ol>
+
+<p>In this post, I’ve compiled information about what you need to know to introduce Bitcode.</p>
+
+<h2 id="about-bitcode">About Bitcode</h2>
+
+<h3 id="bitcode-upload-process">Bitcode Upload Process</h3>
+
+<div class="message">
+    Bitcode is an intermediate representation of a compiled program.
+</div>
+
+<ul>
+  <li>Bitcode is an <a href="https://en.wikipedia.org/wiki/Intermediate_representation">IR (Intermediate Representation)</a> included in binary builds for App Thinning in the App Store. When bitcode is included in the uploaded binary, the App Store recompiles and links the binary, generating optimized binaries for each device architecture.</li>
+  <li>App users only download the binary for their device’s architecture when bitcode is enabled, reducing the size of the app they need to download.</li>
+  <li>To summarize, when uploading a binary to the App Store, the following process occurs:</li>
+</ul>
+
+<ol>
+  <li>Upload a single binary with bitcode to the App Store.</li>
+  <li>The App Store recompiles the binary to generate binaries for different architectures (e.g., arm64, armv7).</li>
+  <li>App users download the binary for their device’s architecture. (Before bitcode, only a single “fat binary” was used.)</li>
+</ol>
+
+<h3 id="symbolication-for-apps-with-bitcode-enabled">Symbolication for Apps with Bitcode Enabled</h3>
+
+<ul>
+  <li>Recompilation by the App Store during archiving makes dSYM generated during app development unusable. Matching dSYM with the app binary is based on the UUID included in the binary. Hence, when a rebuild occurs (even if there are no code changes), the dSYM from the previous build cannot match the subsequent one. Therefore, dSYMs generated during archiving cannot be used for symbolication of Crash Reports in the App Store.</li>
+  <li>Therefore, when uploading dSYMs to Third Party Crash Analysis platforms after enabling bitcode, it is <strong>essential</strong> to download the files from Xcode Organizer or iTunes Connect.</li>
+</ul>
+
+<h3 id="bcsymbolmap">bcsymbolmap</h3>
+
+<ul>
+  <li>During archiving, there is a checkbox in iTunes Connect that decides whether to upload the app’s Symbols. Disabling this checkbox causes Xcode to obfuscate the symbols included in the dSYM of the app before binary upload (e.g., “<em>_hidden#109</em>”). These obfuscated symbols are decrypted using a file called <code class="language-plaintext highlighter-rouge">.bcsymbolmap</code>. Therefore, dSYM files for bitcode-enabled binaries always include the corresponding <code class="language-plaintext highlighter-rouge">.bcsymbolmap</code>.</li>
+  <li>When uploading dSYMs to Third Party Crash Analysis platforms, dSYMs downloaded from Xcode are already decrypted and can be uploaded directly. However, dSYMs downloaded directly from iTunes Connect need to be decrypted manually.</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xcrun dsymutil <span class="nt">-symbol-map</span> &lt;path to BCSymbolMaps <span class="k">in </span>xcarchive&gt; &lt;path to downloaded dSYM directory&gt;
+</code></pre></div></div>
+
+<h2 id="xcode-build-settings-for-bitcode">Xcode Build Settings for Bitcode</h2>
+
+<ul>
+  <li>Xcode has options to include full bitcode or markers indicating bitcode during binary builds.</li>
+</ul>
+
+<h3 id="enable_bitcode">ENABLE_BITCODE</h3>
+
+<p>Setting ENABLE_BITCODE to YES adds flags related to bitcode during source code build and archiving. During the build, the <code class="language-plaintext highlighter-rouge">-embed-bitcode-marker</code> flag is added, and during archiving, the <code class="language-plaintext highlighter-rouge">-embed-bitcode</code> flag is added. You can see this in the build and archive logs.</p>
+
+<ul>
+  <li>Build Log</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Build log excerpt
+CompileSwift normal arm64 TestObj.swift (in target 'SomeProject' from project 'SomeProject')
+...
+/Debug-iphoneos/SomeProject.build/Objects-normal/arm64/TestObj.o -embed-bitcode-marker 
+...
+</code></pre></div></div>
+
+<ul>
+  <li>Archive Log</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Archive log excerpt
+SwiftCodeGeneration normal arm64 (in target 'SomeProject' from project 'SomeProject')
+...
+/Release-iphoneos/SomeProject.build/Objects-normal/arm64/TestObj.bc -embed-bitcode -target arm64-apple-ios11.0 -Xllvm -aarch64-use-tbi -O -disable-llvm-optzns -module-name
+...
+</code></pre></div></div>
+
+<h3 id="bitcode_generation_mode">BITCODE_GENERATION_MODE</h3>
+
+<p>You can achieve the same effect as ENABLE_BITCODE using <code class="language-plaintext highlighter-rouge">BITCODE_GENERATION_MODE</code> in User Defined Settings. Setting the value to <code class="language-plaintext highlighter-rouge">marker</code> adds the <code class="language-plaintext highlighter-rouge">-embed-bitcode-marker</code> compile flag, and setting it to <code class="language-plaintext highlighter-rouge">bitcode</code> adds the <code class="language-plaintext highlighter-rouge">-embed-bitcode</code> flag. You can change this setting to build with full bitcode if needed for certain cases.</p>
+
+<p><img width="484" alt="Screenshot 2020-05-22 12 59 59" src="https://user-images.githubusercontent.com/13018877/82578788-d73b3400-9bc7-11ea-9ff4-953814cbead4.png" /></p>
+
+<blockquote>
+  <p>Note: You can also enable bitcode by adding <code class="language-plaintext highlighter-rouge">-fembed-bitcode</code> directly to Other C Flags.</p>
+</blockquote>
+
+<h2 id="library-bitcode-support">Library Bitcode Support</h2>
+
+<ul>
+  <li>The main drawback of bitcode is that if any library you are using does not support bitcode, you cannot enable bitcode in your app.</li>
+  <li>Here are some considerations for library bitcode support:</li>
+</ul>
+
+<h3 id="checking-binary-bitcode-support">Checking Binary Bitcode Support</h3>
+
+<p>To check if a specific library supports bitcode, you can examine whether the library binary contains LLVM Symbols. However, there can be some confusion about which symbols to check, as there are various <a href="https://stackoverflow.com/a/33105733/5130783">issues</a> regarding this. In general, you can use the following command to check if a binary supports bitcode:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>otool <span class="nt">-arch</span> arm64 <span class="nt">-l</span> MyFramework/MyFramework | <span class="nb">grep </span>__LLVM
+<span class="nv">$ </span>otool <span class="nt">-arch</span> armv7 <span class="nt">-l</span> myLib.a | <span class="nb">grep </span>__LLVM
+</code></pre></div></div>
+
+<h3 id="library-bitcode-support-via-cocoapods">Library Bitcode Support via CocoaPods</h3>
+
+<ul>
+  <li>Bitcode is handled during compilation, not linking. Therefore, whether a library binary supports bitcode or not determines whether bitcode can be enabled in your app. For libraries distributed as built binaries or frameworks, if they previously did not support bitcode, you need</li>
+</ul>
+
+<p>to enable bitcode and rebuild them before redistributing.</p>
+<ul>
+  <li>In the case of CocoaPods, libraries vendored as <code class="language-plaintext highlighter-rouge">vendored_framework</code> or <code class="language-plaintext highlighter-rouge">vendored_libraries</code> fall into this category. If any one library in your app does not support bitcode, your app cannot use bitcode.</li>
+  <li>However, for libraries built from source via CocoaPods, they are built during your app’s build process. Therefore, if you don’t explicitly set <code class="language-plaintext highlighter-rouge">ENABLE_BITCODE</code> to <code class="language-plaintext highlighter-rouge">NO</code> in your app’s PodFile or PodSpec, these libraries will support bitcode.</li>
+</ul>
+
+<h1 id="references">References</h1>
+
+<ul>
+  <li><a href="https://developer.apple.com/library/archive/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-SYMBOLICATION-BITCODE">Understanding and Analyzing Application Crash Reports - Bitcode</a></li>
+  <li><a href="https://help.apple.com/xcode/mac/11.0/index.html?localePath=en.lproj#/devbbdc5ce4f">What is app thinning? (iOS, tvOS, watchOS)</a></li>
+  <li><a href="https://www.slideshare.net/syoikeda/how-to-handle-bitcode">How to handle bitcode</a></li>
+  <li><a href="https://stackoverflow.com/questions/32755775/how-to-check-a-static-library-is-built-contain-bitcode">How to check a static library is built contain bitcode?</a></li>
+  <li><a href="https://medium.com/@heitorburger/static-libraries-frameworks-and-bitcode-6d8f784478a9">Static Libraries, Frameworks, and Bitcode</a></li>
+  <li><a href="https://forums.developer.apple.com/message/7038#11344">https://forums.developer.apple.com/message/7038#11344</a></li>
+  <li><a href="https://www.guardsquare.com/en/blog/enable-bitcode">https://www.guardsquare.com/en/blog/enable-bitcode</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        
+        <h2>What to Read More</h2>
+        
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2020-02/crash_report_symbolication">
+              Crash Report Symbolication
+              <small>09 Feb 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Symbol">
+                Symbol
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#CrashReport">
+                CrashReport
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/en/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

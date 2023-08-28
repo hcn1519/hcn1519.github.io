@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Swift Closure - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Swift Closure - hcn1519 Dev Post">
+  <meta name="description" content="Exploring Swift closures, known as anonymous functions.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Swift Closure">
+  <meta property="og:image" content="/en/public/assets/swiftLogo.jpg">
+  <meta property="og:description" content="Exploring Swift closures, known as anonymous functions.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/en/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/en/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/en/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/en/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/en/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/en/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/en/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/en/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/en/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/en/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/en/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/en/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/en/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/en/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/en/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/en/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/en/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/en/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/en/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="https://hcn1519.github.io" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Swift Closure</h1>
+  <span class="post-date">08 May 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/en/public/assets/swiftLogo.jpg"
+    
+    alt="Swift Closure feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <p>Closures in Swift, also known as anonymous functions, differ from regular functions. Instead of being declared with the <code class="language-plaintext highlighter-rouge">func</code> keyword, they take the form of declaring functions as variables. Closures are a powerful feature that aids in writing concise and intuitive code. Let’s explore closures by highlighting the differences in how they are used compared to regular functions.</p>
+
+<h4 id="using-regular-functions">Using Regular Functions</h4>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="kd">func</span> <span class="nf">addCounter</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="p">}</span>
+
+<span class="nf">addCounter</span><span class="p">()</span>
+<span class="nf">addCounter</span><span class="p">()</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span> <span class="c1">// Result: 2</span>
+</code></pre></div></div>
+
+<p>Regular functions are declared with a function name (<code class="language-plaintext highlighter-rouge">addCounter</code> in this case), and you call the function by using that name.</p>
+
+<h4 id="using-closures">Using Closures</h4>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">let</span> <span class="nv">addCounter</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="p">}</span>
+
+<span class="nf">addCounter</span><span class="p">()</span>
+<span class="nf">addCounter</span><span class="p">()</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span> <span class="c1">// Result: 2</span>
+</code></pre></div></div>
+
+<p>Closures, on the other hand, declare functions as variables. In this case, the <code class="language-plaintext highlighter-rouge">addCounter</code> variable is assigned a function, and you can call it like a function (<code class="language-plaintext highlighter-rouge">addCounter()</code>).</p>
+
+<h2 id="basic-structure-of-a-closure">Basic Structure of a Closure</h2>
+
+<p>Closures in Swift have a basic structure consisting of a <strong>header</strong> and a <strong>body</strong>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">closure</span> <span class="o">=</span> <span class="p">{</span> <span class="n">header</span> <span class="k">in</span> <span class="n">body</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>In the header, you specify the arguments and return type, and in the body, you write the code that gets executed when the closure is called. The <code class="language-plaintext highlighter-rouge">in</code> keyword separates the header from the body.</p>
+
+<p><img src="URL TO IMAGE" alt="Closure Expression" /></p>
+
+<p>The official Swift documentation by Apple explains closures using the <code class="language-plaintext highlighter-rouge">sorted(by:)</code> method. The <code class="language-plaintext highlighter-rouge">sorted(by:)</code> method is a built-in Swift method used to sort an array based on a specified criterion. It relies on the comparison of elements in the array to determine their order. In other words, it repeatedly compares two values in the array, returning <code class="language-plaintext highlighter-rouge">true</code> if the first value should come before the second (ascending order) or <code class="language-plaintext highlighter-rouge">false</code> otherwise.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Chris"</span><span class="p">,</span> <span class="s">"Alex"</span><span class="p">,</span> <span class="s">"Ewa"</span><span class="p">,</span> <span class="s">"Barry"</span><span class="p">,</span> <span class="s">"Daniella"</span><span class="p">]</span>
+<span class="k">let</span> <span class="nv">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1">// The required argument depends on the data type within the array.</span>
+<span class="n">names</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span>
+<span class="n">numbers</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In this context, the <code class="language-plaintext highlighter-rouge">by</code> parameter of <code class="language-plaintext highlighter-rouge">sorted(by:)</code> expects a function or closure that returns a <code class="language-plaintext highlighter-rouge">Bool</code>. This means you can pass either a regular function or a closure as an argument. Here are examples of both:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Chris"</span><span class="p">,</span> <span class="s">"Alex"</span><span class="p">,</span> <span class="s">"Ewa"</span><span class="p">,</span> <span class="s">"Barry"</span><span class="p">,</span> <span class="s">"Daniella"</span><span class="p">]</span>
+
+<span class="c1">// A function that returns true if s1 should come before s2.</span>
+<span class="kd">func</span> <span class="nf">backward</span><span class="p">(</span><span class="n">_</span> <span class="nv">s1</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">s2</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">s1</span> <span class="o">&gt;</span> <span class="n">s2</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">reversedNames</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">backward</span><span class="p">)</span>
+
+<span class="k">var</span> <span class="nv">reverse2</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="nv">s1</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">s2</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">in</span> <span class="k">return</span> <span class="n">s1</span> <span class="o">&lt;</span> <span class="n">s2</span> <span class="p">})</span>
+</code></pre></div></div>
+
+<p>In the above examples, <code class="language-plaintext highlighter-rouge">reversedNames</code> is sorted using a regular function (<code class="language-plaintext highlighter-rouge">backward</code>), while <code class="language-plaintext highlighter-rouge">reverse2</code> is sorted using a closure.</p>
+
+<h2 id="closure-shortening">Closure Shortening</h2>
+
+<p>One of the significant advantages of closures is their ability to write concise and intuitive code. However, understanding when and how to shorten closures is essential. Here, we’ll explore scenarios where you can shorten closure expressions.</p>
+
+<h4 id="1-type-inference">1. Type Inference</h4>
+
+<p>Closures can infer the types of their parameters and the return type if that information is already known. This allows you to omit explicit type declarations.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">names</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="nv">s1</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">s2</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">in</span> <span class="k">return</span> <span class="n">s1</span> <span class="o">&lt;</span> <span class="n">s2</span> <span class="p">})</span>
+
+<span class="c1">// Omitting data types</span>
+<span class="n">names</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span> <span class="k">in</span> <span class="k">return</span> <span class="n">s1</span> <span class="o">&lt;</span> <span class="n">s2</span> <span class="p">})</span>
+</code></pre></div></div>
+
+<p>For instance, in the <code class="language-plaintext highlighter-rouge">sorted(by:)</code> method, the closure is always expected to take two arguments of the same type as the elements in the array and return a <code class="language-plaintext highlighter-rouge">Bool</code>. Since this information is known, you can omit the data type declarations.</p>
+
+<h4 id="2-omitting-the-return-keyword-in-single-expression-closures">2. Omitting the “return” Keyword in Single Expression Closures</h4>
+
+<p>Single expression closures can omit the <code class="language-plaintext highlighter-rouge">return</code> keyword.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Omitting the "return" keyword</span>
+<span class="n">names</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span> <span class="k">in</span> <span class="n">s1</span> <span class="o">&lt;</span> <span class="n">s2</span> <span class="p">})</span>
+<span class="k">var</span> <span class="nv">multiply</span><span class="p">:</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>In single expression closures, where the body contains only one expression, you can omit the <code class="language-plaintext highlighter-rouge">return</code> keyword.</p>
+
+<h4 id="3-short-hand-argument-names">3. Short-hand Argument Names</h4>
+
+<p>Closures provide short-hand argument names that can be used instead of explicit parameter names.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Using short-hand argument names</span>
+<span class="n">names</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="p">{</span> <span class="nv">$0</span> <span class="o">&lt;</span> <span class="nv">$1</span> <span class="p">})</span>
+<span class="k">var</span> <span class="nv">multiply</span><span class="p">:</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">=</span> <span class="p">{</span> <span class="nv">$0</span> <span class="o">*</span> <span class="nv">$1</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>You can use <code class="language-plaintext highlighter-rouge">$0</code>, <code class="language-plaintext highlighter-rouge">$1</code>, and so on to refer to the closure’s arguments in the order they appear.</p>
+
+<h4 id="4-operator-methods-for-shortening">4. Operator Methods for Shortening</h4>
+
+<p>Operator methods can further shorten closures, especially when they involve simple operations.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">names</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="o">&lt;</span><span class="p">)</span>
+<span class="k">var</span> <span class="nv">multiply</span><span class="p">:</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In the case of <code class="language-plaintext highlighter-rouge">sorted(by:)</code>, it always expects a closure that compares two values and returns a <code class="language-plaintext highlighter-rouge">Bool</code>. Similarly, the <code class="language-plaintext highlighter-rouge">multiply</code> closure, which multiplies two values, can be expressed concisely using the <code class="language-plaintext highlighter-rouge">*</code> operator.</p>
+
+<h2 id="passing-closures-as-function-arguments">Passing Closures as Function Arguments</h2>
+
+<p>Just as you can pass variables as arguments to functions, you can also pass closures to functions. The syntax is similar to passing variables, following the <code class="language-plaintext highlighter-rouge">func functionName(label variableName: variableType)</code> pattern.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">hello</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="s">"Hello~"</span><span class="p">)</span> <span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">runClosure</span><span class="p">(</span><span class="n">name</span> <span class="nv">aClosure</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">aClosure</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="nf">runClosure</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="n">hello</span><span class="p">)</span> <span class="c1">// Hello~</span>
+</code></pre></div></div>
+
+<h4 id="utilizing-trailing-closures-for-syntax-sugar">Utilizing Trailing Closures for Syntax Sugar</h4>
+
+<p>Trailing closures are a syntax sugar that allows you to separate a closure from the function call when it becomes excessively long. You can use the trailing closure syntax to make your code more readable.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Passing arguments</span>
+<span class="nf">runClosure</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="n">hello</span><span class="p">)</span> <span class="c1">// Hello~</span>
+<span class="nf">runClosure</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="s">"another closure"</span><span class="p">)</span> <span class="p">})</span>
+
+<span class="nf">runClosure</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Executes when aClosure() is called</span>
+  <span class="nf">print</span><span class="p">(</span><span class="s">"trailing1"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// If there are no other arguments, you can omit the parentheses.</span>
+<span class="n">runClosure</span> <span class="p">{</span>
+  <span class="nf">print</span><span class="p">(</span><span class="s">"trailing2"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Trailing closures can be especially useful when you have multiple arguments in a function call.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">runClosure2</span><span class="p">(</span><span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">name</span> <span class="nv">aClosure</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">aClosure</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="nf">runClosure2</span><span class="p">(</span><span class="nv">index</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Passes index as 2 and executes when aClosure() is called</span>
+
+
+    <span class="nf">print</span><span class="p">(</span><span class="s">"hi"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Trailing closures are commonly used in libraries like Alamofire for completion handlers.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Passing arguments</span>
+<span class="kt">Alamofire</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="kt">URL</span><span class="p">)</span><span class="o">.</span><span class="nf">responseJSON</span><span class="p">(</span><span class="nv">completionHandler</span><span class="p">:</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+  <span class="c1">// Handle the response</span>
+  <span class="nf">completed</span><span class="p">()</span>
+<span class="p">})</span>
+
+<span class="c1">// Utilizing trailing closures</span>
+<span class="kt">Alamofire</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="kt">URL</span><span class="p">)</span><span class="o">.</span><span class="n">responseJSON</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+  <span class="c1">// Handle the response</span>
+  <span class="nf">completed</span><span class="p">()</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<h4 id="using-the-map-method">Using the Map Method</h4>
+
+<p>One of the most common uses of trailing closures is with the <code class="language-plaintext highlighter-rouge">map(_:)</code> method. The <code class="language-plaintext highlighter-rouge">map(_:)</code> method is used to modify all or some of the elements in a collection. It’s like a loop, but with a strong focus on mapping values to new values.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">numbers</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="nv">newValue</span> <span class="o">=</span> <span class="n">value</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="k">return</span> <span class="n">newValue</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In the example above, the <code class="language-plaintext highlighter-rouge">numbers</code> array is modified by mapping each value to a new value (the original value plus one). The return type remains the same as the original. However, you can have a different return type if needed. You can also map collections to dictionaries or vice versa.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">digitNames</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="s">"Zero"</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s">"One"</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s">"Two"</span><span class="p">,</span>   <span class="mi">3</span><span class="p">:</span> <span class="s">"Three"</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s">"Four"</span><span class="p">,</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="s">"Five"</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="s">"Six"</span><span class="p">,</span> <span class="mi">7</span><span class="p">:</span> <span class="s">"Seven"</span><span class="p">,</span> <span class="mi">8</span><span class="p">:</span> <span class="s">"Eight"</span><span class="p">,</span> <span class="mi">9</span><span class="p">:</span> <span class="s">"Nine"</span>
+<span class="p">]</span>
+
+<span class="k">let</span> <span class="nv">oddOrEvenArr</span> <span class="o">=</span> <span class="n">digitNames</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="k">in</span>
+    <span class="k">var</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
+      <span class="n">str</span> <span class="o">=</span> <span class="s">"Even"</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">str</span> <span class="o">=</span> <span class="s">"Odd"</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">str</span>
+<span class="p">}</span>
+<span class="c1">// oddOrEvenArr = ["Even", "Odd", ...] (Order may vary.)</span>
+
+<span class="k">let</span> <span class="nv">oddOrEvenDict</span> <span class="o">=</span> <span class="n">digitNames</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Int</span><span class="p">:</span> <span class="kt">String</span><span class="p">]</span> <span class="k">in</span>
+    <span class="k">var</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
+      <span class="n">str</span> <span class="o">=</span> <span class="s">"Even"</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">str</span> <span class="o">=</span> <span class="s">"Odd"</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nv">key</span><span class="p">:</span> <span class="n">str</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="c1">// oddOrEvenDict = [0: "Even", 1: "Odd", ...] (Order may vary.)</span>
+</code></pre></div></div>
+
+<p>In the above examples, <code class="language-plaintext highlighter-rouge">oddOrEvenArr</code> and <code class="language-plaintext highlighter-rouge">oddOrEvenDict</code> are created by mapping the <code class="language-plaintext highlighter-rouge">digitNames</code> dictionary into arrays and dictionaries, respectively.</p>
+
+<hr />
+
+<h2 id="references">References</h2>
+<ul>
+  <li>Apple Inc. The Swift Programming Language (Swift 3.1)</li>
+  <li>Raywenderlich - Closure</li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        
+        <h2>What to Read More</h2>
+        
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2017-09/swift_escaping_closure">
+              Understanding Escaping Closures in Swift
+              <small>12 Sep 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Closure">
+                Closure
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2017-07/swift_Str">
+              Working with Swift Strings
+              <small>09 Jul 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/en/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

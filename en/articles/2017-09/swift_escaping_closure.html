@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Understanding Escaping Closures in Swift - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Understanding Escaping Closures in Swift - hcn1519 Dev Post">
+  <meta name="description" content="Exploring the concept of escaping closures in Swift.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Understanding Escaping Closures in Swift">
+  <meta property="og:image" content="/en/public/assets/swiftLogo.jpg">
+  <meta property="og:description" content="Exploring the concept of escaping closures in Swift.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/en/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/en/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/en/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/en/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/en/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/en/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/en/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/en/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/en/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/en/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/en/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/en/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/en/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/en/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/en/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/en/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/en/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/en/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/en/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="https://hcn1519.github.io" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Understanding Escaping Closures in Swift</h1>
+  <span class="post-date">12 Sep 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/en/public/assets/swiftLogo.jpg"
+    
+    alt="Understanding Escaping Closures in Swift feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="./swift_escaping_closure#1-concept-of-escaping-closures">Concept of Escaping Closures</a></li>
+  <li><a href="./swift_escaping_closure#2-storing-closures-outside-functions">Storing Closures Outside Functions</a></li>
+  <li><a href="./swift_escaping_closure#3-async-inside-async">Async Inside Async</a></li>
+</ol>
+
+<h2 id="1-concept-of-escaping-closures">1. Concept of Escaping Closures</h2>
+
+<p>This article assumes a basic understanding of closures. If you are not familiar with closures, please read the <a href="https://hcn1519.github.io/en/articles/2017-05/swift_closure">Swift Closure</a> article first before continuing.</p>
+
+<div class="message">
+  A closure is said to escape a function when the closure is passed as an argument to the function, but is called after the function returns.
+</div>
+
+<p>When a closure is said to “escape” a function, it means that the closure is passed as an argument to the function but is executed after the function has returned. This concept of closures escaping the scope of a function challenges the traditional understanding of variable scope. It allows a closure to persist beyond the lifetime of the enclosing function, which is different from the usual scope rules for local variables. In other words, escaping closures can be executed outside the function that originally defined them.</p>
+
+<p>While the idea of a local variable (typically values like <code class="language-plaintext highlighter-rouge">Int</code>, <code class="language-plaintext highlighter-rouge">String</code>, etc.) surviving outside a function might seem similar to using global variables within a function, escaping closures offer more control over the execution order of functions.</p>
+
+<blockquote>
+  <p>Escaping closures are useful for defining the execution order between functions, even allowing one function to run only after another has completed.</p>
+</blockquote>
+
+<p>Ensuring the order of execution of functions is crucial, especially when dealing with asynchronous operations. Consider an app that retrieves JSON data from a server to display it on the screen. In this scenario, a networking library like <code class="language-plaintext highlighter-rouge">Alamofire</code> is often used in the following manner:</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kt">Alamofire</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="n">urlRequest</span><span class="p">)</span><span class="o">.</span><span class="n">responseJSON</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+  <span class="c1">// Handle the response</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>The <code class="language-plaintext highlighter-rouge">Alamofire.request(urlRequest)</code> method sends a request to the server, typically to retrieve JSON data using the GET method. The result is obtained through a <code class="language-plaintext highlighter-rouge">Response</code> object. Usually, functions that send requests to a server and receive responses work asynchronously, returning immediately after sending the request. How is it possible to ensure that the response is received and processed in a way that guarantees proper sequencing? The answer lies in the concept of escaping closures. The <code class="language-plaintext highlighter-rouge">completionHandler</code> parameter in the <code class="language-plaintext highlighter-rouge">responseJSON</code> method is implemented as an escaping closure, indicated by the <code class="language-plaintext highlighter-rouge">{ response in }</code> part.</p>
+
+<div class="message">
+  Using escaping closures, closure arguments can outlive the function that they were passed to. Starting from Swift 3, by default, closures passed as function arguments are not allowed to escape the function’s scope. This means that by default, you cannot store closures in external storage or execute them on other threads using GCD. However, escaping closures make these use cases possible, and you can mark a closure type with the `@escaping` keyword to indicate that it's an escaping closure.
+</div>
+
+<p>Now, let’s explore some code examples to understand how escaping closures work.</p>
+
+<h2 id="2-storing-closures-outside-functions">2. Storing Closures Outside Functions</h2>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// Example of storing a closure outside a function</span>
+<span class="c1">// An array to store closures</span>
+<span class="k">var</span> <span class="nv">completionHandlers</span><span class="p">:</span> <span class="p">[()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="kd">func</span> <span class="nf">withEscaping</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Store the closure outside the function in the completionHandlers array</span>
+    <span class="n">completionHandlers</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">completion</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">withoutEscaping</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">completion</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">MyClass</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">x</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="kd">func</span> <span class="nf">callFunc</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">withEscaping</span> <span class="p">{</span> <span class="k">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">100</span> <span class="p">}</span>
+        <span class="n">withoutEscaping</span> <span class="p">{</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">200</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">let</span> <span class="nv">mc</span> <span class="o">=</span> <span class="kt">MyClass</span><span class="p">()</span>
+<span class="n">mc</span><span class="o">.</span><span class="nf">callFunc</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="n">completionHandlers</span><span class="o">.</span><span class="nf">first</span><span class="p">?()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1">// Output</span>
+<span class="c1">// 200</span>
+<span class="c1">// 100</span></code></pre></figure>
+
+<p>In this example, the <code class="language-plaintext highlighter-rouge">MyClass</code> function <code class="language-plaintext highlighter-rouge">callFunc()</code> calls two functions, <code class="language-plaintext highlighter-rouge">withEscaping(completion:)</code> and <code class="language-plaintext highlighter-rouge">withoutEscaping(completion:)</code>. The <code class="language-plaintext highlighter-rouge">withEscaping(completion:)</code> function takes a closure parameter marked as an escaping closure using the <code class="language-plaintext highlighter-rouge">@escaping</code> keyword. In this function, we store the closure in the <code class="language-plaintext highlighter-rouge">completionHandlers</code> array outside the function’s scope. This means that the closure escapes the function and can be executed at a later time.</p>
+
+<div class="message">
+  Note: In this context, escaping does not mean that the closure interrupts and escapes the function's execution midway. Instead, it means that the closure can be passed outside the function and executed later.
+</div>
+
+<h2 id="3-async-inside-async">3. Async Inside Async</h2>
+
+<p>As mentioned earlier, escaping closures are commonly used in asynchronous operations, especially in networking code with <code class="language-plaintext highlighter-rouge">completionHandlers</code>. To demonstrate this, let’s consider a scenario where you need to retrieve data from a server using a <code class="language-plaintext highlighter-rouge">Server</code> class and update the UI once the data is received. To manage this, you might want to create a class with static methods for handling server requests.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="kt">Server</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="k">var</span> <span class="nv">persons</span><span class="p">:</span> <span class="p">[</span><span class="kt">Person</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="kd">static</span> <span class="nf">getPerson</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">,</span> <span class="p">[</span><span class="kt">Person</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Step 2</span>
+      <span class="kt">Alamofire</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="n">urlRequest</span><span class="p">)</span><span class="o">.</span><span class="n">responseJSON</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+          <span class="n">persons</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1">// Replace 'data' with actual data</span>
+          <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+              <span class="c1">// Step 3</span>
+              <span class="nf">completion</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="n">persons</span><span class="p">)</span>
+          <span class="p">}</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// Usage, e.g., in ViewController.swift</span>
+<span class="c1">// Step 1</span>
+<span class="kt">Server</span><span class="o">.</span><span class="n">getPerson</span> <span class="p">{</span> <span class="p">(</span><span class="n">isSuccess</span><span class="p">,</span> <span class="n">persons</span><span class="p">)</span> <span class="k">in</span>
+  <span class="c1">// Step 4</span>
+  <span class="k">if</span> <span class="n">isSuccess</span> <span class="p">{</span>
+      <span class="c1">// Update the UI</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Here’s the sequence of how the code works:</p>
+
+<ol>
+  <li>In <code class="language-plaintext highlighter-rouge">ViewController</code>, you call the <code class="language-plaintext highlighter-rouge">Server</code> class’s <code class="language-plaintext highlighter-rouge">getPerson(completion:)</code> function to request the necessary data.</li>
+  <li>Inside the <code class="language-plaintext highlighter-rouge">getPerson(completion:)</code> function, <code class="language-plaintext highlighter-rouge">Alamofire</code> sends a request to the server, and the <code class="language-plaintext highlighter-rouge">{ response in }</code> part of <code class="language-plaintext highlighter-rouge">responseJSON</code> is executed only after the request has completed. This part uses an escaping closure.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">completion</code> closure, which is also an escaping closure, is called in order to send the data (persons) back to the original ViewController. It’s important to perform UI updates on the main thread, so we use <code class="language-plaintext highlighter-rouge">DispatchQueue.main.async</code> to ensure this.</li>
+  <li>Finally, the <code class="language-plaintext highlighter-rouge">completion</code> closure in <code class="language-plaintext highlighter-rouge">ViewController</code> is executed. Here, you can check if the data retrieval was successful and update the UI accordingly.</li>
+</ol>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li>Apple Inc. The Swift Programming Language (Swift 3.1) - Escaping Closure</li>
+  <li><a href="https://learnappmaking.com/escaping-closures-swift-3/">escaping closure swift3</a></li>
+  <li>[What do</li>
+</ul>
+
+<p>mean @escaping and @nonescaping closures in Swift?](https://medium.com/@kumarpramod017/what-do-mean-escaping-and-nonescaping-closures-in-swift-d404d721f39d)</p>
+<ul>
+  <li><a href="https://stackoverflow.com/questions/41745328/completion-handlers-in-swift-3-0">Completion handlers in Swift 3.0</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        
+        <h2>What to Read More</h2>
+        
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2017-07/swift_Str">
+              Working with Swift Strings
+              <small>09 Jul 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2017-05/swift_closure">
+              Swift Closure
+              <small>08 May 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Language">
+                Language
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Closure">
+                Closure
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/en/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

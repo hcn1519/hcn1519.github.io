@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Working with Swift Strings - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Working with Swift Strings - hcn1519 Dev Post">
+  <meta name="description" content="Exploring Swift's String methods.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Working with Swift Strings">
+  <meta property="og:image" content="/en/public/assets/swiftLogo.jpg">
+  <meta property="og:description" content="Exploring Swift's String methods.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/en/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/en/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/en/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/en/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/en/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/en/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/en/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/en/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/en/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/en/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/en/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/en/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/en/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/en/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/en/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/en/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/en/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/en/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/en/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="https://hcn1519.github.io" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Working with Swift Strings</h1>
+  <span class="post-date">09 Jul 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/en/public/assets/swiftLogo.jpg"
+    
+    alt="Working with Swift Strings feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="#forms-of-swift-strings">Forms of Swift Strings</a></li>
+  <li><a href="#extended-grapheme-clusters">Extended Grapheme Clusters</a></li>
+  <li><a href="#accessing-swift-strings">Accessing Swift Strings</a>
+    <ol>
+      <li><a href="#accessing-individual-characters-startindex-endindex">Accessing Individual Characters (startIndex, endIndex)</a></li>
+      <li><a href="#accessing-individual-characters-offsetby">Accessing Individual Characters (offsetBy)</a></li>
+      <li><a href="#accessing-the-entire-string-with-loops">Accessing the Entire String with Loops</a></li>
+    </ol>
+  </li>
+  <li><a href="#swift-string-insert-remove">Swift String Insert and Remove</a></li>
+  <li><a href="#prefix-and-suffix">Prefix and Suffix</a></li>
+  <li><a href="#substring">Substring</a></li>
+</ol>
+
+<h2 id="forms-of-swift-strings">Forms of Swift Strings</h2>
+
+<p>In this post, we’ll explore Swift’s String and its various forms. In Swift, you can represent a string like this:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"hello"</span>
+</code></pre></div></div>
+
+<p>In previous versions of Swift (Swift 3), you could only define single-line strings. However, in Swift 4, you can create multi-line strings using triple quotes (<code class="language-plaintext highlighter-rouge">"""</code>).</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">multiLine</span> <span class="o">=</span> <span class="s">"""
+The White Rabbit put on his spectacles, "</span><span class="kt">Where</span> <span class="n">shall</span> <span class="kt">I</span> <span class="n">begin</span><span class="p">,</span> <span class="n">please</span> <span class="n">begin</span> <span class="n">your</span> <span class="kt">Majesty</span><span class="p">?</span><span class="s">" he asked.
+
+"</span><span class="kt">Begin</span> <span class="n">at</span> <span class="n">the</span> <span class="n">beginning</span><span class="p">,</span><span class="s">"
+
+    Indentation is included.
+        Another indent
+"""</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">multiLine</span><span class="p">)</span>
+
+<span class="cm">/* Output:
+The White Rabbit put on his spectacles, "Where shall I begin, please begin your Majesty?" he asked.
+
+"Begin at the beginning,"
+
+    Indentation is included.
+        Another indent
+*/</span>
+</code></pre></div></div>
+
+<p>Leading white space in multi-line strings is omitted when printing. However, if indentation occurs after the starting sentence, it will be included.</p>
+
+<h2 id="extended-grapheme-clusters">Extended Grapheme Clusters</h2>
+
+<p>In Swift, one character represents a “Single Extended Grapheme Cluster.” Extended Grapheme Clusters represent human-readable characters, and this concept applies not only to English but also to other languages. For example, consider Korean characters:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">precomposed</span><span class="p">:</span> <span class="kt">Character</span> <span class="o">=</span> <span class="s">"</span><span class="se">\u{D55C}</span><span class="s">"</span>                  <span class="c1">// 한</span>
+<span class="k">let</span> <span class="nv">decomposed</span><span class="p">:</span> <span class="kt">Character</span> <span class="o">=</span> <span class="s">"</span><span class="se">\u{1112}\u{1161}\u{11AB}</span><span class="s">"</span>   <span class="c1">// ᄒ, ᅡ, ᆫ</span>
+<span class="c1">// Both represent the Character "한."</span>
+</code></pre></div></div>
+
+<p>Surprisingly, <code class="language-plaintext highlighter-rouge">decomposed</code> consists of three scalars. In Extended Grapheme Clusters, it’s not a one-to-one mapping where one Character equals one scalar. This is why it’s challenging to access strings by index. Each Character can consist of one or more scalars, making it challenging to allocate consistent memory sizes per Character, which makes index-based access impossible.</p>
+
+<p><em>Note: Extended Grapheme Clusters in Swift allow intuitive representation of various languages, but their variable sizes make direct index-based access to a String impossible.</em></p>
+
+<h2 id="accessing-swift-strings">Accessing Swift Strings</h2>
+
+<p>In Swift, accessing individual characters using <code class="language-plaintext highlighter-rouge">String[Int]</code> is challenging. Instead, Swift provides methods for such access. Two essential methods are <code class="language-plaintext highlighter-rouge">startIndex</code> and <code class="language-plaintext highlighter-rouge">endIndex</code>.</p>
+
+<h3 id="accessing-individual-characters-startindex-endindex">Accessing Individual Characters (startIndex, endIndex)</h3>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"Hello"</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="p">)</span> <span class="c1">// Index(_base: Swift.String.UnicodeScalarView.Index(_position: 0), _countUTF16: 1)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">endIndex</span><span class="p">)</span> <span class="c1">// Index(_base: Swift.String.UnicodeScalarView.Index(_position: 5), _countUTF16: 0)</span>
+</code></pre></div></div>
+
+<p>In the above example, <code class="language-plaintext highlighter-rouge">str.startIndex</code> returns <code class="language-plaintext highlighter-rouge">0</code>, and <code class="language-plaintext highlighter-rouge">str.endIndex</code> returns <code class="language-plaintext highlighter-rouge">5</code>. Be cautious, as <code class="language-plaintext highlighter-rouge">endIndex</code> is <code class="language-plaintext highlighter-rouge">5</code>, not <code class="language-plaintext highlighter-rouge">4</code>. While “Hello” has five characters, indexing starts from <code class="language-plaintext highlighter-rouge">0</code> and goes up to <code class="language-plaintext highlighter-rouge">4</code>, but <code class="language-plaintext highlighter-rouge">endIndex</code> is <code class="language-plaintext highlighter-rouge">5</code>, indicating the length of the entire string. Thus, <code class="language-plaintext highlighter-rouge">str[str.endIndex]</code> results in an error. To access the last character, you need to use an index before <code class="language-plaintext highlighter-rouge">endIndex</code>.</p>
+
+<p>Swift provides methods like <code class="language-plaintext highlighter-rouge">str.index(before:)</code> and <code class="language-plaintext highlighter-rouge">str.index(after:)</code> for accessing characters before and after <code class="language-plaintext highlighter-rouge">endIndex</code>. To access the last character, you can use <code class="language-plaintext highlighter-rouge">str.index(before: str.endIndex)</code>.</p>
+
+<h3 id="accessing-individual-characters-offsetby">Accessing Individual Characters (offsetBy)</h3>
+
+<p>To access characters in the middle of a string, you can use the <code class="language-plaintext highlighter-rouge">index(_:offsetBy:)</code> method.</p>
+
+<p><em>Note: The <code class="language-plaintext highlighter-rouge">offsetBy</code> method returns a position by adding a given integer value to the starting position.</em></p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"Hello World"</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">str</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="mi">0</span><span class="p">)])</span> <span class="c1">// H</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">str</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="mi">6</span><span class="p">)])</span> <span class="c1">// W</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">str</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">endIndex</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">)])</span> <span class="c1">// d</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">str</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">endIndex</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="o">-</span><span class="mi">3</span><span class="p">)])</span> <span class="c1">// r</span>
+</code></pre></div></div>
+
+<p>In the examples above, the first two print statements access characters at specific offsets from the <code class="language-plaintext highlighter-rouge">startIndex</code>. The last two statements access characters from the <code class="language-plaintext highlighter-rouge">endIndex</code>. Negative values indicate positions counting from the end.</p>
+
+<h3 id="accessing-the-entire-string-with-loops">Accessing the Entire String with Loops</h3>
+
+<p>You can also access a string using loops in three ways. The first way accesses individual characters using <code class="language-plaintext highlighter-rouge">str</code>.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"Hello"</span>
+
+<span class="k">for</span> <span class="n">char</span> <span class="k">in</span> <span class="n">str</span> <span class="p">{</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="c1">// H e l l o (each character)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The second way accesses indices using <code class="language-plaintext highlighter-rouge">indices</code>.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">index</span> <span class="k">in</span> <span class="n">str</span><span class="o">.</span><span class="n">indices</span> <span class="p">{</span>
+  <span class="c1">// Accesses indices generated by Swift, not integers.</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="c1">// Index(_base: Swift.String.UnicodeScalarView.Index(_position: 0), _countUTF16: 1)...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The last way accesses both indices and individual characters simultaneously.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="k">in</span> <span class="n">str</span><span class="o">.</span><span class="nf">enumerated</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// index is an integer.</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"index: </span><span class="se">\(</span><span class="n">index</span><span class="se">)</span><span class="s">, value : </span><span class="se">\(</span><span class="n">value</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>  <span class="c1">// index: 0, value: H</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="swift-string-insert-and-remove">Swift String Insert and Remove</h2>
+
+<p>Swift’s String insertion specifies what content to insert and where to insert it. The methods for this purpose are <code class="language-plaintext highlighter-rouge">insert(_:at:)</code> and <code class="language-plaintext highlighter-rouge">insert(contentsOf:at:)</code>.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"Hello"</span>
+
+<span class="n">str</span><span class="o">.</span><span class="nf">insert</span><span class="p">(</span><span class="s">"A"</span><span class="p">,</span> <span class="nv">at</span><span class="p">:</span> <span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="p">)</span> <span class="c1">// Result: AHello</span>
+<span class="n">str</span><span class="o">.</span><span class="nf">insert</span><span class="p">(</span><span class="nv">contentsOf</span><span class="p">:</span> <span class="s">" World"</span><span class="p">,</span> <span class="nv">at</span><span class="p">:</span> <span class="n">str</span><span class="o">.</span><span class="n">endIndex</span><span class="p">)</span> <span class="c1">// Result: AHello World</span>
+</code></pre></div></div>
+
+<p>For inserting individual characters, you don’t need to use <code class="language-plaintext highlighter-rouge">contentsOf</code>.</p>
+
+<p>String removal is similar to insertion but specifies where and what to remove. The methods are <code class="language-plaintext highlighter-rouge">remove(_:at:)</code> and <code class="language-plaintext highlighter-rouge">removeSubrange(_:)</code>.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"AHello World"</span>
+
+<span class="n">str</span><span class="o">.</span><span class="nf">remove</span><span class="p">(</span><span class="nv">at</span><span class="p">:</span> <span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="p">)</span> <span class="c1">// Result: Hello World</span>
+
+<span class="k">let</span> <span class="nv">rangeOfWorld</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">endIndex</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="o">-</span><span class="mi">6</span><span class="p">)</span><span class="o">..&lt;</span><span class="n">str</span><span class="o">.</span><span class="n">endIndex</span>
+<span class="n">str</span><span class="o">.</span><span class="nf">removeSubrange</span><span class="p">(</span><span class="n">rangeOfWorld</span><span class="p">)</span> <span class="c1">// Result: Hello</span>
+</code></pre></div></div>
+
+<p>Be cautious when using `remove(_:at:)</p>
+
+<p>` with ranges. Ranges must be specified using <code class="language-plaintext highlighter-rouge">String.index</code> or <code class="language-plaintext highlighter-rouge">str.endIndex</code>.</p>
+
+<h2 id="prefix-and-suffix">Prefix and Suffix</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">hasPrefix(_:)</code> and <code class="language-plaintext highlighter-rouge">hasSuffix(_:)</code> methods check if a string starts with or ends with a specific substring, respectively.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">s</span> <span class="o">=</span> <span class="s">"한글"</span>
+
+<span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">startIndex</span><span class="p">]</span> <span class="o">==</span> <span class="s">"한"</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"The first character is '한'."</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="nf">hasPrefix</span><span class="p">(</span><span class="s">"한"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"The first character is '한'."</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="nf">hasSuffix</span><span class="p">(</span><span class="s">"한글"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"The last characters are '한글'."</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="substring">Substring</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Substring</code> represents a part of a string.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"Hello World"</span>
+<span class="k">let</span> <span class="nv">range</span> <span class="o">=</span> <span class="n">str</span><span class="p">[</span><span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="o">...</span><span class="n">str</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="mi">4</span><span class="p">)]</span>
+<span class="k">let</span> <span class="nv">subStr</span> <span class="o">=</span> <span class="n">str</span><span class="p">[</span><span class="n">range</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">subStr</code> in this example refers to a part of the original string without allocating new memory. This memory reuse reduces memory allocation costs. However, this approach is not suitable for long-term storage of strings. For long-term storage, it’s better to create a new string.</p>
+
+<hr />
+
+<h2 id="references">References</h2>
+<ul>
+  <li>Apple Inc. The Swift Programming Language (Swift 4 Beta)</li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        
+        <h2>What to Read More</h2>
+        
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2017-09/swift_escaping_closure">
+              Understanding Escaping Closures in Swift
+              <small>12 Sep 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2017-05/swift_closure">
+              Swift Closure
+              <small>08 May 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/en/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Understanding iOS URLSession - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Understanding iOS URLSession - hcn1519 Dev Post">
+  <meta name="description" content="Exploring the URLSession API in iOS for networking.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Understanding iOS URLSession">
+  <meta property="og:image" content="/en/public/assets/iOS.png">
+  <meta property="og:description" content="Exploring the URLSession API in iOS for networking.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/en/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/en/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/en/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/en/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/en/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/en/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/en/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/en/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/en/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/en/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/en/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/en/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/en/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/en/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/en/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/en/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/en/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/en/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/en/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="https://hcn1519.github.io" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Understanding iOS URLSession</h1>
+  <span class="post-date">30 Jul 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/en/public/assets/iOS.png"
+    
+    alt="Understanding iOS URLSession feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="#urlsession-request-and-response">URLSession’s Request and Response</a></li>
+  <li><a href="#basic-concepts-of-urlsession">Basic Concepts of URLSession</a>
+    <ol>
+      <li><a href="#session">Session</a></li>
+      <li><a href="#request">Request</a></li>
+      <li><a href="#task">Task</a></li>
+    </ol>
+  </li>
+  <li><a href="#using-urlsession-datatask">Using URLSession dataTask</a></li>
+</ol>
+
+<p>To facilitate communication with servers in iOS apps, Apple provides the <code class="language-plaintext highlighter-rouge">URLSession</code> API. <code class="language-plaintext highlighter-rouge">URLSession</code> is a fundamental API that underlies popular libraries like Alamofire and SDWebImage for data exchange with servers in iOS app development. <code class="language-plaintext highlighter-rouge">URLSession</code> supports several protocols, including HTTP, and provides features such as authentication, cookie management, and caching.</p>
+
+<h2 id="urlsessions-request-and-response">URLSession’s Request and Response</h2>
+
+<p>Like any other HTTP communication, <code class="language-plaintext highlighter-rouge">URLSession</code> has a fundamental structure consisting of a <code class="language-plaintext highlighter-rouge">Request</code> and a <code class="language-plaintext highlighter-rouge">Response</code>. First, <code class="language-plaintext highlighter-rouge">Request</code> can be made directly through a <code class="language-plaintext highlighter-rouge">URL</code> object or by creating a <code class="language-plaintext highlighter-rouge">URLRequest</code> object with options. Next, the <code class="language-plaintext highlighter-rouge">Response</code> can be received in the form of a <code class="language-plaintext highlighter-rouge">Completion Handler</code> for configured <code class="language-plaintext highlighter-rouge">Task</code> or by invoking specified methods via the <code class="language-plaintext highlighter-rouge">URLSessionDelegate</code>.</p>
+
+<p>Generally, for simple responses, you can use <code class="language-plaintext highlighter-rouge">Completion Handlers</code>. However, scenarios like supporting file downloads in the background when the app is in the background state, or situations where default options for authentication and caching are not used, would require using the <code class="language-plaintext highlighter-rouge">Delegate</code> pattern.</p>
+
+<h2 id="basic-concepts-of-urlsession">Basic Concepts of URLSession</h2>
+
+<p><code class="language-plaintext highlighter-rouge">URLSession</code> typically follows the following life cycle:</p>
+
+<ol>
+  <li>Determine the <code class="language-plaintext highlighter-rouge">Session</code> configuration and create a <code class="language-plaintext highlighter-rouge">Session</code>.</li>
+  <li>Set up the URL and Request objects for communication.</li>
+  <li>Decide on the <code class="language-plaintext highlighter-rouge">Task</code> to use and write corresponding <code class="language-plaintext highlighter-rouge">Completion Handlers</code> or <code class="language-plaintext highlighter-rouge">Delegate</code> methods.</li>
+  <li>Execute the chosen <code class="language-plaintext highlighter-rouge">Task</code>.</li>
+  <li>After the Task is completed, the <code class="language-plaintext highlighter-rouge">Completion Handler</code> is executed.</li>
+</ol>
+
+<h3 id="1-session">1. Session</h3>
+
+<p><code class="language-plaintext highlighter-rouge">URLSession</code> primarily supports three types of Sessions:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Default Session</code>: The basic session with disk-based caching support.</li>
+  <li><code class="language-plaintext highlighter-rouge">Ephemeral Session</code>: A session that doesn’t store any data.</li>
+  <li><code class="language-plaintext highlighter-rouge">Background Session</code>: A session that allows communication even after the app has terminated.</li>
+</ol>
+
+<h3 id="2-request">2. Request</h3>
+
+<p>You can use <code class="language-plaintext highlighter-rouge">URLRequest</code> to configure how the request to the server should be made. You can specify options such as how data should be cached, which HTTP method to use (GET, POST, etc.), and what content to send.</p>
+
+<h3 id="3-task">3. Task</h3>
+
+<p>Task objects typically handle URL-based content retrieval after the Session sends the server request. Three types of Tasks are supported:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Data Task</code>: Used for sending and receiving data objects.</li>
+  <li><code class="language-plaintext highlighter-rouge">Download Task</code>: Used for downloading data and storing it in files. Supports background downloads.</li>
+  <li><code class="language-plaintext highlighter-rouge">Upload Task</code>: Used for uploading data in file form.</li>
+</ol>
+
+<h2 id="using-urlsession-datatask">Using URLSession dataTask</h2>
+
+<p>Networking APIs like <code class="language-plaintext highlighter-rouge">URLSession</code> are generally used globally within an app. Therefore, it’s recommended to create a separate module (class) and define static functions inside it, rather than writing methods directly in a ViewController.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Works properly in Swift 5.1 and iOS 13 environment.</span>
+<span class="kd">class</span> <span class="kt">NetworkHandler</span> <span class="p">{</span>
+    <span class="kd">class</span> <span class="kd">func</span> <span class="nf">getData</span><span class="p">(</span><span class="nv">resource</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Create a session and configure it.</span>
+        <span class="k">let</span> <span class="nv">defaultSession</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="p">(</span><span class="nv">configuration</span><span class="p">:</span> <span class="o">.</span><span class="k">default</span><span class="p">)</span>
+
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"</span><span class="se">\(</span><span class="n">resource</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"URL is nil"</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Create a request.</span>
+        <span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">URLRequest</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
+
+        <span class="c1">// Create a dataTask.</span>
+        <span class="k">let</span> <span class="nv">dataTask</span> <span class="o">=</span> <span class="n">defaultSession</span><span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?,</span> <span class="nv">response</span><span class="p">:</span> <span class="kt">URLResponse</span><span class="p">?,</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span> <span class="k">in</span>
+            <span class="c1">// Handle data retrieval errors.</span>
+            <span class="k">guard</span> <span class="n">error</span> <span class="o">==</span> <span class="kc">nil</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"Error occur: </span><span class="se">\(</span><span class="kt">String</span><span class="p">(</span><span class="nv">describing</span><span class="p">:</span> <span class="n">error</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="p">}</span>
+
+            <span class="k">guard</span> <span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="k">let</span> <span class="nv">response</span> <span class="o">=</span> <span class="n">response</span> <span class="k">as?</span> <span class="kt">HTTPURLResponse</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">statusCode</span> <span class="o">==</span> <span class="mi">200</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">return</span>
+            <span class="p">}</span>
+
+            <span class="c1">// Successful communication results in data being received in the 'data' object.</span>
+
+            <span class="c1">// If the received data is in JSON format,</span>
+            <span class="c1">// you can serialize the JSON into Swift data types.</span>
+            <span class="c1">// JSON serialization is the process of converting JSON data into a String format that can be used in Swift.</span>
+            <span class="k">guard</span> <span class="k">let</span> <span class="nv">jsonToArray</span> <span class="o">=</span> <span class="k">try</span><span class="p">?</span> <span class="kt">JSONSerialization</span><span class="o">.</span><span class="nf">jsonObject</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[])</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"json to Any Error"</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="p">}</span>
+            <span class="c1">// Perform desired operations.</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">jsonToArray</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="n">dataTask</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">NetworkHandler</span><span class="o">.</span><span class="nf">getData</span><span class="p">(</span><span class="nv">resource</span><span class="p">:</span> <span class="s">"http://www.example.com"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Starting with Swift 4, JSON serialization is now possible at the object level (<code class="language-plaintext highlighter-rouge">Codable</code>). For more information, please refer to the link below.</p>
+
+<p><a href="https://gist.github.com/hcn1519/0d685b1f0aba74ed9577e9cab1b02b6f">Example of Using Swift 4 JSON Serialization</a></p>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+      
+        
+        <h2>What to Read More</h2>
+        
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2022-05/diffabledatasource">
+              Updating UIKit Lists Safely with DiffableDataSource
+              <small>13 May 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2020-08/autolayout_performance_optimization">
+              Optimizing AutoLayout Performance
+              <small>23 Aug 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/en/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

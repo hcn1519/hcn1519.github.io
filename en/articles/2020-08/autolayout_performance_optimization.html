@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Optimizing AutoLayout Performance - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Optimizing AutoLayout Performance - hcn1519 Dev Post">
+  <meta name="description" content="Exploring how to efficiently use AutoLayout from a performance perspective.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Optimizing AutoLayout Performance">
+  <meta property="og:image" content="/en/public/assets/iOS.png">
+  <meta property="og:description" content="Exploring how to efficiently use AutoLayout from a performance perspective.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/en/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/en/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/en/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/en/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/en/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/en/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/en/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/en/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/en/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/en/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/en/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/en/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/en/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/en/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/en/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/en/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/en/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/en/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/en/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="https://hcn1519.github.io" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Optimizing AutoLayout Performance</h1>
+  <span class="post-date">23 Aug 2020</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/en/public/assets/iOS.png"
+    
+    alt="Optimizing AutoLayout Performance feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <h2 id="introduction">Introduction</h2>
+
+<p>In this post, we will explore how to use AutoLayout efficiently from a performance perspective.</p>
+
+<blockquote>
+  <p>This post references a lot of content from <a href="https://developer.apple.com/videos/play/wwdc2018/220">High Performance AutoLayout</a>.</p>
+</blockquote>
+
+<h2 id="content">Content</h2>
+
+<ol>
+  <li><a href="./autolayout_performance_optimization#1-layout-definition-in-autolayout">Layout Definition in AutoLayout</a></li>
+  <li><a href="./autolayout_performance_optimization#2-autolayout-engine-and-layout-updates">AutoLayout Engine and Layout Updates</a></li>
+  <li><a href="./autolayout_performance_optimization#3-autolayout-performance-tips">AutoLayout Performance Tips</a></li>
+</ol>
+
+<h2 id="1-layout-definition-in-autolayout">1. Layout Definition in AutoLayout</h2>
+
+<p>Before AutoLayout, iOS defined the layout of views in a frame-based manner (size and position). Defining view positions primarily based on frames was intuitive and easy to understand. However, frame-based layouts posed a problem when adapting to devices with different screen resolutions. As the number of devices to support increased, this became a significant issue.</p>
+
+<p>AutoLayout addresses the limitations of the frame-based layout system by using a constraint-based layout system. Constraints are, as the name suggests, restrictions that define the relationship between views. When using AutoLayout, various constraints are set up between views. For example, defining that the top of view A is 20 points below the bottom of view B becomes one constraint.</p>
+
+<p>The significant advantage of defining layouts with constraints is that you don’t need to set static values for view sizes or positions. In AutoLayout, the size and position of views are dynamically calculated based on the defined constraints and adapt to the environment. This dynamic layout determination effectively resolves many problems caused by device fragmentation. For instance, when implementing a layout where a screen should leave a certain margin and fill the rest, you no longer need to specify view sizes for each resolution. You only need to set the margin values as constraints, and AutoLayout handles the rest.*</p>
+
+<blockquote>
+  <p>While AutoResizingMask supports similar functionality, it is generally applicable only in simpler UIs.</p>
+</blockquote>
+
+<h2 id="2-autolayout-engine-and-layout-updates">2. AutoLayout Engine and Layout Updates</h2>
+
+<h3 id="autolayout-and-equations">AutoLayout and Equations</h3>
+
+<p>The relationship between two views expressed through constraints can be defined by a single linear equation. For example, when setting a gap of 8 points between the trailing edge of RedView and the leading edge of BlueView, the following equation is established:</p>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/91072672-d0173c80-e674-11ea-8641-65e9ac89e3c8.png" alt="some2" /></p>
+
+<p>AutoLayout’s task is to find the solutions to these linear equations. When all solutions either have exactly one answer or a single viable answer*, each view’s position is determined.</p>
+
+<blockquote>
+  <p>Note: AutoLayout can create situations where multiple solutions are possible by using settings like Priority or Inequality. In such cases, AutoLayout performs Error Minimization to find the optimal solution and uses that value.</p>
+</blockquote>
+
+<h3 id="autolayout-engine">AutoLayout Engine</h3>
+
+<p>The AutoLayout Engine is the core module that calculates the set of equations derived from the constraints. The engine operates as follows:</p>
+
+<ol>
+  <li>Views add constraints. When constraints are added, views convert them into equations and send them to the engine.</li>
+  <li>The engine calculates the received equations. It calculates each variable as if it were solving equations.</li>
+  <li>The calculated results, in the form of variables (minX, minY, width, height, etc.), are sent back to the views.</li>
+</ol>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/90423226-0bef5680-e0f7-11ea-907d-b44d0cc787c8.png" alt="Engine" /></p>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/90955204-87b22000-e4b6-11ea-8010-421389fd17f6.png" alt="스크린샷 2020-08-22 오후 8 29 39" /></p>
+
+<p>Every time a variable is set in the AutoLayout Engine, it notifies the views that the variable has changed. Views, upon receiving this notification, call <code class="language-plaintext highlighter-rouge">setNeedsLayout()</code>.</p>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/90424852-c1bba480-e0f9-11ea-9f00-cf7b9484db6f.png" alt="notify" /></p>
+
+<p>When <code class="language-plaintext highlighter-rouge">setNeedsLayout()</code> is called, the view’s <code class="language-plaintext highlighter-rouge">layoutSubviews()</code> is triggered. In this method, the view copies the engine’s data into frames and determines the layout of itself and its subviews.</p>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/90955520-05772b00-e4b9-11ea-9a2e-f1c7cdbaeae0.png" alt="스크린샷 2020-08-22 오후 8 49 44" /></p>
+
+<h2 id="3-autolayout-performance-tips">3. AutoLayout Performance Tips</h2>
+
+<h3 id="1-avoid-setting-constraints-between-unrelated-views">1. Avoid Setting Constraints Between Unrelated Views</h3>
+
+<p>The AutoLayout Engine treats constraints between views that are unrelated (have no dependencies) as separate entities. Consequently, when constraints are not set between views, the cost of constraint calculation increases linearly. In other words, consolidating constraints that are independently attached to multiple views into a single view can increase the cost of constraint calculation. Therefore, it’s better for view constraints to relate to each other only when necessary for performance.</p>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/90958329-ba681280-e4ce-11ea-88e9-d1ecf276c7f8.png" alt="스크린샷 2020-08-22 오후 11 25 03" /></p>
+
+<h3 id="2-use-constraints-naturally">2. Use Constraints Naturally</h3>
+
+<ul>
+  <li>Don’t force constraints to be minimal</li>
+</ul>
+
+<p>It’s recommended to add constraints as needed. Trying to minimize constraints forcefully may lead to increased constraint calculation costs. For example, you may consider repeatedly adding/removing constraints for constraint optimization, but this often increases costs. In such cases, it may be more efficient to have multiple constraints rather than trying to minimize them.</p>
+
+<ul>
+  <li>Avoid complex constraints to represent two layouts as a single view</li>
+</ul>
+
+<p>Sometimes, to represent two layouts as a single view, you may create complex constraints. The more constraints you add, the harder it becomes to intuitively understand the layout defined by constraints. In such cases, it’s better to prioritize creating constraints that make it clear how the view is represented through constraints (using separate views or adding new subviews to reduce constraint complexity).</p>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/90963169-95849700-e4f0-11ea-9ce6-ce141655464f.png" alt="스크린샷 2020-08-23 오전 3 27 23" /></p>
+
+<p>![스크린샷 2020-08-23 오전 3 26 05](https://user-images.githubusercontent.com/13018877/90963171-97e6f100-e4f0-</p>
+
+<p>11ea-88a7-b6d321841cc8.png)</p>
+
+<h3 id="3-priority-settings-generally-dont-impact-performance-significantly">3. Priority Settings Generally Don’t Impact Performance Significantly</h3>
+
+<p>When the AutoLayout Engine requests values from views, it first checks whether the received constraints contain errors. If there are errors, the Engine asks the views to minimize the errors. During this error minimization process, the Engine uses the <a href="https://en.wikipedia.org/wiki/Simplex_algorithm">Simplex Algorithm</a> to find the optimal solution that minimizes errors. This process is generally not costly, so it doesn’t significantly impact AutoLayout’s performance.</p>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/90975685-809c1800-e571-11ea-92a7-f4f26ac1febf.png" alt="스크린샷 2020-08-23 오후 6 50 13" /></p>
+
+<blockquote>
+  <p>AutoLayout treats constraints other than Required Priority (1000) as optional constraints. AutoLayout does not prioritize optional constraints initially. It calculates all other constraints first and, if there’s any ambiguity in the layout, it uses optional constraints to resolve the ambiguity. This entire process is AutoLayout’s error minimization process.</p>
+</blockquote>
+
+<h3 id="4-eliminate-constraint-churn">4. Eliminate Constraint Churn</h3>
+
+<p>“Constraint churn” refers to unnecessarily complex constraints or repetitive addition/removal of constraints that don’t change the visual layout but add unnecessary complexity. In other words, while the actual view layout remains the same, constraint operations cause the AutoLayout Engine to do more work. Excessive constraint churn can negatively impact AutoLayout’s performance. Constraint churn often occurs in the following situations:</p>
+
+<ul>
+  <li>Removing all constraints and reapplying them.</li>
+  <li>Modifying constraints that don’t need to be changed.</li>
+  <li>Repeatedly adding and removing constraints.</li>
+</ul>
+
+<p>On the contrary, you can reduce constraint churn by following these practices:</p>
+
+<ul>
+  <li>Avoid removing all constraints.</li>
+  <li>Add constraints only once for static constraints that don’t need to be added dynamically during updates.</li>
+  <li>Modify only the necessary constraints.</li>
+  <li>Use view hiding instead of adding/removing constraints when possible.*</li>
+</ul>
+
+<blockquote>
+  <p>Note: Hiding a view is much less costly than changing constraints. Therefore, if hiding a view while maintaining the correct layout is possible, it’s better for performance to not modify the constraints.</p>
+</blockquote>
+
+<h4 id="constraint-churn-and-the-render-loop">Constraint Churn and the Render Loop</h4>
+
+<p>Unintentional constraint operations can occur inside the <code class="language-plaintext highlighter-rouge">updateConstraints()</code> and <code class="language-plaintext highlighter-rouge">layoutSubviews()</code> methods. When rendering views on iOS, you go through a Render Loop. This loop operates as follows:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">updateConstraints()</code> is called - Views are called leaf-to-window in the view hierarchy.</li>
+  <li><code class="language-plaintext highlighter-rouge">layoutSubviews()</code> is called - Called from window to subviews.</li>
+  <li><code class="language-plaintext highlighter-rouge">draw(rect:)</code> is called - Called from window to subviews.</li>
+</ol>
+
+<p>The Render Loop is executed whenever the view’s bounds change, a rotation event occurs, or when <code class="language-plaintext highlighter-rouge">setNeedsLayout()</code> and <code class="language-plaintext highlighter-rouge">layoutIfNeeded()</code> are called. In other words, the methods in the Render Loop are called frequently as layout changes are needed, so they may be called many times. Thus, when overriding <code class="language-plaintext highlighter-rouge">updateConstraints()</code>, it’s essential to consider constraint operations carefully to avoid performance issues. When dealing with the Render Loop cycle, prioritize the following considerations:</p>
+
+<ol>
+  <li>Update constraints only when necessary (e.g., during initial setup or when constraints need updates due to events).</li>
+  <li>Consider using <code class="language-plaintext highlighter-rouge">updateConstraints()</code> and <code class="language-plaintext highlighter-rouge">layoutSubviews()</code> only when you genuinely need them for layout changes.</li>
+</ol>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/90977348-afb98600-e57f-11ea-93e8-05a81738dc1a.png" alt="스크린샷 2020-08-23 오후 8 31 45" /></p>
+
+<h1 id="references">References</h1>
+
+<ul>
+  <li><a href="https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/index.html#//apple_ref/doc/uid/TP40010853-CH7-SW1">AutoLayout - Understanding AutoLayout</a></li>
+  <li><a href="https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/AnatomyofaConstraint.html#//apple_ref/doc/uid/TP40010853-CH9-SW1">AutoLayout - Anatomy of a Constraint</a></li>
+  <li><a href="https://developer.apple.com/videos/play/wwdc2018/220">High Performance AutoLayout</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+      
+        
+        <h2>What to Read More</h2>
+        
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2022-05/diffabledatasource">
+              Updating UIKit Lists Safely with DiffableDataSource
+              <small>13 May 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#WWDC">
+                WWDC
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2017-07/iOS_URLSession">
+              Understanding iOS URLSession
+              <small>30 Jul 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/en/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

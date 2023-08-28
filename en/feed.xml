@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/en/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/en/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-08-28T15:42:53+09:00</updated><id>http://localhost:4000/en/feed.xml</id><title type="html">hcn1519 Dev Post</title><subtitle>프로그래밍에 관하여 글을 쓰는 블로그입니다.</subtitle><author><name>Changnam Hong</name></author><entry><title type="html">Safely Updating UIKit Lists with DiffableDataSource</title><link href="http://localhost:4000/en/articles/2022-05/diffabledatasource" rel="alternate" type="text/html" title="Safely Updating UIKit Lists with DiffableDataSource" /><published>2022-05-13T00:53:17+09:00</published><updated>2023-08-28T09:50:18+09:00</updated><id>http://localhost:4000/en/articles/2022-05/diffabledatasource</id><content type="html" xml:base="http://localhost:4000/en/articles/2022-05/diffabledatasource">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/en/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/en/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-08-28T16:26:46+09:00</updated><id>http://localhost:4000/en/feed.xml</id><title type="html">hcn1519 Dev Post</title><subtitle>프로그래밍에 관하여 글을 쓰는 블로그입니다.</subtitle><author><name>Changnam Hong</name></author><entry><title type="html">Updating UIKit Lists Safely with DiffableDataSource</title><link href="http://localhost:4000/en/articles/2022-05/diffabledatasource" rel="alternate" type="text/html" title="Updating UIKit Lists Safely with DiffableDataSource" /><published>2022-05-13T00:53:17+09:00</published><updated>2023-08-28T09:50:18+09:00</updated><id>http://localhost:4000/en/articles/2022-05/diffabledatasource</id><content type="html" xml:base="http://localhost:4000/en/articles/2022-05/diffabledatasource">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;./diffableDataSource#1-wwdc---advances-in-ui-data-sources&quot;&gt;WWDC - Advances in UI Data Sources&lt;/a&gt;&lt;/li&gt;
@@ -908,7 +908,7 @@
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/SUT.html&quot;&gt;SUT - System Under Test&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/DOC.html&quot;&gt;DOC - Depended On Component&lt;/a&gt;
 ```&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="UnitTest" /><category term="TestDouble" /><category term="TestStub" /><category term="UnitTest" /><category term="TestDouble" /><category term="TestStub" /><summary type="html">Exploring the definition and usage of Test Stubs.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/en/%7B%22feature%22=%3E%22unittest.png%22%7D" /><media:content medium="image" url="http://localhost:4000/en/%7B%22feature%22=%3E%22unittest.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Introduction to Unit Testing Concepts</title><link href="http://localhost:4000/en/articles/2021-09/unittest" rel="alternate" type="text/html" title="Introduction to Unit Testing Concepts" /><published>2021-09-04T00:53:17+09:00</published><updated>2023-08-28T09:50:18+09:00</updated><id>http://localhost:4000/en/articles/2021-09/unittest</id><content type="html" xml:base="http://localhost:4000/en/articles/2021-09/unittest">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="UnitTest" /><category term="TestDouble" /><category term="TestStub" /><category term="UnitTest" /><category term="TestDouble" /><category term="TestStub" /><summary type="html">Exploring the definition and usage of Test Stubs.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/en/%7B%22feature%22=%3E%22unittest.png%22%7D" /><media:content medium="image" url="http://localhost:4000/en/%7B%22feature%22=%3E%22unittest.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Introduction to Unit Testing</title><link href="http://localhost:4000/en/articles/2021-09/unittest" rel="alternate" type="text/html" title="Introduction to Unit Testing" /><published>2021-09-04T00:53:17+09:00</published><updated>2023-08-28T09:50:18+09:00</updated><id>http://localhost:4000/en/articles/2021-09/unittest</id><content type="html" xml:base="http://localhost:4000/en/articles/2021-09/unittest">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;./unittest#1-what-is-unit-testing&quot;&gt;What is Unit Testing?&lt;/a&gt;
@@ -1114,8 +1114,7 @@ A use case is a list of actions or event steps typically defining the interactio
   &lt;li&gt;&lt;a href=&quot;https://martinfowler.com/articles/mocksArentStubs.html&quot;&gt;Mocks Aren’t Stubs - Martin Fowler&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/SUT.html&quot;&gt;SUT - System Under Test&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/DOC.html&quot;&gt;DOC - Depended On Component&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/Four%20Phase%20Test.html&quot;&gt;Four Phase Test&lt;/a&gt;
-```&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/Four%20Phase%20Test.html&quot;&gt;Four Phase Test&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="Unit" /><category term="Testing" /><category term="Use" /><category term="Case" /><category term="Test" /><category term="Doubles" /><category term="Isolation" /><category term="Unit Testing" /><category term="Use Case" /><category term="Test Doubles" /><category term="Test Isolation" /><summary type="html">Exploring the definition and purpose of Unit Testing, as well as Test Doubles.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/en/%7B%22feature%22=%3E%22unittest.png%22%7D" /><media:content medium="image" url="http://localhost:4000/en/%7B%22feature%22=%3E%22unittest.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Inversion Of Control</title><link href="http://localhost:4000/en/articles/2020-12/oop_inversion_of_control" rel="alternate" type="text/html" title="Inversion Of Control" /><published>2020-12-06T00:53:17+09:00</published><updated>2023-08-28T09:50:18+09:00</updated><id>http://localhost:4000/en/articles/2020-12/oop_inversion_of_control</id><content type="html" xml:base="http://localhost:4000/en/articles/2020-12/oop_inversion_of_control">&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inversion of Control&lt;/code&gt; (IoC) refers to a phenomenon where the flow of control is &lt;strong&gt;inverted&lt;/strong&gt;, as the name suggests. To understand what it means for control flow to be inverted, it’s necessary to first understand what control flow without inversion is. Therefore, in this article, we will first examine what non-inverted control flow is and then explore &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inversion of Control&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
@@ -1320,4 +1319,550 @@ A use case is a list of actions or event steps typically defining the interactio
   &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Control_flow&quot;&gt;ControlFlow - Wikipedia&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Inversion_of_control&quot;&gt;Inversion Of Control - Wikipedia&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164&quot;&gt;Clean Architecture - Robert C. Martin&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="IoC," /><category term="OOP," /><category term="ControlFlow," /><category term="Dependency" /><category term="IoC" /><category term="OOP" /><category term="ControlFlow" /><category term="Dependency" /><summary type="html">Exploring Inversion of Control.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/en/%7B%22feature%22=%3E%22OOP.png%22%7D" /><media:content medium="image" url="http://localhost:4000/en/%7B%22feature%22=%3E%22OOP.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="IoC," /><category term="OOP," /><category term="ControlFlow," /><category term="Dependency" /><category term="IoC" /><category term="OOP" /><category term="ControlFlow" /><category term="Dependency" /><summary type="html">Exploring Inversion of Control.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/en/%7B%22feature%22=%3E%22OOP.png%22%7D" /><media:content medium="image" url="http://localhost:4000/en/%7B%22feature%22=%3E%22OOP.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Optimizing AutoLayout Performance</title><link href="http://localhost:4000/en/articles/2020-08/autolayout_performance_optimization" rel="alternate" type="text/html" title="Optimizing AutoLayout Performance" /><published>2020-08-23T00:53:17+09:00</published><updated>2023-08-28T16:26:42+09:00</updated><id>http://localhost:4000/en/articles/2020-08/autolayout_performance_optimization</id><content type="html" xml:base="http://localhost:4000/en/articles/2020-08/autolayout_performance_optimization">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;In this post, we will explore how to use AutoLayout efficiently from a performance perspective.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This post references a lot of content from &lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2018/220&quot;&gt;High Performance AutoLayout&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;content&quot;&gt;Content&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;./autolayout_performance_optimization#1-layout-definition-in-autolayout&quot;&gt;Layout Definition in AutoLayout&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./autolayout_performance_optimization#2-autolayout-engine-and-layout-updates&quot;&gt;AutoLayout Engine and Layout Updates&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./autolayout_performance_optimization#3-autolayout-performance-tips&quot;&gt;AutoLayout Performance Tips&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;1-layout-definition-in-autolayout&quot;&gt;1. Layout Definition in AutoLayout&lt;/h2&gt;
+
+&lt;p&gt;Before AutoLayout, iOS defined the layout of views in a frame-based manner (size and position). Defining view positions primarily based on frames was intuitive and easy to understand. However, frame-based layouts posed a problem when adapting to devices with different screen resolutions. As the number of devices to support increased, this became a significant issue.&lt;/p&gt;
+
+&lt;p&gt;AutoLayout addresses the limitations of the frame-based layout system by using a constraint-based layout system. Constraints are, as the name suggests, restrictions that define the relationship between views. When using AutoLayout, various constraints are set up between views. For example, defining that the top of view A is 20 points below the bottom of view B becomes one constraint.&lt;/p&gt;
+
+&lt;p&gt;The significant advantage of defining layouts with constraints is that you don’t need to set static values for view sizes or positions. In AutoLayout, the size and position of views are dynamically calculated based on the defined constraints and adapt to the environment. This dynamic layout determination effectively resolves many problems caused by device fragmentation. For instance, when implementing a layout where a screen should leave a certain margin and fill the rest, you no longer need to specify view sizes for each resolution. You only need to set the margin values as constraints, and AutoLayout handles the rest.*&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;While AutoResizingMask supports similar functionality, it is generally applicable only in simpler UIs.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;2-autolayout-engine-and-layout-updates&quot;&gt;2. AutoLayout Engine and Layout Updates&lt;/h2&gt;
+
+&lt;h3 id=&quot;autolayout-and-equations&quot;&gt;AutoLayout and Equations&lt;/h3&gt;
+
+&lt;p&gt;The relationship between two views expressed through constraints can be defined by a single linear equation. For example, when setting a gap of 8 points between the trailing edge of RedView and the leading edge of BlueView, the following equation is established:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/91072672-d0173c80-e674-11ea-8641-65e9ac89e3c8.png&quot; alt=&quot;some2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;AutoLayout’s task is to find the solutions to these linear equations. When all solutions either have exactly one answer or a single viable answer*, each view’s position is determined.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Note: AutoLayout can create situations where multiple solutions are possible by using settings like Priority or Inequality. In such cases, AutoLayout performs Error Minimization to find the optimal solution and uses that value.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;autolayout-engine&quot;&gt;AutoLayout Engine&lt;/h3&gt;
+
+&lt;p&gt;The AutoLayout Engine is the core module that calculates the set of equations derived from the constraints. The engine operates as follows:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Views add constraints. When constraints are added, views convert them into equations and send them to the engine.&lt;/li&gt;
+  &lt;li&gt;The engine calculates the received equations. It calculates each variable as if it were solving equations.&lt;/li&gt;
+  &lt;li&gt;The calculated results, in the form of variables (minX, minY, width, height, etc.), are sent back to the views.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90423226-0bef5680-e0f7-11ea-907d-b44d0cc787c8.png&quot; alt=&quot;Engine&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90955204-87b22000-e4b6-11ea-8010-421389fd17f6.png&quot; alt=&quot;스크린샷 2020-08-22 오후 8 29 39&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Every time a variable is set in the AutoLayout Engine, it notifies the views that the variable has changed. Views, upon receiving this notification, call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setNeedsLayout()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90424852-c1bba480-e0f9-11ea-9f00-cf7b9484db6f.png&quot; alt=&quot;notify&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setNeedsLayout()&lt;/code&gt; is called, the view’s &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutSubviews()&lt;/code&gt; is triggered. In this method, the view copies the engine’s data into frames and determines the layout of itself and its subviews.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90955520-05772b00-e4b9-11ea-9a2e-f1c7cdbaeae0.png&quot; alt=&quot;스크린샷 2020-08-22 오후 8 49 44&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;3-autolayout-performance-tips&quot;&gt;3. AutoLayout Performance Tips&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-avoid-setting-constraints-between-unrelated-views&quot;&gt;1. Avoid Setting Constraints Between Unrelated Views&lt;/h3&gt;
+
+&lt;p&gt;The AutoLayout Engine treats constraints between views that are unrelated (have no dependencies) as separate entities. Consequently, when constraints are not set between views, the cost of constraint calculation increases linearly. In other words, consolidating constraints that are independently attached to multiple views into a single view can increase the cost of constraint calculation. Therefore, it’s better for view constraints to relate to each other only when necessary for performance.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90958329-ba681280-e4ce-11ea-88e9-d1ecf276c7f8.png&quot; alt=&quot;스크린샷 2020-08-22 오후 11 25 03&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-use-constraints-naturally&quot;&gt;2. Use Constraints Naturally&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Don’t force constraints to be minimal&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It’s recommended to add constraints as needed. Trying to minimize constraints forcefully may lead to increased constraint calculation costs. For example, you may consider repeatedly adding/removing constraints for constraint optimization, but this often increases costs. In such cases, it may be more efficient to have multiple constraints rather than trying to minimize them.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Avoid complex constraints to represent two layouts as a single view&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Sometimes, to represent two layouts as a single view, you may create complex constraints. The more constraints you add, the harder it becomes to intuitively understand the layout defined by constraints. In such cases, it’s better to prioritize creating constraints that make it clear how the view is represented through constraints (using separate views or adding new subviews to reduce constraint complexity).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90963169-95849700-e4f0-11ea-9ce6-ce141655464f.png&quot; alt=&quot;스크린샷 2020-08-23 오전 3 27 23&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;![스크린샷 2020-08-23 오전 3 26 05](https://user-images.githubusercontent.com/13018877/90963171-97e6f100-e4f0-&lt;/p&gt;
+
+&lt;p&gt;11ea-88a7-b6d321841cc8.png)&lt;/p&gt;
+
+&lt;h3 id=&quot;3-priority-settings-generally-dont-impact-performance-significantly&quot;&gt;3. Priority Settings Generally Don’t Impact Performance Significantly&lt;/h3&gt;
+
+&lt;p&gt;When the AutoLayout Engine requests values from views, it first checks whether the received constraints contain errors. If there are errors, the Engine asks the views to minimize the errors. During this error minimization process, the Engine uses the &lt;a href=&quot;https://en.wikipedia.org/wiki/Simplex_algorithm&quot;&gt;Simplex Algorithm&lt;/a&gt; to find the optimal solution that minimizes errors. This process is generally not costly, so it doesn’t significantly impact AutoLayout’s performance.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90975685-809c1800-e571-11ea-92a7-f4f26ac1febf.png&quot; alt=&quot;스크린샷 2020-08-23 오후 6 50 13&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;AutoLayout treats constraints other than Required Priority (1000) as optional constraints. AutoLayout does not prioritize optional constraints initially. It calculates all other constraints first and, if there’s any ambiguity in the layout, it uses optional constraints to resolve the ambiguity. This entire process is AutoLayout’s error minimization process.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;4-eliminate-constraint-churn&quot;&gt;4. Eliminate Constraint Churn&lt;/h3&gt;
+
+&lt;p&gt;“Constraint churn” refers to unnecessarily complex constraints or repetitive addition/removal of constraints that don’t change the visual layout but add unnecessary complexity. In other words, while the actual view layout remains the same, constraint operations cause the AutoLayout Engine to do more work. Excessive constraint churn can negatively impact AutoLayout’s performance. Constraint churn often occurs in the following situations:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Removing all constraints and reapplying them.&lt;/li&gt;
+  &lt;li&gt;Modifying constraints that don’t need to be changed.&lt;/li&gt;
+  &lt;li&gt;Repeatedly adding and removing constraints.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;On the contrary, you can reduce constraint churn by following these practices:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Avoid removing all constraints.&lt;/li&gt;
+  &lt;li&gt;Add constraints only once for static constraints that don’t need to be added dynamically during updates.&lt;/li&gt;
+  &lt;li&gt;Modify only the necessary constraints.&lt;/li&gt;
+  &lt;li&gt;Use view hiding instead of adding/removing constraints when possible.*&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Note: Hiding a view is much less costly than changing constraints. Therefore, if hiding a view while maintaining the correct layout is possible, it’s better for performance to not modify the constraints.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;constraint-churn-and-the-render-loop&quot;&gt;Constraint Churn and the Render Loop&lt;/h4&gt;
+
+&lt;p&gt;Unintentional constraint operations can occur inside the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateConstraints()&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutSubviews()&lt;/code&gt; methods. When rendering views on iOS, you go through a Render Loop. This loop operates as follows:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateConstraints()&lt;/code&gt; is called - Views are called leaf-to-window in the view hierarchy.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutSubviews()&lt;/code&gt; is called - Called from window to subviews.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;draw(rect:)&lt;/code&gt; is called - Called from window to subviews.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The Render Loop is executed whenever the view’s bounds change, a rotation event occurs, or when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setNeedsLayout()&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutIfNeeded()&lt;/code&gt; are called. In other words, the methods in the Render Loop are called frequently as layout changes are needed, so they may be called many times. Thus, when overriding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateConstraints()&lt;/code&gt;, it’s essential to consider constraint operations carefully to avoid performance issues. When dealing with the Render Loop cycle, prioritize the following considerations:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Update constraints only when necessary (e.g., during initial setup or when constraints need updates due to events).&lt;/li&gt;
+  &lt;li&gt;Consider using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateConstraints()&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutSubviews()&lt;/code&gt; only when you genuinely need them for layout changes.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90977348-afb98600-e57f-11ea-93e8-05a81738dc1a.png&quot; alt=&quot;스크린샷 2020-08-23 오후 8 31 45&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/index.html#//apple_ref/doc/uid/TP40010853-CH7-SW1&quot;&gt;AutoLayout - Understanding AutoLayout&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/AnatomyofaConstraint.html#//apple_ref/doc/uid/TP40010853-CH9-SW1&quot;&gt;AutoLayout - Anatomy of a Constraint&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2018/220&quot;&gt;High Performance AutoLayout&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="iOS," /><category term="WWDC," /><category term="AutoLayout," /><category term="UIKit," /><category term="UIView" /><category term="iOS" /><category term="WWDC" /><category term="AutoLayout" /><category term="UIKit" /><category term="UIView" /><summary type="html">Exploring how to efficiently use AutoLayout from a performance perspective.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/en/%7B%22feature%22=%3E%22iOS.png%22%7D" /><media:content medium="image" url="http://localhost:4000/en/%7B%22feature%22=%3E%22iOS.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Introducing Bitcode</title><link href="http://localhost:4000/en/articles/2020-05/bitcode_implementation" rel="alternate" type="text/html" title="Introducing Bitcode" /><published>2020-05-21T00:53:17+09:00</published><updated>2023-08-28T16:22:05+09:00</updated><id>http://localhost:4000/en/articles/2020-05/bitcode_implementation</id><content type="html" xml:base="http://localhost:4000/en/articles/2020-05/bitcode_implementation">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#about-bitcode&quot;&gt;About Bitcode&lt;/a&gt;
+    &lt;ol&gt;
+      &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#bitcode-upload-process&quot;&gt;Bitcode Upload Process&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#symbolication-for-apps-with-bitcode-enabled&quot;&gt;Symbolication for Apps with Bitcode Enabled&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#bcsymbolmap&quot;&gt;bcsymbolmap&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#xcode-build-setting-for-bitcode&quot;&gt;Xcode Build Settings for Bitcode&lt;/a&gt;
+    &lt;ol&gt;
+      &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#enable_bitcode&quot;&gt;ENABLE_BITCODE&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#bitcode_generation_mode&quot;&gt;BITCODE_GENERATION_MODE&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#library-bitcode-support&quot;&gt;Library Bitcode Support&lt;/a&gt;
+    &lt;ol&gt;
+      &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#checking-binary-bitcode-support&quot;&gt;Checking Binary Bitcode Support&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#library-bitcode-support-via-cocoapods&quot;&gt;Library Bitcode Support via CocoaPods&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In this post, I’ve compiled information about what you need to know to introduce Bitcode.&lt;/p&gt;
+
+&lt;h2 id=&quot;about-bitcode&quot;&gt;About Bitcode&lt;/h2&gt;
+
+&lt;h3 id=&quot;bitcode-upload-process&quot;&gt;Bitcode Upload Process&lt;/h3&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+    Bitcode is an intermediate representation of a compiled program.
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Bitcode is an &lt;a href=&quot;https://en.wikipedia.org/wiki/Intermediate_representation&quot;&gt;IR (Intermediate Representation)&lt;/a&gt; included in binary builds for App Thinning in the App Store. When bitcode is included in the uploaded binary, the App Store recompiles and links the binary, generating optimized binaries for each device architecture.&lt;/li&gt;
+  &lt;li&gt;App users only download the binary for their device’s architecture when bitcode is enabled, reducing the size of the app they need to download.&lt;/li&gt;
+  &lt;li&gt;To summarize, when uploading a binary to the App Store, the following process occurs:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Upload a single binary with bitcode to the App Store.&lt;/li&gt;
+  &lt;li&gt;The App Store recompiles the binary to generate binaries for different architectures (e.g., arm64, armv7).&lt;/li&gt;
+  &lt;li&gt;App users download the binary for their device’s architecture. (Before bitcode, only a single “fat binary” was used.)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;symbolication-for-apps-with-bitcode-enabled&quot;&gt;Symbolication for Apps with Bitcode Enabled&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Recompilation by the App Store during archiving makes dSYM generated during app development unusable. Matching dSYM with the app binary is based on the UUID included in the binary. Hence, when a rebuild occurs (even if there are no code changes), the dSYM from the previous build cannot match the subsequent one. Therefore, dSYMs generated during archiving cannot be used for symbolication of Crash Reports in the App Store.&lt;/li&gt;
+  &lt;li&gt;Therefore, when uploading dSYMs to Third Party Crash Analysis platforms after enabling bitcode, it is &lt;strong&gt;essential&lt;/strong&gt; to download the files from Xcode Organizer or iTunes Connect.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;bcsymbolmap&quot;&gt;bcsymbolmap&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;During archiving, there is a checkbox in iTunes Connect that decides whether to upload the app’s Symbols. Disabling this checkbox causes Xcode to obfuscate the symbols included in the dSYM of the app before binary upload (e.g., “&lt;em&gt;_hidden#109&lt;/em&gt;”). These obfuscated symbols are decrypted using a file called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.bcsymbolmap&lt;/code&gt;. Therefore, dSYM files for bitcode-enabled binaries always include the corresponding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.bcsymbolmap&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;When uploading dSYMs to Third Party Crash Analysis platforms, dSYMs downloaded from Xcode are already decrypted and can be uploaded directly. However, dSYMs downloaded directly from iTunes Connect need to be decrypted manually.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;xcrun dsymutil &lt;span class=&quot;nt&quot;&gt;-symbol-map&lt;/span&gt; &amp;lt;path to BCSymbolMaps &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;xcarchive&amp;gt; &amp;lt;path to downloaded dSYM directory&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;xcode-build-settings-for-bitcode&quot;&gt;Xcode Build Settings for Bitcode&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Xcode has options to include full bitcode or markers indicating bitcode during binary builds.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;enable_bitcode&quot;&gt;ENABLE_BITCODE&lt;/h3&gt;
+
+&lt;p&gt;Setting ENABLE_BITCODE to YES adds flags related to bitcode during source code build and archiving. During the build, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-embed-bitcode-marker&lt;/code&gt; flag is added, and during archiving, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-embed-bitcode&lt;/code&gt; flag is added. You can see this in the build and archive logs.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Build Log&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Build log excerpt
+CompileSwift normal arm64 TestObj.swift (in target 'SomeProject' from project 'SomeProject')
+...
+/Debug-iphoneos/SomeProject.build/Objects-normal/arm64/TestObj.o -embed-bitcode-marker 
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Archive Log&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Archive log excerpt
+SwiftCodeGeneration normal arm64 (in target 'SomeProject' from project 'SomeProject')
+...
+/Release-iphoneos/SomeProject.build/Objects-normal/arm64/TestObj.bc -embed-bitcode -target arm64-apple-ios11.0 -Xllvm -aarch64-use-tbi -O -disable-llvm-optzns -module-name
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;bitcode_generation_mode&quot;&gt;BITCODE_GENERATION_MODE&lt;/h3&gt;
+
+&lt;p&gt;You can achieve the same effect as ENABLE_BITCODE using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BITCODE_GENERATION_MODE&lt;/code&gt; in User Defined Settings. Setting the value to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;marker&lt;/code&gt; adds the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-embed-bitcode-marker&lt;/code&gt; compile flag, and setting it to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bitcode&lt;/code&gt; adds the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-embed-bitcode&lt;/code&gt; flag. You can change this setting to build with full bitcode if needed for certain cases.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width=&quot;484&quot; alt=&quot;Screenshot 2020-05-22 12 59 59&quot; src=&quot;https://user-images.githubusercontent.com/13018877/82578788-d73b3400-9bc7-11ea-9ff4-953814cbead4.png&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Note: You can also enable bitcode by adding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-fembed-bitcode&lt;/code&gt; directly to Other C Flags.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;library-bitcode-support&quot;&gt;Library Bitcode Support&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The main drawback of bitcode is that if any library you are using does not support bitcode, you cannot enable bitcode in your app.&lt;/li&gt;
+  &lt;li&gt;Here are some considerations for library bitcode support:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;checking-binary-bitcode-support&quot;&gt;Checking Binary Bitcode Support&lt;/h3&gt;
+
+&lt;p&gt;To check if a specific library supports bitcode, you can examine whether the library binary contains LLVM Symbols. However, there can be some confusion about which symbols to check, as there are various &lt;a href=&quot;https://stackoverflow.com/a/33105733/5130783&quot;&gt;issues&lt;/a&gt; regarding this. In general, you can use the following command to check if a binary supports bitcode:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;otool &lt;span class=&quot;nt&quot;&gt;-arch&lt;/span&gt; arm64 &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; MyFramework/MyFramework | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;__LLVM
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;otool &lt;span class=&quot;nt&quot;&gt;-arch&lt;/span&gt; armv7 &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; myLib.a | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;__LLVM
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;library-bitcode-support-via-cocoapods&quot;&gt;Library Bitcode Support via CocoaPods&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Bitcode is handled during compilation, not linking. Therefore, whether a library binary supports bitcode or not determines whether bitcode can be enabled in your app. For libraries distributed as built binaries or frameworks, if they previously did not support bitcode, you need&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;to enable bitcode and rebuild them before redistributing.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;In the case of CocoaPods, libraries vendored as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vendored_framework&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vendored_libraries&lt;/code&gt; fall into this category. If any one library in your app does not support bitcode, your app cannot use bitcode.&lt;/li&gt;
+  &lt;li&gt;However, for libraries built from source via CocoaPods, they are built during your app’s build process. Therefore, if you don’t explicitly set &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ENABLE_BITCODE&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NO&lt;/code&gt; in your app’s PodFile or PodSpec, these libraries will support bitcode.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/library/archive/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-SYMBOLICATION-BITCODE&quot;&gt;Understanding and Analyzing Application Crash Reports - Bitcode&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://help.apple.com/xcode/mac/11.0/index.html?localePath=en.lproj#/devbbdc5ce4f&quot;&gt;What is app thinning? (iOS, tvOS, watchOS)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.slideshare.net/syoikeda/how-to-handle-bitcode&quot;&gt;How to handle bitcode&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/32755775/how-to-check-a-static-library-is-built-contain-bitcode&quot;&gt;How to check a static library is built contain bitcode?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/@heitorburger/static-libraries-frameworks-and-bitcode-6d8f784478a9&quot;&gt;Static Libraries, Frameworks, and Bitcode&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://forums.developer.apple.com/message/7038#11344&quot;&gt;https://forums.developer.apple.com/message/7038#11344&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.guardsquare.com/en/blog/enable-bitcode&quot;&gt;https://www.guardsquare.com/en/blog/enable-bitcode&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="Bitcode," /><category term="AppStore," /><category term="Xcode," /><category term="iOS," /><category term="BuildSystem," /><category term="Symbol," /><category term="CrashReport" /><category term="Bitcode" /><category term="AppStore" /><category term="Xcode" /><category term="iOS" /><category term="BuildSystem" /><category term="Symbol" /><category term="CrashReport" /><summary type="html">I've compiled information about what you need to know to introduce Bitcode.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/en/%7B%22feature%22=%3E%22iOS.png%22%7D" /><media:content medium="image" url="http://localhost:4000/en/%7B%22feature%22=%3E%22iOS.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Crash Report Symbolication</title><link href="http://localhost:4000/en/articles/2020-02/crash_report_symbolication" rel="alternate" type="text/html" title="Crash Report Symbolication" /><published>2020-02-09T00:53:17+09:00</published><updated>2023-08-28T16:23:41+09:00</updated><id>http://localhost:4000/en/articles/2020-02/crash_report_symbolication</id><content type="html" xml:base="http://localhost:4000/en/articles/2020-02/crash_report_symbolication">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;./crash_report_symbolication#1-generating-crash-reports&quot;&gt;Generating Crash Reports&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./crash_report_symbolication#2-symbol-and-symbolication&quot;&gt;Symbol and Symbolication&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./crash_report_symbolication#3-crash-report-symbolication&quot;&gt;Crash Report Symbolication&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./crash_report_symbolication#4-appendix&quot;&gt;Appendix&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In this post, we will explore how crash reports are generated in apps and how they can be symbolicated in AppStore Connect.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Note: Before we begin, it’s important to mention that much of the content in this article is a summary of &lt;a href=&quot;https://developer.apple.com/library/archive/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-INTRODUCTION&quot;&gt;Understanding and Analyzing Application Crash Reports - Apple Doc&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;1-generating-crash-reports&quot;&gt;1. Generating Crash Reports&lt;/h2&gt;
+
+&lt;p&gt;When a crash occurs on the device you’re using, the system generates a crash report and stores it internally on the device. Crash reports contain information about the environment at the time the crash occurred and other useful data.&lt;/p&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+    Crash reports describe the conditions under which the application terminated, in most cases including a complete backtrace for each executing thread, and are typically very useful for debugging issues in the application.
+&lt;/div&gt;
+
+&lt;p&gt;You can find crash reports on the device’s settings:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Settings &amp;gt; Privacy &amp;gt; Analytics &amp;amp; Improvements &amp;gt; Analytics Data&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;When you examine these stored crash reports, you can get a rough idea of the environment in which the crash occurred. However, it’s often challenging to determine exactly where in your source code the crash happened by looking at the backtrace from the thread where the crash occurred. While you can generally identify which framework had an issue, this information is too broad to be of significant help in debugging. The reason for this lack of clarity is that the crash report is in an “Unsymbolicated” state. The format in which crash reports are presented changes depending on whether they have been symbolicated.&lt;/p&gt;
+
+&lt;h2 id=&quot;2-symbol-and-symbolication&quot;&gt;2. Symbol and Symbolication&lt;/h2&gt;
+
+&lt;h3 id=&quot;symbol&quot;&gt;Symbol&lt;/h3&gt;
+
+&lt;p&gt;If you’ve read this far, you already know that crash logs need to be symbolicated for developers to analyze them properly. But what is “symbolication”? To understand symbolication, it’s important to first know what a “symbol” is.&lt;/p&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+    Symbol - A symbol in computer programming is a primitive data type whose instances have a unique human-readable form.
+&lt;/div&gt;
+
+&lt;p&gt;A “symbol” is a data type that is &lt;strong&gt;human-readable&lt;/strong&gt;, and it is typically unique within the scope where it exists. Symbols in programming can include things like global variables, local variables, function names, and argument values.&lt;/p&gt;
+
+&lt;p&gt;Symbols are usually stored in a data structure called a “Symbol Table,” often implemented as a hash table. A Symbol Table stores information about what each symbol means in the source code.&lt;/p&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+    Symbol Table - In computer science, a symbol table is a data structure used by a language translator such as a compiler or interpreter, where each identifier (a.k.a. symbol) in a program's source code is associated with information relating to its declaration or appearance in the source.
+&lt;/div&gt;
+
+&lt;p&gt;The Symbol Table is typically kept separate from the compiled binary. In other words, when you release your app, the built &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.app&lt;/code&gt; doesn’t include Symbol Table information. This is because the Symbol Table doesn’t directly affect your app’s execution, and it can be quite large. So, in most cases, the Symbol Table only exists in memory during the compiler’s source code interpretation process, specifically during debugging and crash report symbolication.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Removing symbols from object files compiled during the app build process is often referred to as &lt;a href=&quot;https://www.computerhope.com/unix/strip.htm&quot;&gt;stripping&lt;/a&gt;. When distributing the app in a release, you use stripped binaries.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The information contained in a Symbol Table varies slightly depending on the programming language, but it generally includes:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The symbol’s name&lt;/li&gt;
+  &lt;li&gt;Whether the symbol is relocatable (absolute or relocatable)&lt;/li&gt;
+  &lt;li&gt;The location or address value of the symbol&lt;/li&gt;
+  &lt;li&gt;In high-level languages, Symbol Tables can also contain information about the symbol’s data type, size, dimensions, length, and so on.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;debug-symbol&quot;&gt;Debug Symbol&lt;/h3&gt;
+
+&lt;p&gt;A “Debug Symbol” (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dSYM&lt;/code&gt;) is a type of symbol that carries additional information in the symbol table of an object file, such as a shared library or an executable.&lt;/p&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+    A debug symbol is a special kind of symbol that attaches additional information to the symbol table of an object file, such as a shared library or an executable.
+&lt;/div&gt;
+
+&lt;p&gt;Therefore, Debug Symbols carry more information than regular Symbols. They include information about where the symbol in machine instructions (address information) maps to specific lines of your source code, the size of the symbol, and which class or struct it belongs to, among other things.&lt;/p&gt;
+
+&lt;h3 id=&quot;symbolication&quot;&gt;Symbolication&lt;/h3&gt;
+
+&lt;p&gt;Now, let’s delve into what “symbolication” means in the context of crash reports.&lt;/p&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+    Symbolication is the process of resolving backtrace addresses to source code method or function names, known as symbols.
+&lt;/div&gt;
+
+&lt;p&gt;Symbolication is the process of converting memory addresses in a backtrace into human-readable “symbols” such as method or function names. In symbolicated crash reports, you can see exactly where in your source code the crash occurred.&lt;/p&gt;
+
+&lt;h2 id=&quot;3-crash-report-symbolication&quot;&gt;3. Crash Report Symbolication&lt;/h2&gt;
+
+&lt;p&gt;We’ve briefly looked at how crash reports are generated on devices and how you can export them. However, many crashes occur on users’ devices, and asking them to send their crash logs for debugging is inconvenient and not a practical way to analyze crashes.&lt;/p&gt;
+
+&lt;p&gt;To address this issue, Apple allows users who have agreed (or Test Flight users) to provide Diagnostic Data for their devices where crashes occurred (symbolicated crash reports). Let’s explore how Apple provides Diagnostic Data and the central role of crash report symbolication in this process.&lt;/p&gt;
+
+&lt;p&gt;Images for each step can be found &lt;a href=&quot;https://developer.apple.com/library/archive/technotes/tn2151/Art/tn2151_crash_flow.png&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;As your code is compiled, the compiler generates Debug Symbols alongside it. Debug Symbols contain information about how machine instructions (address information) in the compiled binary map to specific lines of your source code.&lt;/li&gt;
+  &lt;li&gt;When you archive your app for App Store distribution, Xcode creates a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.xcarchive&lt;/code&gt; file in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/Library/Developer/Xcode/Archives&lt;/code&gt; directory.&lt;/li&gt;
+  &lt;li&gt;When you distribute your app on the App Store or through Test Flight, you can choose whether to upload the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dSYM&lt;/code&gt; file alongside it. Enabling this option allows you to view crash report information in iTunes Connect.&lt;/li&gt;
+  &lt;li&gt;When a crash occurs in your app, an “Unsymbolicated” crash report is stored on the device.&lt;/li&gt;
+  &lt;li&gt;You can obtain these unsymbolicated crash reports in various ways: by exporting them directly from a user’s device, by connecting the device to a Mac and using Xcode to obtain them&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;, or by viewing Diagnostic Data from users who have agreed to share it in iTunes Connect.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;You can symbolicate unsymbolicated crash reports using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dSYM&lt;/code&gt; file. Symbolication converts memory addresses in the backtrace into human-readable symbols.&lt;/li&gt;
+  &lt;li&gt;In iTunes Connect, uploaded dSYM files are used to symbolicate crash reports, allowing you to see where crashes occurred in your source code.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dSYM&lt;/code&gt; file and the app binary identify each other using a “Build UUID.” Each time you build, a new Build UUID is generated. This means that even if you build without changing your source code, the previously generated dSYM file and the newly created app binary will have different Build UUIDs.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;4-appendix&quot;&gt;4. Appendix&lt;/h2&gt;
+
+&lt;h3 id=&quot;xcode---configuring-dsym&quot;&gt;Xcode - Configuring dSYM&lt;/h3&gt;
+
+&lt;p&gt;You can decide whether to include Debug Symbols in the compiled binary through the Xcode Build Setting called “Debug Information Format.”&lt;/p&gt;
+
+&lt;p&gt;&lt;img width=&quot;707&quot; alt=&quot;Screenshot 2019-12-14 at 10.03.34 PM&quot; src=&quot;https://user-images.githubusercontent.com/13018877/70849116-9bd06700-1ebd-11ea-80db-19a2b04d7d7e.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Typically, in Debug mode, you include Debug Symbols in the binary, while in Release mode, you exclude them to reduce binary size. Below is a build result when you set the “Debug Information Format” to “DWARF with dSYM File” and build:&lt;/p&gt;
+
+&lt;p&gt;&lt;img width=&quot;1018&quot; alt=&quot;Screenshot 2020-01-28 at 2.25.59 AM&quot; src=&quot;https://user-images.githubusercontent.com/13018877/73197982-a39a5100-4175-11ea-8f90-fe21f809494c.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/library/archive/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-INTRODUCTION&quot;&gt;Understanding and Analyzing Application Crash Reports - Apple Doc&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Symbol_(programming)&quot;&gt;Symbol&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Symbol_table&quot;&gt;Symbol Table&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Debug_symbol&quot;&gt;Debug Symbol&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="iOS," /><category term="macOS," /><category term="BuildSystem," /><category term="Symbol," /><category term="CrashReport" /><category term="iOS" /><category term="macOS" /><category term="BuildSystem" /><category term="Symbol" /><category term="CrashReport" /><summary type="html">Exploring Crash Report Symbolication</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/en/%7B%22feature%22=%3E%22iOS.png%22%7D" /><media:content medium="image" url="http://localhost:4000/en/%7B%22feature%22=%3E%22iOS.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Understanding Escaping Closures in Swift</title><link href="http://localhost:4000/en/articles/2017-09/swift_escaping_closure" rel="alternate" type="text/html" title="Understanding Escaping Closures in Swift" /><published>2017-09-12T09:30:00+09:00</published><updated>2023-08-28T16:15:21+09:00</updated><id>http://localhost:4000/en/articles/2017-09/swift_escaping_closure</id><content type="html" xml:base="http://localhost:4000/en/articles/2017-09/swift_escaping_closure">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;./swift_escaping_closure#1-concept-of-escaping-closures&quot;&gt;Concept of Escaping Closures&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./swift_escaping_closure#2-storing-closures-outside-functions&quot;&gt;Storing Closures Outside Functions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./swift_escaping_closure#3-async-inside-async&quot;&gt;Async Inside Async&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;1-concept-of-escaping-closures&quot;&gt;1. Concept of Escaping Closures&lt;/h2&gt;
+
+&lt;p&gt;This article assumes a basic understanding of closures. If you are not familiar with closures, please read the &lt;a href=&quot;https://hcn1519.github.io/en/articles/2017-05/swift_closure&quot;&gt;Swift Closure&lt;/a&gt; article first before continuing.&lt;/p&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+  A closure is said to escape a function when the closure is passed as an argument to the function, but is called after the function returns.
+&lt;/div&gt;
+
+&lt;p&gt;When a closure is said to “escape” a function, it means that the closure is passed as an argument to the function but is executed after the function has returned. This concept of closures escaping the scope of a function challenges the traditional understanding of variable scope. It allows a closure to persist beyond the lifetime of the enclosing function, which is different from the usual scope rules for local variables. In other words, escaping closures can be executed outside the function that originally defined them.&lt;/p&gt;
+
+&lt;p&gt;While the idea of a local variable (typically values like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Int&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;String&lt;/code&gt;, etc.) surviving outside a function might seem similar to using global variables within a function, escaping closures offer more control over the execution order of functions.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Escaping closures are useful for defining the execution order between functions, even allowing one function to run only after another has completed.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Ensuring the order of execution of functions is crucial, especially when dealing with asynchronous operations. Consider an app that retrieves JSON data from a server to display it on the screen. In this scenario, a networking library like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Alamofire&lt;/code&gt; is often used in the following manner:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kt&quot;&gt;Alamofire&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;responseJSON&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Handle the response&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Alamofire.request(urlRequest)&lt;/code&gt; method sends a request to the server, typically to retrieve JSON data using the GET method. The result is obtained through a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Response&lt;/code&gt; object. Usually, functions that send requests to a server and receive responses work asynchronously, returning immediately after sending the request. How is it possible to ensure that the response is received and processed in a way that guarantees proper sequencing? The answer lies in the concept of escaping closures. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;completionHandler&lt;/code&gt; parameter in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;responseJSON&lt;/code&gt; method is implemented as an escaping closure, indicated by the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{ response in }&lt;/code&gt; part.&lt;/p&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+  Using escaping closures, closure arguments can outlive the function that they were passed to. Starting from Swift 3, by default, closures passed as function arguments are not allowed to escape the function’s scope. This means that by default, you cannot store closures in external storage or execute them on other threads using GCD. However, escaping closures make these use cases possible, and you can mark a closure type with the `@escaping` keyword to indicate that it's an escaping closure.
+&lt;/div&gt;
+
+&lt;p&gt;Now, let’s explore some code examples to understand how escaping closures work.&lt;/p&gt;
+
+&lt;h2 id=&quot;2-storing-closures-outside-functions&quot;&gt;2. Storing Closures Outside Functions&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Example of storing a closure outside a function&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// An array to store closures&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;completionHandlers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;withEscaping&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;completion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Store the closure outside the function in the completionHandlers array&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;completionHandlers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;completion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;withoutEscaping&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;completion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;completion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;MyClass&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;callFunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;withEscaping&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;withoutEscaping&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;MyClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;mc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;callFunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;completionHandlers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?()&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Output&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 200&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 100&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;In this example, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MyClass&lt;/code&gt; function &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;callFunc()&lt;/code&gt; calls two functions, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;withEscaping(completion:)&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;withoutEscaping(completion:)&lt;/code&gt;. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;withEscaping(completion:)&lt;/code&gt; function takes a closure parameter marked as an escaping closure using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@escaping&lt;/code&gt; keyword. In this function, we store the closure in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;completionHandlers&lt;/code&gt; array outside the function’s scope. This means that the closure escapes the function and can be executed at a later time.&lt;/p&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+  Note: In this context, escaping does not mean that the closure interrupts and escapes the function's execution midway. Instead, it means that the closure can be passed outside the function and executed later.
+&lt;/div&gt;
+
+&lt;h2 id=&quot;3-async-inside-async&quot;&gt;3. Async Inside Async&lt;/h2&gt;
+
+&lt;p&gt;As mentioned earlier, escaping closures are commonly used in asynchronous operations, especially in networking code with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;completionHandlers&lt;/code&gt;. To demonstrate this, let’s consider a scenario where you need to retrieve data from a server using a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Server&lt;/code&gt; class and update the UI once the data is received. To manage this, you might want to create a class with static methods for handling server requests.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;persons&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getPerson&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;completion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// Step 2&lt;/span&gt;
+      &lt;span class=&quot;kt&quot;&gt;Alamofire&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;responseJSON&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;persons&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Replace 'data' with actual data&lt;/span&gt;
+          &lt;span class=&quot;kt&quot;&gt;DispatchQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+              &lt;span class=&quot;c1&quot;&gt;// Step 3&lt;/span&gt;
+              &lt;span class=&quot;nf&quot;&gt;completion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;persons&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Usage, e.g., in ViewController.swift&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Step 1&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getPerson&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isSuccess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;persons&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Step 4&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isSuccess&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// Update the UI&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Here’s the sequence of how the code works:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;In &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ViewController&lt;/code&gt;, you call the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Server&lt;/code&gt; class’s &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getPerson(completion:)&lt;/code&gt; function to request the necessary data.&lt;/li&gt;
+  &lt;li&gt;Inside the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getPerson(completion:)&lt;/code&gt; function, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Alamofire&lt;/code&gt; sends a request to the server, and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{ response in }&lt;/code&gt; part of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;responseJSON&lt;/code&gt; is executed only after the request has completed. This part uses an escaping closure.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;completion&lt;/code&gt; closure, which is also an escaping closure, is called in order to send the data (persons) back to the original ViewController. It’s important to perform UI updates on the main thread, so we use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DispatchQueue.main.async&lt;/code&gt; to ensure this.&lt;/li&gt;
+  &lt;li&gt;Finally, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;completion&lt;/code&gt; closure in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ViewController&lt;/code&gt; is executed. Here, you can check if the data retrieval was successful and update the UI accordingly.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Apple Inc. The Swift Programming Language (Swift 3.1) - Escaping Closure&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://learnappmaking.com/escaping-closures-swift-3/&quot;&gt;escaping closure swift3&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;[What do&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;mean @escaping and @nonescaping closures in Swift?](https://medium.com/@kumarpramod017/what-do-mean-escaping-and-nonescaping-closures-in-swift-d404d721f39d)&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/41745328/completion-handlers-in-swift-3-0&quot;&gt;Completion handlers in Swift 3.0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="Swift" /><category term="Closure," /><category term="Escaping" /><category term="Closure" /><category term="Language" /><category term="Networking" /><category term="Swift" /><category term="Closure" /><category term="EscapingClosure" /><category term="Language" /><category term="Networking" /><summary type="html">Exploring the concept of escaping closures in Swift.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/en/%7B%22feature%22=%3E%22swiftLogo.jpg%22%7D" /><media:content medium="image" url="http://localhost:4000/en/%7B%22feature%22=%3E%22swiftLogo.jpg%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
