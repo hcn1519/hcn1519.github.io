@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Introduction to Unit Testing Concepts - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Introduction to Unit Testing Concepts - hcn1519 Dev Post">
+  <meta name="description" content="Exploring the definition and purpose of Unit Testing, as well as Test Doubles.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Introduction to Unit Testing Concepts">
+  <meta property="og:image" content="/public/assets/unittest.png">
+  <meta property="og:description" content="Exploring the definition and purpose of Unit Testing, as well as Test Doubles.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Introduction to Unit Testing Concepts</h1>
+  <span class="post-date">04 Sep 2021</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/unittest.png"
+    
+    alt="Introduction to Unit Testing Concepts feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2023년 08월 28일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="./unittest#1-what-is-unit-testing">What is Unit Testing?</a>
+    <ol>
+      <li><a href="./unittest#solitary-vs-sociable">Solitary vs. Sociable</a></li>
+    </ol>
+  </li>
+  <li><a href="./unittest#2-the-purpose-of-unit-testing">The Purpose of Unit Testing</a>
+    <ol>
+      <li><a href="./unittest#use-case">Use Case</a></li>
+      <li><a href="./unittest#the-purpose-of-unit-testing-and-testing-use-cases">The Purpose of Unit Testing and Testing Use Cases</a></li>
+    </ol>
+  </li>
+  <li><a href="./unittest#3-testing-targets-in-unit-testing">Testing Targets in Unit Testing</a>
+    <ol>
+      <li><a href="./unittest#test-isolation-and-test-doubles">Test Isolation and Test Doubles</a></li>
+      <li><a href="./unittest#test-doubles">Test Doubles</a></li>
+    </ol>
+  </li>
+  <li><a href="./unittest#4-typical-unit-testing-process">Typical Unit Testing Process</a></li>
+</ol>
+
+<h2 id="1-what-is-unit-testing">1. What is Unit Testing?</h2>
+
+<p>In software development, testing is the act of verifying that a particular functionality works correctly before deploying it. Among these tests, Unit Testing focuses on testing a specific unit of code. The definition of what constitutes a unit can vary between programming languages and individuals. From an object-oriented perspective, a unit can be a single class, while from a procedural perspective, it can be a single function. It could also be a collection of classes, a collection of functions, or a mix of classes and functions. Regardless of how a unit is defined, Unit Testing shares the following characteristics:</p>
+
+<ol>
+  <li>Unit Tests focus on low-level code, testing small parts of the overall software.</li>
+  <li>Unit Tests are typically written by developers using standard testing tools.</li>
+  <li>Unit Tests are fast compared to other types of tests.</li>
+  <li>The definition of a unit can vary from person to person:
+    <ul>
+      <li>In an object-oriented context, it might be a single class.</li>
+      <li>In a procedural context, it might be a single function.</li>
+      <li>Sometimes, a set of classes or functions together can be considered a unit.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="solitary-vs-sociable">Solitary vs. Sociable</h3>
+
+<p>When conducting Unit Testing, there are cases where a test can influence the results of other tests if it uses actual objects. For example, if two tests share external resources like a database or file system, the first test could alter the resource’s state, affecting the results of the second test.</p>
+
+<p>In such situations, you can use objects defined for testing purposes (known as “Test Doubles”) to address the problem. Tests designed to use these testing objects are called “Solitary Tests.” Utilizing Test Doubles can eliminate external resource access during testing. However, if multiple tests use the same external resource and do not perform write operations on it, sharing the resource among tests might be acceptable. Additionally, if the external resource is sufficiently stable and fast, there might be no need to restrict access to it. Tests that run without removing dependencies between units are called “Sociable Tests.”</p>
+
+<ul>
+  <li>Solitary Tests: Tests that are designed to run without influencing other units.</li>
+  <li>Sociable Tests: Tests that depend on other units for their behavior.</li>
+</ul>
+
+<h2 id="2-the-purpose-of-unit-testing">2. The Purpose of Unit Testing</h2>
+
+<p>At the surface, Unit Testing involves writing tests for specific units of code and verifying their behavior. However, when you think about it, every unit, whether an object or a function, has a purpose and utility when it’s defined. Therefore, Unit Testing can be considered effective when it tests whether the unit behaves correctly according to its purpose. This purpose becomes especially clear when Unit Testing is applied to test “Use Cases.” Let’s briefly look at what a “Use Case” is before diving deeper.</p>
+
+<h3 id="use-case">Use Case</h3>
+
+<div class="message">
+A use case is a list of actions or event steps typically defining the interactions between a role (known in the Unified Modeling Language (UML) as an actor) and a system to achieve a goal. The actor can be a human or other external system.
+</div>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Use_case">Use Case - Wikipedia</a></li>
+</ul>
+
+<p>A “Use Case” represents various scenarios within software that occur to achieve specific requirements. In clean architecture, a “Use Case” is defined by three key components:</p>
+
+<ol>
+  <li>The input provided by the user.</li>
+  <li>The output displayed to the user.</li>
+  <li>A description of the steps involved in generating the output.</li>
+</ol>
+
+<p>Let’s consider an example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Use Case: Convert account information obtained through HTTP requests into a usable format in the app.
+
+- Input: Data from the URL.
+- Output: Result&lt;Success(Model), Error&gt;
+- Steps:
+    1. Access the URL through an HTTP API call.
+    2. Retrieve the response data in an appropriate format from the URL.
+    3. Parse the response data.
+    4. If the response is successful, map the data to a model object.
+    5. If the response fails, return an error.
+</code></pre></div></div>
+
+<p>This example represents a common scenario where a client app accesses server information via an HTTP API request and needs to test whether the unit responsible for converting the HTTP response into a usable format works correctly.</p>
+
+<p>The purpose of Unit Testing becomes evident when testing Use Cases, as it focuses on verifying whether the unit behaves correctly to fulfill its Use Case. Clean architecture emphasizes that Unit Testing should be possible for Use Cases, as stated:</p>
+
+<div class="message">
+- If the architecture puts use cases first and then keeps the framework at arm's length, you should be able to do unit tests for your use cases without invoking the framework.<br />
+- Thus, when designing the system and the tests, you need to make sure you can test the business rules without going through the GUI.<br />
+- Use cases describe application-specific business rules.
+</div>
+
+<ul>
+  <li>Source: Clean Architecture</li>
+</ul>
+
+<h2 id="3-testing-targets-in-unit-testing">3. Testing Targets in Unit Testing</h2>
+
+<p>In Unit Testing, each <a href="https://en.wikipedia.org/wiki/Test_suite">Test Suite</a> should clearly define what it is testing. In this context, the primary unit being tested is referred to as the “System Under Test” or “SUT.” Additionally, the SUT can have dependencies on other units, which are referred to as “Depended On Components” or “DOC.”</p>
+
+<blockquote>
+  <p>Testing-oriented people like to use terms like object-under-test or system-under-test to name such a thing. Either term is an ugly mouthful to say, but as it’s a widely accepted term I’ll hold my nose and use it. Following Meszaros I’ll use System Under Test, or rather the abbreviation SUT.</p>
+</blockquote>
+
+<ul>
+  <li><a href="https://martinfowler.com/articles/mocksArentStubs.html">Martin Fowler - Mocks Aren’t Stubs</a></li>
+</ul>
+
+<h3 id="test-isolation-and-test-double">Test Isolation and Test Double</h3>
+
+<p>When testing the SUT, there are cases where the DOC becomes problematic. This is especially true when the DOC is dependent on external resources, making testing challenging. For example, imagine testing a vending machine’s change calculation feature. The vending machine behaves like a typical one but has an added feature: it can update drink prices remotely. In other words, the vending machine’s owner can</p>
+
+<p>remotely change the prices of the drinks.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">Beverage</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">price</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">struct</span> <span class="kt">BeverageImpl</span><span class="p">:</span> <span class="kt">Beverage</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">price</span><span class="p">:</span> <span class="kt">Int</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span> <span class="kt">VendingMachine</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">onSaleBeverages</span><span class="p">:</span> <span class="p">[</span><span class="kt">Beverage</span><span class="p">]</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">selectedBeverages</span><span class="p">:</span> <span class="p">[</span><span class="kt">Beverage</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">userInput</span><span class="p">:</span> <span class="kt">Int</span>
+
+    <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">select</span><span class="p">(</span><span class="nv">beverage</span><span class="p">:</span> <span class="kt">Beverage</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">selectedBeverages</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">beverage</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">change</span><span class="p">(</span><span class="nv">userInput</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">totalPrices</span> <span class="o">=</span> <span class="n">selectedBeverages</span><span class="o">.</span><span class="nf">reduce</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span> <span class="nv">$1</span><span class="o">.</span><span class="n">price</span> <span class="p">})</span>
+        <span class="k">return</span> <span class="n">userInput</span> <span class="o">-</span> <span class="n">totalPrices</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In this scenario, we want to test whether the vending machine’s change calculation is correct. That is, we want to verify if the <code class="language-plaintext highlighter-rouge">change(userInput:)</code> method in the above code works correctly. However, there is a significant problem: the prices of the drinks can be changed remotely via the server. The result of the <code class="language-plaintext highlighter-rouge">change(userInput:)</code> method depends on the prices, which could be altered remotely without changing the compiled binary of the vending machine. In other words, the change result is subject to the external factor of the drink prices on the server.</p>
+
+<p>In such situations, Unit Test authors need to choose a testing approach based on the circumstances. The problem mentioned above becomes an issue only when drink prices change frequently. If prices are relatively stable, this may not be a significant problem. However, if prices change frequently or even occasionally, how can we handle it?</p>
+
+<h3 id="test-double">Test Double</h3>
+
+<p>A solution in such cases is to use a “Test Double.” The term “Test Double” refers to the replacement of production objects for testing purposes. It’s a generic term for cases where you substitute a real object with a test-specific version to control and verify its behavior during testing.</p>
+
+<ul>
+  <li><a href="https://martinfowler.com/bliki/TestDouble.html">Test Double - Martin Fowler</a></li>
+</ul>
+
+<p>In the vending machine example mentioned earlier, we want to isolate the impact of server price changes on our tests. This impact is removed by using a “Test Double” object (<code class="language-plaintext highlighter-rouge">BeverageStub</code>) to represent the price information (<code class="language-plaintext highlighter-rouge">Beverage</code>) in our tests. This way, we can test the change calculation method without being affected by server price changes. The price of the <code class="language-plaintext highlighter-rouge">Test Double</code> is set directly within the test.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">BeverageStub</span><span class="p">:</span> <span class="kt">Beverage</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">price</span><span class="p">:</span> <span class="kt">Int</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In this way, during testing, we replace the <code class="language-plaintext highlighter-rouge">DOC</code> causing external environmental changes with a “Test Double” to ensure that the <code class="language-plaintext highlighter-rouge">SUT</code> is not influenced by external factors. This process is referred to as “Test Isolation,” where the <code class="language-plaintext highlighter-rouge">DOC</code> is replaced by a “Test Double” to make the <code class="language-plaintext highlighter-rouge">SUT</code> impervious to external environmental changes.</p>
+
+<blockquote>
+  <p>Note: It’s common for test authors to accidentally create meaningless tests by changing the <code class="language-plaintext highlighter-rouge">SUT</code> with a “Test Double” during testing. To avoid this, clearly define the <code class="language-plaintext highlighter-rouge">SUT</code> and decide which <code class="language-plaintext highlighter-rouge">DOC</code> to replace with a “Test Double” based on the specific testing requirements.</p>
+</blockquote>
+
+<h2 id="4-typical-unit-testing-process">4. Typical Unit Testing Process</h2>
+
+<p>Unit Testing typically follows a 4-step process: setup, exercise, verify, and teardown. Here’s what each step involves:</p>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/133220635-27dfe995-6819-4666-a5e8-f01d81938f84.jpg" alt="Four Phase Test" /></p>
+
+<ul>
+  <li><a href="http://xunitpatterns.com/Four%20Phase%20Test.html">xUnit Patterns - Four Phase Test</a></li>
+</ul>
+
+<blockquote>
+  <p>Note: Unit Testing phases are sometimes expressed as “given, when, then,” which incorporates a behavior-driven perspective but aligns closely with the standard process.</p>
+</blockquote>
+
+<h3 id="1-setup-phase">1. Setup Phase</h3>
+
+<p>In the setup phase, you configure the environment for testing. This is often referred to as creating a “Test Fixture.” The key is to set up the state required for testing the <code class="language-plaintext highlighter-rouge">SUT</code>. During this phase, you might create instances, prepare input data, and, in the case of using mocks, set up expectations. When using mocks, you need to record the expected behavior (method calls) during setup.</p>
+
+<h3 id="2-exercise-phase">2. Exercise Phase</h3>
+
+<p>In the exercise phase, you perform the specific action or behavior that you want to test in your software. This is where you trigger the <code class="language-plaintext highlighter-rouge">SUT</code> to execute. This phase is about changing the state of the <code class="language-plaintext highlighter-rouge">SUT</code> explicitly in a way that you can verify.</p>
+
+<h3 id="3-verify-phase">3. Verify Phase</h3>
+
+<p>In the verify phase, you check whether the test produced the expected results (State Verification). If you’re using mocks, this is where you verify whether the methods were called according to the expectations you set up during the setup phase (Behavior Verification).</p>
+
+<h3 id="4-teardown-phase">4. Teardown Phase</h3>
+
+<p>In the teardown phase, you reset the environment back to its state before the test.</p>
+
+<h1 id="references">References</h1>
+
+<ul>
+  <li>Clean Architecture by Robert C. Martin</li>
+  <li><a href="https://martinfowler.com/bliki/UnitTest.html">Unit Testing - Martin Fowler</a></li>
+  <li><a href="https://martinfowler.com/bliki/TestDouble.html">Test Double - Martin Fowler</a></li>
+  <li><a href="https://martinfowler.com/articles/mocksArentStubs.html">Mocks Aren’t Stubs - Martin Fowler</a></li>
+  <li><a href="http://xunitpatterns.com/SUT.html">SUT - System Under Test</a></li>
+  <li><a href="http://xunitpatterns.com/DOC.html">DOC - Depended On Component</a></li>
+  <li><a href="http://xunitpatterns.com/Four%20Phase%20Test.html">Four Phase Test</a>
+```</li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    <h2>Lastest Posts</h2>
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              Safely Updating UIKit Lists with DiffableDataSource
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000/">< 홈으로</a>
+    <p>잘못된 정보나 궁금하신 점은 hcn1519@gmail.com으로 알려주시면 감사하겠습니다.</p>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

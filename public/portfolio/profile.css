@@ -1,0 +1,91 @@
+.profile {
+  position: fixed;
+  left: 75%;
+  width: 25%;
+  height: 100%;
+  overflow-y: auto;
+
+
+  background: rgba(0,0,0,0.7); /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)); /* Standard syntax */
+}
+.nameLine {
+  width: 20%;
+  height: 1px;
+  background-color: #ffffff;
+  display: inline-block;
+}
+
+.nameBox {
+  width: 60%;
+  margin: 0 auto;
+  border-radius: 6px;
+  padding: 3px 0px 3px 0px;
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
+#name, #nameIntro {
+  color: #ffffff;
+  font-weight: 300;
+}
+nav ul {
+  list-style-type: none;
+  float: left;
+  width: 100%;
+  padding: 0;
+  background-color: #ffffff;
+
+}
+
+nav ul li:hover {
+  background-color: rgba(234, 236, 237, 0.55);
+  cursor: pointer;
+}
+
+nav ul li {
+  padding: 20px;
+  border-bottom: 0.3px solid #ffffff;
+}
+
+nav ul li.selected {
+  background-color: rgba(234, 236, 237, 0.55);
+}
+
+span.image img {
+  width: 150px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 30px;
+  border-radius: 75px;
+}
+header {
+  text-align: center;
+}
+
+a {
+  color: black;
+}
+#media {
+  list-style-type: none;
+  padding: 0px;
+}
+#media a img {
+  width: 30px;
+}
+#media li {
+  display: inline;
+  margin: 8px;
+}
+#media .fa {
+  color: #fff;
+  font-size: 36px;
+}
+
+.centerBox {
+  margin: 0 auto;
+  display: table;
+}

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Test Spy - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Test Spy - hcn1519 Dev Post">
+  <meta name="description" content="Examining the definition and usage of Test Spy.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Test Spy">
+  <meta property="og:image" content="/public/assets/unittest.png">
+  <meta property="og:description" content="Examining the definition and usage of Test Spy.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Test Spy</h1>
+  <span class="post-date">05 Jan 2022</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/unittest.png"
+    
+    alt="Test Spy feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2023년 08월 28일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="./test_spy#1-what-is-spy?">What is Spy?</a></li>
+  <li><a href="./test_spy#2-the-process-of Performing Unit Testing with Spy">The Process of Performing Unit Testing with Spy</a></li>
+  <li><a href="./test_spy#3-spy를-사용하는-시점">When to Use Spy</a>
+    <ol>
+      <li><a href="./test_spy#3-2-spy와-clean-swift">Spy and Clean Swift</a></li>
+    </ol>
+  </li>
+</ol>
+
+<blockquote>
+  <p>You can check the <a href="https://github.com/hcn1519/TestDoublePlayGround">PlayGround</a> used in the explanation.</p>
+</blockquote>
+
+<h2 id="1-what-is-spy">1. What is Spy?</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Spy</code> is a type of <code class="language-plaintext highlighter-rouge">Test Double</code> used in the verification phase of the <code class="language-plaintext highlighter-rouge">SUT</code> to provide “indirect output.” Developers defining objects provide only the necessary APIs as public APIs to prevent misuse of the object. While this is a good way to appropriately distribute the roles of objects, it can be inconvenient when you want to test the object. For example, if a public API does not provide return values, you cannot determine if the API alone is functioning correctly. Furthermore, even if an API provides return values, it is difficult to confirm whether these return values were created through the appropriate process.</p>
+
+<p>These actions that are difficult to confirm through public APIs of the <code class="language-plaintext highlighter-rouge">SUT</code> are referred to as “indirect output.” <code class="language-plaintext highlighter-rouge">Spy</code> is a <code class="language-plaintext highlighter-rouge">Test Double</code> that provides this “indirect output,” which the original <code class="language-plaintext highlighter-rouge">SUT</code> does not provide (commonly as a spy). “Indirect output” can take the form of properties defined internally in the object, information about whether a specific API was called, or information about the order of calls.</p>
+
+<h2 id="2-the-process-of-performing-unit-testing-with-spy">2. The Process of Performing Unit Testing with Spy</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Spy</code> is used in the setup phase of Unit Testing as a replacement for the <code class="language-plaintext highlighter-rouge">SUT</code>’s <code class="language-plaintext highlighter-rouge">DOC</code> (Depended On Component). The Spy is configured to follow the interface of the original <code class="language-plaintext highlighter-rouge">real-DOC</code> as is, and it additionally allows access to function call records and private properties (<code class="language-plaintext highlighter-rouge">indirect output</code>) not provided by the <code class="language-plaintext highlighter-rouge">real-DOC</code> (provides an observation point). In the verification phase, the test author further validates the “indirect output” provided by the <code class="language-plaintext highlighter-rouge">Spy</code> to minimize “Untested Requirement.”</p>
+
+<p>Let’s examine the usability of Spy using an example related to airports and airplanes. When you want to test the functionality of airplanes entering and leaving an airport, you can perform the test as follows:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">testRealDOCFlight</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">flights</span><span class="p">:</span> <span class="p">[</span><span class="kt">Flight</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Flight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="mi">1</span><span class="p">),</span>
+                             <span class="kt">Flight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="mi">2</span><span class="p">),</span>
+                             <span class="kt">Flight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="mi">3</span><span class="p">),</span>
+                             <span class="kt">Flight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="mi">4</span><span class="p">)]</span>
+
+    <span class="k">var</span> <span class="nv">airPort</span> <span class="o">=</span> <span class="kt">Airport</span><span class="p">(</span><span class="nv">flights</span><span class="p">:</span> <span class="n">flights</span><span class="p">,</span> <span class="nv">controlTower</span><span class="p">:</span> <span class="kt">ControlTower</span><span class="p">())</span>
+
+    <span class="c1">// exercise</span>
+    <span class="n">airPort</span><span class="o">.</span><span class="nf">removeFlight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">airPort</span><span class="o">.</span><span class="nf">addFlights</span><span class="p">([</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="mi">5</span><span class="p">)])</span>
+
+    <span class="c1">// verify</span>
+    <span class="nf">assert</span><span class="p">(</span><span class="n">airPort</span><span class="o">.</span><span class="n">flights</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="nf">assert</span><span class="p">(</span><span class="n">airPort</span><span class="o">.</span><span class="nf">hasFlight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="kc">false</span><span class="p">)</span>
+    <span class="nf">assert</span><span class="p">(</span><span class="n">airPort</span><span class="o">.</span><span class="nf">hasFlight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="kc">true</span><span class="p">)</span>
+
+    <span class="k">let</span> <span class="nv">removeNotification</span> <span class="o">=</span> <span class="n">airPort</span><span class="o">.</span><span class="n">controlTower</span><span class="o">.</span><span class="n">notifications</span><span class="o">.</span><span class="n">first</span>
+    <span class="nf">assert</span><span class="p">(</span><span class="n">removeNotification</span><span class="p">?</span><span class="o">.</span><span class="n">actionCode</span> <span class="o">==</span> <span class="s">"remove(number:)"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<details>
+    <summary>View Detailed Code</summary>
+
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="kt">Foundation</span>
+
+<span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Flight</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="k">let</span> <span class="nv">number</span><span class="p">:</span> <span class="kt">Int</span>
+
+    <span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">FlightManagable</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">flights</span><span class="p">:</span> <span class="p">[</span><span class="kt">Flight</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span>
+    <span class="k">var</span> <span class="nv">controlTower</span><span class="p">:</span> <span class="kt">FlightReportable</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span>
+    <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">removeFlight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+    <span class="kd">func</span> <span class="nf">hasFlight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">FlightReportable</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">notifications</span><span class="p">:</span> <span class="p">[</span><span class="kt">ControlTower</span><span class="o">.</span><span class="kt">Notification</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+    <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">report</span><span class="p">(</span><span class="nv">date</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span> <span class="nv">actionCode</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">detail</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ControlTower</span><span class="p">:</span> <span class="kt">FlightReportable</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Notification</span> <span class="p">{</span>
+        <span class="kd">public</span> <span class="k">var</span> <span class="nv">date</span><span class="p">:</span> <span class="kt">Date</span>
+        <span class="kd">public</span> <span class="k">var</span> <span class="nv">actionCode</span><span class="p">:</span> <span class="kt">String</span>
+        <span class="kd">public</span> <span class="k">var</span> <span class="nv">detail</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">notifications</span><span class="p">:</span> <span class="p">[</span><span class="kt">ControlTower</span><span class="o">.</span><span class="kt">Notification</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="kd">public</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">notifications</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">report</span><span class="p">(</span><span class="nv">date</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span> <span class="nv">actionCode</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">detail</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">notification</span> <span class="o">=</span> <span class="kt">ControlTower</span><span class="o">.</span><span class="kt">Notification</span><span class="p">(</span><span class="nv">date</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span> <span class="nv">actionCode</span><span class="p">:</span> <span class="n">actionCode</span><span class="p">,</span> <span class="nv">detail</span><span class="p">:</span> <span class="n">detail</span><span class="p">)</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">notifications</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">notification</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Airport</span><span class="p">:</span> <span class="kt">FlightManagable</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">flights</span><span class="p">:</span> <span class="p">[</span><span class="kt">Flight</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">controlTower</span><span class="p">:</span> <span class="kt">FlightReportable</span>
+
+    <span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">flights</span><span class="p">:</span> <span class="p">[</span><span class="kt">Flight</span><span class="p">],</span> <span class="nv">controlTower</span><span class="p">:</span> <span class="kt">FlightReportable</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">flights</span> <span class="o">=</span> <span class="n">flights</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">controlTower</span> <span class="o">=</span> <span class="n">controlTower</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">addFlights</span><span class="p">(</span><span class="n">_</span> <span class="nv">flights</span><span class="p">:</span> <span class="p">[</span><span class="kt">Flight</span><span class="p">])</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">flights</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="nv">contentsOf</span><span class="p">:</span> <span class="n">flights</span><span class="p">)</span>
+        <span class="n">controlTower</span><span class="o">.</span><span class="nf">report</span><span class="p">(</span><span class="nv">date</span><span class="p">:</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">actionCode</span><span class="p">:</span> <span class="s">"add(flights:)"</span><span class="p">,</span> <span class="nv">detail</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">removeFlight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">filteredFlight</span> <span class="o">=</span> <span class="n">flights</span><span class="o">.</span><span class="n">filter</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">number</span> <span class="o">!=</span> <span class="n">number</span> <span class="p">}</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">flights</span> <span class="o">=</span> <span class="n">filteredFlight</span>
+        <span class="n">controlTower</span><span class="o">.</span><span class="nf">report</span><span class="p">(</span><span class="nv">date</span><span class="p">:</span> <span class="kt">Date</span><span class="p">(),</span> <span class="nv">actionCode</span><span class="p">:</span> <span class="s">"remove(number:)"</span><span class="p">,</span> <span class="nv">detail</span><span class="p">:</span> <span class="n">number</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">hasFlight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">flights</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="nv">where</span><span class="p">:</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">number</span> <span class="o">==</span> <span class="n">number</span> <span class="p">})</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+
+</details>
+
+<p>When you perform the test as shown above, you can confirm the number of airplanes in <code class="language-plaintext highlighter-rouge">AirPort</code> and the notifications accumulated in <code class="language-plaintext highlighter-rouge">ControlTower</code>. However, in this situation, you cannot know how <code class="language-plaintext highlighter-rouge">AirPort</code>’s state was constructed through which method calls. In such cases, you can replace <code class="language-plaintext highlighter-rouge">ControlTower</code>, which <code class="language-plaintext highlighter-rouge">AirPort</code> depends on, with a <code class="language-plaintext highlighter-rouge">Spy</code> to verify this information.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ControlTowerSpy</span><span class="p">:</span> <span class="kt">FlightReportable</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">notifications</span><span class="p">:</span> <span class="p">[</span><span class="kt">ControlTower</span><span class="o">.</span><span class="kt">Notification</span><span class="p">]</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">numberOfReports</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="kd">public</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">notifications</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">numberOfReports</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">report</span><span class="p">(</span><span class="nv">date</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span> <span class="nv">actionCode</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">detail</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">notification</span> <span class="o">=</span> <span class="kt">ControlTower</span><span class="o">.</span><span class="kt">Notification</span><span class="p">(</span><span class="nv">date</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span>
+                                                     <span class="nv">actionCode</span><span class="p">:</span> <span class="n">actionCode</span><span class="p">,</span>
+                                                     <span class="nv">detail</span><span class="p">:</span> <span class="n">detail</span><span class="p">)</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">notifications</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">notification</span><span class="p">)</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">numberOfReports</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>By defining a <code class="language-plaintext highlighter-rouge">Spy</code> object as shown above, you can record additional information (<code class="language-plaintext highlighter-rouge">indirect output</code>) not provided by the original <code class="language-plaintext highlighter-rouge">ControlTower</code> (<code class="language-plaintext highlighter-rouge">real-DOC</code>). This way, you can confirm that the <code class="language-plaintext highlighter-rouge">report</code> function in <code class="language-plaintext highlighter-rouge">AirPort</code> was actually called twice.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">testSpyFlight</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">flights</span><span class="p">:</span> <span class="p">[</span><span class="kt">Flight</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Flight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="mi">1</span><span class="p">),</span>
+                             <span class="kt">Flight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="mi">2</span><span class="p">),</span>
+                             <span class="kt">Flight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="mi">3</span><span class="p">),</span>
+                             <span class="kt">Flight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="mi">4</span><span class="p">)]</span>
+
+    <span class="k">let</span> <span class="nv">controlTowerSpy</span> <span class="o">=</span> <span class="kt">ControlTowerSpy</span><span class="p">()</span>
+   
+
+ <span class="k">var</span> <span class="nv">airPort</span> <span class="o">=</span> <span class="kt">Airport</span><span class="p">(</span><span class="nv">flights</span><span class="p">:</span> <span class="n">flights</span><span class="p">,</span> <span class="nv">controlTower</span><span class="p">:</span> <span class="n">controlTowerSpy</span><span class="p">)</span>
+
+    <span class="c1">// exercise</span>
+    <span class="n">airPort</span><span class="o">.</span><span class="nf">removeFlight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">airPort</span><span class="o">.</span><span class="nf">addFlights</span><span class="p">([</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="mi">5</span><span class="p">)])</span>
+
+    <span class="c1">// verify</span>
+    <span class="nf">assert</span><span class="p">(</span><span class="n">airPort</span><span class="o">.</span><span class="n">flights</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="nf">assert</span><span class="p">(</span><span class="n">airPort</span><span class="o">.</span><span class="nf">hasFlight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="kc">false</span><span class="p">)</span>
+    <span class="nf">assert</span><span class="p">(</span><span class="n">airPort</span><span class="o">.</span><span class="nf">hasFlight</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="kc">true</span><span class="p">)</span>
+
+    <span class="k">let</span> <span class="nv">removeNotification</span> <span class="o">=</span> <span class="n">airPort</span><span class="o">.</span><span class="n">controlTower</span><span class="o">.</span><span class="n">notifications</span><span class="o">.</span><span class="n">first</span>
+    <span class="nf">assert</span><span class="p">(</span><span class="n">removeNotification</span><span class="p">?</span><span class="o">.</span><span class="n">actionCode</span> <span class="o">==</span> <span class="s">"remove(number:)"</span><span class="p">)</span>
+
+    <span class="c1">// indirect output</span>
+    <span class="k">let</span> <span class="nv">spy</span> <span class="o">=</span> <span class="n">airPort</span><span class="o">.</span><span class="n">controlTower</span> <span class="k">as?</span> <span class="kt">ControlTowerSpy</span>
+    <span class="nf">assert</span><span class="p">(</span><span class="n">spy</span><span class="p">?</span><span class="o">.</span><span class="n">numberOfReports</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="3-when-to-use-spy">3. When to Use Spy</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Spy</code> is used when “side effects” occur during the execution of the <code class="language-plaintext highlighter-rouge">SUT</code>’s methods, leading to the creation of “Untested Requirement.” Spy is used as “observation points” for the values recorded during the <code class="language-plaintext highlighter-rouge">SUT</code>’s operation, and it is considered for use in the following cases:</p>
+
+<ul>
+  <li>When it is difficult to predict all attribute changes of the <code class="language-plaintext highlighter-rouge">SUT</code> during the verification of “indirect output”</li>
+  <li>When you want assertions to be more visible during testing, and you cannot adequately express the test’s intent with only the expectations of a Mock.</li>
+</ul>
+
+<h3 id="3-2-spy-and-clean-swift">3-2. Spy and Clean Swift</h3>
+
+<p>When testing UseCases in Clean Swift, using Spy can make writing tests easier. Clean Swift involves the <code class="language-plaintext highlighter-rouge">interactor</code>, <code class="language-plaintext highlighter-rouge">presenter</code>, and <code class="language-plaintext highlighter-rouge">viewController</code> calling methods of the objects they depend on in a one-way direction. Consequently, all methods do not return values, and dependencies exist. Test authors can change the DOC they depend on to Spy instead of checking the state after calling the SUT’s method. This allows you to obtain more diverse information during the testing process.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">testSpyJsonViewerShowJson</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// setup</span>
+    <span class="k">let</span> <span class="nv">interactor</span> <span class="o">=</span> <span class="kt">JsonViewer</span><span class="o">.</span><span class="kt">Interactor</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">presenterSpy</span> <span class="o">=</span> <span class="kt">JsonViewer</span><span class="o">.</span><span class="kt">PresenterSpy</span><span class="p">()</span>
+    <span class="n">interactor</span><span class="o">.</span><span class="n">presenter</span> <span class="o">=</span> <span class="n">presenterSpy</span>
+
+    <span class="c1">// exercise</span>
+    <span class="k">let</span> <span class="nv">sampleData</span> <span class="o">=</span> <span class="s">"""
+    {
+        "</span><span class="n">spy</span><span class="s">": true
+    }
+    """</span><span class="o">.</span><span class="nf">data</span><span class="p">(</span><span class="nv">using</span><span class="p">:</span> <span class="o">.</span><span class="n">utf8</span><span class="p">)</span><span class="o">!</span>
+
+    <span class="n">interactor</span><span class="o">.</span><span class="nf">showJson</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">sampleData</span><span class="p">))</span>
+
+    <span class="c1">// Verify indirect output</span>
+    <span class="nf">assert</span><span class="p">(</span><span class="n">presenterSpy</span><span class="o">.</span><span class="n">presentJsonIsCalled</span><span class="p">)</span>
+    <span class="nf">assert</span><span class="p">(</span><span class="n">presenterSpy</span><span class="o">.</span><span class="n">jsonModel</span><span class="p">?</span><span class="o">.</span><span class="n">spy</span> <span class="p">??</span> <span class="kc">false</span> <span class="o">==</span> <span class="kc">true</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="references">References</h1>
+
+<ul>
+  <li><a href="https://martinfowler.com/bliki/TestDouble.html">Test Double - Martin Fowler</a></li>
+  <li><a href="http://xunitpatterns.com/Test%20Spy.html">Test Spy - xUnitPatterns</a></li>
+  <li><a href="http://xunitpatterns.com/indirect%20output.html">indirect output</a></li>
+  <li><a href="http://xunitpatterns.com/SUT.html">SUT - System Under Test</a></li>
+  <li><a href="http://xunitpatterns.com/DOC.html">DOC - Depended On Component</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2021-12/test_stub">
+              Test Stub
+              <small>25 Dec 2021</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UnitTest">
+                UnitTest
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#TestDouble">
+                TestDouble
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000/">< 홈으로</a>
+    <p>잘못된 정보나 궁금하신 점은 hcn1519@gmail.com으로 알려주시면 감사하겠습니다.</p>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

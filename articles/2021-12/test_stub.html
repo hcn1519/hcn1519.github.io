@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Test Stub - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Test Stub - hcn1519 Dev Post">
+  <meta name="description" content="Exploring the definition and usage of Test Stubs.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Test Stub">
+  <meta property="og:image" content="/public/assets/unittest.png">
+  <meta property="og:description" content="Exploring the definition and usage of Test Stubs.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Test Stub</h1>
+  <span class="post-date">25 Dec 2021</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/unittest.png"
+    
+    alt="Test Stub feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2023년 08월 28일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="./test_stub#1-what-is-stub?">What is Stub?</a></li>
+  <li><a href="./test_stub#2-using-stubs-for-unit-testing">The Process of Performing Unit Tests with Stubs</a></li>
+  <li><a href="./test_stub#3-when-to-use-stubs">When to Use Stubs</a></li>
+</ol>
+
+<blockquote>
+  <p>You can check out the <a href="https://github.com/hcn1519/TestDoublePlayGround">PlayGround</a> used in the explanation.</p>
+</blockquote>
+
+<h2 id="1-what-is-stub">1. What is Stub?</h2>
+
+<p>In this article, we will discuss Stub, one of the representative Test Doubles.</p>
+
+<p>A Stub is an object used to provide ‘indirect input’ to the subject of testing (<code class="language-plaintext highlighter-rouge">SUT</code>, System Under Test). In most cases, objects or functions (Units) are designed to return output based on the input they receive. When we write tests, we naturally verify whether the output matches the input we provide. In this context, the person writing the test constructs various inputs to check if the test appropriately validates the Unit. These provided inputs are referred to as ‘indirect input.’ Furthermore, providing ‘indirect input’ to the <code class="language-plaintext highlighter-rouge">SUT</code> can be structured in two ways: directly injecting it into the Unit or providing it from another object. This other object, referred to as a ‘DOC’ (Depended on Component) because it is an object that the <code class="language-plaintext highlighter-rouge">SUT</code> depends on, and a ‘Stub’ is an object that provides the input from this ‘DOC.’</p>
+
+<ul>
+  <li>When the behavior of the <code class="language-plaintext highlighter-rouge">SUT</code> depends on input values, these inputs are called ‘indirect input.’</li>
+  <li>A ‘Stub’ is an object used for providing ‘indirect input’ to the <code class="language-plaintext highlighter-rouge">SUT</code>.</li>
+</ul>
+
+<h2 id="2-using-stubs-for-unit-testing">2. Using Stubs for Unit Testing</h2>
+
+<p>As is well-known, <a href="https://hcn1519.github.io/articles/2021-09/unittest">typical testing is divided into four phases</a>: (<code class="language-plaintext highlighter-rouge">setup</code>, <code class="language-plaintext highlighter-rouge">exercise</code>, <code class="language-plaintext highlighter-rouge">verify</code>, <code class="language-plaintext highlighter-rouge">teardown</code>).</p>
+
+<ol>
+  <li>During the Setup phase, the test author decides whether to use Stubs when providing input to the <code class="language-plaintext highlighter-rouge">SUT</code>. In other words, they implement the interfaces of the DOCs on which the <code class="language-plaintext highlighter-rouge">SUT</code> depends.</li>
+  <li>During the Exercise phase, the Stub provides the appropriate indirect input to the <code class="language-plaintext highlighter-rouge">SUT</code> when the <code class="language-plaintext highlighter-rouge">SUT</code> requests it.</li>
+  <li>During the Verify phase, the test author checks whether the state of the <code class="language-plaintext highlighter-rouge">SUT</code> is appropriate.</li>
+</ol>
+
+<p>To illustrate this in more detail, let’s consider an example. Let’s say we have a <code class="language-plaintext highlighter-rouge">SubscriptionWorker</code> that handles an HTTP API for toggling a user’s program subscription on/off. This API provides the following JSON response:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"subscribed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"subscriptionCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">27038</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To process this JSON, we can structure the <code class="language-plaintext highlighter-rouge">SubscriptionWorker</code> as follows:</p>
+
+<details>
+    <summary>View Detailed Code</summary>
+
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">protocol</span> <span class="kt">RequestConvertible</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">urlRequest</span><span class="p">:</span> <span class="kt">URLRequest</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">enum</span> <span class="kt">Subscription</span> <span class="p">{</span>
+    <span class="kd">enum</span> <span class="kt">SubscriptionError</span><span class="p">:</span> <span class="kt">Swift</span><span class="o">.</span><span class="kt">Error</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nf">unExpected</span><span class="p">(</span><span class="nv">response</span><span class="p">:</span> <span class="kt">HTTPURLResponse</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">struct</span> <span class="kt">Request</span><span class="p">:</span> <span class="kt">RequestConvertible</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">urlRequest</span><span class="p">:</span> <span class="kt">URLRequest</span>
+    <span class="p">}</span>
+
+    <span class="kd">struct</span> <span class="kt">Response</span><span class="p">:</span> <span class="kt">Decodable</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">subscribed</span><span class="p">:</span> <span class="kt">Int</span>
+        <span class="k">let</span> <span class="nv">subscriptionCount</span><span class="p">:</span> <span class="kt">Bool</span>
+    <span class="p">}</span>
+
+    <span class="kd">struct</span> <span class="kt">Worker</span> <span class="p">{</span>
+        <span class="kd">static</span> <span class="kd">func</span> <span class="nf">update</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="kt">RequestConvertible</span><span class="p">,</span>
+                           <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">((</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Response</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="k">let</span> <span class="nv">dataTask</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="p">(</span><span class="nv">configuration</span><span class="p">:</span> <span class="o">.</span><span class="k">default</span><span class="p">)</span>
+                <span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">urlRequest</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="p">{</span> <span class="n">data</span><span class="p">,</span> <span class="n">urlResponse</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+
+                    <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
+                        <span class="nf">completion</span><span class="p">(</span><span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+                    <span class="p">}</span>
+                    <span class="k">guard</span>
+                        <span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span>
+                        <span class="k">let</span> <span class="nv">urlResponse</span> <span class="o">=</span> <span class="n">urlResponse</span> <span class="k">as?</span> <span class="kt">HTTPURLResponse</span> <span class="k">else</span> <span class="p">{</span>
+                            <span class="k">return</span>
+                        <span class="p">}</span>
+                    <span class="k">switch</span> <span class="n">urlResponse</span><span class="o">.</span><span class="n">statusCode</span> <span class="p">{</span>
+                    <span class="k">case</span> <span class="mi">200</span><span class="p">:</span>
+                        <span class="k">do</span> <span class="p">{</span>
+                            <span class="k">let</span> <span class="nv">response</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">JSONDecoder</span><span class="p">()</span><span class="o">.</span><span class="nf">decode</span><span class="p">(</span><span class="kt">Response</span><span class="o">.</span><span class="k">self</span><span class="p">,</span>
+                                                                    <span class="nv">from</span><span class="p">:</span> <span class="n">data</span><span class="p">)</span>
+                            <span class="nf">completion</span><span class="p">(</span><span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="n">response</span><span class="p">))</span>
+                        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+                            <span class="nf">completion</span><span class="p">(</span><span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+                        <span class="p">}</span>
+                    <span class="k">default</span><span class="p">:</span>
+                        <span class="nf">completion</span><span class="p">(</span><span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="kt">SubscriptionError</span><span class="o">.</span><span class="nf">unExpected</span><span class="p">(</span><span class="nv">response</span><span class="p">:</span> <span class="n">urlResponse</span><span class="p">)))</span>
+                    <span class="p">}</span>
+                <span class="p">})</span>
+            <span class="n">dataTask</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+
+</details>
+
+<p>We make calls to the <code class="language-plaintext highlighter-rouge">Subscription.Worker.update(request:completion:)</code> function as follows:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">urlRequest</span> <span class="o">=</span> <span class="kt">URLRequest</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://hcn1519.github.io"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+<span class="kt">Subscription</span><span class="o">.</span><span class="kt">Worker</span><span class="o">.</span><span class="nf">update</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">urlRequest</span><span class="p">:</span> <span class="n">urlRequest</span><span class="p">),</span> <span class="nv">completion</span><span class="p">:</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+    <span class="c1">// do something</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>In this scenario, we want to test the <code class="language-plaintext highlighter-rouge">Subscription.Worker.update(request:completion:)</code> function. More specifically, we want to test whether it correctly converts the subscription information obtained through an HTTP request into a usable model in the app. However, there’s an issue: the <code class="language-plaintext highlighter-rouge">update()</code> function makes a call to <code class="language-plaintext highlighter-rouge">dataTask(with:completionHandler)</code>, making it dependent on an external server. This means that to create various responses, you would need the server to provide them.</p>
+
+<p>In such cases, using a Stub allows you to perform the desired tests without relying on the server.</p>
+
+<details>
+    <summary>View Detailed Code</summary>
+
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="kt">Foundation</span>
+
+<span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RequestConvertible</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">urlRequest</span><span class="p">:</span> <span class="kt">URLRequest</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+    <span class="k">var</span> <span class="nv">stub</span><span class="p">:</span> <span class="kt">Stub</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Stub</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nf">response</span><span class="p">(</span><span class="kt">Response</span><span class="p">)</span>
+    
+    <span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Response</span> <span class="p">{</span>
+        <span class="kd">public</span> <span class="k">let</span> <span class="nv">response</span><span class="p">:</span> <span class="kt">URLResponse</span>
+        <span class="kd">public</span> <span class="k">let</span> <span class="nv">result</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Data</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span>
+
+        <span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">response</span><span class="p">:</span> <span class="kt">URLResponse</span><span class="p">,</span> <span class="nv">result</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Data</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">self</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="n">response</span>
+            <span class="k">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">result</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Error</span><span class="p">:</span> <span class="kt">Swift</span><span class="o">.</span><span class="kt">Error</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="n">emptyStubResponse</span>
+        <span class="k">case</span> <span class="nf">statusCode</span><span class="p">(</span><span class="kt">Int</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Subscription</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Error</span><span class="p">:</span> <span class="kt">Swift</span><span class="o">.</span><span class="kt">Error</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nf">unExpected</span><span class="p">(</span><span class="nv">response</span><span class="p">:</span> <span class="kt">HTTPURLResponse</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Request</span><span class="p">:</span> <span class="kt">RequestConvertible</span> <span class="p">{</span>
+        <span class="kd">public</span> <span class="k">let</span> <span class="nv">urlRequest</span><span class="p">:</span> <span class="kt">URLRequest</span>
+        <span class="kd">public</span> <span class="k">var</span> <span class="nv">stub</span><span class="p">:</span> <span class="kt">Stub</span><span class="p">?</span>
+
+        <span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">urlRequest</span><span class="p">:</span> <span class="kt">URLRequest</span><span class="p">,</span> <span class="nv">stub</span><span class="p">:</span> <span class="kt">Stub</span><span class="p">?)</span> <span class="p">{</span>
+            <span class="k">self</span><span class="o">.</span><span class="n">urlRequest</span> <span class="o">=</span> <span class="n">urlRequest</span>
+            <span class="k">self</span><span class="o">.</span><span class="n">stub</span> <span class="o">=</span> <span class="n">stub</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Response</span><span class="p">:</span> <span class="kt">Decodable</span> <span class="p">{</span>
+        <span class="kd">public</span> <span class="k">let</span> <span class="nv">subscribed</span><span class="p">:</span> <span class="kt">Bool</span>
+        <span class="kd">public</span> <span class="k">let</span> <span class="nv">subscriptionCount</span><span class="p">:</span> <span class="kt">Int</span>
+    <span class="p">}</span>
+    
+    <span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Worker</span> <span class="p">{</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">update</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="kt">Request</span><span class="p">,</span>
+                                  <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">((</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Response</span><span class="p">,</span> <span class="kt">Swift</span><span class="o">.</span><span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">))</span> <span class="p">{</span>
+            
+            <span class="k">let</span> <span class="nv">dataTask</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="p">(</span><span class="nv">configuration</span><span class="p">:</span> <span class="o">.</span><span class="k">default</span><span class="p">)</span>
+                <span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">completionHanlder</span><span class="p">:</span> <span class="p">{</span> <span class="n">data</span><span class="p">,</span> <span class="n">urlResponse</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+                    
+                    <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
+                        <span class="nf">completion</span><span class="p">(</span><span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+                    <span class="p">}</span>
+                    <span class="k">guard</span>
+                        <span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span>
+                        <span class="k">let</span> <span class="nv">urlResponse</span> <span class="o">=</span> <span class="n">urlResponse</span> <span class="k">as?</span> <span class="kt">HTTPURLResponse</span> <span class="k">else</span> <span class="p">{</span>
+                            <span class="k">return</span>
+                        <span class="p">}</span>
+                    <span class="k">switch</span> <span class="n">urlResponse</span><span class="o">.</span><span class="n">statusCode</span> <span class="p">{</span>
+                    <span class="k">case</span> <span class="mi">200</span><span class="p">:</span>
+                        <span class="k">do</span> <span class="p">{</span>
+                            <span class="k">let</span> <span class="nv">response</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">JSONDecoder</span><span class="p">()</span><span class="o">.</span><span class="nf">decode</span><span class="p">(</span><span class="kt">Response</span><span class="o">.</span><span class="k">self</span><span class="p">,</span>
+                                                                    <span class="nv">from</span><span class="p">:</span> <span class="n">data</span><span class="p">)</span>
+                            <span class="nf">completion</span><span class="p">(</span><span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="n">response</span><span class="p">))</span>
+
+
+                        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+                            <span class="nf">completion</span><span class="p">(</span><span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+                        <span class="p">}</span>
+                    <span class="k">default</span><span class="p">:</span>
+                        <span class="nf">completion</span><span class="p">(</span><span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="kt">Error</span><span class="o">.</span><span class="nf">unExpected</span><span class="p">(</span><span class="nv">response</span><span class="p">:</span> <span class="n">urlResponse</span><span class="p">)))</span>
+                    <span class="p">}</span>
+                <span class="p">})</span>
+            <span class="n">dataTask</span><span class="p">?</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span> <span class="kt">URLSession</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">CompletionHandler</span> <span class="o">=</span> <span class="p">(</span><span class="kt">Data</span><span class="p">?,</span> <span class="kt">URLResponse</span><span class="p">?,</span> <span class="kt">Swift</span><span class="o">.</span><span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+    
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">dataTask</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="kt">RequestConvertible</span><span class="p">,</span>
+                         <span class="nv">completionHanlder</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">CompletionHandler</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">URLSessionDataTask</span><span class="p">?</span> <span class="p">{</span>
+        
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">stub</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">stub</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">urlRequest</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="n">completionHanlder</span><span class="p">)</span>
+        <span class="p">}</span>
+        
+        <span class="k">switch</span> <span class="n">stub</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nf">response</span><span class="p">(</span><span class="k">let</span> <span class="nv">stubResponse</span><span class="p">):</span>
+            <span class="k">switch</span> <span class="n">stubResponse</span><span class="o">.</span><span class="n">result</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="k">let</span> <span class="nv">data</span><span class="p">):</span>
+                <span class="nf">completionHanlder</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">stubResponse</span><span class="o">.</span><span class="n">response</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+            <span class="k">case</span> <span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+                <span class="nf">completionHanlder</span><span class="p">(</span><span class="kc">nil</span><span class="p">,</span> <span class="n">stubResponse</span><span class="o">.</span><span class="n">response</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">nil</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+
+</details>
+
+<p>The main difference between the previous code and the modified code is the ability to inject a Stub. If you use Stub injection, the <code class="language-plaintext highlighter-rouge">update()</code> function will return a <code class="language-plaintext highlighter-rouge">StubResponse</code> that you directly provide, without making actual requests to the URL. In other words, you can provide the response you want directly through the Stub, even if the server does not provide the desired response.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">UIKit</span>
+<span class="kd">import</span> <span class="kt">XCTest</span>
+
+<span class="kd">func</span> <span class="nf">testSuccess</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">urlRequest</span> <span class="o">=</span> <span class="kt">URLRequest</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://hcn1519.github.io"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+
+    <span class="k">let</span> <span class="nv">successData</span> <span class="o">=</span> <span class="s">"""
+    {
+        "</span><span class="n">subscribed</span><span class="s">": true,
+        "</span><span class="n">subscriptionCount</span><span class="s">": 27038
+    }
+    """</span><span class="o">.</span><span class="nf">data</span><span class="p">(</span><span class="nv">using</span><span class="p">:</span> <span class="o">.</span><span class="n">utf8</span><span class="p">)</span><span class="o">!</span>
+
+    <span class="k">let</span> <span class="nv">successURLResponse</span> <span class="o">=</span> <span class="kt">HTTPURLResponse</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">urlRequest</span><span class="o">.</span><span class="n">url</span><span class="o">!</span><span class="p">,</span>
+                                             <span class="nv">statusCode</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+                                             <span class="nv">httpVersion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span>
+                                             <span class="nv">headerFields</span><span class="p">:</span> <span class="p">[:])</span><span class="o">!</span>
+    <span class="k">let</span> <span class="nv">successResponse</span> <span class="o">=</span> <span class="kt">Stub</span><span class="o">.</span><span class="kt">Response</span><span class="p">(</span><span class="nv">response</span><span class="p">:</span> <span class="n">successURLResponse</span><span class="p">,</span>
+                                        <span class="nv">result</span><span class="p">:</span> <span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="n">successData</span><span class="p">))</span>
+
+    <span class="k">let</span> <span class="nv">successStub</span> <span class="o">=</span> <span class="kt">Stub</span><span class="o">.</span><span class="nf">response</span><span class="p">(</span><span class="n">successResponse</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">successRequest</span> <span class="o">=</span> <span class="kt">Subscription</span><span class="o">.</span><span class="kt">Request</span><span class="p">(</span><span class="nv">urlRequest</span><span class="p">:</span> <span class="n">urlRequest</span><span class="p">,</span>
+                                              <span class="nv">stub</span><span class="p">:</span> <span class="n">successStub</span><span class="p">)</span>
+
+    <span class="kt">Subscription</span><span class="o">.</span><span class="kt">Worker</span><span class="o">.</span><span class="nf">update</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="n">successRequest</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+        <span class="k">switch</span> <span class="n">result</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="k">let</span> <span class="nv">response</span><span class="p">):</span>
+            <span class="kt">XCTAssert</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">subscribed</span> <span class="o">==</span> <span class="kc">true</span><span class="p">)</span>
+            <span class="kt">XCTAssert</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">subscriptionCount</span> <span class="o">==</span> <span class="mi">27038</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="kd">#function</span><span class="se">)</span><span class="s"> success"</span><span class="p">)</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+            <span class="kt">XCTAssert</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="s">"Result should succeed </span><span class="se">\(</span><span class="n">error</span><span class="o">.</span><span class="n">localizedDescription</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Note: Here, we have written the code directly to demonstrate how Stubs work. In actual code development, you can make use of libraries like <a href="https://github.com/Moya/Moya/blob/master/docs/Testing.md">Moya</a>, which incorporate this functionality quite effectively.</p>
+</blockquote>
+
+<h2 id="3-when-to-use-stubs">3. When to Use Stubs</h2>
+
+<p>Stubs can be used when it’s difficult to control the injection of ‘indirect input’ into the <code class="language-plaintext highlighter-rouge">SUT</code>. For example, you can use Stubs to create various responses, such as successful and failed cases, to control the behavior of the <code class="language-plaintext highlighter-rouge">SUT</code>. Additionally, in test environments where accessing certain modules (e.g., a payment module) is challenging, you can configure those modules to provide values through Stubs for testing purposes.</p>
+
+<h1 id="references">References</h1>
+
+<ul>
+  <li><a href="https://martinfowler.com/bliki/TestDouble.html">Test Double - Martin Fowler</a></li>
+  <li><a href="http://xunitpatterns.com/Test%20Stub.html">Test Stub - xUnit Patterns</a></li>
+  <li><a href="http://xunitpatterns.com/indirect%20input.html">Indirect Input - xUnit Patterns</a></li>
+  <li><a href="http://xunitpatterns.com/SUT.html">SUT - System Under Test</a></li>
+  <li><a href="http://xunitpatterns.com/DOC.html">DOC - Depended On Component</a>
+```</li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UnitTest">
+                UnitTest
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#TestDouble">
+                TestDouble
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000/">< 홈으로</a>
+    <p>잘못된 정보나 궁금하신 점은 hcn1519@gmail.com으로 알려주시면 감사하겠습니다.</p>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

@@ -1,0 +1,512 @@
+:root {
+  color-scheme: light dark;
+  --main-bg-color: #FFFFFF;
+  --main-text-color: #343434;
+  --post-title-color: #303030;
+  --tag-chips-color: #505050;
+  --tag-chips-bg-color: rgba(0,0,0, 0.1);
+  --tag-chips-bg-hover-color: rgba(0, 0, 0, 0.5);
+  --link-color: #3F51B5;
+  --link-hover-color: #1A237E;
+  --header-title-color: #313131;
+  --blockquote-color: #7a7a7a;
+  --blockquote-border-left-color: #e5e5e5;
+  --strong-color: #303030;
+  --message-color: #717171;
+  --message-bg-color: #f9f9f9;
+  --pagination-item-border-color: #eee;
+  --pagination-item-hover-bg-color: #f5f5f5;
+  --masthead-title-color: #505050;
+  --table-border-color: #e5e5e5;
+  --table-odd-row-bg-color: #f9f9f9;
+  --related-border-color: #eee;
+}
+
+body {
+  color: var(--main-text-color);
+  background-color: var(--main-bg-color);
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+.page-title,
+.post-title,
+.post-title a {
+ color: var(--post-title-color);
+ -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+        transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+}
+
+.tag-chips
+a.tag-link,
+a.tag-link:hover, 
+.tag-chips a.tag-link:focus,
+li.related-posts {
+  color: var(--tag-chips-color) !important;
+}
+
+/* 태그 칩 디자인 */
+.tag-chips {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 5px;
+  -webkit-transition: .2s ease-out;
+          transition: .2s ease-out;
+  background: var(--tag-chips-bg-color);
+}
+
+.tag-chips:hover {
+  cursor: pointer;
+}
+
+a {
+  color: var(--link-color);
+  -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+        transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+  text-decoration: none !important;
+  font-family: "NotoSansKR-Regular", Helvetica, sans-serif;
+}
+.post-title a:hover {
+  color: var(--link-color);
+}
+
+a:hover, a:focus {
+  color: var(--link-hover-color);
+  text-decoration: none;
+}
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: .5rem;
+  font-weight: bold;
+  line-height: 1.25;
+  color: var(--header-title-color);
+  text-rendering: optimizeLegibility;
+  font-family: "NotoSansKR-Medium", sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.5pt;
+}
+
+blockquote {
+  color: var(--blockquote-color);
+  border-left: .25rem solid var(--blockquote-border-left-color);
+}
+
+strong {
+  color: var(--strong-color);
+}
+.message {
+  color: var(--message-color);
+  background-color: var(--message-bg-color);
+}
+
+.pagination-item {
+  border: 1px solid var(--pagination-item-border-color);
+}
+a.pagination-item:hover {
+  background-color: var(--pagination-item-hover-bg-color);
+}
+.masthead-title, .masthead-title a {
+  color: var(--masthead-title-color);
+}
+
+/* Tables */
+table {
+  margin-bottom: 1rem;
+  width: 100%;
+  border: 1px solid var(--table-border-color);
+  border-collapse: collapse;
+}
+td,
+th {
+  padding: .25rem .5rem;
+  border: 0.5px solid var(--table-border-color);
+  text-align: center;
+}
+tbody tr:nth-child(odd) td,
+tbody tr:nth-child(odd) th {
+  background-color: var(--table-odd-row-bg-color);
+}
+
+/* Related posts */
+.related {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-top: 0.5px solid var(--related-border-color);
+}
+.related-posts {
+  padding-left: 0;
+}
+.related-posts li {
+ margin-left: 30pt;
+}
+.related-posts h3 {
+  margin-top: 0;
+}
+.related-posts small {
+  font-size: 75%;
+  color: #999;
+}
+.related-posts a:hover {
+ color: #268bd2;
+ text-decoration: none;
+}
+.related-posts a:hover small {
+ color: inherit;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-bg-color: #1d1d1d;
+    --main-text-color: #e5e5e5;
+    --post-title-color: #f2f2f2;
+    --tag-chips-color: rgba(255, 255, 255, 0.7);
+    --tag-chips-bg-color: rgba(255, 255, 255, 0.1);
+    --tag-chips-bg-hover-color: rgba(255, 255, 255, 0.5);
+    --link-color: rgb(10, 132, 255);
+    --link-hover-color: #81d4fa;
+    --header-title-color: #f4f4f4;
+    --blockquote-color: #928e9c;
+    --blockquote-border-left-color: #928e9c;
+    --strong-color: #f5f5f5;
+    --message-color: #e5e5e5;
+    --message-bg-color: #343434;
+    --pagination-item-border-color: #868585;
+    --pagination-item-hover-bg-color: #000000;
+    --masthead-title-color: #888888;
+    --table-border-color: #444444;
+    --table-odd-row-bg-color: #333333;
+    --related-border-color: #505050;
+  }
+}
+
+/* 인트로에 활용하세요 */
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+/* 정리하는 문구용 */
+.message {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 4pt;
+}
+
+/* 폰트 설정 */
+@font-face {
+  font-family: 'NotoSansKR-Light';
+  src: url("/public/fonts/NotoSansKR-Light.otf");
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NotoSansKR-Regular';
+  src: url("/public/fonts/NotoSansKR-Regular.otf");
+  font-display: swap
+}
+@font-face {
+  font-family: 'NotoSansKR-Medium';
+  src: url("/public/fonts/NotoSansKR-Medium.otf");
+  font-display: swap
+}
+
+/* 원하는 코드 블럭 폰트를 적용하세요 */
+ @font-face {
+    font-family: 'Menlo Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: url("/public/fonts/Menlo-Regular.woff");
+    font-display: swap;
+ }
+/* Components 설정 */
+
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.65;
+  font-family: "NotoSansKR-Light", Helvetica, sans-serif;
+  letter-spacing: -0.5pt;
+}
+
+@media (min-width: 38em) {
+  html {
+    font-size: 16px;
+  }
+}
+
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+}
+h3, h4 {
+  margin-top: 1.5rem;
+  font-size: 1.25rem;
+}
+
+h5, h6 {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+/* Body text */
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-family: "NotoSansKR-Light", Helvetica, sans-serif;
+  line-height: 165%;
+  letter-spacing: -0.5pt;
+}
+
+strong {
+  font-family: "NotoSansKR-Regular", Helvetica, sans-serif;
+  letter-spacing: -0.7pt;
+}
+
+/* Quotes */
+blockquote {
+  padding: .5rem 1rem;
+  margin: .8rem 0;
+}
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+@media (min-width: 30em) {
+  blockquote {
+    padding-right: 5rem;
+    padding-left: 1.25rem;
+  }
+}
+
+/* image */
+img {
+  display: block;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+}
+
+
+/* Lists */
+ul, ol, dl {
+  margin-top: 0;
+  margin-bottom: 0.2rem;
+}
+
+dt {
+  font-weight: bold;
+}
+dd {
+  margin-bottom: .5rem;
+}
+
+/* Misc(popover) */
+/* 커서를 가져다대면 보이는 문구 */
+hr {
+  position: relative;
+  margin: 1.5rem 0;
+  border: 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #fff;
+}
+
+abbr {
+  font-size: 85%;
+  font-weight: bold;
+  color: #555;
+  text-transform: uppercase;
+}
+abbr[title] {
+  cursor: help;
+  border-bottom: 1px dotted #e5e5e5;
+}
+
+
+ /*태그 클라우드 디자인*/
+ .tag-cloud {
+   list-style-type: none;
+ }
+ .tag-cloud li {
+   display: inline-block;
+   padding-right: 2px;
+ }
+
+/* page wrapper */
+.wrap {
+  position: relative;
+  width: 100%;
+}
+
+/* page container */
+.container {
+  max-width: 24rem;
+  padding-left:  1.6rem;
+  padding-right: 1.6rem;
+  margin-left:  auto;
+  margin-right: auto;
+}
+@media (min-width: 38em) {
+  .container {
+    max-width: 34rem;
+    padding-left:  1rem;
+    padding-right: 1rem;
+  }
+}
+@media (min-width: 56em) {
+  .container {
+    max-width: 56rem;
+    padding-left:  1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Masthead(navigation bar)
+ * Super small header above the content for site name and short description.
+ */
+
+.masthead {
+  padding-top:    1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 3rem;
+  padding-left: 4rem;
+}
+.masthead-title {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.masthead-title small {
+  font-size: 75%;
+  font-weight: 400;
+  color: #c0c0c0;
+  letter-spacing: 0;
+}
+
+
+/*
+ * Posts and pages
+ *
+ * Each post is wrapped in `.post` and is used on default and post layouts. Each
+ * page is wrapped in `.page` and is only used on the page layout.
+ */
+
+
+ .page,
+ .post {
+   margin-bottom: 4em;
+ }
+
+ .page-title,
+ .post-title {
+   margin-top: 0;
+ }
+
+ .post-title a:hover {
+   text-decoration: none;
+ }
+
+ /* Meta data line below post title */
+ .post-title {
+   display: inline-block;
+ }
+ .post-date {
+   display: inline-block;
+   margin-top: 0rem;
+   margin-left: 0.5rem;
+   color: #9a9a9a;
+ }
+ @media(max-width: 415px) {
+   .post-date {
+     display: block;
+     margin-top: -0.5rem;
+     margin-left: 0;
+     margin-bottom: 1rem;
+   }
+ }
+ 
+
+/*
+ * Pagination
+ *
+ * Super lightweight (HTML-wise) blog pagination. `span`s are provide for when
+ * there are no more previous or next posts to show.
+ */
+
+.pagination {
+  overflow: hidden; /* clearfix */
+  margin-left: -1rem;
+  margin-right: -1rem;
+  font-family: "NotoSansKR-Regular", Helvetica, Arial, sans-serif;
+  color: #ccc;
+  text-align: center;
+}
+
+/* Pagination items can be `span`s or `a`s */
+.pagination-item {
+  display: block;
+  padding: 1rem;  
+}
+
+.pagination-item:first-child {
+  margin-bottom: -1px;
+}
+
+/* Only provide a hover state for linked pagination items */
+
+@media (min-width: 30em) {
+  .pagination {
+    margin: 3rem 0;
+  }
+  .pagination-item {
+    float: left;
+    width: 50%;
+  }
+  .pagination-item:first-child {
+    margin-bottom: 0;
+    border-top-left-radius:    4px;
+    border-bottom-left-radius: 4px;
+  }
+  .pagination-item:last-child {
+    margin-left: -1px;
+    border-top-right-radius:    4px;
+    border-bottom-right-radius: 4px;
+  }
+}
+
+/* Gist via GitHub Pages */
+.gist .gist-file {
+  font-family: Menlo, Monaco, "Courier New", monospace !important;
+}
+.gist .markdown-body {
+  padding: 15px;
+}
+.gist pre {
+  padding: 0;
+  background-color: transparent;
+}
+.gist .gist-file .gist-data {
+  font-size: .8rem !important;
+  line-height: 1.4;
+}
+.gist code {
+  padding: 0;
+  color: inherit;
+  background-color: transparent;
+  border-radius: 0;
+  letter-spacing: -1pt;
+}

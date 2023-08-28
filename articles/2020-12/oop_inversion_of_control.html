@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Inversion Of Control - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Inversion Of Control - hcn1519 Dev Post">
+  <meta name="description" content="Exploring Inversion of Control.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Inversion Of Control">
+  <meta property="og:image" content="/public/assets/OOP.png">
+  <meta property="og:description" content="Exploring Inversion of Control.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Inversion Of Control</h1>
+  <span class="post-date">06 Dec 2020</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/OOP.png"
+    
+    alt="Inversion Of Control feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2023년 08월 28일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p><code class="language-plaintext highlighter-rouge">Inversion of Control</code> (IoC) refers to a phenomenon where the flow of control is <strong>inverted</strong>, as the name suggests. To understand what it means for control flow to be inverted, it’s necessary to first understand what control flow without inversion is. Therefore, in this article, we will first examine what non-inverted control flow is and then explore <code class="language-plaintext highlighter-rouge">Inversion of Control</code>.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="./oop_inversion_of_control#1-control-flow">Control Flow</a></li>
+  <li><a href="./oop_inversion_of_control#2-inversion-of-control">Inversion of Control</a></li>
+  <li><a href="./oop_inversion_of_control#3-module-extension-through-ioc">Module Extension Through IoC</a></li>
+  <li><a href="./oop_inversion_of_control#4-libraries-and-frameworks-from-a-control-perspective">Libraries and Frameworks from a Control Perspective</a></li>
+</ol>
+
+<h3 id="1-control-flow">1. Control Flow</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Control_flow">Control flow</a> refers to the sequence or flow in which code is executed by a system. Typically, source code executes with code at the top running first and code at the bottom running later. Conditional and loop statements are often used to control the behavior in various situations. Let’s look at a simple example:</p>
+
+<blockquote>
+  <p>The example used here is a slightly modified version of the one from <a href="https://martinfowler.com/bliki/InversionOfControl.html">InversionOfControl - Martin Fowler</a>.</p>
+</blockquote>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">ScreenPresenter</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">var</span> <span class="nv">quest</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span>
+
+    <span class="kd">func</span> <span class="nf">displayName</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Display User Input:"</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">displayQuest</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Display User Input:"</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">User</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">usePresenter</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">presenter</span> <span class="o">=</span> <span class="kt">ScreenPresenter</span><span class="p">()</span>
+        <span class="n">presenter</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">"Hong"</span>
+        <span class="n">presenter</span><span class="o">.</span><span class="nf">displayName</span><span class="p">()</span>
+        <span class="n">presenter</span><span class="o">.</span><span class="n">quest</span> <span class="o">=</span> <span class="s">"Do Something"</span>
+        <span class="n">presenter</span><span class="o">.</span><span class="nf">displayQuest</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The execution order of the above code is as follows:</p>
+
+<ol>
+  <li>Create <code class="language-plaintext highlighter-rouge">ScreenPresenter</code>.</li>
+  <li>Set the <code class="language-plaintext highlighter-rouge">name</code> property of <code class="language-plaintext highlighter-rouge">ScreenPresenter</code>.</li>
+  <li>Call <code class="language-plaintext highlighter-rouge">displayName()</code> to print the <code class="language-plaintext highlighter-rouge">name</code>.</li>
+  <li>Set the <code class="language-plaintext highlighter-rouge">quest</code> property of <code class="language-plaintext highlighter-rouge">ScreenPresenter</code>.</li>
+  <li>Call <code class="language-plaintext highlighter-rouge">displayQuest()</code> to print the <code class="language-plaintext highlighter-rouge">quest</code>.</li>
+</ol>
+
+<p>While the sequence is described somewhat verbosely, the flow is intuitively understandable. In this flow, the developer controls when <code class="language-plaintext highlighter-rouge">displayName()</code> and <code class="language-plaintext highlighter-rouge">displayQuest()</code> are called, and the system executes the commands accordingly.</p>
+
+<p>The key feature of control flow is that the developer-written code has control over the system’s behavior. In other words, in the example above, the developer decides when to call <code class="language-plaintext highlighter-rouge">displayName()</code> and <code class="language-plaintext highlighter-rouge">displayQuest()</code>, and the system follows these commands.</p>
+
+<h3 id="2-inversion-of-control">2. Inversion of Control</h3>
+
+<p>Inversion of Control (<code class="language-plaintext highlighter-rouge">IoC</code>) refers to a phenomenon where the entity in control is inverted. As mentioned earlier, in control flow, the control over system behavior lies with the developer. IoC is the opposite; it means that control is shifted towards the system’s side.</p>
+
+<p>Let’s look at an alternative implementation of the code we discussed earlier:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">ScreenPresenter</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span> <span class="p">{</span>
+        <span class="k">didSet</span> <span class="p">{</span>
+            <span class="nf">didFinishWritingName</span><span class="p">?(</span><span class="n">name</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">var</span> <span class="nv">quest</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span> <span class="p">{</span>
+        <span class="k">didSet</span> <span class="p">{</span>
+            <span class="nf">didFinishWritingQuest</span><span class="p">?(</span><span class="n">quest</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">var</span> <span class="nv">didFinishWritingName</span><span class="p">:</span> <span class="p">((</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span>
+    <span class="k">var</span> <span class="nv">didFinishWritingQuest</span><span class="p">:</span> <span class="p">((</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">User</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">display</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Display User Input:"</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">usePresenter</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">presenter</span> <span class="o">=</span> <span class="kt">ScreenPresenter</span><span class="p">()</span>
+        <span class="n">presenter</span><span class="o">.</span><span class="n">didFinishWritingName</span> <span class="o">=</span> <span class="p">{</span> <span class="n">nameInput</span> <span class="k">in</span>
+            <span class="nf">display</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="n">nameInput</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="n">presenter</span><span class="o">.</span><span class="n">didFinishWritingQuest</span> <span class="o">=</span> <span class="p">{</span> <span class="n">questInput</span> <span class="k">in</span>
+            <span class="nf">display</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="n">questInput</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="n">presenter</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">"Hong"</span>
+        <span class="n">presenter</span><span class="o">.</span><span class="n">quest</span> <span class="o">=</span> <span class="s">"Do Something"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The execution order of the above code is as follows:</p>
+
+<ol>
+  <li>Create <code class="language-plaintext highlighter-rouge">ScreenPresenter</code>.</li>
+  <li>Configure <code class="language-plaintext highlighter-rouge">displayName()</code> to be called when <code class="language-plaintext highlighter-rouge">name</code> is set.</li>
+  <li>Configure <code class="language-plaintext highlighter-rouge">displayQuest()</code> to be called when <code class="language-plaintext highlighter-rouge">quest</code> is set.</li>
+  <li>Set the <code class="language-plaintext highlighter-rouge">name</code> property of <code class="language-plaintext highlighter-rouge">ScreenPresenter</code>.</li>
+  <li>Set the <code class="language-plaintext highlighter-rouge">quest</code> property of <code class="language-plaintext highlighter-rouge">ScreenPresenter</code>.</li>
+</ol>
+
+<p>The key difference between this code and the previous examples is who calls the <code class="language-plaintext highlighter-rouge">display()</code> function. In the earlier examples, the developer directly called it, while in this example, the system calls it. In other words, there’s an inversion (a reversal) of control.</p>
+
+<blockquote>
+  <p>IoC is sometimes also referred to as the Hollywood Principle: “Don’t call us; we’ll call you.”</p>
+</blockquote>
+
+<h3 id="3-module-extension-through-ioc">3. Module Extension Through IoC</h3>
+
+<p>Even by examining just these two examples, it’s evident that code with inverted control flow is relatively more complex than non-inverted code. This complexity arises because to invert control flow, mechanisms for delegating control have been introduced. These mechanisms are often referred to as delegates, and in the example above, closures/callbacks were used. Despite the added complexity, IoC is intentionally employed because it allows modules to be extended flexibly.</p>
+
+<p>By using IoC, you can extend the functionality of a module without changing the module itself. Let’s consider adding a feature that reloads the screen after calling <code class="language-plaintext highlighter-rouge">display(value:)</code> following user input. In the first example, you can add the following code:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">ScreenPresenter</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span>
+
+    <span class="kd">func</span> <span class="nf">displayName</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Display User Input:"</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">reloadScreenForName</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Reload Screen"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">User</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">usePresenter</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">presenter</span> <span class="o">=</span> <span class="kt">ScreenPresenter</span><span class="p">()</span>
+        <span class="n">presenter</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">"Hong"</span>
+        <span class="n">presenter</span><span class="o">.</span><span class="nf">displayName</span><span class="p">()</span>
+        <span class="n">presenter</span><span class="o">.</span><span class="nf">reloadScreenForName</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In the second example, you can handle it like this:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">ScreenPresenter</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span> <span class="p">{</span>
+        <span class="k">didSet</span> <span class="p">{</span>
+            <span class="nf">didFinishWritingName</span><span class="p">?(</span><span class="n">name</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">var</span> <span class="nv">didFinishWritingName</span><span class="p">:</span> <span class="p">((</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">User</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">display</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Display User Input:"</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">reload</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Reload Screen"</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">usePresenter</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">presenter</span> <span class="o">=</span> <span class="kt">ScreenPresenter</span><span class="p">()</span>
+        <span class="n">presenter</span><span class="o">.</span><span class="n">didFinishWritingName</span> <span class="o">=</span> <span class="p">{</span> <span class="n">nameInput</span> <span class="k">in</span>
+            <span class="nf">display</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="n">nameInput</span><span class="p">)</span>
+            <span class="nf">reload</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="n">nameInput</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="n">presenter</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">"Hong"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The significant difference between the two examples lies in <strong>where you made changes in the source code</strong>. In the first example, you added functionality to <code class="language-plaintext highlighter-rouge">ScreenPresenter</code>, which would require recompilation of that module. In the second example, you modified the code of the user of <code class="language-plaintext highlighter-rouge">ScreenPresenter</code>, and there was no need to recompile the <code class="language-plaintext highlighter-rouge">ScreenPresenter</code> module.</p>
+
+<p>This feature of preventing recompilation of a module through IoC allows the module to remain</p>
+
+<p>unconcerned with the user’s code and allows users to extend the module’s functionality as needed. The module only needs to provide the appropriate interfaces for the user.</p>
+
+<h3 id="4-libraries-and-frameworks-from-a-control-perspective">4. Libraries and Frameworks from a Control Perspective</h3>
+
+<p>In terms of binary perspective, libraries and frameworks are often used interchangeably, with little difference. However, from a control perspective, these two terms are clearly distinguished:</p>
+
+<ul>
+  <li>Library - In an application using a library, the application calls functions or creates classes from the library. The control resides with the application.</li>
+  <li>Framework - In an application using a framework, the application must call methods according to the interfaces provided by the framework or perform sub-classing, among other requirements. The control resides with the framework.</li>
+</ul>
+
+<p>When using <code class="language-plaintext highlighter-rouge">UIKit</code>’s <code class="language-plaintext highlighter-rouge">UIViewController</code>, for instance, users write code in line with the lifecycle of <code class="language-plaintext highlighter-rouge">UIViewController</code>. In this case, users don’t directly call the lifecycle methods of <code class="language-plaintext highlighter-rouge">UIViewController</code>. Instead, upon creating an instance, the system directly calls these methods. From a control perspective, <code class="language-plaintext highlighter-rouge">UIKit</code> can be seen as a framework.</p>
+
+<blockquote>
+  <p>In Apple’s development ecosystem, libraries and frameworks are sometimes distinguished based on resource inclusion. For more details, you can refer to <a href="https://hcn1519.github.io/articles/2019-11/framework_basic">Understanding Frameworks</a>.</p>
+</blockquote>
+
+<h1 id="references">References</h1>
+
+<ul>
+  <li><a href="https://martinfowler.com/bliki/InversionOfControl.html">InversionOfControl - Martin Fowler</a></li>
+  <li><a href="https://justhackem.wordpress.com/2016/05/14/inversion-of-control/">InversionOfControl - Just hack’em</a></li>
+  <li><a href="https://martinfowler.com/eaaCatalog/plugin.html">PlugIn - David Rice and Matt Foemmel</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Control_flow">ControlFlow - Wikipedia</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Inversion_of_control">Inversion Of Control - Wikipedia</a></li>
+  <li><a href="https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164">Clean Architecture - Robert C. Martin</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    <h2>Lastest Posts</h2>
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              Safely Updating UIKit Lists with DiffableDataSource
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000/">< 홈으로</a>
+    <p>잘못된 정보나 궁금하신 점은 hcn1519@gmail.com으로 알려주시면 감사하겠습니다.</p>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

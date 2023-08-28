@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Swift Async Await - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Swift Async Await - hcn1519 Dev Post">
+  <meta name="description" content="Exploring Swift's Async/Await">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Swift Async Await">
+  <meta property="og:image" content="/public/assets/swiftLogo.jpg">
+  <meta property="og:description" content="Exploring Swift's Async/Await">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Swift Async Await</h1>
+  <span class="post-date">08 Apr 2022</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/swiftLogo.jpg"
+    
+    alt="Swift Async Await feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2023년 08월 28일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>In this article, we will explore Async/Await introduced in Swift 5.5.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="./swift_async_await#1-handling-asynchronous-tasks-in-the-past">Handling Asynchronous Tasks in the Past</a></li>
+  <li><a href="./swift_async_await#2-defining-and-calling-asynchronous-functions">Defining and Calling Asynchronous Functions</a></li>
+  <li><a href="./swift_async_await#3-asynchronous-sequences">Asynchronous Sequences</a></li>
+  <li><a href="./swift_async_await#4-calling-asynchronous-functions-in-parallel">Calling Asynchronous Functions in Parallel</a></li>
+  <li><a href="./swift_async_await#5-task-and-task-groups">Task and Task Groups</a></li>
+</ol>
+
+<blockquote>
+  <p>This content is based on <a href="https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html">The Swift Programming Language (5.5) - Concurrency</a>.</p>
+</blockquote>
+
+<ul>
+  <li>Using asynchronous code makes it easy to perform multiple tasks concurrently in a program.</li>
+  <li>Asynchronous code helps reduce code complexity.</li>
+</ul>
+
+<h2 id="1-handling-asynchronous-tasks-in-the-past">1. Handling Asynchronous Tasks in the Past</h2>
+
+<p>Using the traditional completion handler-based asynchronous code, even simple code can become complex due to the need for nested closures.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">listPhotos</span><span class="p">(</span><span class="nv">inGallery</span><span class="p">:</span> <span class="s">"Summer Vacation"</span><span class="p">)</span> <span class="p">{</span> <span class="n">photoNames</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="nv">sortedNames</span> <span class="o">=</span> <span class="n">photoNames</span><span class="o">.</span><span class="nf">sorted</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">name</span> <span class="o">=</span> <span class="n">sortedNames</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nf">downloadPhoto</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span> <span class="n">photo</span> <span class="k">in</span>
+        <span class="nf">show</span><span class="p">(</span><span class="n">photo</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><a href="https://books.apple.com/kr/book/the-swift-programming-language-swift-5-5/id881256329">The Swift Programming Language (Swift 5.5) Apple Inc.</a></li>
+</ul>
+
+<h2 id="2-defining-and-calling-asynchronous-functions">2. Defining and Calling Asynchronous Functions</h2>
+
+<p>A new form of function called an “asynchronous function” allows pausing during execution. While traditional “synchronous functions” either perform a completion, throw an error, or do not return, asynchronous functions can pause during execution and resume when results arrive. You can declare an asynchronous function by adding the <code class="language-plaintext highlighter-rouge">async</code> keyword at the end of the function declaration (before <code class="language-plaintext highlighter-rouge">-&gt;</code>, or before <code class="language-plaintext highlighter-rouge">throws</code> if both are used).</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">listPhotos</span><span class="p">(</span><span class="n">inGallery</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="n">async</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="c1">// ... some asynchronous networking code ...</span>
+    <span class="k">return</span> <span class="n">result</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><a href="https://books.apple.com/kr/book/the-swift-programming-language-swift-5-5/id881256329">The Swift Programming Language (Swift 5.5) Apple Inc.</a></li>
+</ul>
+
+<p>When calling an asynchronous function, the function’s execution doesn’t proceed beyond the function call until it returns. Inside an asynchronous function, you can use the <code class="language-plaintext highlighter-rouge">await</code> keyword to mark suspension points. The execution of an asynchronous function pauses only when there are additional asynchronous functions (with <code class="language-plaintext highlighter-rouge">await</code>) within it. All suspension points must explicitly include the <code class="language-plaintext highlighter-rouge">await</code> keyword.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">photoNames</span> <span class="o">=</span> <span class="n">await</span> <span class="nf">listPhotos</span><span class="p">(</span><span class="nv">inGallery</span><span class="p">:</span> <span class="s">"Summer Vacation"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">sortedNames</span> <span class="o">=</span> <span class="n">photoNames</span><span class="o">.</span><span class="nf">sorted</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">name</span> <span class="o">=</span> <span class="n">sortedNames</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">let</span> <span class="nv">photo</span> <span class="o">=</span> <span class="n">await</span> <span class="nf">downloadPhoto</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="n">name</span><span class="p">)</span>
+<span class="nf">show</span><span class="p">(</span><span class="n">photo</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><a href="https://books.apple.com/kr/book/the-swift-programming-language-swift-5-5/id881256329">The Swift Programming Language (Swift 5.5) Apple Inc.</a></li>
+</ul>
+
+<p>The execution order of the above code is as follows:</p>
+
+<ol>
+  <li>The code executes in the usual order until the <code class="language-plaintext highlighter-rouge">await</code> keyword is reached. It calls <code class="language-plaintext highlighter-rouge">listPhotos(inGallery:)</code>, and the program waits until that function returns.</li>
+  <li>While the code is paused, the program can perform other concurrent tasks.</li>
+  <li>After <code class="language-plaintext highlighter-rouge">listPhotos(inGallery:)</code> returns, the code resumes from the point it was paused. In this case, it assigns the return value to <code class="language-plaintext highlighter-rouge">photoNames</code>.</li>
+  <li>The lines containing <code class="language-plaintext highlighter-rouge">sortedNames</code> and <code class="language-plaintext highlighter-rouge">name</code> do not have <code class="language-plaintext highlighter-rouge">await</code>, so they behave like regular synchronous code.</li>
+  <li>Later, <code class="language-plaintext highlighter-rouge">downloadPhoto(named:)</code> is called with <code class="language-plaintext highlighter-rouge">await</code>, and the code pauses in a similar fashion to the first asynchronous call.</li>
+</ol>
+
+<p>The <code class="language-plaintext highlighter-rouge">await</code> keyword signifies that the code can potentially pause and wait for the asynchronous function to complete. Internally, Swift suspends the current thread, allowing other threads to execute, making it similar to <a href="https://en.wikipedia.org/wiki/Yield_(multithreading)">yielding the thread</a>. Because of this, the <code class="language-plaintext highlighter-rouge">await</code> keyword can only be used in specific contexts:</p>
+
+<ul>
+  <li>Inside an asynchronous function, method, or property body.</li>
+  <li>Inside the <code class="language-plaintext highlighter-rouge">main()</code> function of a type annotated with <code class="language-plaintext highlighter-rouge">@main</code>.</li>
+  <li>Inside detached child task code.</li>
+</ul>
+
+<blockquote>
+  <p>Note: You can use <a href="https://developer.apple.com/documentation/swift/task/3814836-sleep">Task.sleep(_:)</a> for easier testing of asynchronous functions.</p>
+</blockquote>
+
+<h2 id="3-asynchronous-sequences">3. Asynchronous Sequences</h2>
+
+<p>Similar to the traditional <a href="https://developer.apple.com/documentation/swift/sequence">Sequence</a> protocol for <code class="language-plaintext highlighter-rouge">for-in</code> loops, Swift introduces the <a href="https://developer.apple.com/documentation/swift/asyncsequence">AsyncSequence</a> protocol. This allows you to use a <code class="language-plaintext highlighter-rouge">for-await-in</code> loop with asynchronous sequences.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Foundation</span>
+
+<span class="k">let</span> <span class="nv">handle</span> <span class="o">=</span> <span class="kt">FileHandle</span><span class="o">.</span><span class="n">standardInput</span>
+<span class="k">for</span> <span class="k">try</span> <span class="n">await</span> <span class="n">line</span> <span class="k">in</span> <span class="n">handle</span><span class="o">.</span><span class="n">bytes</span><span class="o">.</span><span class="n">lines</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><a href="https://books.apple.com/kr/book/the-swift-programming-language-swift-5-5/id881256329">The Swift Programming Language (Swift 5.5) Apple Inc.</a></li>
+</ul>
+
+<p>In a <code class="language-plaintext highlighter-rouge">for-await-in</code> loop, <code class="language-plaintext highlighter-rouge">await</code> is executed at each iteration, and each iteration’s execution waits for the previous one to complete due to the suspension point.</p>
+
+<h2 id="4-calling-asynchronous-functions-in-parallel">4. Calling Asynchronous Functions in Parallel</h2>
+
+<p>Multiple independent asynchronous tasks can run concurrently by adding the <code class="language-plaintext highlighter-rouge">async</code> keyword before a constant that will hold the task’s return value (<code class="language-plaintext highlighter-rouge">async let</code> form). Constants defined in this manner can be used with <code class="language-plaintext highlighter-rouge">await</code>.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">async</span> <span class="k">let</span> <span class="nv">firstPhoto</span> <span class="o">=</span> <span class="nf">downloadPhoto</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="n">photoNames</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">async</span> <span class="k">let</span> <span class="nv">secondPhoto</span> <span class="o">=</span> <span class="nf">downloadPhoto</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="n">photoNames</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">async</span> <span class="k">let</span> <span class="nv">thirdPhoto</span> <span class="o">=</span> <span class="nf">downloadPhoto</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="n">photoNames</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="k">let</span> <span class="nv">photos</span> <span class="o">=</span> <span class="n">await</span> <span class="p">[</span><span class="n">firstPhoto</span><span class="p">,</span> <span class="n">secondPhoto</span><span class="p">,</span> <span class="n">thirdPhoto</span><span class="p">]</span>
+<span class="nf">show</span><span class="p">(</span><span class="n">photos</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><a href="https://books.apple.com/kr/book/the-swift-programming-language-swift-5-5/id881256329">The Swift Programming Language (Swift 5.5) Apple Inc.</a></li>
+</ul>
+
+<p>In the above code, execution proceeds normally until the line where <code class="language-plaintext highlighter-rouge">photos</code> is defined. At this point, the <code class="language-plaintext highlighter-rouge">await</code> keyword is encountered, and the code pauses. Meanwhile, the <code class="language-plaintext highlighter-rouge">downloadPhoto(named:)</code> calls are performed in parallel.</p>
+
+<h2 id="5-task-and-task-groups">5. Task and Task Groups</h2>
+
+<blockquote>
+  <p>A task is a unit of work that can be run asynchronously as part of your program.</p>
+</blockquote>
+
+<ul>
+  <li><a href="https://books.apple.com/kr/book/the-swift-programming-language-swift-5-5/id881256329">The Swift Programming Language (Swift 5.5) Apple Inc.</a></li>
+</ul>
+
+<p>All asynchronous code always runs as part of a Task. For example, the</p>
+
+<p><code class="language-plaintext highlighter-rouge">async-let</code> constructs create child tasks for user convenience. Swift allows users to create their own Task Groups, add child tasks to them, and use them to manage concurrency effectively.</p>
+
+<p>All tasks are part of a Task Group, and all tasks within a Task Group share the same parent task. Tasks can also have child tasks. This hierarchical relationship between tasks and Task Groups is referred to as <a href="https://en.wikipedia.org/wiki/Structured_concurrency">Structured Concurrency</a>.</p>
+
+<p>To create a Task Group, you can use the <a href="https://developer.apple.com/documentation/swift/taskgroup">withTaskGroup(of:returning:body:)</a> API.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">await</span> <span class="nf">withTaskGroup</span><span class="p">(</span><span class="nv">of</span><span class="p">:</span> <span class="kt">Data</span><span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">taskGroup</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="nv">photoNames</span> <span class="o">=</span> <span class="n">await</span> <span class="nf">listPhotos</span><span class="p">(</span><span class="nv">inGallery</span><span class="p">:</span> <span class="s">"Summer Vacation"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="k">in</span> <span class="n">photoNames</span> <span class="p">{</span>
+        <span class="n">taskGroup</span><span class="o">.</span><span class="n">addTask</span> <span class="p">{</span> <span class="n">await</span> <span class="nf">downloadPhoto</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="n">name</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="unstructured-concurrency">Unstructured Concurrency</h3>
+
+<p>Swift also supports creating tasks that are not part of a Task Group. In this case, you can use <a href="https://developer.apple.com/documentation/swift/task/3856790-init">Task.init(priority:operation:)</a> and <a href="https://developer.apple.com/documentation/swift/task/3856786-detached">Task.detached(priority:operation:)</a> to create a new Task as a top-level Task.</p>
+
+<ul>
+  <li>Tasks are used when you want to call asynchronous functions from synchronous code.</li>
+  <li>When you want to create a Task with the caller’s priority and the current actor’s context, use <a href="https://developer.apple.com/documentation/swift/task/3856790-init">Task.init(priority:operation:)</a>.</li>
+  <li>When you want to create a Task that is separate from the current actor, use <a href="https://developer.apple.com/documentation/swift/task/3856786-detached">Task.detached(priority:operation:)</a>.</li>
+</ul>
+
+<h3 id="task-cancellation">Task Cancellation</h3>
+
+<p>Each Task in Swift checks whether it has been canceled at appropriate points during its execution. A canceled Task can either throw an error, return an empty collection or nil, or return a partially completed task. You can check for cancellation using <a href="https://developer.apple.com/documentation/swift/task/3814826-checkcancellation">Task.checkCancellation()</a> or <a href="https://developer.apple.com/documentation/swift/task/3814832-iscancelled">Task.isCancelled</a>.</p>
+
+<h1 id="references">References</h1>
+
+<ul>
+  <li><a href="https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html">The Swift Programming Language (5.5) - Concurrency</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    <h2>Lastest Posts</h2>
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              Safely Updating UIKit Lists with DiffableDataSource
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2021-12/test_stub">
+              Test Stub
+              <small>25 Dec 2021</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000/">< 홈으로</a>
+    <p>잘못된 정보나 궁금하신 점은 hcn1519@gmail.com으로 알려주시면 감사하겠습니다.</p>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

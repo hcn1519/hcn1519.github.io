@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Safely Updating UIKit Lists with DiffableDataSource - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Safely Updating UIKit Lists with DiffableDataSource - hcn1519 Dev Post">
+  <meta name="description" content="This article summarizes the use of UIKit's DiffableDataSource for iOS development.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Safely Updating UIKit Lists with DiffableDataSource">
+  <meta property="og:image" content="/public/assets/iOS.png">
+  <meta property="og:description" content="This article summarizes the use of UIKit's DiffableDataSource for iOS development.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Safely Updating UIKit Lists with DiffableDataSource</h1>
+  <span class="post-date">13 May 2022</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS.png"
+    
+    alt="Safely Updating UIKit Lists with DiffableDataSource feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2023년 08월 28일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="./diffableDataSource#1-wwdc---advances-in-ui-data-sources">WWDC - Advances in UI Data Sources</a></li>
+  <li><a href="./diffableDataSource#2-real-world-application">Real-world Application</a></li>
+</ol>
+
+<h1 id="wwdc---advances-in-ui-data-sources">WWDC - Advances in UI Data Sources</h1>
+
+<p>The <code class="language-plaintext highlighter-rouge">Diffable Data Source</code> is an API introduced in iOS 13 to make updates to <code class="language-plaintext highlighter-rouge">UICollectionView</code> and <code class="language-plaintext highlighter-rouge">UITableView</code> data sources safer and more convenient. In this article, we’ll summarize the key points from WWDC (<a href="https://developer.apple.com/videos/play/wwdc2019/220">Advances in UI Data Sources</a>) that introduced the <code class="language-plaintext highlighter-rouge">Diffable Data Source</code> and share our experience applying it in real-world scenarios.</p>
+
+<h2 id="current-state-of-the-art">Current State-of-the-Art</h2>
+
+<ul>
+  <li>Developers used to write DataSource code like the one below to configure <code class="language-plaintext highlighter-rouge">UICollectionView</code> and <code class="language-plaintext highlighter-rouge">UITableView</code>:</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/168228135-ae120e52-5c14-479f-814e-3cf9c3d26409.jpeg" alt="no1" /></p>
+
+<p>And to update this DataSource, we had to use methods like <code class="language-plaintext highlighter-rouge">reloadData()</code> or <code class="language-plaintext highlighter-rouge">performBatchUpdates()</code>. While <code class="language-plaintext highlighter-rouge">reloadData()</code> is useful for updating small data sets, when dealing with large amounts of data or updating specific cells, you would need to use <code class="language-plaintext highlighter-rouge">performBatchUpdates()</code>. However, improper use of <code class="language-plaintext highlighter-rouge">performBatchUpdates()</code> could lead to crashes like the one below:</p>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/168228171-19ff6cf6-5f89-4b23-8051-7873f535507e.jpeg" alt="no2" /></p>
+
+<h2 id="diffable-datasource">Diffable DataSource</h2>
+
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">Diffable DataSource</code> was introduced in iOS 13 to simplify and make UI updates safer, eliminating the need for developers to handle actions like cell insertions and deletions manually. Instead, it relies on applying a <code class="language-plaintext highlighter-rouge">Snapshot</code> to update data.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/168228193-7237ae99-6c74-444b-b52d-59a8c4b81d52.jpeg" alt="no3" /></p>
+
+<h3 id="snapshots">Snapshots</h3>
+
+<p>A <code class="language-plaintext highlighter-rouge">Snapshot</code> is an object that holds the state of your UI. With a <code class="language-plaintext highlighter-rouge">Snapshot</code>, you can update data without the need for <code class="language-plaintext highlighter-rouge">IndexPath</code> access.</p>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/168228214-24f2a0a0-0290-4d58-a899-b8a103e83d77.jpeg" alt="no4" /></p>
+
+<p>When you need to update the UI, you can create a new <code class="language-plaintext highlighter-rouge">Snapshot</code> or retrieve an existing one and apply it to the DataSource.</p>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/168228230-05f92a53-3d00-4eda-98e0-89d448be7e70.png" alt="no5" /></p>
+
+<h2 id="how-to-use">How to Use</h2>
+
+<h3 id="1-define-the-diffable-datasource-property">1. Define the Diffable DataSource Property</h3>
+
+<p>UIKit provides <code class="language-plaintext highlighter-rouge">Diffable DataSource</code> classes for both <code class="language-plaintext highlighter-rouge">UICollectionView</code> and <code class="language-plaintext highlighter-rouge">UITableView</code>. Here’s an example for <code class="language-plaintext highlighter-rouge">UITableView</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">13.0</span><span class="p">,</span> <span class="n">tvOS</span> <span class="mf">13.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+<span class="kd">open</span> <span class="kd">class</span> <span class="kt">UITableViewDiffableDataSource</span><span class="o">&lt;</span><span class="kt">SectionIdentifierType</span><span class="p">,</span> <span class="kt">ItemIdentifierType</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">UITableViewDataSource</span> 
+    <span class="k">where</span> <span class="kt">SectionIdentifierType</span> <span class="p">:</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt">ItemIdentifierType</span> <span class="p">:</span> <span class="kt">Hashable</span> <span class="p">{</span>
+
+    <span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">CellProvider</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span>
+                                     <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">,</span>
+                                     <span class="n">_</span> <span class="nv">itemIdentifier</span><span class="p">:</span> <span class="kt">ItemIdentifierType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UITableViewCell</span><span class="p">?</span>
+
+    <span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+        <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span>
+        <span class="nv">cellProvider</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">UITableViewDiffableDataSource</span><span class="o">&lt;</span><span class="kt">SectionIdentifierType</span><span class="p">,</span> <span class="kt">ItemIdentifierType</span><span class="o">&gt;.</span><span class="kt">CellProvider</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note that both <code class="language-plaintext highlighter-rouge">SectionIdentifierType</code> and <code class="language-plaintext highlighter-rouge">ItemIdentifierType</code> must conform to the <code class="language-plaintext highlighter-rouge">Hashable</code> protocol.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">ViewController</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
+
+    <span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">13.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+    <span class="kd">private</span> <span class="kd">lazy</span> <span class="k">var</span> <span class="nv">diffableDataSource</span><span class="p">:</span> <span class="kt">UITableViewDiffableDataSource</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">ViewModel</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kt">UITableViewDiffableDataSource</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">ViewModel</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">tableView</span><span class="p">:</span> <span class="n">logTableView</span><span class="p">,</span>
+                                                             <span class="nv">cellProvider</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="n">indexPath</span><span class="p">,</span> <span class="n">itemIdentifier</span><span class="p">)</span> <span class="k">in</span>
+
+            <span class="k">guard</span> <span class="k">let</span> <span class="nv">cell</span> <span class="o">=</span> <span class="n">tableView</span><span class="o">.</span><span class="nf">dequeueReusableCell</span><span class="p">(</span><span class="nv">withIdentifier</span><span class="p">:</span> <span class="s">"MyTableViewCell"</span><span class="p">,</span>
+                                                           <span class="nv">for</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">)</span> <span class="k">as?</span> <span class="kt">MyTableViewCell</span><span class="p">,</span>
+                  <span class="k">let</span> <span class="nv">viewModel</span> <span class="o">=</span> <span class="k">self</span><span class="p">?</span><span class="o">.</span><span class="n">viewModel</span> <span class="k">else</span> <span class="p">{</span>
+                      <span class="k">return</span> <span class="n">tableView</span><span class="o">.</span><span class="nf">dequeueReusableCell</span><span class="p">(</span><span class="nv">withIdentifier</span><span class="p">:</span> <span class="s">"UITableViewCell"</span><span class="p">,</span>
+                                                           <span class="nv">for</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">)</span>
+                  <span class="p">}</span>
+
+            <span class="k">let</span> <span class="nv">cellViewModel</span> <span class="o">=</span> <span class="kt">ViewModel</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="n">itemIdentifier</span><span class="p">)</span>
+            <span class="n">cell</span><span class="o">.</span><span class="n">viewModel</span> <span class="o">=</span> <span class="n">cellViewModel</span>
+            <span class="k">return</span> <span class="n">cell</span>
+        <span class="p">})</span>
+    <span class="p">}()</span>
+
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">super</span><span class="o">.</span><span class="nf">viewDidLoad</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="kd">#available(iOS 13.0, *)</span> <span class="p">{</span>
+            <span class="n">tableView</span><span class="o">.</span><span class="n">dataSource</span> <span class="o">=</span> <span class="n">diffableDataSource</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">tableView</span><span class="o">.</span><span class="n">dataSource</span> <span class="o">=</span> <span class="k">self</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Diffable DataSource</code> can be used as shown above. The <code class="language-plaintext highlighter-rouge">cellProvider</code> closure in <code class="language-plaintext highlighter-rouge">UITableViewDiffableDataSource</code> replaces the logic of the traditional <code class="language-plaintext highlighter-rouge">cellForItemAt()</code> method. When you use <code class="language-plaintext highlighter-rouge">Diffable DataSource</code>, the existing <code class="language-plaintext highlighter-rouge">UITableViewDataSource</code> methods are no longer called.</p>
+
+<h3 id="2-applying-a-new-snapshot">2. Applying a New Snapshot</h3>
+
+<p>If you want to add new data to your DataSource, create an <code class="language-plaintext highlighter-rouge">NSDiffableDataSourceSnapshot</code> and add your models to it:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">snapshot</span> <span class="o">=</span> <span class="kt">NSDiffableDataSourceSnapshot</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">ViewModel</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="n">snapshot</span><span class="o">.</span><span class="nf">appendSections</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">snapshot</span><span class="o">.</span><span class="nf">appendItems</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span> <span class="nv">toSection</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+<span class="k">self</span><span class="p">?</span><span class="o">.</span><span class="n">diffableDataSource</span><span class="o">.</span><span class="nf">apply</span><span class="p">(</span><span class="n">snapshot</span><span class="p">,</span>
+                               <span class="nv">animatingDifferences</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+                               <span class="nv">completion</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="k">in</span>
+    <span class="k">self</span><span class="p">?</span><span class="o">.</span><span class="nf">scrollToBottom</span><span class="p">(</span><span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<h2 id="considerations-and-additional-information">Considerations and Additional Information</h2>
+
+<ul>
+  <li>Once you’ve applied the <code class="language-plaintext highlighter-rouge">Diffable Data Source</code>, do not use methods like <code class="language-plaintext highlighter-rouge">performBatchUpdates()</code>, <code class="language-plaintext highlighter-rouge">insertItems()</code>, or <code class="language-plaintext highlighter-rouge">deleteItems()</code> to update your UI.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/168228354-25666d0d-75de-4876-861c-bd08fce19825.jpeg" alt="no6" /></p>
+
+<ul>
+  <li>You can create a new <code class="language-plaintext highlighter-rouge">Snapshot</code> or use an existing one to update your data.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/168228380-36089083-a6b6-44d6-9f66-b2d677432403.jpeg" alt="no7" /></p>
+
+<ul>
+  <li>All data updates are performed through the <code class="language-plaintext highlighter-rouge">Snapshot</code>. Therefore, the <code class="language-plaintext highlighter-rouge">Snapshot</code> provides APIs for updating your models.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/168228394-a2ad2e51-42e3-4586-873a-4314e4724d21.jpeg" alt="no8" /></p>
+
+<h2 id="performance">Performance</h2>
+
+<ul>
+  <li>The diffing algorithm used by <code class="language-plaintext highlighter-rouge">Diffable Data Source</code> is fast.</li>
+  <li>Unlike other reload APIs, the <code class="language-plaintext highlighter-rouge">apply()</code> method for applying a new <code class="language-plaintext highlighter-rouge">Snapshot</code> doesn’t</li>
+</ul>
+
+<p>have to be executed on the main thread. However, it should always be called on the same queue.</p>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/168228418-136c5999-d77e-4202-8cc9-83546807ede0.jpeg" alt="no9" /></p>
+
+<h1 id="real-world-application">Real-World Application</h1>
+
+<p>While <code class="language-plaintext highlighter-rouge">Diffable DataSource</code> is useful, there are considerations when applying it in real-world projects. Here are a few things we took into account when implementing <code class="language-plaintext highlighter-rouge">Diffable DataSource</code> in our projects.</p>
+
+<h3 id="1-hashable-types">1. Hashable Types</h3>
+
+<h3 id="protocol-type">Protocol Type</h3>
+
+<p>Both <code class="language-plaintext highlighter-rouge">SectionIdentifierType</code> and <code class="language-plaintext highlighter-rouge">ItemIdentifierType</code> for <code class="language-plaintext highlighter-rouge">Diffable DataSource</code> must conform to the <code class="language-plaintext highlighter-rouge">Hashable</code> protocol. When you define a protocol that conforms to <code class="language-plaintext highlighter-rouge">Hashable</code>, you cannot use that protocol as a type. To address this, you can create an enum with associated values that represent different types conforming to the protocol.</p>
+
+<p>For example, if your ViewController uses various ViewModels defined by a protocol:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">ViewModelable</span> <span class="p">{}</span>
+
+<span class="kd">struct</span> <span class="kt">ViewModel1</span><span class="p">:</span> <span class="kt">ViewModelable</span> <span class="p">{}</span>
+<span class="kd">struct</span> <span class="kt">ViewModel2</span><span class="p">:</span> <span class="kt">ViewModelable</span> <span class="p">{}</span>
+<span class="kd">struct</span> <span class="kt">ViewModel3</span><span class="p">:</span> <span class="kt">ViewModelable</span> <span class="p">{}</span>
+
+<span class="kd">class</span> <span class="kt">ViewController</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">viewModel</span><span class="p">:</span> <span class="kt">ViewModelable</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>However, to use <code class="language-plaintext highlighter-rouge">Diffable DataSource</code>, you need your <code class="language-plaintext highlighter-rouge">ViewModelable</code> to be <code class="language-plaintext highlighter-rouge">Hashable</code>, which presents a problem:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">ViewModelable</span><span class="p">:</span> <span class="kt">Hashable</span> <span class="p">{}</span>
+
+<span class="kd">class</span> <span class="kt">ViewController</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">viewModel</span><span class="p">:</span> <span class="kt">ViewModelable</span> <span class="c1">// compile error</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To solve this, you can create an enum that includes associated values for your ViewModels:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">ViewModel</span><span class="p">:</span> <span class="kt">Hashable</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nf">normal</span><span class="p">(</span><span class="nv">viewModel</span><span class="p">:</span> <span class="kt">ViewModelable</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nf">error</span><span class="p">(</span><span class="nv">viewModel</span><span class="p">:</span> <span class="kt">ViewModelable</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">ViewController</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">viewModel</span><span class="p">:</span> <span class="kt">ViewModel</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>With this approach, you can use <code class="language-plaintext highlighter-rouge">Diffable DataSource</code> while accommodating different ViewModel types.</p>
+
+<h3 id="concrete-type">Concrete Type</h3>
+
+<p>Even when your models are concrete types, you may encounter challenges. <code class="language-plaintext highlighter-rouge">Hashable</code> requires you to implement <code class="language-plaintext highlighter-rouge">==(lhs:rhs:)</code> for equatability, which can lead to writing a lot of boilerplate code. To avoid this, you can inject a <code class="language-plaintext highlighter-rouge">UUID</code> into your models, making it easier to conform to <code class="language-plaintext highlighter-rouge">Hashable</code>.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">UUIDHashable</span><span class="p">:</span> <span class="kt">Hashable</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">uuid</span><span class="p">:</span> <span class="kt">UUID</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span> <span class="kt">UUIDHashable</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">hash</span><span class="p">(</span><span class="n">into</span> <span class="nv">hasher</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">Hasher</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">hasher</span><span class="o">.</span><span class="nf">combine</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="2-performance">2. Performance</h3>
+
+<p>In scenarios with large data sets and frequent UI updates, repeatedly creating and applying new Snapshots can lead to performance issues. For instance, if you create and apply a new Snapshot every 0.1 seconds, scrolling may become laggy.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">snapshot</span> <span class="o">=</span> <span class="kt">NSDiffableDataSourceSnapshot</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">ViewModel</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="n">snapshot</span><span class="o">.</span><span class="nf">appendSections</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">snapshot</span><span class="o">.</span><span class="nf">appendItems</span><span class="p">(</span><span class="n">viewModels</span><span class="p">,</span> <span class="nv">toSection</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">diffableDataSource</span><span class="o">.</span><span class="nf">apply</span><span class="p">(</span><span class="n">snapshot</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This is similar to the performance degradation you would experience when calling <code class="language-plaintext highlighter-rouge">reloadData()</code> multiple times rapidly. To improve performance, consider always working with the same Snapshot and modifying it by adding or removing items as needed.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">applySnapshot</span><span class="p">(</span><span class="nv">newItems</span><span class="p">:</span> <span class="p">[</span><span class="kt">ViewModel</span><span class="p">])</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">snapshot</span> <span class="o">=</span> <span class="n">diffableDataSource</span><span class="o">.</span><span class="nf">snapshot</span><span class="p">()</span>
+    <span class="n">snapshot</span><span class="o">.</span><span class="nf">appendItems</span><span class="p">(</span><span class="n">newItems</span><span class="p">,</span> <span class="nv">toSection</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">diffableDataSource</span><span class="o">.</span><span class="nf">apply</span><span class="p">(</span><span class="n">snapshot</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="3-background-queue">3. Background Queue</h2>
+
+<p>As mentioned in WWDC, the <code class="language-plaintext highlighter-rouge">apply()</code> method does not have to run on the main thread. However, if you choose to run it on a different queue, you must explicitly ensure that <code class="language-plaintext highlighter-rouge">apply()</code> is called on the same queue where the <code class="language-plaintext highlighter-rouge">Diffable DataSource</code> is being used. Failure to do so will result in warnings and potentially unexpected crashes.</p>
+
+<p>Additionally, once <code class="language-plaintext highlighter-rouge">apply()</code> has been called on a different queue, do not update it again on the main queue. In other words, avoid switching between queues when using <code class="language-plaintext highlighter-rouge">apply()</code>.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"Update Queue"</span><span class="p">)</span>
+
+<span class="c1">// Even if applyQueueToSnapshot() is called on a different queue, wrap apply() in the same queue.</span>
+<span class="kd">func</span> <span class="nf">applySnapshot</span><span class="p">(</span><span class="nv">newItems</span><span class="p">:</span> <span class="p">[</span><span class="kt">ViewModel</span><span class="p">])</span> <span class="p">{</span>
+    <span class="n">queue</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span> <span class="p">[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="k">in</span>
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">self</span> <span class="o">=</span> <span class="k">self</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+        <span class="k">var</span> <span class="nv">snapshot</span> <span class="o">=</span> <span class="k">self</span><span class="o">.</span><span class="n">diffableDataSource</span><span class="o">.</span><span class="nf">snapshot</span><span class="p">()</span>
+        <span class="n">snapshot</span><span class="o">.</span><span class="nf">appendItems</span><span class="p">(</span><span class="n">newItems</span><span class="p">,</span> <span class="nv">toSection</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">diffableDataSource</span><span class="o">.</span><span class="nf">apply</span><span class="p">(</span><span class="n">snapshot</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="references">References</h1>
+
+<ul>
+  <li><a href="https://developer.apple.com/videos/play/wwdc2019/220">Advances in UI Data Sources</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    <h2>Lastest Posts</h2>
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2021-12/test_stub">
+              Test Stub
+              <small>25 Dec 2021</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000/">< 홈으로</a>
+    <p>잘못된 정보나 궁금하신 점은 hcn1519@gmail.com으로 알려주시면 감사하겠습니다.</p>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>
