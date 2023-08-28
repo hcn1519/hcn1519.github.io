@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Swift, 객체간 비동기 데이터 전송하기 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Swift, 객체간 비동기 데이터 전송하기 - hcn1519 Dev Post">
+  <meta name="description" content="Swift에서 객체간 비동기 데이터를 전송하는 세 가지 방식에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Swift, 객체간 비동기 데이터 전송하기">
+  <meta property="og:image" content="/public/assets/swiftLogo.jpg">
+  <meta property="og:description" content="Swift에서 객체간 비동기 데이터를 전송하는 세 가지 방식에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Swift, 객체간 비동기 데이터 전송하기</h1>
+  <span class="post-date">01 Aug 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/swiftLogo.jpg"
+    
+    alt="Swift, 객체간 비동기 데이터 전송하기 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>통신을 하는 iOS 앱을 만드는 경우 다음과 같은 흐름을 통해 데이터를 주고 받습니다. 대표적으로 데이터를 받아오는 경우</p>
+
+<ol>
+  <li>네트워크를 다루는 객체를 통해 비동기 방식으로 데이터를 전달 받고</li>
+  <li>해당 데이터를 알맞은 모델 객체로 저장하여</li>
+  <li>컨트롤러에서 모델에 기반하여 데이터를 적절히 보여줍니다.</li>
+</ol>
+
+<p><img src="https://dl.dropbox.com/s/kppv4nyggcbbv86/networkprocess.png" alt="process" /></p>
+
+<p>이 경우, 우리는 네트워크를 다루는 객체에서 컨트롤러 객체에 데이터를 넘겨주어야 합니다. 단, 네트워크에서 받는 데이터는 비동기 방식으로 처리되어야 합니다. 여기서는 3가지 방법을 통해 이를 구현하는 방법을 알아보겠습니다.</p>
+
+<h2 id="notificationcenter-활용하기">NotificationCenter 활용하기</h2>
+
+<p><code class="language-plaintext highlighter-rouge">NotificationCenter</code>는 observer 패턴을 활용하여 객체에 알람을 전송하는 메커니즘입니다.</p>
+
+<div class="message">
+  A notification dispatch mechanism that enables the broadcast of information to registered observers.
+</div>
+
+<p><code class="language-plaintext highlighter-rouge">NotificationCenter</code>는 특정 객체에 이름을 지닌 <code class="language-plaintext highlighter-rouge">observer</code>를 달아서, 앱 어딘가에서 자신을 호출하는 <code class="language-plaintext highlighter-rouge">post</code> 메소드가 호출되면 selector가 실행되는 형태를 가지고 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="kt">NetworkModule1</span> <span class="p">{</span>
+    <span class="c1">// 2</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">getData</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">let</span> <span class="nv">defaultSession</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="p">(</span><span class="nv">configuration</span><span class="p">:</span> <span class="o">.</span><span class="k">default</span><span class="p">)</span>
+
+      <span class="k">guard</span> <span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"</span><span class="se">\(</span><span class="kt">BASEURL</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nf">print</span><span class="p">(</span><span class="s">"URL is nil"</span><span class="p">)</span>
+          <span class="k">return</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Request</span>
+      <span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">URLRequest</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
+
+      <span class="c1">// dataTask</span>
+      <span class="k">var</span> <span class="nv">dataTask</span><span class="p">:</span> <span class="kt">URLSessionDataTask</span><span class="p">?</span>
+      <span class="n">dataTask</span> <span class="o">=</span> <span class="n">defaultSession</span><span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+          <span class="c1">// getting Data Error</span>
+          <span class="k">guard</span> <span class="n">error</span> <span class="o">==</span> <span class="kc">nil</span> <span class="k">else</span> <span class="p">{</span>
+              <span class="nf">print</span><span class="p">(</span><span class="s">"Error occur: </span><span class="se">\(</span><span class="kt">String</span><span class="p">(</span><span class="nv">describing</span><span class="p">:</span> <span class="n">error</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+              <span class="k">return</span>
+          <span class="p">}</span>
+
+          <span class="k">if</span> <span class="k">let</span> <span class="nv">myData</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="k">let</span> <span class="nv">response</span> <span class="o">=</span> <span class="n">response</span> <span class="k">as?</span> <span class="kt">HTTPURLResponse</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">statusCode</span> <span class="o">==</span> <span class="mi">200</span> <span class="p">{</span>
+              <span class="c1">// data update</span>
+              <span class="c1">// self.updateData(index: index, data: data)</span>
+              <span class="kt">NotificationCenter</span><span class="o">.</span><span class="k">default</span><span class="o">.</span><span class="nf">post</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">NSNotification</span><span class="o">.</span><span class="kt">Name</span><span class="p">(</span><span class="nv">rawValue</span><span class="p">:</span> <span class="s">"getData"</span><span class="p">),</span>
+                                              <span class="nv">object</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">userInfo</span><span class="p">:</span> <span class="n">myData</span><span class="p">)</span>
+          <span class="p">}</span>
+      <span class="p">}</span>
+
+      <span class="n">dataTask</span><span class="p">?</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="kt">SomeViewController</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
+    <span class="c1">// 1</span>
+    <span class="kd">func</span> <span class="nf">viewDidload</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">super</span><span class="o">.</span><span class="nf">viewDidload</span><span class="p">()</span>
+        <span class="kt">NotificationCenter</span><span class="o">.</span><span class="k">default</span><span class="o">.</span><span class="nf">addObserver</span><span class="p">(</span><span class="k">self</span><span class="p">,</span>
+                                               <span class="nv">selector</span><span class="p">:</span> <span class="kd">#selector(</span><span class="nf">self.getDataFinished</span><span class="kd">)</span><span class="p">,</span>
+                                               <span class="nv">name</span><span class="p">:</span> <span class="kt">NSNotification</span><span class="o">.</span><span class="kt">Name</span><span class="p">(</span><span class="nv">rawValue</span><span class="p">:</span> <span class="s">"getData"</span><span class="p">),</span>
+                                               <span class="nv">object</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="c1">// 3</span>
+    <span class="kd">func</span> <span class="nf">getDataFinished</span><span class="p">(</span><span class="n">_</span> <span class="nv">notification</span><span class="p">:</span> <span class="kt">Notification</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// userInfo를 통해 데이터 전달</span>
+        <span class="c1">// update instance here</span>
+
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+            <span class="c1">// update tableView or collectionView</span>
+            <span class="c1">// self.tableView.reloadData()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">viewController</span> <span class="o">=</span> <span class="kt">SomeViewController</span><span class="p">()</span>
+<span class="n">viewController</span><span class="o">.</span><span class="nf">viewDidload</span><span class="p">()</span>
+<span class="kt">NetworkModule1</span><span class="o">.</span><span class="nf">getData</span><span class="p">()</span></code></pre></figure>
+
+<ol>
+  <li>가장 먼저 <code class="language-plaintext highlighter-rouge">viewDidload()</code>메소드를 호출하여 <code class="language-plaintext highlighter-rouge">viewController</code>에 <code class="language-plaintext highlighter-rouge">NotificationCenter</code>의 observer를 달아줍니다. 이 때 <code class="language-plaintext highlighter-rouge">selector</code>를 통해 해당 observer가 호출되면 실행되는 메소드를 <code class="language-plaintext highlighter-rouge">getDataFinished</code>로 지정하였습니다.</li>
+  <li>다음으로 <code class="language-plaintext highlighter-rouge">NetworkModule1.getData()</code>를 호출하는데 이 때 <code class="language-plaintext highlighter-rouge">NotificationCenter</code>로 post를 전달합니다. 이 때 <code class="language-plaintext highlighter-rouge">userInfo</code> 파라미터를 통해서 딕셔너리 형태의 데이터를 전달할 수 있으며, 이는 <code class="language-plaintext highlighter-rouge">selector</code>에서 지정된 함수에서 받을 수 있습니다.</li>
+  <li>받아 온 데이터를 GCD를 통해 <code class="language-plaintext highlighter-rouge">Main</code> 큐에서 뷰를 업데이트 합니다.</li>
+</ol>
+
+<p>이와 같이 <code class="language-plaintext highlighter-rouge">NotificationCenter</code>를 통해 데이터를 받아오고 난 이후에 post를 전달하는 형태로 코드를 작성하면 데이터가 전달된 후 다음 작업을 하는 것이 보장되기 때문에 비동기 데이터를 처리할 수 있습니다. 다만, <code class="language-plaintext highlighter-rouge">NotificationCenter</code>는 observer도 달고, <code class="language-plaintext highlighter-rouge">selector</code> 함수도 별도로 작성해야 하기 때문에 코드가 다소 길어지는 경향이 있습니다. 그렇기 때문에 다수의 observer로부터 값을 주고 받는 경우에 사용하는 것이 좋습니다.</p>
+
+<h2 id="escaping-closure-활용하기">Escaping Closure 활용하기</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Escaping closure</code>를 사용하면 해당 함수가 실행된 후 클로저가 실행되는 것을 <strong>보장</strong> 할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="kt">NetworkModule2</span> <span class="p">{</span>
+  <span class="c1">// 2</span>
+  <span class="kd">static</span> <span class="kd">func</span> <span class="nf">getDataFromClosure</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="n">myData</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">let</span> <span class="nv">defaultSession</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="p">(</span><span class="nv">configuration</span><span class="p">:</span> <span class="o">.</span><span class="k">default</span><span class="p">)</span>
+
+      <span class="k">guard</span> <span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"</span><span class="se">\(</span><span class="kt">BASEURL</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nf">print</span><span class="p">(</span><span class="s">"URL is nil"</span><span class="p">)</span>
+          <span class="k">return</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Request</span>
+      <span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">URLRequest</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
+
+      <span class="c1">// dataTask</span>
+      <span class="k">var</span> <span class="nv">dataTask</span><span class="p">:</span> <span class="kt">URLSessionDataTask</span><span class="p">?</span>
+      <span class="n">dataTask</span> <span class="o">=</span> <span class="n">defaultSession</span><span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+          <span class="c1">// getting Data Error</span>
+          <span class="k">guard</span> <span class="n">error</span> <span class="o">==</span> <span class="kc">nil</span> <span class="k">else</span> <span class="p">{</span>
+              <span class="nf">print</span><span class="p">(</span><span class="s">"Error occur: </span><span class="se">\(</span><span class="kt">String</span><span class="p">(</span><span class="nv">describing</span><span class="p">:</span> <span class="n">error</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+              <span class="k">return</span>
+          <span class="p">}</span>
+
+          <span class="k">if</span> <span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="k">let</span> <span class="nv">response</span> <span class="o">=</span> <span class="n">response</span> <span class="k">as?</span> <span class="kt">HTTPURLResponse</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">statusCode</span> <span class="o">==</span> <span class="mi">200</span> <span class="p">{</span>
+              <span class="c1">// 3</span>
+              <span class="c1">// data update</span>
+              <span class="c1">// self.updateData(index: index, data: data)</span>
+
+              <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+                  <span class="nf">completion</span><span class="p">(</span><span class="n">myDatas</span><span class="p">)</span>
+              <span class="p">}</span>
+          <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="n">dataTask</span><span class="p">?</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">class</span> <span class="kt">SomeViewController</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
+
+    <span class="kd">func</span> <span class="nf">viewDidload</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">super</span><span class="o">.</span><span class="nf">viewDidload</span><span class="p">()</span>
+        <span class="c1">// 1</span>
+        <span class="kt">NetworkHandler2</span><span class="o">.</span><span class="nf">getDataFromClosure</span><span class="p">()</span> <span class="p">{</span> <span class="p">[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="n">results</span> <span class="k">in</span>
+            <span class="c1">// 4</span>
+            <span class="c1">// update tableView or collectionView</span>
+            <span class="c1">// self?.tableView.reloadData()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<ol>
+  <li>가장 먼저 <code class="language-plaintext highlighter-rouge">getDataFromClosure(completion:)</code> 함수를 호출합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">getDataFromClosure(completion:)</code>은 파라미터로 <code class="language-plaintext highlighter-rouge">escaping closure</code>를 받습니다. 그렇기 때문에 <code class="language-plaintext highlighter-rouge">completion</code>은 해당 함수가 실행된 이후에 실행됩니다.</li>
+  <li>받아온 데이터를 serialize하고 <code class="language-plaintext highlighter-rouge">completion</code> 클로저를 호출합니다. 이 때, 일반적으로 <code class="language-plaintext highlighter-rouge">completion</code>은 받아온 데이터들을 화면에 적절히 뿌려주는 작업을 하기 때문에, main 쓰레드에서 클로저를 호출합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">completion</code> 클로저의 body 부분으로 <code class="language-plaintext highlighter-rouge">escaping closure</code> 형태로 <code class="language-plaintext highlighter-rouge">completion</code>이 작성되어 있기 때문에 항상 <code class="language-plaintext highlighter-rouge">getDataFromClosure()</code>가 실행된 이후 실행되는 것이 보장됩니다.</li>
+</ol>
+
+<h2 id="delegate-패턴-활용하기">Delegate 패턴 활용하기</h2>
+
+<hr />
+
+<h2 id="참고자료">참고자료</h2>
+<ul>
+  <li>Apple Inc. The Swift Programming Language (Swift 3.1)</li>
+  <li><a href="https://medium.com/@kumarpramod017/what-do-mean-escaping-and-nonescaping-closures-in-swift-d404d721f39d">What do mean @escaping and @nonescaping closures in Swift?</a></li>
+  <li><a href="https://stackoverflow.com/questions/41745328/completion-handlers-in-swift-3-0">Completion handlers in Swift 3.0</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2017-09/swift_escaping_closure">
+              Swift Escaping Closure 이해하기
+              <small>12 Sep 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#EscapingClosure">
+                EscapingClosure
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

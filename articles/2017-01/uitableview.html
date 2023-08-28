@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>iOS UITableView 기초 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="iOS UITableView 기초 - hcn1519 Dev Post">
+  <meta name="description" content="iOS의 UITableView에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="iOS UITableView 기초">
+  <meta property="og:image" content="/public/assets/iOS10.png">
+  <meta property="og:description" content="iOS의 UITableView에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">iOS UITableView 기초</h1>
+  <span class="post-date">22 Jan 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS10.png"
+    
+    alt="iOS UITableView 기초 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h4 id="tableview의-기본-구조">tableView의 기본 구조</h4>
+
+<p>iOS에서 UITabelView는 계층적으로 무언가를 보여줄 때 주로 사용합니다. 간단한 예를 들면 아이폰의 설정창입니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/daap53vpn7elgo8/basictable.png" /></p>
+
+<p>tableView는 무조건 <strong>1개의 column</strong> 으로 구성되고, 위아래 스크롤만 할 수 있습니다. 그리고 table을 구성하는 요소로 <strong>section</strong> 과 <strong>row</strong> 가 있습니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/w5dbga4sow9vx8p/tableviewBasic.png" /></p>
+
+<p>이미지 출처 : <a href="https://www.ralfebert.de/tutorials/ios-swift-uitableviewcontroller">
+https://www.ralfebert.de/tutorials/ios-swift-uitableviewcontroller
+</a></p>
+
+<p><strong>section</strong> 과 <strong>row</strong> 는 위 그림을 보시면 쉽게 파악하실 수 있습니다. <strong>Section</strong> 이 여러 <strong>row</strong> 를 포함하는 구조를 가지고 있는 것이죠. 물론 section이 1개만 있고 여러 개의 rows만 있는 경우도 매우 많습니다. 몇 가지 예제를 더 살펴보자면,</p>
+
+<p><img src="https://dl.dropbox.com/s/93ifocbudi9aanj/types_of_table_views.jpg" /></p>
+
+<p>위 그림에서 첫 번째 예시에는 section이 없고, row만 있는 것을 확인하실 수 있습니다.</p>
+
+<h4 id="필수-메소드">필수 메소드</h4>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift">  <span class="c1">// 실제 셀에 데이터를 반환하는 메소드, (필수)</span>
+  <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">cellForRowAt</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UITableViewCell</span> <span class="p">{</span>
+
+      <span class="k">let</span> <span class="nv">cell</span> <span class="o">=</span> <span class="n">tableView</span><span class="o">.</span><span class="nf">dequeueReusableCell</span><span class="p">(</span><span class="nv">withIdentifier</span><span class="p">:</span> <span class="s">"lottoCell"</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="n">indexPath</span> <span class="k">as</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="k">as!</span> <span class="kt">LottoCell</span>
+      <span class="k">let</span> <span class="nv">row</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">indexPath</span><span class="o">.</span><span class="n">row</span>
+
+      <span class="n">cell</span><span class="o">.</span><span class="n">nameOfOutlet</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">"Hello world"</span>
+
+      <span class="k">return</span> <span class="n">cell</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 해당 테이블에 섹션이 몇 개가 있는지?, (필수)</span>
+  <span class="kd">func</span> <span class="nf">numberOfSections</span><span class="p">(</span><span class="k">in</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="mi">1</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 행의 개수(세로로 나열되는)</span>
+  <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">numberOfRowsInSection</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">lottoNumbers</span><span class="o">.</span><span class="n">count</span>
+  <span class="p">}</span></code></pre></figure>
+
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-08/autolayout_performance_optimization">
+              AutoLayout 성능 최적화하기
+              <small>23 Aug 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-03/ios_darkmode">
+              iOS 다크모드 알아보기
+              <small>13 Mar 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2017-09/ios_app_lifeCycle">
+              iOS Application Life Cycle 이해하기
+              <small>07 Sep 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

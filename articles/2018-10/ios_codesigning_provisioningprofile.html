@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title> iOS 인증서, Provisioning Profile - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content=" iOS 인증서, Provisioning Profile - hcn1519 Dev Post">
+  <meta name="description" content="앱을 iOS 기기에 설치하기 위해 필요한 Certificate, Provisioning Profile 등에 대해 알아 봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content=" iOS 인증서, Provisioning Profile">
+  <meta property="og:image" content="/public/assets/iOS.png">
+  <meta property="og:description" content="앱을 iOS 기기에 설치하기 위해 필요한 Certificate, Provisioning Profile 등에 대해 알아 봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title"> iOS 인증서, Provisioning Profile</h1>
+  <span class="post-date">21 Oct 2018</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS.png"
+    
+    alt=" iOS 인증서, Provisioning Profile feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="목차">목차</h2>
+
+<ol>
+  <li><a href="https://hcn1519.github.io/articles/2018-10/ios_codesigning_provisioningprofile#certificate-발급-받기">애플에서 Certificate 발급 받기</a></li>
+  <li><a href="https://hcn1519.github.io/articles/2018-10/ios_codesigning_provisioningprofile#device-신뢰-확보하기">Device 신뢰 확보하기</a></li>
+  <li><a href="https://hcn1519.github.io/articles/2018-10/ios_codesigning_provisioningprofile#app-빌드와-기기에서-앱-실행시-signing-확인">App 빌드와 기기에서 앱 실행시 Signing 확인</a></li>
+</ol>
+
+<p>iOS에서 자신이 만든 앱을 시뮬레이터가 아닌 실제 단말기에서 구동하는 방식을 찾아보게 되면, 그 과정이 쉽지 않다는 것을 알 수 있습니다. 이 글에서는 내가 만든 앱을 기기에서 실행하는 과정에서 필요한 것들에 대해 알아보고자 합니다.</p>
+
+<p>우선 iOS 기기에 자신이 만든 앱을 등록하는 과정이 어떤 것인지 대략적으로 이해하면 좋습니다.</p>
+
+<ol>
+  <li>개발자는 애플로부터 iOS 기기에 앱을 설치할 수 있는 권한을 얻어야 합니다. 즉, 개발자는 애플에서 인증 받은 개발자가 되어야 합니다. 이 인증서를 통해 애플은 개발자를 식별할 수 있고, 앱 서명에 대한 권한을 얻을 수 있습니다.</li>
+  <li>자신의 앱을 기기에 설치할 때, 기기에는 항상 만든 사람의 서명(signing)이 포함됩니다. 서명에는 만든 사람의 권한 정보가 포함되고, 애플에서 인증 받은 개발자만 앱을 기기에 설치할 수 있습니다.</li>
+</ol>
+
+<p>아래에서는 위에서 설명한 과정에서 필요한 것들과 이들을 어떻게 만드는지 하나하나 알아보겠습니다.</p>
+
+<h2 id="certificate-발급-받기">Certificate 발급 받기</h2>
+
+<p>앞서 언급한 것처럼 우리가 사용하는 iOS 기기에는 애플과 애플에서 인증한 개발자들이 만든 앱들만 설치할 수 있습니다. 일반 개발자는 애플 소속이 아니기 때문에 <code class="language-plaintext highlighter-rouge">애플에서 인증받은 개발자</code>가 되어야 합니다. 이를 위해서 개발자는 애플에서 인증서(Certificate)를 받아야 합니다. 인증서를 받기 위해서는 맥에서 <code class="language-plaintext highlighter-rouge">CertSigningRequest(CSR)</code>을 생성하고 이를 애플에 제출해야 합니다.</p>
+
+<h3 id="certsigningrequestcsr">CertSigningRequest(CSR)</h3>
+
+<p>CSR 파일은 이름에서 알 수 있듯이 애플에 인증서를 요청하기 위한 파일입니다. 이 파일은 맥에 설치되어 있는 <code class="language-plaintext highlighter-rouge">KeyChainAccess(키체인 접근)</code>이라는 앱을 통해서 만들 수 있고, 그 과정은 다음과 같습니다.</p>
+
+<blockquote>
+  <p>키체인 접근 &gt; 인증서 요청 &gt; 인증 기관에서 인증서 요청</p>
+</blockquote>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-10/ios_codesigning_provisioningprofile/createCSR.png" /></p>
+
+<p>인증서 생성은 다음과 같은 작업을 수행합니다.</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">CertificateSigningRequest.certSigningRequest</code> 파일 생성 - 애플에 등록할 인증 요청 파일입니다.</li>
+  <li>인증서의 개인키와 공개키 생성 - 키체인 접근의 키 카테고리를 확인하면, 인증서 생성시 등록한 <code class="language-plaintext highlighter-rouge">일반 이름</code> 항목으로 등록된 개인키와 공개키를 확인할 수 있습니다. 인증서를 주고 받고, 이를 사용하는 과정에서 <a href="https://ko.wikipedia.org/wiki/%EA%B3%B5%EA%B0%9C_%ED%82%A4_%EC%95%94%ED%98%B8_%EB%B0%A9%EC%8B%9D">공개 키 암호 방식(비대칭 암호화) </a> 방식을 사용합니다. 인증서를 애플로부터 발급 받고나서 그냥 사용하는 것이 아니라, 개인키가 반드시 필요하기 때문에 이 키는 잘 보관해야 합니다.</li>
+</ol>
+
+<p>이렇게 CSR 파일을 생성 후, 애플 개발자 페이지에서 해당 CSR을 업로드하면 인증서(<code class="language-plaintext highlighter-rouge">myCertificate.cer</code> 형태)를 발급 받을 수 있습니다.</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-10/ios_codesigning_provisioningprofile/createCSR2.png" /></p>
+
+<p>이렇게 만든 인증서를 다운로드 후, 더블 클릭하면 인증서가 맥에 등록됩니다. 등록이 올바르게 되었는지 확인하기 위해서는 키체인 접근(<code class="language-plaintext highlighter-rouge">키체인 접근 &gt; 키 카테고리 &gt; 설정한 일반이름(개인키) &gt; 등록한 인증서 확인</code>) 앱을 확인하면 됩니다.</p>
+
+<h2 id="device-신뢰-확보하기">Device 신뢰 확보하기</h2>
+
+<p>위의 과정을 거치면 개발자는 <code class="language-plaintext highlighter-rouge">애플에서 인증 받은 개발자</code>가 되었다고 할 수 있습니다. 즉, 이제 개발자는 자신이 만든 앱에 서명할 때 애플의 인증 절차를 통과할 수 있습니다. 이제 <code class="language-plaintext highlighter-rouge">우리가 인증 받았다</code>라는 사실을 기기에 전달하기만 하면 되는데, 이를 위해 <code class="language-plaintext highlighter-rouge">Provisioning Profile</code>이 필요합니다.</p>
+
+<h3 id="provisioning-profile">Provisioning Profile</h3>
+
+<p>애플에서 정의한 Provisioning Profile은 다음과 같습니다.</p>
+
+<blockquote>
+  <p>provisioning profile is a type of system profile used to launch one or more apps on devices and use certain services.</p>
+</blockquote>
+
+<p><a href="https://help.apple.com/xcode/mac/current/#￼/dev46a99ba04">Provisioning profile</a></p>
+
+<p><code class="language-plaintext highlighter-rouge">Provisioning Profile</code>은 기기와 개발자 계정 사이를 연결하는 역할을 담당하는 profile입니다. 이 profile은 <code class="language-plaintext highlighter-rouge">myProfile.mobileProvision</code>의 형태의 파일입니다. <code class="language-plaintext highlighter-rouge">Provisioning Profile</code>에는 다음과 같은 것들이 들어갑니다.</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-10/ios_codesigning_provisioningprofile/provisioningProfile.png" /></p>
+
+<ol>
+  <li>Certificate - 앞서서 만든 인증서가 <code class="language-plaintext highlighter-rouge">Provisioning Profile</code>에 들어갑니다.</li>
+  <li>App ID - 모든 iOS 앱은 앱 스토어에 등록되기 위해 Bundle Identifier 기반의 App ID가 필요합니다. 즉, App ID는 앱 스토어에서 사용되는 앱의 고유 ID입니다.</li>
+  <li>Device - 모든 iOS 기기는 고유의 UDID(Unique Device Identifier)를 가지고 있고, 이 기기를 developer 사이트(멤버 센터)에 등록해두어야 테스트하려는 앱을 기기에 설치할 수 있습니다.</li>
+</ol>
+
+<h3 id="provisioning-profile-생성하기">Provisioning Profile 생성하기</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Provisioning Profile</code>은 Xcode에서 자동으로 생성되도록 할 수도 있고, 직접 developer 사이트에서 생성하고, import할 수도 있습니다. 자동으로 관리하는 방식은 Xcode에서 <code class="language-plaintext highlighter-rouge">project navigator &gt; target 선택 &gt; Signing &gt; Automatically Manage Signing</code>을 선택하는 것입니다.
+이 방법은 Xcode 8, 9에서 많이 개선되어 잘 동작합니다. 다만, 여기서는 <code class="language-plaintext highlighter-rouge">Provisioning Profile</code> 생성 과정에서 어딘가 꼬이는 상황이 발생할 수 있고, 자동 생성을 사용할 수 없는 환경에서 개발을 해야 할 수도 있기 때문에, 수동으로 <code class="language-plaintext highlighter-rouge">Provisioning Profile</code>을 생성하고 추가하는 방법을 살펴보겠습니다.</p>
+
+<h5 id="수동으로-provisioning-profile-생성하기">수동으로 <code class="language-plaintext highlighter-rouge">Provisioning Profile</code> 생성하기</h5>
+
+<p>직접 인증서를 모두 관리하는 환경에서는 Certificate, App ID, Device를 맞춰서 <code class="language-plaintext highlighter-rouge">Provisioning Profile</code>을 생성한 후, <code class="language-plaintext highlighter-rouge">Provisioning Profile</code>을 다운로드 받아서 Xcode에 등록하는 형태로 이를 사용합니다. 과정은 아래와 같습니다.</p>
+
+<ul>
+  <li>먼저 생성할 종류의 <code class="language-plaintext highlighter-rouge">Provisioning Profile</code>을 선택합니다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-10/ios_codesigning_provisioningprofile/createProvision1.png" /></p>
+
+<ul>
+  <li>다음으로 생성한 App ID를 선택합니다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-10/ios_codesigning_provisioningprofile/createProvision2.png" /></p>
+
+<blockquote>
+  <p>App ID의 경우 위에서 별도로 생성 방식을 설명하지 않았지만, developer 사이트 &gt; App ID 탭에서 필요한 서비스 선택 후 쉽게 생성할 수 있습니다.</p>
+</blockquote>
+
+<ul>
+  <li>연결할 Certificate를 선택합니다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-10/ios_codesigning_provisioningprofile/createProvision3.png" /></p>
+
+<p>이렇게 하면 <code class="language-plaintext highlighter-rouge">Provisioning Profile</code>을 생성할 수 있습니다. 이렇게 생성된 <code class="language-plaintext highlighter-rouge">Provisioning Profile</code>을 다운로드 받고, 이를 더블 클릭하여 Xcode가 설치된 맥에 등록하면, Xcode에서 이를 인식하여 Signing 탭에서 해당 <code class="language-plaintext highlighter-rouge">Provisioning Profile</code>을 사용할 수 있습니다.</p>
+
+<blockquote>
+  <p>Device ID는 어디다가 포함시키는지 의아할 수 있습니다. 이는 App ID처럼 developer 사이트 &gt; Device에서 등록할 수 있습니다. UDID는 기기를 맥에 연결한 후, itunes의 기기 정보에서 확인할 수 있습니다.</p>
+</blockquote>
+
+<p>생성한 과정에서 몇 가지 알 수 있는 점이 있습니다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Provisioning Profile</code>은 App ID마다 1개씩 생성할 수 있습니다.</li>
+  <li>기기의 UDID를 한 번 등록하면, 하나의 계정에서 여러 개의 앱을 만들 때, 별도의 등록 과정은 필요 없습니다.</li>
+  <li>개발 인증서와 배포 인증서가 나뉘어 있듯이 <code class="language-plaintext highlighter-rouge">Provisioning Profile</code>도 개발, 배포용이 나뉘어 있습니다.(유료 등록자가 아니면 배포용은 만들 수 없습니다.)</li>
+</ul>
+
+<h2 id="app-빌드와-기기에서-앱-실행시-signing-확인">App 빌드와 기기에서 앱 실행시 Signing 확인</h2>
+
+<p>이제 앞서서 언급한 2가지 조건(인증 받은 개발자, 기기에 인증 내용 전달)을 충족하였으므로 기기에 앱을 빌드할 수 있습니다. 빌드시 어떤 파일들이 생겨나는지 살펴보기 위해 커맨드 라인을 통해 앱을 빌드합니다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>xcodebuild <span class="nt">-project</span> myProject.xcodeproj
+</code></pre></div></div>
+
+<p>빌드를 진행하고, 성공적으로 완료되면 <code class="language-plaintext highlighter-rouge">build</code> 디렉토리가 생성됩니다. 여기서,</p>
+
+<blockquote>
+  <p>build &gt; Release-iPhoneOS &gt; myProject</p>
+</blockquote>
+
+<p>경로로 이동하고, myProject 파일을 오른쪽 클릭하여 패키지 내용 보기로 열어줍니다. 그러면 그 안에는 다음과 유사한 파일들이 있습니다.</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-10/ios_codesigning_provisioningprofile/build.png" /></p>
+
+<p>이 중에서 인증과 설치 허가와 관련된 것은 <code class="language-plaintext highlighter-rouge">_CodeSignature</code>와 <code class="language-plaintext highlighter-rouge">embedded.mobileProvision</code>입니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">_CodeSignature</code> 디렉토리에는 <code class="language-plaintext highlighter-rouge">CodeResources</code>라는 파일이 담겨 있고, 여기에는 코드 서명자(개발자)의 코드 서명이 해시 값 형태로 담겨 있습니다. iOS 시스템은 바이너리에서 코드 서명 해시 값을 생성하는 역할을 수행하는 코드 서명 소프트웨어를 시스템에 포함하고 있습니다. 그래서 시스템은 코드 서명자가 생성한 해시 값, 코드 서명 소프트웨어가 생성한 해시 값을 비교하여 코드 서명 시점으로부터 코드에 변경사항이 있는지 체크하고 이를 기반으로 인증 여부를 확인합니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">embedded.mobileProvision</code>은 빌드시 사용된 <code class="language-plaintext highlighter-rouge">Provisioning Profile</code>의 복사본으로 애플의 서명을 확인하는 용도로 사용됩니다. 즉, <code class="language-plaintext highlighter-rouge">Provisioning Profile</code>은 바이너리 컴파일, 앱의 설치, 그리고 앱의 실행 3단계에서 체크됩니다.</p>
+
+<hr />
+
+<h2 id="참고-자료">참고 자료</h2>
+
+<ul>
+  <li><a href="http://la-stranger.blogspot.com/2014/04/ios.html">iOS 인증서와 코드 사이닝 이해하기</a></li>
+  <li><a href="https://medium.com/@abhimuralidharan/what-is-a-provisioning-profile-in-ios-77987a7c54c2">What is a provisioning profile &amp; code signing in iOS?</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-05/bitcode_implementation">
+              Bitcode 도입하기
+              <small>21 May 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Xcode">
+                Xcode
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2018-10/codesigningprocess">
+              Code Signing iOS(macOS)
+              <small>28 Oct 2018</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#ProvisioningProfile">
+                ProvisioningProfile
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Certificate">
+                Certificate
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

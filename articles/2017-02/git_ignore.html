@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Git ignore - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Git ignore - hcn1519 Dev Post">
+  <meta name="description" content="github에 프로젝트를 올릴 때 파일을 제외하는 방법을 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Git ignore">
+  <meta property="og:image" content="/public/assets/blogThumb.png">
+  <meta property="og:description" content="github에 프로젝트를 올릴 때 파일을 제외하는 방법을 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Git ignore</h1>
+  <span class="post-date">21 Feb 2017</span>
+
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2022년 05월 23일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>git을 사용할 때, github에 올리면 안되는 파일 혹은 폴더들이 있습니다. 이런 파일들이 github에 올라가지 않도록 도와주는 것이 <code>.gitignore</code>입니다. <code>.gitignore</code>을 사용하는 것은 간단합니다. 먼저 프로젝트의 root 폴더에서 <code>.gitignore</code>파일을 생성합니다.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">vim .gitignore</code></pre></figure>
+
+<p>이렇게 하면 <code>.gitignore</code> 파일이 생성되고, 해당 파일 안에 제외하고자 하는 파일을 넣어주면 됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c"># .gitignore</span>
+Info.plist
+Pods/
+xcuserdata/
+<span class="k">*</span>.lock</code></pre></figure>
+
+<p>특정 파일을 제외시키고자 할 때는 파일명을 그대로 써주면 됩니다. 폴더의 경우에는 <code>Pods/</code>처럼 뒤에 <code>/</code>를 붙여주어야 합니다. 특정 확장자를 가진 모든 파일을 제외하고자 할 경우에는 <code>*.lock</code>처럼 <code>*</code>를 사용하면 됩니다.</p>
+
+<p><br /></p>
+
+<h2 id="이미-올라간-파일들을-github에서-제외하기">이미 올라간 파일들을 github에서 제외하기</h2>
+
+<p>처음부터 <code>.gitignore</code>을 생성하고 작업을 진행한 경우 위의 작업만 하면 되지만, 이미 프로젝트를 <code>commit</code>했을 경우에는 위의 작업을 진행해도 올바르게 <code>.gitignore</code>이 작동하지 않습니다. 이 때는 캐시된 파일들을 <code>refresh</code>(github에서 파일을 삭제)해주고 새롭게 <code>add</code>를 해야합니다. 이 때 이미 올라간 파일을 지우는 명령어는 다음과 같습니다.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">git <span class="nb">rm</span> <span class="nt">--cached</span> <span class="nt">-r</span> .</code></pre></figure>
+
+<p>위 명령어를 치면 다음과 같이 변경된 파일들의 목록들이 쭉 나타납니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/p41b9a8qdk6jiby/ignore.png" /></p>
+
+<p>이 후 다시 <code>add</code>, <code>commit</code>, <code>push</code>의 단계를 거치면 <code>gitignore</code>가 정상 작동하게 됩니다.</p>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    <h2>Lastest Posts</h2>
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

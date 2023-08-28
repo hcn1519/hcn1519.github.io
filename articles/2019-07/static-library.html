@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Static Library - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Static Library - hcn1519 Dev Post">
+  <meta name="description" content="Static Library 대해 학습한 내용을 정리합니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Static Library">
+  <meta property="og:image" content="/public/assets/iOS.png">
+  <meta property="og:description" content="Static Library 대해 학습한 내용을 정리합니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Static Library</h1>
+  <span class="post-date">01 Jul 2019</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS.png"
+    
+    alt="Static Library feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p><code class="language-plaintext highlighter-rouge">Static library</code>는 아카이빙된 object file(<code class="language-plaintext highlighter-rouge">.o</code> 확장자)의 모음으로 <code class="language-plaintext highlighter-rouge">.a</code> 확장자 형태의 라이브러리입니다. <code class="language-plaintext highlighter-rouge">Static library</code>는 <code class="language-plaintext highlighter-rouge">Static archive library</code>, <code class="language-plaintext highlighter-rouge">static linked shared library</code>라고도 불립니다.</p>
+
+<p>Xcode에서는 <code class="language-plaintext highlighter-rouge">Static library</code>를 만드는 템플릿을 제공하고 있으며, 아래 그림에서 볼 수 있듯이 <code class="language-plaintext highlighter-rouge">Cocoa touch Static Library</code>를 통해서 생성할 수 있습니다.</p>
+
+<p><img width="1512" alt="스크린샷 2019-06-24 오전 12 47 52" src="https://user-images.githubusercontent.com/13018877/59978668-bb2abd80-9619-11e9-9ff3-04d6792d8198.png" /></p>
+
+<ul>
+  <li>macOS/iOS의 소스 코드를 컴파일하게 되면 object files를 생성합니다. object file은 Mach-O 형식의 바이너리 데이터로 다음의 내용을 포함하고 있습니다.
+    <ol>
+      <li>Header - 파일이 동작하는 아키텍쳐에 대한 정보를 명시한다(x86, arm64 등)</li>
+      <li>Load Commands - 파일의 논리적 흐름에 대한 정보를 명시한다.</li>
+      <li>Raw Segment Data - raw code와 data</li>
+    </ol>
+  </li>
+</ul>
+
+<div class="message">
+Mach-O is the native executable format of binaries in OS X and is the preferred format for shipping code. An executable format determines the order in which the code and data in a binary file are read into memory.
+</div>
+
+<ul>
+  <li><a href="https://developer.apple.com/library/archive/documentation/Performance/Conceptual/CodeFootprint/Articles/MachOOverview.html">Overview of the Mach-O Executable Format - Apple Doc</a></li>
+</ul>
+
+<h3 id="static-library의-동작-과정">Static Library의 동작 과정</h3>
+
+<p>앱의 빌드 과정에서 object file은 linker(<code class="language-plaintext highlighter-rouge">static linker</code>)를 통해서 <code class="language-plaintext highlighter-rouge">executable</code> 파일로 합쳐집니다. <code class="language-plaintext highlighter-rouge">executable</code>  file은 앱이 메모리에 올라갈 준비가 완료된 형태의 파일로, 일반적인 Application 생성 프로젝트는 빌드의 결과물로 <code class="language-plaintext highlighter-rouge">executable</code>file을 생성합니다.</p>
+
+<p><img width="420" alt="스크린샷 2019-06-24 오전 1 43 02" src="https://user-images.githubusercontent.com/13018877/59979337-8ae71d00-9621-11e9-979d-94fba9111ae4.png" /></p>
+
+<p>위의 그림의 <code class="language-plaintext highlighter-rouge">SampleProject.App</code>의 경로로 빌드 완료 후 아래 명령어를 실행하면 <code class="language-plaintext highlighter-rouge">executable</code> file이 생성된 것을 확인할 수 있습니다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>file SampleProject.app/SampleProject
+SampleProject.app/SampleProject: Mach-O 64-bit executable arm64
+</code></pre></div></div>
+
+<p>static library는 앱의 라이브러리와 <code class="language-plaintext highlighter-rouge">static linker</code>를 통해 앱과 연결될 때, 앱의 <code class="language-plaintext highlighter-rouge">executable</code> file로 복사됩니다. 그리고, <code class="language-plaintext highlighter-rouge">static linker</code>는 object code와 library code를 하나의 <code class="language-plaintext highlighter-rouge">executable</code> file로 모아서 런타임에서 항상 코드를 메모리에 로드해놓습니다. 즉, 앱이 실행될 때 앱과 연결된 <code class="language-plaintext highlighter-rouge">Static Library</code>는 앱의 주소공간에 항상 로드되어 있습니다.</p>
+
+<p><img width="681" alt="staticLib" src="https://user-images.githubusercontent.com/13018877/59974188-0cb85580-95e4-11e9-8e07-ce9c9d892391.png" /></p>
+
+<h3 id="static-library의-한계와-dynamic-library">Static Library의 한계와 Dynamic Library</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Static Library</code>는 앱 실행시 앱의 주소 공간에 항상 로드되어 있기 때문에 라이브러리 코드의 실행 속도가 매우 빠릅니다. 하지만, <code class="language-plaintext highlighter-rouge">Static Library</code>는 앱의 <code class="language-plaintext highlighter-rouge">executable</code> file에 반드시 포함되어야 하기 때문에 아래의 문제를 일으킵니다.</p>
+
+<ul>
+  <li>앱의 초기 런칭 속도 저하</li>
+  <li>앱의 초기 메모리 사용량 증가</li>
+  <li><code class="language-plaintext highlighter-rouge">Static Library</code>의 버전 업데이트시 개발자는 앱의 object files를 새로운 버전의 <code class="language-plaintext highlighter-rouge">Static Library</code>로 연결해야 합니다. <code class="language-plaintext highlighter-rouge">Static Library</code>는 새로운 버전으로 빌드가 되어야 업데이트된 라이브러리를 사용할 수 있습니다.</li>
+</ul>
+
+<h2 id="참고자료">참고자료</h2>
+
+<ul>
+  <li><a href="https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/OverviewOfDynamicLibraries.html#//apple_ref/doc/uid/TP40001873-SW1">Overview of Dynamic Libraries - Apple Doc</a></li>
+  <li><a href="http://www.vadimbulavin.com/static-dynamic-frameworks-and-libraries/">http://www.vadimbulavin.com/static-dynamic-frameworks-and-libraries/</a></li>
+  <li><a href="https://medium.com/@StueyGK/static-libraries-vs-dynamic-libraries-af78f0b5f1e4">Static Libraries vs. Dynamic Libraries</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-05/bitcode_implementation">
+              Bitcode 도입하기
+              <small>21 May 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-02/crash_report_symbolication">
+              Crash Report Symbolication
+              <small>09 Feb 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#macOS">
+                macOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#OS">
+                OS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-11/framework_basic">
+              Framework 이해하기
+              <small>16 Nov 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#macOS">
+                macOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#OS">
+                OS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Library">
+                Library
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Framework">
+                Framework
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-09/dynamic_library">
+              Dynamic Library
+              <small>06 Sep 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#macOS">
+                macOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#OS">
+                OS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Library">
+                Library
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Framework">
+                Framework
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

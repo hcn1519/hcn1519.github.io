@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Java Scanner의 에러 체크하기(Validation) - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Java Scanner의 에러 체크하기(Validation) - hcn1519 Dev Post">
+  <meta name="description" content="Java에서 Scanner Class의 에러를 체크하는 방법입니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Java Scanner의 에러 체크하기(Validation)">
+  <meta property="og:image" content="/public/assets/errorCheck.PNG">
+  <meta property="og:description" content="Java에서 Scanner Class의 에러를 체크하는 방법입니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Java Scanner의 에러 체크하기(Validation)</h1>
+  <span class="post-date">04 Oct 2016</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/errorCheck.PNG"
+    
+    alt="Java Scanner의 에러 체크하기(Validation) feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>&nbsp;자바에서는 사용자로부터 콘솔창에서 입력을 받을 때, Scanner라는 클래스를 사용합니다. 이 포스팅에서는 Scanner를 사용할 때 잘못된 입력(예를 들어, 정수형 3을 받아야 하는데 "aaa"같은 String이 들어오는 경우)이 들어오는 것을 방지하는 것에 대해 알아봅니다.</p>
+
+<h4>1. 단일입력 처리</h4>
+
+<p>&nbsp;먼저 Scanner로 단 1개의 <code>0또는 자연수</code>만 받는 예제입니다. 실수도 안 되고, 음의 정수도 안 되고, 문자열도 안 받습니다. 띄어쓰기로 여러 개를 넣어도 받지 않습니다.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">ScannerErrCheck</span><span class="o">{</span> <span class="c1">//scanner로 입력 받는 데이터타입 예외처리용 class입니다.
+</span>
+  <span class="kt">int</span> <span class="n">scNum</span><span class="o">;</span>
+  <span class="kt">void</span> <span class="nf">errorCheckNum</span><span class="o">(</span><span class="nc">Scanner</span> <span class="n">scNum</span><span class="o">){</span> <span class="c1">// 0또는 자연수 체크하는 메소드
+</span>
+
+    <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+
+      <span class="k">if</span><span class="o">(</span><span class="n">scNum</span><span class="o">.</span><span class="na">hasNextInt</span><span class="o">()){</span> <span class="c1">// 정수를 받는지 체크
+</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">scNum</span> <span class="o">=</span> <span class="n">scNum</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">lengthOfInput</span> <span class="o">=</span> <span class="n">scNum</span><span class="o">.</span><span class="na">nextLine</span><span class="o">().</span><span class="na">split</span><span class="o">(</span><span class="s">" "</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">coef</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">float</span><span class="o">[</span><span class="n">lengthOfInput</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">lengthOfInput</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="mi">1</span><span class="o">){</span> <span class="c1">// 1개만 받는지 체크
+</span>
+          <span class="nc">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"1개의 숫자만 입력하세요."</span><span class="o">);</span>
+          <span class="n">scNum</span><span class="o">.</span><span class="na">reset</span><span class="o">();</span>
+          <span class="k">continue</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">scNum</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="c1">// 0 이상 자연수라면 차수 결정
+</span>
+        <span class="k">break</span><span class="o">;</span>
+        <span class="k">else</span> <span class="o">{</span> <span class="c1">// 음의 정수이면, 재입력 요구
+</span>
+          <span class="nc">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"0 또는 자연수를 입력하세요."</span><span class="o">);</span>
+          <span class="n">scNum</span><span class="o">.</span><span class="na">reset</span><span class="o">();</span>
+          <span class="k">continue</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="c1">// 실수이면, 재입력 요구
+</span>
+          <span class="nc">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"정수를 입력하세요."</span><span class="o">);</span>				
+          <span class="n">scNum</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+      <span class="nc">ScannerErrCheck</span> <span class="n">err1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ScannerErrCheck</span><span class="o">();</span> <span class="c1">// scanner가 1개의 자연수만 받도록 하는 class
+</span>
+      <span class="nc">Scanner</span> <span class="n">scNum</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"1개의 자연수를 입력하세요 &gt;&gt;"</span><span class="o">);</span>
+      <span class="n">err1</span><span class="o">.</span><span class="na">errorCheckNum</span><span class="o">(</span><span class="n">scNum</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span></code></pre></figure>
+
+<h4>2. 복수개 입력 실수인지 체크</h4>
+
+<p>&nbsp;다음으로는 Scanner로 띄어쓰기를 통해 여러개의 data를 받을 때 실수형인지 체크하는 예외 처리입니다.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">ScannerErrCheck</span><span class="o">{</span> <span class="c1">//scanner로 입력 받는 데이터타입 예외처리용 class입니다.
+</span>
+  <span class="kt">float</span><span class="o">[]</span> <span class="n">scArr</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">float</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+
+  <span class="kt">void</span> <span class="nf">errorCheckArr</span><span class="o">(</span><span class="nc">Scanner</span> <span class="n">scArr</span><span class="o">){</span>
+
+    <span class="kt">int</span> <span class="n">counter</span> <span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+    <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span> 	<span class="c1">// 입력 받은 수를 scArr[i]에 저장하는 작업 진행
+</span>
+      <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="k">this</span><span class="o">.</span><span class="na">scArr</span><span class="o">.</span><span class="na">length</span> <span class="o">;</span> <span class="n">i</span><span class="o">++){</span>  
+        <span class="k">if</span> <span class="o">(</span><span class="n">scArr</span><span class="o">.</span><span class="na">hasNextFloat</span><span class="o">())</span> <span class="o">{</span>	<span class="c1">// 받은 수가 실수(혹은 정수)일 경우 입력,
+</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">scArr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">scArr</span><span class="o">.</span><span class="na">nextFloat</span><span class="o">();</span>  
+          <span class="n">counter</span><span class="o">++;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span> <span class="c1">// 실수가 아니라면 입력을 리셋하고, 새로운 입력 요구
+</span>
+          <span class="nc">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"모든 계수는 실수형이어야 합니다."</span><span class="o">);</span>
+          <span class="n">scArr</span><span class="o">.</span><span class="na">reset</span><span class="o">();</span>
+          <span class="n">scArr</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+      <span class="k">if</span><span class="o">(</span><span class="n">counter</span> <span class="o">==</span> <span class="k">this</span><span class="o">.</span><span class="na">coef</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>	<span class="c1">// counter 갯수가 배열의 길이와 같아지면 루프 종료
+</span>
+      <span class="k">break</span><span class="o">;</span>
+      <span class="k">else</span> <span class="o">{</span>	<span class="c1">// 1개의 입력이라도 실수형이 아니라면, 전부 새로운 입력 요구
+</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">scArr</span><span class="o">.</span><span class="na">reset</span><span class="o">();</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+
+  <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+    <span class="nc">ScannerErrCheck</span> <span class="n">err1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ScannerErrCheck</span><span class="o">();</span>
+    <span class="nc">Scanner</span> <span class="n">scArr</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"여러개의 실수를 입력하세요. &gt;&gt;"</span><span class="o">);</span>
+    <span class="n">err1</span><span class="o">.</span><span class="na">errorCheckArr</span><span class="o">(</span><span class="n">scArr</span><span class="o">);</span> <span class="c1">// 에러 체크 메소드
+</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>&nbsp;적절히 위의 방식을 섞어서 쓰면 이런 저런 곳에서 활용할 수 있을 것 같네요.</p>
+
+<h5>더 볼만한 추가 자료</h5>
+
+<ul>
+  <li><a href="http://stackoverflow.com/questions/3059333/validating-input-using-java-util-scanner" target="_blank">Stackoverflow validation 관련 포스팅</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2017-01/enumeration">
+              Enumeration 개념
+              <small>21 Jan 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Java">
+                Java
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2016-12/java_console">
+              Java파일 컴파일해서 실행하기
+              <small>21 Dec 2016</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Java">
+                Java
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

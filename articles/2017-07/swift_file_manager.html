@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Swift로 파일 다루기 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Swift로 파일 다루기 - hcn1519 Dev Post">
+  <meta name="description" content="Swift의 FileManager를 이용하여 Local에 있는 File들을 다루는 법에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Swift로 파일 다루기">
+  <meta property="og:image" content="/public/assets/swiftLogo.jpg">
+  <meta property="og:description" content="Swift의 FileManager를 이용하여 Local에 있는 File들을 다루는 법에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Swift로 파일 다루기</h1>
+  <span class="post-date">15 Jul 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/swiftLogo.jpg"
+    
+    alt="Swift로 파일 다루기 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2022년 02월 03일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="./swift_file_manager#기본적인-macos-파일-시스템">기본적인 macOS 파일 시스템</a></li>
+  <li><a href="./swift_file_manager#filemanager">FileManager</a>
+    <ol>
+      <li><a href="./swift_file_manager#directory-접근하기">Directory 접근하기</a></li>
+      <li><a href="./swift_file_manager#directory-생성하기">Directory 생성하기</a></li>
+      <li><a href="./swift_file_manager#파일-만들고-쓰기">파일 만들고 쓰기</a></li>
+      <li><a href="./swift_file_manager#파일-읽기">파일 읽기</a></li>
+    </ol>
+  </li>
+  <li><a href="./swift_file_manager#번외-:-ios-프로젝트에서-로컬-이미지-읽고-보여주기">번외 : iOS 프로젝트에서 로컬 이미지 읽고 보여주기</a></li>
+</ol>
+
+<p>이번 포스팅에서는 Swift를 통해 로컬(macOS)에 있는 파일들을 다루는 방법에 대해 알아보고자 합니다.</p>
+
+<h2 id="기본적인-macos-파일-시스템">기본적인 macOS 파일 시스템</h2>
+
+<p>macOS의 파일 시스템은 domain(영역)으로 파일들의 위치를 결정합니다. 어떤 파일이 특정 domain에 속해 있는 경우 그 파일은 무조건 해당 domain의 루트 디렉토리보다 아래에 위치해야 합니다. 바꿔말하면, domain을 설정해주면 다른 domain의 파일들이 변경되는 것을 미리 방지할 수 있다는 말입니다. macOS에는 기본적으로 <code class="language-plaintext highlighter-rouge">user</code>, <code class="language-plaintext highlighter-rouge">local</code>, <code class="language-plaintext highlighter-rouge">network</code>, <code class="language-plaintext highlighter-rouge">system</code> domain을 제공합니다. 아래 그림을 통해 domain과 디렉토리, 파일들의 관계를 쉽게 이해할 수 있습니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/jk555owekupnw3w/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202017-07-15%20%EC%98%A4%ED%9B%84%209.08.01.png" style="width: 50%;margin: 0 auto;" /></p>
+
+<p>macOS에서 로그인 후 터미널에서 최상단 루트에서 <code class="language-plaintext highlighter-rouge">pwd</code> 명령어를 치면 나오는 경로는 <code class="language-plaintext highlighter-rouge">/Users/userName</code>의 형태입니다. 즉, 사용자들은 기본적으로 <code class="language-plaintext highlighter-rouge">user</code> domain에 속해서 대부분의 작업들을 수행하는 것이죠. 좀 더 자세한 내용을 확인하고 싶다면 아래 링크를 확인해주세요.</p>
+
+<p><a href="https://developer.apple.com/library/content/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/FileSystemOverview/FileSystemOverview.html#//apple_ref/doc/uid/TP40010672-CH2-SW2">File System Basics</a></p>
+
+<h2 id="filemanager">FileManager</h2>
+
+<p>Swift에서는 파일들을 다루기 위한 클래스로 <code class="language-plaintext highlighter-rouge">FileManager</code>를 제공하고 있습니다. <code class="language-plaintext highlighter-rouge">FileManager</code>는 <code class="language-plaintext highlighter-rouge">FileManager.default</code> 인스턴스를 기본으로 제공하며, 원하면 자신만의 인스턴스를 새롭게 생성할 수도 있습니다. 파일시스템에서 파일 혹은 디렉토리들은 모두 경로를 가지고 있습니다. <code class="language-plaintext highlighter-rouge">FileManager</code>는 <code class="language-plaintext highlighter-rouge">URL</code> 혹은 <code class="language-plaintext highlighter-rouge">String</code> 데이터 타입을 통해 파일에 접근할 수 있도록 해줍니다. 다만, Apple에서는 <code class="language-plaintext highlighter-rouge">URL</code>을 통한 파일 접근을 권장하고 있습니다.</p>
+
+<div class="message">
+  The preferred way to specify the location of a file or directory is to use the NSURL class. Although the NSString class has many methods related to path creation, URLs offer a more robust way to locate files and directories. For apps that also work with network resources, URLs also mean that you can use one type of object to manage items located on a local file system or on a network server.
+</div>
+
+<p><a href="https://developer.apple.com/documentation/foundation/filemanager">FileManager</a></p>
+
+<h3 id="directory-접근하기">Directory 접근하기</h3>
+
+<p>가장 먼저 디렉토리의 내용을 보는 방법을 알아보겠습니다. 가장 쉬운 방법은 <code class="language-plaintext highlighter-rouge">contentsOfDirectory(atPath:)</code> 메소드를 쓰는 것입니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// FileManager 인스턴스 생성</span>
+<span class="k">let</span> <span class="nv">fileManager</span> <span class="o">=</span> <span class="kt">FileManager</span><span class="p">()</span>
+
+<span class="c1">// 해당 디렉토리 경로</span>
+<span class="k">let</span> <span class="nv">desktopPath</span> <span class="o">=</span> <span class="s">"/Users/userName/Desktop"</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="c1">// contentsOfDirectory(atPath:)가 해당 디렉토리 안의 파일 리스트를 배열로 반환</span>
+    <span class="k">let</span> <span class="nv">contents</span> <span class="o">=</span> <span class="k">try</span> <span class="n">fileManager</span><span class="o">.</span><span class="nf">contentsOfDirectory</span><span class="p">(</span><span class="nv">atPath</span><span class="p">:</span> <span class="n">desktopPath</span><span class="p">)</span>
+
+    <span class="c1">// subpathsOfDirectory(atPath:)가 해당 디렉토리의 하위에 있는 모든 파일을 배열로 반환</span>
+    <span class="k">let</span> <span class="nv">deeperContents</span> <span class="o">=</span> <span class="k">try</span> <span class="n">fileManager</span><span class="o">.</span><span class="nf">subpathsOfDirectory</span><span class="p">(</span><span class="nv">atPath</span><span class="p">:</span> <span class="n">desktopPath</span><span class="p">)</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">deeperContents</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="k">as</span> <span class="kt">NSError</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Error access directory: </span><span class="se">\(</span><span class="n">error</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><code class="language-plaintext highlighter-rouge">contentsOfDirectory(atPath:)</code> 메소드는 설정한 경로의 디렉토리 안에 있는 파일들을 <code class="language-plaintext highlighter-rouge">[String]</code> 형태로 반환합니다. 또한, <code class="language-plaintext highlighter-rouge">subpathsOfDirectory(atPath:)</code>와 같은 메소드는 설정한 경로에 있는 디렉토리들을 모두 탐색하여 그 안에 있는 파일까지 모두 포함한 배열을 반환합니다.</p>
+
+<h3 id="directory-생성하기">Directory 생성하기</h3>
+
+<p>디렉토리를 생성하는 방법도 접근하는 것과 크게 다르지 않습니다. 여기서는 <code class="language-plaintext highlighter-rouge">createDirectory(atPath:withIntermediateDirectories:attributes:)</code> 메소드를 사용합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// FileManagerTest.swift</span>
+<span class="c1">// FileManager 인스턴스 생성</span>
+<span class="k">let</span> <span class="nv">fileManager</span> <span class="o">=</span> <span class="kt">FileManager</span><span class="p">()</span>
+
+<span class="c1">// document 디렉토리의 경로 저장</span>
+<span class="k">let</span> <span class="nv">documentsDirectory</span> <span class="o">=</span> <span class="n">fileManager</span><span class="o">.</span><span class="nf">urls</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="nv">in</span><span class="p">:</span> <span class="o">.</span><span class="n">userDomainMask</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="o">!</span>
+
+<span class="c1">// 해당 디렉토리 이름 지정</span>
+<span class="k">let</span> <span class="nv">dataPath</span> <span class="o">=</span> <span class="n">documentsDirectory</span><span class="o">.</span><span class="nf">appendingPathComponent</span><span class="p">(</span><span class="s">"FileManger Directory"</span><span class="p">)</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="c1">// 디렉토리 생성</span>
+    <span class="k">try</span> <span class="n">fileManager</span><span class="o">.</span><span class="nf">createDirectory</span><span class="p">(</span><span class="nv">atPath</span><span class="p">:</span> <span class="n">dataPath</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="nv">withIntermediateDirectories</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">attributes</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+
+<span class="p">}</span> <span class="k">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="k">as</span> <span class="kt">NSError</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Error creating directory: </span><span class="se">\(</span><span class="n">error</span><span class="o">.</span><span class="n">localizedDescription</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>과정은 다음과 같습니다.</p>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">urls(for:in:)</code> 메소드를 통해 특정 경로에 접근한다.</li>
+  <li>해당 경로에 추가 경로를 지정하는 방식으로 디렉토리 명을 추가한다.</li>
+  <li>디렉토리를 생성한다.</li>
+</ol>
+
+<p><code class="language-plaintext highlighter-rouge">urls(for:in:)</code> 메소드는 <code class="language-plaintext highlighter-rouge">SearchPathDirectory</code>와 <code class="language-plaintext highlighter-rouge">SearchPathDomainMask</code>를 파라미터로 받고, <code class="language-plaintext highlighter-rouge">SearchPathDomainMask</code>의 범위에서 <code class="language-plaintext highlighter-rouge">SearchPathDirectory</code>를 찾는 메소드입니다. <code class="language-plaintext highlighter-rouge">SearchPathDirectory</code>는 enum 형태로 구현되어 있으며 <code class="language-plaintext highlighter-rouge">.desktopDirectory</code>, <code class="language-plaintext highlighter-rouge">.documentDirectory</code>, <code class="language-plaintext highlighter-rouge">.downloadsDirectory</code>처럼 실제로 사용자가 사용하는 디렉토리 경로를 지칭합니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">SearchPathDomainMask</code>의 경우 <code class="language-plaintext highlighter-rouge">.userDomainMask</code>, <code class="language-plaintext highlighter-rouge">.systemDomainMask</code>, <code class="language-plaintext highlighter-rouge">localDomainMask</code>처럼 앞서 언급했던 <code class="language-plaintext highlighter-rouge">domain</code>을 기준으로 만들어져 있습니다. 파일 시스템 설명에서 알 수 있듯이 domain은 directory보다 큰 개념입니다. 또, <code class="language-plaintext highlighter-rouge">domainMask</code>라는 것은 존재하는 상위 URL을 숨기는 것을 의미합니다. 정리하자면, <code class="language-plaintext highlighter-rouge">SearchPathDomainMask</code>를 <code class="language-plaintext highlighter-rouge">userDomainMask</code>로 설정하면, <code class="language-plaintext highlighter-rouge">/Users</code>보다 위에 있는 디렉토리는 접근할 수 없게 됩니다. 또한 <code class="language-plaintext highlighter-rouge">SearchPathDomainMask</code>보다 상위에 있는 디렉토리를 찾으려고 한다면 에러가 나게 됩니다.</p>
+
+<p>다음으로 <code class="language-plaintext highlighter-rouge">appendingPathComponent(_:)</code>를 사용하면, 경로 URL에 추가적인 경로를 붙일 수 있습니다. 위에서는 접근한 디렉토리 아래에 새롭게 생성할 디렉토리 명을 추가했습니다.</p>
+
+<p>다음으로 디렉토리의 생성입니다. <code class="language-plaintext highlighter-rouge">createDirectory(atPath:withIntermediateDirectories:attributes:)</code>는 <code class="language-plaintext highlighter-rouge">atPath</code>에서 설정된 경로에 디렉토리를 생성합니다. 디렉토리의 경로는 확장자 없이 끝나는 형태이어야 합니다.</p>
+
+<h3 id="파일-만들고-쓰기">파일 만들고 쓰기</h3>
+
+<p><code class="language-plaintext highlighter-rouge">FileManger()</code>를 사용하여 파일 생성과 텍스트 쓰기도 가능합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// FileManagerTest.swift에 추가</span>
+<span class="k">do</span> <span class="p">{</span>
+    <span class="c1">// 파일 이름을 기존의 경로에 추가</span>
+    <span class="k">let</span> <span class="nv">helloPath</span> <span class="o">=</span> <span class="n">dataPath</span><span class="o">.</span><span class="nf">appendingPathComponent</span><span class="p">(</span><span class="s">"Hello.txt"</span><span class="p">)</span>
+
+    <span class="c1">// 쓸 내용</span>
+    <span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="s">"Hello File From Swift"</span>
+
+    <span class="k">do</span> <span class="p">{</span>
+        <span class="c1">// 쓰기 작업</span>
+        <span class="k">try</span> <span class="n">text</span><span class="o">.</span><span class="nf">write</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="n">helloPath</span><span class="p">,</span> <span class="nv">atomically</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="o">.</span><span class="n">utf8</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="k">as</span> <span class="kt">NSError</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Error Writing File : </span><span class="se">\(</span><span class="n">error</span><span class="o">.</span><span class="n">localizedDescription</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>파일 생성과 쓰기의 경우에도 파일을 만들 디렉토리를 지정하고, 그 경로에 텍스트를 쓰면 됩니다. 이 때, <code class="language-plaintext highlighter-rouge">String.write(to:atomically:encoding:)</code> 메소드를 사용하면 됩니다.</p>
+
+<h3 id="파일-읽기">파일 읽기</h3>
+
+<p>파일 읽기도 읽을 때 <code class="language-plaintext highlighter-rouge">String(contentsOf:encoding:)</code> 메소드를 쓰는 것만 제외하면, 쓰기와 그 과정이 동일합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// FileManagerTest.swift에 추가</span>
+<span class="k">do</span> <span class="p">{</span>
+    <span class="c1">// 파일 이름을 기존의 경로에 추가</span>
+    <span class="k">let</span> <span class="nv">helloPath</span> <span class="o">=</span> <span class="n">dataPath</span><span class="o">.</span><span class="nf">appendingPathComponent</span><span class="p">(</span><span class="s">"Hello.txt"</span><span class="p">)</span>
+
+    <span class="c1">// 내용 읽기</span>
+    <span class="k">let</span> <span class="nv">text2</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">String</span><span class="p">(</span><span class="nv">contentsOf</span><span class="p">:</span> <span class="n">helloPath</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="o">.</span><span class="n">utf8</span><span class="p">)</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="n">text2</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="k">as</span> <span class="kt">NSError</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Error Reading File : </span><span class="se">\(</span><span class="n">error</span><span class="o">.</span><span class="n">localizedDescription</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>최종 소스코드는 아래에서 볼 수 있습니다.</p>
+
+<p><a href="https://gist.github.com/hcn1519/05f6088279331452fedffdf0742c0f62">https://gist.github.com/hcn1519/05f6088279331452fedffdf0742c0f62</a></p>
+
+<h2 id="번외--ios-프로젝트에서-로컬-이미지-읽고-보여주기">번외 : iOS 프로젝트에서 로컬 이미지 읽고 보여주기</h2>
+
+<p>위의 내용들을 사용하여 간단히 로컬에 있는 이미지를 iOS 앱에서 보여주는 프로젝트를 만들어 보겠습니다. 결과 앱은 다음과 같습니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/0jx630j5j4lxmmk/result.png" style="width: 50%; border: 1px solid gray; margin: 0 auto; padding: 10px" /></p>
+
+<p>먼저 테스트 이미지 파일은 아래 링크에서 다운받고, <code class="language-plaintext highlighter-rouge">/Users/Documents</code>에 저장합니다.</p>
+
+<p><a href="https://dl.dropboxusercontent.com/s/rnmu9em96d3840u/apple.jpg">이미지 샘플</a></p>
+
+<p>그리고 Xcode에서 Single View Application 앱을 생성하고, <code class="language-plaintext highlighter-rouge">UIImageView</code>를 ViewController에 만들어서 imageView라는 이름으로 <code class="language-plaintext highlighter-rouge">IBOutlet</code>을 연결합니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/unmnrq4akzkfc09/xcode.png" alt="프로젝트 이미지" /></p>
+
+<p>다음으로 <code class="language-plaintext highlighter-rouge">ViewController</code>의 코드를 다음과 같이 수정합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="kt">UIKit</span>
+
+<span class="kd">class</span> <span class="kt">ViewController</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
+
+    <span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">imageView</span><span class="p">:</span> <span class="kt">UIImageView</span><span class="o">!</span>
+
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">super</span><span class="o">.</span><span class="nf">viewDidLoad</span><span class="p">()</span>
+
+        <span class="k">let</span> <span class="nv">apple</span> <span class="o">=</span> <span class="nf">loadImage</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">appleImage</span> <span class="o">=</span> <span class="n">apple</span> <span class="p">{</span>
+            <span class="n">imageView</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">appleImage</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kd">func</span> <span class="nf">loadImage</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UIImage</span><span class="p">?</span> <span class="p">{</span>
+
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">documentsDirectory</span> <span class="o">=</span> <span class="kt">FileManager</span><span class="o">.</span><span class="k">default</span><span class="o">.</span><span class="nf">urls</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="nv">in</span><span class="p">:</span> <span class="o">.</span><span class="n">userDomainMask</span><span class="p">)</span><span class="o">.</span><span class="n">first</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">nil</span> <span class="p">}</span>
+
+        <span class="k">let</span> <span class="nv">imageFile</span> <span class="o">=</span> <span class="s">"apple.jpg"</span>
+        <span class="k">let</span> <span class="nv">imageURL</span> <span class="o">=</span> <span class="n">documentsDirectory</span><span class="o">.</span><span class="nf">appendingPathComponent</span><span class="p">(</span><span class="n">imageFile</span><span class="p">)</span>
+
+        <span class="nf">print</span><span class="p">(</span><span class="n">imageURL</span><span class="p">)</span>
+
+        <span class="k">do</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="nv">imageData</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Data</span><span class="p">(</span><span class="nv">contentsOf</span><span class="p">:</span> <span class="n">imageURL</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="kt">UIImage</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">imageData</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="k">let</span> <span class="nv">err</span> <span class="k">as</span> <span class="kt">NSError</span> <span class="p">{</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"이미지 로딩 에러 : </span><span class="se">\(</span><span class="n">err</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">nil</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>흐름은 간단합니다. 먼저 로컬에 있는 <strong>apple.jpg</strong> 파일을 가져와서 <code class="language-plaintext highlighter-rouge">UIImage</code> 인스턴스를 만듭니다. 그리고 이 인스턴스를 통해 뷰에 만든 imageView에 이미지를 출력합니다. 하지만 앱을 컴파일하고 실행해보면 해당 파일을 찾을 수 없다고 나옵니다. 분명 이미지를 <code class="language-plaintext highlighter-rouge">Documents</code>에 놔두었고, <code class="language-plaintext highlighter-rouge">url(for:in:)</code> 메소드를 <code class="language-plaintext highlighter-rouge">.documentsDirectory</code>로 잘 설정해두었는데도 말이죠.</p>
+
+<p>이 문제는 해당 경로를 출력해보면 그 이유를 알 수 있습니다. 위에서 출력된 <code class="language-plaintext highlighter-rouge">imageURL</code>은 <code class="language-plaintext highlighter-rouge">/Users/Documents/apple.jpg</code>가 되어야 원하는 결과가 나옵니다. 하지만, 실제로는 <code class="language-plaintext highlighter-rouge">file:///Users/userName/Library/Developer/CoreSimulator/Devices/52EFC32B-305F-4EB6-8C73-2B2F7A4680E8/data/Containers/Data/Application/E28F4A30-935D-4EFE-815C-213A08B6D2DF/Documents/apple.jpg
+</code>과 같은 경로가 출력됩니다. 경로를 살펴보면 <code class="language-plaintext highlighter-rouge">FileManager</code>는 시뮬레이터 안에 있는 documents에 접근하는 것을 확인할 수 있습니다. 그렇기 때문에 <code class="language-plaintext highlighter-rouge">apple.jpg</code> 파일은 해당 경로로 옮겨주어야 합니다. 터미널을 실행하여 Documents 디렉토리에 있는 <code class="language-plaintext highlighter-rouge">apple.jpg</code>를 위의 경로로 옮기도록 하겠습니다. 단, 위의 Devices 이하의 경로는 시뮬레이터마다 다르므로 그대로 복사하면 안 되고, 경로를 한 번 출력해보고 그 경로를 사용해야 합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="err">$</span> <span class="n">mv</span> <span class="kt">Documents</span><span class="o">/</span><span class="n">apple</span><span class="o">.</span><span class="n">jpg</span> <span class="o">/</span><span class="kt">Users</span><span class="o">/</span><span class="n">userName</span><span class="o">/</span><span class="kt">Library</span><span class="o">/</span><span class="kt">Developer</span><span class="o">/</span><span class="kt">CoreSimulator</span><span class="o">/</span><span class="kt">Devices</span><span class="o">/</span><span class="mi">52</span><span class="kt">EFC32B</span><span class="o">-</span><span class="mi">305</span><span class="kt">F</span><span class="o">-</span><span class="mi">4</span><span class="kt">EB6</span><span class="o">-</span><span class="mi">8</span><span class="kt">C73</span><span class="o">-</span><span class="mi">2</span><span class="kt">B2F7A4680E8</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="kt">Containers</span><span class="o">/</span><span class="kt">Data</span><span class="o">/</span><span class="kt">Application</span><span class="o">/</span><span class="kt">E28F4A30</span><span class="o">-</span><span class="mi">935</span><span class="kt">D</span><span class="o">-</span><span class="mi">4</span><span class="kt">EFE</span><span class="o">-</span><span class="mi">815</span><span class="kt">C</span><span class="o">-</span><span class="mi">213</span><span class="kt">A08B6D2DF</span><span class="o">/</span><span class="kt">Documents</span></code></pre></figure>
+
+<p>이제 다시 실행하면 이미지가 올바르게 뜨는 것을 확인할 수 있습니다.</p>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2017-07/swift_Str">
+              Swift String 다루기
+              <small>09 Jul 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Foundation">
+                Foundation
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

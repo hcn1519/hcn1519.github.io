@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Dynamic Library - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Dynamic Library - hcn1519 Dev Post">
+  <meta name="description" content="Dynamic Library 대해 학습한 내용을 정리합니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Dynamic Library">
+  <meta property="og:image" content="/public/assets/iOS.png">
+  <meta property="og:description" content="Dynamic Library 대해 학습한 내용을 정리합니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Dynamic Library</h1>
+  <span class="post-date">06 Sep 2019</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS.png"
+    
+    alt="Dynamic Library feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p><a href="https://hcn1519.github.io/articles/2019-07/static-library">Static Library</a>는 컴파일 타임에 executable(실행 바이너리)에 포함되어야 합니다. 이 문제는 앱이 커질 수록 더 큰 문제가 되었고, 이를 해결하기 위해 나온 것이 <code class="language-plaintext highlighter-rouge">Dynamic Library</code>입니다. <code class="language-plaintext highlighter-rouge">Dynamic Library</code>는 <code class="language-plaintext highlighter-rouge">Static Library</code>와는 다르게 앱의 <code class="language-plaintext highlighter-rouge">executable</code> files에 포함되지 않습니다.  바꿔 말하면, <code class="language-plaintext highlighter-rouge">Dynamic Library</code>는 앱의 컴파일과 별개로 동작하여, 앱의 컴파일 없이 <code class="language-plaintext highlighter-rouge">Dynamic Library</code>의 코드는 변경될 수 있습니다.</p>
+
+<p>또한, <code class="language-plaintext highlighter-rouge">Dynamic Library</code>는 앱의 <code class="language-plaintext highlighter-rouge">executable</code> files에 포함되지 않기 때문에, 앱의 초기 실행시 불필요하다면 메모리에 로드될 필요가 없습니다. 그렇기 때문에 앱 초기 실행에 필요 없는 <code class="language-plaintext highlighter-rouge">Static Library</code>를 <code class="language-plaintext highlighter-rouge">Dynamic Library</code>로 전환하면 앱 초기 실행 속도를 개선하고 메모리 사용량을 줄일 수 있습니다.</p>
+
+<p><img width="644" alt="dynamicLib" src="https://user-images.githubusercontent.com/13018877/59974192-1b067180-95e4-11e9-9d6c-2b7b6cdd1118.png" /></p>
+
+<p>Dynamic Library는 앱에서 사용되기 위해 Link와 Load의 과정을 거칩니다. 아래에서는 이 과정에 대해서 얘기해보려고 합니다.</p>
+
+<h2 id="dynamic-libraries-link">Dynamic Libraries Link</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Dynamic Library</code> 사용에서 핵심적인 역할을 담당하는 것으로 <code class="language-plaintext highlighter-rouge">Dynamic Linker</code>가 있습니다. <code class="language-plaintext highlighter-rouge">Dynamic Linker</code>에 대해서 wiki에 정의된 내용은 다음과 같습니다.</p>
+
+<div class="message">
+In computing, a dynamic linker is the part of an operating system that loads and links the shared libraries needed by an executable when it is executed (at "run time"), by copying the content of libraries from persistent storage to RAM, filling jump tables and relocating pointers.
+</div>
+
+<p><code class="language-plaintext highlighter-rouge">Dynamic Linker</code>는 <code class="language-plaintext highlighter-rouge">executable</code> 실행시 외부로부터 필요한 라이브러리를 연결하는 역할을 담당합니다. macOS와 iOS의 기반인 Darwin OS에서는 프로젝트 빌드 시점에서 소스코드 컴파일 이후에 라이브러리를 Link합니다. 이 Link Time 시점에서 <code class="language-plaintext highlighter-rouge">Dynamic Linker</code> 파일 경로는 앱 번들에 포함됩니다.(<code class="language-plaintext highlighter-rouge">executable</code> target인 프로젝트 빌드시 Mach-O 명령어가 호출됩니다.) 이 때, executable이 필요로 하는 Dynamic Library의 파일 경로(<code class="language-plaintext highlighter-rouge">someLib.dylib</code>)도 함께 앱 번들에 포함됩니다.</p>
+
+<blockquote>
+  <p>Note: executable 외부는 빌드된 <code class="language-plaintext highlighter-rouge">Example.app</code> 번들의 외부를 의미하는 것이 아니라, 해당 번들 안에서 컴파일된 소스코드의 외부를 의미합니다. 그래서 <code class="language-plaintext highlighter-rouge">Dynamic Library</code>를 적용한다고 하여서 앱의 사이즈가 줄어드는 것은 아닙니다.(오히려 늘어날 수 있습니다.) executable(실행 바이너리)이 줄어드는 것과 앱 번들이 줄어드는 것의 차이를 이해하면 좋습니다.</p>
+</blockquote>
+
+<p>또한 <code class="language-plaintext highlighter-rouge">Dynamic Linker</code>는 Link Time 시점에 <code class="language-plaintext highlighter-rouge">executable</code>이 필요로 하는 라이브러리를 알 수 있도록 메모리에 각각의 라이브러리를 호출하는 <code class="language-plaintext highlighter-rouge">machine code functions</code>를 메모리에 로드해놓습니다. 그래서 Link Time 시점에서 <code class="language-plaintext highlighter-rouge">executable</code>은 필요로하는 라이브러리의 주소를 <code class="language-plaintext highlighter-rouge">Dynamic Linker</code>를 통해 획득할 수 있습니다.</p>
+
+<p>이러한 일련의 과정은 런타임에서 수행되고, <code class="language-plaintext highlighter-rouge">Dynamic Linker</code>는 Library를 이미 실행되고 있는 프로세스(<code class="language-plaintext highlighter-rouge">executable</code>)에 연결합니다. 이러한 과정을 <code class="language-plaintext highlighter-rouge">Dynamic Linking</code>이라고 부릅니다.</p>
+
+<p>정리하면 다음과 같습니다.</p>
+
+<ol>
+  <li>개발자가 앱을 빌드합니다.</li>
+  <li>소스코드 컴파일이 진행됩니다.</li>
+  <li>소스코드가 컴파일되면 컴파일된 파일에서 필요로하는 라이브러리의 Link를 진행합니다.</li>
+  <li>Link 과정에서 <code class="language-plaintext highlighter-rouge">executable</code>이 필요로 하는 라이브러리의 주소를 <code class="language-plaintext highlighter-rouge">Dynamic Linker</code>가 제공합니다.</li>
+</ol>
+
+<h2 id="dynamic-libraries-load">Dynamic Libraries Load</h2>
+
+<p>Dynamic Library는 메모리 로드 시점 및 메모리 로드 방식에 따라서 크게 <code class="language-plaintext highlighter-rouge">Dependent Library</code>와 <code class="language-plaintext highlighter-rouge">Runtime Loaded Library</code>로 나눌 수 있습니다.</p>
+
+<h3 id="1-dependent-library">1. Dependent Library</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Dependent Library</code>는 <code class="language-plaintext highlighter-rouge">Dynamic Library</code>중 앱 자체가 의존성을 가지고 있어서 앱 시작시 바로 메모리에 로드되는 라이브러리를 의미합니다.</p>
+
+<div class="message">
+A dependent library, from the client’s point of view, is a dynamic library the client is linked with. Dependent libraries are loaded into the same process the client is being loaded into as part of its load process. For example, when an app is launched, its dependent libraries are loaded as part of the launch process, before the main function is executed.
+</div>
+
+<p>앱이 실행되는 과정에서 <code class="language-plaintext highlighter-rouge">Dependent Library</code>가 로드되는 과정은 다음과 같습니다.</p>
+
+<ol>
+  <li>앱이 실행될 때 커널은 새로운 프로세스를 위해 할당된 주소 공간에 앱의 코드와 데이터를 로드합니다. 커널은 <code class="language-plaintext highlighter-rouge">Dynamic Loader</code>를 앱과 함께 로드하고, <code class="language-plaintext highlighter-rouge">Dynamic Loader</code>는 <code class="language-plaintext highlighter-rouge">Dependent Library</code>를 메모리에 로드합니다.(<code class="language-plaintext highlighter-rouge">Dynamic Linking</code> 과정에서 <code class="language-plaintext highlighter-rouge">executable</code>이 획득한 주소값을 활용하여 <code class="language-plaintext highlighter-rouge">machine code functions</code>를 호출합니다.)</li>
+  <li><code class="language-plaintext highlighter-rouge">Static Linker</code>는 앱이 <code class="language-plaintext highlighter-rouge">Dependent Library</code>와 링크될 때마다 해당 <code class="language-plaintext highlighter-rouge">Dependent Library</code>를 사용한 소스코드 파일명을 기록합니다. 이 파일명은 <code class="language-plaintext highlighter-rouge">install name</code>이라고 부릅니다. <code class="language-plaintext highlighter-rouge">Dynamic Loader</code>는 <code class="language-plaintext highlighter-rouge">install name</code>을 활용하여 파일 시스템에 라이브러리의 위치를 설정합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">Dynamic Loader</code>는 정의되지 않은 외부 symbols를 앱 실행 시점에 처리하고, 그 이외의 symbols는 앱이 실제로 사용할 때까지 방치됩니다.</li>
+</ol>
+
+<h3 id="2-runtime-loaded-library">2. Runtime Loaded library</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Runtime Loaded Library</code>는 <code class="language-plaintext highlighter-rouge">Dynamic Library</code>중 클라이언트가 런타임에서 직접 로드(<code class="language-plaintext highlighter-rouge">dl_open()</code> 호출)하는 라이브러리를 의미합니다. 클라이언트는 <code class="language-plaintext highlighter-rouge">Runtime Loaded Library</code>를 <code class="language-plaintext highlighter-rouge">static linker</code>에 연결된 라이브러리로 해당 라이브러리를 포함시키지 않고, 이 때문에 <code class="language-plaintext highlighter-rouge">Dynamic Loader</code>는 <code class="language-plaintext highlighter-rouge">Runtime Loaded Library</code>을 앱 실행시 로드하지 않습니다. 클라이언트는 앱에서 <code class="language-plaintext highlighter-rouge">Runtime Loaded Library</code>를 통해 export된 symbols를 사용할 때, 해당 라이브러리를 메모리에 로드합니다.</p>
+
+<blockquote>
+  <p>Note: iOS에서는 Runtime Loaded library를 구현해서 테스트해 볼 수는 있지만, 실제로 이 기능을 사용하여 앱을 배포할 수 없습니다.(앱 스토어 심사 거절 사유) 이 글은 iOS에 국한된 것이 아니라, Darwin OS 기반으로 설명을 작성하였기 때문에 위의 설명을 함께 정리하였습니다.</p>
+</blockquote>
+
+<ul>
+  <li><a href="https://developer.apple.com/app-store/review/guidelines/#software-requirements">App Review GuideLine Software Requirements 2.5.2</a></li>
+  <li><a href="https://github.com/patriknyblad/ios-runtime-loading-dynamic-framework">참고 소스코드 - ios runtime loading dynamic framework</a></li>
+</ul>
+
+<h4 id="참고---다양한-플랫폼-대응---dlcdynamic-loader-compatibility">참고 - 다양한 플랫폼 대응 - DLC(Dynamic Loader Compatibility)</h4>
+
+<p>플랫폼마다 <code class="language-plaintext highlighter-rouge">Dynamic Loader</code>를 구현한 방법이 다르기 때문에, <code class="language-plaintext highlighter-rouge">Dynamic Loader</code>가 동작하기 위해서는 플랫폼별 인터페이스가 필요합니다. 이런 인터페이스를 제공하는 것이 DLC(Dynamic Loader Compatibility, <code class="language-plaintext highlighter-rouge">dlfcn.h</code>에 위치한다)입니다. DLC는 아래와 같은 메서드를 제공합니다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// dlfcn.h</span>
+<span class="k">extern</span> <span class="kt">int</span> <span class="nf">dladdr</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="p">,</span> <span class="n">Dl_info</span> <span class="o">*</span><span class="p">);</span>
+<span class="k">extern</span> <span class="kt">int</span> <span class="nf">dlclose</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">__handle</span><span class="p">);</span>
+<span class="k">extern</span> <span class="kt">char</span> <span class="o">*</span> <span class="nf">dlerror</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="k">extern</span> <span class="kt">void</span> <span class="o">*</span> <span class="nf">dlopen</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">__path</span><span class="p">,</span> <span class="kt">int</span> <span class="n">__mode</span><span class="p">);</span>
+<span class="k">extern</span> <span class="kt">void</span> <span class="o">*</span> <span class="nf">dlsym</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">__handle</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">__symbol</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">dlopen</code> - 앱이 라이브러리에서 export된 symbols를 사용하기 전에 호출. <code class="language-plaintext highlighter-rouge">dlsym</code>, <code class="language-plaintext highlighter-rouge">dlclose</code>에 사용되는 handle을 리턴한다.(<code class="language-plaintext highlighter-rouge">dynamic library handle</code>) <code class="language-plaintext highlighter-rouge">dlopen</code> 호출시. <code class="language-plaintext highlighter-rouge">Dynamic Library</code>의 reference count를 증가시킨다.</li>
+  <li><code class="language-plaintext highlighter-rouge">dlsym</code> - <code class="language-plaintext highlighter-rouge">Dynamic Library</code>에 의해 export된 symbols가 위치하는 주소공간</li>
+  <li><code class="language-plaintext highlighter-rouge">dladdr</code> - 주소 공간에 대한 정보 제공. DL_info 타입의 struct로 정보가 제공된다.</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// dlfcn.h</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">dl_info</span> <span class="p">{</span>
+        <span class="k">const</span> <span class="kt">char</span>      <span class="o">*</span><span class="n">dli_fname</span><span class="p">;</span>     <span class="cm">/* Pathname of shared object */</span>
+        <span class="kt">void</span>            <span class="o">*</span><span class="n">dli_fbase</span><span class="p">;</span>     <span class="cm">/* Base address of shared object */</span>
+        <span class="k">const</span> <span class="kt">char</span>      <span class="o">*</span><span class="n">dli_sname</span><span class="p">;</span>     <span class="cm">/* Name of nearest symbol */</span>
+        <span class="kt">void</span>            <span class="o">*</span><span class="n">dli_saddr</span><span class="p">;</span>     <span class="cm">/* Address of nearest symbol */</span>
+<span class="p">}</span> <span class="n">Dl_info</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="참고자료">참고자료</h2>
+
+<ul>
+  <li><a href="https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/OverviewOfDynamicLibraries.html#//apple_ref/doc/uid/TP40001873-SW1">Overview of Dynamic Libraries - Apple Doc</a></li>
+  <li><a href="https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/DynamicLibraryUsageGuidelines.html#//apple_ref/doc/uid/TP40001928-SW10">Dynamic Library Usage Guidelines - Apple Doc</a></li>
+  <li><a href="http://www.vadimbulavin.com/static-dynamic-frameworks-and-libraries/">http://www.vadimbulavin.com/static-dynamic-frameworks-and-libraries/</a></li>
+  <li><a href="https://medium.com/@StueyGK/static-libraries-vs-dynamic-libraries-af78f0b5f1e4">Static Libraries vs. Dynamic Libraries</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Dynamic_linker#macOS_and_iOS">Dynamic_linker#macOS_and_iOS</a></li>
+  <li><a href="https://www.bignerdranch.com/blog/it-looks-like-you-are-trying-to-use-a-framework/">It Looks Like You Are Trying to Use a Framework</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-05/bitcode_implementation">
+              Bitcode 도입하기
+              <small>21 May 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-02/crash_report_symbolication">
+              Crash Report Symbolication
+              <small>09 Feb 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#macOS">
+                macOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#OS">
+                OS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-11/framework_basic">
+              Framework 이해하기
+              <small>16 Nov 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#macOS">
+                macOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#OS">
+                OS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Library">
+                Library
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Framework">
+                Framework
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-07/static-library">
+              Static Library
+              <small>01 Jul 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#macOS">
+                macOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#OS">
+                OS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Library">
+                Library
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Framework">
+                Framework
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

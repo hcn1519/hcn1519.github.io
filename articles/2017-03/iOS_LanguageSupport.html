@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>iOS 다국어 지원 설정하기 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="iOS 다국어 지원 설정하기 - hcn1519 Dev Post">
+  <meta name="description" content="iOS 다국어 지원 설정에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="iOS 다국어 지원 설정하기">
+  <meta property="og:image" content="/public/assets/iOS.png">
+  <meta property="og:description" content="iOS 다국어 지원 설정에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">iOS 다국어 지원 설정하기</h1>
+  <span class="post-date">16 Mar 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS.png"
+    
+    alt="iOS 다국어 지원 설정하기 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="localization-설정">Localization 설정</h2>
+
+<p>이 포스트에서는 iOS에서 아이폰에 설정된 언어에 따라서 앱의 언어를 바꾸는 방법에 대해 알아보겠습니다. 먼저 프로젝트 최상단 파일을 선택 후, Project를 선택합니다. 그리고 <code class="language-plaintext highlighter-rouge">Localization</code> 파트에서 원하는 언어를 추가합니다.</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2017-03/iOS_LanguageSupport/lang1.png" /></p>
+
+<p>이렇게 추가를 하게 되면 타겟을 설정하라고 나올텐데, 그냥 생성하시면 됩니다.(참고: Launch Screen Story Board의 글씨는 Localization 지원이 되지 않습니다. 따라서 이에 대한 설명은 생략합니다.)</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2017-03/iOS_LanguageSupport/lang2.png" /></p>
+
+<p>Localization을 적용하면 다음과 같이 <code class="language-plaintext highlighter-rouge">Main Story Board</code>와 <code class="language-plaintext highlighter-rouge">Launch Screen Story Board</code>에 다음과 같이 <code class="language-plaintext highlighter-rouge">Main.strings (Korean)</code>와 <code class="language-plaintext highlighter-rouge">Launch Screen Story Board.strings (Korean)</code>이라고 생성된 것을 확인할 수 있습니다.</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2017-03/iOS_LanguageSupport/lang3.png" /></p>
+
+<p>다음으로 <code class="language-plaintext highlighter-rouge">Localizable.strings</code> 파일을 생성해야 합니다.</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2017-03/iOS_LanguageSupport/lang5.png" /></p>
+
+<p>위처럼 프로젝트에서 string file을 생성하고 이름을 <code class="language-plaintext highlighter-rouge">Localizable.strings</code>으로 지정합니다. 각각의 파일들의 역할은 다음과 같습니다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Main.strings (Korean)</code> - 스토리보드 상의 label들에 대한 번역</li>
+  <li><code class="language-plaintext highlighter-rouge">Localizable.strings</code> - 프로젝트 곳곳에 있는 string들에 대한 번역</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">Main.strings (Korean)</code> 파일은 스토리보드에서 생성한 label들에 대한 번역 내용들을 담고 있습니다. 다만 label들이 코드로 내용이 바뀌게 된다면 해당 label의 내용은 <code class="language-plaintext highlighter-rouge">Localizable.strings</code>에서 변경해주어야 합니다. <code class="language-plaintext highlighter-rouge">Localizable.strings</code>에는 각각의 문자열들이 어떤 내용으로 바뀌어야 하는지에 대한 서술을 넣습니다.</p>
+
+<p>이제 Localization이 제대로 작동하도록 각각의 파일에 Localize 옵션을 추가해줍니다.(<code class="language-plaintext highlighter-rouge">Main.storyboard (Base)</code>와 <code class="language-plaintext highlighter-rouge">Localizable.strings</code> 모두 적용)</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2017-03/iOS_LanguageSupport/lang4.png" /></p>
+
+<p>이 때, 기본적으로 Base는 영어로 되어 있으므로, 영어와 한국어를 지원하도록 만든다고 하면, 한국어만 체크해주시면 됩니다.</p>
+
+<h2 id="main-storyboard에-localization-적용">Main StoryBoard에 Localization 적용</h2>
+
+<p>Main StoryBoard의 경우에는 적용이 매우 간단합니다. 그냥 영어 버전에는 Label들을 영어로, 한국어 버전에는 Label들을 한국어로 바꾸어주면 됩니다.</p>
+
+<h2 id="일반-코드에-localization-적용">일반 코드에 Localization 적용</h2>
+
+<p>다음으로 일반 코드에 Localization을 적용하는 경우입니다. 먼저 번역하고자 하는 문자열을 key, 번역된 문자열을 value로 하는 딕셔너리들을 다음과 같이 생성합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// Localization.strings (Base)</span>
+<span class="s">"Edit"</span> <span class="o">=</span> <span class="s">"Edit"</span><span class="p">;</span>
+<span class="s">"Done"</span> <span class="o">=</span> <span class="s">"Done"</span><span class="p">;</span>
+
+<span class="c1">// Localization.strings (korean)</span>
+<span class="s">"Edit"</span> <span class="o">=</span> <span class="s">"편집"</span><span class="p">;</span>
+<span class="s">"Done"</span> <span class="o">=</span> <span class="s">"완료"</span><span class="p">;</span></code></pre></figure>
+
+<p>그리고 나서 문자열이 적용된(여기서는 “Edit”) 코드로 가서 이를 다음과 같이 변경해줍니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="n">editLabel</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">"Edit"</span> <span class="c1">// 다음과 같이 설정되어 있을 경우,</span>
+
+<span class="n">editLabel</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">format</span><span class="p">:</span> <span class="kt">NSLocalizedString</span><span class="p">(</span><span class="s">"Edit"</span><span class="p">,</span> <span class="nv">comment</span><span class="p">:</span> <span class="s">""</span><span class="p">))</span> <span class="c1">// 이렇게 바꿔줍니다.</span></code></pre></figure>
+
+<h3 id="swift-스타일-localization">Swift 스타일 Localization</h3>
+
+<p>Swift에서는 <code class="language-plaintext highlighter-rouge">extension</code>을 통해 위 코드보다 좀 더 간결하게 코드를 작성할 수 있습니다. 이를 위해서 <code class="language-plaintext highlighter-rouge">StringExtension.swift</code> 파일을 생성하고 아래 코드를 넣어줍니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// StringExtension.swift</span>
+<span class="kd">import</span> <span class="kt">Foundation</span>
+
+<span class="kd">extension</span> <span class="kt">String</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">localized</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kt">NSLocalizedString</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="nv">tableName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">bundle</span><span class="p">:</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span> <span class="nv">comment</span><span class="p">:</span> <span class="s">""</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>이렇게 써넣으면, <code class="language-plaintext highlighter-rouge">"myString".localized</code>를 통해 좀 더 간결하게 구현할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="n">editLabel</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">"Edit"</span>
+
+<span class="n">editLabel</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">"Edit"</span><span class="o">.</span><span class="n">localized</span> <span class="c1">// extension으로 구현</span></code></pre></figure>
+
+<h2 id="변수가-포함된-문자열-localization">변수가 포함된 문자열 Localization</h2>
+
+<p>위의 경우는 모두 문자열에 변수가 없는 경우만 적용 가능합니다. 그런데 출력하는 문자열에 변수가 포함된 경우에는 어떻게 해야 할까요? 다음 예제를 보시면 쉽게 이해할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">myName</span> <span class="o">=</span> <span class="s">"Sam"</span>
+<span class="k">let</span> <span class="nv">friend</span> <span class="o">=</span> <span class="s">"Tom"</span>
+<span class="k">let</span> <span class="nv">myNum</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">titleLabel</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">format</span><span class="p">:</span> <span class="kt">NSLocalizedString</span><span class="p">(</span><span class="s">"Hello %@, This is %@"</span><span class="p">,</span> <span class="nv">comment</span><span class="p">:</span> <span class="s">""</span><span class="p">),</span> <span class="n">myName</span><span class="p">,</span> <span class="n">friend</span><span class="p">)</span> <span class="c1">// Hello Sam, This is Tom</span>
+<span class="n">titleLabel</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">format</span><span class="p">:</span> <span class="kt">NSLocalizedString</span><span class="p">(</span><span class="s">"Hello %d"</span><span class="p">,</span> <span class="nv">comment</span><span class="p">:</span> <span class="s">""</span><span class="p">),</span> <span class="n">myNum</span><span class="p">)</span> <span class="c1">// Hello 10</span></code></pre></figure>
+
+<p>String 타입의 경우 <code class="language-plaintext highlighter-rouge">%@</code>를 Int 타입의 경우 <code class="language-plaintext highlighter-rouge">%d</code>를 넣으면 해당 변수가 올바르게 출력되는 것을 확인할 수 있습니다.</p>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    <h2>Lastest Posts</h2>
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

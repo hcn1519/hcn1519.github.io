@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Swift String 다루기 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Swift String 다루기 - hcn1519 Dev Post">
+  <meta name="description" content="Swift의 String method들에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Swift String 다루기">
+  <meta property="og:image" content="/public/assets/swiftLogo.jpg">
+  <meta property="og:description" content="Swift의 String method들에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Swift String 다루기</h1>
+  <span class="post-date">09 Jul 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/swiftLogo.jpg"
+    
+    alt="Swift String 다루기 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2022년 02월 03일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="./swift_Str#swift-string-형태">Swift String 형태</a></li>
+  <li><a href="./swift_Str#extended-grapheme-clusters확장적-문자소-집합">Extended Grapheme Clusters(확장적 문자소 집합)</a></li>
+  <li><a href="./swift_Str#swift의-string-접근하기">Swift의 String 접근하기</a>
+    <ol>
+      <li><a href="./swift_Str#개별-character-접근하기startindex-endindex">개별 Character 접근하기(startIndex, endIndex)</a></li>
+      <li><a href="./swift_Str#개별-character-접근하기offsetby">개별 Character 접근하기(offsetBy)</a></li>
+      <li><a href="./swift_Str#루프를-통해-전체-string에-접근하기">루프를 통해 전체 String에 접근하기</a></li>
+    </ol>
+  </li>
+  <li><a href="./swift_Str#swift-string-insert-remove">Swift String Insert, Remove</a></li>
+  <li><a href="./swift_Str#prefix와-suffix접두사-접미사">Prefix와 Suffix(접두사, 접미사)</a></li>
+  <li><a href="./swift_Str#substring">Substring</a></li>
+</ol>
+
+<h2 id="swift-string-형태">Swift String 형태</h2>
+
+<p>이번 포스팅에서는 Swift의 String에 대해 알아보고자 합니다. Swift에서 문자열을 다음과 같은 형태를 지닙니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"hello"</span></code></pre></figure>
+
+<p>기존 Swift3에서는 한 줄 문자열밖에 없었는데, Swift4에서 여러 줄을 통해 이뤄진 문자열을 <code class="language-plaintext highlighter-rouge">"""</code>를 통해 생성할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">multiLine</span> <span class="o">=</span> <span class="s">"""
+The White Rabbit put on his sectacles, "</span><span class="kt">Where</span> <span class="n">sall</span> <span class="kt">I</span> <span class="n">begin</span><span class="p">,</span> <span class="n">please</span> <span class="n">begin</span> <span class="n">your</span> <span class="kt">Majesty</span><span class="p">?</span><span class="s">" he asked.
+
+"</span><span class="kt">Begin</span> <span class="n">at</span> <span class="n">the</span> <span class="n">beginning</span><span class="p">,</span><span class="s">"
+
+    Indent가 들어갑니다.
+        또다른 indent
+"""</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">multiLine</span><span class="p">)</span>
+
+<span class="cm">/* 출력 결과
+The White Rabbit put on his sectacles, "Where sall I begin, please begin your Majesty?" he asked.
+
+"Begin at the beginning,"
+
+    Indent가 들어갑니다.
+        또다른 indent
+*/</span></code></pre></figure>
+
+<p>여러 줄을 통해 이뤄진 문자열의 앞에 있는 whiteSpace는 출력할 때 생략됩니다. 다만, 시작하는 문장보다 뒷쪽으로 들여쓰기가 들어가는 경우, 해당 들여쓰기는 적용됩니다.</p>
+
+<h2 id="extended-grapheme-clusters확장적-문자소-집합">Extended Grapheme Clusters(확장적 문자소 집합)</h2>
+
+<p>Swift에서 하나의 Character는 <code class="language-plaintext highlighter-rouge">Single Extended Grapheme Clusters</code>를 나타냅니다. <code class="language-plaintext highlighter-rouge">Extended Grapheme Clusters</code>라는 것은 사람이 읽을 수 있는 하나의 문자를 지칭합니다. 여기서 “사람이 읽을 수 있다”의 의미는 영어에만 적용되는 것이 아니라, 다른 나라의 언어도 포함합니다. Apple의 공식문서에서 한글을 예로 드는데요. 이를 살펴보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">precomposed</span><span class="p">:</span> <span class="kt">Character</span> <span class="o">=</span> <span class="s">"</span><span class="se">\u{D55C}</span><span class="s">"</span>                  <span class="c1">// 한</span>
+<span class="k">let</span> <span class="nv">decomposed</span><span class="p">:</span> <span class="kt">Character</span> <span class="o">=</span> <span class="s">"</span><span class="se">\u{1112}\u{1161}\u{11AB}</span><span class="s">"</span>   <span class="c1">// ᄒ, ᅡ, ᆫ</span>
+<span class="c1">// 둘 모두 Character 타입 "한"을 지칭합니다.</span></code></pre></figure>
+
+<p><code class="language-plaintext highlighter-rouge">decomposed</code>는 놀랍게도 Character 타입에 3개의 <code class="language-plaintext highlighter-rouge">scala</code>(이 때 <code class="language-plaintext highlighter-rouge">scala</code>라는 것은 최소 의미를 담은 Character 값(ex: <code class="language-plaintext highlighter-rouge">\u{D55C}</code>)들을 의미합니다.)가 들어갑니다. 즉, Extended Grapheme Clusters에서는 <strong>1 scala = 1 Character</strong> 가 아니라, <strong>1 Character = 1개 혹은 여러개의 scala</strong> 가 되는 것입니다. 인덱스를 통해서 String을 다룰 수 없는 이유가 여기서 나타납니다. 각각의 Character가 여러 개의 scala 값을 지닐 수 있기 때문에 동일한 메모리로 한정된 저장공간을 가지기 어렵습니다. 그렇기 때문에 String을 만들 때 Character별로 동일한 크기의 메모리를 할당할 수 없고, 이는 인덱스를 통한 접근을 불가능하게 만드는 것입니다.</p>
+
+<div class="message">
+  Swift에서 채택한 Extended Grapheme Clusters는 다양한 언어를 직관적으로 표시할 수 있게 도와준다. 하지만, Extended Grapheme Clusters는 서로 다른 크기의 Character를 만들기 때문에 String[Int]를 통한 String의 개별 Character로의 접근은 불가능하다.
+</div>
+
+<h2 id="swift의-string-접근하기">Swift의 String 접근하기</h2>
+
+<p>Swift에서는 <code class="language-plaintext highlighter-rouge">String[Int]</code>를 통해 개별 문자에 접근하기 어렵기 때문에, Swift에서 제공하는 메소드들을 사용해야만 합니다. Swift에서는 <code class="language-plaintext highlighter-rouge">String.index</code> 메소드를 통해서 개별문자 혹은 범위로의 접근을 할 수 있습니다. 가장 기본이 되는 2가지 메소드는 <code class="language-plaintext highlighter-rouge">startIndex</code>와 <code class="language-plaintext highlighter-rouge">endIndex</code>입니다.</p>
+
+<h3 id="개별-character-접근하기startindex-endindex">개별 Character 접근하기(startIndex, endIndex)</h3>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"Hello"</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="p">)</span> <span class="c1">// Index(_base: Swift.String.UnicodeScalarView.Index(_position: 0), _countUTF16: 1)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">endIndex</span><span class="p">)</span> <span class="c1">// Index(_base: Swift.String.UnicodeScalarView.Index(_position: 5), _countUTF16: 0)</span></code></pre></figure>
+
+<p>위와 같은 경우 <code class="language-plaintext highlighter-rouge">str.startIndex</code>는 <code class="language-plaintext highlighter-rouge">0</code>을 반환하고, <code class="language-plaintext highlighter-rouge">str.endIndex</code>는 <code class="language-plaintext highlighter-rouge">5</code>를 반환합니다. 조심해야할 부분은 <code class="language-plaintext highlighter-rouge">endIndex</code> 값이 4가 아니라 5라는 점입니다. <code class="language-plaintext highlighter-rouge">Hello</code>는 5글자이고, 0부터 시작하면 4까지인데, <code class="language-plaintext highlighter-rouge">endIndex</code>는 5라는 것이죠. 즉, <code class="language-plaintext highlighter-rouge">endIndex</code>는 전체 String의 길이를 반환한다는 것을 알 수 있습니다. 위의 메소드들을 통해서 String의 Character들을 접근할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"Hello"</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="p">])</span> <span class="c1">// H</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">str</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="nv">before</span><span class="p">:</span> <span class="n">str</span><span class="o">.</span><span class="n">endIndex</span><span class="p">)])</span> <span class="c1">// o</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">str</span><span class="o">.</span><span class="n">endIndex</span><span class="p">])</span> <span class="c1">// error</span></code></pre></figure>
+
+<p>위의 예시처럼 <code class="language-plaintext highlighter-rouge">str[메소드를 통해 접근한 특정 인덱스]</code>의 표현을 통해 개별 Character에 접근할 수 있습니다.(여기서 숫자로 접근하면 에러입니다.) 그래서, <code class="language-plaintext highlighter-rouge">str[str.startIndex]</code>이 <code class="language-plaintext highlighter-rouge">H</code>를 출력하는 것은 직관적입니다. 하지만, <code class="language-plaintext highlighter-rouge">str[str.endIndex]</code>의 경우 상황이 조금 다릅니다. 왜냐하면 전체 문자는 0부터 4까지인데, <code class="language-plaintext highlighter-rouge">str.endIndex</code>는 5이기 때문이죠. 그래서 <code class="language-plaintext highlighter-rouge">str[str.endIndex]</code>는 에러이고, 마지막 문자에 접근하기 위해서는 <code class="language-plaintext highlighter-rouge">endIndex</code> 앞의 인덱스에 대한 접근이 필요합니다.</p>
+
+<p>Swift는 이와 같은 앞쪽 혹은 뒤쪽 문자에 대한 접근을 위해 <code class="language-plaintext highlighter-rouge">str.index[before:]</code>와 <code class="language-plaintext highlighter-rouge">str.index[after:]</code> 메소드를 제공합니다. 여기서는 <code class="language-plaintext highlighter-rouge">endIndex</code> 앞의 문자를 접근해야 하므로, <code class="language-plaintext highlighter-rouge">str.index(before: str.endIndex)</code>이 마지막 문자 <code class="language-plaintext highlighter-rouge">o</code>를 가리키는 인덱스가 됩니다. 비슷한 원리로 <code class="language-plaintext highlighter-rouge">str.index(after: str.startIndex)</code>를 사용하면, <code class="language-plaintext highlighter-rouge">H</code> 다음의 문자 <code class="language-plaintext highlighter-rouge">e</code>에 접근할 수 있습니다.</p>
+
+<h3 id="개별-character-접근하기offsetby">개별 Character 접근하기(offsetBy)</h3>
+
+<p><code class="language-plaintext highlighter-rouge">startIndex</code>와 <code class="language-plaintext highlighter-rouge">endIndex</code>는 String의 시작과 끝(흑은 그 앞뒤 인덱스)으로의 접근만 가능할 뿐, 중간에 있는 문자에 대한 접근은 어렵습니다. 그래서 Swift는 중간에 있는 문자에 접근하기 위한 <code class="language-plaintext highlighter-rouge">index(_:offsetBy:)</code> 메소드를 별도로 제공합니다.</p>
+
+<div class="message">
+  offsetBy 메소드는 시작 지점부터 떨어진 정수 값만큼을 더한 위치를 반환합니다.
+</div>
+
+<p>사용방법은 다음과 같습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"Hello World"</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">str</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="mi">0</span><span class="p">)])</span> <span class="c1">// H</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">str</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="mi">6</span><span class="p">)])</span> <span class="c1">// W</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">str</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">endIndex</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">)])</span> <span class="c1">// d</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">str</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">endIndex</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="o">-</span><span class="mi">3</span><span class="p">)])</span> <span class="c1">// r</span></code></pre></figure>
+
+<p>위의 예시에서 4개의 출력 중 위의 2개는 <code class="language-plaintext highlighter-rouge">str.startIndex</code>를 시작지점으로 정한 것입니다. <code class="language-plaintext highlighter-rouge">str.startIndex</code>에서 0만큼 떨어진 것은 자기 자신이므로 <code class="language-plaintext highlighter-rouge">H</code>가 되고, 6만큼 떨어진 것은 <code class="language-plaintext highlighter-rouge">W</code>입니다.(자기자신의 인덱스에서 6을 더한 것) 다음으로 아래 2개의 예시는 뒷쪽에서 접근하는 방법입니다. <code class="language-plaintext highlighter-rouge">str.endIndex</code>는 전체 String의 가장 마지막 값입니다. 여기서 <code class="language-plaintext highlighter-rouge">str.endIndex</code>은 전체 길이를 반환하므로 -1을 <strong>더하면</strong> 전체 String의 마지막 문자를 지칭하는 인덱스가 됩니다. 이와 같은 원리로 -3을 <strong>더하면</strong> <code class="language-plaintext highlighter-rouge">r</code>이 나오는 것입니다.</p>
+
+<h3 id="루프를-통해-전체-string에-접근하기">루프를 통해 전체 String에 접근하기</h3>
+
+<p>다음은 루프를 통한 String 접근입니다. 크게 3가지 방법이 있습니다. 첫 번째는 <code class="language-plaintext highlighter-rouge">str</code>를 사용하여 개별 문자(value)에 접근하는 방식입니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"Hello"</span>
+
+<span class="k">for</span> <span class="n">char</span> <span class="k">in</span> <span class="n">str</span> <span class="p">{</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="c1">// H e l l o 각각 접근</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>다음은 <code class="language-plaintext highlighter-rouge">indice</code>를 활용하여 인덱스에 접근하는 방식입니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">for</span> <span class="n">index</span> <span class="k">in</span> <span class="n">str</span><span class="o">.</span><span class="n">indice</span> <span class="p">{</span>
+  <span class="c1">// 정수 인덱스가 아닌 Swift에서 만들어낸 인덱스에 접근합니다.</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="c1">// Index(_base: Swift.String.UnicodeScalarView.Index(_position: 0), _countUTF16: 1)...</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>마지막으로 인덱스와 개별 문자에 동시에 접근하는 방식입니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">for</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="k">in</span> <span class="n">str</span><span class="o">.</span><span class="nf">enumerated</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// index는 정수입니다.</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"index: </span><span class="se">\(</span><span class="n">index</span><span class="se">)</span><span class="s">, value : </span><span class="se">\(</span><span class="n">value</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>  <span class="c1">// index: 0, value : H</span>
+<span class="p">}</span></code></pre></figure>
+
+<h2 id="swift-string-insert-remove">Swift String Insert, Remove</h2>
+
+<p>Swift의 String Insert는 <strong>어떤 내용을 어떤 곳에</strong> 할 것인지를 통해 나타납니다. 이 때 사용하는 메소드는 <code class="language-plaintext highlighter-rouge">insert(_:at:)</code>(<code class="language-plaintext highlighter-rouge">insert(contentsOf:at:)</code>)입니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"Hello"</span>
+
+<span class="n">str</span><span class="o">.</span><span class="nf">insert</span><span class="p">(</span><span class="s">"A"</span><span class="p">,</span> <span class="nv">at</span><span class="p">:</span> <span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="p">)</span> <span class="c1">// 결과 : AHello</span>
+<span class="n">str</span><span class="o">.</span><span class="nf">insert</span><span class="p">(</span><span class="nv">contentsOf</span><span class="p">:</span> <span class="s">" World"</span><span class="p">,</span> <span class="nv">at</span><span class="p">:</span> <span class="n">str</span><span class="o">.</span><span class="n">endIndex</span><span class="p">)</span> <span class="c1">// 결과 : AHello World</span></code></pre></figure>
+
+<p>위처럼 개별 Character를 삽입할 때는 <code class="language-plaintext highlighter-rouge">contentsOf</code>를 사용하지 않아도 됩니다.</p>
+
+<p>String Remove의 경우에도 Insert와 유사한데, 문자를 삭제할 위치 및 범위를 지정해주면 됩니다. 이 때는 <code class="language-plaintext highlighter-rouge">remove(_:at:)</code>(<code class="language-plaintext highlighter-rouge">removeSubrange(_:)</code>) 메소드를 사용합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"AHello World"</span>
+
+<span class="n">str</span><span class="o">.</span><span class="nf">remove</span><span class="p">(</span><span class="nv">at</span><span class="p">:</span> <span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="p">)</span> <span class="c1">// 결과 : Hello World</span>
+
+<span class="k">let</span> <span class="nv">rangeOfWorld</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">endIndex</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="o">-</span><span class="mi">6</span><span class="p">)</span><span class="o">..&lt;</span><span class="n">str</span><span class="o">.</span><span class="n">endIndex</span>
+<span class="n">str</span><span class="o">.</span><span class="nf">removeSubrange</span><span class="p">(</span><span class="n">rangeOfWorld</span><span class="p">)</span> <span class="c1">// 결과 : Hello</span></code></pre></figure>
+
+<p>여기서 <code class="language-plaintext highlighter-rouge">remove(_:at:)</code> 메소드는 직관적으로 이해할 수 있습니다. 반면 <code class="language-plaintext highlighter-rouge">range</code>의 경우에는 아무 <code class="language-plaintext highlighter-rouge">range</code>나 사용해서는 안됩니다.(하나의 배열도 <code class="language-plaintext highlighter-rouge">range</code>가 될 수 있습니다.) 여기서 말하는 <code class="language-plaintext highlighter-rouge">range</code>는 <strong>String.index</strong> 를 사용하여 닫힌 <code class="language-plaintext highlighter-rouge">range</code>를 의미합니다. 즉 위의 예시처럼, <code class="language-plaintext highlighter-rouge">str.index</code> 혹은 <code class="language-plaintext highlighter-rouge">str.endIndex</code> 같은 것들로 닫힌 <code class="language-plaintext highlighter-rouge">range</code>를 지칭하는 것입니다.</p>
+
+<h2 id="prefix와-suffix접두사-접미사">Prefix와 Suffix(접두사, 접미사)</h2>
+
+<p><code class="language-plaintext highlighter-rouge">hasPrefix(_:)</code> 메소드와 <code class="language-plaintext highlighter-rouge">hasSuffix(_:)</code> 메소드는 String의 앞쪽 혹은 뒷쪽에 찾고자 하는 문자가 있는지를 확인할 수 있도록 해주는 메소드입니다. 특정 문자열이 앞에서부터(혹은 뒤에서부터) 포함되어 있는지 확인할 때 좋은 메소드라고 생각됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">s</span> <span class="o">=</span> <span class="s">"한글"</span>
+
+<span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">startIndex</span><span class="p">]</span> <span class="o">==</span> <span class="s">"한"</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"앞 글자가 한"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="nf">hasPrefix</span><span class="p">(</span><span class="s">"한"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"앞 글자가 한"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="nf">hasSuffix</span><span class="p">(</span><span class="s">"한글"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"뒷 쪽이 한글"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<h2 id="substring">Substring</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Substring</code>은 말그대로 String의 일부를 지칭합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"Hello"</span>
+<span class="k">let</span> <span class="nv">str2</span> <span class="o">=</span> <span class="s">"Hello World"</span></code></pre></figure>
+
+<p>다음과 같은 두 개의 string이 있다고 할 경우 str은 str2에 포함된 패턴으로 일종의 substring이라고 생각할 수 있습니다. 하지만 두 string은 서로 다른 메모리를 사용하기 때문에 메모리 측면에서는 다른 서로 포함 관계가 아닙니다. 이번에 추가된 <code class="language-plaintext highlighter-rouge">Substring</code>을 통해서는 하나의 String에서 내용으로 보나, 메모리 측면에서 보나 포함된 <code class="language-plaintext highlighter-rouge">Substring</code>을 만들 수 있게 해줍니다. Substring은 원래 string에서 인덱스의 범위를 지정해주는 형태로 만들 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"Hello World"</span>
+<span class="k">let</span> <span class="nv">range</span> <span class="o">=</span> <span class="n">str</span><span class="p">[</span><span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="o">...</span><span class="n">str</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="mi">4</span><span class="p">)]</span>
+<span class="k">let</span> <span class="nv">subStr</span> <span class="o">=</span> <span class="n">str</span><span class="p">[</span><span class="n">range</span><span class="p">]</span></code></pre></figure>
+
+<p><img src="https://www.dropbox.com/s/lflgz9p17031m84/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202017-07-10%20%EC%98%A4%ED%9B%84%207.03.40.png?dl=0" />
+위에서 만든 <code class="language-plaintext highlighter-rouge">subStr</code>은 새로운 메모리를 해당 변수에 할당하지 않고, 기존의 str 변수의 메모리를 재사용합니다. 이런 메모리 재사용은 메모리 할당 비용을 줄여줍니다. 하지만, 이와 같은 활용은 장기로 string을 저장하는 경우에 적합하지 않으므로 장기로 string을 사용할 경우 새로운 string을 만드는 것이 좋습니다.</p>
+
+<hr />
+
+<h2 id="참고자료">참고자료</h2>
+<ul>
+  <li>Apple Inc. The Swift Programming Language (Swift 4 Beta)</li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-03/atomic">
+              atomic/non atomic
+              <small>01 Mar 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-class-deep">
+              Swift init 2부
+              <small>06 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-basic">
+              Swift init 1부
+              <small>05 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

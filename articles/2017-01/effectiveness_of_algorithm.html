@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Big-O notation - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Big-O notation - hcn1519 Dev Post">
+  <meta name="description" content="Big-O notation에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Big-O notation">
+  <meta property="og:image" content="/public/assets/blogThumb.png">
+  <meta property="og:description" content="Big-O notation에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Big-O notation</h1>
+  <span class="post-date">07 Jan 2017</span>
+
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>아래 내용은 Big-O notation을 이해하기 위해 stackOverFlow의 답변 내용을 번역한 것입니다. 본 질문은 다음과 같습니다.</p>
+<p><a href="http://stackoverflow.com/questions/2307283/what-does-olog-n-mean-exactly">stackOverFlow 본 질문</a></p>
+
+<p>또한, 이 내용만으로 설명이 저 개인적으로는 완벽하다고 생각하지 않아서 Khan academy의 내용을 추가적으로 첨부합니다. 내용 정리가 굉장히 잘 되어 있으니 참고하실 수 있을 것이라 생각됩니다.</p>
+<p><a href="https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation">Khan academy - Asymptotic notation</a></p>
+
+<h4 id="the-logarithm-1">The logarithm 1.</h4>
+
+<p> 말의 목에 밧줄을 묶어놨다고 상상해보세요. 만약 밧줄을 말의 목에 바로 걸어두었다면 이것은 1입니다. 이제 밧줄을 막대기에 묶었다고 생각해보세요. 말은 밧줄을 당기기위해 더 많은 힘을 사용해야 합니다. 말이 밧줄을 당겨야 하는 시간은 밧줄의 강도와 막대기의 크기에 따라 다릅니다. 여기서 밧줄을 당기기 위해 자기 힘의 10배를 내야한다고 가정하겠습니다.</p>
+
+<p> 이제 밧줄이 막대기에 1번 감겨 있다면, 힘을 10배 더 내야합니다. 2번 감으면 100배, 3번 감으면 1,000배의 힘을 내야 하는 것이죠. 우리는 여기서 각각의 줄 감기가 힘을 10배 씩 늘리는 것을 확인할 수 있습니다. loagrithm이란 특정 수를 몇 번 곱해야 원하는 숫자가 나오는가에 대한 것입니다. 예를 들어, base가 10일 경우(log10 n) 3은 1,000의 로그이며, 6은 1,000,000의 로그입니다.</p>
+
+<p>그렇다면, O(log n)은 무슨 의미일까요?</p>
+
+<p>위의 예시에서는 <em>‘성장률’</em> 이 O(log n)입니다. 각각의 추가적인 줄 감기는 매번 10배의 힘을 더 요구합니다.</p>
+
+<table rules="groups">
+  <thead>
+    <tr>
+      <th style="text-align: center">Turns</th>
+      <th style="text-align: center">Max Force</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">10</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">100</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">1000</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">n</td>
+      <td style="text-align: center">10^n</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>위의 예시에서는 밑이 10인 예시이지만, Big O에서는 밑은 중요하지 않습니다. 이제 1-100 사이의 수를 찾는 게임을 상상해보겠습니다.</p>
+
+<p>Your Friend: Guess my number between 1-100!
+Your Guess: 50
+Your Friend: Lower!
+Your Guess: 25
+Your Friend: Lower!
+Your Guess: 13
+Your Friend: Higher!
+Your Guess: 19
+Your Friend: Higher!
+Your Friend: 22
+Your Guess: Lower!
+Your Guess: 20
+Your Friend: Higher!
+Your Guess: 21
+Your Friend: YOU GOT IT!</p>
+
+<p>이 경우 7번의 추론이 필요했습니다. 그런데 여기에 들어간 관계는 무엇인가요? 하나의 추론이 추가될 때마다 알 수 있는 최대 숫자는 어떻게 될까요?</p>
+
+<table rules="groups">
+  <thead>
+    <tr>
+      <th style="text-align: center">Guesses</th>
+      <th style="text-align: center">Items</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">4</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">8</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">16</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">32</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">6</td>
+      <td style="text-align: center">64</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">128</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">1024</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>  이 그래프를 확인해보면, 우리가 binary search를 사용할 경우 1-100 사이의 숫자를 찾는데에는 <em>최대</em> 7번의 추론이 필요합니다. 만약 1-128 사이의 숫자를 추론하려면 여전히 7번의 추론이면 충분하지만, 1-129의 사이의 숫자를 얻어내려면 8번의 추론이 필요합니다.(binary search는 밑이 2인 로그를 전제합니다.) 알아두어야 할 것은 Big O는 항상 최악의 경우를 전제로 합니다. 운이 좋다면 1번에 숫자를 찾아낼 수도 있습니다.</p>
+
+<p> 그렇다면 O(n log n)은 어떨까요? 이는 2개의 루프가 중첩되어 있을 때, 바깥의 루프가 n의 속도로 증가하고(O(n)), 안쪽 루프가 log n의 속도로 증가할 때(O(log n)), 전체 runnign time은 O(n) * O(log n) = O(n log n)이 됩니다.(ex - merge sort)</p>
+
+<h4 id="the-logarithm-2">The logarithm 2.</h4>
+
+<p>logarithmic running-time 함수의 가장 흔한 속성은</p>
+
+<ul>
+  <li>어떤 행동을 수행할 다음 요소의 선택은 여러 가지 가능성 중 하나이다.</li>
+  <li>오직 1개만 선택되어야 한다.
+또는</li>
+  <li>행동이 수행되는 요소는 n의 자리수이다.</li>
+</ul>
+
+<p> 이 속성 때문에 전화번호부에서 사람을 찾는 것이 O(log n)입니다. 우리는 원하는 결과값을 얻기 위해 모든 사람을 볼 필요가 없습니다. 대신, 우리는 divide-and-conquer(분할 정복)해서 전체를 다 보기 전에 작은 부분만 보고도 결과 값을 얻을 수 있습니다. 물론 전화번호 양이 많은 책을 찾는 것은 여전히 많은 시간이 듭니다. 하지만, 양이 증가하는 속도는 검색 속도보다 빠르게 늘어나지는 않습니다.
+ 우리는 전화번호부 예시를 다른 종류의 running time 계산 문제로 확장할 수 있습니다. 우리는 전화번호부를 비즈니스(노란색), 특별한 이름과 사람들(흰색) 등으로 나눌 수 있습니다. 하나의 전화번호는 최대 1명의 개인 혹은 비즈니스에 할당됩니다. 우리는 또한 특정한 페이지를 펼치는 것이 constant time이 든다는 것을 가정합니다.</p>
+
+<ul>
+  <li>O(1) (average case): 주어진 페이지에 사람의 이름이 있고, 바로 번호를 찾을 수 있는 경우</li>
+  <li>O(log n): 사람의 이름을 주고, 전화번호부 책의 중간을 펼칩니다. 그리고 그 부분에 찾는 사람의 이름이 있는지 확인합니다. 이름이 펼친 부분에 없고, 이름 순서가 빠르다면, 책의 처음과 그 중간 지점의 중간을 새롭게 펼칩니다. 반대로 이름 순서가 느리다면 중간지점을 처음지점으로 두고 책의 끝을 마지막으로 두어 새로운 중간지점을 펼칩니다. 이 작업을 이름을 찾을 때까지 반복합니다.</li>
+  <li>O(n): 전화번호에 숫자 5가 들어간 사람의 번호를 모두 찾는 작업</li>
+  <li>O(n): 번호를 주고, 사람 또는 비즈니스 번호를 찾는 작업</li>
+  <li>O(n log n): 전화번호 출력에 오류가 있어서 번호가 랜덤으로 정렬되었다. 이를 이름의 오름차순으로 정렬(AtoZ)하고, 차곡차곡 새로운 비어 있는 전화번호부에 등록하는 작업</li>
+</ul>
+
+<blockquote>
+  <p>내용 출처: The rope-logarithm example was grabbed from the excellent Mathematician’s Delight book by W.Sawyer.</p>
+</blockquote>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2017-05/amortized_analysis">
+              Amortized Analysis(분할상환 분석)
+              <small>18 May 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Algorithm">
+                Algorithm
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Coursera">
+                Coursera
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2017-01/greedy_algorithm">
+              Greedy algorithm(탐욕 알고리즘)
+              <small>02 Jan 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Java">
+                Java
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Algorithm">
+                Algorithm
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Coursera">
+                Coursera
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2016-12/stress_testing">
+              Stress Testing에 대하여
+              <small>21 Dec 2016</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Java">
+                Java
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Coursera">
+                Coursera
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

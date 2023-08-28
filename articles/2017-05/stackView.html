@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>UIStackView 기초 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="UIStackView 기초 - hcn1519 Dev Post">
+  <meta name="description" content="UIStackView의 기본에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="UIStackView 기초">
+  <meta property="og:image" content="/public/assets/iOS.png">
+  <meta property="og:description" content="UIStackView의 기본에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">UIStackView 기초</h1>
+  <span class="post-date">03 May 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS.png"
+    
+    alt="UIStackView 기초 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p><strong>UIStackView</strong> 는 iOS 9에서 나온 개념으로 여러 개의 View를 한 셋트로 만들어주는 역할을 하는 View입니다. 그래서 항상 StackView 안에는 몇 개의 View 들이 있는데, 이를 <strong>arrangedSubViews</strong> 라고 합니다. 이 subView들은 일정한 규칙에 따라 StackView 안에서 배치됩니다. 그리고 이 규칙은 크게 4가지가 있습니다.(axis, alignment, distribution, spacing) 이는 StackView를 스토리보드에서 생성하면 Attribute Indicator 최상단에서 다음과 같이 확인할 수 있습니다.</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2017-05/stackView/stackviewComponents.png" /></p>
+
+<ul>
+  <li>axis는 StackView의 가로, 세로 형태를 설정합니다.</li>
+  <li>alignment는 StackView안의 view들이 Y축 정렬을 설정합니다.</li>
+  <li>distribution은 StackView안의 view들이 X축 정렬을 설정합니다.</li>
+  <li>spacing은 view들간의 간격을 설정합니다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2017-05/stackView/stackViewComponents2.png" /></p>
+
+<h2 id="uistackview-autolayout">UIStackView AutoLayout</h2>
+
+<h4 id="pinxy-position">Pin(x,y position)</h4>
+
+<p>StackView는 포함하고 있는 첫 번째 View와 마지막 View를 기준으로 AutoLayout을 설정합니다. 즉, 가로 StackView라고 한다면, 첫 번째 View의 Leading edge(anchor)가 StackView의 Leading edge가 되고, 마지막 View의 Trailing edge가 StackView의 Trailing edge가 됩니다. 이는 세로 StackView에서도 동일하게 적용됩니다.</p>
+
+<h4 id="sizewidth-height">Size(width, height)</h4>
+
+<p>StackView를 사용할 때는 일반적으로 StackView 자체에 대한 Constraints만 적용하고 그 안의 Views들은 StackView의 속성을 통해 결정하는 것이 일반적입니다. 예를 들어 내부 Views들의 Intrinsic Size를 사용하고 싶다면, StackView의 Top과 Leading Constraints만 적용하는 방식으로 사용하고, 사이즈를 조정하고 싶은 부분에 대한 constraints를 적절히 적용하여 내부 Views들의 크기를 조정하면 됩니다.</p>
+
+<h2 id="uistackview-programatically">UIStackView programatically</h2>
+
+<h4 id="stackview-생성">StackView 생성</h4>
+
+<p>StackView는 Class로 다음과 같이 생성합니다. 또한 속성들은 다음과 같이 생성합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// UIStackView in Swift 3.0</span>
+<span class="k">let</span> <span class="nv">stackView</span> <span class="o">=</span> <span class="kt">UIStackView</span><span class="p">()</span>
+
+<span class="n">stackView</span><span class="o">.</span><span class="n">axis</span> <span class="o">=</span> <span class="o">.</span><span class="n">horizontal</span>
+<span class="n">stackView</span><span class="o">.</span><span class="n">distribution</span> <span class="o">=</span> <span class="o">.</span><span class="n">fillEqually</span>
+<span class="n">stackView</span><span class="o">.</span><span class="n">alignment</span> <span class="o">=</span> <span class="o">.</span><span class="n">fill</span>
+<span class="n">stackView</span><span class="o">.</span><span class="n">spacing</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">stackView</span><span class="o">.</span><span class="n">translatesAutoresizingMaskIntoConstraints</span> <span class="o">=</span> <span class="kc">false</span>
+
+<span class="c1">// stackView에 View 추가</span>
+<span class="n">stackView</span><span class="o">.</span><span class="nf">addArrangedSubview</span><span class="p">(</span><span class="n">view1</span><span class="p">)</span></code></pre></figure>
+
+<h4 id="stackview-autolayout">StackView AutoLayout</h4>
+
+<p>그리고 다음 예제는 stackView의 모든 부분에 pin을 준 형태입니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// UIStackView Constraints</span>
+<span class="n">stackView</span><span class="o">.</span><span class="n">leadingAnchor</span><span class="o">.</span><span class="nf">constraint</span><span class="p">(</span><span class="nv">equalTo</span><span class="p">:</span> <span class="n">view</span><span class="o">.</span><span class="n">leadingAnchor</span><span class="p">)</span><span class="o">.</span><span class="n">isActive</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="n">stackView</span><span class="o">.</span><span class="n">trailingAnchor</span><span class="o">.</span><span class="nf">constraint</span><span class="p">(</span><span class="nv">equalTo</span><span class="p">:</span> <span class="n">view</span><span class="o">.</span><span class="n">trailingAnchor</span><span class="p">)</span><span class="o">.</span><span class="n">isActive</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="n">stackView</span><span class="o">.</span><span class="n">centerXAnchor</span><span class="o">.</span><span class="nf">constraint</span><span class="p">(</span><span class="nv">equalTo</span><span class="p">:</span> <span class="n">view</span><span class="o">.</span><span class="n">centerXAnchor</span><span class="p">)</span><span class="o">.</span><span class="n">isActive</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="n">stackView</span><span class="o">.</span><span class="n">centerYAnchor</span><span class="o">.</span><span class="nf">constraint</span><span class="p">(</span><span class="nv">equalTo</span><span class="p">:</span> <span class="n">view</span><span class="o">.</span><span class="n">centerYAnchor</span><span class="p">)</span><span class="o">.</span><span class="n">isActive</span> <span class="o">=</span> <span class="kc">true</span></code></pre></figure>
+
+<p>StackView 내부의 Views에 접근하기 위해서는 앞서 언급한 arrangedSubViews 속성을 사용하면 됩니다. 다음 예제는 내부 View 중 첫 번째 view의 height와 width를 같게 만드는 constraint 예제입니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="n">stackView</span><span class="o">.</span><span class="n">arrangedSubviews</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">heightAnchor</span><span class="o">.</span><span class="nf">constraint</span><span class="p">(</span><span class="nv">equalTo</span><span class="p">:</span> <span class="n">stackView</span><span class="o">.</span><span class="n">arrangedSubviews</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">widthAnchor</span><span class="p">)</span><span class="o">.</span><span class="n">isActive</span> <span class="o">=</span> <span class="kc">true</span></code></pre></figure>
+
+<hr />
+
+<h2 id="참고-자료">참고 자료</h2>
+<ul>
+  <li><a href="https://developer.apple.com/reference/uikit/uistackview">UIStackView - Apple API Reference</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    <h2>Lastest Posts</h2>
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

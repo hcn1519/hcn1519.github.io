@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Package, Bundle, NSBundle - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Package, Bundle, NSBundle - hcn1519 Dev Post">
+  <meta name="description" content="Package와 Bundle, 그리고 NSBundle에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Package, Bundle, NSBundle">
+  <meta property="og:image" content="/public/assets/iOS.png">
+  <meta property="og:description" content="Package와 Bundle, 그리고 NSBundle에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Package, Bundle, NSBundle</h1>
+  <span class="post-date">15 Dec 2018</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS.png"
+    
+    alt="Package, Bundle, NSBundle feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="package">Package</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Package</code>란 <code class="language-plaintext highlighter-rouge">Finder</code>가 사용자에게 단일 파일로 보여주는 디렉토리를 의미합니다.</li>
+</ul>
+
+<blockquote>
+  <p>A package is any directory that the Finder presents to the user as if it were a single file.</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">Package</code>는 macOS에서 디렉토리를 추상화하는 기본적인 방법 중 하나입니다. <code class="language-plaintext highlighter-rouge">Package</code>는 디렉토리이지만 Opaque Directory로, <code class="language-plaintext highlighter-rouge">Finder</code>에서는 이를 단일한 파일로 인식합니다. 그래서 일반적인 디렉토리를 <code class="language-plaintext highlighter-rouge">Finder</code>에서 더블 클릭하여 열면 디렉토리 안으로 이동하지만, <code class="language-plaintext highlighter-rouge">Package</code>는 파일이 실행됩니다.</p>
+
+<p><img width="371" alt="2018-12-15 4 58 06" src="https://user-images.githubusercontent.com/13018877/50040637-9f52c780-008a-11e9-9ace-85449e14feb7.png" /></p>
+
+<p>위와 같이 <code class="language-plaintext highlighter-rouge">Finder</code>에서 아이콘을 오른쪽 클릭으로 확인할 때, <strong>패키지 내용 보기</strong>라는 옵션이 있는 것을 <code class="language-plaintext highlighter-rouge">Package</code>라고 보면 됩니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Finder</code>에서 <strong>응용 프로그램</strong> 탭으로 이동한 후 아무 앱 아이콘을 오른쪽 클릭으로 확인하면 놀랍게도  <strong>패키지 내용 보기</strong> 옵션이 존재합니다.</p>
+
+<p><img width="1108" alt="2018-12-15 5 04 15" src="https://user-images.githubusercontent.com/13018877/50040687-b34af900-008b-11e9-8784-8646e476d0eb.png" /></p>
+
+<p>이처럼 application도 하나의 <code class="language-plaintext highlighter-rouge">Package</code> 종류 중 하나입니다. MacOS에서는 하나의 Application을 <code class="language-plaintext highlighter-rouge">.app</code>이라는 확장자가 붙는 <code class="language-plaintext highlighter-rouge">Package</code>로 취급합니다. 시스템(<code class="language-plaintext highlighter-rouge">Finder</code>)은 <code class="language-plaintext highlighter-rouge">.app</code>, <code class="language-plaintext highlighter-rouge">.bundle</code>, <code class="language-plaintext highlighter-rouge">.framework</code>, <code class="language-plaintext highlighter-rouge">.plugin</code> 와 같은 확장자를 가진 디렉토리를 <code class="language-plaintext highlighter-rouge">Package</code>로 인식합니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Package</code>는 Finder로 바로 열 수 있는 디렉토리가 아닙니다. 그래서 앞서서 본 것처럼 <strong>패키지 내용 보기</strong>를 통해서 해당 디렉토리에 들어가거나, 터미널로 이동해서 들어갈 수 있습니다. 이런 방식으로 구성되어 있는 이유는 <code class="language-plaintext highlighter-rouge">Package</code> 안에는 해당 <code class="language-plaintext highlighter-rouge">Package</code>를 실행하는 코드와 리소스들이 들어가 있고, 이를 사용자가 임의로 바꾸는 것을 방지하기 위해서입니다.</p>
+
+<h2 id="bundle">Bundle</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Bundle</code> - 실행 가능한 코드와 코드에 의해 사용되는 리소스를 가진 디렉토리</li>
+</ul>
+
+<blockquote>
+  <p>A <code class="language-plaintext highlighter-rouge">Bundle</code> is a directory with a standardized hierarchical structure that holds executable code and the resources used by that code.</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">Bundle</code>은 <code class="language-plaintext highlighter-rouge">Package</code>처럼 디렉토리의 한 종류를 지칭하지만, 실행 가능한 코드와 리소스를 포함하는 디렉토리입니다.  <code class="language-plaintext highlighter-rouge">Bundle</code>은 코드와 리소스의 구조를 정의합니다. 이 때, <code class="language-plaintext highlighter-rouge">Bundle</code>의 구조는 application, framework, plugin의 종류에 따라 차이가 있습니다. <code class="language-plaintext highlighter-rouge">Bundle</code>은 개발자와 OS가 코드를 좀 더 수월하게 다룰 수 있도록 합니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Bundle</code>과 <code class="language-plaintext highlighter-rouge">Package</code> 개념을 서로 혼용해서 쓰는 경우가 많은데, 많은 <code class="language-plaintext highlighter-rouge">Bundle</code>이 <code class="language-plaintext highlighter-rouge">Package</code>이기도 하기 때문입니다. application 같은 경우는 <code class="language-plaintext highlighter-rouge">Finder</code>에서 사용자에게 단일한 파일로 노출되는 <code class="language-plaintext highlighter-rouge">Package</code>이면서, 실행 코드와 리소스를 포함하여 <code class="language-plaintext highlighter-rouge">Bundle</code>이기도 한 대표적인 예입니다.</p>
+
+<h3 id="bundle-display-name">Bundle Display Name</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Bundle</code>은 사용자에게 보여지는 이름과 실제 <code class="language-plaintext highlighter-rouge">Bundle</code>이 사용하는 File System의 이름을 따로 관리합니다. 그래서 <code class="language-plaintext highlighter-rouge">Finder</code>에서 이름을 변경하는 것은 Display Name만 변경하는 것입니다.</p>
+
+<p>일반적으로 Application은 확장자인 <code class="language-plaintext highlighter-rouge">.app</code>이 생략된 Display Name을 사용합니다. 그래서 <code class="language-plaintext highlighter-rouge">Finder</code>에서 응용 프로그램의 확장자가 노출되지 않습니다. 또한 사용자의 언어에 맞춰서 <code class="language-plaintext highlighter-rouge">Bundle</code>의 Display name이 해당 언어에 맞춰서 나오도록 설정할 수도 있습니다.</p>
+
+<h1 id="nsbundle">NSBundle</h1>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Bundle</code>에 포함된 코드와 리소스에 대한 표현</li>
+</ul>
+
+<blockquote>
+  <p>A representation of the code and resources stored in a bundle directory on disk.</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">NSBundle</code>은 ObjectiveC를 통해 만들어진 Foundation Class로 <code class="language-plaintext highlighter-rouge">Bundle</code> 디렉토리 안에 포함된 리소스에 쉽게(<code class="language-plaintext highlighter-rouge">Bundle</code> 디렉토리의 구조를 알 필요 없이) 접근할 수 있도록 제공되는 객체입니다.</p>
+
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@interface</span> <span class="nc">NSBundle</span> <span class="p">:</span> <span class="nc">NSObject</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Note: NSBundle과 위에서 언급한 디렉토리 상의 Bundle은 다른 개념입니다. NSBundle은 NSObject를 상속하는 클래스이고, 위에서 언급한 Bundle은 디렉토리의 한 종류입니다. Swift 3에서 NSBundle의 명칭이 Bundle로 변경되었으니, 이 부분을 유의할 필요가 있습니다.</p>
+</blockquote>
+
+<p>NSBundle은 다음과 같은 목적으로 주로 사용됩니다.</p>
+
+<ol>
+  <li>특정 Bundle 디렉토리를 위한 NSBundle 객체 사용(ex: main bundle)</li>
+  <li>NSBundle의 메소드를 통해 필요한 리소스를 저장하거나 불러오기(ex: <code class="language-plaintext highlighter-rouge">Bundle.main.url(resource:extension:)</code>)</li>
+  <li>다른 시스템 API와 리소스를 통한 인터렉션</li>
+</ol>
+
+<h2 id="main-bundle">Main Bundle</h2>
+
+<p>Bundle은 여러가지가 있지만, 그 중 가장 흔히 사용하게 되는 것은 <code class="language-plaintext highlighter-rouge">mainBundle</code>입니다. <code class="language-plaintext highlighter-rouge">mainBundle</code>은 앱이 실행되는 코드가 있는 Bundle 디렉토리에 접근할 수 있게 도와주는 bundle입니다. <code class="language-plaintext highlighter-rouge">mainBundle</code>은 아래와 같이 정의되어 있습니다.</p>
+
+<blockquote>
+  <p>The main bundle represents the bundle directory that contains the currently executing code.</p>
+</blockquote>
+
+<ul>
+  <li>Objective C</li>
+</ul>
+
+<div class="language-objectivec highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@interface</span> <span class="nc">NSBundle</span> <span class="p">:</span> <span class="nc">NSObject</span> <span class="p">{</span>
+<span class="p">...</span>
+<span class="cm">/* Methods for creating or retrieving bundle instances. */</span>
+<span class="k">@property</span> <span class="p">(</span><span class="n">class</span><span class="p">,</span> <span class="n">readonly</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">NSBundle</span> <span class="o">*</span><span class="n">mainBundle</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="p">[</span><span class="n">NSBundle</span> <span class="nf">mainBundle</span><span class="p">]</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Swift</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">Bundle</span> <span class="p">:</span> <span class="kt">NSObject</span> <span class="p">{</span>
+    <span class="cm">/* Methods for creating or retrieving bundle instances. */</span>
+    <span class="kd">open</span> <span class="kd">class</span> <span class="k">var</span> <span class="nv">main</span><span class="p">:</span> <span class="kt">Bundle</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span>
+</code></pre></div></div>
+
+<h3 id="main-bundle의-사용">Main Bundle의 사용</h3>
+
+<p>Main Bundle은 외부 리소스를 프로젝트에 추가하고 접근할 때 가장 흔히 사용됩니다. 예를 들어서 이미지를 프로젝트에서 사용하기 위해 프로젝트에 추가하려면 아래와 같은 창이 뜹니다.</p>
+
+<p><img width="719" alt="2018-12-19 12 41 06" src="https://user-images.githubusercontent.com/13018877/50164727-cf1dfb80-0326-11e9-8bbf-4b0a9bb46003.png" /></p>
+
+<p>여기서 확인을 누르면 앱 전역에서 다음과 같은 형태로 이미지에 접근할 수 있습니다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"myImageName"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"jpg"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Note: 이미지 같은 경우에는 Xcode에서 특별하게 취급하여, Bundle 사용 없이 바로 이미지 리터럴을 사용하거나 UIImage 형태로 접근할 수 있도록 제공됩니다. 이 부분은 별도로 다룹니다.</p>
+</blockquote>
+
+<h3 id="main-bundle의-위치와-관련-사항">Main Bundle의 위치와 관련 사항</h3>
+
+<h4 id="main-bundle의-위치">Main Bundle의 위치</h4>
+
+<p>Main Bundle의 위치는 <code class="language-plaintext highlighter-rouge">Bundle.main.bundleURL</code>을 출력해보면 쉽게 알 수 있습니다. 이를 출력하면 아래와 같은 형태의 경로가 나옵니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/userName/Library/Developer/CoreSimulator/Devices/...Some Hash.../AweSomeProject.app
+</code></pre></div></div>
+
+<p><img width="1069" alt="2018-12-19 12 38 32" src="https://user-images.githubusercontent.com/13018877/50166074-96335600-0329-11e9-8427-1166b03a1190.png" /></p>
+
+<p>앞서 언급한 것처럼 <code class="language-plaintext highlighter-rouge">Bundle.main.url</code>이 <code class="language-plaintext highlighter-rouge">AweSomeProject.app</code>의 경로를 가리키고 있는 것을 확인할 수 있습니다. <code class="language-plaintext highlighter-rouge">AweSomeProject.app</code>은 Bundle이면서 <code class="language-plaintext highlighter-rouge">Package</code>인 디렉토리입니다. 그래서 터미널로 이동하거나, Finder의 <strong>패키지 내용 보기</strong>를 통해서 확인할 수 있습니다. 그리고 내부에 들어가보면 프로젝트에 드래그 앤 드랍으로 끌어놓은 이미지 파일들을 확인할 수 있습니다.</p>
+
+<h4 id="copy-bundle-resources">Copy Bundle Resources</h4>
+
+<p>이제 약간 궁금증이 생기는 부분이 <strong><code class="language-plaintext highlighter-rouge">mainBundle</code>에 들어가 있는 리소스 파일들이 언제 들어 가는 것인가</strong>에 대해서입니다. 답은 <strong>빌드할 때</strong>입니다.</p>
+
+<p>프로젝트의 <code class="language-plaintext highlighter-rouge">Build Phases</code>(SwiftLint 적용시 스크립트를 추가하는 위치이기도 합니다.)에는 빌드시 실행되는 여러가지 스크립트 혹은 항목들이 있습니다. 그 중 <code class="language-plaintext highlighter-rouge">Copy Bundle Resources</code>라는 항목이 있습니다.</p>
+
+<p><img width="1125" alt="2018-12-19 12 47 02" src="https://user-images.githubusercontent.com/13018877/50166263-09d56300-032a-11e9-85e1-a1eb289de8d2.png" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">Copy Bundle Resources</code>을 통해 Xcode는 빌드시 앱에 추가할 리소스를 결정합니다. 바꿔 말하면, 이 항목에 없는 리소스는 Project Navigator에 추가되어 있어도 실제로 Bundle에서는 접근할 수 없습니다.(리소스 URL이 nil이 됩니다.)</p>
+
+<h4 id="main-bundle의-sub-directory">Main Bundle의 Sub Directory</h4>
+
+<p><code class="language-plaintext highlighter-rouge">mainBundle</code>을 사용하면서 다소 의아할 수 있는 부분이 Sub Directory입니다. Xcode에서 Project Navigator 에서 Group을 생성하고 그 안에 리소스를 넣으면 다음과 같은 형태로 리소스에 접근하려고 시도할 수 있습니다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"myImageName"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"png"</span><span class="p">,</span> <span class="nv">subdirectory</span><span class="p">:</span> <span class="s">"groupName"</span><span class="p">,</span> <span class="nv">localization</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>그런데 이렇게 접근하면 URL은 nil을 출력합니다. 이유는 Xcode에서는 개별 리소스를 추가할 때 <code class="language-plaintext highlighter-rouge">Create Groups</code>으로 추가한 것들은 모두 <code class="language-plaintext highlighter-rouge">Copy Bundle Resources</code> 항목에 별도 디렉토리 없이 바로 파일만 추가되기 때문입니다.</p>
+
+<p><img width="719" alt="2018-12-19 12 41 06" src="https://user-images.githubusercontent.com/13018877/50164727-cf1dfb80-0326-11e9-8bbf-4b0a9bb46003.png" /></p>
+
+<p>그래서 위와 같은 옵션을 주고, 리소스를 추가하면 모든 리소스는 <code class="language-plaintext highlighter-rouge">mainBundle</code>의 root에 복사됩니다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"myImageName"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"png"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>그렇다면 sub directory 옵션은 어떻게 활용하는 것일까요? 가장 간단한 방법은 project navigator에 리소스가 담긴 디렉토리를 <code class="language-plaintext highlighter-rouge">Create Folder References</code> 옵션을 주고 추가하는 것입니다. 이렇게 추가하면, 일반적인 노란색 디렉토리 모양이 project navigator에 나타나는 것이 아니라, 파란색 디렉토리가 추가됩니다.</p>
+
+<p><img width="267" alt="copy type" src="https://user-images.githubusercontent.com/13018877/50167285-2ffc0280-032c-11e9-89cc-90712bfdee66.png" /></p>
+
+<p>이렇게 추가된 디렉토리는 <code class="language-plaintext highlighter-rouge">Copy Bundle Resources</code>에서도 디렉토리로 나타나고, 접근시에도 sub directory 파라미터를 사용해야 합니다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"img"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"png"</span><span class="p">,</span> <span class="nv">subdirectory</span><span class="p">:</span> <span class="s">"imgbox"</span><span class="p">,</span> <span class="nv">localization</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="참고자료">참고자료</h1>
+
+<ul>
+  <li>
+    <p><a href="https://developer.apple.com/library/archive/documentation/CoreFoundation/Conceptual/CFBundles/AboutBundles/AboutBundles.html#//apple_ref/doc/uid/10000123i-CH100-SW1">Bundle Programming Guide - About Bundle</a></p>
+  </li>
+  <li>
+    <p><a href="https://developer.apple.com/documentation/foundation/nsbundle">Foundation - NSBundle</a></p>
+  </li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-02/crash_report_symbolication">
+              Crash Report Symbolication
+              <small>09 Feb 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#macOS">
+                macOS
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-11/framework_basic">
+              Framework 이해하기
+              <small>16 Nov 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#macOS">
+                macOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Framework">
+                Framework
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-09/dynamic_library">
+              Dynamic Library
+              <small>06 Sep 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#macOS">
+                macOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Framework">
+                Framework
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-07/static-library">
+              Static Library
+              <small>01 Jul 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#macOS">
+                macOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Framework">
+                Framework
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

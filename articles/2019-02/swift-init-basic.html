@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Swift init 1부 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Swift init 1부 - hcn1519 Dev Post">
+  <meta name="description" content="Swift의 객체 초기화 방식에 대해 알아 봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Swift init 1부">
+  <meta property="og:image" content="/public/assets/swiftLogo.jpg">
+  <meta property="og:description" content="Swift의 객체 초기화 방식에 대해 알아 봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Swift init 1부</h1>
+  <span class="post-date">05 Feb 2019</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/swiftLogo.jpg"
+    
+    alt="Swift init 1부 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>생성자(initializer, constructor)는 객체를 생성하는 메소드를 지칭합니다. 객체는 일반적으로 클래스를 통해 추상화된 형태로 description을 작성합니다. 그리고 클래스를 실제로 사용하기 위해서는 실제 메모리에 올라가는 객체의 인스턴스를 만들어야 합니다. 이 때, 객체의 인스턴스를 만드는 메소드가 생성자입니다. 다만, Swift에서는 클래스뿐만 아니라, struct에 대해서도 생성자를 지원합니다.</p>
+
+<p>Swift에서 생성자는 <code class="language-plaintext highlighter-rouge">init()</code> 형태로 작성되며, 필요하면 argument를 추가해서 작성할 수도 있습니다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">Car</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">brand</span><span class="p">:</span> <span class="kt">String</span>
+
+    <span class="nf">init</span><span class="p">(</span><span class="nv">brand</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">brand</span> <span class="o">=</span> <span class="n">brand</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>생성자 메소드는 작성할 때 몇 가지 조건이 있습니다. 그 조건을 살펴보면 다음 같은 것들이 있습니다.</p>
+
+<ol>
+  <li>생성자가 메소드가 끝나는 시점에서 객체의 모든 <code class="language-plaintext highlighter-rouge">stored properties</code>에는 값이 존재해야 합니다.
+    <ul>
+      <li>옵셔널 값은 특별히 값을 지정하지 않아도 nil이 기본으로 들어갑니다.</li>
+      <li>property에 default value가 지정되어 있으면 <code class="language-plaintext highlighter-rouge">stored property</code>에 특별한 값을 지정하지 않아도 됩니다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Constant property(let으로 선언된 property)는 생성자에서만 그 값을 설정할 수 있습니다.</p>
+  </li>
+  <li>struct는 생성자를 특별히 작성하지 않아도, <code class="language-plaintext highlighter-rouge">memberwise initializer</code>를 제공합니다. 다만, init 메소드를 별도로 작성하게 되면 <code class="language-plaintext highlighter-rouge">memberwise initializer</code>는 사용할 수 없게 됩니다.(extension 안에 생성자를 쓰면 memberwise initializer를 그대로 사용할 수 있습니다.)</li>
+</ol>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">Car</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">brand</span><span class="p">:</span> <span class="kt">String</span>
+    <span class="k">let</span> <span class="nv">price</span><span class="p">:</span> <span class="kt">Int</span>
+<span class="p">}</span>
+
+<span class="c1">// 별도로 작성하지 않아도 memberwise initializer가 제공됩니다.</span>
+<span class="k">let</span> <span class="nv">car</span> <span class="o">=</span> <span class="kt">Car</span><span class="p">(</span><span class="nv">brand</span><span class="p">:</span> <span class="s">"BMW"</span><span class="p">,</span> <span class="nv">price</span><span class="p">:</span> <span class="mi">10000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="initializer-delegation">Initializer Delegation</h2>
+
+<p><code class="language-plaintext highlighter-rouge">initializer delegation</code>의 개념은 <code class="language-plaintext highlighter-rouge">initializer</code>가 다른 <code class="language-plaintext highlighter-rouge">initializer</code>를 호출하여 인스턴스 생성을 완료하는 것을 의미합니다. <code class="language-plaintext highlighter-rouge">initializer delegation</code>은 struct와 class인지 여부에 따라 적용되는 부분이 다르고, struct가 class에 비해 상대적으로 더 간단합니다.</p>
+
+<h3 id="struct">Struct</h3>
+
+<p>struct가 class에 비해 <code class="language-plaintext highlighter-rouge">initializer delegation</code>이 간단한 이유는 struct는 상속이 되지 않기 때문입니다. struct는 delegation용으로 <code class="language-plaintext highlighter-rouge">self.init()</code> 형태의 initializer만 호출합니다. 아래는 이에 대한 예시입니다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">Car</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">brand</span><span class="p">:</span> <span class="kt">String</span>
+    <span class="k">let</span> <span class="nv">price</span><span class="p">:</span> <span class="kt">Int</span>
+
+    <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// initializer delegation</span>
+        <span class="k">self</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">brand</span><span class="p">:</span> <span class="s">"BMW"</span><span class="p">,</span> <span class="nv">price</span><span class="p">:</span> <span class="mi">10000</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="nf">init</span><span class="p">(</span><span class="nv">brand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">price</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">brand</span> <span class="o">=</span> <span class="n">brand</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">price</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// brand: BMW, price :10000</span>
+<span class="k">let</span> <span class="nv">car</span> <span class="o">=</span> <span class="kt">Car</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>앞서서 생성자는 반드시 모든 <code class="language-plaintext highlighter-rouge">stored properties</code>들에 대한 값을 설정해주어야 한다고 서술하였습니다. 그런데 위의 예시에서는 <code class="language-plaintext highlighter-rouge">init()</code> 메소드는 <code class="language-plaintext highlighter-rouge">stored properties</code>의 값을 <code class="language-plaintext highlighter-rouge">self.init(brand: "BMW", price: 10000)</code> 호출을 통해 설정합니다. 즉, 이는 <strong>초기화의 과정을 자신이 직접하는 것이 아니라, 일부(여기서는 전부) 다른 메소드가 수행하도록 위임한다(delegate)</strong>고 할 수 있습니다.</p>
+
+<h3 id="class">Class</h3>
+
+<h4 id="designated-initializer-convenience-initializer">designated initializer, convenience initializer</h4>
+
+<p>class의 initialize delegation을 얘기하기 위해서는 우선적으로 <code class="language-plaintext highlighter-rouge">designated initializer</code>와 <code class="language-plaintext highlighter-rouge">convenience initializer</code>에 대한 이해가 필요합니다. <code class="language-plaintext highlighter-rouge">designated initializer</code>와 <code class="language-plaintext highlighter-rouge">convenience initializer</code>를 구분하는 가장 쉬운 방법은 <code class="language-plaintext highlighter-rouge">convenience</code> 키워드의 유무입니다. <code class="language-plaintext highlighter-rouge">designated initializer</code>는 반드시 1개는 있어야 하고,(default initalizer가 이를 대신할 수 있습니다.) <code class="language-plaintext highlighter-rouge">convenience initializer</code>는 말 그대로 <code class="language-plaintext highlighter-rouge">designated initializer</code>보다 좀 더 작성 조건이 유연하여 편리하게 쓰려고 만드는 메소드입니다.</p>
+
+<blockquote>
+  <p>Designated initializers are the primary initializers for a class. A designated initializer fully initializes all properties introduced by that class and calls an appropriate superclass initializer to continue the initialization process up the superclass chain.</p>
+</blockquote>
+
+<blockquote>
+  <p>Convenience initializers are secondary, supporting initializers for a class. You can define a convenience initializer to call a designated initializer from the same class as the convenience initializer with some of the designated initializer’s parameters set to default values. You can also define a convenience initializer to create an instance of that class for a specific use case or input value type</p>
+</blockquote>
+
+<h4 id="class-initializer-delegation">Class initializer delegation</h4>
+
+<p>class의 <code class="language-plaintext highlighter-rouge">initialize delegation</code>은 상속을 고려해야 하기 때문에 struct에 비해 복잡합니다. 기본 rule에 대해 살펴보면 다음과 같습니다.</p>
+
+<ul>
+  <li>Rule 1 - <code class="language-plaintext highlighter-rouge">designated initializer</code>는 <code class="language-plaintext highlighter-rouge">superClass</code>의 <code class="language-plaintext highlighter-rouge">designated initialzer</code>를 반드시 호출해야 한다.</li>
+  <li>Rule 2 - <code class="language-plaintext highlighter-rouge">convenience initializer</code>는 동일 클래스의 initializer를 호출해야 한다.</li>
+  <li>Rule 3 - <code class="language-plaintext highlighter-rouge">convenience initializer</code>는 반드시 <code class="language-plaintext highlighter-rouge">designated initialzer</code>를 호출해야 한다.</li>
+</ul>
+
+<p>다음의 Rule에 대해 설명하는 예시를 살펴보겠습니다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">Device</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">icon</span><span class="p">:</span> <span class="kt">String</span>
+
+    <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">icon</span> <span class="o">=</span> <span class="s">"no icon"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">Watch</span><span class="p">:</span> <span class="kt">Device</span> <span class="p">{</span>
+
+    <span class="k">var</span> <span class="nv">price</span><span class="p">:</span> <span class="kt">Int</span>
+
+    <span class="k">override</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// delegate up</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1">// Rule 1</span>
+        <span class="k">super</span><span class="o">.</span><span class="nf">init</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">price</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// delegate across</span>
+        <span class="c1">// Rule 2, 3</span>
+        <span class="k">self</span><span class="o">.</span><span class="nf">init</span><span class="p">()</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">price</span>
+    <span class="p">}</span>
+
+    <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">foo</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">bar</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Rule 2, 3</span>
+        <span class="k">self</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">price</span><span class="p">:</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Watch</code>는 <code class="language-plaintext highlighter-rouge">Device</code>를 상속하고 있습니다. 그래서 <code class="language-plaintext highlighter-rouge">Watch</code>의 <code class="language-plaintext highlighter-rouge">designated initializer</code>인 <code class="language-plaintext highlighter-rouge">init()</code>은 <code class="language-plaintext highlighter-rouge">super.init()</code>을 호출하고 있습니다.(Rule 1)</li>
+  <li><code class="language-plaintext highlighter-rouge">Watch</code>의 <code class="language-plaintext highlighter-rouge">convenience initializer</code> 중 <code class="language-plaintext highlighter-rouge">convenience init(price: Int)</code>은 <code class="language-plaintext highlighter-rouge">Watch</code>의 <code class="language-plaintext highlighter-rouge">designated initializer</code>인 <code class="language-plaintext highlighter-rouge">init()</code>을 호출하고 있습니다.(Rule 2, 3)</li>
+  <li><code class="language-plaintext highlighter-rouge">Watch</code>의 <code class="language-plaintext highlighter-rouge">convenience initializer</code> 중 <code class="language-plaintext highlighter-rouge">convenience init(foo: String, bar: Int)</code>은 동일 클래스의 initializer를 호출하고 있습니다.(Rule 2) 다만, 직접적으로 <code class="language-plaintext highlighter-rouge">designated initializer</code>을 호출하고 있지는 않습니다. 하지만, <code class="language-plaintext highlighter-rouge">convenience init(price: Int)</code>을 호출하여 결론적으로는 <code class="language-plaintext highlighter-rouge">designated initializer</code>도 호출합니다.(Rule 3)</li>
+</ul>
+
+<hr />
+
+<h1 id="참고자료">참고자료</h1>
+
+<ul>
+  <li><a href="https://itunes.apple.com/kr/book/the-swift-programming-language-swift-4-2/id881256329?mt=11">The Swift Programming Language (Swift 4.2)</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-03/atomic">
+              atomic/non atomic
+              <small>01 Mar 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-class-deep">
+              Swift init 2부
+              <small>06 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#init">
+                init
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2018-07/swift_automatic_reference_counting">
+              Swift ARC
+              <small>25 Jul 2018</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

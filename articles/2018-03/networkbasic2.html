@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>네트워크 정리 2 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="네트워크 정리 2 - hcn1519 Dev Post">
+  <meta name="description" content="네트워크 강의 정리 2">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="네트워크 정리 2">
+  <meta property="og:image" content="/public/assets/blogThumb.png">
+  <meta property="og:description" content="네트워크 강의 정리 2">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">네트워크 정리 2</h1>
+  <span class="post-date">17 Mar 2018</span>
+
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <blockquote>
+  <p>본 내용은 kocw의 한양대학교 이석복 교수님 강의인 <a href="http://www.kocw.net/home/search/kemView.do?kemId=1223614">컴퓨터 네트워크</a>를 듣고 정리한 내용입니다.</p>
+</blockquote>
+
+<h1 id="application-layer">Application Layer</h1>
+
+<p><code class="language-plaintext highlighter-rouge">Application Layer</code>는 OSI 7계층 중 사용자가 인터넷을 사용하면서 실제 체감할 수 있는 서비스를 제공합니다. 여기서 말하는 서비스를 제공한다는 것은 특정 프로토콜을 지원한다는 의미로 이해하면 되는데, <code class="language-plaintext highlighter-rouge">Application Layer</code>에서 제공하는 가장 대표적인 프로토콜이 <code class="language-plaintext highlighter-rouge">HTTP</code> 프로토콜입니다.</p>
+
+<h2 id="http">HTTP</h2>
+
+<div class="message">
+  HTTP - Hypertext Transfer Protocol, 하이퍼텍스트를 전송하는 프로토콜
+</div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">HTTP</code>의 메세지는 요청(request)과 응답(response)으로 이뤄져 있다.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">HTTP</code>는 매우 단순한 프로토콜로 클라이언트의 요청과 서버의 응답으로 이뤄진 프로토콜입니다. 예를 들어 어떤 모바일 앱이 클라이언트고 모바일 앱에 정보를 제공하는 서버가 있다고 할 때, 클라이언트는 서버로부터 정보를 받아오기 위해 <code class="language-plaintext highlighter-rouge">GET</code>이든 <code class="language-plaintext highlighter-rouge">POST</code>든 어떤 요청을 서버쪽으로 전송합니다. 여기서 요청을 수행하는 방법은 URL을 접속하는 형태로 이뤄집니다. 그리고 서버는 클라이언트의 요청에 따른 응답을 클라이언트쪽으로 전달합니다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">HTTP</code>는 상태가 없다(stateless).</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">HTTP</code>에서 클라이언트와 서버는 서로 지속적으로 연결되어 있는 상태가 아닙니다. <code class="language-plaintext highlighter-rouge">HTTP</code>에서는 데이터를 보내고 받는 순간에만 연결되기 때문에 <code class="language-plaintext highlighter-rouge">HTTP</code>는 상태가 없다고 얘기합니다. 즉, 클라이언트 측에서 앱 UI를 업데이트한다고 했을 때, <code class="language-plaintext highlighter-rouge">HTTP</code> 프로토콜을 사용하면 실시간으로 서버로부터 정보를 받아서 업데이트하는 것은 <code class="language-plaintext highlighter-rouge">HTTP</code>가 아닌 다른 프로토콜을 사용해야 합니다.</p>
+
+<h3 id="cookie">Cookie</h3>
+
+<p>이러한 HTTP의 상태가 없는 속성은 효율적으로 네트워크 자원을 활용하는 장점도 있지만, 서버의 클라이언트에 대한 정보가 부족하다는 단점도 있습니다. 그래서 이를 보완하기 위해 브라우저는 <code class="language-plaintext highlighter-rouge">Cookie</code>라는 저장공간을 지원합니다.</p>
+
+<div class="message">
+  An HTTP cookie (also called web cookie, Internet cookie, browser cookie, or simply cookie) is a small piece of data sent from a website and stored on the user's computer by the user's web browser while the user is browsing. Cookies were designed to be a reliable mechanism for websites to remember stateful information (such as items added in the shopping cart in an online store) or to record the user's browsing activity (including clicking particular buttons, logging in, or recording which pages were visited in the past).
+</div>
+<p>출처: <a href="https://en.wikipedia.org/wiki/Circuit_switching">HTTP Cookie - wikipedia</a></p>
+
+<p>쿠키를 활용되는 과정은 다음과 같습니다. 아래 과정은 일반 인터넷 사용자가 아마존 서버에 접속할 때의 상황을 서술합니다.</p>
+
+<ol>
+  <li>사용자가 처음 아마존 서버에 접속하면 쿠키에는 아마존 관련 정보가 하나도 없기 때문에 사용자는 쿠키 데이터 없이 클라이언트는 아마존 서버에 요청을 보냅니다.</li>
+  <li>이 때 아마존 서버는 클라이언트측 요청에 쿠키 관련 정보가 없는 것을 확인하고, 응답에 쿠키 번호를 함께 보냅니다.</li>
+  <li>클라이언트에 있는 웹브라우저는 이 쿠키를 클라이언트 컴퓨터에 저장합니다.</li>
+  <li>시간이 지나서 다음번에 클라이언트가 아마존 서버에 요청을 보내게 되었습니다. 이 때 웹브라우저는 아마존 서버에 대한 쿠키를 가지고 있기 때문에 쿠키번호를 요청에 같이 보냅니다.</li>
+  <li>아마존 서버는 해당 쿠키번호와 클라이언트의 접속기록을 조합하여 사용자가 좋아할 법한 내용을 응답 html에 포함시켜서 전송합니다.</li>
+</ol>
+
+<p>쿠키는 서버가 클라이언트의 특징을 파악하는데 도움을 주지만, 쿠키 데이터가 컴퓨터에 과도하게 쌓이게 되면 웹 브라우징 성능 저하의 원인이 됩니다. 그렇기 때문에 웹 브라우저 성능 개선을 위해 주로 삭제하는 데이터이기도 합니다.</p>
+
+<h3 id="web-caches프록시-서버">Web Caches(프록시 서버)</h3>
+
+<div class="message">
+  A web cache (or HTTP cache) is an information technology for the temporary storage (caching) of web documents, such as HTML pages and images, to reduce server lag. A web cache system stores copies of documents passing through it; subsequent requests may be satisfied from the cache if certain conditions are met. A web cache system can refer either to an appliance, or to a computer program.
+</div>
+<p>출처: <a href="https://en.wikipedia.org/wiki/Web_cache">HTTP Web Cache - wikipedia</a></p>
+
+<p>웹 캐시는 클라이언트의 요청을 대신해서 서버쪽으로 전달해주는 역할을 하는 일종의 중간 서버입니다. 그래서 실제 서버로부터 받아온 응답을 자신이 소유하고 있다가 클라이언트가 동일한 서버에 접속하게 되면 자신이 소유하고 있는 응답을 보냅니다.(Forward Position System)</p>
+
+<p>웹 캐시의 장점은 다음과 같습니다.</p>
+
+<ol>
+  <li>클라이언트 측에서 속도가 빠르다.</li>
+  <li>서버 측에서는 서버 부하가 적다.</li>
+  <li>외부로 트래픽이 적게 나가기 떄문에 비용이 적게 든다.</li>
+</ol>
+
+<p>하지만 웹 캐시는 갱신된 정보가 업데이트되지 않는 문제(Consistency)를 갖고 있습니다. 즉, 실제로 서버쪽에서 정보가 변경되었는데 웹 캐시에서는 변경사항을 반영하지 않는 문제가 발생할 수 있는 것입니다. 이러한 문제를 극복하기 위해, 즉 웹 캐시의 데이터를 최신의 것으로 업데이트하기 위해 HTTP 헤더에서 <code class="language-plaintext highlighter-rouge">if-modified-since</code> 필드에 현재 날짜를 보냅니다. 그리고 이 요청에 대한 응답으로 <code class="language-plaintext highlighter-rouge">200 OK</code>이 오면 웹 캐시를 새롭게 업데이트를 하고, <code class="language-plaintext highlighter-rouge">304 Not Modified</code>가 오게 되면 현재 웹 캐시가 죄신이기 떄문에 업데이트를 할 필요가 없습니다.</p>
+
+<hr />
+
+<h2 id="참고자료">참고자료</h2>
+<ul>
+  <li><a href="http://www.kocw.net/home/search/kemView.do?kemId=1223614">컴퓨터 네트워크</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Circuit_switching">HTTP Cookie - wikipedia</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    <h2>Lastest Posts</h2>
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

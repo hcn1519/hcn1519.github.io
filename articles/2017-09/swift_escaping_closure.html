@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Swift Escaping Closure 이해하기 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Swift Escaping Closure 이해하기 - hcn1519 Dev Post">
+  <meta name="description" content="Swift의 Escaping Closure에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Swift Escaping Closure 이해하기">
+  <meta property="og:image" content="/public/assets/swiftLogo.jpg">
+  <meta property="og:description" content="Swift의 Escaping Closure에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Swift Escaping Closure 이해하기</h1>
+  <span class="post-date">12 Sep 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/swiftLogo.jpg"
+    
+    alt="Swift Escaping Closure 이해하기 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2022년 02월 03일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="./swift_escaping_closure#1-escaping-closure-개념">Escaping Closure 개념</a></li>
+  <li><a href="./swift_escaping_closure#2-클로저를-함수-외부에-저장하기">클로저를 함수 외부에 저장하기</a></li>
+  <li><a href="./swift_escaping_closure#3-async-inside-async">Async Inside Async</a></li>
+</ol>
+
+<h2 id="1-escaping-closure-개념">1. Escaping Closure 개념</h2>
+
+<p>본 글은 Closure에 대한 기본 개념을 알고 있다는 전제 하에 글을 진행합니다. 그러니 Closure에 대한 이해가 부족하다면 <a href="https://hcn1519.github.io/articles/2017-05/swift_closure">Swift Closure</a> 이 글을 먼저 읽고 본 글을 읽어주세요.</p>
+
+<div class="message">
+  A closure is said to escape a function when the closure is passed as an argument to the function, but is called after the function returns.
+</div>
+
+<p>클로저가 함수로부터 <code class="language-plaintext highlighter-rouge">Escape</code>한다는 것은 해당 함수의 인자로 클로저가 전달되지만, <strong>함수가 반환된 후 실행</strong> 되는 것을 의미합니다. 함수의 인자가 함수의 영역을 탈출하여 함수 밖에서 사용할 수 있는 개념은 기존에 우리가 알고 있던 변수의 <code class="language-plaintext highlighter-rouge">scope</code> 개념을 무시합니다. 왜냐하면 함수에서 선언된 로컬 변수가 로컬 변수의 영역을 뛰어넘어 <strong>함수 밖</strong> 에서도 유효하기 때문입니다.</p>
+
+<p>일반 로컬 변수(주로 값들: <code class="language-plaintext highlighter-rouge">Int</code>, <code class="language-plaintext highlighter-rouge">String</code> 등등)가 함수 밖에서 살아있는 것은 전역 변수를 함수에 가져와서 값을 새로 주는 것과 크게 다르지 않아 보입니다. 그래서 이와 같은 <code class="language-plaintext highlighter-rouge">Escape</code> 개념이 크게 의미가 없어 보입니다. 하지만, 클로저의 <code class="language-plaintext highlighter-rouge">Escaping</code>은 <code class="language-plaintext highlighter-rouge">A 함수가 마무리된 상태에서만 B 함수가 실행되도록</code> 함수를 작성할 수 있다는 점에서 유용합니다.</p>
+
+<blockquote>
+  <p>Escaping Closure를 활용하면 통해서 함수 사이에 실행 순서를 정할 수 있습니다.</p>
+</blockquote>
+
+<p>함수의 실행 순서를 보장 받을 수 있는 것은 상당히 중요한 기능입니다. 왜냐하면, 이 순서 보장은 비동기 함수의 경우도 포함하기 때문입니다. 서버에서 Json 형식의 데이터를 가져와 화면에 이를 보여주는 앱을 생각해보겠습니다. 이 때 HTTP 통신을 위해 <code class="language-plaintext highlighter-rouge">Alamofire</code> 라이브러리를 사용합니다. <code class="language-plaintext highlighter-rouge">Alamofire</code> 라이브러리는 이 같은 경우 흔히 아래와 같은 형태로 사용됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kt">Alamofire</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="n">urlRequest</span><span class="p">)</span><span class="o">.</span><span class="n">responseJSON</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+  <span class="c1">// handle response</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><code class="language-plaintext highlighter-rouge">Alamofire.request(urlRequest)</code> 메소드는 서버로 <code class="language-plaintext highlighter-rouge">Request</code>를 전송합니다. 여기서는 GET 방식으로 Json 형식의 데이터를 받아옵니다. 그리고 그 결과는 <code class="language-plaintext highlighter-rouge">Response</code> 객체를 통해 받을 수 있습니다. 일반적으로 서버에 <code class="language-plaintext highlighter-rouge">Request</code>를 전송하고 그 <code class="language-plaintext highlighter-rouge">Response</code> 받아오는 함수들은 비동기로 작동하여 <code class="language-plaintext highlighter-rouge">Request</code>를 보낸 직후 반환 되어버리는데, 어떻게 이 같은 <code class="language-plaintext highlighter-rouge">Response</code>가 <code class="language-plaintext highlighter-rouge">Request</code> 결과를 기다리게 하는 형태로 함수를 작성할 수 있는 것일까요? 답은 <code class="language-plaintext highlighter-rouge">Escaping Closure</code>에 있습니다. <code class="language-plaintext highlighter-rouge">responseJSON</code> 메소드를 파라미터를 간단히 들여다보면 다음과 같이 되어 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">@discardableResult</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">responseJSON</span><span class="p">(</span>
+        <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">options</span><span class="p">:</span> <span class="kt">JSONSerialization</span><span class="o">.</span><span class="kt">ReadingOptions</span> <span class="o">=</span> <span class="o">.</span><span class="n">allowFragments</span><span class="p">,</span>
+        <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">DataResponse</span><span class="o">&lt;</span><span class="kt">Any</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span>
+        <span class="o">-&gt;</span> <span class="k">Self</span>
+    <span class="p">{</span>
+
+    <span class="p">}</span></code></pre></figure>
+
+<p><code class="language-plaintext highlighter-rouge">responseJSON(queue:options:completionHandler:)</code>에서 <code class="language-plaintext highlighter-rouge">queue</code>와 <code class="language-plaintext highlighter-rouge">options</code>는 기본값이 지정되어 있기 때문에, 값을 주지 않아도 해당 함수는 작동합니다. 눈여겨 볼 부분은 <code class="language-plaintext highlighter-rouge">completionHandler</code>입니다. 이 <code class="language-plaintext highlighter-rouge">completionHandler</code>는 <code class="language-plaintext highlighter-rouge">Escaping Closure</code> 형태로 작성되어 있습니다. 즉, <code class="language-plaintext highlighter-rouge">completionHandler</code>는 <code class="language-plaintext highlighter-rouge">responseJSON(queue:options:completionHandler:)</code> 함수가 반환되고(완전히 서버로부터 값을 가져 온 상태에서) 실행됩니다. 그 부분이 바로 <code class="language-plaintext highlighter-rouge">trailing closure</code> 형태로 작성되어 있는 <code class="language-plaintext highlighter-rouge">{ response in }</code> 부분입니다.</p>
+
+<div class="message">
+  Escaping Closure를 통해서 클로저 인자는 함수로부터 빠져나올 수(outLive) 있습니다. Swift3 이후부터는 기본적으로 함수의 인자로 들어오는 클로저가 함수 밖에서 사용할 수 없도록 되어 있습니다. 즉 기본적으로 클로저를 함수 외부의 저장소에 저장하거나, GCD를 이용하여 다른 쓰레드에서 해당 클로저를 실행시키는 것이 불가능합니다. 하지만 이는 Escaping Closure를 통해 사용 가능하고, 클로저 타입 앞에 @escaping 키워드를 넣어주면 Closure는 Escaping Closure가 됩니다.
+</div>
+
+<p>여기서부터는 <code class="language-plaintext highlighter-rouge">Escaping Closure</code>으로 작성한 코드를 살펴보고자 합니다. 먼저 Apple의 공식 문서에서 <code class="language-plaintext highlighter-rouge">Escaping Closure</code>를 설명하는 예시를 살펴보겠습니다.</p>
+
+<h2 id="2-클로저를-함수-외부에-저장하기">2. 클로저를 함수 외부에 저장하기</h2>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// 함수 외부에 클로저를 저장하는 예시</span>
+<span class="c1">// 클로저를 저장하는 배열</span>
+<span class="k">var</span> <span class="nv">completionHandlers</span><span class="p">:</span> <span class="p">[()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="kd">func</span> <span class="nf">withEscaping</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 함수 밖에 있는 completionHandlers 배열에 해당 클로저를 저장</span>
+    <span class="n">completionHandlers</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">completion</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">withoutEscaping</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">completion</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">MyClass</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">x</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="kd">func</span> <span class="nf">callFunc</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">withEscaping</span> <span class="p">{</span> <span class="k">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">100</span> <span class="p">}</span>
+        <span class="n">withoutEscaping</span> <span class="p">{</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">200</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">let</span> <span class="nv">mc</span> <span class="o">=</span> <span class="kt">MyClass</span><span class="p">()</span>
+<span class="n">mc</span><span class="o">.</span><span class="nf">callFunc</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="n">completionHandlers</span><span class="o">.</span><span class="nf">first</span><span class="p">?()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1">// 결과</span>
+<span class="c1">// 200</span>
+<span class="c1">// 100</span></code></pre></figure>
+
+<p>위의 예시에서는 MyClass의 함수 <code class="language-plaintext highlighter-rouge">callFunc()</code>는 클로저를 인자를 가지는 <code class="language-plaintext highlighter-rouge">withEscaping(completion:)</code>과 <code class="language-plaintext highlighter-rouge">withoutEscaping(completion:)</code>을 각각 호출합니다. 이 때 <code class="language-plaintext highlighter-rouge">withEscaping(completion:)</code>은 <code class="language-plaintext highlighter-rouge">completion</code>의 파라미터가 <code class="language-plaintext highlighter-rouge">Escaping Closure</code> 형태로 구현되어 있습니다. 위의 예제에서는 <code class="language-plaintext highlighter-rouge">completionHandlers.append(completion)</code>코드를 통해 <code class="language-plaintext highlighter-rouge">withEscaping(completion:)</code> 외부에 클로저를 저장합니다. 즉, 클로저가 함수에서 빠져나갔습니다. 이렇게 함수를 호출하는 도중에 해당 함수 외부에 클로저를 저장하기 위해서는 클로저는 <code class="language-plaintext highlighter-rouge">Escaping Closure</code>이어야 합니다.</p>
+
+<div class="message">
+  Note: 이 때, 클로저가 탈출한다는 의미는 해당 함수의 실행을 중간에 끊고, 탈출(escape)하는 의미가 아닙니다. 여기서의 탈출(escape)은 클로저를 외부로 보낼 수 있다는 의미입니다.
+</div>
+
+<h2 id="3-async-inside-async">3. Async Inside Async</h2>
+
+<p>앞서 언급한 것처럼 <code class="language-plaintext highlighter-rouge">Escaping Closure</code>는 HTTP 통신에서 <code class="language-plaintext highlighter-rouge">completionHandler</code>로 많이 사용됩니다. 다만, 서버에 요청하는 Restful API 기반의 <code class="language-plaintext highlighter-rouge">Request</code>들은 앱의 이곳저곳에서 사용되는 경우가 많기 때문에 따로 클래스를 만들어 사용하는 것이 유용한 경우가 많습니다. 여기서는 이를 구현하는 방식중 하나로 하나의 <code class="language-plaintext highlighter-rouge">class</code> 안에서 통신 메소드들을 <code class="language-plaintext highlighter-rouge">static</code>함수 형태로 관리하는 것을 보이고자 합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="kt">Server</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="nf">getPerson</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// doSomething</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>위의 코드는 static 메소드로 <code class="language-plaintext highlighter-rouge">getPerson()</code>을 작성하여, <code class="language-plaintext highlighter-rouge">Server.getPerson()</code> 형태로 앱의 어디에서는 호출할 수 있습니다.</p>
+
+<p>앞에서 예시로 들었던 서버에서 Json 정보를 가져와 앱 화면을 보여주는 경우를 다시 생각해보겠습니다. 이 메소드를 static 함수 형태로 관리하려면 어떻게 해야할까요? 여기서 생각해야하는 점은 데이터를 받아오는 것과 데이터로 화면을 업데이트하는 것이 모두 비동기로 이루어져야 한다는 점입니다. 또한 데이터가 받아온 상태에서 화면을 업데이트 하는 것이 <strong>보장</strong> 되어야 합니다. 그렇지 않으면, 앱이 화면을 업데이트하는 도중 데이터가 없어 크래시가 나게 됩니다. 그래서 이와 같은 경우에는 두 개의 <code class="language-plaintext highlighter-rouge">Escaping Closure</code>를 함께 사용합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="kt">Server</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="k">var</span> <span class="nv">persons</span><span class="p">:</span> <span class="p">[</span><span class="kt">Person</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="kd">static</span> <span class="nf">getPerson</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">,</span> <span class="p">[</span><span class="kt">Person</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 순서 2.</span>
+      <span class="kt">Alamofire</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="n">urlRequest</span><span class="p">)</span><span class="o">.</span><span class="n">responseJSON</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+          <span class="n">persons</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">데이터</span><span class="p">)</span>
+          <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+              <span class="c1">// 순서 3.</span>
+              <span class="nf">completion</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="n">persons</span><span class="p">)</span>
+          <span class="p">}</span>
+
+      <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// Usage, ex) ViewController.swift</span>
+<span class="c1">// 순서 1.</span>
+<span class="kt">Server</span><span class="o">.</span><span class="n">getPerson</span> <span class="p">{</span> <span class="p">(</span><span class="n">isSuccess</span><span class="p">,</span> <span class="n">persons</span><span class="p">)</span> <span class="k">in</span>
+  <span class="c1">// 순서 4.</span>
+  <span class="k">if</span> <span class="n">isSuccess</span> <span class="p">{</span>
+      <span class="c1">// update UI</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>코드의 작동 순서는 다음과 같습니다.</p>
+
+<ol>
+  <li>ViewController에서 필요한 데이터를 <code class="language-plaintext highlighter-rouge">Server</code> 클래스의 함수 <code class="language-plaintext highlighter-rouge">getPerson(completion:)</code>을 통해 호출합니다.</li>
+  <li>다음으로 <code class="language-plaintext highlighter-rouge">Alamofire</code>를 통해 서버로 <code class="language-plaintext highlighter-rouge">Request</code>를 전송하고, <code class="language-plaintext highlighter-rouge">responseJson</code>은 <code class="language-plaintext highlighter-rouge">Escaping Closure</code>이므로 <code class="language-plaintext highlighter-rouge">{ response in }</code> 부분은 결과가 모두 들어 온 이후에 실행됩니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">responseJson</code>의 <code class="language-plaintext highlighter-rouge">completionHandler</code> 블럭이 실행되고, 화면 업데이트를 위해 서버로부터 받아온 데이터(persons)를 처음 호출했던 ViewController 쪽으로 보내기 위해, <code class="language-plaintext highlighter-rouge">getPerson(completion:)</code>의 <code class="language-plaintext highlighter-rouge">completion</code>을 호출합니다. 그런데 이 때, 화면 업데이트는 Main 쓰레드에서 이뤄져야하므로, <code class="language-plaintext highlighter-rouge">completion</code>은 <code class="language-plaintext highlighter-rouge">Escaping Closure</code> 형태를 취합니다.</li>
+  <li>호출된 <code class="language-plaintext highlighter-rouge">completion</code>으로 <code class="language-plaintext highlighter-rouge">getPerson(completion:)</code> 메소드의 <code class="language-plaintext highlighter-rouge">completion</code> 블럭이 실행됩니다. 이 때, 통신이 잘 되었는지, 확인하는 Boolean을 <code class="language-plaintext highlighter-rouge">isSuccess</code>로 넘기고, 데이터를 persons로 넘겼습니다. 그 이후 화면을 업데이트하면 앱에서 서버의 데이터를 문제 없이 받아오게 됩니다.</li>
+</ol>
+
+<hr />
+
+<h2 id="참고자료">참고자료</h2>
+
+<ul>
+  <li>Apple Inc. The Swift Programming Language (Swift 3.1) - Escaping Closure</li>
+  <li><a href="https://learnappmaking.com/escaping-closures-swift-3/">escaping closure swift3</a></li>
+  <li><a href="https://medium.com/@kumarpramod017/what-do-mean-escaping-and-nonescaping-closures-in-swift-d404d721f39d">What do mean @escaping and @nonescaping closures in Swift?</a></li>
+  <li><a href="https://stackoverflow.com/questions/41745328/completion-handlers-in-swift-3-0">Completion handlers in Swift 3.0</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-03/atomic">
+              atomic/non atomic
+              <small>01 Mar 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-class-deep">
+              Swift init 2부
+              <small>06 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-basic">
+              Swift init 1부
+              <small>05 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

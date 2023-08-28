@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Core Graphics - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Core Graphics - hcn1519 Dev Post">
+  <meta name="description" content="Core Graphics에 대해 학습한 내용을 정리합니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Core Graphics">
+  <meta property="og:image" content="/public/assets/iOS.png">
+  <meta property="og:description" content="Core Graphics에 대해 학습한 내용을 정리합니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Core Graphics</h1>
+  <span class="post-date">24 Mar 2018</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS.png"
+    
+    alt="Core Graphics feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <blockquote>
+  <p>이 시리즈는 애플의 <a href="https://developer.apple.com/library/content/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_overview/dq_overview.html#//apple_ref/doc/uid/TP30001066-CH202-CJBBAEEC">CoreGraphics</a> 문서를 기반으로 정리한 내용을 담고 있습니다.</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">Core Grahics</code>는 애플의 플랫폼에서 2차원 그래픽을 담당하는 기술을 의미합니다. <code class="language-plaintext highlighter-rouge">Core Grahics</code>는 <code class="language-plaintext highlighter-rouge">Quartz 2D</code>라는 엔진을 통해 구현되는데, 이 때 <code class="language-plaintext highlighter-rouge">Quartz 2D</code>에서 제공하는 API를 활용하여 개발자는 디바이스 화면에 이미지를 로딩한다든지, 도형을 그린다든지 하는 일련의 그래픽 작업을 수행할 수 있습니다. 이 포스팅에서는 <code class="language-plaintext highlighter-rouge">Quartz 2D</code>의 몇 가지 기본 개념 및 컨셉에 대해 알아보고자 합니다.</p>
+
+<h2 id="painter-draws-an-image-on-paper-in-quartz-2d">Painter draws an Image on paper in Quartz 2D</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Quartz 2D</code>에서는 <em>Painter</em> model라는 것을 기반으로 그래픽을 화면에 표시합니다. <em>Painter</em> model은 다음 2가지 단계를 통해 그래픽을 구현합니다.</p>
+
+<ol>
+  <li>각각의 연속적인 Drawing(그림)은 layer에 그려지고, 이 그림은 canvas(page)에 표현된다.</li>
+  <li>이 page에 표현된 그림은 추가적인 그림을 겹치는 형태로 수정된다.</li>
+</ol>
+
+<p><img src="https://dl.dropbox.com/s/70doq0y7d4rlpaa/coreGraphicsFig1.png" style="margin: 0 auto;" /></p>
+
+<p>이러한 과정은 여러개의 그림을 투명한 종이에 그려놓고 이 그림을 겹쳐서 하나의 그림을 만든다고 생각하면 이해가 쉽습니다. 다만 이 때 특정 그림을 앞에 두어서 뒤에 있는 그림이 가려지는 경우가 생기는데 <em>Painter</em> model도 그 영향을 받아서 그림을 그리는 순서를 잘 지켜야 원하는 그래픽을 얻을 수 있습니다.</p>
+
+<h2 id="drawing-destinations-graphic-context">Drawing Destinations: Graphic Context</h2>
+
+<div class="message">
+  A graphics context is an opaque data type (CGContextRef) that encapsulates the information Quartz uses to draw images to an output device, such as a PDF file, a bitmap, or a window on a display.
+</div>
+
+<p><code class="language-plaintext highlighter-rouge">Graphic Context</code>은 Quartz가 출력 기기(pdf, bitmap, display 등)에 이미지를 그리기 위한 정보들을 담고 있는 데이터 타입입니다. 그래서 <code class="language-plaintext highlighter-rouge">Graphic Context</code>은 그래픽 drawing parameters나 기기별 page의 paint 정보가 담겨 있습니다. <code class="language-plaintext highlighter-rouge">Graphic Context</code>는 그래픽 출력 형식에 따라 다른 타입을 사용합니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/j4qhae761uypuan/core2.png" style="margin: 0 auto;" /></p>
+
+<p>이렇게 <code class="language-plaintext highlighter-rouge">Graphic Context</code>가 기기별로 이미지를 그리기 위한 정보를 담고 있기 때문에, 이는 그림이 표현되는 목적지로 이해가 될 수 있습니다. 이 말은 <code class="language-plaintext highlighter-rouge">Graphic Context</code> 자체가 디바이스별 이미지 정보를 모두 담고 있기 때문에 <code class="language-plaintext highlighter-rouge">Graphic Context</code>만 알아도 이미지가 어떻게 출력될 것인지 알 수 있다는 것을 의미합니다. 그래서 사용자가 하나의 이미지를 여러 기기에 출력하고 싶을 때 상황별 <code class="language-plaintext highlighter-rouge">Graphic Context</code>만 제공하면 <code class="language-plaintext highlighter-rouge">Quartz</code>가 기기별 차이 계산을 알아서 수행합니다.</p>
+
+<h2 id="graphic-state">Graphic State</h2>
+
+<p>Quartz는 현재의 <code class="language-plaintext highlighter-rouge">Graphic state</code>에 따라서 drawing의 결과를 수정합니다. <code class="language-plaintext highlighter-rouge">Graphic state</code>에는 <code class="language-plaintext highlighter-rouge">Drawing Routines</code>가 인자로 포함되어 있습니다. <code class="language-plaintext highlighter-rouge">Drawing Routines</code>은 <code class="language-plaintext highlighter-rouge">Graphic state</code>을 참조하여 결과를 랜더링(화면을 그리는) 방식을 사용합니다. 그래서 <code class="language-plaintext highlighter-rouge">Graphic state</code>에 색을 칠하거나, 현재 위치를 바꾸거나, 텍스트 사이즈를 바꾸는 것과 같은 것들을 적용하면 그리는 대상의 형태도 바뀐 형태로 나타납니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Graphic context</code>는 <code class="language-plaintext highlighter-rouge">Graphic state</code>를 그래픽의 적용 순서를 유지하기 위해 스택의 형태로 저장합니다. <code class="language-plaintext highlighter-rouge">Graphic context</code>는 현재의 상태를 저장하기 위해 <code class="language-plaintext highlighter-rouge">CGContextSaveGState</code> 함수를 호출하는데, 이 때 <code class="language-plaintext highlighter-rouge">Graphic state</code>의 복사본이 스택에 push되고, 저장된 그래픽을 불러올 때는 <code class="language-plaintext highlighter-rouge">CGContextRestoreGState</code> 함수를 호출하여 <code class="language-plaintext highlighter-rouge">Graphic state</code>의 복사본을 pop합니다.</p>
+
+<h2 id="quartz-2d-coordinate-systems">Quartz 2D Coordinate systems</h2>
+
+<p>Coordinate system(좌표 시스템)은 화면에 그려지는 객체의 위치와 크기를 정의하는 것으로 각각의 좌표는 floating-value(CGFloat) 형태로 정의됩니다. 하나의 객체를 디바이스 화면에 그릴 때 있어서 문제가 되는 부분 중 하나는 기기별로 그래픽을 표현하는 스펙이 다르다는 점입니다. 동일한 300x300의 이미지를 해상도가 서로 다른 기기에 그린다고 할 때, 동일한 형태로 이미지가 나오는 것을 기대하기 어렵습니다. 즉, 좌표 시스템을 디바이스 레벨에서 정의하게 되면 객체가 왜곡된 형태로 표현될 수 있습니다.</p>
+
+<p>Quartz는 이러한 문제를 해결하기 위해 사용자가 사용하는 별도의 좌표 시스템을 두고, 이를 디바이스별로 적절하게 변환해주는 행렬을 하나 정의합니다. 이 행렬이 <code class="language-plaintext highlighter-rouge">Current Transformation Matrix(CTM)</code>입니다.</p>
+
+<ol>
+  <li>사용자가 사용하는 user-space Coordinate system 정의</li>
+  <li>기기에서 사용하는 device-space Coordinate system 정의</li>
+  <li>user-space의 point 값을 CTM을 활용하여 device-space point 값으로 변환</li>
+</ol>
+
+<p>이와 같이 user-space, device-space 좌표 시스템을 분리해서 정의하게 되면, 사용자는 하나의 좌표 시스템을 사용하면서도 기기별로 객체가 다르게 노출되는 문제를 고민하지 않아도 됩니다.</p>
+
+<blockquote>
+  <p>CTM은 Affine Transform이라는 매트릭스 타입의 한 종류로 하나의 좌표를 다른 하나의 좌표로 전환하는 역할을 수행합니다. 그리고 이 때, CTM은 translation, rotation, scaling operations를 활용하여 대상이 그려지는 형태를 변환하는 역할도 맡습니다. 예를 들어서 박스를 45도 기울인 형태로 그리고 싶으면 박스를 그리기 전에 ctm을 45도 기울이면 됩니다.</p>
+</blockquote>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="kt">UIKit</span>
+
+<span class="kd">class</span> <span class="kt">RotatedView</span><span class="p">:</span> <span class="kt">UIView</span> <span class="p">{</span>
+
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">draw</span><span class="p">(</span><span class="n">_</span> <span class="nv">rect</span><span class="p">:</span> <span class="kt">CGRect</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="o">.</span><span class="nf">draw</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+
+        <span class="k">let</span> <span class="nv">context</span> <span class="o">=</span> <span class="kt">UIGraphicsGetCurrentContext</span><span class="p">()</span><span class="o">!</span>
+
+        <span class="n">context</span><span class="o">.</span><span class="nf">setFillColor</span><span class="p">(</span><span class="kt">UIColor</span><span class="o">.</span><span class="n">green</span><span class="o">.</span><span class="n">cgColor</span><span class="p">)</span>
+
+        <span class="c1">// Context Origin 설정</span>
+        <span class="k">let</span> <span class="nv">centerX</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">origin</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">context</span><span class="o">.</span><span class="nf">translateBy</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="n">centerX</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="n">rect</span><span class="o">.</span><span class="n">origin</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+        <span class="c1">// Context 사이즈 조정</span>
+        <span class="n">context</span><span class="o">.</span><span class="nf">scaleBy</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="nf">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nv">y</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="nf">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+        <span class="c1">// Context 회전</span>
+        <span class="n">context</span><span class="o">.</span><span class="nf">rotate</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">(</span><span class="mi">45</span> <span class="o">*</span> <span class="kt">Double</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span><span class="p">))</span>
+        <span class="n">context</span><span class="o">.</span><span class="nf">fill</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<hr />
+
+<h2 id="참고자료">참고자료</h2>
+<ul>
+  <li><a href="https://developer.apple.com/library/content/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_overview/dq_overview.html#//apple_ref/doc/uid/TP30001066-CH202-TPXREF101">Overview of Quartz 2D Programming Guide</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-05/CGBitmapContext">
+              CGBitmapContext 정리
+              <small>04 May 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#CoreGraphics">
+                CoreGraphics
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

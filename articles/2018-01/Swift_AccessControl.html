@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Swift 접근 제어자(Access Control) - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Swift 접근 제어자(Access Control) - hcn1519 Dev Post">
+  <meta name="description" content="Swift의 접근제어자에 대해 간단히 정리했습니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Swift 접근 제어자(Access Control)">
+  <meta property="og:image" content="/public/assets/swiftLogo.jpg">
+  <meta property="og:description" content="Swift의 접근제어자에 대해 간단히 정리했습니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Swift 접근 제어자(Access Control)</h1>
+  <span class="post-date">16 Jan 2018</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/swiftLogo.jpg"
+    
+    alt="Swift 접근 제어자(Access Control) feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>Swift의 접근 제어자(Access Control)에 대해서 간단히 정리해보고자 합니다. 정의를 살펴보면,</p>
+
+<div class="message">
+  Access control restricts access to parts of your code from code in other source files and modules.
+</div>
+
+<p>다음과 같습니다.</p>
+
+<p>접근 제어자는 코드를 작성하는 한 파일에서 다른 파일에 있는 코드에 대한 접근을 명시적으로 작성하여 이를 관리하는 것인데, <code class="language-plaintext highlighter-rouge">module</code>과 <code class="language-plaintext highlighter-rouge">source file</code>에 따라 다른 접근을 할 수 있습니다.</p>
+
+<h4 id="module과-source-file">Module과 Source file</h4>
+
+<p><code class="language-plaintext highlighter-rouge">module</code>이라는 것은 하나의 프레임워크를 의미합니다. 즉, <code class="language-plaintext highlighter-rouge">import</code> 키워드로 추가되는 것들이 <code class="language-plaintext highlighter-rouge">module</code>입니다. <code class="language-plaintext highlighter-rouge">UIKit</code>, <code class="language-plaintext highlighter-rouge">Foundation</code> 등이 모두 <code class="language-plaintext highlighter-rouge">module</code>입니다. 프로젝트의 하위에 있는 <code class="language-plaintext highlighter-rouge">targets</code>도 각각 모두 하나의 <code class="language-plaintext highlighter-rouge">module</code>입니다. <code class="language-plaintext highlighter-rouge">source file</code>은 각각의 <code class="language-plaintext highlighter-rouge">module</code> 안에 있는 파일들입니다. 예를 들어 <code class="language-plaintext highlighter-rouge">example.swift</code> 같은 파일들이 하나의 <code class="language-plaintext highlighter-rouge">source file</code>입니다.</p>
+
+<h4 id="swift의-5가지-접근-제어자">Swift의 5가지 접근 제어자</h4>
+
+<p>이제 <code class="language-plaintext highlighter-rouge">module</code>과 <code class="language-plaintext highlighter-rouge">source file</code>을 기준으로 나뉘는 5가지 접근 제어자를 알아보고자 합니다. 그리고 여기서는 특정 접근 제어자가 적용되는 대상을 <code class="language-plaintext highlighter-rouge">entity</code>로 서술합니다. <code class="language-plaintext highlighter-rouge">entity</code>는 접근제어자를 작성할 수 있는 property, method, class, struct 등의 집합을 의미합니다.</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">open</code>, <code class="language-plaintext highlighter-rouge">public</code> - 프로젝트 내의 모든 <code class="language-plaintext highlighter-rouge">module</code> 해당 entity에 접근할 수 있습니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">internal</code> - <code class="language-plaintext highlighter-rouge">default</code> 접근 제어자로, entity가 작성된 <code class="language-plaintext highlighter-rouge">module</code>에서만 접근할 수 있습니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">fileprivate</code> - entity가 작성된 <code class="language-plaintext highlighter-rouge">source file</code>에서만 접근할 수 있도록 합니다. 서로 다른 클래스가 같은 파일안에 있고 <code class="language-plaintext highlighter-rouge">fileprivate</code>로 선언되어 있다면 둘은 서로 접근할 수 있습니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">private</code> - 특정 객체에서만 사용할 수 있도록 하는 가장 제한적인 접근제어자입니다. <code class="language-plaintext highlighter-rouge">fileprivate</code>과 달리 같은 파일 안에 있어도 서로 다른 객체가 <code class="language-plaintext highlighter-rouge">private</code>로 선언되어 있다면 둘은 서로 접근할 수 없습니다.</li>
+</ol>
+
+<h4 id="open과-public의-차이">open과 public의 차이</h4>
+
+<p>이 정리를 보면, 당연하게도 <code class="language-plaintext highlighter-rouge">open</code>과 <code class="language-plaintext highlighter-rouge">public</code>의 차이가 무엇인지 궁금할 것입니다. 둘의 차이는 <code class="language-plaintext highlighter-rouge">open</code>은 다른 모듈에서 <code class="language-plaintext highlighter-rouge">subclass</code>가 가능하지만, <code class="language-plaintext highlighter-rouge">public</code>은 그렇지 않다는 것입니다. 먼저 <code class="language-plaintext highlighter-rouge">open</code>은 <code class="language-plaintext highlighter-rouge">class</code>에만 사용될 수 있습니다. 그리고 한 모듈에서 만든 class를 <code class="language-plaintext highlighter-rouge">superClass</code>로 하는 <code class="language-plaintext highlighter-rouge">subClass</code>를 다른 모듈에서 만들기 위해서는 해당 <code class="language-plaintext highlighter-rouge">superClass</code>가 <code class="language-plaintext highlighter-rouge">open</code>으로 선언되어야 합니다. 당연히 <code class="language-plaintext highlighter-rouge">overriding</code>도 이 규칙이 적용됩니다.</p>
+
+<h4 id="몇-가지-암묵적-룰">몇 가지 암묵적 룰</h4>
+
+<p>위에서 살펴본 특징 이외에도 따로 언급하지 않아도 적용되는 몇 가지 암묵적인 룰이 있습니다.</p>
+
+<ul>
+  <li>아무 접근 제어자도 적지 않으면 <code class="language-plaintext highlighter-rouge">internal</code>이 됩니다.</li>
+</ul>
+
+<p>아무런 조건 없이 클래스, 변수 등을 만들면 해당 <code class="language-plaintext highlighter-rouge">entity</code>의 접근제어자는 기본적으로 <code class="language-plaintext highlighter-rouge">internal</code>이 됩니다.</p>
+
+<ul>
+  <li>어떠한 entity도 더 제한적인 접근제어자를 가진 entity로 정의 될 수 없습니다.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="kd">struct</span> <span class="kt">Car</span> <span class="p">{</span>
+  <span class="c1">// error</span>
+  <span class="kd">public</span> <span class="k">var</span> <span class="nv">engine</span><span class="p">:</span> <span class="kt">String</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>위의 코드를 보면, <code class="language-plaintext highlighter-rouge">Car</code>는 <code class="language-plaintext highlighter-rouge">private</code>인데 그 안의 <code class="language-plaintext highlighter-rouge">engine</code>은 <code class="language-plaintext highlighter-rouge">public</code>입니다. 이런 접근 제어자 형태는 사용할 수 없습니다. 접근 제어자는 특정 entity로부터의 상대적인 기준이 적용되는 것이 아니라, 전체 프로젝트를 기준으로 적용됩니다. 그렇기 때문에 특정 entity 안의 변수, 메소드들은 기본적으로 해당 entity의 접근제어자보다 강하게만 적용될 수 있고, 더 약하게 적용될 수는 없습니다.</p>
+
+<h4 id="유용한-기타-사항">유용한 기타 사항</h4>
+
+<ul>
+  <li>Unit Test는 <code class="language-plaintext highlighter-rouge">@testable</code> 키워드로 모듈을 import하여 public과 open이 아닌 entity들을 사용할 수 있도록 해줍니다.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">@testable</span> <span class="kd">import</span> <span class="p">{</span><span class="n">target_name</span><span class="p">}</span></code></pre></figure>
+
+<p>특정 Unit test의 파일의 상단에 위처럼 선언을 하면 해당 모듈의 entity를 <code class="language-plaintext highlighter-rouge">internal</code> 형태로 사용할 수 있도록 해줍니다.</p>
+
+<ul>
+  <li>Getter와 Setter에는 서로 다른 접근제어자를 적용할 수 있습니다.</li>
+</ul>
+
+<p>Swift에서는 Setter를 Getter보다 더 제한적으로 설정할 수 있습니다.(반대는 불가능합니다.) 이 기능은 getter, setter를 모두 따로 작성하지 않아도 되는 매우 큰 장점을 제공합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span></code></pre></figure>
+
+<p>다른 조건 없이 위와 같이 변수를 작성하였다면, getter는 <code class="language-plaintext highlighter-rouge">internal</code>이 되고, setter는 <code class="language-plaintext highlighter-rouge">private</code>이 됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Car</span> <span class="p">{</span>
+  <span class="kd">fileprivate</span> <span class="k">var</span> <span class="nv">_engine</span><span class="p">:</span> <span class="kt">String</span>
+
+  <span class="kd">public</span> <span class="k">var</span> <span class="nv">engine</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span>
+    <span class="k">get</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">self</span><span class="o">.</span><span class="n">_engine</span>
+    <span class="p">}</span> <span class="k">set</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="n">newValue</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 위의 코드를 getter와 setter에 대해 더 간결하고, 명확하게 정의할 수 있습니다.</span>
+<span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Car</span> <span class="p">{</span>
+  <span class="nf">fileprivate</span><span class="p">(</span><span class="k">set</span><span class="p">)</span> <span class="k">var</span> <span class="nv">engine</span><span class="p">:</span> <span class="kt">String</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>다른 예시로 변수를 감싸고 있는 entity의 접근제어자가 <code class="language-plaintext highlighter-rouge">public</code>이면, 그 내부 entity들은 기본적으로 이를 따라가기 때문에 engine의 getter는 <code class="language-plaintext highlighter-rouge">public</code>, setter는 <code class="language-plaintext highlighter-rouge">fileprivate</code>이 됩니다.</p>
+
+<ul>
+  <li>protocol에서 선언된 변수의 접근제어자는 조건을 만족한 경우에만 사용할 수 있습니다.</li>
+</ul>
+
+<p>먼저 상황별로 관련된 예제는 다음 <a href="https://stackoverflow.com/a/38281420/5130783">링크</a>에서 확인할 수 있습니다. 그 중 가장 필요하다고 생각되는 부분은 <code class="language-plaintext highlighter-rouge">private(set)</code>과 관련된 부분입니다. 즉, 아래 예제의 상황에서 protocol에 <code class="language-plaintext highlighter-rouge">private(set)</code>에 어떤 식으로 들어가야 하는지에 대한 문제입니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">protocol</span> <span class="kt">Car</span> <span class="p">{</span>
+  <span class="c1">// 무엇이 들어가야 할까?</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span> <span class="kt">CarModel</span><span class="p">:</span> <span class="kt">Car</span> <span class="p">{</span>
+  <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">engine</span><span class="p">:</span> <span class="kt">String</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>이는 protocol의 “변수가 <code class="language-plaintext highlighter-rouge">gettable</code>, <code class="language-plaintext highlighter-rouge">settable</code>하다.”는 말에 “<strong>외부 entity</strong>에서 <code class="language-plaintext highlighter-rouge">gettable</code>, <code class="language-plaintext highlighter-rouge">settable</code>하다.”라는 의미를 추가하면 문제를 해결할 수 있습니다. 즉, <code class="language-plaintext highlighter-rouge">private(set)</code>은 외부에서 <code class="language-plaintext highlighter-rouge">settable</code>하지 않기 때문에 protocol에는 <code class="language-plaintext highlighter-rouge">gettable</code>만 들어가게 됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">protocol</span> <span class="kt">Car</span> <span class="p">{</span>
+  <span class="k">var</span> <span class="nv">engine</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span> <span class="kt">CarModel</span><span class="p">:</span> <span class="kt">Car</span> <span class="p">{</span>
+  <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">engine</span><span class="p">:</span> <span class="kt">String</span>
+<span class="p">}</span></code></pre></figure>
+
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-03/atomic">
+              atomic/non atomic
+              <small>01 Mar 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-class-deep">
+              Swift init 2부
+              <small>06 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-basic">
+              Swift init 1부
+              <small>05 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

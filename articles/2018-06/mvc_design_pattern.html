@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>MVC Design Pattern - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="MVC Design Pattern - hcn1519 Dev Post">
+  <meta name="description" content="MVC Design Pattern과 Cocoa에서 사용하는 MVC에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MVC Design Pattern">
+  <meta property="og:image" content="/public/assets/blogThumb.png">
+  <meta property="og:description" content="MVC Design Pattern과 Cocoa에서 사용하는 MVC에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">MVC Design Pattern</h1>
+  <span class="post-date">08 Jun 2018</span>
+
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p><code class="language-plaintext highlighter-rouge">MVC</code> Design Pattern은 정말 널리 알려져 있는 디자인 패턴이지만, 이게 명확히 어떤 개념인지 잘 모르는 경우가 생각보다 많습니다.(저 포함) 그래서 이번 글에서는 <code class="language-plaintext highlighter-rouge">MVC</code>에 대해서 정리하고자 합니다.</p>
+
+<p>디자인 패턴은 기본적으로 Application 내에서 각각의 객체들이 어떤 <strong>역할</strong>과 <strong>책임</strong>을 가져야 하는지에 대해 규정합니다. <code class="language-plaintext highlighter-rouge">MVC</code> 디자인 패턴도 객체의 역할과 책임에 따라 객체들을 크게 <code class="language-plaintext highlighter-rouge">Model</code>, <code class="language-plaintext highlighter-rouge">View</code>, <code class="language-plaintext highlighter-rouge">Controller</code>로 나눕니다.</p>
+
+<blockquote>
+  <p>아래에서는 사용하는 Model, View, Controller라고 지칭하는 것은 각각의 특징을 지닌 객체 집단을 의미한다고 생각하면 됩니다.</p>
+</blockquote>
+
+<h2 id="model">Model</h2>
+
+<div class="message">
+   Model Objects Encapsulate Data and Basic Behaviors
+</div>
+
+<p><code class="language-plaintext highlighter-rouge">Model</code>은 앱내의 데이터를 가지고 있으며, 그 데이터를 처리하는 방식에 대한 로직을 가지고 있습니다. 그래서 앱에서 어떤 데이터가 로딩되기 위해선 반드시 <code class="language-plaintext highlighter-rouge">Model</code> 객체를 거쳐야만 합니다. <code class="language-plaintext highlighter-rouge">Model</code>은 화면에 직접적으로 데이터를 로딩하는 역할을 하지 않습니다. 그래서 <code class="language-plaintext highlighter-rouge">Model</code>은 <code class="language-plaintext highlighter-rouge">view</code>와 직접적으로 연관이 없도록 디자인해야 합니다. 예를 들어 Person 객체의 생일과 관련한 데이터를 화면에 로딩한다고 할 때, 생일정보는 <code class="language-plaintext highlighter-rouge">Model</code>에 있지만, 그 생일이 화면에 표현되는 것은 모델이 관리하지 않습니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Model</code>에 속하는 객체들은 다음과 같습니다.</p>
+
+<ul>
+  <li>Network Code - 네트워크의 커뮤니케이션을 관리하는 객체(NetworkManager의 형태)</li>
+  <li>Persistence Code - CoreData, Realm에 저장되는 객체(디스크에 저장)</li>
+  <li>Parsing Code - 네트워크의 response를 통해 생성되는 객체</li>
+</ul>
+
+<h2 id="view">View</h2>
+
+<div class="message">
+   View Objects Present Information to the User
+</div>
+
+<p><code class="language-plaintext highlighter-rouge">View</code>는 데이터를 앱의 화면에 어떻게 보여줄 것인지에 대해 알고 있습니다. 그렇지만 <code class="language-plaintext highlighter-rouge">View</code>는 모델의 데이터가 어떻게 변경 되는지에 대해서는 관여하지 않습니다. <code class="language-plaintext highlighter-rouge">View</code>는 보통 재사용이 가능하며, 수정할 수 있고, 앱 사이의 일관성을 제공합니다. <code class="language-plaintext highlighter-rouge">View</code>는 <code class="language-plaintext highlighter-rouge">Model</code>의 데이터를 올바르게 보여주는 것을 보장해야 합니다. 그래서 일반적으로 <code class="language-plaintext highlighter-rouge">Model</code> 데이터의 변경에 대해 파악하고 있어야 합니다.(notification)</p>
+
+<p><code class="language-plaintext highlighter-rouge">View</code>에는 UIKit의 객체들중 다음의 것들이 포함됩니다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">UIView</code>와 <code class="language-plaintext highlighter-rouge">UIView</code>의 SubClass</li>
+  <li><code class="language-plaintext highlighter-rouge">UIViewController</code> - 논란의 여지가 있지만, <code class="language-plaintext highlighter-rouge">UIView</code>와 밀접하게 연관되어 있습니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">Animation</code>, <code class="language-plaintext highlighter-rouge">Transition</code></li>
+  <li>Core Animation, Core Graphics의 class</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">View</code>에서 다음의 체크리스트가 해당된다면 코드를 수정할 필요가 있습니다.</p>
+
+<ul>
+  <li>Does it interact with the model layer?</li>
+  <li>Does it contain any business logic?</li>
+  <li>Does it try to do anything not related to UI?</li>
+</ul>
+
+<h2 id="controller">Controller</h2>
+
+<div class="message">
+   Controller Objects Tie the Model to the View
+</div>
+
+<p><code class="language-plaintext highlighter-rouge">Controller</code>는 각각의 <code class="language-plaintext highlighter-rouge">View</code>와 <code class="language-plaintext highlighter-rouge">Model</code> 사이의 연결을 보장해야 합니다. <code class="language-plaintext highlighter-rouge">Controller</code>는 또한 앱의 환경설정을 담당하고, 다른 객체들의 life cycle을 관리합니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Controller</code>는 다음과 같은 일을 하는 것들입니다.</p>
+
+<ul>
+  <li>What should be accessed first: the persistence or the network?</li>
+  <li>How often should you refresh the app?</li>
+  <li>What should the next screen be and in what circumstances?</li>
+  <li>If the app goes to the background, what should be cleaned?</li>
+</ul>
+
+<h3 id="combining-roles">Combining Roles</h3>
+
+<p>이들 <code class="language-plaintext highlighter-rouge">MVC</code>는 개별적으로 작동하지만, 동시에 2개의 기능을 가질 수도 있습니다. 그래서 <code class="language-plaintext highlighter-rouge">ViewController</code>는 <code class="language-plaintext highlighter-rouge">View</code>와 <code class="language-plaintext highlighter-rouge">Controller</code>의 속성을 지닌 객체입니다. 또한 <code class="language-plaintext highlighter-rouge">ModelController</code>는 <code class="language-plaintext highlighter-rouge">Model</code>과 <code class="language-plaintext highlighter-rouge">Controller</code>의 속성을 지닌 객체입니다.</p>
+
+<h2 id="mvc-as-a-compound-design-pattern">MVC as a Compound design pattern</h2>
+
+<p>전통적인(이론적인) MVC와 실제로 Cocoa에서 사용하는 MVC 패턴에는 몇 가지 차이가 있습니다. 그 중 가장 큰 차이는 <code class="language-plaintext highlighter-rouge">View</code>와 <code class="language-plaintext highlighter-rouge">Controller</code>의 역할분담입니다.</p>
+
+<h3 id="traditional-mvc">Traditional MVC</h3>
+
+<p>전통적인 MVC는 다음과 같은 3가지 특징을 지니고 있습니다.</p>
+
+<ol>
+  <li>Composite - 모든 View는 동일한 규칙 아래에서 생성되어 협력한다. 테이블뷰, 개별 뷰, 버튼 등은 모두 사용자의 입력을 허용하고 다양한 레벨의 결과물을 보여준다.</li>
+  <li>Strategy - Controller는 하나 이상의 View 객체의 전략을 구현(model에 이벤트 전달, View의 데이터 업데이트 등)한다.</li>
+  <li>Observer - Model은 View의 상태에 대한 알림을 준다.</li>
+</ol>
+
+<p>위와 같은 특징에 기반하면 다음과 같은 앱의 사용과정이 나타나게 됩니다.</p>
+
+<ol>
+  <li>사용자는 View를 조작하고, 이는 이벤트를 만들어낸다.</li>
+  <li>Controller는 이 이벤트를 받아서 앱에 적용(앱의 전략을 구현)한다.</li>
+  <li>이 때, 전략은 Model에 메시지를 보내어 Model의 상태나 값이 변경된다.</li>
+  <li>Model은 이러한 변화를 notification이 등록된 View에게 알려 화면을 업데이트한다.</li>
+</ol>
+
+<p>그리고 이를 그림으로 나타낸 것이 아래 그림입니다.</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-06/mvc_design_pattern/f1.png" /></p>
+
+<h3 id="cocoa-mvc">Cocoa MVC</h3>
+
+<h4 id="theoritical-problem">Theoritical Problem</h4>
+
+<p>Cocoa MVC에서 전통적인 MVC에 대해 문제를 제기하는 부분은 바로 Model과 View의 Notification으로 연결된 관계입니다. Model과 View는 일반적으로 앱에서 재사용이 많이 될 수 있는 코드들입니다. 그런데 위와 같이 둘 사이를 Notification 연결하면 두 객체 사이의 데이터는 Notification Center를 통해 전달해야 합니다. 그래서 두 객체 사이에는 상호 의존성이 생기게 되고 이는 객체의 재사용성을 저해합니다.</p>
+
+<p>그래서 Cocoa MVC에서는 이러한 문제를 해결하기 위해 Model과 View의 연결이 Controller를 통해 이뤄지도록 디자인하였습니다. 즉, Cocoa MVC는 Model이 변경된 것에 대한 notification을 controller를 통해서 View로 전달합니다. 이러한 디자인 패턴을 Mediator(중재자) Design Pat</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-06/mvc_design_pattern/f2.png" /></p>
+
+<h4 id="practical-problem">Practical Problem</h4>
+
+<p>전통적인 MVC는 실제 코드 구현에 있어서도 문제가 있습니다. Cocoa MVC에서 Mediating Controller의 역할을 수행하도록 만들어진 것이 <code class="language-plaintext highlighter-rouge">NSController</code>의 SubClass입니다. 이 클래스는 Mediating Design Pattern을 적용할 수 있도록 기능을 제공합니다. 그런데 이를 사용하지 않는다면 View는 Model의 notification에 대해 반응하는 코드를 custom으로 작성해야 합니다.</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-06/mvc_design_pattern/f3.png" /></p>
+
+<h2 id="massive-view-controller">Massive View Controller?</h2>
+
+<p>앞서서 디자인 패턴은 객체의 역할과 책임을 정의한 것이라고 서술하였습니다. 그런데 iOS에서 코드를 작성하다보면 엄청난 길이의 <code class="language-plaintext highlighter-rouge">UIViewController</code>를 마주하게 됩니다. 그런데 이러한 코드는 리팩토링하기 어렵고 테스트도 어렵습니다. 그렇기 때문에 <code class="language-plaintext highlighter-rouge">UIViewController</code>의 라인을 130줄 이내로 줄이는 연습을 하는 것이 좋습니다. 그 방법은 다음과 같은 것들이 있습니다.</p>
+
+<ul>
+  <li>View의 Customization은 View에서 작성한다.</li>
+  <li>DataSource, Delegate은 <code class="language-plaintext highlighter-rouge">ViewController</code> 안에 작성하는 것이 아니라, 별개의 객체를 생성하여 관리한다.</li>
+  <li>너무 많은 Property를 가지고 있다면, 이를 여러 개의 <code class="language-plaintext highlighter-rouge">ViewController</code>로 나누어 처리하거나 새로운 <code class="language-plaintext highlighter-rouge">UIView</code>를 만드는 것을 생각해본다.</li>
+</ul>
+
+<hr />
+
+<h2 id="참고자료">참고자료</h2>
+<ul>
+  <li><a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/CocoaEncyclopedia/Model-View-Controller/Model-View-Controller.html">Model-View-Controller</a></li>
+  <li><a href="https://www.raywenderlich.com/132662/mvc-in-ios-a-modern-approach">Model-View-Controller (MVC) in iOS: A Modern Approach</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    <h2>Lastest Posts</h2>
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

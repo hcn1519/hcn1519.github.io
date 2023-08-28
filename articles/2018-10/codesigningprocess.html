@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Code Signing iOS(macOS) - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Code Signing iOS(macOS) - hcn1519 Dev Post">
+  <meta name="description" content="Code Signing이 무엇이고, 어떻게 동작하는지 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Code Signing iOS(macOS)">
+  <meta property="og:image" content="/public/assets/iOS.png">
+  <meta property="og:description" content="Code Signing이 무엇이고, 어떻게 동작하는지 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Code Signing iOS(macOS)</h1>
+  <span class="post-date">28 Oct 2018</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS.png"
+    
+    alt="Code Signing iOS(macOS) feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p><code class="language-plaintext highlighter-rouge">Code Signing</code>이라는 것은 종이 계약서에 서명을 남기는 것처럼 코드에 서명을 남기는 작업입니다. 여기서 코드의 범주는 단순히 우리가 작성하는 코드뿐만 아니라, 데이터, 라이브러리, 툴 등 모든 코드로 이뤄진 것들을 포함합니다. 우리가 계약서에 서명을 한다고 하였을 때 중요한 것은 <strong>계약서의 내용</strong>과 계약 내용의 이행을 보장하는 <strong>서명</strong> 자체입니다. 즉, 계약서의 내용은 계약서에 서명한 이후에 바뀌어선 안 됩니다. <code class="language-plaintext highlighter-rouge">Code Signing</code>도 계약서의 서명과 동일한 동작을 보장해야 합니다. 그래서</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Code Signing</code>은 실제로 서명자가 서명했다는 것을 알려줄 수 있어야 하고,</li>
+  <li>코드의 내용이 <code class="language-plaintext highlighter-rouge">Code Signing</code> 시점에서 변경되었는지, 아닌지를 알려줄 수 있어야 합니다.</li>
+</ol>
+
+<p>이와 같은 기능을 포함하기 위해 <code class="language-plaintext highlighter-rouge">Code Signing</code>은 몇 가지 구성요소의 조합을 통해 구성됩니다. 여기서는 이 <code class="language-plaintext highlighter-rouge">Code Signing</code>이 어떻게 이루어져 있는지에 대해 살펴보겠습니다.</p>
+
+<h2 id="code-signing의-구성">Code Signing의 구성</h2>
+
+<h3 id="1-seal---도장">1. Seal - 도장</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Code Signing</code>을 수행하는 소프트웨어는 최종 번들(앱, 라이브러리, 프레임워크)에서 여러 리소스를 사용하여 단방향 해싱 알고리즘으로 <code class="language-plaintext highlighter-rouge">seal(도장)</code>을 만듭니다. 이 <code class="language-plaintext highlighter-rouge">seal</code>은 짧은 문자열 묶음(해시)으로, 특정 input block에 대해 unique하고, original input을 재조립하는 데 사용할 수 없도록 만들어집니다.</p>
+
+<p>코드를 평가하는 주체(시스템에서 코드 변경을 파악하는 주체)는 코드를 서명하는 주체와 동일한 해싱 알고리즘을 사용하여 결과를 생성합니다. 그리고 두 결과를 비교하여 코드의 변경 여부에 대해 파악합니다. 이와 같은 비교 과정은 해시가 변경되지 않았음이 보장될 때 유효합니다. 그리고 이를 보장하는 것이 <code class="language-plaintext highlighter-rouge">Digital Signature</code>입니다.</p>
+
+<h3 id="2-digital-signature---전자-서명">2. Digital Signature - 전자 서명</h3>
+
+<ul>
+  <li>전자 서명의 기본적인 용도는 서명자의 신분을 인증하는 것입니다. 하지만, 전자 서명은 이것뿐만 아니라 서명 데이터가 변경되지 않는 것을 보장합니다.(문서에 워터마크를 심는 것과 비슷합니다)</li>
+</ul>
+
+<h4 id="전자-서명의-생성">전자 서명의 생성</h4>
+<ul>
+  <li>전자 서명은 공개키 암호화 방식을 사용하여 만들어집니다.</li>
+  <li>전자 서명은 Seal의 해시 값과 서명자의 개인키를 통해 생성됩니다.</li>
+  <li>서명자가 만들어낸 암호화된 해시와 <code class="language-plaintext highlighter-rouge">Certificate</code>가 종합적으로 전자 서명을 나타냅니다.</li>
+</ul>
+
+<h4 id="전자-서명의-검증">전자 서명의 검증</h4>
+
+<ul>
+  <li>서명 검증 소프트웨어는 앱의 코드와 데이터로부터 해시(1)를 생성합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">Certifcate</code>에 있는 공개키를 사용하여 서명자가 제출한 암호화된 해시를 해독하여 원래 해시(2)를 생성합니다.</li>
+  <li>두 해시(1, 2)를 비교하여 데이터 변화를 검증합니다. 여기서 둘의 결과가 같으면 동일한 서명을 가지고 있는 것이고, 그렇지 않으면 서로 다른 서명으로 판단합니다.</li>
+</ul>
+
+<h4 id="서명된-코드의-포함-요소">서명된 코드의 포함 요소</h4>
+
+<ul>
+  <li>앱의 bundle에 있는 데이터 컴포넌트(ex: <code class="language-plaintext highlighter-rouge">Info.plist</code> 등)에도 서명을 할 수 있습니다. 이 서명은 <code class="language-plaintext highlighter-rouge">_CodeSignature/CodeResources</code>에 들어가 있습니다.</li>
+  <li>라이브러리, 툴 등 앱 안에 있는 코드들도 서명될 수 있고 이 내용도 <code class="language-plaintext highlighter-rouge">_CodeSignature/CodeResources</code>에 들어갑니다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-10/codesigningprocess/codeSigning.png" /></p>
+
+<p>위의 그림은 <code class="language-plaintext highlighter-rouge">_CodeSignature/CodeResources</code>의 일부분을 캡쳐한 것입니다. 자세히 들여다보면 각 파일 이름으로 key가 설정되어 있고, 일정한 해시가 value로 들어가 있는 것을 확인할 수 있습니다.</p>
+
+<h3 id="3-code-requirement">3. Code Requirement</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Code Requirement</code>는 <code class="language-plaintext highlighter-rouge">Code Signing</code>을 평가할 때 사용하는 규칙을 의미합니다. 시스템은 코드 <code class="language-plaintext highlighter-rouge">Code Signing</code>을 평가할 때 어떤 <code class="language-plaintext highlighter-rouge">Code Requirement</code>을 적용할지 판단합니다. 예를 들어서, 앱은 <code class="language-plaintext highlighter-rouge">Code Requirement</code>을 통해 앱 내에서 사용하는 모든 플러그인이 애플의 서명을 얻었는지 확인하는 절차를 거치도록 할 수 있습니다.</p>
+
+<h4 id="internal-requirement">Internal Requirement</h4>
+
+<p><code class="language-plaintext highlighter-rouge">Internal requirement</code>이란 <code class="language-plaintext highlighter-rouge">Code Requirement</code> 중 서명자에 의해 구체화되고, 코드 서명 안에 포함된 것을 의미합니다. <code class="language-plaintext highlighter-rouge">Internal requirement</code>는 시스템이 코드 서명을 확인할 때 사용할 수 있습니다. 하지만 시스템이 이를 반드시 사용하는 것은 아닙니다. 예를 들어서 앱에 포함된 플러그인도 <code class="language-plaintext highlighter-rouge">Internal requirement</code>을 가지고 있지만 시스템은 이를 쓰지 않을 수도 있습니다.</p>
+
+<h4 id="designated-requirement">Designated Requirement</h4>
+
+<p><code class="language-plaintext highlighter-rouge">Internal requirement</code>이면서 시스템에게 특정 코드를 어떻게 identifying하는지에 대한 규칙을 담고 있는 것을 <code class="language-plaintext highlighter-rouge">Designated Requirement</code>이라고 합니다.</p>
+
+<ul>
+  <li>특정 코드가 동일한 <code class="language-plaintext highlighter-rouge">Designated Requirement</code>을 가지고 있으면(그리고 정해진 확인 작업 거쳤다면), 두 코드는 동일하다고 할 수 있습니다. 이는 코드 서명자가 동일한 앱의 다른 버전을 배포할 수 있도록 해줍니다. 예를 들어 Apple Mail이라는 앱이 있을 때 동일한 <code class="language-plaintext highlighter-rouge">Designated Requirement</code>을 가지고 있고 동일한 identifier(<code class="language-plaintext highlighter-rouge">com.apple.mail</code>)를 가지고 있는 코드는 동일한 앱이라고 인식될 수 있습니다. <code class="language-plaintext highlighter-rouge">Designated Requirement</code>을 통한 비교는 완전히 다른 바이너리를 갖고 있어도 적용되기 때문에 다른 버전의 애플 메일 앱을 배포할 수 있도록 해줍니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">Designated Requirement</code>는 <code class="language-plaintext highlighter-rouge">Info.plist</code>에 있는 <code class="language-plaintext highlighter-rouge">CFBundleIdentifier</code>와 코드 서명을 보호하는 서명 체인을 통해 생성됩니다.</li>
+</ul>
+
+<hr />
+
+<h1 id="참고자료">참고자료</h1>
+
+<ul>
+  <li><a href="https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/AboutCS/AboutCS.html#//apple_ref/doc/uid/TP40005929-CH3-SW3">Understanding the Code Signature</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2018-10/ios_codesigning_provisioningprofile">
+               iOS 인증서, Provisioning Profile
+              <small>21 Oct 2018</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#ProvisioningProfile">
+                ProvisioningProfile
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Certificate">
+                Certificate
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

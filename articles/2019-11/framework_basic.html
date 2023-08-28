@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Framework 이해하기 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Framework 이해하기 - hcn1519 Dev Post">
+  <meta name="description" content="Framework에 대해 학습한 내용을 정리합니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Framework 이해하기">
+  <meta property="og:image" content="/public/assets/iOS.png">
+  <meta property="og:description" content="Framework에 대해 학습한 내용을 정리합니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Framework 이해하기</h1>
+  <span class="post-date">16 Nov 2019</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS.png"
+    
+    alt="Framework 이해하기 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="목차">목차</h2>
+
+<ol>
+  <li><a href="http://localhost:4000/articles/2019-11/framework_basic#framework-개념">Framework 개념</a></li>
+  <li><a href="http://localhost:4000/articles/2019-11/framework_basic#framework-구조">Framework 구조</a></li>
+</ol>
+
+<h2 id="framework-개념">Framework 개념</h2>
+
+<h3 id="1-framework-정의">1. Framework 정의</h3>
+
+<div class="message">
+A framework is a hierarchical directory that encapsulates shared resources, such as a dynamic shared library, nib files, image files, localized strings, header files, and reference documentation in a single package.
+</div>
+
+<p><code class="language-plaintext highlighter-rouge">Framework</code>는 공유 자원(<code class="language-plaintext highlighter-rouge">dynamic shared library</code>, nib 파일, 이미지 파일 등)을 단일 패키지 형태로 담고 있는 디렉토리입니다. <code class="language-plaintext highlighter-rouge">Framework</code>는 library와 달리 리소스를 포함할 수 있고 이는 <code class="language-plaintext highlighter-rouge">Framework</code>을 모듈 배포에 있어서 더 많이 활용할 수 있도록 해줍니다.</p>
+
+<h3 id="2-framework은-bundle의-한-종류입니다">2. Framework은 Bundle의 한 종류입니다</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Framework</code>는 실행 바이너리를 포함한 디렉토리입니다. <code class="language-plaintext highlighter-rouge">Framework</code>는 파일 시스템의 Bundle로 패키징되어 Core Foundation Bundle Service를 이용할 수 있고, NSBundle class로 접근할 수 있습니다.</p>
+
+<p>리소스는 해당 Bundle의 포함 여부에 따라 접근 가능 여부가 결정됩니다. 외부에서 <code class="language-plaintext highlighter-rouge">Framework</code> 사용시 <code class="language-plaintext highlighter-rouge">Framework</code>의 리소스에 접근하기 위해서는 해당 리소스가 포함된 bundle(Framework)을 명시해주어야 합니다. 이 말은 바꿔 말하면, 서로 다른 <code class="language-plaintext highlighter-rouge">Framework</code>에 포함된 동일한 리소스는 하나의 리소스로 인식되지 않고, 서로 다른 리소스로 인식된다는 것을 의미합니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Framework</code>에 이미지 리소스가 포함되어 있을 때 해당 <code class="language-plaintext highlighter-rouge">Framework</code>를 사용하는 앱에서는 이 리소스에 다음과 같이 접근할 수 있습니다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">bundle</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="p">(</span><span class="nv">identifier</span><span class="p">:</span> <span class="s">"com.hcn1519.ExampleFramework"</span><span class="p">)</span> <span class="c1">// 해당 Framework의 Bundle Identifier 작성</span>
+<span class="k">let</span> <span class="nv">image</span> <span class="o">=</span> <span class="kt">UIImage</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="s">"sampleImg"</span><span class="p">,</span> <span class="nv">in</span><span class="p">:</span> <span class="n">bundle</span><span class="p">,</span> <span class="nv">compatibleWith</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>여기서 <code class="language-plaintext highlighter-rouge">UIViewController</code>나 <code class="language-plaintext highlighter-rouge">UIImage</code>와 같은 클래스의 인스턴스를 생성할 때 왜 리소스 이름뿐만 아니라 bundle을 지정하는 파라미터가 왜 항상 붙어 있는지 이해할 수 있습니다. xib나 image 파일 등의 리소스를 필요로하는 인스턴스는 bundle 설정 없이는 접근할 수 없습니다.(이를 지정하지 않는 경우에 대부분 default 설정은 mainBundle이 됩니다) Bundle과 관련해서는 <a href="https://hcn1519.github.io/articles/2018-12/bundle">Package, Bundle, NSBundle</a>에서도 관련 내용을 확인할 수 있습니다.</p>
+</blockquote>
+
+<h3 id="3-framework은-opaque-data-type이-아닙니다">3. Framework은 Opaque Data Type이 아닙니다</h3>
+
+<p>일반적인 Bundle과는 다르게 <code class="language-plaintext highlighter-rouge">Framework</code>는 Opaque Data Type으로 취급되지 않고 이 때문에 일반적인 디렉토리로 접근됩니다. Opaque Data Type으로 취급된다는 것은 디렉토리이지만 Finder에서 실행 파일로 취급되는 것을 의미합니다. 대표적인 Bundle인 <code class="language-plaintext highlighter-rouge">.app</code>의 경우 finder에서 실행파일로 인식되어 더블 클릭하면 앱이 실행됩니다.(Bundle은 기본적으로 디렉토리이기 때문에 터미널로 <code class="language-plaintext highlighter-rouge">.app</code> 접근시 내부로 들어갈 수 있습니다.) 반면, <code class="language-plaintext highlighter-rouge">framework</code>는 finder에서 일반 디렉토리로 취급되어 더블 클릭시 내부 디렉토리로 들어갑니다.</p>
+
+<h3 id="4-framework은-application이-특정-작업을-수행할-수-있도록-기능을-제공합니다">4. Framework은 Application이 특정 작업을 수행할 수 있도록 기능을 제공합니다</h3>
+
+<p>가장 대표적인 <code class="language-plaintext highlighter-rouge">Framework</code>의 예시로는 <code class="language-plaintext highlighter-rouge">UIKit</code>, <code class="language-plaintext highlighter-rouge">Foundation</code>이 있습니다. 해당 <code class="language-plaintext highlighter-rouge">Framework</code>를 소스코드에서 import하게 되면 사용자는 <code class="language-plaintext highlighter-rouge">Framework</code>에서 제공하는 built-in 기능들을 바로 사용할 수 있습니다. 이는 라이브러리와 어느정도 같은 기능을 수행한다고 할 수 있는데, static library 혹은 dynamic library(<code class="language-plaintext highlighter-rouge">.a</code>, <code class="language-plaintext highlighter-rouge">.dylib</code>)와 <code class="language-plaintext highlighter-rouge">framework</code>은 아래의 차이점을 가지고 있습니다.</p>
+
+<ul>
+  <li>Framework은 라이브러리보다 효율적으로 리소스를 관리할 수 있게 해줍니다.</li>
+  <li>Framework은 리소스를 패키징된 형태로 함께 제공할 수 있지만, 라이브러리는 소스코드만 포함할 수 있습니다.</li>
+  <li>Framework은 여러 버전을 동일한 Bundle에 포함하여 하위 버전 호환성을 지원할 수 있습니다.</li>
+  <li>Framework은 물리적으로 메모리의 한 군데에서만 코드가 read-only 형태로 실행되기 때문에 메모리 사용량을 줄일 수 있습니다.</li>
+</ul>
+
+<h2 id="framework-구조">Framework 구조</h2>
+
+<p>빌드된 <code class="language-plaintext highlighter-rouge">Framework</code> 내부 디렉토리를 살펴보면 아래 이미지와 그 형태가 유사합니다.</p>
+
+<p><img width="882" alt="frameworkDirectory_swift" src="https://user-images.githubusercontent.com/13018877/58764367-12042080-85a1-11e9-91c0-68a0eedb9187.png" /></p>
+
+<h3 id="1-바이너리">1. 바이너리</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Framework</code> 내부에는 <code class="language-plaintext highlighter-rouge">Framework</code>와 이름이 동일한 바이너리 파일이 존재합니다. 이 바이너리의 타입은 Build Setting에서 설정한 Mach-O Format에 따라 static, dynamic library가 됩니다.</li>
+  <li>해당 바이너리에 대해서 <code class="language-plaintext highlighter-rouge">nm</code> 명령어를 사용하면 symbol과 관련된 정보를 얻을 수 있습니다. 아래 명령어는 컴파일되어 나타나는 <code class="language-plaintext highlighter-rouge">.o</code> 파일이 어떤 것들이 있는지를 보여주는 간단한 명령어입니다.</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nm <span class="nt">-debug-syms</span> ExampleFramework | <span class="nb">grep</span> <span class="s2">"</span><span class="se">\.</span><span class="s2">o"</span>
+</code></pre></div></div>
+
+<h3 id="2-header">2. Header</h3>
+
+<ul>
+  <li>Header의 경우 <code class="language-plaintext highlighter-rouge">Framework</code> 생성시 설정한 언어가 Swift인지 Objective-C인지에 따라 그 결과물이 바뀝니다. Xcode는 <code class="language-plaintext highlighter-rouge">Framework</code> 빌드시 Swift를 위한 별도의 Header 파일(<code class="language-plaintext highlighter-rouge">ExampleFramework-Swift.h</code>)을 생성합니다. Objective-C 기반 <code class="language-plaintext highlighter-rouge">Framework</code>는 이 파일이 생성되지 않습니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">ExampleFramework.h</code>은 기본적으로 public header를 관리합니다. Objective-C로 작성된 객체를 외부에서 접근하기 위해서는 관련 header를 public으로 전환해주어야 합니다. 즉, <code class="language-plaintext highlighter-rouge">ExampleFramework.h</code>에 관련 header 파일을 작성해야 합니다. Swift 객체의 경우 접근 제어자 룰에 따라 외부 <code class="language-plaintext highlighter-rouge">Framework</code>에서 사용 가능 여부가 결정됩니다.</li>
+</ul>
+
+<h3 id="3-modulemap">3. modulemap</h3>
+
+<ul>
+  <li>Swift는 <code class="language-plaintext highlighter-rouge">module</code> 단위로 소스코드를 관리합니다. 하나의 <code class="language-plaintext highlighter-rouge">module</code>은 import시 하나의 <code class="language-plaintext highlighter-rouge">module</code>이 됩니다. <code class="language-plaintext highlighter-rouge">modulemap</code>은 <code class="language-plaintext highlighter-rouge">module</code>과 header의 연결고리 역할을 하는 파일로, <code class="language-plaintext highlighter-rouge">module</code>에 포함되는 header가 무엇인지 정의하고, 어떤 implementation(<code class="language-plaintext highlighter-rouge">.a</code>, <code class="language-plaintext highlighter-rouge">.dylib</code>)가 <code class="language-plaintext highlighter-rouge">module</code>에 포함되는지를 알려주는 파일입니다. Xcode 빌드 설정에서 <code class="language-plaintext highlighter-rouge">DEFINE_MODULES</code> 옵션에 따라 해당 파일의 생성 여부가 결정됩니다.(default 설정은 true입니다.)</li>
+</ul>
+
+<p><img width="863" alt="스크린샷 2019-11-17 오후 6 52 22" src="https://user-images.githubusercontent.com/13018877/69006090-c9cd9480-096d-11ea-8045-b0a54f0038ba.png" /></p>
+
+<h2 id="참고자료">참고자료</h2>
+
+<ul>
+  <li><a href="https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/WhatAreFrameworks.html#//apple_ref/doc/uid/20002303-BBCEIJFI">Framework Programming Guide - What are Frameworks?</a></li>
+  <li><a href="https://clang.llvm.org/docs/Modules.html#module-maps">LLVM - modulemaps</a></li>
+  <li><a href="https://theswiftdev.com/2018/01/25/deep-dive-into-swift-frameworks">Deep dive into Swift frameworks</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-05/bitcode_implementation">
+              Bitcode 도입하기
+              <small>21 May 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-02/crash_report_symbolication">
+              Crash Report Symbolication
+              <small>09 Feb 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#macOS">
+                macOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#OS">
+                OS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-09/dynamic_library">
+              Dynamic Library
+              <small>06 Sep 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#macOS">
+                macOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#OS">
+                OS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Library">
+                Library
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Framework">
+                Framework
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-07/static-library">
+              Static Library
+              <small>01 Jul 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#macOS">
+                macOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#OS">
+                OS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Library">
+                Library
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Framework">
+                Framework
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>iOS URLSession 이해하기 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="iOS URLSession 이해하기 - hcn1519 Dev Post">
+  <meta name="description" content="iOS에서 네트워킹을 도와주는 URLSession API에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="iOS URLSession 이해하기">
+  <meta property="og:image" content="/public/assets/iOS.png">
+  <meta property="og:description" content="iOS에서 네트워킹을 도와주는 URLSession API에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">iOS URLSession 이해하기</h1>
+  <span class="post-date">30 Jul 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS.png"
+    
+    alt="iOS URLSession 이해하기 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2022년 02월 03일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="./iOS_URLSession#urlsession의-request와-response">URLSession의 Request와 Response</a></li>
+  <li><a href="./iOS_URLSession#urlsession의-기본-컨셉">URLSession의 기본 컨셉</a>
+    <ol>
+      <li><a href="./iOS_URLSession#1-session">Session</a></li>
+      <li><a href="./iOS_URLSession#2-request">Request</a></li>
+      <li><a href="./iOS_URLSession#3-task">Task</a></li>
+    </ol>
+  </li>
+  <li><a href="./iOS_URLSession#urlsession-datatask-사용하기">URLSession dataTask 사용하기</a></li>
+</ol>
+
+<p>iOS 앱에서 서버와 통신하기 위해 애플은 <code class="language-plaintext highlighter-rouge">URLSession</code>이라는 API를 제공하고 있습니다. <code class="language-plaintext highlighter-rouge">URLSession</code>은 iOS 앱 통신에서 유명한 라이브러리인 <code class="language-plaintext highlighter-rouge">Alamofire</code>, <code class="language-plaintext highlighter-rouge">SDWebImage</code> 등의 기반이 되는 API로 서버와의 데이터 교류를 위해서는 필수적으로 알아야 하는 API입니다. <code class="language-plaintext highlighter-rouge">URLSession</code>은 HTTP를 포함한 몇 가지 프로토콜을 지원하고, 인증, 쿠키 관리, 캐시 관리 등을 지원합니다.</p>
+
+<h2 id="urlsession의-request와-response">URLSession의 Request와 Response</h2>
+
+<p><code class="language-plaintext highlighter-rouge">URLSession</code>은 다른 HTTP 통신과 마찬가지로 <code class="language-plaintext highlighter-rouge">Request</code>와 <code class="language-plaintext highlighter-rouge">Response</code>를 기본 구조로 가지고 있습니다. 먼저 <code class="language-plaintext highlighter-rouge">Request</code>는 <code class="language-plaintext highlighter-rouge">URL</code> 객체를 통해 직접 통신하는 형태와, <code class="language-plaintext highlighter-rouge">URLRequest</code> 객체를 만들어서 옵션을 설정하여 통신하는 형태가 있습니다. 다음으로 <code class="language-plaintext highlighter-rouge">Response</code>는 설정된 <code class="language-plaintext highlighter-rouge">Task</code>의 <code class="language-plaintext highlighter-rouge">Completion Handler</code> 형태로 <code class="language-plaintext highlighter-rouge">response</code>를 받거나, <code class="language-plaintext highlighter-rouge">URLSessionDelgate</code>를 통해 지정된 메소드를 호출하는 형태로 <code class="language-plaintext highlighter-rouge">response</code>를 받는 형태가 있습니다.</p>
+
+<p>일반적으로 간단한 response를 작성할 때에는 <code class="language-plaintext highlighter-rouge">Completion Handler</code>를 사용하지만, 앱이 background 상태로 들어갈 때에도 파일 다운로드를 지원하도록 설정하거나, 인증과 캐싱을 default 옵션으로 사용하지 않는 상황과 같은 경우에는 <code class="language-plaintext highlighter-rouge">Delegate</code> 패턴을 사용해야 합니다.</p>
+
+<h2 id="urlsession의-기본-컨셉">URLSession의 기본 컨셉</h2>
+
+<p><code class="language-plaintext highlighter-rouge">URLSession</code>은 기본적으로 다음과 같은 순서(Life Cycle)로 진행됩니다.</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Session</code> configuration을 결정하고, <code class="language-plaintext highlighter-rouge">Session</code>을 생성한다.</li>
+  <li>통신할 URL과 Request 객체를 설정한다.</li>
+  <li>사용할 <code class="language-plaintext highlighter-rouge">Task</code>를 결정하고, 그에 맞는 <code class="language-plaintext highlighter-rouge">Completion Handler</code>나 <code class="language-plaintext highlighter-rouge">Delegate</code> 메소드들을 작성한다.</li>
+  <li>해당 <code class="language-plaintext highlighter-rouge">Task</code>를 실행한다.</li>
+  <li>Task 완료 후 <code class="language-plaintext highlighter-rouge">Completion Handler</code>가 실행된다.</li>
+</ol>
+
+<h3 id="1-session">1. Session</h3>
+
+<p><code class="language-plaintext highlighter-rouge">URLSession</code>은 크게 3가지 종류의 Session을 지원합니다.</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Default Session</code>: 기본적인 Session으로 디스크 기반 캐싱을 지원합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">Ephemeral Session</code>: 어떠한 데이터도 저장하지 않는 형태의 세션입니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">Background Session</code>: 앱이 종료된 이후에도 통신이 이뤄지는 것을 지원하는 세션입니다.</li>
+</ol>
+
+<h3 id="2-request">2. Request</h3>
+
+<p><code class="language-plaintext highlighter-rouge">URLRequest</code>를 통해서는 서버로 요청을 보낼 때 어떻게 데이터를 캐싱할 것인지, 어떤 HTTP 메소드를 사용할 것인지(Get, Post 등), 어떤 내용을 전송할 것인지 등을 설정할 수 있습니다.</p>
+
+<h3 id="3-task">3. Task</h3>
+
+<p>Task 객체는 일반적으로 Session 객체가 서버로 요청을 보낸 후, 응답을 받을 때 URL 기반의 내용들을 받는(retrieve) 역할을 합니다. 3가지 종류의 Task가 지원됩니다.</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Data Task</code> - Data 객체를 통해 데이터 주고받는 Task입니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">Download Task</code> - data를 파일의 형태로 전환 후 다운 받는 Task입니다. 백그라운드 다운로드 지원</li>
+  <li><code class="language-plaintext highlighter-rouge">Upload Task</code> - data를 파일의 형태로 전환 후 업로드하는 Task입니다.</li>
+</ol>
+
+<h2 id="urlsession-datatask-사용하기">URLSession dataTask 사용하기</h2>
+
+<p><code class="language-plaintext highlighter-rouge">URLSession</code>과 같은 네트워킹용 API는 일반적으로 앱 전역에서 사용됩니다. 그렇기 때문에 ViewController에 메소드를 작성하기보다는 하나의 모듈(class)을 만들고 그 안에 static 함수들을 만들어 사용하는 것이 좋습니다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Swift 5.1, iOS 13 환경에서 정상적으로 동작합니다.</span>
+<span class="kd">class</span> <span class="kt">NetworkHandler</span> <span class="p">{</span>
+    <span class="kd">class</span> <span class="kd">func</span> <span class="nf">getData</span><span class="p">(</span><span class="nv">resource</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 세션 생성, 환경설정</span>
+        <span class="k">let</span> <span class="nv">defaultSession</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="p">(</span><span class="nv">configuration</span><span class="p">:</span> <span class="o">.</span><span class="k">default</span><span class="p">)</span>
+
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"</span><span class="se">\(</span><span class="n">resource</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"URL is nil"</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Request</span>
+        <span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">URLRequest</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
+
+        <span class="c1">// dataTask</span>
+        <span class="k">let</span> <span class="nv">dataTask</span> <span class="o">=</span> <span class="n">defaultSession</span><span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?,</span> <span class="nv">response</span><span class="p">:</span> <span class="kt">URLResponse</span><span class="p">?,</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span> <span class="k">in</span>
+            <span class="c1">// getting Data Error</span>
+            <span class="k">guard</span> <span class="n">error</span> <span class="o">==</span> <span class="kc">nil</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"Error occur: </span><span class="se">\(</span><span class="kt">String</span><span class="p">(</span><span class="nv">describing</span><span class="p">:</span> <span class="n">error</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="p">}</span>
+
+            <span class="k">guard</span> <span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="k">let</span> <span class="nv">response</span> <span class="o">=</span> <span class="n">response</span> <span class="k">as?</span> <span class="kt">HTTPURLResponse</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">statusCode</span> <span class="o">==</span> <span class="mi">200</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">return</span>
+            <span class="p">}</span>
+
+            <span class="c1">// 통신에 성공한 경우 data에 Data 객체가 전달됩니다.</span>
+
+            <span class="c1">// 받아오는 데이터가 json 형태일 경우,</span>
+            <span class="c1">// json을 serialize하여 json 데이터를 swift 데이터 타입으로 변환</span>
+            <span class="c1">// json serialize란 json 데이터를 String 형태로 변환하여 Swift에서 사용할 수 있도록 하는 것을 말합니다.</span>
+            <span class="k">guard</span> <span class="k">let</span> <span class="nv">jsonToArray</span> <span class="o">=</span> <span class="k">try</span><span class="p">?</span> <span class="kt">JSONSerialization</span><span class="o">.</span><span class="nf">jsonObject</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[])</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"json to Any Error"</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="p">}</span>
+            <span class="c1">// 원하는 작업</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">jsonToArray</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="n">dataTask</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">NetworkHandler</span><span class="o">.</span><span class="nf">getData</span><span class="p">(</span><span class="nv">resource</span><span class="p">:</span> <span class="s">"http://www.example.com"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Swift4에서는 JSON Serialize 작업이 객체 단위(<code class="language-plaintext highlighter-rouge">Codable</code>)로 가능해졌습니다. 자세한 내용은 아래 링크를 참고하세요.</p>
+
+<p><a href="https://gist.github.com/hcn1519/0d685b1f0aba74ed9577e9cab1b02b6f">Swift4 JSON Serialize 사용하기 예시</a></p>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-08/autolayout_performance_optimization">
+              AutoLayout 성능 최적화하기
+              <small>23 Aug 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-03/ios_darkmode">
+              iOS 다크모드 알아보기
+              <small>13 Mar 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2017-09/ios_app_lifeCycle">
+              iOS Application Life Cycle 이해하기
+              <small>07 Sep 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

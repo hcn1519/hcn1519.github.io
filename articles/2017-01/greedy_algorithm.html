@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Greedy algorithm(탐욕 알고리즘) - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Greedy algorithm(탐욕 알고리즘) - hcn1519 Dev Post">
+  <meta name="description" content="Greedy algorithm에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Greedy algorithm(탐욕 알고리즘)">
+  <meta property="og:image" content="/public/assets/blogThumb.png">
+  <meta property="og:description" content="Greedy algorithm에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Greedy algorithm(탐욕 알고리즘)</h1>
+  <span class="post-date">02 Jan 2017</span>
+
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h4>Greedy algorithm이란?</h4>
+<p>&nbsp;탐욕 알고리즘은 최적해를 구하는 데에 사용되는 근사적인 방법으로, 여러 경우 중 하나를 결정해야 할 때마다 그 순간에 최적이라고 생각되는 것을 선택해 나가는 방식으로 진행하여 최종적인 해답에 도달한다.(출처 : 위키피디아)</p>
+
+<h4>Greedy algorithm의 과정</h4>
+
+<p>&nbsp;Greedy algorithm는 3가지 절차를 거친다. 이는,</p>
+<ol>
+  <li>Make some greedy choice.</li>
+  <li>Reduce to a smaller subproblem.</li>
+  <li>Iterate.</li>
+</ol>
+
+<p>&nbsp;인데, 이를 약간 해석하자면,</p>
+<ol>
+  <li>가장 탐욕스런 선택을 한다.</li>
+  <li>문제를 조금 더 작은 문제로 분해한다.</li>
+  <li>반복한다.</li>
+</ol>
+
+<p>&nbsp;다음과 같다. 물론 이것만으로는 조금 부족하다. 이 과정을 보완하는 방법으로 첫 번째 선택이 실제로 최적의 선택인지를 증명하는 과정이 필요한데, 그 과정에서 나오는 것이 <code>safe move</code>이다.</p>
+
+<h4>Safe move란?</h4>
+<blockquote>
+  <p>Greedy choice 중 “첫 번째로 선택한 것”이 “최적의 선택과 일치”할 경우 이를 Safe move라 한다.</p>
+</blockquote>
+
+<p>&nbsp;Greedy algorithm은 첫 번째 선택이 safe move라는 것을 증명해야만 올바른 답을 얻을 수 있다. 이에 맞춰 과정을 다시 한 번 정리하면,</p>
+
+<ol>
+  <li>가장 탐욕스런 선택을 한다.</li>
+  <li style="color:#b20000">이 선택이 safe move인지 증명한다.</li>
+  <li>문제를 조금 더 작은 문제로 분해한다.</li>
+  <li>반복한다.</li>
+</ol>
+
+<p>&nbsp;다음과 같이 정리될 수 있다.</p>
+
+<h4>Fractional Knapsack 문제</h4>
+
+<p>&nbsp;Greedy 알고리즘의 가장 대표적인 문제로 언급되는 것이 Knapsack 문제입니다. 문제는 다음과 같습니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/5x37ekxmdsxtq7s/knapsack.png" /></p>
+
+<blockquote>
+  <p>배낭을 매고 긴 여행을 떠난다. 배낭에 담을 수 있는 총 무게와 담을 수 있는 물건의 가짓수가 주어진다. 물건에는 모두 value가 있고, 가지고 있는 총량도 정해져 있다. 이 때 value가 최대가 되도록 가방을 싸고, 최대 value 값을 출력하시오.(ex) 물건 가짓수 : 3, 가능한 무게 : 50, 물건1 : value - 60, weights - 20, 물건2 : value - 100, weights - 50, 물건1 : value - 120, weights - 30 경우 180 출력)</p>
+</blockquote>
+
+<p><img src="https://dl.dropbox.com/s/u7qe6w9dk6kvdx0/sample.png" /></p>
+
+<p>&nbsp;이 문제를 풀 때 Greedy 알고리즘의 방식에 따라 가장 탐욕스러운 선택을 하되, 그 선택이 safe move인지 판단한 후 이를 반복하는 과정을 진행합니다. 여기서의 safe move는 바로, 무게당 value가 가장 큰 물건을 먼저 배낭에 담는 것입니다. 즉, value/weight의 값이 가장 큰 값을 먼저 가방에 집어 넣는 것이죠.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">Knapsack(W, w1, v1, . . . , wn, vn)
+  A ← [0, 0, . . . , 0], V ← 0
+  repeat n times:
+  if W = 0:
+    return (V , A)
+  select i with wi &gt; 0 and max vi
+  wi
+  a ← min(wi ,W)
+  V ← V + a vi/wi
+  wi ← wi−a, A[i] ← A[i]+a, W ← W−a
+return (V , A)</code></pre></figure>
+
+<p>&nbsp;이를 수도 코드로 표현하면 다음과 같습니다. 가방의 무게가 0이 될 때까지 루프가 돌고, vi/wi가 최대인 값을 찾아서 가방에서 뺄 수 있는만큼 빼는 작업을 반복합니다. 이 코드는 제대로 작동하는 코드이긴 합니다만 Big-O가 크다는 문제점을 지니고 있습니다. value/weight의 값을 찾는 과정이 O(n)이고, 전체 루프가 O(n)이어서 최악의 경우 n^2 횟수만큼 코드가 돌아야 하기 때문에 Big-O가 O(n^2)이기 때문입니다.</p>
+<p>&nbsp;그런데 이 Big-O는 쉽게 줄어들 수 있습니다. 바로 value/weight의 최댓값을 찾는 sorting의 과정을 기존 메인 루프를 돌기 전에 진행하는 것입니다. 배열 sorting의 Big-O는 O(nlogn)으로 알려져 있습니다. 그렇기 때문에 sorting의 과정을 기존 메인 루프 앞에 놓으면 O(nlogn) + O(n)이 되어 최종 Big-O는 O(nlogn)이 되는 것이죠. 이를 java 코드로 구현한 것은 아래와 같습니다.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">getOptimalValue</span><span class="o">(</span><span class="kt">int</span> <span class="n">capacity</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">values</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">weights</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">double</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">perValue</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="n">values</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+    <span class="kt">int</span> <span class="n">priority</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">values</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+
+    <span class="c1">// value/weight을 perValue 배열에 저장합니다.</span>
+    <span class="c1">// int double간의 casting에 유의하세요.</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">perValue</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+      <span class="n">perValue</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span> <span class="o">(</span><span class="kt">double</span><span class="o">)</span><span class="n">values</span><span class="o">[</span><span class="n">i</span><span class="o">]/(</span><span class="kt">double</span><span class="o">)</span><span class="n">weights</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+      <span class="n">priority</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">double</span> <span class="n">temp</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">temp2</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+    <span class="c1">// perValue 값이 큰 순으로 sorting 진행</span>
+    <span class="c1">// 기존 값의 인덱스를 유지하기 위해 priority 배열도 함께 sorting</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">perValue</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+      <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">perValue</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">perValue</span><span class="o">[</span><span class="n">i</span><span class="o">]&lt;</span><span class="n">perValue</span><span class="o">[</span><span class="n">j</span><span class="o">]){</span>
+          <span class="n">temp</span> <span class="o">=</span> <span class="n">perValue</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+          <span class="n">perValue</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">perValue</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+          <span class="n">perValue</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">;</span>
+
+          <span class="n">temp2</span> <span class="o">=</span> <span class="n">priority</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+          <span class="n">priority</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">priority</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+          <span class="n">priority</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp2</span><span class="o">;</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 우선순위의 숫자가 큰 것이 먼저 실행되도록 설정</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">values</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">weights</span><span class="o">[</span><span class="n">priority</span><span class="o">[</span><span class="n">i</span><span class="o">]]</span> <span class="o">&lt;=</span> <span class="n">capacity</span><span class="o">){</span>
+          <span class="n">value</span> <span class="o">+=</span> <span class="o">(</span><span class="kt">double</span><span class="o">)</span><span class="n">perValue</span><span class="o">[</span><span class="n">i</span><span class="o">]*</span><span class="n">weights</span><span class="o">[</span><span class="n">priority</span><span class="o">[</span><span class="n">i</span><span class="o">]];</span>
+          <span class="n">capacity</span> <span class="o">-=</span> <span class="n">weights</span><span class="o">[</span><span class="n">priority</span><span class="o">[</span><span class="n">i</span><span class="o">]];</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">weights</span><span class="o">[</span><span class="n">priority</span><span class="o">[</span><span class="n">i</span><span class="o">]]</span> <span class="o">&gt;</span> <span class="n">capacity</span><span class="o">){</span>
+          <span class="n">value</span> <span class="o">+=</span> <span class="o">(</span><span class="kt">double</span><span class="o">)(</span><span class="n">perValue</span><span class="o">[</span><span class="n">i</span><span class="o">]*</span><span class="n">capacity</span><span class="o">);</span>
+          <span class="n">capacity</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span>
+      <span class="k">if</span><span class="o">(</span><span class="n">capacity</span> <span class="o">&lt;</span><span class="mi">0</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">value</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<blockquote>
+  <p>내용 출처 : Coursera, Algorithmic Toolbox by University of California, San Diego &amp; Higher School of Economics(week3)의 강의내용을 개인적으로 정리한 자료입니다.</p>
+</blockquote>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2017-05/amortized_analysis">
+              Amortized Analysis(분할상환 분석)
+              <small>18 May 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Algorithm">
+                Algorithm
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Coursera">
+                Coursera
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2017-01/effectiveness_of_algorithm">
+              Big-O notation
+              <small>07 Jan 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Java">
+                Java
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Algorithm">
+                Algorithm
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Coursera">
+                Coursera
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2016-12/stress_testing">
+              Stress Testing에 대하여
+              <small>21 Dec 2016</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Java">
+                Java
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Coursera">
+                Coursera
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Rails에서 form 생성시 parameter 관련 문제 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Rails에서 form 생성시 parameter 관련 문제 - hcn1519 Dev Post">
+  <meta name="description" content="Rails에서 form을 만들고 나서 생기는 parmeter 전달과 관련된 문제들을 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rails에서 form 생성시 parameter 관련 문제">
+  <meta property="og:image" content="/public/assets/blogThumb.png">
+  <meta property="og:description" content="Rails에서 form을 만들고 나서 생기는 parmeter 전달과 관련된 문제들을 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Rails에서 form 생성시 parameter 관련 문제</h1>
+  <span class="post-date">05 Feb 2016</span>
+
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2023년 08월 28일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;h5&gt;</span>Parameter 전송시 나타날 수 있는 문제 3가지<span class="nt">&lt;/h5&gt;</span>
+  <span class="nt">&lt;ol&gt;</span>
+    <span class="nt">&lt;li&gt;</span>token과 관련된 문제(unexpected token)<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Strong parameter<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>DB와 Schema.rb 불일치 문제<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;/ol&gt;</span></code></pre></figure>
+
+<p>&nbsp;웹 어플리케이션에서 데이터 입력 form을 만들어서 데이터를 저장하는 작업은 매우 일반적인 작업입니다. 그리고 사용자가 입력한 데이터는 parameters를 이용해서 저장됩니다. Rails도 당연히 이 방식을 따릅니다. 다만 parameter를 넘겨주는 방식이 다른 프레임워크와 다른 면이 있어서, MVC 기반의 프레임워크에서 일반적으로 사용하는 방법으로는 문제가 발생할 수 있습니다.</p>
+<p>&nbsp;이 포스팅에서는 내가 form을 잘 만들었다고 생각하고, parameter를 넘겼는데 생길 수 있는 문제 중 흔히 보이는 3가지 문제들과 그 해결방법에 대해 알아보겠습니다.</p>
+
+<h4>1. token과 관련된 문제(unexpected token)</h4>
+<p><img src="https://dl.dropbox.com/s/rsbv6mqcgrr6zsy/token.png" /></p>
+<p>&nbsp;이 오류는 아직 rails에 익숙하지 않아서 rails form을 사용하지 않고, html 태그를 사용하는 분들이 흔히 보는 오류 메세지입니다.(사실 저도 아직 잘 못 씁니다..) Rails에서는 기본적으로 입력 form을 생성할 때 보안을 강화하기 위해 문자열 인코딩 정보와 token이라는 일종의 암호문을 함께 전송합니다. 그런데 이 두가지는 rails에서 제공하는 form helper로 전송할 때는 자동으로 생성되지만, html태그로 전송될 때는 자동으로 생성되지 않습니다.</p>
+<p>간단한 예시로 무엇이 문제인지 알아보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-erb" data-lang="erb">  <span class="cp">&lt;%=</span> <span class="n">form_tag</span> <span class="k">do</span> <span class="cp">%&gt;</span>
+    Form contents
+  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span></code></pre></figure>
+
+<p>&nbsp;Rails는 기본적으로 html에서 사용하는 form 이외에 자신들만의 form을 가지고 있습니다. 위에서 보는 <code>&lt;%= form_tag  do %&gt;</code>가 대표적인 예시입니다. 위의 form은 아무 input이 없는 form처럼 보이지만 사실 rails form은 기본적으로 인코딩 정보와 token을 보이지 않게 같이 전송합니다. 그래서 위의 form은 실제로는 아래와 같은 form을 만듭니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">#app/views/posts.html.erb
+<span class="nt">&lt;form</span> <span class="na">accept-charset=</span><span class="s">"UTF-8"</span> <span class="na">action=</span><span class="s">"/"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"utf8"</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">value=</span><span class="s">"&amp;#x2713;"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"authenticity_token"</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">value=</span><span class="s">"J7CBxfHalt49OSHp27hblqK20c9PgwJ108nDHX/8Cts="</span> <span class="nt">/&gt;</span>
+    Form contents
+<span class="nt">&lt;/form&gt;</span></code></pre></figure>
+
+<p>&nbsp;굳이 인코딩 정보와 token을 넣는 이유는 보안을 강화하기 위해서입니다.</p>
+<h5>해결방법</h5>
+<p>&nbsp;해결방법은 간단합니다.</p>
+<ol>
+  <li>rails form을 익히고, 사용하기(권장)</li>
+  <li>application_controller 수정하기</li>
+</ol>
+
+<p>1. Rails form을 익히고, 사용하기(권장)</p>
+<p>&nbsp;먼저 rails form을 잘 익히고 사용하는 방법이 가장 좋습니다. 굳이 강화된 보안을 무시하면서 html태그를 사용할 필요는 없다고 생각합니다. <a href="http://api.rubyonrails.org/classes/ActionView/Helpers/FormTagHelper.html" target="_blank">Rails form_tag 관련 문서</a> 앞의 링크의 문서처럼 rails form tag과 html form tag를 잘 비교하면서 설명한 문서가 있습니다. rails를 더 잘 쓰시려면 배우는 것이 필수입니다. 익숙해지면 html tag보다 더 편리합니다.</p>
+<p>2. Application_controller 수정하기</p>
+<p>&nbsp;다음 방법은 권장하지는 않는 방법입니다만, 보안 체크를 꺼버리는 방법이 있습니다.<code>app/controllers/application_controller.rb</code>에 가보시면 다음과 같은 코드가 기본적으로 설정되어 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+  <span class="c1"># Prevent CSRF attacks by raising an exception.</span>
+  <span class="c1"># For APIs, you may want to use :null_session instead.</span>
+  <span class="n">protect_from_forgery</span> <span class="ss">with: :exception</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>&nbsp;여기서 4번째 줄의 <code>protect_from_forgery with: :exception</code>부분을 주석처리해주면 token관련 오류는 보지 않을 수 있습니다. 하지만 거듭 강조하지만 보안도 개발자가 고려해야 하는 것중 하나이기 때문에, 이는 권장하지 않는 방법입니다. 구글에 rails form 관련 문서를 꼭 읽어보세요.</p>
+
+<h4>2. Strong parameter</h4>
+<p>&nbsp;strong parameter 문제는 scaffold로 app을 만들었을 때 흔히 나오는 문제입니다. 다음은 scaffold로 post를 만들었을 때의 post controller입니다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1">#app/controllers/posts_controller.rb</span>
+<span class="k">class</span> <span class="nc">PostsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="n">before_action</span> <span class="ss">:set_post</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:show</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="p">]</span>
+
+  <span class="k">def</span> <span class="nf">index</span>
+    <span class="vi">@posts</span> <span class="o">=</span> <span class="no">Post</span><span class="p">.</span><span class="nf">all</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">show</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">new</span>
+    <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="p">.</span><span class="nf">new</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">edit</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">create</span>
+    <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">post_params</span><span class="p">)</span>
+
+    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+      <span class="k">if</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">save</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">html</span> <span class="p">{</span> <span class="n">redirect_to</span> <span class="vi">@post</span><span class="p">,</span> <span class="ss">notice: </span><span class="s1">'Post was successfully created.'</span> <span class="p">}</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">status: :created</span><span class="p">,</span> <span class="ss">location: </span><span class="vi">@post</span> <span class="p">}</span>
+      <span class="k">else</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">html</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:new</span> <span class="p">}</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">json: </span><span class="vi">@post</span><span class="p">.</span><span class="nf">errors</span><span class="p">,</span> <span class="ss">status: :unprocessable_entity</span> <span class="p">}</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">update</span>
+    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+      <span class="k">if</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">post_params</span><span class="p">)</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">html</span> <span class="p">{</span> <span class="n">redirect_to</span> <span class="vi">@post</span><span class="p">,</span> <span class="ss">notice: </span><span class="s1">'Post was successfully updated.'</span> <span class="p">}</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">status: :ok</span><span class="p">,</span> <span class="ss">location: </span><span class="vi">@post</span> <span class="p">}</span>
+      <span class="k">else</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">html</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:edit</span> <span class="p">}</span>
+        <span class="nb">format</span><span class="p">.</span><span class="nf">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">json: </span><span class="vi">@post</span><span class="p">.</span><span class="nf">errors</span><span class="p">,</span> <span class="ss">status: :unprocessable_entity</span> <span class="p">}</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">destroy</span>
+    <span class="vi">@post</span><span class="p">.</span><span class="nf">destroy</span>
+    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+      <span class="nb">format</span><span class="p">.</span><span class="nf">html</span> <span class="p">{</span> <span class="n">redirect_to</span> <span class="n">posts_url</span><span class="p">,</span> <span class="ss">notice: </span><span class="s1">'Post was successfully destroyed.'</span> <span class="p">}</span>
+      <span class="nb">format</span><span class="p">.</span><span class="nf">json</span> <span class="p">{</span> <span class="n">head</span> <span class="ss">:no_content</span> <span class="p">}</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+    <span class="c1"># Use callbacks to share common setup or constraints between actions.</span>
+    <span class="k">def</span> <span class="nf">set_post</span>
+      <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+    <span class="k">end</span>
+
+    <span class="c1"># Never trust parameters from the scary internet, only allow the white list through.</span>
+    <span class="k">def</span> <span class="nf">post_params</span>
+      <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:post</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:title</span><span class="p">,</span> <span class="ss">:content</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>&nbsp;위의 19번째 줄을 보면(<code>@post = Post.new(post_params)</code>), rails는 parameter를 <code>post_params</code>로 묶어서 처리합니다. 그리고 해당 parameter는 59번 째 줄에서 만들어집니다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># 59번 째 줄</span>
+<span class="c1"># Never trust parameters from the scary internet, only allow the white list through.</span>
+<span class="k">def</span> <span class="nf">post_params</span>
+  <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:post</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:title</span><span class="p">,</span> <span class="ss">:content</span><span class="p">)</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>&nbsp;이와 같은 방식을 strong parameter를 사용한다고 말합니다. 즉, rails는 기존의 사용자가 넘겨준 데이터를 보안상의 이유로 곧이곧대로 믿는 것이 아니라, 사용자가 보내주는 데이터가 우리가 구성한 db에 맞는 데이터가 들어 온 것인지 한 번 더 확인합니다. 그래서, rails는 <code>:title, :content</code>만 form이 받아들이는 데이터로 인식하고 그 이외의 데이터는 저장하지 않습니다. 따라서, DB를 수정할 경우에(table에 새로운 column을 추가하는 경우) 해당 strong parameter도 같이 수정해주어야 합니다.(rails 4에서는 <code>rake db:migrate add_column_to_table ~</code>와 같은 명령어로 자동 수정이 안 됩니다.)</p>
+
+<h4>3. DB와 Schema.rb 불일치 문제</h4>
+<p>&nbsp;마지막으로 migration과 관련된 문제입니다. 이 문제도 strong parameter처럼 오류 메세지를 뿜지 않습니다. 그래서 log쪽에서 확인을 해야하는 문제인데요. <code>rake db:migrate</code>를 통해 만든 db 구성과 <code>schema.rb</code>에 만들어진 db 구성이 다를 때, form 데이터는 저장되지 않습니다.(사실 어떤 데이터든 db에 저장이 안됩니다.)</p>
+<p>&nbps;Schema.rb는 db table을 모두 조감하는 하나의 db 밑그림입니다. 처음부터 있는 파일을 아니고 <code>rake db:migrate</code>하면 생기는 db 폴더에 생성됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># encoding: UTF-8</span>
+<span class="c1"># This file is auto-generated from the current state of the database. Instead</span>
+<span class="c1"># of editing this file, please use the migrations feature of Active Record to</span>
+<span class="c1"># incrementally modify your database, and then regenerate this schema definition.</span>
+<span class="c1"># Note that this schema.rb definition is the authoritative source for your</span>
+<span class="c1"># database schema. If you need to create the application database on another</span>
+<span class="c1"># system, you should be using db:schema:load, not running all the migrations</span>
+<span class="c1"># from scratch. The latter is a flawed and unsustainable approach (the more migrations</span>
+<span class="c1"># you'll amass, the slower it'll run and the greater likelihood for issues).</span>
+<span class="c1"># It's strongly recommended that you check this file into your version control system.</span>
+
+<span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Schema</span><span class="p">.</span><span class="nf">define</span><span class="p">(</span><span class="ss">version: </span><span class="mi">20160117164750</span><span class="p">)</span> <span class="k">do</span>
+
+  <span class="n">create_table</span> <span class="s2">"posts"</span><span class="p">,</span> <span class="ss">force: :cascade</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+    <span class="n">t</span><span class="p">.</span><span class="nf">string</span>   <span class="s2">"title"</span>
+    <span class="n">t</span><span class="p">.</span><span class="nf">string</span>   <span class="s2">"content"</span>
+    <span class="n">t</span><span class="p">.</span><span class="nf">datetime</span> <span class="s2">"created_at"</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
+    <span class="n">t</span><span class="p">.</span><span class="nf">datetime</span> <span class="s2">"updated_at"</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
+  <span class="k">end</span>
+
+<span class="k">end</span></code></pre></figure>
+
+<p>&nbsp;눈여겨 볼 부분은 12번 째 줄에서 <code># It's strongly recommended that you check this file into your version control system.</code> 에서 볼 수 있듯이 직접 저 파일을 수정해서는 안 된다는 것입니다. 일반적으로 schema.rb와 db table간의 차이는 잘 안 생깁니다. 자주 있는 문제는 아니라는 거죠. 그렇지만, 차이가 생겼을 때는 이를 맞춰주어야 합니다. 이 때는</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">  rake db:schema:dump</code></pre></figure>
+
+<p>명령어를 사용합니다. 이 명령어는 현재 우리가 만든 db 구성에 schema.rb 파일을 재구성해주는 명령어입니다.</p>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    <h2>Lastest Posts</h2>
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

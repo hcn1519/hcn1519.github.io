@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Xcode 프로젝트 파일 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Xcode 프로젝트 파일 - hcn1519 Dev Post">
+  <meta name="description" content="Xcode에서 사용되는 workspace, project, target, scheme 등에 대해 알아 봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Xcode 프로젝트 파일">
+  <meta property="og:image" content="/public/assets/blogThumb.png">
+  <meta property="og:description" content="Xcode에서 사용되는 workspace, project, target, scheme 등에 대해 알아 봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Xcode 프로젝트 파일</h1>
+  <span class="post-date">12 Jun 2018</span>
+
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>Xcode에서는 프로젝트를 관리하거나 프로젝트를 빌드하는 용도의 파일 혹은 항목들이 있습니다. 이번 글에서는 이에 대해 알아보고자 합니다.</p>
+
+<h2 id="project">Project</h2>
+
+<div class="message">
+  An Xcode project is a repository for all the files, resources, and information required to build one or more software products
+</div>
+
+<p><code class="language-plaintext highlighter-rouge">Project</code>는 Application을 빌드하기 위한 파일, 리소스, 정보를 담은 repository입니다. 처음 Xcode를 켜고 Single View Application을 생성하면 <code class="language-plaintext highlighter-rouge">Project</code>를 생성하게 됩니다. 이 때, 프로젝트의 디렉토리를 살펴보게 되면 <code class="language-plaintext highlighter-rouge">프로젝트명.xcodeproj</code>라는 파일이 생긴 것을 확인할 수 있습니다. 정확히 얘기하면 이는 파일이 아니라 이는 디렉토리입니다. 터미널을 통해 해당 파일로 들어가게 되면 <code class="language-plaintext highlighter-rouge">project.pbxproj</code>이라는 파일과 <code class="language-plaintext highlighter-rouge">xcuserdata</code>라는 디렉토리가 존재합니다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">project.pbxproj</code>가 실제 설정파일입니다.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">project.pbxproj</code>는 실제 프로젝트의 설정을 담은 파일입니다. 해당 파일을 열어보면 프로젝트 내부에서 생성된 파일들을 파일 유형에 따라 reference를 저장하고 있습니다.</p>
+
+<blockquote>
+  <p>이 project.pbxproj는 사실 git을 사용할 경우 충돌이 일어나는 주요 파일 중 하나입니다. 2명의 팀원이 작업을 위해 각자 A 파일, B 파일을 생성하여 각자 커밋한 경우 한 쪽에는 B 파일의 reference, 다른 쪽은 A 파일의 reference가 없습니다. 그래서 두 작업에서 사용된 project.pbxproj 파일은 서로 다른 reference를 가지고 있어서 conflict가 일어납니다. 그리고 이 충돌이 고치기 쉽지 않은 것이 project.pbxproj가 깨지면 프로젝트 자체가 열리지 않습니다. 그러므로 이럴 때는 에디터나 소스트리 같은 형상 관리 툴로 해당 충돌을 수정해야 합니다.</p>
+</blockquote>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">xcuserdata</code>는 프로젝트의 개인 설정을 담은 디렉토리입니다.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">xcuserdata</code>는 breakpoint, UI layout, 스냅샷 설정을 담은 프로젝트 자체에 크게 영향을 주지 않는 디렉토리입니다.</p>
+
+<h2 id="workspace">Workspace</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Workspace</code>는 여러 개의 <code class="language-plaintext highlighter-rouge">Project</code>를 담아 관리할 수 있도록 해주는 개념입니다. <code class="language-plaintext highlighter-rouge">Workspace</code>는 대부분 CocoaPods을 처음 사용할 때 접해보았을 것입니다. CocoaPods는 본래의 프로젝트와는 별도로 <code class="language-plaintext highlighter-rouge">Project</code>를 만들어서 라이브러리 의존성을 관리할 수 있도록 해주는 도구입니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Workspace</code>도 생성하게 되면 <code class="language-plaintext highlighter-rouge">Project.xcodeproj</code>와 유사한 디렉토리인 <code class="language-plaintext highlighter-rouge">project.xcworkspace</code>가 생성됩니다. 해당 디렉토리에 들어가보면 <code class="language-plaintext highlighter-rouge">contents.xcworkspacedata</code> 파일과 <code class="language-plaintext highlighter-rouge">xcuserdata</code>, <code class="language-plaintext highlighter-rouge">xcshareddata</code> 디렉토리가 있습니다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">contents.xcworkspacedata</code>는 프로젝트들의 referce를 저장하고 있습니다.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">contents.xcworkspacedata</code>는 <code class="language-plaintext highlighter-rouge">workspace</code>에 포함된 프로젝트들의 reference를 저장한 xml 파일입니다. 그래서 <code class="language-plaintext highlighter-rouge">workspace</code>에 프로젝트를 추가하면 해당 파일에 referece가 추가됩니다.</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">xcuserdata</code>는 workspace의 개인 설정을 담은 디렉토리입니다.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">xcshareddata</code>는 workspace에 공유된 설정을 담은 디렉토리입니다.</p>
+  </li>
+</ul>
+
+<h3 id="workspace와-subproject의-차이">Workspace와 SubProject의 차이</h3>
+
+<p>Xcode는 여러 개의 프로젝트를 다룰 수 있도록 <code class="language-plaintext highlighter-rouge">Workspace</code> 만드는 기능도 제공하지만, 프로젝트 안에 SubProject를 생성하여 이를 관리할 수도 있습니다. 이와 같은 방식이 활용되는 경우는 오픈소스로 배포되는 라이브러리에서 라이브러리 코드가 담긴 <code class="language-plaintext highlighter-rouge">Project</code>와 라이브러리를 사용하여 만든 예제 <code class="language-plaintext highlighter-rouge">Project</code>를 나누고 싶은 경우가 있는데, 이 때 SubProject로 예제 <code class="language-plaintext highlighter-rouge">Project</code>를 활용할 수 있습니다.</p>
+
+<p>물론 이 또한 <code class="language-plaintext highlighter-rouge">Workspace</code>를 통해 관리할 수도 있습니다. 다만, SubProject는 <code class="language-plaintext highlighter-rouge">Project</code> 사이의 부모-자식 관계가 생기므로 부모 프로젝트가 자식 프로젝트에 대한 reference를 가질 수 있습니다. 반대는 불가능합니다. 반면 <code class="language-plaintext highlighter-rouge">Workspace</code>를 통해 <code class="language-plaintext highlighter-rouge">Project</code>를 관리하면 <code class="language-plaintext highlighter-rouge">Project</code>들간의 관계는 형제 관계가 됩니다. 그래서 어떤 <code class="language-plaintext highlighter-rouge">Project</code>든 다른 <code class="language-plaintext highlighter-rouge">Project</code>의 reference를 지닐 수 있습니다.</p>
+
+<h2 id="target">Target</h2>
+
+<div class="message">
+  Target은 프로젝트를 통해 생성되는 Application을 지칭합니다. 이는 일반적으로 하나의 모듈을 의미합니다.
+</div>
+
+<p>“<code class="language-plaintext highlighter-rouge">Target</code>이 Application이다.”라는 말의 의미는 좀 더 구체적으로 말하자면, “<code class="language-plaintext highlighter-rouge">Target</code>은 Xcode의 빌드를 통해 생성된 최종 product이다.”와 의미가 같습니다. 즉, <code class="language-plaintext highlighter-rouge">Target</code>은 어떻게 프로젝트를 빌드할 것인지를 담당합니다.</p>
+
+<p>Xcode에서 프로젝트에서 최상단 설정 파일을 누르게되면 project 하위에 target 섹션이 있고, 여기서 프로젝트의 target을 관리할 수 있습니다. 기본적으로 <code class="language-plaintext highlighter-rouge">Target</code>은 프로젝트 생성시 1개만 생성되지만, 목적에 따라서 하나의 프로젝트에 여러개의 <code class="language-plaintext highlighter-rouge">Target</code>을 생성할 수 있습니다.</p>
+
+<ul>
+  <li>각각의 target은 프로젝트의 build setting을 설정할 수 있습니다.</li>
+  <li>각각의 target은 프로젝트에서 포함될 객체, 리소스, 혹은 별도의 스크립트를 따로 설정할 수 있도록 해줍니다.</li>
+  <li>Xcode에서는 target을 통해서 하나의 프로젝트를 여러 개의 배포판으로 사용할 수 있도록 해줍니다.(i.e. iPhone용 target, iPad용 target, 특정 라이브러리가 포함된 target 등)</li>
+</ul>
+
+<h2 id="scheme">Scheme</h2>
+
+<div class="message">
+  An Xcode scheme defines a collection of targets to build, a configuration to use when building, and a collection of tests to execute.
+</div>
+
+<p><code class="language-plaintext highlighter-rouge">Scheme</code>은 <code class="language-plaintext highlighter-rouge">Target</code>이 프로젝트를 Build, Profile, Test등을 할 때 일어날 일들을 정의할 수 있도록 해주는 항목입니다. 일반적으로 <code class="language-plaintext highlighter-rouge">Target</code>은 1개 이상의 <code class="language-plaintext highlighter-rouge">Scheme</code>을 가지고 있습니다. 이 <code class="language-plaintext highlighter-rouge">Scheme</code>에서는 프로젝트 빌드시 사용되는 환경변수나 인자를 넘겨줄 수 있습니다.</p>
+
+<h3 id="scheme에서-build-configuration-설정하기">Scheme에서 Build Configuration 설정하기</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Scheme</code>은 앞서 언급한 것처럼 프로젝트의 런타임에서 일어날 일을 설정할 수 있습니다. 이 때 사용되는 대표적인 것 중 하나가 <code class="language-plaintext highlighter-rouge">Build Configuration</code>입니다. 기본적으로 <code class="language-plaintext highlighter-rouge">Build Configuration</code>은 <code class="language-plaintext highlighter-rouge">debug</code>, <code class="language-plaintext highlighter-rouge">release</code>가 생성됩니다. 이 <code class="language-plaintext highlighter-rouge">Build Configuration</code>은 실제 코드내에서 포함될 코드와 그렇지 않은 코드를 다르게 설정할 수 있도록 도와줍니다.</p>
+
+<p>예를 들어 보겠습니다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">do</span> <span class="p">{</span>
+  <span class="c1">// do something</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="p">{</span>
+  <span class="nf">debugPrint</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>다음과 같은 에러 처리 코드가 프로젝트에 있다고 했을 경우 <code class="language-plaintext highlighter-rouge">debugPrint</code>는 사실 실제 배포에 포함될 필요가 없는 코드입니다. 이러한 코드는 <code class="language-plaintext highlighter-rouge">Build Configuration</code>을 사용하여 배포 코드에 포함되지 않게 만들 수 있습니다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">do</span> <span class="p">{</span>
+  <span class="c1">// do something</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="p">{</span>
+  <span class="cp">#if DEBUG</span>
+    <span class="nf">debugPrint</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+  <span class="cp">#endif</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이렇게 코드를 작성하고 <code class="language-plaintext highlighter-rouge">Scheme</code>에서 <code class="language-plaintext highlighter-rouge">Build Configuration</code>을 <code class="language-plaintext highlighter-rouge">release</code>로 설정할 경우, <code class="language-plaintext highlighter-rouge">debugPrint</code>는 실행되지 않습니다. 이와 같은 것을 가능하게 해주는 것이 Xcode의 <code class="language-plaintext highlighter-rouge">PreProcessor</code>입니다.</p>
+
+<hr />
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    <h2>Lastest Posts</h2>
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

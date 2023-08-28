@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Amortized Analysis(분할상환 분석) - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Amortized Analysis(분할상환 분석) - hcn1519 Dev Post">
+  <meta name="description" content="분할상황 분석에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Amortized Analysis(분할상환 분석)">
+  <meta property="og:image" content="/public/assets/blogThumb.png">
+  <meta property="og:description" content="분할상황 분석에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Amortized Analysis(분할상환 분석)</h1>
+  <span class="post-date">18 May 2017</span>
+
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="평균-러닝타임-분석의-필요성">평균 러닝타임 분석의 필요성</h2>
+
+<p>3 벌의 옷을 산다고 생각해보겠습니다. 각각의 옷은 1만 원, 2만 원, 3만 원입니다. 이 때 옷을 사는데 필요한 금액은 6만 원입니다. 자 그런데 우리가 아는 정보가 <strong>“옷 한 벌당 최대 3만원”</strong> 밖에 없다면 우리가 준비해야 하는 비용은 어떻게 되나요? 3벌의 옷을 구매하고 옷은 항상 3벌을 사야하기 때문에 최악의 상황을 대비하여 총 9만 원이 필요합니다. <strong>“옷 한 벌당 최대 3만원”</strong> 의 정보만 으로는 불필요한 3만 원을 더 준비해야 합니다.</p>
+
+<p>자, 그런데 여기에 옷 한 개 구매 당 평균 비용이 2만 원 이라는 정보를 추가적으로 알게 된다면 우리가 준비해야 하는 돈은 어떻게 될까요? 네, 정확히 6만 원만 준비하면 됩니다. 이 때 필요한 돈 6만원이 어떻게 사용되는지 조금 자세히 살펴보면 다음과 같습니다.</p>
+
+<ol>
+  <li>평균비용을 통해 각각의 옷마다 2만 원이 들 것이라 예상하고 6만 원을 준비합니다.</li>
+  <li>구매하는 옷이 2만 원이라면 그대로 2만 원을 사용합니다.</li>
+  <li>옷이 2만 원보다 비싸다면, 부족한 금액을 2만 원보다 싼 옷에서 보충합니다.</li>
+</ol>
+
+<p>너무 당연한 얘기를 장황하게 써놓았다고 생각할 수 있습니다만, 이것이 분할상환분석의 핵심입니다.</p>
+
+<div class="message">
+  분할상환 분석은 부족한 금액 혹은 남는 금액을 전체 연산에서 서로 보충해나가면서 평균 비용을 도출하는 구조를 기반으로 전체 연산의 평균 비용을 도출합니다.
+</div>
+
+<p>분할상환분석은 알고리즘의 러닝타임을 분석하는 방식중 하나입니다. 기존에 우리는 알고리즘 러닝타임 분석을 코드 라인들의 <em>Big-O</em> 를 통해 표현하였습니다. 그리고 <em>Big-O</em> 는 항상 최악을 가정하기 때문에 전체 알고리즘 비용을 어떤 경우에 실제 최악의 경우가 거의 발생하지 않음에도 불구하고, 최악으로 잡습니다. 이 때 분할상환분석은 전체비용의 평균이라는 추가적인 정보를 제공하여 실제 연산의 비용 판단에 도움을 줍니다.</p>
+
+<div class="message">
+  분할상환 분석은 자료구조를 수행하는 경우에 필요한 시간을 비용으로 산정하고 이 비용의 평균을 구하는 분석방법입니다.
+</div>
+
+<p>이진수를 1씩 증가시키는 이진 카운터(Binary Incrementer)를 예로 들어보겠습니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/i86g3zjf3r122ch/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202017-06-19%20%EC%98%A4%ED%9B%84%204.37.49.png" /></p>
+
+<p>이진 카운터는 일정한 길이의 배열에 0과 1을 저장하여 이진수를 표현하는 데이터를 1씩 증가시키는 함수입니다. 자 그런데 위의 그림에서 보듯이, 이진수를 1씩 증가 시킬 때 <strong>반전되는 값의 개수</strong>(비용)는 매 반복마다 일정하지가 않습니다. 예를 들어 15(10)인 수를 16으로 만들 경우 <code class="language-plaintext highlighter-rouge">01111(2)</code>를 <code class="language-plaintext highlighter-rouge">10000(2)</code>로 만들 때 5개의 값을 반전시킵니다. 그렇지만 16에서 17로 증가할 때는 <code class="language-plaintext highlighter-rouge">10000(2)</code>가 <code class="language-plaintext highlighter-rouge">10001(2)</code>되는 것이므로 1개의 값만 반전됩니다. 즉, 4개의 반전 작업이 절약되는 것입니다. 이 반전이라는 비용은 일정하게 증가하는 것이 아니라, 매 log2n(log 베이스 2) 값이 자연수가 될 때마다 목표치에 도달하는 형태를 취하고 있는 것입니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/3dcfzql0c4wvmcc/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202017-06-19%20%EC%98%A4%ED%9B%84%205.01.56.png" /></p>
+
+<p>여기서 분할상환 분석의 필요성이 나타납니다. 일반적으로 비용 분석은 최악의 경우를 비용으로 잡고 분석합니다. 하지만, 때때로 최악의 경우를 비용으로 잡는 것이 위처럼 매 연산에 비용을 과하게 부과하는 상황이 발생합니다. 그렇기 때문에 전체 연산의 과정이 <strong>평균적으로</strong> 어느 정도의 비용이 필요한지를 구하는 것이 연산을 합리적으로 바라보는 시각에 도움을 줄 수 있습니다.</p>
+
+<p>CLRS에서 소개하는 분석 방식은 크게 총계분석, 결산방법, 잠재비용방법이 있습니다. 각각의 분석이 어떤 방식으로 이뤄지는지 하나씩 살펴보겠습니다.</p>
+
+<h2 id="1-총계분석aggregate-method">1. 총계분석(Aggregate method)</h2>
+
+<div class="message">
+  총계분석에서는 모든 n에 대해, 최악의 경우 전체적으로 T(n)의 시간복잡도를 지닐 때, 분할상환 비용(Amortized Cost)이 T(n)/n이 되는 분석법입니다.
+</div>
+
+<p>무슨 의미인지 Stack을 예로 설명하겠습니다. Stack에는 기본적으로 <code class="language-plaintext highlighter-rouge">push</code>, <code class="language-plaintext highlighter-rouge">pop</code>의 메소드가 있습니다. 이 때 각각의 연산의 비용을 1이라고 정했을 때 시간복잡도는 어떻게 될까요? 네, 둘 모두 <code class="language-plaintext highlighter-rouge">O(1)</code>입니다. 왜냐하면 <code class="language-plaintext highlighter-rouge">push</code>, <code class="language-plaintext highlighter-rouge">pop</code>은 둘 다 <code class="language-plaintext highlighter-rouge">top</code>을 기준으로 원소를 넣고 빼는 위치가 정해져 있기 때문입니다. 이 때 n개 연산에 대한 <code class="language-plaintext highlighter-rouge">push</code>, <code class="language-plaintext highlighter-rouge">pop</code> 각각의 시퀀스 비용은 어떻게 될까요? 여기서 n개 연산의 시퀀스 비용이라는 것은 해당 연산을 n번 할 경우 발생하는 총 비용에 시간복잡도를 곱한 것을 의미합니다. 즉, <code class="language-plaintext highlighter-rouge">push</code>의 비용은 1이고 시간복잡도는 <code class="language-plaintext highlighter-rouge">O(1)</code>이므로 연산이 n번 일어났을 때 <code class="language-plaintext highlighter-rouge">push</code> 연산의 시퀀스 비용은 <code class="language-plaintext highlighter-rouge">O(n)</code>입니다.(<code class="language-plaintext highlighter-rouge">pop</code>도 <code class="language-plaintext highlighter-rouge">O(n)</code>입니다.)</p>
+
+<table rules="groups">
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">비용</th>
+      <th style="text-align: center">시간 복잡도</th>
+      <th style="text-align: center">n번 수행 시퀀스 비용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Push</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">O(1)</td>
+      <td style="text-align: center">O(n)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Pop</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">O(1)</td>
+      <td style="text-align: center">O(n)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>총계분석에서는 n번 수행한 각각의 시퀀스 비용을 합산(T(n))하여 이를 n으로 나눈 값을 <strong>분할상환비용(Amortized Cost)</strong> 이라고 말합니다. 이 비용은 <code class="language-plaintext highlighter-rouge">O(n)/n</code>이므로 <code class="language-plaintext highlighter-rouge">O(1)</code>이 됩니다.</p>
+
+<p>그럼 여기서 해당 스택에 <code class="language-plaintext highlighter-rouge">MultiPop</code>이라는 연산을 추가해보겠습니다. 그렇다면, 분할상환비용은 변할까요? 그럴수도 있고 아닐 수도 있습니다. 총계분석은 자료구조 내의 모든 연산의 시퀀스 비용을 합산합니다. 그렇기 때문에 연산을 추가한다는 것은 평균을 내기 위한 값을 하나 더 추가한다는 것을 의미합니다. 그렇기 떄문에 위의 경우에서 <code class="language-plaintext highlighter-rouge">MultiPop</code>을 추가한다는 것은 다시 말해서 <code class="language-plaintext highlighter-rouge">MultiPop</code>의 n번 수행한 시퀀스 비용을 합산값에 추가해야 합니다. 그래서 이 때 그 값이 <code class="language-plaintext highlighter-rouge">O(n)</code>이라면 분할상환비용은 여전히 <code class="language-plaintext highlighter-rouge">O(1)</code>일 것이고, 그렇지 않다면 값이 변해야 합니다.</p>
+
+<p>여기서 문제가 되는 것은 <code class="language-plaintext highlighter-rouge">MultiPop</code>의 n번 수행한 시퀀스 비용입니다. 이를 코드 기반으로 생각해서 <code class="language-plaintext highlighter-rouge">MultiPop</code>은 <code class="language-plaintext highlighter-rouge">Pop</code>이 n번 수행되는 것이기 때문에 비용이 <code class="language-plaintext highlighter-rouge">n</code>, 시간 복잡도가 <code class="language-plaintext highlighter-rouge">O(n)</code>이므로, n번 수행한 시퀀스 비용이 <code class="language-plaintext highlighter-rouge">O(n^2)</code>이라고 분석할 수도 있습니다. 이는 맞는 분석입니다만 이 비용을 모든 경우에 만족하면서 더 낮게 설정할 수 있습니다. 그리고 핵심 아이디어는 <strong>Pop은 Push된 횟수만큼만 일어난다</strong> 입니다. 즉, <code class="language-plaintext highlighter-rouge">Push</code>가 n번 일어나면 <code class="language-plaintext highlighter-rouge">MultiPop</code>은 n번 이상으로 일어날 수 없다는 것입니다. 그 결과 <code class="language-plaintext highlighter-rouge">MultiPop</code>의 n번 수행한 시퀀스 비용은 <code class="language-plaintext highlighter-rouge">O(n)</code>이 됩니다.</p>
+
+<table rules="groups">
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">n번 수행 시퀀스 비용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Push</td>
+      <td style="text-align: center">O(n)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Pop</td>
+      <td style="text-align: center">O(n)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">MultiPop</td>
+      <td style="text-align: center">O(n)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>그렇기 때문에 <code class="language-plaintext highlighter-rouge">MultiPop</code>연산을 추가해도 해당 스택의 분할상환비용은 <code class="language-plaintext highlighter-rouge">O(3n)/n</code>으로 <code class="language-plaintext highlighter-rouge">O(1)</code>이 됩니다.</p>
+
+<p>그렇다면 여기다가 <code class="language-plaintext highlighter-rouge">MultiPush</code>연산이 추가되면 어떻게 될까요? 여기서 고민해야 되는 것은 <strong>최악의 경우</strong> 입니다. <code class="language-plaintext highlighter-rouge">MultiPush</code>가 추가되기 전에는 <code class="language-plaintext highlighter-rouge">Push</code>가 n번 일어나는 것이 최악의 비용을 만들어내지만, <code class="language-plaintext highlighter-rouge">MultiPush</code>가 있는 경우에는 <code class="language-plaintext highlighter-rouge">MultiPush</code>가 n번 일어나는 것이 최악의 경우가 됩니다. <code class="language-plaintext highlighter-rouge">MultiPush</code>는 <code class="language-plaintext highlighter-rouge">Push</code>가 n번 일어나기 때문에 비용이 <code class="language-plaintext highlighter-rouge">n</code>이고, 시간복잡도는 <code class="language-plaintext highlighter-rouge">O(n)</code>이 되어 n번 수행한 시퀀스 비용은 <code class="language-plaintext highlighter-rouge">O(n^2)</code>이 됩니다. 그러므로 이 때 분할상환 비용은 <code class="language-plaintext highlighter-rouge">O(n)</code>이 됩니다.</p>
+
+<hr />
+
+<h2 id="참고자료">참고자료</h2>
+
+<ul>
+  <li>Introduction to Algorithms 3rd Edition, Ch 17</li>
+  <li><a href="https://www.youtube.com/watch?v=U5XKyIVy2Vc">Amortized Analysis - Youtube</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2017-01/effectiveness_of_algorithm">
+              Big-O notation
+              <small>07 Jan 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Algorithm">
+                Algorithm
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Coursera">
+                Coursera
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2017-01/greedy_algorithm">
+              Greedy algorithm(탐욕 알고리즘)
+              <small>02 Jan 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Algorithm">
+                Algorithm
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Coursera">
+                Coursera
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

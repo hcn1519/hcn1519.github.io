@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>atomic/non atomic - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="atomic/non atomic - hcn1519 Dev Post">
+  <meta name="description" content="atomic의 개념에 대해서 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="atomic/non atomic">
+  <meta property="og:image" content="/public/assets/swiftLogo.jpg">
+  <meta property="og:description" content="atomic의 개념에 대해서 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">atomic/non atomic</h1>
+  <span class="post-date">01 Mar 2019</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/swiftLogo.jpg"
+    
+    alt="atomic/non atomic feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p><code class="language-plaintext highlighter-rouge">atomic</code> 은 ObjectiveC를 경험하였던 분들에게는 익숙한 개념이지만, Swift만 사용했던 분들에게는 익숙하지 않을 수 있는 개념입니다. <code class="language-plaintext highlighter-rouge">atomic</code>의 정의에 대해서 살펴보면 다음과 같습니다.</p>
+
+<ul>
+  <li>atomic - 중단되지 않는</li>
+</ul>
+
+<blockquote>
+  <p>an operation appears to occur at a single instant between its invocation and its response</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">atomic</code>하다는 것은 프로그래밍에서 <strong>데이터의 변경이 한 번에 일어난 것처럼 보이게 하는 것</strong>을 의미합니다. 데이터의 값을 변경하는 작업에는 항상 값 변경의 시간이 필요합니다. 그런데 <code class="language-plaintext highlighter-rouge">atomic</code>한 데이터는 데이터의 값에 접근하는 여러 데이터 소비자(프로세스, 쓰레드 등)의 관점에서 데이터 값 변경에 걸리는 시간이 0초인 것처럼 느끼게 합니다. 이게 어떻게 가능할까요? ObjectiveC에서는 <code class="language-plaintext highlighter-rouge">atomic</code>한 데이터를 set할 때 lock을 걸어서 <code class="language-plaintext highlighter-rouge">atomic</code> 데이터를 만들 수 있도록 해줍니다.</p>
+
+<div class="language-objective_c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">atomic</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">oldValue</span> <span class="o">=</span> <span class="o">*</span><span class="n">slot</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">slot</span> <span class="o">=</span> <span class="n">newValue</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">spin_lock_t</span> <span class="o">*</span><span class="n">slotlock</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">PropertyLocks</span><span class="p">[</span><span class="n">GOODHASH</span><span class="p">(</span><span class="n">slot</span><span class="p">)];</span>
+    <span class="n">_spin_lock</span><span class="p">(</span><span class="n">slotlock</span><span class="p">);</span>
+    <span class="n">oldValue</span> <span class="o">=</span> <span class="o">*</span><span class="n">slot</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">slot</span> <span class="o">=</span> <span class="n">newValue</span><span class="p">;</span>
+    <span class="n">_spin_unlock</span><span class="p">(</span><span class="n">slotlock</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>쓰레드에 lock을 건다는 것은 데이터를 변경할 때, 데이터 변경 작업 이외의 다른 모든 작업이 멈추도록 만듭니다.(좀 더 정확히는 SpinLock을 걸게 되면, 크리티컬 섹션의 동작이 모두 끝날 때까지 쓰레드가 루프를 돌면서 busy waiting하게 됩니다.) 그래서 이는 달리 말하면, 데이터가 시간 소모 없이 바로 변경된 것처럼 보이게 합니다. 데이터 변경시에 데이터 업데이트 이외에는 아무런 작업이 일어나지 않았기 때문입니다. 이런 방식으로 <code class="language-plaintext highlighter-rouge">atomic</code> 데이터는 멀티 쓰레드 환경에서 <strong>데이터가 반드시 변경 전, 변경 후의 상황에서만 접근되도록 하는 것을 보장</strong>합니다. 즉, <strong>데이터의 변경 중에는 해당 데이터에 접근이 불가능</strong>(lock이 걸려 있으므로)합니다.</p>
+
+<ul>
+  <li>Lock에 대한 좀 더 자세한 설명은 <a href="http://www.vadimbulavin.com/atomic-properties/">Atomic Properties in Swift</a>을 참고하면 좋습니다.</li>
+</ul>
+
+<h3 id="atomic과-objectivec">atomic과 ObjectiveC</h3>
+
+<p>ObjectiveC Property는 기본적으로 <code class="language-plaintext highlighter-rouge">atomic</code>으로 선언됩니다. 다만, <code class="language-plaintext highlighter-rouge">atomic</code> property는 위에서 본 것처럼 <code class="language-plaintext highlighter-rouge">atomic</code> 데이터가 변경 도중에 접근하지 못 하도록 lock이 걸리기 때문에 property 접근의 성능이 느려집니다. 그래서 멀티 쓰레드에서 접근될 이유가 없는 많은 ObjectiveC Property(반드시 메인스레드에서 업데이트 해야하는 View Property 같은 것들)에는 <code class="language-plaintext highlighter-rouge">nonatomic</code> annotation을 설정하는 것이 좋습니다.</p>
+
+<div class="language-objective_c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@interface</span> <span class="nc">Asset</span> <span class="p">:</span> <span class="nc">NSObject</span>
+<span class="c1">// name을 nonatomic으로 사용</span>
+<span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
+<span class="k">@end</span>
+</code></pre></div></div>
+
+<h3 id="atomic과-swift">atomic과 Swift</h3>
+
+<p>한편, Swift는 Thread-Safe를 고려하고 디자인된 언어가 아니기 때문에 모든 property는 <code class="language-plaintext highlighter-rouge">non atomic</code>입니다. 그리고 별도로 <code class="language-plaintext highlighter-rouge">atomic</code> 옵션을 지정할 수도 없습니다. 그래서 Swift의 property가 <code class="language-plaintext highlighter-rouge">atomic</code>을 지원하기 위해서는 GCD를 통해 이를 구현해주어야 합니다. 다음 <a href="https://www.objc.io/blog/2018/12/18/atomic-variables/">글</a>에서 자세한 내용을 확인할 수 있습니다. 여기에서는 위 글에서 작성된 것을 확인하는 예제만 간단히 남기도록 하겠습니다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">AtomicValue</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"queue"</span><span class="p">)</span>
+
+    <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">storedValue</span><span class="p">:</span> <span class="kt">T</span>
+
+    <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">storedValue</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">storedValue</span> <span class="o">=</span> <span class="n">storedValue</span>
+    <span class="p">}</span>
+
+    <span class="k">var</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">T</span> <span class="p">{</span>
+        <span class="k">get</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">queue</span><span class="o">.</span><span class="n">sync</span> <span class="p">{</span>
+                <span class="k">self</span><span class="o">.</span><span class="n">storedValue</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">set</span> <span class="p">{</span> <span class="c1">// read, write 접근 자체는 atomic하지만,</span>
+              <span class="c1">// 다른 쓰레드에서 데이터 변경 도중(read, write 사이)에 접근이 가능하여, 완벽한 atomic이 아닙니다.</span>
+            <span class="n">queue</span><span class="o">.</span><span class="n">sync</span> <span class="p">{</span>
+                <span class="k">self</span><span class="o">.</span><span class="n">storedValue</span> <span class="o">=</span> <span class="n">newValue</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 올바른 방법</span>
+    <span class="kd">func</span> <span class="nf">mutate</span><span class="p">(</span><span class="n">_</span> <span class="nv">transform</span><span class="p">:</span> <span class="p">(</span><span class="k">inout</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">())</span> <span class="p">{</span>
+        <span class="n">queue</span><span class="o">.</span><span class="n">sync</span> <span class="p">{</span>
+            <span class="nf">transform</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="o">.</span><span class="n">storedValue</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">atomicInComplete</span> <span class="o">=</span> <span class="kt">AtomicValue</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">atomicComplete</span> <span class="o">=</span> <span class="kt">AtomicValue</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="kt">DispatchQueue</span><span class="o">.</span><span class="nf">concurrentPerform</span><span class="p">(</span><span class="nv">iterations</span><span class="p">:</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="k">in</span>
+
+    <span class="n">atomicInComplete</span><span class="o">.</span><span class="n">value</span> <span class="o">+=</span> <span class="n">idx</span>
+
+    <span class="n">atomicComplete</span><span class="o">.</span><span class="n">mutate</span> <span class="p">{</span> <span class="nv">$0</span> <span class="o">+=</span> <span class="n">idx</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">atomicInComplete</span><span class="o">.</span><span class="n">storedValue</span><span class="p">)</span> <span class="c1">// 결과: 돌릴 때마다 다름</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">atomicComplete</span><span class="o">.</span><span class="n">storedValue</span><span class="p">)</span> <span class="c1">// 결과: 4950</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="참고자료">참고자료</h2>
+
+<ul>
+  <li><a href="https://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&amp;ejkGb=KOR&amp;barcode=9788994506401">아론 힐리가스의 Objective-C 프로그래밍</a></li>
+  <li><a href="https://medium.com/@YogevSitton/atomic-vs-non-atomic-properties-crash-course-d11c23f4366c">Atomic vs. Non Atomic Properties Crash Course</a></li>
+  <li><a href="https://www.objc.io/blog/2018/12/18/atomic-variables/">Swift Tips: Atomic Variables</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-03/thread-safe">
+              Thread Safe
+              <small>21 Mar 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#atomic">
+                atomic
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#OS">
+                OS
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-class-deep">
+              Swift init 2부
+              <small>06 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-basic">
+              Swift init 1부
+              <small>05 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

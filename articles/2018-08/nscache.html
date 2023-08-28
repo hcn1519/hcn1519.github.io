@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>NSCache - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="NSCache - hcn1519 Dev Post">
+  <meta name="description" content="NSCache에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="NSCache">
+  <meta property="og:image" content="/public/assets/blogThumb.png">
+  <meta property="og:description" content="NSCache에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">NSCache</h1>
+  <span class="post-date">28 Aug 2018</span>
+
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <ul>
+  <li><code class="language-plaintext highlighter-rouge">NSCache</code>는 Cocoa에서 사용할 수 있는 캐싱을 위한 클래스입니다. <code class="language-plaintext highlighter-rouge">NSCache</code>는 <code class="language-plaintext highlighter-rouge">NSDictionary</code>처럼 <code class="language-plaintext highlighter-rouge">key-value</code> 형태로 되어 있습니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">NSCache</code>는 메모리가 충분할 때는 주어진 모든 데이터를 캐싱합니다. 반면, 가용 메모리가 적을 때는 다른 앱을 위해 캐싱된 데이터를 자동으로 버립니다.</li>
+</ul>
+
+<blockquote>
+  <p>이렇게 버려진 데이터는 필요할 때 다시 캐싱해야 합니다. 바꿔말하면, 캐싱된 데이터가 없어도 앱이 적절히 동작(i.e. 다시 데이터 캐싱)할 수 있도록 구조를 설계해야 합니다.</p>
+</blockquote>
+
+<h2 id="nscache-property">NSCache Property</h2>
+
+<ul>
+  <li>countLimit - <code class="language-plaintext highlighter-rouge">NSCache</code>는 캐싱하는 데이터의 개수를 제한할 수 있습니다. 만약 countLimit이 10으로 설정되어 있는데, 11개의 데이터를 <code class="language-plaintext highlighter-rouge">NSCache</code>에 넣게 되면 1개는 자동으로 버립니다.</li>
+  <li>totalCostLimit - <code class="language-plaintext highlighter-rouge">NSCache</code>는 객체를 추가할 때 cost(<code class="language-plaintext highlighter-rouge">Int</code>)를 함께 설정할 수 있습니다. 이 때, <code class="language-plaintext highlighter-rouge">totalCostLimit</code>은 cost들의 총합의 최댓값입니다. 즉, <code class="language-plaintext highlighter-rouge">NSCache</code>에 추가된 데이터들의 cost가 <code class="language-plaintext highlighter-rouge">totalCostLimit</code>에 도달하거나 넘게 되면 <code class="language-plaintext highlighter-rouge">NSCache</code>는 데이터를 버립니다.</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">cache</span><span class="p">:</span> <span class="kt">NSCache</span><span class="o">&lt;</span><span class="kt">NSString</span><span class="p">,</span> <span class="kt">UIImage</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kt">NSCache</span><span class="p">()</span>
+<span class="n">cache</span><span class="o">.</span><span class="n">countLimit</span> <span class="o">=</span> <span class="n">허용하는</span> <span class="n">key의</span> <span class="n">개수</span>
+<span class="n">cache</span><span class="o">.</span><span class="n">totalCostLimit</span> <span class="o">=</span> <span class="n">cost</span> <span class="n">합계의</span> <span class="n">최댓값</span>
+</code></pre></div></div>
+
+<ul>
+  <li>evictsObjectsWithDiscardedContent - <code class="language-plaintext highlighter-rouge">NSCache</code>는 시스템에서 메모리를 너무 많이 사용하지 않도록 디자인되어 있습니다. 그래서 캐싱된 데이터를 자동으로 지우는 다양한 정책을 사용하고 있고, 캐싱된 데이터가 너무 많은 메모리를 사용하면 시스템은 캐싱된 데이터를 삭제합니다.</li>
+</ul>
+
+<blockquote>
+  <p>The NSCache class incorporates various auto-eviction policies, which ensure that a cache doesn’t use too much of the system’s memory. If memory is needed by other applications, these policies remove some items from the cache, minimizing its memory footprint.</p>
+</blockquote>
+
+<blockquote>
+  <p>이 부분은 좀 더 알아보고 구체적인 서술을 하고자 합니다.</p>
+</blockquote>
+
+<h2 id="nscache-구현">NSCache 구현</h2>
+
+<p>NSCache가 어떻게 구현되어 있는지는 애플에서 공개한 <a href="https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSCache.swift">Foundation - NSCache</a>를 살펴보면 파악할 수 있습니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">NSCache</code>는 기본적으로 연결리스트로 데이터를 캐싱합니다. 연결리스트로 데이터를 캐싱하는 이유에 대해서 명확히 서술되어 있지는 않지만, 캐시는 중간에 있는 데이터 추가, 삭제가 빈번하기 때문에 이를 효율적으로 하기 위해(배열로 해당 작업을 수행시 데이터를 앞으로 당기거나, 뒤로 데이터를 모두 밀어야 하는 작업이 추가적으로 발생합니다.) 연결리스트로 구현된 것이라고 생각해볼 수 있습니다.</p>
+
+<p>한편, <code class="language-plaintext highlighter-rouge">NSCache</code>는 별도로 Dictionary를 두어 데이터의 접근도 O(1)에 수행할 수 있도록 제공하고 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// NSCache</span>
+<span class="kd">open</span> <span class="kd">class</span> <span class="kt">NSCache</span><span class="o">&lt;</span><span class="kt">KeyType</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="p">,</span> <span class="kt">ObjectType</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span> <span class="p">{</span>
+
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">_entries</span> <span class="o">=</span> <span class="kt">Dictionary</span><span class="o">&lt;</span><span class="kt">NSCacheKey</span><span class="p">,</span> <span class="kt">NSCacheEntry</span><span class="o">&lt;</span><span class="kt">KeyType</span><span class="p">,</span> <span class="kt">ObjectType</span><span class="o">&gt;&gt;</span><span class="p">()</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">_head</span><span class="p">:</span> <span class="kt">NSCacheEntry</span><span class="o">&lt;</span><span class="kt">KeyType</span><span class="p">,</span> <span class="kt">ObjectType</span><span class="o">&gt;</span><span class="p">?</span>
+<span class="p">}</span></code></pre></figure>
+
+<h2 id="nscache-데이터-교체-알고리즘">NSCache 데이터 교체 알고리즘</h2>
+
+<p>일반적으로 캐시는 캐싱된 데이터를 버리는 방식에 있어서 용도에 따라 서로 다른 페이지 교체 알고리즘을 사용합니다. 흔히, FIFO, LRU, LFU 등의 메모리 페이지 교체 알고리즘들이 사용되는데, <code class="language-plaintext highlighter-rouge">NSCache</code>는 이와는 조금 다른 방식으로 데이터를 취하고 버립니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">NSCache</code>에는 개별 데이터마다 cost 값을 부여할 수 있습니다. <code class="language-plaintext highlighter-rouge">NSCache</code>는 이 cost값의 오름차순으로 데이터를 추가할 때 정렬을 수행합니다. 실제 코드를 살펴보면 다음과 같습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="kd">func</span> <span class="nf">insert</span><span class="p">(</span><span class="n">_</span> <span class="nv">entry</span><span class="p">:</span> <span class="kt">NSCacheEntry</span><span class="o">&lt;</span><span class="kt">KeyType</span><span class="p">,</span> <span class="kt">ObjectType</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">guard</span> <span class="k">var</span> <span class="nv">currentElement</span> <span class="o">=</span> <span class="n">_head</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// The cache is empty</span>
+        <span class="n">entry</span><span class="o">.</span><span class="n">prevByCost</span> <span class="o">=</span> <span class="kc">nil</span>
+        <span class="n">entry</span><span class="o">.</span><span class="n">nextByCost</span> <span class="o">=</span> <span class="kc">nil</span>
+
+        <span class="n">_head</span> <span class="o">=</span> <span class="n">entry</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+
+    <span class="k">guard</span> <span class="n">entry</span><span class="o">.</span><span class="n">cost</span> <span class="o">&gt;</span> <span class="n">currentElement</span><span class="o">.</span><span class="n">cost</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// Insert entry at the head</span>
+        <span class="n">entry</span><span class="o">.</span><span class="n">prevByCost</span> <span class="o">=</span> <span class="kc">nil</span>
+        <span class="n">entry</span><span class="o">.</span><span class="n">nextByCost</span> <span class="o">=</span> <span class="n">currentElement</span>
+        <span class="n">currentElement</span><span class="o">.</span><span class="n">prevByCost</span> <span class="o">=</span> <span class="n">entry</span>
+
+        <span class="n">_head</span> <span class="o">=</span> <span class="n">entry</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+
+    <span class="k">while</span> <span class="k">let</span> <span class="nv">nextByCost</span> <span class="o">=</span> <span class="n">currentElement</span><span class="o">.</span><span class="n">nextByCost</span><span class="p">,</span> <span class="n">nextByCost</span><span class="o">.</span><span class="n">cost</span> <span class="o">&lt;</span> <span class="n">entry</span><span class="o">.</span><span class="n">cost</span> <span class="p">{</span>
+        <span class="n">currentElement</span> <span class="o">=</span> <span class="n">nextByCost</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Insert entry between currentElement and nextElement</span>
+    <span class="k">let</span> <span class="nv">nextElement</span> <span class="o">=</span> <span class="n">currentElement</span><span class="o">.</span><span class="n">nextByCost</span>
+
+    <span class="n">currentElement</span><span class="o">.</span><span class="n">nextByCost</span> <span class="o">=</span> <span class="n">entry</span>
+    <span class="n">entry</span><span class="o">.</span><span class="n">prevByCost</span> <span class="o">=</span> <span class="n">currentElement</span>
+
+    <span class="n">entry</span><span class="o">.</span><span class="n">nextByCost</span> <span class="o">=</span> <span class="n">nextElement</span>
+    <span class="n">nextElement</span><span class="p">?</span><span class="o">.</span><span class="n">prevByCost</span> <span class="o">=</span> <span class="n">entry</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>위의 코드를 보면 <code class="language-plaintext highlighter-rouge">NSCache</code>에 데이터를 추가할 때, cost값을 기준으로 정렬을 수행하는 것을 확인할 수 있습니다. 또한 삭제의 경우, 새로운 값을 추가할 때, 값이 작은 데이터들을 순차적으로 제거하여 totalCostLimit을 유지하는 방식을 활용하고 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// open func setObject(_ obj: ObjectType, forKey key: KeyType, cost g: Int)의 일부 발췌</span>
+<span class="c1">// CostLimit에 기반하여 데이터 제거(Purging)</span>
+<span class="c1">// purgeAmount = 줄여야 하는 cost의 총량</span>
+<span class="k">var</span> <span class="nv">purgeAmount</span> <span class="o">=</span> <span class="p">(</span><span class="n">totalCostLimit</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">?</span> <span class="p">(</span><span class="n">_totalCost</span> <span class="o">-</span> <span class="n">totalCostLimit</span><span class="p">)</span> <span class="p">:</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">purgeAmount</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">entry</span> <span class="o">=</span> <span class="n">_head</span> <span class="p">{</span>
+        <span class="n">delegate</span><span class="p">?</span><span class="o">.</span><span class="nf">cache</span><span class="p">(</span><span class="nf">unsafeDowncast</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="nv">to</span><span class="p">:</span><span class="kt">NSCache</span><span class="o">&lt;</span><span class="kt">AnyObject</span><span class="p">,</span> <span class="kt">AnyObject</span><span class="o">&gt;.</span><span class="k">self</span><span class="p">),</span> <span class="nv">willEvictObject</span><span class="p">:</span> <span class="n">entry</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="c1">// 작은(head쪽) cost의 데이터들부터 제거해나감</span>
+        <span class="n">_totalCost</span> <span class="o">-=</span> <span class="n">entry</span><span class="o">.</span><span class="n">cost</span>
+        <span class="n">purgeAmount</span> <span class="o">-=</span> <span class="n">entry</span><span class="o">.</span><span class="n">cost</span>
+
+        <span class="nf">remove</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="c1">// _head will be changed to next entry in remove(_:)</span>
+        <span class="n">_entries</span><span class="p">[</span><span class="kt">NSCacheKey</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">nil</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">break</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>데이터 추가 삭제를 cost 중심으로 설명하였는데, count를 통해서도 해당 작업을 수행합니다. 이 부분은 여기서 따로 서술하지 않습니다.(cost를 중심으로 데이터를 추가 삭제하는 것과 크게 다르지 않습니다.)</p>
+
+<p>전체 코드는 <a href="https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSCache.swift">Foundation - NSCache</a>에서 확인하실 수 있으니, 이를 참고하시면 좋을 것 같습니다.</p>
+
+<hr />
+
+<h1 id="참고-자료">참고 자료</h1>
+
+<ul>
+  <li><a href="https://developer.apple.com/documentation/foundation/nscache">NSCache - Apple Documentation</a></li>
+  <li><a href="https://developer.apple.com/library/archive/documentation/Performance/Conceptual/ManagingMemory/Articles/CachingandPurgeableMemory.html">Caching and Purgeable Memory</a></li>
+  <li><a href="https://nshipster.com/nscache/">NSHipster - NSCache</a></li>
+  <li><a href="https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSCache.swift">Foundation - NSCache</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2018-09/wwdc2018session416">
+              iOS Memory Footprint 분석 방법
+              <small>01 Sep 2018</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Memory">
+                Memory
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2018-07/swift_automatic_reference_counting">
+              Swift ARC
+              <small>25 Jul 2018</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Memory">
+                Memory
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

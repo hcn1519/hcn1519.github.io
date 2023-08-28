@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Objc Dynamic Binding, Typing - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Objc Dynamic Binding, Typing - hcn1519 Dev Post">
+  <meta name="description" content="ObjectiveC의 동적 바인딩, 타이핑에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Objc Dynamic Binding, Typing">
+  <meta property="og:image" content="/public/assets/objc.png">
+  <meta property="og:description" content="ObjectiveC의 동적 바인딩, 타이핑에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Objc Dynamic Binding, Typing</h1>
+  <span class="post-date">15 Jan 2019</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/objc.png"
+    
+    alt="Objc Dynamic Binding, Typing feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="동적-바인딩">동적 바인딩</h2>
+
+<p>동적 바인딩(Dynamic Binding)은 객체에 호출되는 실제 메소드를 알아내는 시기를 컴파일 시점이 아니라, 프로그램 실행(런타임) 중으로 미루는 방법을 의미합니다. 예시를 통해 살펴보겠습니다.</p>
+
+<div class="language-objective_c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// IntPoint.h</span>
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;
+</span>
+<span class="k">@interface</span> <span class="nc">IntPoint</span> <span class="p">:</span> <span class="nc">NSObject</span>
+
+<span class="k">@property</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+<span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">print</span><span class="p">;</span>
+<span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">set</span><span class="p">:</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nv">x</span> <span class="nf">and</span><span class="p">:(</span><span class="kt">int</span><span class="p">)</span><span class="nv">y</span><span class="p">;</span>
+<span class="k">-</span><span class="p">(</span><span class="n">IntPoint</span> <span class="o">*</span><span class="p">)</span><span class="nf">add</span><span class="p">:</span> <span class="p">(</span><span class="n">IntPoint</span> <span class="o">*</span><span class="p">)</span><span class="nv">point</span><span class="p">;</span>
+
+<span class="k">@end</span>
+
+<span class="c1">// IntPoint.m</span>
+<span class="cp">#import "IntPoint.h"
+</span>
+<span class="k">@implementation</span> <span class="nc">IntPoint</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">print</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Point x: %d, y: %d"</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">set</span><span class="p">:(</span><span class="kt">int</span><span class="p">)</span><span class="nv">x</span> <span class="nf">and</span><span class="p">:(</span><span class="kt">int</span><span class="p">)</span><span class="nv">y</span> <span class="p">{</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="n">IntPoint</span> <span class="o">*</span><span class="p">)</span><span class="nf">add</span><span class="p">:(</span><span class="n">IntPoint</span> <span class="o">*</span><span class="p">)</span><span class="nv">point</span> <span class="p">{</span>
+    <span class="n">IntPoint</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">[[</span><span class="n">IntPoint</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span>
+
+    <span class="n">result</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">point</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+    <span class="n">result</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">point</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@end</span>
+</code></pre></div></div>
+
+<p>위와 같은 <code class="language-plaintext highlighter-rouge">IntPoint</code>라는 클래스를 생성하고, 아래와 같이 해당 클래스를 사용할 수 있습니다.</p>
+
+<div class="language-objective_c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Test</span>
+<span class="n">id</span> <span class="n">dataValue</span><span class="p">;</span>
+
+<span class="n">IntPoint</span> <span class="o">*</span><span class="n">point1</span> <span class="o">=</span> <span class="p">[[</span><span class="n">IntPoint</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span>
+<span class="n">IntPoint</span> <span class="o">*</span><span class="n">point2</span> <span class="o">=</span> <span class="p">[[</span><span class="n">IntPoint</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span>
+
+<span class="p">[</span><span class="n">point1</span> <span class="nf">set</span><span class="p">:</span><span class="mi">100</span> <span class="nf">and</span><span class="p">:</span><span class="mi">100</span><span class="p">];</span>
+<span class="p">[</span><span class="n">point2</span> <span class="nf">set</span><span class="p">:</span><span class="mi">30</span> <span class="nf">and</span><span class="p">:</span><span class="mi">20</span><span class="p">];</span>
+<span class="n">dataValue</span> <span class="o">=</span> <span class="p">[</span><span class="n">point1</span> <span class="nf">add</span><span class="p">:</span><span class="n">point2</span><span class="p">];</span> <span class="c1">// 1</span>
+
+<span class="p">[</span><span class="n">point1</span> <span class="nf">print</span><span class="p">];</span>    <span class="c1">//        Point x: 100, y: 100</span>
+<span class="p">[</span><span class="n">point2</span> <span class="nf">print</span><span class="p">];</span>    <span class="c1">//        Point x: 30, y: 20</span>
+<span class="p">[</span><span class="n">dataValue</span> <span class="nf">print</span><span class="p">];</span> <span class="c1">//        Point x: 130, y: 120, 2</span>
+</code></pre></div></div>
+
+<ol>
+  <li>위의 예시에서 <code class="language-plaintext highlighter-rouge">dataValue</code>는 <code class="language-plaintext highlighter-rouge">id</code>형으로 선언되어 있고, id형은 어떤 객체든 담을 수 있습니다.</li>
+  <li>시스템은 <code class="language-plaintext highlighter-rouge">id</code>형 객체가 호출하는 메소드를 컴파일 시점이 아닌, 런타임 시점에 파악합니다.  그렇기 때문에 시스템은 <code class="language-plaintext highlighter-rouge">dataValue</code>가 호출하는 <code class="language-plaintext highlighter-rouge">print</code> 메소드가 <code class="language-plaintext highlighter-rouge">IntPoint</code>의 메소드라는 것을 알 수 있고, 이를 호출합니다.</li>
+  <li>그렇기 때문에 동적 바인딩은 다형성 구현을 가능하게 합니다. 흔히 알고 있는 객체의 다형성의 경우 특정 <code class="language-plaintext highlighter-rouge">protocol</code> 타입으로 설정된 변수의 자리에 해당 <code class="language-plaintext highlighter-rouge">protocol</code>을 준수하는 객체는 무엇이든 들어갈 수 있는 것을 의미합니다. 동적 바인딩을 통한 다형성은 <strong>각각의 객체가 동일한 이름의 메소드를 가지고 있는 상황에서 클래스에 관계 없이 시스템이 구현된 메소드를 파악하고 이를 호출하는 것</strong>을 의미합니다.</li>
+</ol>
+
+<h2 id="동적-타이핑dynamic-typing">동적 타이핑(Dynamic Typing)</h2>
+
+<p>객체의 타입을 명시적으로 지정하지 않고,(데이터 타입을 id로 지정) 런타임에서 객체의 타입을 설정하도록 하는 것을 동적 타이핑(Dynamic Typing)이라고 합니다. 이런 동적 타이핑이 가능한 이유는 ObjectiveC의 객체는 <code class="language-plaintext highlighter-rouge">isa</code>라는 클래스 타입(클래스 객체를 가리킴)을 지칭하는 포인터가 존재하기 때문입니다. 즉, 인스턴스가 id 타입이라도, 런타임에서 해당 인스턴스의 타입은 언제나 알 수 있습니다. <code class="language-plaintext highlighter-rouge">isa</code> 포인터는 <code class="language-plaintext highlighter-rouge">class()</code> 메소드를 통해 접근할 수 있습니다.</p>
+
+<div class="language-objective_c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">id</span> <span class="n">dataValue</span><span class="p">;</span>
+<span class="n">IntPoint</span> <span class="o">*</span><span class="n">point</span> <span class="o">=</span> <span class="p">[[</span><span class="n">IntPoint</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span>
+<span class="n">dataValue</span> <span class="o">=</span> <span class="n">point</span><span class="p">;</span>
+<span class="n">NSLog</span><span class="p">(</span><span class="s">@"%@"</span><span class="p">,</span> <span class="p">[</span><span class="n">dataValue</span> <span class="nf">class</span><span class="p">]);</span> <span class="c1">// IntPoint</span>
+</code></pre></div></div>
+
+<p>동적 타이핑은 정적 타이핑과 비교될 수 있습니다.</p>
+
+<ul>
+  <li>동적 타이핑 - 컴파일 시점이 아니라, <strong>프로그램이 실행되는 단계에서 객체의 타입을 파악하는 방식</strong>을 의미합니다.</li>
+  <li>정적 타이핑 - <strong>특정 클래스의 객체로 타입을 지정</strong>하는 것으로, 컴파일 타임에 변수의 타입을 지정하는 것을 의미합니다.</li>
+</ul>
+
+<div class="language-objective_c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 동적 타이핑</span>
+<span class="n">id</span> <span class="n">dataValue</span><span class="p">;</span>
+
+<span class="c1">// 정적 타이핑</span>
+<span class="n">IntPoint</span> <span class="o">*</span><span class="n">dataValue</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>동적 타이핑된 변수에 메시지를 전달할 때는 반드시 해당 변수가 메시지에 대해 respond 할 수 있어야 합니다. 그렇기 때문에 동적 타이핑된 인스턴스에 메시지 전달시에는 <code class="language-plaintext highlighter-rouge">respondsToSelector(SEL)</code>을 통해 예외처리를 해주는 것이 좋습니다.</p>
+
+<div class="language-objective_c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">id</span> <span class="n">dataValue</span><span class="p">;</span>
+<span class="n">IntPoint</span> <span class="o">*</span><span class="n">point</span> <span class="o">=</span> <span class="p">[[</span><span class="n">IntPoint</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span>
+<span class="p">[</span><span class="n">point</span> <span class="nf">set</span><span class="p">:</span><span class="mi">10</span> <span class="nf">and</span><span class="p">:</span><span class="mi">20</span><span class="p">];</span>
+<span class="n">dataValue</span> <span class="o">=</span> <span class="n">point</span><span class="p">;</span>
+
+<span class="c1">// 다음과 같이 해당 selector에 respond할 수 있는지 우선적으로 체크해야 합니다.</span>
+<span class="k">if</span> <span class="p">([</span><span class="n">dataValue</span> <span class="nf">respondsToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">print</span><span class="p">)])</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">dataValue</span> <span class="nf">print</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>id 데이터형을 활용한 동적 타이핑은 남용하면 안 됩니다. 이유는 다음과 같습니다.</p>
+
+<ol>
+  <li>컴파일 타임에 잡지 못 한 오류는 사용자가 보게 될 수도 있습니다. 런타임 에러를 확인하기 위해서는 앱을 다시 빌드해야하므로 생산성도 떨어집니다.</li>
+  <li>선언한 변수의 가독성이 높아집니다.</li>
+</ol>
+
+<hr />
+
+<h1 id="참고-자료">참고 자료</h1>
+
+<ul>
+  <li>프로그래밍 오브젝티브-C 2.0</li>
+  <li><a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/DynamicBinding.html#//apple_ref/doc/uid/TP40008195-CH15-SW1">Cocoa Core Concepts - Dynamic Binding</a></li>
+  <li><a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/DynamicTyping.html#//apple_ref/doc/uid/TP40008195-CH62-SW1">Cocoa Core Concepts - Dynamic Typing</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-03/atomic">
+              atomic/non atomic
+              <small>01 Mar 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#ObjectiveC">
+                ObjectiveC
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-01/objc_selector">
+              Objc selector
+              <small>16 Jan 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#ObjectiveC">
+                ObjectiveC
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

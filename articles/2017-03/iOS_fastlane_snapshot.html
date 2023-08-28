@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>iOS fastlane 스냅샷 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="iOS fastlane 스냅샷 - hcn1519 Dev Post">
+  <meta name="description" content="iOS에서 fastlane의 스냅샷 기능을 활용하여 디바이스별 스크린샷을 찍는 방법에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="iOS fastlane 스냅샷">
+  <meta property="og:image" content="/public/assets/fastlane.png">
+  <meta property="og:description" content="iOS에서 fastlane의 스냅샷 기능을 활용하여 디바이스별 스크린샷을 찍는 방법에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">iOS fastlane 스냅샷</h1>
+  <span class="post-date">19 Mar 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/fastlane.png"
+    
+    alt="iOS fastlane 스냅샷 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="fastlane의-필요성">Fastlane의 필요성</h2>
+
+<p>iOS에서 앱을 배포하기 위해서는 기본적으로 앱의 모든 페이지에 대한 스크린샷을 찍어야 합니다. 앱을 Universal Setting으로 두고 배포를 하려고 할 경우 최소 5가지 화면에 대한 UI 스크린샷이 필요합니다.(iPhone 7, iPhone7 Plus, iPhone SE, iPad Retina, iPad Pro) 그런데 여기다가 디바이스 언어별로 앱스토어에서 다른 스크린샷이 보이길 원할 경우 언어별로 똑같은 스크린샷을 찍어야 합니다. 정리하자면,</p>
+
+<div class="message">
+앱 모든 화면 개수 x 디바이스 5개 x 지원하는 언어 = 총 필요한 스크린샷 개수
+</div>
+
+<p>다음과 같이 됩니다. 예를 들어 아이폰, 아이패드를 지원하고 한국어, 영어를 지원하는 앱의 경우 앱의 화면을 4개로 가정하면, 4x5x2 = 40개의 스크린샷이 필요합니다. 기본적으로 이 화면은 어떻게 찍을까요?</p>
+
+<h3 id="노가다">노가다</h3>
+
+<p>네, 말 그대로 시뮬레이터를 바꿔가면서 노가다를 해야합니다. 각 시뮬레이터를 켜면서</p>
+
+<figure class="animated_gif_frame" data-caption="GIF (2MB)">
+  <img class="animated_gif" src="https://hcn1519.github.io/public/postImages/2017-03/iOS_fastlane_snapshot/takeSnapshot.gif" data-source="https://hcn1519.github.io/public/postImages/2017-03/iOS_fastlane_snapshot/takeSnapshot.gif" width="100%" height="auto" />
+</figure>
+
+<p>한땀한땀 스크린샷을 찍어줘야 하는 것이죠. Fastlane snapshot은 이러한 지루하고 오래 걸리는 반복적인 과정을 자동화해주는 역할을 담당합니다. 테스트 결과 40장의 스크린샷도 컴퓨터만 켜놓으면 10분만에 찍어주는 퍼포먼스를 보여줍니다.</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2017-03/iOS_fastlane_snapshot/snapshotde.png" /></p>
+
+<h2 id="fastlane-snapshot-설치">Fastlane snapshot 설치</h2>
+
+<p>Fastlane은 맥에 기본적으로 사용되는 ruby gem을 통해 설치됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>gem <span class="nb">install </span>fastlane</code></pre></figure>
+
+<p>설치가 완료되면, 터미널에서 프로젝트 루트로 이동합니다. 그 후,</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">fastlane init</code></pre></figure>
+
+<p>다음 명령어를 치게 되면, 3개의 파일(<code>snapfile</code>, <code>SnapshotHelper.swift</code>, <code>SnapshotHelper2-3.swift</code>)이 생성됩니다. 다음으로 스냅샷이 저장될 폴더를 생성합니다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">mkdir </span>snapshots</code></pre></figure>
+
+<h2 id="fastlane-configuration">Fastlane Configuration</h2>
+
+<p>fastlane snapshot은 Xcode의 <code>UITest</code>라는 기능을 통해 작동합니다. 그러므로 UITest를 프로젝트에 추가하고 이에 대한 설정을 해주어야 올바르게 작동합니다.먼저 프로젝트에 <code>UITest</code>를 추가하도록 하겠습니다. 최상단 메뉴바에서 <code>File &gt; New &gt; Target</code>을 선택합니다. 다음으로, <code>UITestBundle</code>을 프로젝트에 추가합니다. 이렇게 하면 <code>ProjectNameUITests</code> 형태로 폴더가 생성됩니다.</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2017-03/iOS_fastlane_snapshot/target.png" /></p>
+
+<p>다음으로 이전에 생성했던 <code>SnapshotHelper.swift</code>을 새롭게 생성된 <code>ProjectNameUITests</code>로 넣어줍니다. 그리고 폴더 안에 있는 <code>ProjectNameUITests.swift</code>의 코드를 변경합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// ProjectNameUITests.swift</span>
+<span class="kd">import</span> <span class="kt">XCTest</span>
+<span class="kd">class</span> <span class="kt">ProjectNameUITests</span><span class="p">:</span> <span class="kt">XCTestCase</span> <span class="p">{</span>
+  <span class="k">override</span> <span class="kd">func</span> <span class="nf">setUp</span><span class="p">()</span> <span class="p">{</span>
+     <span class="k">super</span><span class="o">.</span><span class="nf">setUp</span><span class="p">()</span>
+     <span class="n">continueAfterFailure</span> <span class="o">=</span> <span class="kc">false</span>
+     <span class="k">let</span> <span class="nv">app</span> <span class="o">=</span> <span class="kt">XCUIApplication</span><span class="p">()</span>
+     <span class="nf">setupSnapshot</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+     <span class="n">app</span><span class="o">.</span><span class="nf">launch</span><span class="p">()</span>
+ <span class="p">}</span>
+
+ <span class="k">override</span> <span class="kd">func</span> <span class="nf">tearDown</span><span class="p">()</span> <span class="p">{</span>
+     <span class="k">super</span><span class="o">.</span><span class="nf">tearDown</span><span class="p">()</span>
+ <span class="p">}</span>
+ <span class="kd">func</span> <span class="nf">testSnapshot</span><span class="p">()</span> <span class="p">{</span>
+ <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>다음으로 <code>snapfile</code>에 대한 설정입니다. <code>snapfile</code>은 fastlane snapshot을 사용할 때 설정할 수 있는 옵션들을 지정하는 파일입니다. 여기서, 스크린샷을 찍을 기기 설정, 언어 설정, 결과물 저장 경로 설정 등을 할 수 있습니다. 에디터를 통해 snapfile을 열고, 내용을 다음과 같이 수정하겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// snapfile</span>
+<span class="c1">// 스냅샷을 찍을 디바이스 리스트</span>
+<span class="nf">devices</span><span class="p">([</span>
+  <span class="s">"iPhone 7"</span><span class="p">,</span>
+  <span class="s">"iPhone 7 Plus"</span><span class="p">,</span>
+  <span class="s">"iPhone SE"</span><span class="p">,</span>
+  <span class="s">"iPad Retina"</span><span class="p">,</span>
+  <span class="s">"iPad Pro (12.9-inch)"</span>
+<span class="p">])</span>
+
+<span class="c1">// 언어 설정</span>
+<span class="nf">languages</span><span class="p">([</span>
+ <span class="s">"en-US"</span><span class="p">,</span>
+ <span class="s">"ko"</span>
+<span class="p">])</span>
+<span class="c1">// 타겟 프로젝트</span>
+<span class="n">project</span> <span class="s">"./CircuitWatch.xcodeproj"</span>
+<span class="c1">// 스냅샷 저장 경로</span>
+<span class="n">output_directory</span> <span class="err">'</span><span class="o">./</span><span class="n">snapshots</span><span class="err">'</span>
+<span class="c1">// 새로 스냅샷을 찍을 경우 기존에 폴더에 있던 사진 모두 삭제</span>
+<span class="n">clear_previous_screenshots</span> <span class="kc">true</span></code></pre></figure>
+
+<h2 id="fastlane-with-uitests">Fastlane with UITests</h2>
+
+<p><code>UITests</code>는 말 그대로 UI들이 제대로 작동하는지를 테스트할 수 있게 도와주는 툴입니다. fastlane snapshots은 <code>UITests</code>를 통해 작동하는데 구체적으로 어떻게 하는지에 대해 알아보겠습니다. 먼저 Xcode에서 <code>ProjectNameUITests.swift</code>으로 이동합니다. 그리고 <code>커서</code>를 <code>testSnapshot()</code> 안으로 넣어둡니다. 그리고 밑에 보이는 빨간 버튼(레코드 버튼)을 누르게 되면, <code>UITests</code>가 구동되면서 시뮬레이터가 켜집니다. 그리고 켜진 시뮬레이터에서 버튼을 누르거나 하는 액션을 취하면 놀랍게도, 실시간으로 코드가 생성됩니다.</p>
+
+<figure class="animated_gif_frame" data-caption="GIF (2MB)">
+  <img class="animated_gif" src="https://hcn1519.github.io/public/postImages/2017-03/iOS_fastlane_snapshot/setUITest.gif" data-source="https://hcn1519.github.io/public/postImages/2017-03/iOS_fastlane_snapshot/setUITest.gif" width="100%" height="auto" />
+</figure>
+
+<p>이 방식을 사용해서 스크린샷을 찍을 화면이 모두 나오도록 액션을 생성합니다. 다음으로 snapshot을 찍을 구간에 <code>snapshot("main")</code> 다음과 같이 snapshot 이름을 설정하여 코드를 집어넣습니다. 예시로</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="n">circuitwatchMainvcNavigationBar</span><span class="o">.</span><span class="n">buttons</span><span class="p">[</span><span class="s">"Edit"</span><span class="p">]</span><span class="o">.</span><span class="nf">tap</span><span class="p">()</span>
+<span class="nf">snapshot</span><span class="p">(</span><span class="s">"EditPage"</span><span class="p">)</span>
+<span class="n">circuitwatchMainvcNavigationBar</span><span class="o">.</span><span class="n">buttons</span><span class="p">[</span><span class="s">"Done"</span><span class="p">]</span><span class="o">.</span><span class="nf">tap</span><span class="p">()</span></code></pre></figure>
+
+<p>다음과 같은 경우에는, 앱에서 Edit 버튼을 누르고, EditPage라는 스크린샷을 촬영한 후 Done 버튼을 누르는 과정입니다. 이런 방식으로 스크린샷이 필요한 구간에 적절히 snapshot 문구를 넣어주면 스크린샷이 올바르게 찍히게 됩니다. 여기까지 하시면 fastlane snapshots을 구동할 수 있습니다. 한 번 돌려보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">fastlane snapshot <span class="nt">--stop_after_first_error</span></code></pre></figure>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2017-03/iOS_fastlane_snapshot/errorResult.png" /></p>
+
+<p>잘 되나요? 아마 위와 유사한 오류 메세지를 보게 될 것입니다. 결과가 다음과 같이 나오는 이유는 UITests에서 버튼들이 특정 언어에 한정되도록 설정되어 있기 때문입니다. 즉, 위에서 <code>"Edit"</code> 버튼은 한글 설정된 기기에서 <code>"편집"</code>으로 나올 경우 <code>UITests</code>가 같은 버튼으로 인식하지 못 하는 것입니다.</p>
+
+<h2 id="fastlane-언어-지원">Fastlane 언어 지원</h2>
+
+<p>위와 같은 문제로 인해, 코드를 언어에 관계없이 작동하도록 수정해주어야 합니다. 이 때 주로 활용되는 것이 <code>element(boundBy:)</code> 메소드입니다. <code>element(boundBy:)</code>는 여러 언어에 관계 없이 컴포넌트들이 인덱스를 통해 작동할 수 있도록 해줍니다. 버튼의 경우 아래 코드는 제가 실제로 사용했던 <code>UITests</code> 상의 코드입니다. 참고하시면 도움이 될 것이라 생각됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">testSnapshot</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="k">let</span> <span class="nv">app</span> <span class="o">=</span> <span class="kt">XCUIApplication</span><span class="p">()</span>
+
+        <span class="nf">snapshot</span><span class="p">(</span><span class="s">"1-Main"</span><span class="p">)</span>
+        <span class="c1">// 테이블의 첫 번째 셀 선택</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="nf">element</span><span class="p">(</span><span class="nv">boundBy</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="nf">tap</span><span class="p">()</span>
+
+        <span class="nf">snapshot</span><span class="p">(</span><span class="s">"2-Circuit"</span><span class="p">)</span>
+        <span class="c1">// navigationBar에서 왼쪽 BarItem 클릭</span>
+        <span class="k">let</span> <span class="nv">backBtn</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">navigationBars</span><span class="p">[</span><span class="s">"CircuitWatch.CircuitVC"</span><span class="p">]</span><span class="o">.</span><span class="nf">children</span><span class="p">(</span><span class="nv">matching</span><span class="p">:</span> <span class="o">.</span><span class="n">button</span><span class="p">)</span><span class="o">.</span><span class="nf">element</span><span class="p">(</span><span class="nv">boundBy</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">backBtn</span><span class="o">.</span><span class="nf">tap</span><span class="p">()</span>
+
+        <span class="k">let</span> <span class="nv">circuitwatchMainvcNavigationBar</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">navigationBars</span><span class="p">[</span><span class="s">"CircuitWatch.MainVC"</span><span class="p">]</span>
+        <span class="c1">// navigationBar에서 오른쪽 BarItem 클릭</span>
+        <span class="n">circuitwatchMainvcNavigationBar</span><span class="o">.</span><span class="n">buttons</span><span class="o">.</span><span class="nf">element</span><span class="p">(</span><span class="nv">boundBy</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="nf">tap</span><span class="p">()</span>
+
+        <span class="nf">snapshot</span><span class="p">(</span><span class="s">"3-AddCircuit"</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">addBackBtn</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">navigationBars</span><span class="p">[</span><span class="s">"CircuitWatch.AddCircuitVC"</span><span class="p">]</span><span class="o">.</span><span class="nf">children</span><span class="p">(</span><span class="nv">matching</span><span class="p">:</span> <span class="o">.</span><span class="n">button</span><span class="p">)</span><span class="o">.</span><span class="nf">element</span><span class="p">(</span><span class="nv">boundBy</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">addBackBtn</span><span class="o">.</span><span class="nf">tap</span><span class="p">()</span>
+
+        <span class="k">let</span> <span class="nv">editBtn</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">navigationBars</span><span class="p">[</span><span class="s">"CircuitWatch.MainVC"</span><span class="p">]</span><span class="o">.</span><span class="n">buttons</span><span class="o">.</span><span class="nf">element</span><span class="p">(</span><span class="nv">boundBy</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">editBtn</span><span class="o">.</span><span class="nf">tap</span><span class="p">()</span>
+        <span class="nf">snapshot</span><span class="p">(</span><span class="s">"4-MainEdit"</span><span class="p">)</span>
+
+        <span class="n">editBtn</span><span class="o">.</span><span class="nf">tap</span><span class="p">()</span>
+
+    <span class="p">}</span></code></pre></figure>
+
+<p>자 이제, 모든 설정이 끝났습니다. fastlane snapshot을 다시 구동해보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">fastlane snapshot</code></pre></figure>
+
+<p>결과 이미지는 다음과 같습니다.</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2017-03/iOS_fastlane_snapshot/fastlaneResultTerminal.png" /></p>
+
+<p>이렇게 나오고, fastlane은 이미지가 모두 포함된 HTML 파일도 생성해줍니다.</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2017-03/iOS_fastlane_snapshot/fastlaneResulthtml.png" /></p>
+
+<h2 id="trouble-shooting">Trouble Shooting</h2>
+
+<p>과정을 잘 따라왔음에도 불구하고 안되는 경우가 있을 수 있습니다. 혹시나 다음과 같은 <code>Exit status: 1 Caught error... 1</code> 에러를 맞닥뜨린 분은 다음 명령어를 치고 다시 돌려보세요.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">chmod </span>755 ~/Library/Preferences/
+fastlane snapshot reset_simulators</code></pre></figure>
+
+<h2 id="더-볼만한-자료">더 볼만한 자료</h2>
+<ul>
+  <li><a href="https://realm.io/kr/news/automate-ios-screenshots-with-fastlane-snapshot/">FastLane Snapshot으로 배포용 스크린샷 자동으로 만들기 - iOS Tech Talk</a></li>
+  <li><a href="https://code.tutsplus.com/tutorials/how-to-automate-screenshots-with-fastlane--cms-26151">code tutsplus 자료</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    <h2>Lastest Posts</h2>
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

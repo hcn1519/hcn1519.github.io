@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Rails에서 CSV 파일 import하기(by rake) - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Rails에서 CSV 파일 import하기(by rake) - hcn1519 Dev Post">
+  <meta name="description" content="커맨드라인에서 rake 명령어를 통해 CSV 데이터를 Rails 프로젝트 안에 넣는 방법에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rails에서 CSV 파일 import하기(by rake)">
+  <meta property="og:image" content="/public/assets/csvImport.png">
+  <meta property="og:description" content="커맨드라인에서 rake 명령어를 통해 CSV 데이터를 Rails 프로젝트 안에 넣는 방법에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Rails에서 CSV 파일 import하기(by rake)</h1>
+  <span class="post-date">27 Nov 2016</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/csvImport.png"
+    
+    alt="Rails에서 CSV 파일 import하기(by rake) feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>&nbsp;대부분의 프로젝트는 모델을 설계한 이후에 관련 데이터를 집어넣어야만 합니다. 예를 들자면, 학교 강의실 위치 데이터를 내 프로젝트에 넣고자 할 경우, 건물이름, 강의실 번호 등의 속성으로 설계된 모델에 각각의 강의실 정보를 입력해야 합니다. 그런데 form으로 그런 데이터를 집어넣을 수 있다는 것은 알고 있으실텐데, 이걸 form으로 일일이 집어 넣는 것은 정말 시간이 많이 드는 일입니다. 예컨데 강의실이 1,000개가 있다면, 강의실 입력 작업을 1,000번 해야되는 거죠.</p>
+
+<p>&nbsp;이런 번거로운 작업을 대신 해주는 것이 CSV입니다. CSV는 무슨 거창한 것이 아니라, <code>Comma Separated Values</code>의 약자로 쉽게 생각하자면 메모장에 콤마(,) 단위로 데이터가 입력된 파일입니다. 이번 포스팅에서는 CSV로 만든 파일을 Rails 프로젝트의 데이터베이스에 올리는 방법을 알아보도록 하겠습니다.</p>
+
+<h4>1. CSV 파일 생성하기</h4>
+<p><a href="https://dl.dropbox.com/s/njvwf7ifcutpl3s/LectureRoom.csv" download="">
+LectureRoom.csv 다운로드
+</a></p>
+<p>CSV 파일은 Excel만 할 줄 아신다면 만드는 방법이 매우 간단합니다. 엑셀에서 다른 이름으로 저장하기에서 CSV 확장자로 저장만 해주면 됩니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/ubx9wc6jjh94ytq/csvSave.png" /></p>
+
+<h4>2. CSV 파일 업로드</h4>
+<p>&nbsp;그런데 Rails 프로젝트의 모델에 해당 CSV 데이터를 그대로 올려주려면, Excel에서 데이터를 만들 때 규칙을 지켜주어야 합니다. 즉, 모델의 속성명들과 CSV 데이터의 순서나 이름을 맞춰주어야 합니다. 다음과 같이 LectureRoom이라는 모델을 제가 만들었다고 가정하겠습니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/uayd6rzga3rnm15/lectureRoom.png" /></p>
+
+<p>&nbsp;현재 LectureRoom 모델에는 building_name, room_number, full_name라는 3 가지 속성이 있습니다. 이와 같은 경우 CSV 파일의 경우 첫 번째 행에 속성명이 써있어야 하고, 다음 줄부터 데이터가 들어갑니다. 즉, 다음과 같이 데이터가 입력되어야 합니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/ua8em8n859ic8ta/lectureRoomExcel.png" /></p>
+
+<p>&nbsp;여기서 id의 경우 모델의 기본 속성 중 하나이므로, 들어가도 무방합니다. 이제 이 파일을 <code>public</code>에 저장합니다. 파일명은 적당히 <code>ClassRoom.csv</code>로 설정하겠습니다.</p>
+
+<h4>3. CSV 파일과 Rails 모델 연동하기</h4>
+
+<p>&nbsp;다음은 CSV 파일과 Rails 모델의 연동입니다. 연동의 방법은 controller를 통해 연동하거나, rake 명령어를 통해 연동하는 방법이 있는데요. rake 명령어로 rake db:migrate하듯이 데이터를 올리는 것이 훨씬 간단하기 때문에, 여기서는 rake 명령어를 통해 연동을 해보도록 하겠습니다.</p>
+
+<p>&nbsp;Rails 프로젝트 폴더를 살펴보면 <code>/lib/tasks</code>라는 폴더가 있습니다. 그곳에 <code>import_classrooms_csv.rake</code>라는 파일을 생성합니다. 다음으로 해당 파일 안에 다음 코드를 넣어줍니다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">'csv'</span>
+<span class="n">namespace</span> <span class="ss">:import_classrooms_csv</span> <span class="k">do</span>
+  <span class="n">task</span> <span class="ss">:create_classrooms</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+    <span class="no">CSV</span><span class="p">.</span><span class="nf">foreach</span><span class="p">(</span><span class="s2">"public/ClassRoom.csv"</span><span class="p">,</span> <span class="ss">:headers</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
+      <span class="no">ClassRoom</span><span class="p">.</span><span class="nf">create!</span><span class="p">(</span><span class="n">row</span><span class="p">.</span><span class="nf">to_hash</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>&nbsp;어떤 작업을 하는 지 간단하게 살펴보자면 다음과 같습니다.</p>
+
+<ol>
+<li>Rails에 내장되어 있는 CSV를 import합니다.</li>
+<li>namespace는 해당 명령을 :import_classrooms_csv로 호출하겠다는 의미입니다.</li>
+<li>task 이하는 해당 rake 명령어가 어떤 작업을 하는지를 보여주는 부분입니다.</li>
+<li>여기서는 public 폴더에 있는 ClassRoom.csv 파일의 내용을 가지고, ClassRoom 모델을 생성하기 때문에 ClassRoom.create!(row.to_hash)를 넣었습니다.</li>
+</ol>
+
+<p>&nbsp;결과 화면은 다음과 같습니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/eq0jl6krmxcyw6y/rake.png" /></p>
+
+<p>&nbsp;이제 rake 명령어로 해당 작업을 실행해주면 됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">rake import_classrooms_csv:create_classrooms</code></pre></figure>
+
+<p>&nbsp;별 문제 없이 데이터가 들어갔다면, 다음과 같이 다음과 같이 나옵니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/3b3opt20toxgt2j/rakeTask.png" /></p>
+
+<p>&nbsp;이제 데이터가 제대로 들어갔는지 콘솔을 통해 확인해보도록 하겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">rails c
+ClassRoom.all</code></pre></figure>
+
+<p>&nbsp;확인해보시면, 데이터들이 다음과 같이 정상적으로 들어간 것을 확인하실 수 있습니다.</p>
+<p><img src="https://dl.dropbox.com/s/fpjprhm910tvteq/example.png" /></p>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    <h2>Lastest Posts</h2>
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

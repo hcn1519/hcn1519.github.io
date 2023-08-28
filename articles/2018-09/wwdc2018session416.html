@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>iOS Memory Footprint 분석 방법 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="iOS Memory Footprint 분석 방법 - hcn1519 Dev Post">
+  <meta name="description" content="WWDC의 iOS Memory Deep Dive 세션을 정리하였습니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="iOS Memory Footprint 분석 방법">
+  <meta property="og:image" content="/public/assets/iOS.png">
+  <meta property="og:description" content="WWDC의 iOS Memory Deep Dive 세션을 정리하였습니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">iOS Memory Footprint 분석 방법</h1>
+  <span class="post-date">01 Sep 2018</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS.png"
+    
+    alt="iOS Memory Footprint 분석 방법 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>본 글은 2018년 WWDC의 <a href="https://developer.apple.com/videos/play/wwdc2018/416">iOS Memory Deep Dive</a> 세션을 정리한 글입니다. 내용을 위주로 정리하였으며, 데모 부분은 별도로 정리하지 않았습니다. 전체 데모를 확인하고자 한다면, 본 세션을 확인해주시기 바랍니다.</p>
+
+<blockquote>
+  <p>iOS Memory Deep Dive 세션 요약 - Discover how memory graphs can be used to get a close up look at what is contributing to an app’s memory footprint. Understand the true memory cost of an image. Learn some tips and tricks for reducing the memory footprint of an app.</p>
+</blockquote>
+
+<h1 id="memory-footprint">Memory Footprint</h1>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m01.png" /></p>
+
+<ul>
+  <li>메모리 사용의 최소 단위는 Page이다. 그리고 이 Page는 16KB이다.</li>
+  <li>Page는 <code class="language-plaintext highlighter-rouge">Clean Page</code>, <code class="language-plaintext highlighter-rouge">Dirty Page</code>가 있고 이는 Page가 write 되었는지 아닌지에 따라서 구분된다.</li>
+  <li>실제 메모리 사용량 = 사용된 Page 수 * Page의 크기와 같다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m02.png" /></p>
+
+<ul>
+  <li>위처럼 배열을 allocate하게 되면 시스템은 6개의 Page를 배열에 할당한다. 이 Page는 모두 <code class="language-plaintext highlighter-rouge">Clean Page</code>이다.</li>
+  <li>그리고 이 배열에 새로운 값을 할당(write)하게 되면 해당 값이 포함된 Page는 <code class="language-plaintext highlighter-rouge">Dirty Page</code>가 된다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m03.png" /></p>
+
+<ul>
+  <li>Memory Mapped Files - 디스크에 있는 파일이지만, 메모리 위에 올라가 있는 파일</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m04.png" /></p>
+
+<ul>
+  <li>다음과 같이 50KB 크기의 jpeg 이미지가 있다고 하였을 때, 이 파일은 다음과 같이 메모리에 적재된다.</li>
+</ul>
+
+<h2 id="memory-profile">Memory Profile</h2>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m05.png" /></p>
+
+<ul>
+  <li>메모리는 다음과 같이 (read, write 관점에서) Dirty, Compressed, Clean 영역으로 구분할 수 있다.</li>
+</ul>
+
+<h3 id="clean-memory">Clean Memory</h3>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m07.png" /></p>
+
+<ul>
+  <li>Clean Memory는 기록될(page out, writable) 수 있는 메모리를 의미한다. Clean Memory의 데이터는 아직 write되지 않았기 때문에 디스크의 데이터와 동일하다.</li>
+  <li>Memory Mapped File, 프레임워크의 일부 등이 이에 해당한다.</li>
+</ul>
+
+<h3 id="dirty-memory">Dirty Memory</h3>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m08.png" /></p>
+
+<ul>
+  <li>Dirty Memory는 App에 의해 쓰여진(written) 메모리를 의미한다. 사용자에 의해 기록되었기 때문에 디스크와 메모리가 동일한 데이터를 가지고 있지 않다.</li>
+  <li>heap의 메모리 할당, decode된 이미지 버퍼, 프레임워크의 일부 등이 이에 해당한다.</li>
+</ul>
+
+<h3 id="compressed-memory">Compressed Memory</h3>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m09.png" /></p>
+
+<ul>
+  <li>iOS에는 전통적인 Disk Swap System이 없다.</li>
+  <li>그 대신 Memory Compressor라는 것을 iOS 7부터 사용한다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m10.png" /></p>
+
+<p>Memory Compressor는</p>
+<ol>
+  <li>접근이 되지 않은 page를 squeeze down(압축)하여, 더 많은 공간을 생성한다.</li>
+  <li>접근이 일어날 경우 압축을 해제하여 메모리 writing이 일어날 수 있도록 한다.</li>
+</ol>
+
+<h3 id="memory-warning">Memory Warning</h3>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m11.png" /></p>
+
+<ul>
+  <li>시스템은 사용 가능한 메모리가 부족할 때, 앱의 메모리를 정리하고, 이 때, 앱 내로 Notification(<code class="language-plaintext highlighter-rouge">didReceiveMemoryWarning</code>)을 전달한다.</li>
+  <li>앱은 이 때 적절히 메모리 사용량을 줄이는 작업을 수행할 필요가 있다.(i.e. 메모리에 캐싱된 데이터 제거)</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m12.png" /></p>
+
+<ul>
+  <li>캐시의 경우 <code class="language-plaintext highlighter-rouge">NSCache</code>를 사용하게 되면, 데이터를 thread safe(여러 쓰레드에서 동시에 접근해도 안전하다)하게 저장할 수 있고, 메모리에 저장된 데이터는 항상 purgeable(버릴 수 있는)하기 때문에 <code class="language-plaintext highlighter-rouge">NSDictionary</code>보다 <code class="language-plaintext highlighter-rouge">NSCache</code>를 사용하는 것을 권장한다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m13.png" /></p>
+
+<ol>
+  <li>메모리 footprint의 한계치는 디바이스마다 다르다.</li>
+  <li>extension 앱은 더 제약이 많다.</li>
+  <li>이 한계를 넘게되면 <code class="language-plaintext highlighter-rouge">EXC_RESOURCE_EXCEPTION</code>이 에러로 나온다.</li>
+</ol>
+
+<hr />
+
+<h1 id="tools-for-profiling-footprint">Tools for Profiling Footprint</h1>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/ex1.png" /></p>
+
+<ul>
+  <li>Xcode에서 앱의 메모리 사용량을 빠르게 확인하려면 Debug Navigator에서 메모리 사용량을 보면 된다.</li>
+</ul>
+
+<h2 id="instrument">Instrument</h2>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m14.png" /></p>
+
+<ul>
+  <li>이 때, 메모리 사용량에 대해 좀 더 자세히 디버깅하기 위해서는 Instrument를 사용한다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m15.png" /></p>
+
+<ul>
+  <li>Instrument는 메모리 사용량을 추적하기 위한 여러 가지 템플릿을 제공하고, 많은 개발자들이 이미 <code class="language-plaintext highlighter-rouge">Allocation</code>과 <code class="language-plaintext highlighter-rouge">leaks</code>에 대해서는 알고 있고, 이를 활용하고 있다.</li>
+  <li>다만, <code class="language-plaintext highlighter-rouge">VM Tracker</code>, <code class="language-plaintext highlighter-rouge">Virtual Memory Trace</code>에 대해서는 모르는 개발자도 많다.</li>
+</ul>
+
+<h3 id="vm-tracker">VM Tracker</h3>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m16.png" /></p>
+
+<ul>
+  <li>VM Tracker는 앞서서 설명했던, Dirty Memory Size, Swapped Size(iOS의 경우 Compressed Memory)를 제공한다.</li>
+</ul>
+
+<blockquote>
+  <p>“Resident memory” is memory which is currently loaded into RAM - memory which is actually being used.</p>
+</blockquote>
+
+<p><a href="https://stackoverflow.com/a/5176117/5130783">iphone - What do “Dirty” and “Resident” mean in relation to Virtual Memory? - Stack Overflow</a></p>
+
+<h3 id="virtual-memory-trace">Virtual Memory Trace</h3>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/custom1.png" /></p>
+
+<p>(발표자료가 너무 안보여서 대체하였습니다.)</p>
+
+<ul>
+  <li>Virtual Memory Trace는 Virtual Memory System 중 앱과 관련된 상세한 내용을 제공한다.(i.e. 페이지 캐시 히트, Virtual Memory의 page zero fill 등)</li>
+</ul>
+
+<blockquote>
+  <p>Note: Virtual Memory Activity는 실제 구동시 상당히 느리고, Allocation 템플릿처럼 실시간으로 쌓이는 모습을 확인하기 어려웠습니다.(Xcode 9.3.1) 그래서 템플릿을 켠 상태로, 앱 녹화를 모두 마치고 종료 후 확인이 가능합니다.(이마저도 Instrument가 강제 종료되는 문제가 있으니 유의하세요.)</p>
+</blockquote>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m17.png" /></p>
+
+<ul>
+  <li>Xcode 10에서는 Instrument에서 나오는 <code class="language-plaintext highlighter-rouge">EXC_RESOURCE_EXCEPTION</code>를 캐치하여, 앱을 일시정지하는 기능을 제공한다.</li>
+</ul>
+
+<h2 id="memory-graphvmmap">Memory Graph(vmmap)</h2>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/custom2.png" /></p>
+
+<ul>
+  <li>Xcode에서는 메모리의 allocation을 그림으로 보여주는 Memory graph 기능을 제공한다.</li>
+  <li>또한 이 Memory Graph를 활용하여 Xcode의 Command Line Tool들을 사용할 수 있도록 기능을 제공하고 있다.</li>
+</ul>
+
+<p>Command Line Tool을 활용하기 위한 과정은 다음과 같습니다.</p>
+
+<ul>
+  <li>
+    <p>Export Memory Graph
+<img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/custom3.png" /></p>
+  </li>
+  <li>
+    <p>Terminal</p>
+  </li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vmmap App.memgraph
+vmmap —summary App.memgraph
+</code></pre></div></div>
+
+<ul>
+  <li>구동 화면은 다음과 같습니다.(summary)</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m18.png" />
+<img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m19.png" /></p>
+
+<ul>
+  <li>여러가지 사이즈에 대한 정보를 제공하는데, 이 때 Swapped Size는 Precompressed Size를 의미한다.</li>
+</ul>
+
+<h3 id="more-detail">More Detail</h3>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m20.png" /></p>
+
+<ul>
+  <li>좀 더 상세한 내용을 보기 위해서는 <code class="language-plaintext highlighter-rouge">--summary</code> 를 제거하면 된다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m21.png" /></p>
+
+<ul>
+  <li>예시1. 메모리의 Text Section(None writable)</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m22.png" /></p>
+
+<ul>
+  <li>예시2. 메모리의 Data Section</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m23.png" /></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vmmap <span class="nt">--pages</span> app.memgraph | <span class="nb">grep</span> <span class="s1">'.dylib'</span> | <span class="nb">awk</span> <span class="s1">'{ sum += $6 } END { print "Total Dirty Pages: " sum } '</span>
+</code></pre></div></div>
+
+<ul>
+  <li>메모리의 Dirty Size가 얼마나 되는지 디버깅하기 위해서 다음과 같은 명령어를 활용할 수도 있다.(발표자 왈 Super Cool Command)</li>
+</ul>
+
+<h2 id="leak">Leak</h2>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m24.png" /></p>
+
+<ul>
+  <li>
+    <p>예시 - Strong Reference Cycle을 가지고 있는 3개의 객체 구현</p>
+  </li>
+  <li>
+    <p>다음의 명령어를 실행한다.</p>
+  </li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>leaks app.memorygraph
+</code></pre></div></div>
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m26.png" /></p>
+
+<ul>
+  <li>leak이 일어나고 있는 객체에 대한 정보와 Retain Cycle에 대한 정보를 보여준다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m25.png" /></p>
+
+<ul>
+  <li>또한 malloc stack logging이 켜져 있을 경우, root node의 backtrace도 보여준다.</li>
+</ul>
+
+<h2 id="heap">Heap</h2>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m28.png" /></p>
+
+<ul>
+  <li>heap allocation에서는 어떤 객체의 크기가 큰지, 혹은 어떤 동일한 객체가 반복적으로 생성되는지 보여준다.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>heap App.memgraph
+heap App.memgraph <span class="nt">-sortBySize</span>
+heap App.memgraph <span class="nt">-addresses</span> all | &lt;classes-pattern&gt;
+</code></pre></div></div>
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m29.png" /></p>
+
+<ul>
+  <li>예시 화면은 다음과 같습니다.</li>
+  <li>기본적으로 heap은 count를 기준으로 sorting되며, 이 옵션은 변경할 수 있다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m30.png" /></p>
+
+<ul>
+  <li>여기서는 <code class="language-plaintext highlighter-rouge">NSConcrteData</code> 클래스가 매우 큰 것을 확인할 수 있다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m31.png" /></p>
+
+<ul>
+  <li>위의 클래스가 어디서부터 왔는지 파악하는 과정은 다음과 같다.</li>
+  <li>먼저, 객체의 주소값을 확인한다.(<code class="language-plaintext highlighter-rouge">--addresses</code> 옵션을 활용한다.)</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m32.png" /></p>
+
+<ul>
+  <li>다음으로 Malloc stack logging을 활용한다.</li>
+  <li>프로젝트 빌드시 Malloc stack logging 옵션을 켤 경우, 시스템은 각각의 allocation에 대한 모든 backtrace를 기록한다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m33.png" /></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">malloc_history</code> 옵션을 활용하면 해당 주소의 backtrace를 확인할 수 있다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m34.png" /></p>
+
+<ul>
+  <li>이를 실행하면 다음과 같은 backtrace를 확인할 수 있다.</li>
+</ul>
+
+<h2 id="tool-선택">Tool 선택</h2>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/m35.png" /></p>
+
+<ul>
+  <li>어떤 툴을 선택하여 메모리 사용을 디버깅할 것인지에 대해 다음 가이드라인을 참고할 수 있다.</li>
+</ul>
+
+<hr />
+
+<h1 id="image">Image</h1>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i1.png" /></p>
+
+<ul>
+  <li>이미지의 메모리 사용량은 이미지 파일 크기와 관련되어 있는 것이 아니라, 이미지의 크기와 관련되어 있다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i2.png" /></p>
+
+<ul>
+  <li>다음과 같은 이미지가 있을 때 이 이미지의 메모리 사용량은 어떻게 될까요?</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i3.png" /></p>
+
+<ul>
+  <li>정답은 대략 10MB입니다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i4.png" /></p>
+
+<ul>
+  <li>왜 이렇게 많은 메모리를 사용하는지는 iOS에서 이미지를 어떻게 다루는지 살펴보면 알 수 있다.</li>
+  <li>이미지를 메모리에 올리기 위해서는 Load, Decode, Render Phase를 거친다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i5.png" /></p>
+
+<ul>
+  <li>Load Phase에서 iOS는 압축된 이미지 사이즈를 메모리에 올린다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i06.png" /></p>
+
+<ul>
+  <li>다음으로 Decode Phase에서 GPU가 이미지를 읽을 수 있도록 JPEG 파일의 포멧을 변경한다. 이 과정은 이미지의 압축을 모두 풀어야 하기 때문에, 이제 이미지의 사이즈는 10MB가 된다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i07.png" /></p>
+
+<ul>
+  <li>이 이미지는 이제 우리가 원하는대로 render된다.</li>
+</ul>
+
+<h2 id="image-rendering-formats">Image Rendering Formats</h2>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i08.png" /></p>
+
+<ul>
+  <li>이미지 랜더링 포멧 중에서 SRGB 포맷은 가장 대표적인 포맷 중 하나이다.</li>
+  <li>이는 픽셀당 4 Byte이며, RGBA 각각 1 Byte를 차지한다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i09.png" /></p>
+
+<ul>
+  <li>iOS는 이제 Wide 포맷을 사용하여 SRGB 포맷보다 더 많은 색을 표현할 수 있다.</li>
+  <li>Wide 포맷은 픽셀당 8 Bytes이며, SRGB보다 좀 더 정확한 색을 표현할 수 있다.</li>
+  <li>다만, Wide 포맷은 필요한 경우에만 사용하면 된다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i10.png" /></p>
+
+<ul>
+  <li>SRGB 포맷보다 더 작은 Luminance and alpha 8 포맷도 존재한다.</li>
+  <li>이는 픽셀당 2 Bytes이고, grayscale 값과 alpha 값만 지원한다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i11.png" /></p>
+
+<ul>
+  <li>SRGB 포맷보다 75% 더 작은 Alpha 8 포맷도 존재한다.</li>
+  <li>이미지 마스킹, monochrome 이미지 혹은 텍스트에서 유용하게 사용할 수 있다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i12.png" /></p>
+
+<ul>
+  <li>이처럼, 우리에게는 많은 이미지 포맷이 있고, 우리는 올바른 이미지 포맷을 선택할 필요가 있다.</li>
+</ul>
+
+<h2 id="picking-the-right-format">Picking the right format</h2>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i13.png" /></p>
+
+<ul>
+  <li>이미지 포맷을 선택하는 좋은 방법은 우리가 포맷을 선택하는 것이 아니라, 포맷이 우리를 선택하도록 하는 것이다.</li>
+  <li><code class="language-plaintext highlighter-rouge">UIGraphicsBeginImageContextWithOptions</code> 는 모든 이미지를 픽셀당 4 Bytes(항상 SRGB)의 크기로 설정하고 이미지를 처리한다.</li>
+  <li>iOS 10에서 소개된 <code class="language-plaintext highlighter-rouge">UIGraphicsImageRender</code>를 사용하면, iOS 12부터는 최적의 이미지 포맷을 시스템이 선택해준다.</li>
+</ul>
+
+<h3 id="예시">예시</h3>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i14.png" /></p>
+
+<ul>
+  <li>기존의 <code class="language-plaintext highlighter-rouge">UIGraphicsBeginImageContextWithOptions</code>를 사용하여 검은색 원을 그리는 예시이다.</li>
+  <li>이 때, <code class="language-plaintext highlighter-rouge">UIGraphicsBeginImageContextWithOptions</code>를 사용하였기 때문에 drawing시 픽셀당 4 Bytes를 사용한다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i15.png" /></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">UIGraphicsImageRender</code> 사용하여 동일하게 검은색 원을 그릴 수 있다.</li>
+  <li>이 때는 <code class="language-plaintext highlighter-rouge">UIGraphicsImageRender</code>가 검은색만 사용한 것을 파악하였기 때문에 drawing시 픽셀당 1 Bytes만 사용할 수 있도록 해준다.</li>
+  <li>보너스로 해당 마스킹을 다른 색으로 대체하고 싶을 때, 새로운 메모리 할당 없이 이 작업을 수행할 수 있다. 즉, 생성한 원을 검은색 이외의 파란색, 빨간색 등으로 추가적인 메모리 할당 없이 변경할 수 있다.</li>
+</ul>
+
+<h2 id="down-sampling">Down Sampling</h2>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i16.png" /></p>
+
+<ul>
+  <li>메모리 사용량을 줄이기 위해 이미지를 down sampling할 때, UIImage를 직접 down sampling하는 것은 앞서서 본 것처럼 Image Decompressing 작업을 하기 때문에 메모리 사용량이 높다.</li>
+  <li><code class="language-plaintext highlighter-rouge">UIKit</code> 대신에 <code class="language-plaintext highlighter-rouge">ImageIO</code> 프레임워크를 사용하면, 데이터 Writing 작업 없이 이미지의 사이즈와 메타 데이터 정보를 읽을 수 있다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i17.png" /></p>
+
+<ul>
+  <li>위의 코드는 <code class="language-plaintext highlighter-rouge">UIImage</code>를 곧바로 사용하여 이미지를 리사이징하는 코드이다.</li>
+  <li>위의 코드에는 memory spike가 존재한다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i18.png" /></p>
+
+<ul>
+  <li>다음 코드는 <code class="language-plaintext highlighter-rouge">ImageIO</code>를 활용하여 이미지를 리사이징하는 코드이다.</li>
+  <li>이 코드는 low level API이기 때문에 일부 설정을 해주어야 한다.</li>
+  <li>여기서 만들어지는 이미지는 <code class="language-plaintext highlighter-rouge">CGImage</code>이며, 이는 <code class="language-plaintext highlighter-rouge">UIImage</code>를 통해 wrapping해주면 바로 사용할 수 있다.</li>
+  <li>이는 이전의 코드보다 50% 더 빠르고, memory spike도 없다.</li>
+</ul>
+
+<blockquote>
+  <p>Note: ImageIO를 통해서 생성되는 이미지는 앞서서 언급한 것처럼 UIImage가 아닌, CGImage입니다. CGImage는 scale과 orientation에 대한 정보를 가지고 있지 않기 때문에 scale과 orientation에 대한 정보를 기존의 이미지와 동일하게 맞추기 위해서는 이 정보를 별도로 저장하고 있어야 합니다.</p>
+</blockquote>
+
+<h2 id="optimizing-when-in-the-background">Optimizing When In the background</h2>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i19.png" /></p>
+
+<ul>
+  <li>앱에서 현재 보이지 않는 부분의 이미지는 unload하면 메모리를 절약할 수 있다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i20.png" /></p>
+
+<ul>
+  <li>방식 1. <code class="language-plaintext highlighter-rouge">UIApplicationWillEnterForeground</code>, <code class="language-plaintext highlighter-rouge">UIApplicationDidEnterBackground</code> Notification을 활용하여 이미지 로딩을 관리한다.</li>
+</ul>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i21.png" /></p>
+
+<ul>
+  <li>방식 2. <code class="language-plaintext highlighter-rouge">UIViewController</code>의 생명주기를 활용하여(<code class="language-plaintext highlighter-rouge">viewWillAppear</code>, <code class="language-plaintext highlighter-rouge">viewDidDisapper</code>) 이미지 로딩을 관리한다.</li>
+</ul>
+
+<hr />
+
+<h1 id="summary">Summary</h1>
+<p><img src="https://hcn1519.github.io/public/postImages/2018-09/wwdc2018session416/i22.png" /></p>
+
+<hr />
+
+<p>참고 자료</p>
+<ul>
+  <li><a href="https://developer.apple.com/videos/play/wwdc2018/416">iOS Memory Deep Dive</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#WWDC">
+                WWDC
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-08/autolayout_performance_optimization">
+              AutoLayout 성능 최적화하기
+              <small>23 Aug 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#WWDC">
+                WWDC
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-03/ios_darkmode">
+              iOS 다크모드 알아보기
+              <small>13 Mar 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#WWDC">
+                WWDC
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2018-08/nscache">
+              NSCache
+              <small>28 Aug 2018</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Memory">
+                Memory
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

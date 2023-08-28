@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Swift Class 기본 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Swift Class 기본 - hcn1519 Dev Post">
+  <meta name="description" content="Swift의 Class에서 쓰이는 Initializer, getter, setter에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Swift Class 기본">
+  <meta property="og:image" content="/public/assets/swiftLogo.jpg">
+  <meta property="og:description" content="Swift의 Class에서 쓰이는 Initializer, getter, setter에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Swift Class 기본</h1>
+  <span class="post-date">30 Jan 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/swiftLogo.jpg"
+    
+    alt="Swift Class 기본 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>객체지향 개념을 가지고 있는 언어들은 대부분 <code>class</code>와 <code>object</code>를 가지고 있습니다. Swift도 class 개념을 가지고 있으며, class 구성의 기본인 <code>initializer, getter, setter</code> 개념을 지니고 있습니다. 간단하게 이를 알아보도록 하겠습니다.</p>
+
+<h2 id="1-initializer생성자">1. Initializer(생성자)</h2>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="kt">Rectangle</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">_width</span><span class="p">:</span> <span class="kt">Double</span><span class="o">!</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">_height</span><span class="p">:</span> <span class="kt">Double</span><span class="o">!</span>
+
+    <span class="nf">init</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Double</span><span class="p">){</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">_height</span> <span class="o">=</span> <span class="n">height</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">var</span> <span class="nv">r1</span> <span class="o">=</span> <span class="kt">Rectangle</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
+<span class="k">var</span> <span class="nv">r1</span> <span class="o">=</span> <span class="kt">Rectangle</span><span class="p">()</span> <span class="c1">// default 생성자가 없으므로 error</span></code></pre></figure>
+
+<p><code>Initializer</code>는 처음 Class를 생성할 때, 새로운 object를 만드는 메소드입니다. 즉, Class가 가진 property를 Class 생성과 함께 초기화하는 역할을 합니다. Swift에서는 이를 <code>init</code> 메소드로 호출하고, <code>self</code>를 통해서 object를 호출합니다. 여기서 object를 호출한다는 것의 의미는 생성된 object를 가져와서 property의 값을 설정하거나, 메소드에 활용하는 데 사용하는 것을 의미합니다. <code>self</code> 키워드는 자신이 속한 object의 주소값을 저장합니다.(<code>self</code>가 object를 reference한다고 표현하기도 합니다.)</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">r1</span> <span class="o">=</span> <span class="kt">Rectangle</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span></code></pre></figure>
+
+<p>즉, 다음과 같이 생성자를 사용할 때, r1 object를 우선적으로 만들고, 다음으로 Initializer가 호출되어 생성된 r1을 불러와 r1의 property인 <code>_width</code>, <code>_height</code>을 설정하는 것입니다.<!--_--></p>
+
+<h2 id="2-getter--setter">2. getter &amp; setter</h2>
+
+<p>getter와 setter는 class의 <code>private</code>로 감싸진 property를 설정하기 위해 주로 사용됩니다. 저는 처음 getter와 setter를 java로 배웠는데, Swift가 getter &amp; setter의 코드 가독성 부분을 많이 보완했다고 생각합니다. 무슨 의미인지 아래 예제를 들어보겠습니다.</p>
+
+<h4 id="java-getter--setter">Java getter &amp; setter</h4>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Rectangle</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">double</span> <span class="n">_width</span><span class="o">;</span>
+
+    <span class="c1">// getter</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getWidth</span><span class="o">(){</span>
+      <span class="k">return</span> <span class="n">_width</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// setter</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setWidth</span><span class="o">(</span><span class="kt">double</span> <span class="n">width</span><span class="o">){</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">_width</span> <span class="o">=</span> <span class="n">width</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span><span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+    <span class="nc">Rectangle</span> <span class="n">r1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Rectangle</span><span class="o">();</span>
+
+    <span class="c1">// getter &amp; setter</span>
+    <span class="n">r1</span><span class="o">.</span><span class="na">setWidth</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+    <span class="kt">double</span> <span class="n">width</span> <span class="o">=</span> <span class="n">r1</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>위의 코드는 일반적으로 Java에서 getter와 setter를 사용하는 경우입니다. <code>getWidth</code>와 <code>setWidth</code> 메소드로 getter와 setter를 설정하였습니다. 그런데, <code>getWidth()</code>와 <code>setWidth()</code> 메소드를 쓰는 것이 여러모로 불편할 때가 많습니다. 즉, <code>r1.width</code>로 쓰는 게 훨씬 직관적인데, 이를 사용하지 못 하게 되는 것이죠.</p>
+
+<h4 id="swift-getter--setter">Swift getter &amp; setter</h4>
+
+<p>Swift는 getter와 setter에서 바로 이 부분을 보완하였습니다. 아래의 Swift 코드를 봐보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">variableName</span><span class="p">:</span> <span class="n">dataType</span> <span class="p">{</span>
+    <span class="k">get</span> <span class="p">{</span>
+        <span class="c1">//code to execute</span>
+        <span class="k">return</span> <span class="n">someValue</span>
+    <span class="p">}</span>
+    <span class="nf">set</span><span class="p">(</span><span class="n">newValue</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//code to execute</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>출처 : <a href="https://syntaxdb.com/ref/swift/getters-setters">SyntaxDB</a></p>
+
+<p>기본적인 Getter와 Setter의 형태는 위와 같습니다. <code>variableName</code>에 들어가는 변수가 원하는 property 호출을 담당합니다. 즉, <code>className.variableName</code>의 표현으로 property의 값에 접근할 수 있게 됩니다. 위의 Java 코드와 동일한 코드를 Swift로 적게 되면 아래와 같이 나옵니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="kt">Rectangle</span> <span class="p">{</span>
+  <span class="kd">private</span> <span class="k">var</span> <span class="nv">_width</span><span class="p">:</span> <span class="kt">Double</span><span class="o">!</span>
+
+  <span class="k">var</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Double</span> <span class="p">{</span>
+    <span class="k">get</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">_width</span>
+    <span class="p">}</span> <span class="k">set</span> <span class="p">{</span>
+      <span class="n">_width</span> <span class="o">=</span> <span class="n">newValue</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">var</span> <span class="nv">r1</span> <span class="o">=</span> <span class="kt">Rectangle</span><span class="p">()</span>
+<span class="n">r1</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">width</span><span class="p">)</span> <span class="c1">// 10</span></code></pre></figure>
+
+<p>Swift는 <code>r1.width</code>라는 표현 하나로 getter와 setter 모두를 사용할 수 있게 해줍니다. property를 <code>_width</code>로 선언했는데 어째서 <code>r1._width</code>가 아니고 <code>r1.width</code>인가요? 하고 생각하실 수 있습니다. 이는 <code>var width: Double...</code>로 선언되어 있기 때문에 그렇습니다. 즉, 우리가 선언한 변수명을 토대로 property에 접근하게 되고, <code>var width</code>는 어떤 다른 변수 명으로 바뀔 수 있습니다.<!--_--></p>
+
+<h2 id="little-bit-further">Little bit further</h2>
+
+<ul>
+  <li>Getter</li>
+</ul>
+
+<p>Getter를 사용하면서 변수와 관련하여 생각해봐야 할 부분은 <code>Optional</code>입니다. iOS 프로그램은 상당히 많은 부분에서 nil값을 허용하기 위해 <code>Optional</code>을 활용합니다. 그래서 getter를 설정할 때 nil값을 설정할 수 있는 <code>Optional</code>을 쓰는 변수에 대해서는 프로그램이 nil 오류가 나지 않도록 다음과 같이 많이 씁니다.(주로 String을 다룰 때 주의하세요.)</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// nil을 먼저 체크하여 빈 String으로 변환</span>
+<span class="kd">private</span> <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="o">!</span>
+<span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span>
+  <span class="k">get</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+      <span class="n">name</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">name</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>또한 getter는 setter 없이 쓰일 때 <code>get{}</code>를 생략할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="o">!</span>
+<span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">""</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">name</span>
+<span class="p">}</span></code></pre></figure>
+
+<ul>
+  <li>Setter</li>
+</ul>
+
+<p>Setter를 사용할 때는 파라미터(anyName)를 넘길 수도 있고 넘기지 않을 수도 있습니다. 이 때 파라미터를 넘기지 않으면 <code>newValue</code>가 예약어가 되어 변수 설정을 할 수 있도록 해줍니다. 특별히 변수 이름을 설정할 이유가 없다면 더 간단한 것을 쓰는 것이 나아 보입니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="nf">set</span><span class="p">(</span><span class="n">anyName</span><span class="p">){</span>
+  <span class="n">target</span> <span class="o">=</span> <span class="n">anyName</span>
+<span class="p">}</span>
+<span class="k">set</span> <span class="p">{</span>
+  <span class="n">target</span> <span class="o">=</span> <span class="n">newValue</span>
+<span class="p">}</span></code></pre></figure>
+
+<blockquote>
+  <p>참고자료 : Apple Inc. The Swift Programming Language (Swift 3.0.1)</p>
+</blockquote>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-03/atomic">
+              atomic/non atomic
+              <small>01 Mar 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-class-deep">
+              Swift init 2부
+              <small>06 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-basic">
+              Swift init 1부
+              <small>05 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

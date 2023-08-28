@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Swift 표준입력 라이브러리 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Swift 표준입력 라이브러리 - hcn1519 Dev Post">
+  <meta name="description" content="Swift의 표준 입력을 수월하게 해주는 라이브러리를 제작하였습니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Swift 표준입력 라이브러리">
+  <meta property="og:image" content="/public/assets/swiftLogo.jpg">
+  <meta property="og:description" content="Swift의 표준 입력을 수월하게 해주는 라이브러리를 제작하였습니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Swift 표준입력 라이브러리</h1>
+  <span class="post-date">02 Jun 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/swiftLogo.jpg"
+    
+    alt="Swift 표준입력 라이브러리 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>요즘 알고리즘 문제 사이트에서 문제를 푸는데, Swift로 답안을 제출할 수 있어서 종종 Swift로 답안을 작성합니다. 다만, 대부분 알고리즘 문제들은 콘솔에서 입력을 받기 때문에 콘솔의 입력을 다루는 메소드를 작성해야 합니다. 그런데.. Swift에서는 아직까지 지원하는 메소드가 <code class="language-plaintext highlighter-rouge">readLine()</code>밖에 없어서 <code class="language-plaintext highlighter-rouge">Int</code>형 데이터, <code class="language-plaintext highlighter-rouge">Double</code>형 데이터를 별도로 캐스팅해주어야 하고, 개별 <code class="language-plaintext highlighter-rouge">String</code>에 접근하려면 라인 전체를 읽고, 이를 잘라서 접근해야만 했습니다.</p>
+
+<p>또한… <code class="language-plaintext highlighter-rouge">Optional</code>은 코드의 안전성을 높여주긴 하지만, 일반적으로 표준 입력을 받는 알고리즘 문제들은 값이 보장되어 있는 경우가 대부분이므로 값을 unwrap하는 일도 상당히 성가십니다. 그래서 이제까지는 문제별로 코드를 작성했었는데, 인내심의 한계에 도달해서 직접 input을 받는 Struct를 제작하였습니다. 코드는 아래와 같습니다.</p>
+
+<h2 id="소스-코드">소스 코드</h2>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// Swift 3.1</span>
+<span class="kd">import</span> <span class="kt">Foundation</span>
+
+<span class="kd">struct</span> <span class="kt">ReadInput</span> <span class="p">{</span>
+
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">currentIndex</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">inputArray</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1">// 데이터를 배열로 변환</span>
+    <span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">readLineToArray</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="p">{</span>
+
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="nf">readLine</span><span class="p">()</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="nf">components</span><span class="p">(</span><span class="nv">separatedBy</span><span class="p">:</span> <span class="s">" "</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 띄어쓰기 단위로 String 읽기</span>
+    <span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">read</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">inputArray</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
+            <span class="n">inputArray</span> <span class="o">=</span> <span class="k">self</span><span class="o">.</span><span class="nf">readLineToArray</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">inputArray</span><span class="p">[</span><span class="n">inputArray</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="nv">after</span><span class="p">:</span> <span class="n">currentIndex</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="n">currentIndex</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">currentIndex</span> <span class="o">==</span> <span class="n">inputArray</span><span class="o">.</span><span class="n">count</span> <span class="p">{</span>
+            <span class="k">self</span><span class="o">.</span><span class="n">inputArray</span><span class="o">.</span><span class="nf">removeAll</span><span class="p">()</span>
+            <span class="k">self</span><span class="o">.</span><span class="n">currentIndex</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Int 데이터 읽기</span>
+    <span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">readInt</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="kt">Int</span><span class="p">(</span><span class="k">self</span><span class="o">.</span><span class="nf">read</span><span class="p">())</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nf">fatalError</span><span class="p">(</span><span class="s">"Int형 데이터가 아닙니다."</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Double 데이터 읽기</span>
+    <span class="kd">public</span> <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">readDouble</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Double</span> <span class="p">{</span>
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="kt">Double</span><span class="p">(</span><span class="k">self</span><span class="o">.</span><span class="nf">read</span><span class="p">())</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nf">fatalError</span><span class="p">(</span><span class="s">"Double형 데이터가 아닙니다."</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>코드를 사용하기 위해서는 <code class="language-plaintext highlighter-rouge">Foundation</code>을 import해야 합니다. 제공하는 메소드는 크게 4가지입니다. 메소드들은 자바의 <code class="language-plaintext highlighter-rouge">next()</code>, <code class="language-plaintext highlighter-rouge">nextInt()</code> 등의 기능과 비슷합니다. <code class="language-plaintext highlighter-rouge">read()</code>는 단일 String을 읽고, <code class="language-plaintext highlighter-rouge">readInt()</code>, <code class="language-plaintext highlighter-rouge">readDouble()</code>은 숫자를, <code class="language-plaintext highlighter-rouge">readLineToArray()</code>는 읽은 라인을 배열로 변환한 데이터를 리턴합니다.</p>
+
+<h2 id="사용법">사용법</h2>
+
+<p>사용법은 매우 간단합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">ri</span> <span class="o">=</span> <span class="kt">ReadInput</span><span class="p">()</span>
+
+<span class="k">let</span> <span class="nv">str1</span> <span class="o">=</span> <span class="n">ri</span><span class="o">.</span><span class="nf">read</span><span class="p">()</span> <span class="c1">// String 리턴</span>
+<span class="k">let</span> <span class="nv">num1</span> <span class="o">=</span> <span class="n">ri</span><span class="o">.</span><span class="nf">readInt</span><span class="p">()</span> <span class="c1">// Int 리턴</span>
+<span class="k">let</span> <span class="nv">num2</span> <span class="o">=</span> <span class="n">ri</span><span class="o">.</span><span class="nf">readDouble</span><span class="p">()</span> <span class="c1">// Int 리턴</span>
+<span class="k">let</span> <span class="nv">line</span> <span class="o">=</span> <span class="n">ri</span><span class="o">.</span><span class="nf">readLineToArray</span><span class="p">()</span> <span class="c1">// [String] 배열 리턴</span></code></pre></figure>
+
+<p>자바에서 <code class="language-plaintext highlighter-rouge">Scanner</code> 인스턴스를 만들듯이, <code class="language-plaintext highlighter-rouge">ReadInput</code> 인스턴스를 만들고 필요한 메소드를 사용하면 됩니다.</p>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-03/atomic">
+              atomic/non atomic
+              <small>01 Mar 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-class-deep">
+              Swift init 2부
+              <small>06 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-basic">
+              Swift init 1부
+              <small>05 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

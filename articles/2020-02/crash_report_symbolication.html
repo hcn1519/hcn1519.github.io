@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Crash Report Symbolication - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Crash Report Symbolication - hcn1519 Dev Post">
+  <meta name="description" content="Crash Report의 Symbolication에 대해 알아 봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Crash Report Symbolication">
+  <meta property="og:image" content="/public/assets/iOS.png">
+  <meta property="og:description" content="Crash Report의 Symbolication에 대해 알아 봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Crash Report Symbolication</h1>
+  <span class="post-date">09 Feb 2020</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS.png"
+    
+    alt="Crash Report Symbolication feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="목차">목차</h2>
+
+<ol>
+  <li><a href="./crash_report_symbolication#1-크래시-리포트의-생성">크래시 리포트의 생성</a></li>
+  <li><a href="./crash_report_symbolication#2-symbol-symbolication">Symbol, Symbolication</a></li>
+  <li><a href="./crash_report_symbolication#3-crash-report-symbolication">Crash Report Symbolication</a></li>
+  <li><a href="./crash_report_symbolication#4-appendix">Appendix</a></li>
+</ol>
+
+<p>이번 글에서는 앱에서 크래시 리포트가 어떻게 생성되고, 이를 AppStore Connect에서 확인할 수 있는지 알아보고자 합니다.</p>
+
+<blockquote>
+  <p>Note: 시작하기에 앞서 이 글의 많은 내용이 <a href="https://developer.apple.com/library/archive/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-INTRODUCTION">Understanding and Analyzing Application Crash Reports - Apple Doc</a>의 내용을 정리한 내용임을 밝혀둡니다.</p>
+</blockquote>
+
+<h2 id="1-크래시-리포트의-생성">1. 크래시 리포트의 생성</h2>
+
+<p>사용하고 있는 디바이스에서 크래시가 발생할 경우 시스템은 크래시 리포트를 생성하고 이를 디바이스 내부에 저장합니다. 크래시 리포트는 크래시가 발생한 시점에 대한 환경 정보나 기타 크래시 분석에 유용한 정보들을 담고 있습니다.</p>
+
+<div class="message">
+    Crash reports describe the conditions under which the application terminated, in most cases including a complete backtrace for each executing thread, and are typically very useful for debugging issues in the application.
+</div>
+
+<p>크래시 리포트는 크래시가 발생한 디바이스의 설정에서 확인할 수 있습니다.</p>
+
+<blockquote>
+  <p>설정 &gt; 개인정보 보호 &gt; 분석 및 향상 &gt; 분석 데이터</p>
+</blockquote>
+
+<p>이렇게 저장되어 있는 크래시 리포트를 확인하면 다음과 같은 내용을 담고 있습니다.</p>
+
+<p><img width="1237" alt="스크린샷 2020-01-27 오후 8 03 47" src="https://user-images.githubusercontent.com/13018877/73169775-27394b00-4140-11ea-9059-36d646a80dcd.png" /></p>
+
+<p>내용을 살펴보면 어떤 환경에서 크래시가 발생했는지 대략적으로 확인할 수 있습니다. 그런데 크래시가 발생한 Thread에서 나오는 BackTrace를 살펴보면 소스 코드의 어디에서 크래시가 나오는지 확인하기가 어렵습니다. 어떤 Framework에서 문제가 발생했는지는 대략적으로 알 수 있지만, 이는 너무 광범위해서 디버깅에 큰 도움이 되지 않습니다. 이렇게 BackTrace가 사람이 읽을 수 없는 형태로 나타나는 이유는 크래시 리포트가 <code class="language-plaintext highlighter-rouge">UnSymblicate</code> 상태이기 때문입니다. 크래시 리포트가 포함하고 있는 정보는 크래시 리포트가 <code class="language-plaintext highlighter-rouge">Symbolication</code> 되었는지, 아닌지에 따라 보여지는 포맷이 변경됩니다.</p>
+
+<h2 id="2-symbol-symbolication">2. Symbol, Symbolication</h2>
+
+<h3 id="symbol">Symbol</h3>
+
+<p>여기까지 글을 읽으셨다면 개발자가 크래시 로그를 분석할 때, 크래시 리포트가 <code class="language-plaintext highlighter-rouge">Symbolication</code>된 상태이어야 한다는 것을 알 수 있습니다. 그렇다면 <code class="language-plaintext highlighter-rouge">Symbolication</code>은 어떤 과정일까요? <code class="language-plaintext highlighter-rouge">Symbolication</code>이 무엇인지 알기 위해서 우선적으로 <code class="language-plaintext highlighter-rouge">Symbol</code>이 무엇인지 알 필요가 있습니다.</p>
+
+<div class="message">
+    Symbol - A symbol in computer programming is a primitive data type whose instances have a unique human-readable form.
+</div>
+
+<p><code class="language-plaintext highlighter-rouge">Symbol</code>은 <strong>사람이 읽을 수 있는</strong> 데이터 타입으로, 주로 해당 <code class="language-plaintext highlighter-rouge">Symbol</code>이 위치하는 scope 내에서 고유한 값이라는 특징을 지닙니다. <code class="language-plaintext highlighter-rouge">Symbol</code>의 예로는 전역 변수, 지역 변수, 함수의 이름, 인자 값 등이 있습니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Symbol</code>은  주로 <code class="language-plaintext highlighter-rouge">Symbol Table</code>(Hash Table)의 형태로 저장 됩니다. <code class="language-plaintext highlighter-rouge">Symbol Table</code>은 각각의 Symbol이 소스코드의 어떤 의미를 지니는지를 담고 있는 자료구조입니다.</p>
+
+<div class="message">
+    Symbol Table - In computer science, a symbol table is a data structure used by a language translator such as a compiler or interpreter, where each identifier (a.k.a. symbol) in a program's source code is associated with information relating to its declaration or appearance in the source.
+</div>
+
+<p><code class="language-plaintext highlighter-rouge">Symbol Table</code>은 일반적으로 빌드 바이너리와 별개로 관리됩니다. 즉, 앱 릴리즈시 빌드된 <code class="language-plaintext highlighter-rouge">.app</code>에 <code class="language-plaintext highlighter-rouge">Symbol Table</code> 정보가 포함되지 않도록 하는 것이 일반적입니다. 이렇게 하는 이유는 <code class="language-plaintext highlighter-rouge">Symbol Table</code>이 앱 동작에 직접적으로 관여하는 것도 아니고, <code class="language-plaintext highlighter-rouge">Symbol Table</code>의 용량이 생각보다 크기 때문입니다. 그래서 <code class="language-plaintext highlighter-rouge">Symbol Table</code>은 많은 경우에 컴파일러의 소스코드 해석 과정에서만 메모리 위에 존재하는데, 그 시점은 디버깅 과정, 크래시 리포트 <code class="language-plaintext highlighter-rouge">Symbolication</code> 과정에 정도입니다.</p>
+
+<blockquote>
+  <p>위와 같이 앱 빌드 과정에서 컴파일된 Object 파일에서 Symbol을 제거하는 작업을 <a href="https://www.computerhope.com/unix/strip.htm">strip</a>이라고 하고, 릴리즈 앱 배포시에는 <code class="language-plaintext highlighter-rouge">strip</code> 된 바이너리를 사용합니다.</p>
+</blockquote>
+
+<p>Symbol Table에 포함되는 정보는 언어마다 조금씩 다르지만, 대략적으로 아래와 같은 정보를 포함합니다.</p>
+
+<ul>
+  <li>Symbol의 이름</li>
+  <li>Symbol의 relocatable 특성(absolute, relocatable 여부 등)</li>
+  <li>Symbol의 위치 혹은 주소 값</li>
+  <li>고차원 언어에서는 Symbol Table에 Symbol의 데이터 타입, 크기, 차원, 길이 등의 정보를 저장하기도 한다.</li>
+</ul>
+
+<h3 id="debug-symbol">Debug Symbol</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Debug Symbol</code>(<code class="language-plaintext highlighter-rouge">dSYM</code>)은 Symbol 중에서 디버깅을 위해 필요한 정보를 좀 더 많이 가지고 있는 Symbol을 말합니다.</p>
+
+<div class="message">
+A debug symbol is a special kind of symbol that attaches additional information to the symbol table of an object file, such as a shared library or an executable.
+</div>
+
+<p>그래서 <code class="language-plaintext highlighter-rouge">Debug Symbol</code>은 Symbol이 위치한 소스코드 라인 정보, Symbol의 크기, Symbol이 포함된 class, struct의 정보 등을 추가적으로 가지고 있습니다.</p>
+
+<h3 id="symbolication">Symbolication</h3>
+
+<p>이제 크래시 리포트의 <code class="language-plaintext highlighter-rouge">Symbolication</code>이 무엇을 의미하는지 알아보겠습니다.</p>
+
+<div class="message">
+Symbolication is the process of resolving backtrace addresses to source code method or function names, known as symbols
+</div>
+
+<p><code class="language-plaintext highlighter-rouge">Symbolication</code>은 크래시 리포트에서 나타나는 BackTrace의 주소값을 <code class="language-plaintext highlighter-rouge">Symbol</code>로 전환하는 과정을 의미합니다. 주소값을 <code class="language-plaintext highlighter-rouge">Symbol</code>로 전환한다는 것의 의미는 사람이 봐도 의미를 모르는 주소값이 사람이 보면 무엇인지 알 수 있는 소스코드의 특정 <code class="language-plaintext highlighter-rouge">Symbol</code>로 전환이 되는 것을 의미합니다. 그래서 <code class="language-plaintext highlighter-rouge">Symbolication</code>된 크래시 리포트를 보게 되면 실제로 소스 코드의 어떤 부분에서 크래시가 발생하였는지 알 수 있게 됩니다.</p>
+
+<h2 id="3-crash-report-symbolication">3. Crash Report Symbolication</h2>
+
+<p>앞서서 크래시 리포트가 생성되어 디바이스에 저장되고 이를 export하는 과정을 간략히 살펴 보았습니다. 이처럼 사용자의 앱에 쌓이는 크래시 리포트를 직접 export하여 디버깅을 하기도 합니다. 하지만, 많은 크래시는 누구인지 모르는 사용자의 기기에서 발생합니다. 그리고 크래시를 분석하기 위해서 사용자의 디바이스의 크래시 로그를 보내달라고 하는 것은 매우 불편하고, 현실적인 크래시 분석 방법이 아닙니다.</p>
+
+<p>이와 같은 문제를 해결하기 위해 애플은 동의를 얻은 사용자(혹은 Test Flight 사용자)에 한하여 iTunes Connect에서 크래시가 발생한 기기의 Diagnostic Data를 제공합니다.(<code class="language-plaintext highlighter-rouge">symbolicate</code> 된 크래시 리포트) 여기서는 애플이 이 Diagnostic Data를 어떻게 제공하는지 크래시 리포트 <code class="language-plaintext highlighter-rouge">Symbolication</code> 과정을 중심으로 살펴 보겠습니다.</p>
+
+<p>각 과정에 대한 이미지는 <a href="https://developer.apple.com/library/archive/technotes/tn2151/Art/tn2151_crash_flow.png">다음</a>에서 확인할 수 있습니다.</p>
+
+<ol>
+  <li>컴파일러는 소스코드를 해석하면서 <code class="language-plaintext highlighter-rouge">Debug Symbol</code>을 함께 생성합니다. <code class="language-plaintext highlighter-rouge">Debug Symbol</code>은 컴파일된 바이너리의 machine instruction(주소값 정보)이 우리가 작성한 소스코드의 어떤 라인에 매핑되는지에 대한 정보를 가지고 있습니다.</li>
+  <li>앱 스토어 배포를 위해 아카이빙을 수행할 경우, Xcode는 <code class="language-plaintext highlighter-rouge">.xcarchive</code> 파일을 <code class="language-plaintext highlighter-rouge">~/Library/Developer/Xcode/Archives</code> 경로에 생성합니다.</li>
+  <li>앱 스토어에 앱을 배포하거나, Test Flight을 통해 베타 테스트를 진행할 경우, iTunes Connect에 <code class="language-plaintext highlighter-rouge">dSYM</code> 파일을 함께 업로드할 지 선택할 수 있습니다. 이 때, dSYM 파일을 함께 업로드한다고 설정하면 iTunes Connect의 Diagnostic Data에서 크래시 리포트 정보를 확인할 수 있습니다.</li>
+  <li>앱에서 크래시가 발생할 경우, <code class="language-plaintext highlighter-rouge">UnSymbolicated</code>  상태의 크래시 리포트가 디바이스에 저장됩니다.</li>
+  <li>해당 크래시 리포트는 사용자로부터 몇 가지 방법을 통해 얻을 수 있습니다. 사용자의 디바이스에 쌓인 크래시 리포트를 직접 export하여 얻을 수도 있고, 디바이스를 맥과 연결하여 Xcode를 통해 크래시 리포트를 얻을 수도 있습니다. 그리고 Diagnostic Data를 전송하기로 설정한 사용자의 크래시 리포트는 iTunes Connect에서 확인할 수 있습니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">UnSymbolicated</code> 상태의 크래시 리포트는 <code class="language-plaintext highlighter-rouge">dSYM</code> 파일을 통해 <code class="language-plaintext highlighter-rouge">symbolicate</code>할 수 있습니다. <code class="language-plaintext highlighter-rouge">Symbolicate</code> 과정을 통해 BackTrace의 주소값을 <code class="language-plaintext highlighter-rouge">Symbol</code>로 변경할 수 있게 됩니다.
+사용자가 Diagnostic Data를 애플과 공유한다고 설정하였을 경우 크래시 리포트가 앱 스토어에 업로드됩니다.(혹은 Test Flight 환경)</li>
+  <li>iTunes Connect에서는 업로드된 dSYM과 크래시 리포트를 통해 Symbolicate 된 크래시 리포트를 생성합니다.</li>
+</ol>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">dSYM</code> 파일과 앱 바이너리는 <code class="language-plaintext highlighter-rouge">Build UUID</code>를 통해 서로를 식별합니다. 그리고 <code class="language-plaintext highlighter-rouge">Build UUID</code>는 매 빌드마다 새로 생성됩니다. 그렇기 때문에, 소스 코드 변경 없이 빌드를 수행하는 경우에도 이전에 생성된 <code class="language-plaintext highlighter-rouge">dSYM</code> 파일과 새로 생성된 앱 바이너리는 서로 다른 <code class="language-plaintext highlighter-rouge">Build UUID</code>를 가집니다.</p>
+</blockquote>
+
+<h2 id="4-appendix">4. Appendix</h2>
+
+<h3 id="xcode---dsym-설정">Xcode - dSYM 설정</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Debug Symbol</code>은 Xcode Build Setting의 <code class="language-plaintext highlighter-rouge">Debug Information Format</code>에서 컴파일된 바이너리에 포함시킬지 여부를 결정할 수 있습니다.</p>
+
+<p><img width="707" alt="스크린샷 2019-12-14 오후 10 03 34" src="https://user-images.githubusercontent.com/13018877/70849116-9bd06700-1ebd-11ea-80db-19a2b04d7d7e.png" /></p>
+
+<p>일반적으로 Debug 모드에서는 <code class="language-plaintext highlighter-rouge">Debug Symbol</code>이 바이너리에 포함되고, Release 모드에서는 바이너리 사이즈를 줄이기 위해 이를 바이너리에 포함되지 않도록 설정합니다. 아래는 <code class="language-plaintext highlighter-rouge">Debug Information Format</code>을 <code class="language-plaintext highlighter-rouge">DWARF with dSYM File</code>으로 설정하고 빌드하였을 경우에 나타나는 빌드 결과물입니다.</p>
+
+<p><img width="1018" alt="스크린샷 2020-01-28 오전 2 25 59" src="https://user-images.githubusercontent.com/13018877/73197982-a39a5100-4175-11ea-8f90-fe21f809494c.png" /></p>
+
+<h2 id="참고-자료">참고 자료</h2>
+
+<ul>
+  <li><a href="https://developer.apple.com/library/archive/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-INTRODUCTION">Understanding and Analyzing Application Crash Reports - Apple Doc</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Symbol_(programming)">Symbol</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Symbol_table">Symbol Table</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Debug_symbol">Debug Symbol</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-05/bitcode_implementation">
+              Bitcode 도입하기
+              <small>21 May 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Symbol">
+                Symbol
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#CrashReport">
+                CrashReport
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-11/framework_basic">
+              Framework 이해하기
+              <small>16 Nov 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#macOS">
+                macOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#OS">
+                OS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-09/dynamic_library">
+              Dynamic Library
+              <small>06 Sep 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#macOS">
+                macOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#OS">
+                OS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-07/static-library">
+              Static Library
+              <small>01 Jul 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#macOS">
+                macOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#OS">
+                OS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#BuildSystem">
+                BuildSystem
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>CGBitmapContext 정리 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="CGBitmapContext 정리 - hcn1519 Dev Post">
+  <meta name="description" content="CGBitmapContext에 대해 학습한 내용을 정리합니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CGBitmapContext 정리">
+  <meta property="og:image" content="/public/assets/iOS.png">
+  <meta property="og:description" content="CGBitmapContext에 대해 학습한 내용을 정리합니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">CGBitmapContext 정리</h1>
+  <span class="post-date">04 May 2019</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS.png"
+    
+    alt="CGBitmapContext 정리 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>Core Graphics에서는 화면 drawing을 위해 기본적으로 비트맵 이미지와 이미지 마스크를 사용합니다. 비트맵 이미지라는 것은 픽셀의 집합으로, Core Graphics에서는 <code class="language-plaintext highlighter-rouge">CGBitmapContext</code>를 사용하여 <code class="language-plaintext highlighter-rouge">CGImage</code>를 픽셀 단위로 처리할 수 있습니다.</p>
+
+<h2 id="cgbitmapcontext의-스펙">CGBitmapContext의 스펙</h2>
+
+<p><code class="language-plaintext highlighter-rouge">CGBitmapContext</code>를 만들기 위해서는 아래와 같은 정보가 필요합니다.</p>
+
+<h4 id="1-이미지의-크기">1. 이미지의 크기</h4>
+
+<ul>
+  <li>픽셀 단위의 width, height</li>
+</ul>
+
+<h4 id="2-이미지에-사용되는-픽셀-관련-정보">2. 이미지에 사용되는 픽셀 관련 정보</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">bitsPerComponent</code> - ColorSpace에서 사용되는 각각의 Component가 사용하는 비트 수(i.e. 32bits RGBA colorSpace를 사용하면, 각각의 R, G, B, A가 8bits를 사용하므로 <code class="language-plaintext highlighter-rouge">bitsPerComponent</code>는 8이 됩니다.)</li>
+  <li><code class="language-plaintext highlighter-rouge">bytesPerRow</code> - 각 행별 바이트 수(i.e. 32bits RGBA ColorSpace를 사용할 경우,<code class="language-plaintext highlighter-rouge">bitsPerComponent</code> * 4(= 32) * imageWidth가 됩니다.)</li>
+  <li><code class="language-plaintext highlighter-rouge">bitsPerPixel</code> - 개별 픽셀별 사용되는 비트 수(최소 <code class="language-plaintext highlighter-rouge">bitsPerComponent</code> * <code class="language-plaintext highlighter-rouge">componentPerPixel</code> 이상)</li>
+</ul>
+
+<h4 id="3-colorspace-정보">3. ColorSpace 정보</h4>
+
+<ul>
+  <li>ColorSpace는 pixel마다 색상을 저장하는 형식을 의미합니다. CoreGraphics에서는 <code class="language-plaintext highlighter-rouge">RGB</code>, <code class="language-plaintext highlighter-rouge">CMYK</code>, <code class="language-plaintext highlighter-rouge">GrayScale</code>에 대한 색상 포맷을 지원합니다. 일반적으로 많이 사용하는 <code class="language-plaintext highlighter-rouge">RGB</code> 색상 포맷은 픽셀마다 24 bits를 사용합니다. 즉, 각각의 색상(R, G, B)마다 8 bits를 사용하고 256색을 표현할 수 있습니다. 여기에 alpha에 대한 정보를 포함하고 싶다면 <code class="language-plaintext highlighter-rouge">RGBA</code>(혹은 <code class="language-plaintext highlighter-rouge">ARGB</code>) 포맷을 사용하여 총 32  bits로 하나의 pixel을 표현하면 됩니다.</li>
+</ul>
+
+<p><img width="623" alt="스크린샷 2019-05-05 오후 6 52 57" src="https://user-images.githubusercontent.com/13018877/57192049-31d70300-6f67-11e9-9e81-d7de43e12811.png" /></p>
+
+<blockquote>
+  <p>위에서 언급한 RGB 스펙은 sRGB(standard Red Green Blue)와 동일합니다.</p>
+</blockquote>
+
+<h4 id="4-cgbitmapinfo">4. CGBitmapInfo</h4>
+
+<ul>
+  <li>각 픽셀이 어떤 비트 배치 룰을 따르고, 어떻게 픽셀의 데이터를 읽을 것인지 설정하는 옵션입니다. 그래서 해당 옵션에서는 <code class="language-plaintext highlighter-rouge">CGImageAlphaInfo</code>를 통해 alpha 값에 대한 옵션을 설정하고, <code class="language-plaintext highlighter-rouge">CGBitmapInfo</code>를 통해 byte order 설정(little endian, big endian), floating value 사용 여부 등을 설정합니다.</li>
+</ul>
+
+<blockquote>
+  <p>Constants that specify whether the bitmap should contain an alpha channel, the alpha channel’s relative location in a pixel, and information about whether the pixel components are floating-point or integer values.</p>
+</blockquote>
+
+<h2 id="cgbitmapcontext-usage">CGBitmapContext Usage</h2>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">CGImage</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">bitmapContext</span><span class="p">:</span> <span class="kt">CGContext</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">colorSpace</span> <span class="o">=</span> <span class="kt">CGColorSpaceCreateDeviceRGB</span><span class="p">()</span>
+        <span class="k">let</span> <span class="nv">width</span> <span class="o">=</span> <span class="k">self</span><span class="o">.</span><span class="n">width</span>
+        <span class="k">let</span> <span class="nv">height</span> <span class="o">=</span> <span class="k">self</span><span class="o">.</span><span class="n">height</span>
+        <span class="k">let</span> <span class="nv">imageSize</span> <span class="o">=</span> <span class="kt">CGSize</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">(</span><span class="n">width</span><span class="p">),</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">(</span><span class="n">height</span><span class="p">))</span>
+
+        <span class="k">let</span> <span class="nv">bitsPerComponent</span> <span class="o">=</span> <span class="k">self</span><span class="o">.</span><span class="n">bitsPerComponent</span>
+        <span class="k">let</span> <span class="nv">bytesPerRow</span> <span class="o">=</span> <span class="k">self</span><span class="o">.</span><span class="n">bytesPerRow</span>
+
+        <span class="k">let</span> <span class="nv">totalBytes</span> <span class="o">=</span> <span class="n">bytesPerRow</span> <span class="o">*</span> <span class="n">height</span>
+        <span class="k">var</span> <span class="nv">pixelValues</span> <span class="o">=</span> <span class="p">[</span><span class="kt">UInt32</span><span class="p">](</span><span class="nv">repeating</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">count</span><span class="p">:</span> <span class="n">totalBytes</span><span class="p">)</span>
+
+        <span class="c1">// pixel value는 개별 pixel 값에 접근하여 값을 사용할 경우에 사용합니다.</span>
+        <span class="c1">// pixel을 사용할 일이 없다면, CGContext 생성시 data: nil을 설정하면 됩니다.</span>
+        <span class="k">let</span> <span class="nv">context</span> <span class="o">=</span>  <span class="kt">CGContext</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">pixelValues</span><span class="p">,</span>
+                                 <span class="nv">width</span><span class="p">:</span> <span class="n">width</span><span class="p">,</span>
+                                 <span class="nv">height</span><span class="p">:</span> <span class="n">height</span><span class="p">,</span>
+                                 <span class="nv">bitsPerComponent</span><span class="p">:</span> <span class="n">bitsPerComponent</span><span class="p">,</span>
+                                 <span class="nv">bytesPerRow</span><span class="p">:</span> <span class="n">bytesPerRow</span><span class="p">,</span>
+                                 <span class="nv">space</span><span class="p">:</span> <span class="n">colorSpace</span><span class="p">,</span>
+                                 <span class="nv">bitmapInfo</span><span class="p">:</span> <span class="kt">CGImageAlphaInfo</span><span class="o">.</span><span class="n">premultipliedLast</span><span class="o">.</span><span class="n">rawValue</span> <span class="o">|</span> <span class="kt">CGBitmapInfo</span><span class="o">.</span><span class="n">byteOrder32Little</span><span class="o">.</span><span class="n">rawValue</span><span class="p">)</span>
+
+        <span class="n">context</span><span class="p">?</span><span class="o">.</span><span class="nf">draw</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="nv">in</span><span class="p">:</span> <span class="kt">CGRect</span><span class="p">(</span><span class="nv">origin</span><span class="p">:</span> <span class="o">.</span><span class="n">zero</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="n">imageSize</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">context</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Note: CGBitmapContext 관련 코드들은 Swift3에서 사용 방식이 많이 변경되었습니다. 아래 코드는 Swift 5.0 환경에서 작성한 예제입니다.</p>
+</blockquote>
+
+<hr />
+
+<h1 id="참고-자료">참고 자료</h1>
+
+<ul>
+  <li>
+    <p><a href="https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_images/dq_images.html#//apple_ref/doc/uid/TP30001066-CH212-TPXREF101">CoreGraphics - Bitmap Images and Image Masks</a></p>
+  </li>
+  <li>
+    <p>바이트를 읽는 형식에 대해서는 <a href="https://betterexplained.com/articles/understanding-big-and-little-endian-byte-order/">
+Understanding Big and Little Endian Byte Order</a> 참고</p>
+  </li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2018-03/coregraphics">
+              Core Graphics
+              <small>24 Mar 2018</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#CoreGraphics">
+                CoreGraphics
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

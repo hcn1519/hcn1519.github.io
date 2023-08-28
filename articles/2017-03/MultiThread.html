@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>다중 Thread 프로그래밍 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="다중 Thread 프로그래밍 - hcn1519 Dev Post">
+  <meta name="description" content="Operating System Concepts에 기반한 정리입니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="다중 Thread 프로그래밍">
+  <meta property="og:image" content="/public/assets/thread.png">
+  <meta property="og:description" content="Operating System Concepts에 기반한 정리입니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">다중 Thread 프로그래밍</h1>
+  <span class="post-date">20 Mar 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/thread.png"
+    
+    alt="다중 Thread 프로그래밍 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="여러-작업을-하는-운영체제">여러 작업을 하는 운영체제</h2>
+
+<p>코어가 1개인 CPU는 본질적으로 한 순간에 1개의 일밖에 할 수 없습니다. 그런데 현대의 컴퓨터는 컴퓨터를 킨 순간부터 여러 개의 작업을 수행합니다. 물론, 현대의 컴퓨터는 1 코어보다는 멀티 코어가 대중화되어 있습니다. 다만 그 코어의 개수도 개인 컴퓨터 수준에서는 4~8개 수준이므로, 하나의 컴퓨터는 한 순간에 4~8개의 작업만 수행할 수 있습니다. 하지만, 개인 컴퓨터들은 이보다 더 많은 일을 수행합니다. 이것이 어떻게 가능할까요?</p>
+
+<!-- process 이미지 -->
+<p><img src="https://dl.dropbox.com/s/sud3gn15aa6xvf9/process.png" /></p>
+
+<p>많은 작업을 동시다발적으로 가능하게 하는 것은 바로 <strong>Process</strong> 입니다. 하나하나 켜진 프로그램들은 운영체제에서 <strong>Process</strong> 라고 부릅니다. 엄밀한 의미에서 “<strong>Process</strong> = 프로그램”은 아니지만, 이렇게 이해해도 크게 문제는 없습니다.</p>
+
+<p>이제 우리가 이해한 컴퓨터들은 300여 개의 일을 <strong>Process</strong> 를 통해 가능하게 해줍니다. 하지만, 이것만으로 충분하지는 않습니다. 예를 들어 1개의 웹 서버가 300명의 클라이언트밖에 수용할 수 없다면, 하루 방문자 수(클라이언트)가 수천 만에 달하는 곳들은 운영을 할 수 없을 것입니다.(소위 말해 서버가 계속 터질 것입니다.) 즉, <strong>Process</strong> 안의 세분화된 또 다른 개념의 도입이 필요해진 것입니다.</p>
+
+<h2 id="thread-개념">Thread 개념</h2>
+
+<p>여기서 도입되는 것이 <strong>Thread</strong> 입니다. 먼저 <strong>Thread</strong> 의 기본 개념 및 구성에 대해 살펴보면 다음과 같습니다.</p>
+
+<div class="message">
+Thread는 <span style="font-weight: bold">CPU 이용의 기본 단위</span> 입니다. Thread는 스레드 ID, 프로그램 카운터, 레지스터 집합, 스택으로 구성되며, 같은 프로세스에 속한 다른 스레드와 코드, 데이터 섹션 외 운영체제 자원을 공유합니다.
+</div>
+
+<p><img src="https://hcn1519.github.io/public/assets/thread.png" /></p>
+
+<p><strong>Thread</strong> 는 프로세스 안에서 만들어지는 것들로, 프로세스들의 자원들을 공유합니다. 앞서 예를 들었던 웹 서버라는 프로세스가 다중 <strong>Thread</strong> 로 클라이언트에 대해 응답하는 방식을 살펴보면 아래 그림과 같습니다.</p>
+
+<!-- thread2 이미지 -->
+<p><img src="https://dl.dropbox.com/s/8t4xfa3fktgw3kx/thread2.png" /></p>
+
+<p>여기서는 크게 3 가지의 <strong>Thread</strong> 를 생성합니다.</p>
+
+<ol>
+  <li>클라이언트의 요청을 listen하는 <strong>Thread</strong></li>
+  <li>요청에 대해 서비스할 <strong>Thread</strong></li>
+  <li>추가적인 요청을 listen하는 <strong>Thread</strong></li>
+</ol>
+
+<p>즉, 웹 서버에 동시에 여러 사람이 요청을 보내올 때 하나의 프로세스가 각각의 클라이언트에 응대하는 것이 아니라, 각각의 반복적인 업무를 가지고 있는 여러 개의 <strong>Thread</strong> 를 생성하여 동시다발적으로 클라이언트에 대응(listen)하는 형태인 것입니다.</p>
+
+<div class="message">
+정리하자면, <span style="font-weight: bold">Thread</span> 는 프로세스에서 이뤄지는 여러 가지 반복되는 일들을 세분화하여 작업을 수행하는 것이라고 할 수 있습니다.
+</div>
+
+<h4 id="thread의-장점">Thread의 장점</h4>
+
+<p><strong>Thread</strong> 사용의 장점은 다음과 같습니다.</p>
+
+<ol>
+  <li>응답성(responsiveness) - 응용 프로그램이 긴 작업을 시행할 경우에도 스레드를 통해 또 다른 프로그램을 실행할 수 있다.</li>
+  <li>자원 공유(resource sharing) - 한 응용 프로그램이 같은 주소 공간 내에서 여러 개의 다르 작업을 하는 스레드를 가질 수 있게 한다.</li>
+  <li>경제성(economy) - 프로세스 생성보다 경제적</li>
+  <li>규모 가변성(scalability) - 다중 CPU 상황에서 여전히 병렬적으로 일을 수행할 수 있다.</li>
+</ol>
+
+<h2 id="thread-예시java">Thread 예시(Java)</h2>
+
+<blockquote>
+  <p>참고자료 : Operating System Concepts 8th edition</p>
+</blockquote>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-03/thread-safe">
+              Thread Safe
+              <small>21 Mar 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#OS">
+                OS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Thread">
+                Thread
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2018-07/gcddispatchqueue">
+              GCD - Dispatch Queue
+              <small>08 Jul 2018</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#OS">
+                OS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Thread">
+                Thread
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

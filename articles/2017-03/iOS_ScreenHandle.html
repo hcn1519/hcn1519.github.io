@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>iOS 디바이스별 화면 다루기 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="iOS 디바이스별 화면 다루기 - hcn1519 Dev Post">
+  <meta name="description" content="iOS에서 디바이스 종류에 따라 다른 뷰 설정하기">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="iOS 디바이스별 화면 다루기">
+  <meta property="og:image" content="/public/assets/iOS10.png">
+  <meta property="og:description" content="iOS에서 디바이스 종류에 따라 다른 뷰 설정하기">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">iOS 디바이스별 화면 다루기</h1>
+  <span class="post-date">08 Mar 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS10.png"
+    
+    alt="iOS 디바이스별 화면 다루기 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>iOS에서 디바이스별로 다양한 화면을 지원함에 따라 view를 세부적으로 설정 해야할 필요성이 늘어나고 있습니다. iPhone 종류만 iPhone 7, iPhone 7 plus, iPhone SE가 있고, iPad도 프로 모델까지 합하면 설정시 못 해도 6개 이상을 해주어야 합니다. iOS에서는 여러 화면에 대응할 수 있도록 <code>UIDevice</code>를 통해 화면별로 코드를 수정할 수 있도록 해줍니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// ScreenExtension.swift</span>
+<span class="kd">import</span> <span class="kt">UIKit</span>
+
+<span class="kd">extension</span> <span class="kt">UIDevice</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">isiPhone</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="kt">UIDevice</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">userInterfaceIdiom</span> <span class="o">==</span> <span class="kt">UIUserInterfaceIdiom</span><span class="o">.</span><span class="n">pad</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="kc">true</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="kc">false</span>
+    <span class="p">}</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">isiPad</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="kt">UIDevice</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">userInterfaceIdiom</span> <span class="o">==</span> <span class="kt">UIUserInterfaceIdiom</span><span class="o">.</span><span class="n">pad</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">false</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>프로젝트에 <code>UIDevice</code>에 대한 <code>extension</code>을 설정해두시면, 프로젝트 어디에서든 해당 화면에 대한 구분을 할 수 있습니다. 즉, view에다가 아래 코드를 입력하여 아이폰에만 적용되는 코드, 아이패드에만 적용되는 코드를 넣을 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">if</span> <span class="kt">UIDevice</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">isiPhone</span> <span class="p">{</span>
+  <span class="c1">// iPhone         </span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="kt">UIDevice</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">isiPad</span> <span class="p">{</span>
+  <span class="c1">// iPad</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>다만, 요즘엔 아이폰과 패드에 대한 구분 이상으로 더 세세하게 나눌 필요가 있습니다. 그래서, 기기별로 좀 더 세세하게 나눠보면,</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// ScreenExtesion.swift</span>
+<span class="kd">import</span> <span class="kt">UIKit</span>
+
+<span class="kd">extension</span> <span class="kt">UIDevice</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">isiPhoneSE</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="kt">UIDevice</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">userInterfaceIdiom</span> <span class="o">==</span> <span class="kt">UIUserInterfaceIdiom</span><span class="o">.</span><span class="n">phone</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="kt">UIScreen</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">height</span> <span class="o">==</span> <span class="mi">568</span> <span class="o">||</span> <span class="kt">UIScreen</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width</span> <span class="o">==</span> <span class="mi">320</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">false</span>
+    <span class="p">}</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">isiPhonePlus</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="kt">UIDevice</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">userInterfaceIdiom</span> <span class="o">==</span> <span class="kt">UIUserInterfaceIdiom</span><span class="o">.</span><span class="n">phone</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="kt">UIScreen</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">height</span> <span class="o">==</span> <span class="mi">736</span> <span class="o">||</span> <span class="kt">UIScreen</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width</span> <span class="o">==</span> <span class="mi">414</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">false</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">isiPad</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="kt">UIDevice</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">userInterfaceIdiom</span> <span class="o">==</span> <span class="kt">UIUserInterfaceIdiom</span><span class="o">.</span><span class="n">pad</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="kt">UIScreen</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">height</span> <span class="o">==</span> <span class="mi">1024</span> <span class="o">||</span> <span class="kt">UIScreen</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width</span> <span class="o">==</span> <span class="mi">768</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">false</span>
+    <span class="p">}</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">isiPadPro12</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="kt">UIDevice</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">userInterfaceIdiom</span> <span class="o">==</span> <span class="kt">UIUserInterfaceIdiom</span><span class="o">.</span><span class="n">pad</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="kt">UIScreen</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">height</span> <span class="o">==</span> <span class="mi">1366</span> <span class="o">||</span> <span class="kt">UIScreen</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width</span> <span class="o">==</span> <span class="mi">1366</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">false</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>다음과 같이 나눌 수 있고, 이는 아래 코드들을 사용할 수 있게 해줍니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">if</span> <span class="kt">UIDevice</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">isiPadPro12</span> <span class="p">{</span>
+  <span class="c1">// iPad Pro 12.9          </span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="kt">UIDevice</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">isiPad</span> <span class="p">{</span>
+  <span class="c1">// iPad Air2, iPad Pro 9.7  </span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="kt">UIDevice</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">isiPhonePlus</span> <span class="p">{</span>
+  <span class="c1">// iPhone 7+</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="kt">UIDevice</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">isiPhoneSE</span> <span class="p">{</span>
+  <span class="c1">// iPhone SE  </span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="c1">// iPhone 7</span>
+<span class="p">}</span></code></pre></figure>
+
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-08/autolayout_performance_optimization">
+              AutoLayout 성능 최적화하기
+              <small>23 Aug 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-03/ios_darkmode">
+              iOS 다크모드 알아보기
+              <small>13 Mar 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2017-09/ios_app_lifeCycle">
+              iOS Application Life Cycle 이해하기
+              <small>07 Sep 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

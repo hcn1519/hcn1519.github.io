@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Shell에서 변수 사용하기 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Shell에서 변수 사용하기 - hcn1519 Dev Post">
+  <meta name="description" content="예제를 통해 Shell 변수에 대해 알아보겠습니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Shell에서 변수 사용하기">
+  <meta property="og:image" content="/public/assets/linux.png">
+  <meta property="og:description" content="예제를 통해 Shell 변수에 대해 알아보겠습니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Shell에서 변수 사용하기</h1>
+  <span class="post-date">06 Jul 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/linux.png"
+    
+    alt="Shell에서 변수 사용하기 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="shell-기본-변수">Shell 기본 변수</h2>
+
+<p>Shell에서 사용되는 변수는 기본적으로 <code class="language-plaintext highlighter-rouge">$</code>를 앞에 붙여서 사용됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ var</span><span class="o">=</span>10
+<span class="nv">$ </span><span class="nb">echo </span>var // 결과: var
+<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$var</span> // 결과: 10</code></pre></figure>
+
+<p>위의 예시에서 var에 10을 주고, 접근하기 위해서는 <code class="language-plaintext highlighter-rouge">$var</code>의 형태를 사용해야 합니다.</p>
+
+<h2 id="shell의-지정된-변수들">Shell의 지정된 변수들</h2>
+
+<p>Shell에는 미리 지정되어 있는 몇 가지 변수들이 있습니다. <code class="language-plaintext highlighter-rouge">$HOME</code>, <code class="language-plaintext highlighter-rouge">$SHELL</code>, <code class="language-plaintext highlighter-rouge">$PWD</code>, <code class="language-plaintext highlighter-rouge">$PATH</code> 등이 미리 전역으로 지정되어 있는 경로 변수들입니다. 위의 변수들이 하는 역할은 다음과 같습니다.</p>
+
+<ul>
+  <li>$HOME : 홈디렉토리의 경로를 저장합니다.(<code class="language-plaintext highlighter-rouge">/Users/name</code> 형태)</li>
+  <li>$SHELL : 사용하고 있는 배쉬의 경로를 저장합니다.(<code class="language-plaintext highlighter-rouge">/bin/bash</code> 형태)</li>
+  <li>$PWD : 현재 위치한 경로를 저장합니다.(<code class="language-plaintext highlighter-rouge">/Users/name/Desktop</code> 형태)</li>
+  <li>$PATH : 전역에서 접근할 수 있는 디렉토리들의 경로를 저장합니다. 여러 경로들을 <code class="language-plaintext highlighter-rouge">:</code>을 통해 구분하여 저장합니다.</li>
+</ul>
+
+<h2 id="shell의-파라미터-사용">Shell의 파라미터 사용</h2>
+
+<p>또한 Shell은 스크립트를 실행할 때 파라미터를 전송할 수 있습니다. 그리고 파라미터들은 스크립트 내에서 <code class="language-plaintext highlighter-rouge">$0</code>, <code class="language-plaintext highlighter-rouge">$1</code>, <code class="language-plaintext highlighter-rouge">$2</code>의 형태로 접근할 수 있습니다. 예시를 통해 알아보겠습니다. 먼저 <code class="language-plaintext highlighter-rouge">hello.sh</code>를 생성하고 다음 내용을 넣어줍니다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># hello.sh</span>
+<span class="c">#!/bin/Bash</span>
+<span class="nb">echo</span> <span class="s2">"Hello </span><span class="nv">$0</span><span class="s2">"</span>
+<span class="nb">echo</span> <span class="s2">"Hello </span><span class="nv">$1</span><span class="s2">"</span>
+<span class="nb">echo</span> <span class="s2">"Hello </span><span class="nv">$2</span><span class="s2">"</span></code></pre></figure>
+
+<p>위와 같이 스크립트를 작성하게 되면 <code class="language-plaintext highlighter-rouge">$0</code>, <code class="language-plaintext highlighter-rouge">$1</code>, <code class="language-plaintext highlighter-rouge">$2</code>에 각각 어떤 내용이 나타나는지 알 수 있습니다. 이제 해당 스크립트를 실행해봅니다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./hello.sh Tom Sam
+   ^--<span class="nv">$0</span>     ^--<span class="nv">$1</span> ^--<span class="nv">$2</span>
+<span class="c"># 출력 결과</span>
+<span class="c"># Hello ./hello.sh</span>
+<span class="c"># Hello Tom</span>
+<span class="c"># Hello Sam</span></code></pre></figure>
+
+<p>파라미터는 계속해서 뒤에 추가적으로 붙여줄 수 있으며 번호가 증가하는 형태로 접근할 수 있습니다.</p>
+
+<h2 id="새로운-변수-사용하기export-source">새로운 변수 사용하기(export, source)</h2>
+
+<p>위의 예시에서 <code class="language-plaintext highlighter-rouge">var=10</code>과 같은 명령이 만드는 변수는 <strong>쉘 변수</strong> 라고 부릅니다. 이 <strong>쉘 변수</strong> 는 bash에서 생성했을 때 bash에서만 사용할 수 있습니다. 즉, 다른 <code class="language-plaintext highlighter-rouge">temp.sh</code>를 만들고 변수 <code class="language-plaintext highlighter-rouge">var</code>에 접근할 수 없습니다. 이 때, 해당 변수에 접근하도록 만들어주는 명령어가 <code class="language-plaintext highlighter-rouge">export</code>입니다. <code class="language-plaintext highlighter-rouge">export var=10</code>으로 명령을 내리면 이는 bash와 그 fork된 자식(이 때, bash는 모든 shell의 최상위에 있으므로 bash상에서 <code class="language-plaintext highlighter-rouge">export var=10</code>으로 선언하면 <code class="language-plaintext highlighter-rouge">var</code>는 모든 쉘에서 사용할 수 있습니다.)에서 사용할 수 있는 <strong>환경변수</strong> 가 됩니다. 예를 들면,</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">export </span><span class="nv">var</span><span class="o">=</span>10
+<span class="nv">$ </span>vim hello2.sh</code></pre></figure>
+
+<p>으로 <code class="language-plaintext highlighter-rouge">hello2.sh</code>를 생성합니다. 그리고 다음 내용을 작성합니다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># hello2.sh</span>
+<span class="c">#!/bin/bash</span></code></pre></figure>
+
+<p>그 결과는 다음과 같습니다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$var</span>
+<span class="nv">$ </span>./hello2.sh <span class="c">#결과: 10</span></code></pre></figure>
+
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    <h2>Lastest Posts</h2>
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

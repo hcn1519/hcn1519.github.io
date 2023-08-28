@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>UIBarButtonItem에 Circle Image Button 넣기 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="UIBarButtonItem에 Circle Image Button 넣기 - hcn1519 Dev Post">
+  <meta name="description" content="UIBarButtonItem에 원형 이미지 버튼을 넣는 방법에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="UIBarButtonItem에 Circle Image Button 넣기">
+  <meta property="og:image" content="/public/assets/blogThumb.png">
+  <meta property="og:description" content="UIBarButtonItem에 원형 이미지 버튼을 넣는 방법에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">UIBarButtonItem에 Circle Image Button 넣기</h1>
+  <span class="post-date">29 Mar 2018</span>
+
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>이번 글에서는 <code class="language-plaintext highlighter-rouge">UINavigationBar</code>에 사각형 이미지를 가지고 원형 이미지 버튼을 만드는 방법에 대해 알아보고자 합니다. 그렇게 어려운 내용은 아니지만, 처음에 잘못 접근한 부분이 있어서 이를 기록으로 남깁니다.</p>
+
+<h2 id="1-core-graphics로-이미지-버튼-추가하기잘못된-방법">1. Core Graphics로 이미지 버튼 추가하기(잘못된 방법)</h2>
+
+<p><code class="language-plaintext highlighter-rouge">UINavigationBar</code>에 버튼을 추가하려면 <code class="language-plaintext highlighter-rouge">UIBarButtonItem</code>을 활용하여 버튼을 추가해야 합니다. 그래서 이미지 버튼을 만들어야하기 때문에 다음과 같은 방식으로 버튼을 추가하는 것을 생각해볼 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">self</span><span class="o">.</span><span class="n">navigationItem</span><span class="o">.</span><span class="n">rightBarButtonItem</span> <span class="o">=</span> <span class="kt">UIBarButtonItem</span><span class="p">(</span><span class="nv">image</span><span class="p">:</span> <span class="n">image</span><span class="p">,</span> <span class="nv">style</span><span class="p">:</span> <span class="o">.</span><span class="n">plain</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span></code></pre></figure>
+
+<h3 id="1-이미지-크기-조정">1. 이미지 크기 조정</h3>
+
+<p>이렇게 하면 이미지 사이즈가 화면에서 출력되는 사이즈와 동일하지 않으면 프레임을 무시하고 출력됩니다. 그래서 이를 위해 이미지를 resize할 필요가 있습니다. 그래서 아래와 같은 <code class="language-plaintext highlighter-rouge">resizeImage(size:)</code>와 같은 메소드로 이미지 사이즈를 우선 조정하고 이를 버튼에 적용해볼 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">extension</span> <span class="kt">UIImage</span> <span class="p">{</span>
+  <span class="kd">func</span> <span class="nf">resizeImage</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIImage</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">originalSize</span> <span class="o">=</span> <span class="k">self</span><span class="o">.</span><span class="n">size</span>
+    <span class="k">let</span> <span class="nv">ratio</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">originalSize</span><span class="o">.</span><span class="n">width</span> <span class="o">&gt;</span> <span class="n">originalSize</span><span class="o">.</span><span class="n">height</span> <span class="p">?</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">width</span> <span class="o">/</span> <span class="n">originalSize</span><span class="o">.</span><span class="n">width</span><span class="p">)</span> <span class="p">:</span>
+                                                          <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">height</span> <span class="o">/</span> <span class="n">originalSize</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+    <span class="p">}()</span>
+
+    <span class="k">return</span> <span class="kt">UIImage</span><span class="p">(</span><span class="nv">cgImage</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">cgImage</span><span class="o">!</span><span class="p">,</span> <span class="nv">scale</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">,</span> <span class="nv">orientation</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">imageOrientation</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 원하는 사이즈 적용</span>
+<span class="k">let</span> <span class="nv">scaledImage</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="nf">resizeImage</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="mi">26</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="mi">26</span><span class="p">))</span>
+<span class="k">self</span><span class="o">.</span><span class="n">navigationItem</span><span class="o">.</span><span class="n">rightBarButtonItem</span> <span class="o">=</span> <span class="kt">UIBarButtonItem</span><span class="p">(</span><span class="nv">image</span><span class="p">:</span> <span class="n">scaledImage</span><span class="p">,</span> <span class="nv">style</span><span class="p">:</span> <span class="o">.</span><span class="n">plain</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span></code></pre></figure>
+
+<h3 id="2-이미지-랜더링-모드-변경">2. 이미지 랜더링 모드 변경</h3>
+
+<p>이제 사이즈는 제대로 조정이 되지만, 이미지가 하얗게 나오는 문제가 있습니다. 그래서 이미지의 rendering mode를 조정해주어야 합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">scaledImage</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="nf">resizeImage</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="mi">26</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="mi">26</span><span class="p">))</span><span class="o">.</span><span class="nf">withRenderingMode</span><span class="p">(</span><span class="o">.</span><span class="n">alwaysOriginal</span><span class="p">)</span></code></pre></figure>
+
+<h3 id="3-이미지-원형으로-만들기">3. 이미지 원형으로 만들기</h3>
+
+<p>이제 이미지를 원형으로 만드는 과정만 남았습니다. 그런데 이게 생각보다 쉽지 않습니다. 일반적으로 이미지를 원형으로 만들 때 사용하는 방법은 <code class="language-plaintext highlighter-rouge">UIImageView</code>의 layer에서 <code class="language-plaintext highlighter-rouge">cornerRadius</code> 값을 조정하는 것입니다. 그런데 지금까지 <code class="language-plaintext highlighter-rouge">UIImageView</code>로 이미지를 추가하지 않고 <code class="language-plaintext highlighter-rouge">UIImage</code>를 <code class="language-plaintext highlighter-rouge">UIBarButtonItem</code>에 추가하는 방식으로 이미지를 넣었습니다. 그래서 <code class="language-plaintext highlighter-rouge">Graphic Context</code>를 활용하여 이미지를 새롭게 그려주어야 합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">extension</span> <span class="kt">UIImage</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">roundedImage</span><span class="p">:</span> <span class="kt">UIImage</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">rect</span> <span class="o">=</span> <span class="kt">CGRect</span><span class="p">(</span><span class="nv">origin</span><span class="p">:</span> <span class="o">.</span><span class="n">zero</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+
+        <span class="kt">UIGraphicsBeginImageContextWithOptions</span><span class="p">(</span><span class="k">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">let</span> <span class="nv">path</span> <span class="o">=</span> <span class="kt">UIBezierPath</span><span class="p">(</span><span class="nv">ovalIn</span><span class="p">:</span> <span class="n">rect</span><span class="p">)</span>
+        <span class="n">path</span><span class="o">.</span><span class="nf">addClip</span><span class="p">()</span>
+
+        <span class="k">self</span><span class="o">.</span><span class="nf">draw</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="n">rect</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kt">UIGraphicsGetImageFromCurrentImageContext</span><span class="p">()</span><span class="o">!</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">scaledImage</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="nf">resizeImage</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="mi">26</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="mi">26</span><span class="p">))</span><span class="o">.</span><span class="nf">withRenderingMode</span><span class="p">(</span><span class="o">.</span><span class="n">alwaysOriginal</span><span class="p">)</span><span class="o">.</span><span class="n">roundedImage</span>
+<span class="k">self</span><span class="o">.</span><span class="n">navigationItem</span><span class="o">.</span><span class="n">rightBarButtonItem</span> <span class="o">=</span> <span class="kt">UIBarButtonItem</span><span class="p">(</span><span class="nv">image</span><span class="p">:</span> <span class="n">scaledImage</span><span class="p">,</span> <span class="nv">style</span><span class="p">:</span> <span class="o">.</span><span class="n">plain</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span></code></pre></figure>
+
+<p>위의 방식은 <code class="language-plaintext highlighter-rouge">Graphic Context</code> 위에 이미지를 <code class="language-plaintext highlighter-rouge">UIBezierPath</code> 안에만 그리는 방식입니다. 그런데.. 이 방식은 <em>비트맵 방식으로 이미지를 그린다</em>는 큰 문제가 있습니다. 그래서 이미지가 원형으로 나오지만, 이미지 테두리가 비트맵 때문에 오돌토돌하게 나타납니다. 그래서 위의 방식으로 원형 이미지 버튼을 만들면 안됩니다.</p>
+
+<h2 id="2-uiimageview로-이미지-넣기">2. UIImageView로 이미지 넣기</h2>
+
+<p>결론적으로 <code class="language-plaintext highlighter-rouge">UIImageView</code>를 사용한 방식으로 <code class="language-plaintext highlighter-rouge">UIBarButtonItem</code>을 만들어야 합니다. 물론 이 때 앞서서 사용했던 이미지 사이즈를 줄이는 익스텐션은 동일하게 사용됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">scaledImage</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="nf">resizeImage</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="mi">26</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="mi">26</span><span class="p">))</span>
+<span class="k">let</span> <span class="nv">imageView</span> <span class="o">=</span> <span class="kt">UIImageView</span><span class="p">(</span><span class="nv">image</span><span class="p">:</span> <span class="n">scaledImage</span><span class="p">)</span>
+<span class="n">imageView</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="kt">CGRect</span><span class="p">(</span><span class="nv">origin</span><span class="p">:</span> <span class="o">.</span><span class="n">zero</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="n">scaledImage</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="n">imageView</span><span class="o">.</span><span class="n">layer</span><span class="o">.</span><span class="n">cornerRadius</span> <span class="o">=</span> <span class="n">imageView</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">imageView</span><span class="o">.</span><span class="n">clipsToBounds</span> <span class="o">=</span> <span class="kc">true</span>
+
+<span class="k">self</span><span class="o">.</span><span class="n">navigationItem</span><span class="o">.</span><span class="n">rightBarButtonItem</span> <span class="o">=</span> <span class="kt">UIBarButtonItem</span><span class="p">(</span><span class="nv">customView</span><span class="p">:</span> <span class="n">imageView</span><span class="p">)</span></code></pre></figure>
+
+<hr />
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    <h2>Lastest Posts</h2>
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

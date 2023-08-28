@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Swift Closure - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Swift Closure - hcn1519 Dev Post">
+  <meta name="description" content="Swift의 closure에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Swift Closure">
+  <meta property="og:image" content="/public/assets/swiftLogo.jpg">
+  <meta property="og:description" content="Swift의 closure에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Swift Closure</h1>
+  <span class="post-date">08 May 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/swiftLogo.jpg"
+    
+    alt="Swift Closure feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>Closure는 익명함수로 알려진 기능으로, 함수를 <code class="language-plaintext highlighter-rouge">func</code> 키워드로 선언하는 것이 아니라, 함수를 <code class="language-plaintext highlighter-rouge">변수에 선언하는 형태</code>를 취하고 있습니다. Closure는 코드를 간결하고, 직관적으로 작성하는 데 많은 도움을 주는 기능입니다. 일반 함수와 Closure의 사용 방식의 차이를 통해 Closure에 대해 알아보겠습니다.</p>
+
+<h4 id="일반적인-함수-사용">일반적인 함수 사용</h4>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">counter</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">func</span> <span class="nf">addCounter</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="p">}</span>
+<span class="nf">addCounter</span><span class="p">()</span>
+<span class="nf">addCounter</span><span class="p">()</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span> <span class="c1">// 결과 2</span></code></pre></figure>
+
+<p>일반적인 함수는 다음과 같이 함수명을 설정(<code class="language-plaintext highlighter-rouge">addCounter</code>)하고, 해당 함수명으로 함수를 호출하는 형태를 취합니다.</p>
+
+<h4 id="closure-사용">Closure 사용</h4>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">counter</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">let</span> <span class="nv">addCounter</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="p">}</span>
+<span class="nf">addCounter</span><span class="p">()</span>
+<span class="nf">addCounter</span><span class="p">()</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span> <span class="c1">// 결과 2</span></code></pre></figure>
+
+<p>Closure는 변수에 값을 선언하는 대신에 변수에 <strong>함수</strong> 를 선언합니다. 여기서는 <code class="language-plaintext highlighter-rouge">addCounter</code> 변수에 함수를 선언하였습니다. 그리고 이 변수는 함수처럼 호출을 할 수 있습니다.(<code class="language-plaintext highlighter-rouge">addCounter()</code> 형태)</p>
+
+<h2 id="closure-기본-형태">Closure 기본 형태</h2>
+
+<p>Closure는 기본적으로 <strong>header</strong> 와 <strong>body</strong> 를 가진 형태로 구성되어 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">closure</span> <span class="o">=</span> <span class="p">{</span> <span class="n">header</span> <span class="k">in</span> <span class="n">body</span> <span class="p">}</span></code></pre></figure>
+
+<p>여기서 header에서는 인자와 리턴타입을 명시합니다. body에서는 호출시 실행되는 함수의 내용을 작성합니다. <code class="language-plaintext highlighter-rouge">in</code> 키워드는 header와 body를 나누는 키워드입니다.</p>
+
+<p><img src="https://hcn1519.github.io/public/postImages/2017-05/swift_closure/closure Expression.png" /></p>
+
+<p>애플의 Swift 공식 가이드 문서에서는 Closure를 <code class="language-plaintext highlighter-rouge">sorted(by:)</code> 메소드를 통해 설명합니다. <code class="language-plaintext highlighter-rouge">sorted(by:)</code> 메소드는 Swift 내장 메소드로 배열을 by 이하의 기준에 따라 정렬하는 메소드입니다. 이 때 그 기준은 배열에 있는 데이터 타입들 간의 <strong>대소 비교</strong> 를 통해 이뤄집니다. 즉, 배열의 두 값을 가져와 그 크기를 비교하여 앞의 값이 뒤의 값보다 이전에 와야하면 <code class="language-plaintext highlighter-rouge">true</code>를 그렇지 않으면 <code class="language-plaintext highlighter-rouge">false</code>를 반환하는 것을 반복하고(오름차순 기준) 그 결과에 따라 정렬합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Chris"</span><span class="p">,</span> <span class="s">"Alex"</span><span class="p">,</span> <span class="s">"Ewa"</span><span class="p">,</span> <span class="s">"Barry"</span><span class="p">,</span> <span class="s">"Daniella"</span><span class="p">]</span>
+<span class="k">let</span> <span class="nv">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1">// 배열 내의 데이터 타입에 따라 필요한 인자가 다릅니다.</span>
+<span class="n">names</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span>
+<span class="n">numbers</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span></code></pre></figure>
+
+<p>이 때, <code class="language-plaintext highlighter-rouge">by</code>에서 필요한 값은 Bool을 반환하는 함수의 형태로, 일반적인 함수 혹은 closure가 들어가게 됩니다. 이에 따라 다음과 같은 형태들이 <code class="language-plaintext highlighter-rouge">sorted(by:)</code>의 인자로 들어가게 됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Chris"</span><span class="p">,</span> <span class="s">"Alex"</span><span class="p">,</span> <span class="s">"Ewa"</span><span class="p">,</span> <span class="s">"Barry"</span><span class="p">,</span> <span class="s">"Daniella"</span><span class="p">]</span>
+
+<span class="c1">// s1이 s2보다 클 때, 앞에 와야한다를 의미</span>
+<span class="c1">// "Chris"가 "Alex" 보다 크고 이 때 true이므로 "Chris"가 "Alex"보다 배열의 앞쪽에 위치합니다.</span>
+<span class="c1">// 결과적으로 배열 전체가 내림차순으로 정렬됩니다.</span>
+<span class="kd">func</span> <span class="nf">backward</span><span class="p">(</span><span class="n">_</span> <span class="nv">s1</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">s2</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">s1</span> <span class="o">&gt;</span> <span class="n">s2</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">reversedNames</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">backward</span><span class="p">)</span>
+
+<span class="k">var</span> <span class="nv">reverse2</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="nv">s1</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">s2</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">in</span> <span class="k">return</span> <span class="n">s1</span> <span class="o">&lt;</span> <span class="n">s2</span> <span class="p">})</span></code></pre></figure>
+
+<p>위의 경우 <code class="language-plaintext highlighter-rouge">reversedNames</code>는 <code class="language-plaintext highlighter-rouge">sorted(by:)</code>의 인자를 일반 함수(<code class="language-plaintext highlighter-rouge">backward</code>)로 받은 형태이고, <code class="language-plaintext highlighter-rouge">reverse2</code>는 <code class="language-plaintext highlighter-rouge">sorted(by:)</code>의 인자를 closure로 받은 것입니다.</p>
+
+<h2 id="closure-축약">Closure 축약</h2>
+
+<p>Closure의 짧지만 직관적인 코드 작성에 크게 기여하는 것이 바로 축약형입니다. 반대로, 어떤 경우 축약을 하는지 모른다면 어떻게 Closure가 작동하는지 모르게 되는 상황에 직면하게 됩니다. 여기서는 Closure에서 어떤 경우 표현을 생략할 수 있는지 알아보겠습니다.</p>
+
+<h4 id="1-type-inferring">1. Type Inferring</h4>
+
+<div class="message">
+  Closure는 어떤 타입의 데이터가 인자로 들어오고, return 값이 어떤 것인지 미리 알고 있다면 이를 생략할 수 있습니다.
+</div>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="n">names</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="nv">s1</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">s2</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">in</span> <span class="k">return</span> <span class="n">s1</span> <span class="o">&lt;</span> <span class="n">s2</span> <span class="p">})</span>
+
+<span class="c1">// 데이터 타입 생략</span>
+<span class="n">names</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span> <span class="k">in</span> <span class="k">return</span> <span class="n">s1</span> <span class="o">&lt;</span> <span class="n">s2</span> <span class="p">})</span></code></pre></figure>
+
+<p>앞서 언급한 <code class="language-plaintext highlighter-rouge">sorted(by:)</code> 메소드의 파라미터 함수는 항상 배열의 데이터 타입을 가진 인자 두 개를 지니고, <code class="language-plaintext highlighter-rouge">Bool</code> 타입을 리턴합니다. 즉, 어떤 데이터 타입이 필요한지 이미 알려져 있어서 closure는 이를 <strong>추론</strong> 할 수 있습니다. 그러므로 이는 모두 생략 가능합니다. 다른 예시를 살펴 보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">multiply</span><span class="p">:</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">a</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="k">in</span> <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="p">}</span>
+
+<span class="c1">// 데이터 타입 생략</span>
+<span class="k">var</span> <span class="nv">multiply</span><span class="p">:</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="p">}</span></code></pre></figure>
+
+<p>위에서 <code class="language-plaintext highlighter-rouge">multiply</code>는 받은 두 값을 곱한 값을 반환하는 변수입니다. 이 때, 여기서는 변수를 선언할 때 타입을 <code class="language-plaintext highlighter-rouge">(Int, Int) -&gt; Int</code>로 명시를 했기 때문에, Closure에서 이미 어떤 데이터 타입이 인자로 오고 어떤 데이터 타입을 리턴하는지 알고 있습니다. 그러므로 Closure 내부에서는 이를 생략할 수 있습니다.</p>
+
+<h4 id="2-single-expression-closure의-return-keyword-생략">2. Single Expression Closure의 “return” keyword 생략</h4>
+
+<div class="message">
+  Single Expression Closure는 `return` 키워드를 생략할 수 있습니다.
+</div>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// return 키워드 생략</span>
+<span class="n">names</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span> <span class="k">in</span> <span class="n">s1</span> <span class="o">&lt;</span> <span class="n">s2</span> <span class="p">})</span>
+<span class="k">var</span> <span class="nv">multiply</span><span class="p">:</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="p">}</span></code></pre></figure>
+
+<p>다음과 같이 <code class="language-plaintext highlighter-rouge">return</code> 키워드 없이 Closure를 작성할 수 있습니다.</p>
+
+<h4 id="3-short-hand-argument-name">3. Short-hand argument name</h4>
+
+<div class="message">
+  Closure 내부로 들어오는 인자들은 항상 이름을 정의하지 않아도, 순서대로 `$0`, `$1`의 이름으로 사용할 수 있습니다.
+</div>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// 축약형 인자 이름 사용</span>
+<span class="n">names</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="p">{</span> <span class="nv">$0</span> <span class="o">&lt;</span> <span class="nv">$1</span> <span class="p">})</span>
+<span class="k">var</span> <span class="nv">multiply</span><span class="p">:</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">=</span> <span class="p">{</span> <span class="nv">$0</span> <span class="o">*</span> <span class="nv">$1</span> <span class="p">}</span></code></pre></figure>
+
+<p>다음과 같은 형태로 사용할 수 있습니다.</p>
+
+<h4 id="4-operator-methods를-통한-축약">4. Operator Methods를 통한 축약</h4>
+
+<p>위의 경우까지는 Closure에서 자주 통용될 수 있는 방법이고, operator(연산자)를 이용한 축약은 두 값을 연산하는 것이 결과로 나오는 특별한 경우이기 때문에 사용할 수 있는 축약입니다. 그 형태를 살펴보면,</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="n">names</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="o">&lt;</span><span class="p">)</span>
+<span class="k">var</span> <span class="nv">multiply</span><span class="p">:</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="p">)</span></code></pre></figure>
+
+<p>다음과 같습니다. <code class="language-plaintext highlighter-rouge">sorted(by:)</code> 메소드는 항상 <strong>두 값의 크기 비교를 통해 Bool을 반환</strong> 하므로 연산자(<code class="language-plaintext highlighter-rouge">&lt;</code>)만 쓰는 것으로도 그 의미를 알 수 있습니다. 또한 <code class="language-plaintext highlighter-rouge">multiply</code>의 경우에도 항상 <strong>두 값을 곱한 값을 반환</strong> 하므로 연산자(<code class="language-plaintext highlighter-rouge">*</code>)만으로도 연산을 모두 알 수 있습니다. 그렇기 때문에 위와 같은 축약이 가능합니다.</p>
+
+<h2 id="함수로-closure-전달하기">함수로 Closure 전달하기</h2>
+
+<p>Closure는 <code class="language-plaintext highlighter-rouge">변수</code>에 저장되기 때문에 변수를 함수에 넘길 수 있는 것처럼, Closure도 함수로 넘길 수 있습니다. 그 형태는 일반적인 변수를 넘기는 것과 동일하여 <code class="language-plaintext highlighter-rouge">func  함수명(label 변수명: 변수타입)</code> 이 조건에 맞게만 써주면 됩니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">hello</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="s">"Hello~"</span><span class="p">)</span> <span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">runClosure</span><span class="p">(</span><span class="n">name</span> <span class="nv">aClosure</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">aClosure</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="nf">runClosure</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="n">hello</span><span class="p">)</span> <span class="c1">// Hello~</span></code></pre></figure>
+
+<h4 id="trailing-closure를-활용한-syntax-sugar">Trailing Closure를 활용한 Syntax Sugar</h4>
+
+<p>Trailing Closure는 함수의 호출시 Closure를 인자로 넘길 때, Closure가 지나치게 길어질 경우 이를 함수와 분리해서 쓸 수 있는 Syntax Sugar입니다. 즉 위의 코드는 몇 가지 형태로 호출될 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// 인자를 전달하는 형태</span>
+<span class="nf">runClosure</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="n">hello</span><span class="p">)</span> <span class="c1">// Hello~</span>
+<span class="nf">runClosure</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="s">"anther closure"</span><span class="p">)</span> <span class="p">})</span>
+
+<span class="nf">runClosure</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// aClosure()가 호출된 시점에서 실행됩니다.</span>
+  <span class="nf">print</span><span class="p">(</span><span class="s">"trailing1"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// 인자가 Closure밖에 없다면 ()를 생략할 수 있습니다.</span>
+<span class="n">runClosure</span> <span class="p">{</span>
+  <span class="nf">print</span><span class="p">(</span><span class="s">"trailing2"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>인자가 한 개가 아닌 경우는 다음과 같이 사용할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">runClosure2</span><span class="p">(</span><span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">name</span> <span class="nv">aClosure</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">aClosure</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="nf">runClosure2</span><span class="p">(</span><span class="nv">index</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// index는 2로 넘기고, aClosure()가 호출된 시점에서 hi 출력</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"hi"</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><code class="language-plaintext highlighter-rouge">Alamofire</code>를 사용할 때 completionHandler로 나타나는 Closure 같은 것들은 이 때문에 trailing closure 형태로도 쓸 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// 인자를 전달하는 형태</span>
+<span class="kt">Alamofire</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="kt">URL</span><span class="p">)</span><span class="o">.</span><span class="nf">responseJSON</span><span class="p">(</span><span class="nv">completionHandler</span><span class="p">:</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+  <span class="c1">// do something</span>
+  <span class="nf">completed</span><span class="p">()</span>
+<span class="p">})</span>
+
+<span class="c1">// Trailing Closure 활용한 형태</span>
+<span class="kt">Alamofire</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="kt">URL</span><span class="p">)</span><span class="o">.</span><span class="n">responseJSON</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+  <span class="c1">// do something</span>
+  <span class="nf">completed</span><span class="p">()</span>
+<span class="p">})</span></code></pre></figure>
+
+<h4 id="map-method">Map Method</h4>
+
+<p>Trailing closure 형태로 사용하는 대표적인 메소드 중 하나로 <code class="language-plaintext highlighter-rouge">map(_:)</code> 메소드가 있습니다. <code class="language-plaintext highlighter-rouge">map(_:)</code>은 collection 데이터 타입 안의 모든 객체(혹은 일부)를 수정할 때 사용하는 메소드입니다. 일종의 루프라고 할 수 있는데, 일반적인 루프라기 보다는 값을 새롭게 <code class="language-plaintext highlighter-rouge">mapping</code>하는데 목적이 강합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">numbers</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="k">in</span>
+  <span class="k">var</span> <span class="nv">newVal</span> <span class="o">=</span> <span class="n">value</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="k">return</span> <span class="n">newVal</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>위의 예시는 <code class="language-plaintext highlighter-rouge">numbers</code> 배열의 값들을 기존 값+1의 값들로 새롭게 <code class="language-plaintext highlighter-rouge">mapping</code>한 것을 보여줍니다. 이 때, 위처럼 기존과 동일한 리턴 타입을 가질 수도 있지만, 그렇지 않아도 됩니다. 또한 배열로 딕셔너리를 만들 수도 있고, 반대의 경우도 가능합니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">digitNames</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="s">"Zero"</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s">"One"</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s">"Two"</span><span class="p">,</span>   <span class="mi">3</span><span class="p">:</span> <span class="s">"Three"</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s">"Four"</span><span class="p">,</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="s">"Five"</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="s">"Six"</span><span class="p">,</span> <span class="mi">7</span><span class="p">:</span> <span class="s">"Seven"</span><span class="p">,</span> <span class="mi">8</span><span class="p">:</span> <span class="s">"Eight"</span><span class="p">,</span> <span class="mi">9</span><span class="p">:</span> <span class="s">"Nine"</span>
+<span class="p">]</span>
+
+<span class="k">let</span> <span class="nv">oddOrEvenArr</span> <span class="o">=</span> <span class="n">digitNames</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="k">in</span>
+    <span class="k">var</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
+      <span class="n">str</span> <span class="o">=</span> <span class="s">"짝수"</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">str</span> <span class="o">=</span> <span class="s">"홀수"</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">str</span>
+<span class="p">}</span>
+<span class="c1">// oddOrEvenArr = ["짝수", "홀수", ...] (순서가 보장되지는 않습니다.)</span>
+
+<span class="k">let</span> <span class="nv">oddOrEvenDict</span> <span class="o">=</span> <span class="n">digitNames</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">String</span><span class="p">]</span> <span class="k">in</span>
+    <span class="k">var</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
+      <span class="n">str</span> <span class="o">=</span> <span class="s">"짝수"</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">str</span> <span class="o">=</span> <span class="s">"홀수"</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nv">key</span><span class="p">:</span> <span class="n">str</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="c1">// oddOrEvenDict = [0:"짝수", 1:"홀수", ...] (순서가 보장되지는 않습니다.)</span></code></pre></figure>
+
+<p>위의 예시의 경우 <code class="language-plaintext highlighter-rouge">oddOrEvenArr</code>과 <code class="language-plaintext highlighter-rouge">oddOrEvenDict</code>은 각각 <code class="language-plaintext highlighter-rouge">digitNames</code>을 새롭게 <code class="language-plaintext highlighter-rouge">mapping</code>하여 만든 배열과 딕셔너리입니다.</p>
+
+<hr />
+
+<h2 id="참고자료">참고자료</h2>
+<ul>
+  <li>Apple Inc. The Swift Programming Language (Swift 3.1)</li>
+  <li>Raywenderlich - Closure</li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-03/atomic">
+              atomic/non atomic
+              <small>01 Mar 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-class-deep">
+              Swift init 2부
+              <small>06 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-basic">
+              Swift init 1부
+              <small>05 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

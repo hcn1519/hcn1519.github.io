@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>캐시 메모리 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="캐시 메모리 - hcn1519 Dev Post">
+  <meta name="description" content="캐시 메모리의 일반적인 개념에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="캐시 메모리">
+  <meta property="og:image" content="/public/assets/blogThumb.png">
+  <meta property="og:description" content="캐시 메모리의 일반적인 개념에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">캐시 메모리</h1>
+  <span class="post-date">12 Aug 2018</span>
+
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="정의">정의</h2>
+
+<p>캐시는 데이터나 값을 미리 저장하는 임시 장소를 의미합니다. 정의에서 알 수 있는 점은 캐시가 저장소라는 점입니다. 그리고 또 중요한 점은 데이터를 <strong>미리</strong> 처리한다는 점과, 저장소가 영구적인 것이 아니라 <strong>임시</strong>적이라는 점입니다. 각각을 살펴보겠습니다.</p>
+
+<ul>
+  <li>캐시는 저장소이다.</li>
+</ul>
+
+<p>캐시는 어디에서 쓰이든 데이터나 값을 저장합니다. CPU 캐시, 캐시 메모리라고 불리는 캐시는 CPU에서 연산에 필요한 값을 저장하는 메모리입니다. 브라우저 캐시는 사용자의 브라우저 활동 데이터를 저장하는 저장소입니다.</p>
+
+<p>캐시는 프로세서가 연산 이전에 가장 먼저 살피는 저장소입니다. 그래서 CPU는 DRAM의 데이터에 접근하기 이전에 먼저 캐시 메모리를 살피고, 브라우저는 네트워크로부터 데이터를 직접 가져오기 이전에 브라우저 캐시를 우선적으로 확인합니다.</p>
+
+<ul>
+  <li>캐시는 데이터를 미리 처리한다.</li>
+</ul>
+
+<p>캐시를 사용하는 주된 목적은 데이터 접근 속도의 향상입니다. 어떤 데이터를 캐싱한다는 것은 데이터 접근이 오래 걸리는 작업을 미리 처리하여 캐시에 미리 저장해두고, 이를 사용하는 것을 의미합니다.</p>
+
+<ul>
+  <li>캐시는 임시적이다.</li>
+</ul>
+
+<p>일반적으로 RAM은 메모리를 영구적으로 저장하지 않고, 일시적으로 저장하고, 메모리 데이터를 주기적으로 삭제합니다. 캐시도 영구적으로 데이터를 저장하기보다는 만료 기간을 지정해서 사용하는 경우가 많습니다.</p>
+
+<h2 id="배경">배경</h2>
+
+<p>CPU의 클럭 속도가 증가함에 따라 DRAM에서 CPU의 속도를 따라가기 어렵게 되었습니다. 반면, SRAM은 DRAM에 비해 빠르지만 가격이 매우 비쌉니다. 그래서 인텔과 같은 CPU 제조사들은 시스템 성능을 높이면서 가격도 어느정도 합리적인 수준으로 맞추기 위해 CPU-DRAM을 기본 데이터 처리 구조로 두고(일반적인 CPU와 메모리 구조를 의미합니다.) 그 사이에 속도 보완을 위해 SRAM을 두었습니다. 그리고 이 SRAM이 캐시 메모리입니다.</p>
+
+<h2 id="목적">목적</h2>
+
+<p>캐시는 주로 다음의 2가지 목적을 위해서 사용합니다.</p>
+
+<ul>
+  <li>원래 데이터의 접근시간이 캐시의 데이터 접근 시간보다 오래 걸리는 경우</li>
+</ul>
+
+<p>네트워크에서 이미지를 다운로드 후 화면에 로딩하는 속도는 디스크에서 동일한 이미지 데이터를 가져오는 속도보다 느립니다. 또한, 디스크의 이미지 데이터를 가져와 화면에 로딩하는 속도는 메모리에서 이미지 데이터를 가져와 화면에 로딩하는 속도보다 빠릅니다. 만약 이미지 데이터가 반복적으로 사용된다면, 네트워크에서 반복적으로 이미지를 다운로드하는 것보다, 메모리에 동일한 이미지 데이터를 저장해두고 이를 가지고 화면에 이미지를 로딩하는 것이 훨씬 빠를 것입니다. 이 때, 이미지 데이터를 저장하는 공간이 캐시가 됩니다.</p>
+
+<p>캐시에 대해서 나무위키에서는 다음의 비유를 소개하고 있습니다.</p>
+
+<ul>
+  <li>지갑 - 캐시</li>
+  <li>현금 - 데이터</li>
+  <li>계좌 - 외부 저장소</li>
+</ul>
+
+<p>우리는 편의점에서 현금 결제를 하기 위해 현금이 필요합니다. 이 현금을 계좌에서 가져오기 위해서는 ATM에 가서 현금을 출금해야 합니다. 하지만, 지갑에 현금을 일부 들고 다닌다면, 그럴 필요 없이 바로 결제를 할 수 있습니다. 즉, 지갑이라는 캐시가 있어서 필요한 데이터인 현금을 ATM에 가서 뽑을 필요 없이 바로 사용할 수 있는 것입니다.</p>
+
+<ul>
+  <li>값을 다시 계산하는 시간을 줄이고 싶은 경우</li>
+</ul>
+
+<p>값을 계산하는 작업이 오래 걸리는 경우, 이를 미리 계산해서 그 값을 캐시에 저장해두고 사용할 수도 있습니다. 이 경우 연산이 오래 걸릴 수록 캐시를 사용하는 효용성이 더 높아지게 됩니다. 다만, 실시간으로 값을 연산하는 것이 아니기 때문에, 잘못된 데이터가 저장되어 있을 수 있다는 점을 염두해두고 사용하는 것이 필요합니다.</p>
+
+<h2 id="캐시의-동작-원리">캐시의 동작 원리</h2>
+
+<h3 id="캐시의-지역성">캐시의 지역성</h3>
+
+<p>캐시가 효율적으로 동작하려면 한 번 캐싱된 데이터를 반복적으로 사용하는 것이 중요합니다. 그리고 이를 위해서는 캐시에 저장할 데이터가 지역성을 지녀야 합니다. 지역성이란 데이터 접근이 <em>시간적</em>, 혹은 <em>공간적</em>으로 가깝게 일어나는 것을 의미합니다.</p>
+
+<ul>
+  <li>시간적 지역성(Temporal Locality) - 특정 데이터가 1번 접근되었는데, 이에 또 접근할 가능성이 높은 것</li>
+  <li>공간적 지역성(Spacial Locality) - 참조된 데이터 근처에 있는 데이터가 참조될 가능성이 높은 것</li>
+</ul>
+
+<p>이러한 지역성을 고려하여 데이터를 캐싱하게 되면 캐시 히트(Cache Hits) 비율이 높아지고, 캐시 미스(Cache Miss) 비율이 낮아지게 됩니다. 캐시 히트란 SRAM에 데이터가 있는 경우를 의미하고, 캐시 미스란 SRAM에 데이터가 없어서 DRAM에서 데이터를 가져와야 하는 경우를 의미합니다. 캐시를 설계할 때는 캐시 히트 비율이 높아야 캐시가 의미가 있습니다. 정리하자면, 캐시는 데이터 재사용율을 높이는 방식으로 사용되어야 효율적으로 동작하므로 이를 충분히 고려하여 캐시를 설계하고 사용해야 합니다.</p>
+
+<hr />
+
+<h2 id="참고자료">참고자료</h2>
+
+<ul>
+  <li><a href="https://namu.wiki/w/캐시%20메모리">캐시 메모리 - 나무위키</a></li>
+  <li><a href="https://ko.wikipedia.org/wiki/캐시">캐시 - 위키피디아</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    <h2>Lastest Posts</h2>
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Swift의 Struct와 Class - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Swift의 Struct와 Class - hcn1519 Dev Post">
+  <meta name="description" content="Swift의 Struct와 Class의 차이에 대해 알아봅니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Swift의 Struct와 Class">
+  <meta property="og:image" content="/public/assets/swiftLogo.jpg">
+  <meta property="og:description" content="Swift의 Struct와 Class의 차이에 대해 알아봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Swift의 Struct와 Class</h1>
+  <span class="post-date">14 Feb 2017</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/swiftLogo.jpg"
+    
+    alt="Swift의 Struct와 Class feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <h2 id="class와-struct-기본-구조">Class와 Struct 기본 구조</h2>
+
+<p>Class와 Struct는 매우 유사한 데이터 타입입니다. 형태도 유사하고, 쓰임새도 비슷합니다. Swift에서도 이러한 유사성은 유지되는데요. 그렇다면 구체적으로 어떤 부분에서 차이가 있을까요? 다음의 예제를 가지고 살펴보겠습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="kt">SportsCar</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">brand</span><span class="p">:</span> <span class="kt">String</span>
+    <span class="k">var</span> <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span>
+<span class="p">}</span>
+<span class="kd">struct</span> <span class="kt">Truck</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">weight</span><span class="p">:</span> <span class="kt">Int</span>
+    <span class="k">var</span> <span class="nv">mileage</span><span class="p">:</span> <span class="kt">Double</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>여기서는 <code>SportsCar</code>라는 Class와 <code>Truck</code> 이라는 구조체를 선언하였습니다. 정확히 class라는 단어와 struct라는 단어만 제외하면 그 형태가 동일합니다. 하지만, 여기서 class 부분은 컴파일 에러를 호출합니다. <strong>Swift에서는 기본적으로 class에 생성자(init)를 포함해야 하기 때문입니다.</strong>(Struct는 생성자가 없어도 됩니다.) 즉 다음과 같은 코드가 두 코드의 기본 형태입니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="kt">SportsCar</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">brand</span><span class="p">:</span> <span class="kt">String</span>
+    <span class="k">var</span> <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span>
+
+    <span class="nf">init</span><span class="p">(</span><span class="nv">brand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">brand</span> <span class="o">=</span> <span class="n">brand</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">struct</span> <span class="kt">Truck</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">weight</span><span class="p">:</span> <span class="kt">Int</span>
+    <span class="k">var</span> <span class="nv">mileage</span><span class="p">:</span> <span class="kt">Double</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>위와 같이 구성하면, 두 데이터 타입 모두 인스턴스(객체)를 생성할 수 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">sportCar1</span> <span class="o">=</span> <span class="kt">SportsCar</span><span class="p">(</span><span class="nv">brand</span><span class="p">:</span> <span class="s">"포르쉐"</span><span class="p">,</span> <span class="nv">model</span><span class="p">:</span> <span class="s">"911"</span><span class="p">)</span>
+<span class="k">var</span> <span class="nv">truck1</span> <span class="o">=</span> <span class="kt">Truck</span><span class="p">(</span><span class="nv">weight</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span> <span class="nv">mileage</span><span class="p">:</span> <span class="mi">16</span><span class="p">)</span></code></pre></figure>
+
+<p><br /></p>
+
+<h2 id="class와-struct의-차이">Class와 Struct의 차이</h2>
+
+<p>그렇다면 가장 근본적인 두 데이터 타입의 차이는 무엇일까요?</p>
+
+<p>답은 바로, class는 <code>reference type</code>이고, struct는 <code>value type</code>이라는 점입니다.</p>
+
+<h4 id="reference-type">Reference type</h4>
+<div class="message">
+  Reference type은 생성자를 통해 초기화 되고 나면, 변수에 값을 할당 하거나, 함수에서 호출할 때, 동일한 인스턴스의 reference(주소)를 반환하는 데이터 type을 말합니다. ex) Object
+</div>
+
+<h4 id="value-type">Value type</h4>
+<div class="message">
+  Value type은 변수에 값을 할당 하거나, 함수에서 호출할 때, 새로운 인스턴스를 만드는(copy) 데이터 type을 말합니다. ex) primitive data type - Int, Double, Char ...
+</div>
+<p>출처 : <a href="https://medium.com/@andrea.prearo/reference-and-value-types-in-swift-dad40ea76226#.lnwbky1s3">Reference and Value Types in Swift - Andrea Prearo</a></p>
+
+<p>Swift 언어를 만든 Apple에서 제공하는 공식 블로그에서는 두 타입의 차이를 mutation(변하기 쉬움)의 측면에서 설명하고 있습니다. <a href="https://developer.apple.com/swift/blog/?id=10">Apple blog - Value and Reference Types</a></p>
+
+<p>위의 예제의 경우를 mutable 측면에서 살펴 보면,</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nv">sportCar1</span> <span class="o">=</span> <span class="kt">SportsCar</span><span class="p">(</span><span class="nv">brand</span><span class="p">:</span> <span class="s">"포르쉐"</span><span class="p">,</span> <span class="nv">model</span><span class="p">:</span> <span class="s">"911"</span><span class="p">)</span>
+<span class="k">var</span> <span class="nv">sportCar2</span> <span class="o">=</span> <span class="n">sportCar1</span>
+<span class="n">sportCar2</span><span class="o">.</span><span class="n">brand</span> <span class="o">=</span> <span class="s">"람보르기니"</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">sportCar1</span><span class="o">.</span><span class="n">brand</span><span class="p">)</span> <span class="c1">// "람보르기니" 출력</span>
+
+<span class="k">var</span> <span class="nv">truck1</span> <span class="o">=</span> <span class="kt">Truck</span><span class="p">(</span><span class="nv">weight</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span> <span class="nv">mileage</span><span class="p">:</span> <span class="mi">16</span><span class="p">)</span>
+<span class="k">var</span> <span class="nv">truck2</span> <span class="o">=</span> <span class="n">truck1</span>
+<span class="n">truck2</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="mi">4000</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">truck1</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span> <span class="c1">// 2000 출력</span></code></pre></figure>
+
+<p>다음과 같이 차이가 생깁니다. 위의 경우를 살펴보면, <code>sportCar2.brand</code> 부분을 바꿨는데, <code>sportCar1.brand</code>의 값이 변했습니다. 반면, <code>truck2.weight</code> 부분을 바꾼 것은 <code>truck1.weight</code>에 영향을 끼치지 않았습니다. 이러한 현상이 왜 일어나는 것일까요? 그것은 <code>reference type</code>과 <code>value type</code>의 근본적인 메모리 모델이 다르기 때문입니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/dbqmfztgx16ht1u/sportcar.png" /></p>
+
+<p>먼저 class의 경우, <code>sportCar1</code>과 같은 변수가 SportsCar 객체의 값을 직접 저장하지 않습니다. 대신 <code>sportCar1</code> 변수는 <code>sportCar1</code> 객체의 데이터들이 저장된 장소의 <strong>주소</strong> 를 저장합니다. 그렇기 때문에, <code>sportCar2 = sportCar1</code>의 결과는 <code>sportCar2</code>에 <code>sportCar1</code>의 <strong>주소</strong> 를 복사합니다. 반면, struct는 <code>truck1</code> 변수가 저장한 값을 통채로 복사하여 새로운 인스턴스를 생성하고 이를 <code>truck1</code>에 할당합니다.</p>
+
+<p><img src="https://dl.dropbox.com/s/bbz6bcc7n21g67a/truck.png" /></p>
+
+<p>즉, <code>truck2 = truck1</code>의 결과는 <code>truck2</code>에 <code>truck1</code>의 <strong>값</strong> 전체를 복사합니다. 그렇기 때문에, <code>truck2</code>와 <code>truck1</code>은 전혀 <strong>별개의 데이터</strong> 가 되고 둘은 서로에게 영향을 미치지 않습니다.</p>
+
+<div class="message">
+  정리하자면, class는 변수 자신이 자신의 속성을 바꾸는 것 이외에도 외부에서 속성을 변경할 수 있습니다.(sportCar2.brand를 바꾼 것이 sportCar1.brand를 변화시킨 것) 반면 struct는 자신의 속성은 자신이 바꾸어야 합니다. 그렇기 때문에 value type인 struct가 class보다 좀 더 mutation에 대해 안전하다고 할 수 있습니다.
+</div>
+
+<h2 id="그렇다면-어떤-데이터를-사용해야-되나요">그렇다면 어떤 데이터를 사용해야 되나요?</h2>
+
+<p>많은 Swift의 API들은 class에 기반하고 있기 때문에 custom 데이터 타입을 만들 때 class를 무조건 사용해야 하는 경우가 빈번합니다. 하지만, 그 이외의 상황, 특히 multi threads 환경과 같은 곳에서는 mutable한 속성이 잘못된 결과를 쉽게 야기할 수 있기 때문에 struct를 사용할 것을 권장합니다.(기본 데이터 타입인 Array, String, Dictionary 등도 모두 value type에 속합니다.) Struct를 통해 동일한 값을 <strong>복사</strong> 하는 것은 constant time 수준만을 필요로 하고, 안전하게 데이터를 전달할 수 있습니다.</p>
+
+<p><br /></p>
+
+<h5 id="더-볼만한-추가-자료">더 볼만한 추가 자료</h5>
+<ul>
+  <li><a href="https://developer.apple.com/swift/blog/?id=10">Apple blog - Value and Reference Types</a></li>
+  <li><a href="https://medium.com/@andrea.prearo/reference-and-value-types-in-swift-dad40ea76226#.lnwbky1s3">Reference and Value Types in Swift - Andrea Prearo</a></li>
+  <li><a href="http://stackoverflow.com/a/24232845/5130783">Stackoverflow - Why Choose Struct Over Class?</a></li>
+</ul>
+
+<blockquote>
+  <p>참고자료 : Apple Inc. The Swift Programming Language (Swift 3.0.1)</p>
+</blockquote>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-03/atomic">
+              atomic/non atomic
+              <small>01 Mar 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-class-deep">
+              Swift init 2부
+              <small>06 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2019-02/swift-init-basic">
+              Swift init 1부
+              <small>05 Feb 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#Language">
+                Language
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>

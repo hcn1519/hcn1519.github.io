@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>iOS 다크모드 알아보기 - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="iOS 다크모드 알아보기 - hcn1519 Dev Post">
+  <meta name="description" content="iOS에서 다크모드를 적용하기 위해 알아야 하는 내용을 정리하였습니다.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="iOS 다크모드 알아보기">
+  <meta property="og:image" content="/public/assets/iOS.png">
+  <meta property="og:description" content="iOS에서 다크모드를 적용하기 위해 알아야 하는 내용을 정리하였습니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://localhost:4000" title="Home">CNH</a>
+            <small>Dev Post</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">iOS 다크모드 알아보기</h1>
+  <span class="post-date">13 Mar 2020</span>
+
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/public/assets/iOS.png"
+    
+    alt="iOS 다크모드 알아보기 feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <!-- 마지막 수정날짜와 포스트 생성 날짜가 30일 이상 차이 날 경우 업데이트 라벨 노출 -->
+  
+  <div class="message">
+    이 글은 2021년 11월 16일에 마지막으로 업데이트 되었습니다.
+  </div>
+  
+  
+  <p>다크모드 도입에 있어서 필요한 정보를 조사하면서 실제 구현과 관련된 내용을 정리해보았습니다. 공식 문서 및 영상을 보면서 관련 내용을 같이 참고하시면 좋을 것 같습니다.(해당 내용의 대부분은 <a href="https://developer.apple.com/videos/play/wwdc2019/214/">WWDC - Implement Dark Mode</a>을 기반으로 작성되었습니다.)</p>
+
+<h2 id="목차">목차</h2>
+
+<h4 id="1-uitraitcollection">1. UITraitCollection</h4>
+
+<ol>
+  <li><a href="./ios_darkmode#1-uitraitcollectioncurrent">UITraitCollection.current</a></li>
+  <li><a href="./ios_darkmode#2-traitcollectiondidchange">traitCollectionDidChange(_:)</a></li>
+  <li><a href="./ios_darkmode#3-raitcollection을-활용하여-라이트다크-모드-강제-설정하기"><code class="language-plaintext highlighter-rouge">TraitCollection</code>을 활용하여 라이트/다크 모드 강제 설정하기</a></li>
+</ol>
+
+<h4 id="2-다크모드-주요-구현-대상">2. 다크모드 주요 구현 대상</h4>
+
+<ol>
+  <li><a href="./ios_darkmode#1-색상">색상</a></li>
+  <li><a href="./ios_darkmode#2-이미지">이미지</a></li>
+  <li><a href="./ios_darkmode#3-기타-components">기타 Components</a></li>
+</ol>
+
+<h2 id="uitraitcollection">UITraitCollection</h2>
+
+<ul>
+  <li><a href="https://developer.apple.com/documentation/uikit/uitraitcollection">UITraitCollection</a>은 iOS의 인터페이스 환경에 대한 정보를 가지고 있는 객체입니다. 인터페이스 환경 정보에는 iOS 12부터  <code class="language-plaintext highlighter-rouge">userInterfaceStyle</code>라는 Property가 추가되었고, 이 값을 통해 라이트/다크 모드에 대해서 판별을 할 수 있습니다.(iOS 12에서는 다크모드가 지원되지 않는데, macOS의 다크모드가 지원되면서 API만 미리 추가된 것으로 보입니다.)</li>
+  <li><code class="language-plaintext highlighter-rouge">UITraitCollection</code>은 앱 실행시 1개의 값만 존재하는 것이 아니라, 각각의 View, ViewController마다 존재합니다. <code class="language-plaintext highlighter-rouge">UITraitCollection</code> 값은 시스템으로부터 UIScreen으로 전달되고, View 계층 구조 상으로 최하단의 View까지 그 값이 전달됩니다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/76678327-343fca00-661a-11ea-8cb2-5894562c8569.png" alt="dark1" /></p>
+
+<ul>
+  <li>UIKit은 특정 UIView 객체를 생성할 때, 적합한 <code class="language-plaintext highlighter-rouge">traitCollection</code>이 무엇인지 예상하여 값을 설정해줍니다. 즉, <code class="language-plaintext highlighter-rouge">addSubView</code> 과정에서 <code class="language-plaintext highlighter-rouge">traitCollection</code>을 설정하지 않아도 상속, 사용자 설정 값 등에 기반하여 값이 알아서 설정됩니다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/76678329-373aba80-661a-11ea-910e-bb681c887511.png" alt="dark2" /></p>
+
+<h3 id="1-uitraitcollectioncurrent">1. UITraitCollection.current</h3>
+
+<ul>
+  <li><a href="https://developer.apple.com/documentation/uikit/uitraitcollection/3238080-current">UITraitCollection.current</a>은 iOS 13에서 추가된 static 변수로 현재의 <code class="language-plaintext highlighter-rouge">traitCollection</code>을 알려줍니다. UIKit은 UIView를 그릴 때 <code class="language-plaintext highlighter-rouge">UITraitCollection.current</code>를 해당 View의 <code class="language-plaintext highlighter-rouge">traitCollection</code>으로 설정하여 <code class="language-plaintext highlighter-rouge">UITraitCollection.current</code>이 현재의 View에 대한 <code class="language-plaintext highlighter-rouge">traitCollection</code>을 나타낼 수 있도록 합니다.</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">BackgroundView</span><span class="p">:</span> <span class="kt">UIView</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">draw</span><span class="p">(</span><span class="n">_</span> <span class="nv">rect</span><span class="p">:</span> <span class="kt">CGRect</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// UIKit sets UITraitCollection.current to self.traitCollection</span>
+        <span class="kt">UIColor</span><span class="o">.</span><span class="n">systemBackground</span><span class="o">.</span><span class="nf">setFill</span><span class="p">()</span>
+        <span class="kt">UIRectFill</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">TraitCollection.current</code>은 <code class="language-plaintext highlighter-rouge">layoutSubViews()</code> 호출 이전에 반드시 업데이트 됩니다. 그러므로,  아래와 같은 layout 메소드에서는 <code class="language-plaintext highlighter-rouge">TraitCollection</code>이 부모의 것을 획득한 것이 보장됩니다.</li>
+  <li>그래서 라이트/다크 모드 전환시에 업데이트가 필요한 View는 <code class="language-plaintext highlighter-rouge">viewDidLoad()</code>가 아니라 <code class="language-plaintext highlighter-rouge">layoutSubViews()</code>에서 업데이트가 진행이 되어야 합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">layoutSubViews()</code>는 레이아웃을 그릴 때 반복적으로 호출되는 메소드이므로 코드 작성시 유의해야 합니다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/76678330-3c980500-661a-11ea-8e49-675ab1ae1a1d.png" alt="dark3" /></p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">ViewController</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">viewWillLayoutSubviews</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">super</span><span class="o">.</span><span class="nf">viewWillLayoutSubviews</span><span class="p">()</span>
+        <span class="nf">updateTitle</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">updateTitle</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="kd">#available(iOS 13.0, *)</span> <span class="p">{</span>
+            <span class="k">guard</span> <span class="n">traitCollection</span><span class="o">.</span><span class="n">userInterfaceStyle</span> <span class="o">==</span> <span class="o">.</span><span class="n">dark</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s">"라이트 모드"</span>
+                <span class="k">return</span>
+            <span class="p">}</span>
+            <span class="k">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s">"다크 모드"</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s">"라이트 모드"</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>이 때 <code class="language-plaintext highlighter-rouge">traitCollection</code>이 변경될 경우 <code class="language-plaintext highlighter-rouge">traitCollectionDidChange()</code>이 호출됩니다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/76678332-40c42280-661a-11ea-95f6-07a8dc933471.png" alt="dark4" /></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">layoutSubViews()</code>, <code class="language-plaintext highlighter-rouge">traitCollectionDidChange()</code> 함수 외부에서 <code class="language-plaintext highlighter-rouge">self.view</code>와 <code class="language-plaintext highlighter-rouge">UITraitCollection.current</code>는 동일한 값을 보장하지 않습니다.</li>
+  <li>애플에서는 이와 같은 경우에 다음과 같이 3가지 방식으로 대응할 것을 권장하고 있습니다.</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">layer</span> <span class="o">=</span> <span class="kt">CALayer</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">traitCollection</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">traitCollection</span>
+
+<span class="c1">// Option 1 - resolvedColor를 통해 traitCollection 반영</span>
+<span class="k">let</span> <span class="nv">resolvedColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="nf">resolvedColor</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">traitCollection</span><span class="p">)</span>
+<span class="n">layer</span><span class="o">.</span><span class="n">borderColor</span> <span class="o">=</span> <span class="n">resolvedColor</span><span class="o">.</span><span class="n">cgColor</span>
+
+<span class="c1">// Option 2 - performAsCurrent 클로저 활용</span>
+<span class="n">traitCollection</span><span class="o">.</span><span class="n">performAsCurrent</span> <span class="p">{</span>
+    <span class="n">layer</span><span class="o">.</span><span class="n">borderColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">cgColor</span>
+<span class="p">}</span>
+
+<span class="c1">// Option 3 - 직접 current TraitCollection 업데이트</span>
+<span class="c1">// 이 경우 UITraitCollection은 동작하는 Thread에서만 적용되어 다른 Thread에 영향을 주지 않습니다.</span>
+<span class="c1">// 이 방식은 performAsCurrent의 내부 동작과 동일합니다.</span>
+<span class="k">let</span> <span class="nv">savedTraitCollection</span> <span class="o">=</span> <span class="kt">UITraitCollection</span><span class="o">.</span><span class="n">current</span>
+<span class="kt">UITraitCollection</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">traitCollection</span>
+<span class="n">layer</span><span class="o">.</span><span class="n">borderColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">cgColor</span>
+<span class="kt">UITraitCollection</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">savedTraitCollection</span>
+</code></pre></div></div>
+
+<h3 id="2-traitcollectiondidchange">2. traitCollectionDidChange</h3>
+
+<ul>
+  <li><a href="https://developer.apple.com/documentation/uikit/uitraitenvironment/1623516-traitcollectiondidchange">traitCollectionDidChange(_:)</a>은 인터페이스 환경 변화에 대한 옵저빙 메소드로 <code class="language-plaintext highlighter-rouge">UITraitCollection</code>이 변경될 때마다 호출이 됩니다.</li>
+  <li>iOS 13에서 <code class="language-plaintext highlighter-rouge">traitCollectionDidChange(_:)</code>는 초기화 과정에서 모든 traitCollection이 결정된 이후에만 호출되도록 API가 변경되었습니다. 이 때문에, 하위 버전에서 <code class="language-plaintext highlighter-rouge">traitCollectionDidChange(_:)</code>이 호출되던 케이스인데 iOS 13에서는 호출되지 않는 상황이 발생할 수 있습니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">traitCollection</code>의 변경은 라이트/다크 모드에 국한된 것이 아니라, sizeClass 변경시에도 호출되기 때문에 아래와 같이 <code class="language-plaintext highlighter-rouge">userInterfaceStyle</code> 변경을 확인할 수 있는 별도의 API가 추가되었습니다.</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">traitCollectionDidChange</span><span class="p">(</span><span class="n">_</span> <span class="nv">previousTraitCollection</span><span class="p">:</span> <span class="kt">UITraitCollection</span><span class="p">?)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="o">.</span><span class="nf">traitCollectionDidChange</span><span class="p">(</span><span class="n">previousTraitCollection</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">traitCollection</span><span class="o">.</span><span class="nf">hasDifferentColorAppearance</span><span class="p">(</span><span class="nv">comparedTo</span><span class="p">:</span> <span class="n">previousTraitCollection</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Resolve dynamic colors again</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">traitCollectionDidChange(_:)</code> 호출 시점에 대한 디버깅을 위해 별도의 argument가 추가되었습니다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/76678335-46ba0380-661a-11ea-926a-f34c76da0fea.png" alt="dark5" /></p>
+
+<h3 id="3-traitcollection을-활용하여-라이트다크-모드-강제-설정하기">3. TraitCollection을 활용하여 라이트/다크 모드 강제 설정하기</h3>
+
+<ul>
+  <li>iOS 13부터 UIView와 UIViewController는 <code class="language-plaintext highlighter-rouge">overrideUserInterfaceStyle</code>이라는 property를 새롭게 제공합니다. 이 값에 대해서 <code class="language-plaintext highlighter-rouge">.light</code>, <code class="language-plaintext highlighter-rouge">.dark</code>와 같이 지정할 경우 그 하위의 SubView까지 스타일 값이 오버라이딩 됩니다.</li>
+  <li>전체 앱에 대해서 라이트/다크 모드를 강제하려면 Info.plist에 <code class="language-plaintext highlighter-rouge">UIUserInterfaceStyle</code> 값을 <code class="language-plaintext highlighter-rouge">.light</code>, <code class="language-plaintext highlighter-rouge">.dark</code>와 같이 설정해주면 됩니다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/76678338-49b4f400-661a-11ea-9ee5-68b5da4814d8.png" alt="dark6" /></p>
+
+<h2 id="다크모드-주요-구현-대상">다크모드 주요 구현 대상</h2>
+
+<h3 id="1-색상">1. 색상</h3>
+
+<p>Xcode에서는 아래와 같은 기능을 통해서 라이트/다크 모드에 대한 색상을 설정할 수 있습니다.</p>
+
+<h4 id="namedcolor를-통한-지원">namedColor를 통한 지원</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">namedColor</code>는 <strong>iOS 11 이상</strong> 부터 지원되는 기능으로 Asset Catalog를 통해서 UIColor를 정의하여 사용하는 기능입니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">namedColor</code>는 일반 이미지처럼 xcasset에 추가할 수 있습니다.</li>
+  <li>이 때, Attribute Inspector에서 appearance 설정을 Any, Dark, Light 설정시 1개의 이름으로 각 모드별 색상이 적용됩니다.</li>
+</ul>
+
+<div class="message">
+    Use the Any Appearance variant to specify the color value to use on older systems that do not support Dark Mode.
+</div>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/76678341-4f123e80-661a-11ea-8182-80b68c2e458a.png" alt="dark7" /></p>
+
+<p>이렇게 정의된 <code class="language-plaintext highlighter-rouge">namedColor</code>는 Interface Builder, 코드에서 각각 다음과 같이 사용할 수 있습니다.</p>
+
+<ul>
+  <li>Interface Builder</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/76678462-95b46880-661b-11ea-86a0-fc0c28f6b21c.png" alt="dark8" /></p>
+
+<ul>
+  <li>Code</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">purColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="s">"Pure"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="system-color">System Color</h4>
+
+<ul>
+  <li>iOS 13에서는 다크 모드를 지원하는 <code class="language-plaintext highlighter-rouge">System Color</code>가 추가 되었습니다. <code class="language-plaintext highlighter-rouge">System Color</code>도 <code class="language-plaintext highlighter-rouge">namedColor</code>와 유사하게 동작하며 라이트/다크 모드에서 설정된 색상 값이 다릅니다.(<a href="https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/">색상 표, Human Interface Guidelines - Color</a>)</li>
+  <li><code class="language-plaintext highlighter-rouge">System Color</code>에는 사용 용도에 맞춰서 View의 이름으로 정의된 색상(semantically defined system color)도 존재합니다.</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">color</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="o">.</span><span class="n">systemBlue</span>
+<span class="k">let</span> <span class="nv">labelColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="o">.</span><span class="n">label</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">System Color</code> 이외에 기존에 사용되던 <code class="language-plaintext highlighter-rouge">UIColor.black</code>, <code class="language-plaintext highlighter-rouge">UIColor.white</code>와 같은 색상은 라이트/다크 모드 전환이 지원되지 않습니다. 그래서 다크 모드가 지원되는 화면에서는 해당 색상들이 <code class="language-plaintext highlighter-rouge">System Color</code>로 변경되거나, 적절히 정의된 <code class="language-plaintext highlighter-rouge">namedColor</code>로 설정되어야 합니다.</p>
+
+<h4 id="resolved-color">Resolved Color</h4>
+
+<ul>
+  <li>UIColor에는 <a href="https://developer.apple.com/documentation/uikit/uicolor/3238042-resolvedcolor">resolvedColor(:UITraitCollection)</a> extension 메소드가 iOS 13에서 추가되었습니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">resolvedColor</code>는 시스템의 라이트/다크 모드와 관계 없이 특정 View에 설정된 <code class="language-plaintext highlighter-rouge">UITraitCollection</code>에 맞춰서 정해진 색상을 반환합니다.</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ViewController와 subView의 UITraitCollection.userInterfaceStyle에 따라서 값이 다름</span>
+<span class="k">let</span> <span class="nv">vcBGColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="o">.</span><span class="n">systemBackground</span><span class="o">.</span><span class="nf">resolvedColor</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">viewController</span><span class="o">.</span><span class="n">traitCollection</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">subViewBGColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="o">.</span><span class="n">systemBackground</span><span class="o">.</span><span class="nf">resolvedColor</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">subView</span><span class="o">.</span><span class="n">traitCollection</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="dynamic-provider">Dynamic Provider</h4>
+
+<p>iOS 13 이상에서 UIColor에 신규 API인 <a href="https://developer.apple.com/documentation/uikit/uicolor/3238041-init">UIColor.init(dynamicProvider:)</a>이 추가되었습니다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">UIColor</span> <span class="p">{</span>
+    <span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">13.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+    <span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">dynamicProvider</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">UITraitCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIColor</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>해당 생성자는 <code class="language-plaintext highlighter-rouge">UITraitCollection</code>에 따라서 색상을 리턴할 수 있는 기능을 지원합니다.</li>
+  <li>코드로 라이트/다크 모드에 대한 분기 처리가 필요할 때 사용할 수 있습니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">dynamicProvider</code>는 <code class="language-plaintext highlighter-rouge">UITraitCollection.current</code>를 사용하여 <code class="language-plaintext highlighter-rouge">userInterfaceStyle</code>을 판별하므로 별도의 <code class="language-plaintext highlighter-rouge">traitCollection</code>을 인자로 넘기지 않고도 색상을 설정할 수 있습니다.</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">myColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="kd">#available(iOS 13, *)</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">color</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="p">(</span><span class="nv">dynamicProvider</span><span class="p">:</span> <span class="p">{</span> <span class="n">traitCollection</span> <span class="k">in</span>
+            <span class="k">if</span> <span class="n">traitCollection</span><span class="o">.</span><span class="n">userInterfaceStyle</span> <span class="o">==</span> <span class="o">.</span><span class="n">dark</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="kt">UIColor</span><span class="o">.</span><span class="n">white</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="kt">UIColor</span><span class="o">.</span><span class="n">black</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="n">color</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// 하위버전</span>
+        <span class="k">return</span> <span class="kt">UIColor</span><span class="o">.</span><span class="n">black</span>
+    <span class="p">}</span>
+<span class="p">}()</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Note: dynamicProvider 생성자를 활용해서 생성된 UIColor는 Interface Builder에서 사용할 수 없습니다.</p>
+</blockquote>
+
+<h3 id="2-이미지">2. 이미지</h3>
+
+<p>다크모드와 관련된 이미지 API의 경우에도 색상과 거의 동일한 API를 사용합니다. 이미지도 색상과 동일하게 Asset Catalog에서 라이트/다크 모드에 맞춰서 이미지를 노출하도록 설정 할 수 있습니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/76678469-a1a02a80-661b-11ea-8ab5-23b8606097e2.png" alt="dark9" /></p>
+
+<h4 id="template-image">Template Image</h4>
+
+<ul>
+  <li>아이콘과 같은 이미지의 경우에는 이미지의 <code class="language-plaintext highlighter-rouge">rendering mode</code>를 <code class="language-plaintext highlighter-rouge">template Image</code>로 설정하여 <code class="language-plaintext highlighter-rouge">tintColor</code>를 주어서 다크모드를 지원하는 방법도 있습니다. 이 방법 사용시에는 라이트/다크 모드에 맞춰서 <code class="language-plaintext highlighter-rouge">tintColor</code>를 적용하면 됩니다.</li>
+  <li>Template Image도 Asset Catalog 설정, Code 설정 모두 지원합니다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/13018877/76678472-a5cc4800-661b-11ea-9379-09738bf2c7c4.png" alt="dark92" /></p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">image</span> <span class="o">=</span> <span class="kt">UIImage</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="s">"dessert"</span><span class="p">)?</span><span class="o">.</span><span class="nf">withRenderingMode</span><span class="p">(</span><span class="o">.</span><span class="n">alwaysTemplate</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="resolved-image">Resolved Image</h4>
+
+<p>이미지의 경우에도 <code class="language-plaintext highlighter-rouge">UITraitCollection</code>에 맞춰서 나타나는 이미지를 동적으로 변경할 수 있습니다. 다만 이는 <code class="language-plaintext highlighter-rouge">UIImage</code>의 extension으로 제공되는 것이 아니라, <code class="language-plaintext highlighter-rouge">UIImageAsset</code>의 extension으로 제공됩니다.</p>
+
+<ul>
+  <li>참고 - <a href="https://developer.apple.com/documentation/uikit/uiimage/providing_images_for_different_appearances">Providing Images for Different Appearances - Apple Article</a></li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">UIImageAsset</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">NSSecureCoding</span> <span class="p">{</span>
+    <span class="kd">open</span> <span class="kd">func</span> <span class="nf">image</span><span class="p">(</span><span class="n">with</span> <span class="nv">traitCollection</span><span class="p">:</span> <span class="kt">UITraitCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIImage</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="k">let</span> <span class="nv">image</span> <span class="o">=</span> <span class="kt">UIImage</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="s">"HeaderImage"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">asset</span> <span class="o">=</span> <span class="n">image</span><span class="p">?</span><span class="o">.</span><span class="n">imageAsset</span>
+<span class="k">let</span> <span class="nv">resolvedImage</span> <span class="o">=</span> <span class="n">asset</span><span class="p">?</span><span class="o">.</span><span class="nf">image</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">traitCollection</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="symbol-image">Symbol Image</h4>
+
+<p>Symbol Image의 경우에는 애플에서 제작한 <a href="https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/">SF Symbols</a> 기반으로 구성된 벡터 이미지입니다. 해당 Symbol을 커스텀해서 앱 디자인에 맞는 심볼을 제공할 수 있습니다.</p>
+
+<ul>
+  <li>참고 - <a href="https://developer.apple.com/documentation/uikit/uiimage/configuring_and_displaying_symbol_images_in_your_ui">Configuring and Displaying Symbol Images in Your UI - Apple Article</a>)</li>
+</ul>
+
+<h3 id="3-기타-components">3. 기타 Components</h3>
+
+<h4 id="1-statusbar">1. StatusBar</h4>
+
+<p>statusBarStyle에서 <code class="language-plaintext highlighter-rouge">darkContent</code> 옵션이 추가되었습니다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">UIStatusBarStyle</span> <span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="p">`</span><span class="nv">default</span><span class="p">`</span> <span class="c1">// Automatically chooses light or dark content based on the user interface style</span>
+    <span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">7.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+    <span class="k">case</span> <span class="n">lightContent</span> <span class="c1">// Light content, for use on dark backgrounds</span>
+    <span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">13.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
+    <span class="k">case</span> <span class="n">darkContent</span> <span class="c1">// Dark content, for use on light backgrounds</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="2-uiactivityindicatorview">2. UIActivityIndicatorView</h4>
+
+<p>기존의 색상 이름으로 설정되던 스타일이 <code class="language-plaintext highlighter-rouge">.medium</code>, <code class="language-plaintext highlighter-rouge">.large</code>로 변경되었습니다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">UIActivityIndicatorView</span><span class="p">(</span><span class="nv">style</span><span class="p">:</span> <span class="o">.</span><span class="n">medium</span><span class="p">)</span>
+<span class="kt">UIActivityIndicatorView</span><span class="p">(</span><span class="nv">style</span><span class="p">:</span> <span class="o">.</span><span class="n">large</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="https://media.oss.navercorp.com/user/10153/files/e1735d80-5f09-11ea-8c65-cb66b351fc67" alt="스크린샷 2020-03-05 오후 5 50 56" /></p>
+
+<h4 id="3-attributedstring">3. AttributedString</h4>
+
+<p>AttributedString의 경우 <strong>모두</strong> <code class="language-plaintext highlighter-rouge">foregroundColor</code>를 라이트/다크 모드에 맞게 추가해주어야 합니다.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">attributes</span><span class="p">:</span> <span class="p">[</span><span class="kt">NSAttributedString</span><span class="o">.</span><span class="kt">Key</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">.</span><span class="nv">font</span><span class="p">:</span> <span class="kt">UIFont</span><span class="o">.</span><span class="nf">systemFont</span><span class="p">(</span><span class="nv">ofSize</span><span class="p">:</span> <span class="mf">36.0</span><span class="p">),</span>
+    <span class="o">.</span><span class="nv">foregroundColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="o">.</span><span class="n">label</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<h2 id="참고자료">참고자료</h2>
+
+<ul>
+  <li><a href="https://developer.apple.com/videos/play/wwdc2019/214/">WWDC - Implement Dark Mode</a></li>
+  <li><a href="https://developer.apple.com/documentation/xcode/supporting_dark_mode_in_your_interface">Apple Article - Supporting Dark Mode in Your Interface</a></li>
+  <li><a href="https://nshipster.com/dark-mode/">NSHipster - Dark Mode on iOS 13</a></li>
+  <li>기타 관련 API 문서 - 해당 링크는 설명 중간에 포함</li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+      
+      <h2>읽어 볼만한 다른 글</h2>
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#WWDC">
+                WWDC
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2020-08/autolayout_performance_optimization">
+              AutoLayout 성능 최적화하기
+              <small>23 Aug 2020</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#WWDC">
+                WWDC
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2018-09/wwdc2018session416">
+              iOS Memory Footprint 분석 방법
+              <small>01 Sep 2018</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#WWDC">
+                WWDC
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/articles/2017-09/ios_app_lifeCycle">
+              iOS Application Life Cycle 이해하기
+              <small>07 Sep 2017</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#iOS">
+                iOS
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="https://hcn1519.github.io/tags/#UIKit">
+                UIKit
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+        
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="http://localhost:4000">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>
