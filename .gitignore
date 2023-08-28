@@ -7,3 +7,5 @@ _site
 *.editorconfig
 
 drafts/
+
+node_modules/

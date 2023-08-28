@@ -117,23 +117,22 @@ layout: default
 
 
 <script>
-  {% assign themeName = "github-light" %}
+  {% assign theme_name = "github-light" %}
   if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     // dark mode
-    {% assign themeName = "github-dark" %}
+    {% assign theme_name = "github-dark" %}
   }
 </script>
 <script src="https://utteranc.es/client.js"
         repo="hcn1519/hcn1519.github.io"
         issue-term="og:title"
         label="gets Comments 🙌"
-        theme={{ themeName }}
+        theme={{ theme_name }}
         crossorigin="anonymous"
         async>
 </script>
 
 <div class="back-home">
-    <a href="{{ site.url }}/">< 홈으로</a>
-    <p>잘못된 정보나 궁금하신 점은 hcn1519@gmail.com으로 알려주시면 감사하겠습니다.</p>
+    <a href="{{ site.url }}">< Home</a>
   </div>
 </div>

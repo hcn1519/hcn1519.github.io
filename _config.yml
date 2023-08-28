@@ -29,6 +29,5 @@ plugins:
 markdown: kramdown
 highlighter: rouge
 
-# languages: ["en","ko"]
 languages: ["ko", "en"]
 exclude_from_localizations: ["javascript", "images", "css"]
