@@ -16,13 +16,13 @@ permalink: /tags/
 </ul>
 
 <div class="tag-list">
-{% for tag in site.tags %}
+{% for tag in site.tags reversed %}
   <div class="tag-group">
     {% capture tag_name %}{{ tag | first }}{% endcapture %}
     <h5 class="tag-group-title" id="{{ tag_name | slugize }}">{{ tag_name }}</h5>
     {% for post in site.tags[tag_name] %}
     <article class="tag-item">
-      <a class="tag-item-title" href="{{ site.url }}{{ post.url }}">{{post.title}}</a>
+      <a class="tag-item-title" href="{{ site.baseurl }}{{ post.url }}">{{post.title}}</a>
     </article>
     {% endfor %}
   </div>

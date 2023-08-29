@@ -15,8 +15,18 @@
       <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
-            <a href="https://hcn1519.github.io" title="Home">CNH</a>
+            <a href="{{ site.baseurl }}" title="Home">CNH</a>
             <small>{{ site.tagline }}</small>
+
+            <span style="display: block;font-size: medium;text-align: end;margin-top: -22px;">
+              <small>
+              {% if site.lang == "en" %}
+              <a href="{{ site.baseurl_root }}/">한국어로 보기</a>
+              {% else %}
+              <a href="{{ site.baseurl_root }}/en">Read in English</a>
+              {% endif %}
+              </small>
+            </span>
           </h3>
         </div>
       </div>
