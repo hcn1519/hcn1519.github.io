@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="https://hcn1519.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://hcn1519.github.io/" rel="alternate" type="text/html" hreflang="ko" /><updated>2023-08-28T16:49:21+09:00</updated><id>https://hcn1519.github.io/feed.xml</id><title type="html">hcn1519 Dev Post</title><subtitle>프로그래밍에 관하여 글을 쓰는 블로그입니다.</subtitle><author><name>Changnam Hong</name></author><entry><title type="html">DiffableDataSource로 안전하게 UIKit List 업데이트하기</title><link href="https://hcn1519.github.io/articles/2022-05/diffabledatasource" rel="alternate" type="text/html" title="DiffableDataSource로 안전하게 UIKit List 업데이트하기" /><published>2022-05-13T00:53:17+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>https://hcn1519.github.io/articles/2022-05/diffabledatasource</id><content type="html" xml:base="https://hcn1519.github.io/articles/2022-05/diffabledatasource">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2023-08-29T15:43:49+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">hcn1519 Dev Post</title><subtitle>프로그래밍에 관하여 글을 쓰는 블로그입니다.</subtitle><author><name>Changnam Hong</name></author><entry><title type="html">DiffableDataSource로 안전하게 UIKit List 업데이트하기</title><link href="http://localhost:4000/articles/2022-05/diffabledatasource" rel="alternate" type="text/html" title="DiffableDataSource로 안전하게 UIKit List 업데이트하기" /><published>2022-05-13T00:53:17+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>http://localhost:4000/articles/2022-05/diffabledatasource</id><content type="html" xml:base="http://localhost:4000/articles/2022-05/diffabledatasource">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;./diffableDataSource#1-wwdc---advances-in-ui-data-sources&quot;&gt;WWDC - Advances in UI Data Sources&lt;/a&gt;&lt;/li&gt;
@@ -246,7 +246,7 @@
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2019/220&quot;&gt;Advances in UI Data Sources&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="iOS," /><category term="WWDC," /><category term="DiffableDataSource," /><category term="UIKit" /><category term="iOS" /><category term="WWDC" /><category term="DiffableDataSource" /><category term="UIKit" /><summary type="html">UIKit의 DiffableDataSource를 사용하기 위한 방법에 대해 정리하였습니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22iOS.png%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22iOS.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Swift Async Await</title><link href="https://hcn1519.github.io/articles/2022-04/swift_async_await" rel="alternate" type="text/html" title="Swift Async Await" /><published>2022-04-08T09:30:00+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>https://hcn1519.github.io/articles/2022-04/swift_async_await</id><content type="html" xml:base="https://hcn1519.github.io/articles/2022-04/swift_async_await">&lt;p&gt;이 글에서는 Swift 5.5에 소개된 Async/Await에 대해 살펴보고자 합니다.&lt;/p&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="iOS," /><category term="WWDC," /><category term="DiffableDataSource," /><category term="UIKit" /><category term="iOS" /><category term="WWDC" /><category term="DiffableDataSource" /><category term="UIKit" /><summary type="html">UIKit의 DiffableDataSource를 사용하기 위한 방법에 대해 정리하였습니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/%7B%22feature%22=%3E%22iOS.png%22%7D" /><media:content medium="image" url="http://localhost:4000/%7B%22feature%22=%3E%22iOS.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Swift Async Await</title><link href="http://localhost:4000/articles/2022-04/swift_async_await" rel="alternate" type="text/html" title="Swift Async Await" /><published>2022-04-08T09:30:00+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>http://localhost:4000/articles/2022-04/swift_async_await</id><content type="html" xml:base="http://localhost:4000/articles/2022-04/swift_async_await">&lt;p&gt;이 글에서는 Swift 5.5에 소개된 Async/Await에 대해 살펴보고자 합니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
 
@@ -412,7 +412,7 @@
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html&quot;&gt;The Swift Programming Language (5.5) - Concurrency&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="Swift" /><category term="Language" /><category term="Async" /><category term="Await" /><category term="Concurrency" /><category term="Swift" /><category term="Language" /><category term="Async" /><category term="Await" /><category term="Concurrency" /><category term="Thread" /><summary type="html">Swift의 Async Await에 대해 알아봅니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22swiftLogo.jpg%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22swiftLogo.jpg%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Test Spy</title><link href="https://hcn1519.github.io/articles/2022-01/test_spy" rel="alternate" type="text/html" title="Test Spy" /><published>2022-01-05T00:53:17+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>https://hcn1519.github.io/articles/2022-01/test_spy</id><content type="html" xml:base="https://hcn1519.github.io/articles/2022-01/test_spy">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="Swift" /><category term="Language" /><category term="Async" /><category term="Await" /><category term="Concurrency" /><category term="Swift" /><category term="Language" /><category term="Async" /><category term="Await" /><category term="Concurrency" /><category term="Thread" /><summary type="html">Swift의 Async Await에 대해 알아봅니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/%7B%22feature%22=%3E%22swiftLogo.jpg%22%7D" /><media:content medium="image" url="http://localhost:4000/%7B%22feature%22=%3E%22swiftLogo.jpg%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Test Spy</title><link href="http://localhost:4000/articles/2022-01/test_spy" rel="alternate" type="text/html" title="Test Spy" /><published>2022-01-05T00:53:17+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>http://localhost:4000/articles/2022-01/test_spy</id><content type="html" xml:base="http://localhost:4000/articles/2022-01/test_spy">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;./test_spy#1-what-is-spy?&quot;&gt;What is Spy?&lt;/a&gt;&lt;/li&gt;
@@ -627,7 +627,7 @@
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/indirect%20output.html&quot;&gt;indirect output&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/SUT.html&quot;&gt;SUT - System Under Test&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/DOC.html&quot;&gt;DOC - Depended On Component&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="UnitTest" /><category term="TestDouble" /><category term="TestSpy" /><category term="UnitTest" /><category term="TestDouble" /><category term="TestSpy" /><summary type="html">Test Spy의 정의와 사용 방식에 대해 살펴봅니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22unittest.png%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22unittest.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Test Stub</title><link href="https://hcn1519.github.io/articles/2021-12/test_stub" rel="alternate" type="text/html" title="Test Stub" /><published>2021-12-25T00:53:17+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>https://hcn1519.github.io/articles/2021-12/test_stub</id><content type="html" xml:base="https://hcn1519.github.io/articles/2021-12/test_stub">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="UnitTest" /><category term="TestDouble" /><category term="TestSpy" /><category term="UnitTest" /><category term="TestDouble" /><category term="TestSpy" /><summary type="html">Test Spy의 정의와 사용 방식에 대해 살펴봅니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/%7B%22feature%22=%3E%22unittest.png%22%7D" /><media:content medium="image" url="http://localhost:4000/%7B%22feature%22=%3E%22unittest.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Test Stub</title><link href="http://localhost:4000/articles/2021-12/test_stub" rel="alternate" type="text/html" title="Test Stub" /><published>2021-12-25T00:53:17+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>http://localhost:4000/articles/2021-12/test_stub</id><content type="html" xml:base="http://localhost:4000/articles/2021-12/test_stub">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;./test_stub#1-what-is-stub?&quot;&gt;What is Stub?&lt;/a&gt;&lt;/li&gt;
@@ -905,7 +905,7 @@
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/indirect%20input.html&quot;&gt;Indirect Input - xUnit Patterns&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/SUT.html&quot;&gt;SUT - System Under Test&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/DOC.html&quot;&gt;DOC - Depended On Component&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="UnitTest" /><category term="TestDouble" /><category term="TestStub" /><category term="UnitTest" /><category term="TestDouble" /><category term="TestStub" /><summary type="html">Test Stub의 정의와 사용 방식에 대해 살펴봅니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22unittest.png%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22unittest.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">UnitTest 개념 소개</title><link href="https://hcn1519.github.io/articles/2021-09/unittest" rel="alternate" type="text/html" title="UnitTest 개념 소개" /><published>2021-09-04T00:53:17+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>https://hcn1519.github.io/articles/2021-09/unittest</id><content type="html" xml:base="https://hcn1519.github.io/articles/2021-09/unittest">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="UnitTest" /><category term="TestDouble" /><category term="TestStub" /><category term="UnitTest" /><category term="TestDouble" /><category term="TestStub" /><summary type="html">Test Stub의 정의와 사용 방식에 대해 살펴봅니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/%7B%22feature%22=%3E%22unittest.png%22%7D" /><media:content medium="image" url="http://localhost:4000/%7B%22feature%22=%3E%22unittest.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">UnitTest 개념 소개</title><link href="http://localhost:4000/articles/2021-09/unittest" rel="alternate" type="text/html" title="UnitTest 개념 소개" /><published>2021-09-04T00:53:17+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>http://localhost:4000/articles/2021-09/unittest</id><content type="html" xml:base="http://localhost:4000/articles/2021-09/unittest">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;./unittest#1-what-is-unittest?&quot;&gt;What is UnitTest?&lt;/a&gt;
@@ -1121,7 +1121,7 @@ A use case is a list of actions or event steps typically defining the interactio
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/SUT.html&quot;&gt;SUT - System Under Test&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/DOC.html&quot;&gt;DOC - Depended On Component&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/Four%20Phase%20Test.html&quot;&gt;Four Phase Test&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="UnitTest" /><category term="UseCase" /><category term="TestDouble" /><category term="TestIsolation" /><category term="UnitTest" /><category term="UseCase" /><category term="TestDouble" /><category term="TestIsolation" /><summary type="html">UnitTest에 대한 정의와 목적, TestDouble에 대해 살펴봅니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22unittest.png%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22unittest.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Inversion Of Control</title><link href="https://hcn1519.github.io/articles/2020-12/oop_inversion_of_control" rel="alternate" type="text/html" title="Inversion Of Control" /><published>2020-12-06T00:53:17+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>https://hcn1519.github.io/articles/2020-12/oop_inversion_of_control</id><content type="html" xml:base="https://hcn1519.github.io/articles/2020-12/oop_inversion_of_control">&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inversion of Control&lt;/code&gt;은 단어의 뜻 그대로 제어 흐름이 &lt;strong&gt;역전&lt;/strong&gt;되는 현상을 말합니다. 제어 흐름이 역전되는 것을 알기 위해서는 제어 흐름이 역전되지 않은 것을 이해할 필요가 있습니다. 따라서, 이 글에서는 역전되지 않은 제어의 흐름이 무엇인지 먼저 살펴보고, 이를 역전하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inversion of Control&lt;/code&gt;에 대해 살펴보겠습니다.&lt;/p&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="UnitTest" /><category term="UseCase" /><category term="TestDouble" /><category term="TestIsolation" /><category term="UnitTest" /><category term="UseCase" /><category term="TestDouble" /><category term="TestIsolation" /><summary type="html">UnitTest에 대한 정의와 목적, TestDouble에 대해 살펴봅니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/%7B%22feature%22=%3E%22unittest.png%22%7D" /><media:content medium="image" url="http://localhost:4000/%7B%22feature%22=%3E%22unittest.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Inversion Of Control</title><link href="http://localhost:4000/articles/2020-12/oop_inversion_of_control" rel="alternate" type="text/html" title="Inversion Of Control" /><published>2020-12-06T00:53:17+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>http://localhost:4000/articles/2020-12/oop_inversion_of_control</id><content type="html" xml:base="http://localhost:4000/articles/2020-12/oop_inversion_of_control">&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inversion of Control&lt;/code&gt;은 단어의 뜻 그대로 제어 흐름이 &lt;strong&gt;역전&lt;/strong&gt;되는 현상을 말합니다. 제어 흐름이 역전되는 것을 알기 위해서는 제어 흐름이 역전되지 않은 것을 이해할 필요가 있습니다. 따라서, 이 글에서는 역전되지 않은 제어의 흐름이 무엇인지 먼저 살펴보고, 이를 역전하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inversion of Control&lt;/code&gt;에 대해 살펴보겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
 
@@ -1324,157 +1324,157 @@ Hollywood Principle - Don,t call us, We will call you.&lt;/p&gt;
   &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Control_flow&quot;&gt;ControlFlow - Wikipedia&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Inversion_of_control&quot;&gt;Inversion Of Control - Wikipedia&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164&quot;&gt;Clean Architecture - Robert C. Martin&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="IoC," /><category term="OOP," /><category term="ControlFlow," /><category term="Dependency" /><category term="IoC" /><category term="OOP" /><category term="ControlFlow" /><category term="Dependency" /><summary type="html">제어흐름의 역전에 대해 알아봅니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22OOP.png%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22OOP.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Optimizing AutoLayout Performance</title><link href="https://hcn1519.github.io/articles/2020-08/autolayout_performance_optimization" rel="alternate" type="text/html" title="Optimizing AutoLayout Performance" /><published>2020-08-23T00:53:17+09:00</published><updated>2023-08-28T16:29:07+09:00</updated><id>https://hcn1519.github.io/articles/2020-08/autolayout_performance_optimization</id><content type="html" xml:base="https://hcn1519.github.io/articles/2020-08/autolayout_performance_optimization">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="IoC," /><category term="OOP," /><category term="ControlFlow," /><category term="Dependency" /><category term="IoC" /><category term="OOP" /><category term="ControlFlow" /><category term="Dependency" /><summary type="html">제어흐름의 역전에 대해 알아봅니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/%7B%22feature%22=%3E%22OOP.png%22%7D" /><media:content medium="image" url="http://localhost:4000/%7B%22feature%22=%3E%22OOP.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">AutoLayout 성능 최적화하기</title><link href="http://localhost:4000/articles/2020-08/autolayout_performance_optimization" rel="alternate" type="text/html" title="AutoLayout 성능 최적화하기" /><published>2020-08-23T00:53:17+09:00</published><updated>2023-08-29T14:49:17+09:00</updated><id>http://localhost:4000/articles/2020-08/autolayout_performance_optimization</id><content type="html" xml:base="http://localhost:4000/articles/2020-08/autolayout_performance_optimization">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 
-&lt;p&gt;In this post, we will explore how to use AutoLayout efficiently from a performance perspective.&lt;/p&gt;
+&lt;p&gt;이 글에서는 성능 관점에서 AutoLayout을 효율적으로 사용하는 방법에 대해 살펴보고자 합니다.&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;This post references a lot of content from &lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2018/220&quot;&gt;High Performance AutoLayout&lt;/a&gt;.&lt;/p&gt;
+  &lt;p&gt;이 글은 &lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2018/220&quot;&gt;High Performance AutoLayout&lt;/a&gt;의 많은 내용을 참고하고 있습니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;content&quot;&gt;Content&lt;/h2&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;./autolayout_performance_optimization#1-layout-definition-in-autolayout&quot;&gt;Layout Definition in AutoLayout&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;./autolayout_performance_optimization#2-autolayout-engine-and-layout-updates&quot;&gt;AutoLayout Engine and Layout Updates&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./autolayout_performance_optimization#1-autolayout의-layout-정의-방식&quot;&gt;AutoLayout의 Layout 정의 방식&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./autolayout_performance_optimization#2-autolayout-engine과-layout-업데이트&quot;&gt;AutoLayout Engine과 Layout 업데이트&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;./autolayout_performance_optimization#3-autolayout-performance-tips&quot;&gt;AutoLayout Performance Tips&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;1-layout-definition-in-autolayout&quot;&gt;1. Layout Definition in AutoLayout&lt;/h2&gt;
+&lt;h2 id=&quot;1-autolayout의-layout-정의-방식&quot;&gt;1. AutoLayout의 Layout 정의 방식&lt;/h2&gt;
 
-&lt;p&gt;Before AutoLayout, iOS defined the layout of views in a frame-based manner (size and position). Defining view positions primarily based on frames was intuitive and easy to understand. However, frame-based layouts posed a problem when adapting to devices with different screen resolutions. As the number of devices to support increased, this became a significant issue.&lt;/p&gt;
+&lt;p&gt;AutoLayout이 나오기 이전에 iOS에서 View의 Layout은 Frame 기반(Size와 Position)으로 정의되었습니다. Frame 중심으로 View의 위치를 결정하는 것은 직관적으로 이해가 가능한 것이 가장 큰 장점입니다. 하지만, Frame 기반 Layout 시스템은 해상도가 다른 디바이스에서는 각 해상도별 Size와 Position별로 각 View의 Frame을 설정해주어야 하는 문제가 있습니다. 이 문제는 하나의 Layout 코드로 지원해야 하는 디바이스가 늘어남에 따라 큰 문제가 되었습니다.&lt;/p&gt;
 
-&lt;p&gt;AutoLayout addresses the limitations of the frame-based layout system by using a constraint-based layout system. Constraints are, as the name suggests, restrictions that define the relationship between views. When using AutoLayout, various constraints are set up between views. For example, defining that the top of view A is 20 points below the bottom of view B becomes one constraint.&lt;/p&gt;
+&lt;p&gt;AutoLayout은 이러한 기존 Frame 기반 Layout 시스템의 문제를 해결하기 위해 Constraint 기반 Layout 시스템을 사용합니다. Constraint은 단어 그대로 제약을 의미하는데, 이 제약은 View의 관계에 대한 제약을 의미합니다. 그래서 AutoLayout을 사용할 경우, View 사이의 다양한 Constraint을 설정합니다. 예를 들어, A View의 top이 B View의 bottom과 20pt 떨어져 있도록 하는 것이 하나의 Constraint이 됩니다.&lt;/p&gt;
 
-&lt;p&gt;The significant advantage of defining layouts with constraints is that you don’t need to set static values for view sizes or positions. In AutoLayout, the size and position of views are dynamically calculated based on the defined constraints and adapt to the environment. This dynamic layout determination effectively resolves many problems caused by device fragmentation. For instance, when implementing a layout where a screen should leave a certain margin and fill the rest, you no longer need to specify view sizes for each resolution. You only need to set the margin values as constraints, and AutoLayout handles the rest.*&lt;/p&gt;
+&lt;p&gt;이렇게 Constraint을 통해 View의 Layout을 결정하는 것의 큰 장점은 View의 크기나 위치를 정적인 값으로 설정하지 않아도 된다는 점입니다. AutoLayout에서 View의 크기나 위치는 설정된 Constriant을 기반으로 환경에 맞추어 동적으로 계산됩니다. 동적으로 View의 Layout을 결정하는 것은 디바이스 파편화로 발생하는 많은 문제를 해결해줍니다. 예를 들어, 화면을 일정 마진 값만 남기고 나머지를 채우는 View의 Layout을 구현할 때, 각 해상도별로 View의 사이즈를 지정하지 않아도 각각의 마진 값을 Constraint으로 설정하기만 하면 AutoLayout이 이를 기반으로 View의 Layout을 설정해줍니다.*&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;While AutoResizingMask supports similar functionality, it is generally applicable only in simpler UIs.&lt;/p&gt;
+  &lt;p&gt;AutoResizingMask도 유사한 기능을 지원하지만, 상대적으로 간단한 UI에서만 적용될 수 있습니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&quot;2-autolayout-engine-and-layout-updates&quot;&gt;2. AutoLayout Engine and Layout Updates&lt;/h2&gt;
+&lt;h2 id=&quot;2-autolayout-engine과-layout-업데이트&quot;&gt;2. AutoLayout Engine과 Layout 업데이트&lt;/h2&gt;
 
-&lt;h3 id=&quot;autolayout-and-equations&quot;&gt;AutoLayout and Equations&lt;/h3&gt;
+&lt;h3 id=&quot;autolayout과-방정식&quot;&gt;AutoLayout과 방정식&lt;/h3&gt;
 
-&lt;p&gt;The relationship between two views expressed through constraints can be defined by a single linear equation. For example, when setting a gap of 8 points between the trailing edge of RedView and the leading edge of BlueView, the following equation is established:&lt;/p&gt;
+&lt;p&gt;Constraint을 통해 나타나는 두 개 View 사이의 관계는 1개의 일차 방정식(Single Equation)으로 정의될 수 있습니다. 예를 들어, RedView의 trailing과 BlueView의 Leading 사이의 간격을 8pt로 설정할 경우 아래와 같은 방정식이 설립됩니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/91072672-d0173c80-e674-11ea-8641-65e9ac89e3c8.png&quot; alt=&quot;some2&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;AutoLayout’s task is to find the solutions to these linear equations. When all solutions either have exactly one answer or a single viable answer*, each view’s position is determined.&lt;/p&gt;
+&lt;p&gt;AutoLayout은 이렇게 정의된 일차 방정식들의 해를 구하는 작업을 수행합니다. 그리고 모든 해가 정확히 1개의 답을 가지거나, 1개의 가능한 답*을 가지게 될 때, 각각의 View는 그 위치가 결정됩니다.&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Note: AutoLayout can create situations where multiple solutions are possible by using settings like Priority or Inequality. In such cases, AutoLayout performs Error Minimization to find the optimal solution and uses that value.&lt;/p&gt;
+  &lt;p&gt;Note: AutoLayout은 Priority 설정이나, inEquality 설정 등을 통해서 방정식의 답이 여러 개가 존재할 수 있는 상황을 만들어 낼 수 있습니다. 이 때, AutoLayout은 Error Minimization을 통해 1개의 최적해를 구하고, 해당 값을 사용합니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;autolayout-engine&quot;&gt;AutoLayout Engine&lt;/h3&gt;
 
-&lt;p&gt;The AutoLayout Engine is the core module that calculates the set of equations derived from the constraints. The engine operates as follows:&lt;/p&gt;
+&lt;p&gt;AutoLayout Engine은 설정된 여러 개의 일차 방정식을 계산하는 코어 모듈입니다. 이 Engine은 아래와 같이 동작합니다.&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Views add constraints. When constraints are added, views convert them into equations and send them to the engine.&lt;/li&gt;
-  &lt;li&gt;The engine calculates the received equations. It calculates each variable as if it were solving equations.&lt;/li&gt;
-  &lt;li&gt;The calculated results, in the form of variables (minX, minY, width, height, etc.), are sent back to the views.&lt;/li&gt;
+  &lt;li&gt;View는 Constraint을 추가합니다. 이 때 View는 추가된 Constraint을 방정식으로 변환하고 이를 Engine쪽으로 전달합니다.&lt;/li&gt;
+  &lt;li&gt;Engine은 전달 받은 방정식을 계산합니다. 여기서 Engine은 우리가 방정식의 해를 구하는 것처럼 각각의 변수를 계산합니다.&lt;/li&gt;
+  &lt;li&gt;계산 결과 값은 View의 Origin, Size 값과 유사한 형태인 Variable(minX, minY, width, height 등)을 View에게 전달됩니다.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90423226-0bef5680-e0f7-11ea-907d-b44d0cc787c8.png&quot; alt=&quot;Engine&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90955204-87b22000-e4b6-11ea-8010-421389fd17f6.png&quot; alt=&quot;스크린샷 2020-08-22 오후 8 29 39&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Every time a variable is set in the AutoLayout Engine, it notifies the views that the variable has changed. Views, upon receiving this notification, call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setNeedsLayout()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Engine은 각각의 Variable에 값을 설정할 때마다, Variable의 값이 변경되었다는 것을 View에게 알립니다. View는 Variable 변경 이벤트를 받을 때마다, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setNeedsLayout()&lt;/code&gt;을 호출합니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90424852-c1bba480-e0f9-11ea-9f00-cf7b9484db6f.png&quot; alt=&quot;notify&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;When &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setNeedsLayout()&lt;/code&gt; is called, the view’s &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutSubviews()&lt;/code&gt; is triggered. In this method, the view copies the engine’s data into frames and determines the layout of itself and its subviews.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setNeedsLayout()&lt;/code&gt;이 호출되면 해당 View의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutSubViews()&lt;/code&gt;가 호출됩니다. 여기서 View는 Engine의 데이터를 Frame으로 복사하고, 자신과 자신의 SubView의 Layout을 결정합니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90955520-05772b00-e4b9-11ea-9a2e-f1c7cdbaeae0.png&quot; alt=&quot;스크린샷 2020-08-22 오후 8 49 44&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;3-autolayout-performance-tips&quot;&gt;3. AutoLayout Performance Tips&lt;/h2&gt;
 
-&lt;h3 id=&quot;1-avoid-setting-constraints-between-unrelated-views&quot;&gt;1. Avoid Setting Constraints Between Unrelated Views&lt;/h3&gt;
+&lt;h3 id=&quot;1-관계가-없는-view-사이에-constraint-설정하지-않기&quot;&gt;1. 관계가 없는 View 사이에 Constraint 설정하지 않기&lt;/h3&gt;
 
-&lt;p&gt;The AutoLayout Engine treats constraints between views that are unrelated (have no dependencies) as separate entities. Consequently, when constraints are not set between views, the cost of constraint calculation increases linearly. In other words, consolidating constraints that are independently attached to multiple views into a single view can increase the cost of constraint calculation. Therefore, it’s better for view constraints to relate to each other only when necessary for performance.&lt;/p&gt;
+&lt;p&gt;Engine은 서로 관계가 없는(dependency가 없음) View의 Constraint을 별개로 인지합니다. 그래서 View끼리 Constraint이 걸려 있지 않을 때, Constraint 계산 비용은 선형적으로(linear) 증가합니다. 바꿔 말하면, 여러 개의 View에 독립적으로 걸려 있는 Constraint을 하나의 View로 묶어서 처리하는 방식은 Constraint 계산 비용을 증가시킬 수 있습니다. 그러므로, View의 Constraint은 필요한 경우에만 서로 관련되도록 처리하는 것이 성능적으로 좀 더 좋습니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90958329-ba681280-e4ce-11ea-88e9-d1ecf276c7f8.png&quot; alt=&quot;스크린샷 2020-08-22 오후 11 25 03&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;2-use-constraints-naturally&quot;&gt;2. Use Constraints Naturally&lt;/h3&gt;
+&lt;h3 id=&quot;2-constraint을-자연스럽게-사용하기&quot;&gt;2. Constraint을 자연스럽게 사용하기&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Don’t force constraints to be minimal&lt;/li&gt;
+  &lt;li&gt;억지로 Constraint을 적게 사용하지 않기&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;It’s recommended to add constraints as needed. Trying to minimize constraints forcefully may lead to increased constraint calculation costs. For example, you may consider repeatedly adding/removing constraints for constraint optimization, but this often increases costs. In such cases, it may be more efficient to have multiple constraints rather than trying to minimize them.&lt;/p&gt;
+&lt;p&gt;Constraint은 직관적으로 필요한 만큼 추가되는 것이 좋습니다. 억지로 Constraint을 적게 설정하려고 한다면 오히려 Constraint 계산 비용이 커지는 경우가 발생할 수 있습니다. 예를 들어, Constraint 최적화를 위해 Constraint를 반복적으로 추가/제거하는 방법을 고려할 수 있지만, 이는 비용을 크게 만드는 경우가 많습니다. 이런 경우에는 오히려 Constraint을 여러 개 두는 것이 나을 수도 있습니다.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Avoid complex constraints to represent two layouts as a single view&lt;/li&gt;
+  &lt;li&gt;두 개의 Layout을 하나의 View로 표현하기 위해, Constraint을 복잡하게 설정하지 않기&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Sometimes, to represent two layouts as a single view, you may create complex constraints. The more constraints you add, the harder it becomes to intuitively understand the layout defined by constraints. In such cases, it’s better to prioritize creating constraints that make it clear how the view is represented through constraints (using separate views or adding new subviews to reduce constraint complexity).&lt;/p&gt;
+&lt;p&gt;때때로 두개의 Layout을 하나의 View로 표현하기 위해 복잡한 Constraint을 설정하는 경우가 발생할 수 있습니다. 추가되는 Constraint이 많으면 많아질수록 Constraint을 통해 표현되는 Layout은 직관적으로 이해하기 어렵습니다. 이런 경우에는 직관적으로 View가 Constraint을 통해 명확히 표현될 수 있는가를 중점에 두고, Constraint을 설정하는 것이 좋습니다.(별도의 View로 나누거나, 새로운 SubView를 추가하여 Constraint 복잡도를 줄이는 방법들을 사용)&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90963169-95849700-e4f0-11ea-9ce6-ce141655464f.png&quot; alt=&quot;스크린샷 2020-08-23 오전 3 27 23&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;![스크린샷 2020-08-23 오전 3 26 05](https://user-images.githubusercontent.com/13018877/90963171-97e6f100-e4f0-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90963171-97e6f100-e4f0-11ea-88a7-b6d321841cc8.png&quot; alt=&quot;스크린샷 2020-08-23 오전 3 26 05&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;11ea-88a7-b6d321841cc8.png)&lt;/p&gt;
+&lt;h3 id=&quot;3-priority-설정은-일반적으로-성능에-큰-영향을-미치지-않는다&quot;&gt;3. Priority 설정은 일반적으로 성능에 큰 영향을 미치지 않는다.&lt;/h3&gt;
 
-&lt;h3 id=&quot;3-priority-settings-generally-dont-impact-performance-significantly&quot;&gt;3. Priority Settings Generally Don’t Impact Performance Significantly&lt;/h3&gt;
-
-&lt;p&gt;When the AutoLayout Engine requests values from views, it first checks whether the received constraints contain errors. If there are errors, the Engine asks the views to minimize the errors. During this error minimization process, the Engine uses the &lt;a href=&quot;https://en.wikipedia.org/wiki/Simplex_algorithm&quot;&gt;Simplex Algorithm&lt;/a&gt; to find the optimal solution that minimizes errors. This process is generally not costly, so it doesn’t significantly impact AutoLayout’s performance.&lt;/p&gt;
+&lt;p&gt;AutoLayout Engine이 View로부터 계산된 Variable을 제공해줄 것을 요청 받을 때, Engine은 우선적으로 전달 받은 Constraint에 에러가 있는지 여부를 확인합니다. 그리고 이 때 에러가 있다면, Engine은 View에게 에러를 최소화(minimize error)해줄 것을 요청합니다.* 이 때, 에러를 최소화하는 과정에서 &lt;a href=&quot;https://en.wikipedia.org/wiki/Simplex_algorithm&quot;&gt;Simplex Algorithm&lt;/a&gt;를 사용하여 에러를 최소화하는 최적해(Variable)를 도출합니다. 이러한 Variable 도출 과정은 일반적으로 비용이 크지 않기 때문에 AutoLayout의 성능에 있어서 큰 영향을 미치지 않습니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90975685-809c1800-e571-11ea-92a7-f4f26ac1febf.png&quot; alt=&quot;스크린샷 2020-08-23 오후 6 50 13&quot; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;AutoLayout treats constraints other than Required Priority (1000) as optional constraints. AutoLayout does not prioritize optional constraints initially. It calculates all other constraints first and, if there’s any ambiguity in the layout, it uses optional constraints to resolve the ambiguity. This entire process is AutoLayout’s error minimization process.&lt;/p&gt;
+  &lt;p&gt;AutoLayout은 Required Priority(1000)로 설정된 Constraint을 제외한 이외의 Constraint은 무시할 수 있는 값(Optional Constraint)으로 취급합니다. AutoLayout은 Optional Constraint은 우선적으로 사용하지 않습니다. 그리고 다른 Constraint을 모두 계산하고 난 후에 Layout의 모호함이 남아 있을 때, Optional Constraint을 사용하여 적절한 Constraint을 결정합니다. 이러한 일련의 과정이 AutoLayout의 에러 최소화 과정입니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;4-eliminate-constraint-churn&quot;&gt;4. Eliminate Constraint Churn&lt;/h3&gt;
+&lt;h3 id=&quot;4-constraint-churn-없애기&quot;&gt;4. Constraint Churn 없애기&lt;/h3&gt;
 
-&lt;p&gt;“Constraint churn” refers to unnecessarily complex constraints or repetitive addition/removal of constraints that don’t change the visual layout but add unnecessary complexity. In other words, while the actual view layout remains the same, constraint operations cause the AutoLayout Engine to do more work. Excessive constraint churn can negatively impact AutoLayout’s performance. Constraint churn often occurs in the following situations:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Constraint Churn&lt;/code&gt;이라는 것은 &lt;strong&gt;시각적으로는 동일한 Layout 결과물&lt;/strong&gt;을 불필요하게 복잡한 Constraint을 설정하거나, 반복적으로 Constraint을 추가/제거하여 뒤섞는 것을 의미합니다. 즉, 실제 View의 레이아웃 변경은 없지만, Engine이 더 많은 일을 하게 만드는 경우 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Constraint Churn&lt;/code&gt;이 있다고 말합니다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Constraint Churn&lt;/code&gt;이 많아질 경우 AutoLayout의 성능에 악영향을 끼칠 수 있습니다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Constraint Churn&lt;/code&gt;은 다음과 같은 작업을 수행할 경우 주로 발생하게 됩니다.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Removing all constraints and reapplying them.&lt;/li&gt;
-  &lt;li&gt;Modifying constraints that don’t need to be changed.&lt;/li&gt;
-  &lt;li&gt;Repeatedly adding and removing constraints.&lt;/li&gt;
+  &lt;li&gt;모든 Constraint 제거 후 다시 설정&lt;/li&gt;
+  &lt;li&gt;변경이 필요하지 않은 Constraint 변경&lt;/li&gt;
+  &lt;li&gt;반복적 Constraint 추가/제거&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;On the contrary, you can reduce constraint churn by following these practices:&lt;/p&gt;
+&lt;p&gt;이를 반대로 얘기하면 아래와 같은 방식으로 AutoLayout을 처리할 경우 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Constraint Churn&lt;/code&gt;을 줄일 수 있습니다.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Avoid removing all constraints.&lt;/li&gt;
-  &lt;li&gt;Add constraints only once for static constraints that don’t need to be added dynamically during updates.&lt;/li&gt;
-  &lt;li&gt;Modify only the necessary constraints.&lt;/li&gt;
-  &lt;li&gt;Use view hiding instead of adding/removing constraints when possible.*&lt;/li&gt;
+  &lt;li&gt;모든 Constraint을 제거하지 않기&lt;/li&gt;
+  &lt;li&gt;동적으로 추가되지 않아도 되는 Constraint은 항상 init 과정 등에서 정적으로 한 번만 추가하기&lt;/li&gt;
+  &lt;li&gt;변경이 필요한 Constraint만 변경하기&lt;/li&gt;
+  &lt;li&gt;Add/Remove(Activate/Deactivate)를 하기보다는 View를 Hidden 처리하는 방식을 활용하기*&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Note: Hiding a view is much less costly than changing constraints. Therefore, if hiding a view while maintaining the correct layout is possible, it’s better for performance to not modify the constraints.&lt;/p&gt;
+  &lt;p&gt;Note: Constraint은 그대로 두고 View를 Hidden하는 비용이 Constraint을 변경하거나 추가/제거를 하는 작업보다 비용이 훨씬 작습니다. 따라서, View를 숨김 처리하는 것만으로 레이아웃이 올바르게 표현될 수 있다면 Constraint은 변경하지 않는 것이 성능적으로 좋습니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h4 id=&quot;constraint-churn-and-the-render-loop&quot;&gt;Constraint Churn and the Render Loop&lt;/h4&gt;
+&lt;h4 id=&quot;constraint-churn과-render-loop&quot;&gt;Constraint Churn과 Render Loop&lt;/h4&gt;
 
-&lt;p&gt;Unintentional constraint operations can occur inside the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateConstraints()&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutSubviews()&lt;/code&gt; methods. When rendering views on iOS, you go through a Render Loop. This loop operates as follows:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Constraint Churn&lt;/code&gt;을 발생시키는 작업을 의도치 않게 수행할 수 있는 곳이 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateConstraints()&lt;/code&gt;와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutSubViews()&lt;/code&gt;입니다. iOS에서 View를 화면에 그릴 때, Render Loop를 거칩니다. 이 Render Loop는 아래와 같은 흐름으로 진행이 됩니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width=&quot;1338&quot; alt=&quot;스크린샷 2020-08-06 오후 5 40 15&quot; src=&quot;https://user-images.githubusercontent.com/13018877/89510719-e7989d80-d80b-11ea-8e44-7d5c26d448dd.png&quot; /&gt;&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateConstraints()&lt;/code&gt; is called - Views are called leaf-to-window in the view hierarchy.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutSubviews()&lt;/code&gt; is called - Called from window to subviews.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;draw(rect:)&lt;/code&gt; is called - Called from window to subviews.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateConstraints()&lt;/code&gt; 호출 - View Hierarchy의 leaf부터 Window 방향으로 호출&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutSubViews()&lt;/code&gt; 호출 - Window부터 SubViews 방향으로 호출&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;draw(rect:)&lt;/code&gt; 호출 - Window부터 SubViews 방향으로 호출&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;The Render Loop is executed whenever the view’s bounds change, a rotation event occurs, or when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setNeedsLayout()&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutIfNeeded()&lt;/code&gt; are called. In other words, the methods in the Render Loop are called frequently as layout changes are needed, so they may be called many times. Thus, when overriding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateConstraints()&lt;/code&gt;, it’s essential to consider constraint operations carefully to avoid performance issues. When dealing with the Render Loop cycle, prioritize the following considerations:&lt;/p&gt;
+&lt;p&gt;Render Loop는 View의 bounds가 변경되거나, 회전 이벤트가 발생하거나, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setNeedsLayout()&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutIfNeeded()&lt;/code&gt;가 호출될 때마다 수행됩니다. 바꿔 말하면, Render Loop의 메소드들은 View의 레이아웃 변경이 필요할 때마다 호출되므로, 매우 많이 호출됩니다. 그렇기 때문에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateConstraints()&lt;/code&gt;을 오버라이딩하여 Constraint 업데이트를 수행할 때, 별도 예외처리 없이 Constraint 추가/제거 작업을 반복적으로 수행할 경우 Layout 성능에 이슈가 발생할 수 있습니다. 그러므로 Render Loop 사이클 안에서 어떤 처리가 필요할 경우 아래 사항을 우선적으로 고려하여 Constraint 작업을 수행하는 것이 좋습니다.&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Update constraints only when necessary (e.g., during initial setup or when constraints need updates due to events).&lt;/li&gt;
-  &lt;li&gt;Consider using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateConstraints()&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutSubviews()&lt;/code&gt; only when you genuinely need them for layout changes.&lt;/li&gt;
+  &lt;li&gt;Constraint 업데이트는 최대한 필요한 경우에만(최초 설정, 이벤트 발생시 업데이트 필요한 경우 등)에만 수행되는 것이 좋습니다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateConstraints()&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutSubViews()&lt;/code&gt;은 해당 메소드를 오버라이딩하여 Constraint을 처리하지 않으면 Layout이 제대로 잡히지 않을 경우에만 사용하는 것이 좋습니다.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/90977348-afb98600-e57f-11ea-93e8-05a81738dc1a.png&quot; alt=&quot;스크린샷 2020-08-23 오후 8 31 45&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+&lt;h1 id=&quot;참고자료&quot;&gt;참고자료&lt;/h1&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/index.html#//apple_ref/doc/uid/TP40010853-CH7-SW1&quot;&gt;AutoLayout - Understanding AutoLayout&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/AnatomyofaConstraint.html#//apple_ref/doc/uid/TP40010853-CH9-SW1&quot;&gt;AutoLayout - Anatomy of a Constraint&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2018/220&quot;&gt;High Performance AutoLayout&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="iOS," /><category term="WWDC," /><category term="AutoLayout," /><category term="UIKit," /><category term="UIView" /><category term="iOS" /><category term="WWDC" /><category term="AutoLayout" /><category term="UIKit" /><category term="UIView" /><summary type="html">Exploring how to efficiently use AutoLayout from a performance perspective.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22iOS.png%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22iOS.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Bitcode 도입하기</title><link href="https://hcn1519.github.io/articles/2020-05/bitcode_implementation" rel="alternate" type="text/html" title="Bitcode 도입하기" /><published>2020-05-21T00:53:17+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>https://hcn1519.github.io/articles/2020-05/bitcode_implementation</id><content type="html" xml:base="https://hcn1519.github.io/articles/2020-05/bitcode_implementation">&lt;h2 id=&quot;목차&quot;&gt;목차&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="iOS," /><category term="WWDC," /><category term="AutoLayout," /><category term="UIKit," /><category term="UIView" /><category term="iOS" /><category term="WWDC" /><category term="AutoLayout" /><category term="UIKit" /><category term="UIView" /><summary type="html">성능 관점에서 AutoLayout을 적절히 사용하는 방법에 대해 살펴봅니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/%7B%22feature%22=%3E%22iOS.png%22%7D" /><media:content medium="image" url="http://localhost:4000/%7B%22feature%22=%3E%22iOS.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Bitcode 도입하기</title><link href="http://localhost:4000/articles/2020-05/bitcode_implementation" rel="alternate" type="text/html" title="Bitcode 도입하기" /><published>2020-05-21T00:53:17+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>http://localhost:4000/articles/2020-05/bitcode_implementation</id><content type="html" xml:base="http://localhost:4000/articles/2020-05/bitcode_implementation">&lt;h2 id=&quot;목차&quot;&gt;목차&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#about-bitcode&quot;&gt;About bitcode&lt;/a&gt;
@@ -1615,7 +1615,7 @@ SwiftCodeGeneration normal arm64 (in target 'SomProject' from project 'SomProjec
   &lt;li&gt;&lt;a href=&quot;https://medium.com/@heitorburger/static-libraries-frameworks-and-bitcode-6d8f784478a9&quot;&gt;Static Libraries, Frameworks, and Bitcode&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://forums.developer.apple.com/message/7038#11344&quot;&gt;https://forums.developer.apple.com/message/7038#11344&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.guardsquare.com/en/blog/enable-bitcode&quot;&gt;https://www.guardsquare.com/en/blog/enable-bitcode&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="Bitcode," /><category term="AppStore," /><category term="Xcode," /><category term="iOS," /><category term="BuildSystem," /><category term="Symbol," /><category term="CrashReport" /><category term="Bitcode" /><category term="AppStore" /><category term="Xcode" /><category term="iOS" /><category term="BuildSystem" /><category term="Symbol" /><category term="CrashReport" /><summary type="html">Bitcode 도입을 위해 알아야 하는 것들에 대해 정리해보았습니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22iOS.png%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22iOS.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Expression과 Statement</title><link href="https://hcn1519.github.io/articles/2020-05/expression_statement" rel="alternate" type="text/html" title="Expression과 Statement" /><published>2020-05-09T00:53:17+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>https://hcn1519.github.io/articles/2020-05/expression_statement</id><content type="html" xml:base="https://hcn1519.github.io/articles/2020-05/expression_statement">&lt;h2 id=&quot;목차&quot;&gt;목차&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="Bitcode," /><category term="AppStore," /><category term="Xcode," /><category term="iOS," /><category term="BuildSystem," /><category term="Symbol," /><category term="CrashReport" /><category term="Bitcode" /><category term="AppStore" /><category term="Xcode" /><category term="iOS" /><category term="BuildSystem" /><category term="Symbol" /><category term="CrashReport" /><summary type="html">Bitcode 도입을 위해 알아야 하는 것들에 대해 정리해보았습니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/%7B%22feature%22=%3E%22iOS.png%22%7D" /><media:content medium="image" url="http://localhost:4000/%7B%22feature%22=%3E%22iOS.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Expression과 Statement</title><link href="http://localhost:4000/articles/2020-05/expression_statement" rel="alternate" type="text/html" title="Expression과 Statement" /><published>2020-05-09T00:53:17+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>http://localhost:4000/articles/2020-05/expression_statement</id><content type="html" xml:base="http://localhost:4000/articles/2020-05/expression_statement">&lt;h2 id=&quot;목차&quot;&gt;목차&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;./expression_statement#introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
@@ -1843,7 +1843,7 @@ We don't normally expect operators to modify their operands, since operators in 
   &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Expression_(computer_science)&quot;&gt;Expression (computer science) - Wikipedia&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Statement_(computer_science)&quot;&gt;Statement (computer science) - Wikipedia&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.iso.org/standard/74528.html&quot;&gt;ISO/IEC 9899:2018&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="Expression," /><category term="Statement," /><category term="Language," /><category term="C," /><category term="Terminology" /><category term="Expression" /><category term="Statement" /><category term="Language" /><category term="C" /><category term="Terminology" /><summary type="html">Expression과 Statement에 대해 정리하였습니다.</summary></entry><entry><title type="html">iOS 다크모드 알아보기</title><link href="https://hcn1519.github.io/articles/2020-03/ios_darkmode" rel="alternate" type="text/html" title="iOS 다크모드 알아보기" /><published>2020-03-13T00:53:17+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>https://hcn1519.github.io/articles/2020-03/ios_darkmode</id><content type="html" xml:base="https://hcn1519.github.io/articles/2020-03/ios_darkmode">&lt;p&gt;다크모드 도입에 있어서 필요한 정보를 조사하면서 실제 구현과 관련된 내용을 정리해보았습니다. 공식 문서 및 영상을 보면서 관련 내용을 같이 참고하시면 좋을 것 같습니다.(해당 내용의 대부분은 &lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2019/214/&quot;&gt;WWDC - Implement Dark Mode&lt;/a&gt;을 기반으로 작성되었습니다.)&lt;/p&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="Expression," /><category term="Statement," /><category term="Language," /><category term="C," /><category term="Terminology" /><category term="Expression" /><category term="Statement" /><category term="Language" /><category term="C" /><category term="Terminology" /><summary type="html">Expression과 Statement에 대해 정리하였습니다.</summary></entry><entry><title type="html">iOS 다크모드 알아보기</title><link href="http://localhost:4000/articles/2020-03/ios_darkmode" rel="alternate" type="text/html" title="iOS 다크모드 알아보기" /><published>2020-03-13T00:53:17+09:00</published><updated>2023-08-28T15:46:12+09:00</updated><id>http://localhost:4000/articles/2020-03/ios_darkmode</id><content type="html" xml:base="http://localhost:4000/articles/2020-03/ios_darkmode">&lt;p&gt;다크모드 도입에 있어서 필요한 정보를 조사하면서 실제 구현과 관련된 내용을 정리해보았습니다. 공식 문서 및 영상을 보면서 관련 내용을 같이 참고하시면 좋을 것 같습니다.(해당 내용의 대부분은 &lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2019/214/&quot;&gt;WWDC - Implement Dark Mode&lt;/a&gt;을 기반으로 작성되었습니다.)&lt;/p&gt;
 
 &lt;h2 id=&quot;목차&quot;&gt;목차&lt;/h2&gt;
 
@@ -2166,4 +2166,4 @@ We don't normally expect operators to modify their operands, since operators in 
   &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/documentation/xcode/supporting_dark_mode_in_your_interface&quot;&gt;Apple Article - Supporting Dark Mode in Your Interface&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://nshipster.com/dark-mode/&quot;&gt;NSHipster - Dark Mode on iOS 13&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;기타 관련 API 문서 - 해당 링크는 설명 중간에 포함&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="iOS," /><category term="WWDC," /><category term="DarkMode," /><category term="UIKit" /><category term="iOS" /><category term="WWDC" /><category term="DarkMode" /><category term="UIKit" /><summary type="html">iOS에서 다크모드를 적용하기 위해 알아야 하는 내용을 정리하였습니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22iOS.png%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22iOS.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="iOS," /><category term="WWDC," /><category term="DarkMode," /><category term="UIKit" /><category term="iOS" /><category term="WWDC" /><category term="DarkMode" /><category term="UIKit" /><summary type="html">iOS에서 다크모드를 적용하기 위해 알아야 하는 내용을 정리하였습니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/%7B%22feature%22=%3E%22iOS.png%22%7D" /><media:content medium="image" url="http://localhost:4000/%7B%22feature%22=%3E%22iOS.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
