@@ -5,14 +5,6 @@ layout: default
 <div class="post">
   <h2 class="post-title">{{ page.title }}</h2>
   <span class="post-date">{{ page.date | date_to_string }}</span>
-  &nbsp;
-  <small>
-  {% if site.lang == "en" %}
-  <a href="{{ site.baseurl_root }}{{ page.url }}" title="Home">한국어로 보기</a>
-  {% else %}
-  <a href="{{ site.baseurl_root }}/en{{ page.url }}" title="Home">Read in English</a>
-  {% endif %}
-  </small>
   {% if page.image.feature %}
   <div class="post-image-feature">
     <img class="feature-image" src=
