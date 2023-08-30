@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <title>Thread Safe - hcn1519 Dev Post</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Thread Safe - hcn1519 Dev Post">
+  <meta name="description" content="Exploring Thread Safety.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Thread Safe">
+  <meta property="og:image" content="/en/public/assets/blogThumb.png">
+  <meta property="og:description" content="Exploring Thread Safety.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/en/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/en/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/en/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/en/public/favicon/apple-icon-57x57.png" async>
+  <link rel="apple-touch-icon" sizes="60x60" href="/en/public/favicon/apple-icon-60x60.png" async>
+  <link rel="apple-touch-icon" sizes="72x72" href="/en/public/favicon/apple-icon-72x72.png" async>
+  <link rel="apple-touch-icon" sizes="76x76" href="/en/public/favicon/apple-icon-76x76.png" async>
+  <link rel="apple-touch-icon" sizes="114x114" href="/en/public/favicon/apple-icon-114x114.png" async>
+  <link rel="apple-touch-icon" sizes="120x120" href="/en/public/favicon/apple-icon-120x120.png" async>
+  <link rel="apple-touch-icon" sizes="144x144" href="/en/public/favicon/apple-icon-144x144.png" async>
+  <link rel="apple-touch-icon" sizes="152x152" href="/en/public/favicon/apple-icon-152x152.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="/en/public/favicon/apple-icon-180x180.png" async>
+  <link rel="icon" type="image/png" sizes="192x192"  href="/en/public/favicon/android-icon-192x192.png" async>
+  <link rel="icon" type="image/png" sizes="32x32" href="/en/public/favicon/favicon-32x32.png" async>
+  <link rel="icon" type="image/png" sizes="96x96" href="/en/public/favicon/favicon-96x96.png" async>
+  <link rel="icon" type="image/png" sizes="16x16" href="/en/public/favicon/favicon-16x16.png" async>
+  <link rel="manifest" href="/en/public/favicon/manifest.json" async>
+  
+  <link type="application/atom+xml" rel="alternate" href="https://hcn1519.github.io/en/feed.xml" title="hcn1519 Dev Post" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/en/">Home</a>
+      </li>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/en" title="Home">CNH</a>
+            <small>Dev Post</small>
+            <span style="font-size: medium;text-align: right;float: right;margin-top: 3.5px;">
+              <small>
+              
+              <a href="/">한국어로 보기</a>
+              
+              </small>
+            </span>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h2 class="post-title">Thread Safe</h2>
+  <span class="post-date">21 Mar 2019</span>
+  
+  <div class="post-image-feature">
+    <img class="feature-image" src=
+    
+    "/en/public/assets/blogThumb.png"
+    
+    alt="Thread Safe feature image">
+
+    
+  </div><!-- /.image-wrap -->
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <h2 id="table-of-contents">Table of Contents</h2>
+
+<ol>
+  <li><a href="./thread-safe#thread-safe-concept">Thread Safe Concept</a></li>
+  <li><a href="./thread-safe#examples-of-thread-safety">Examples of Thread Safety</a></li>
+  <li><a href="./thread-safe#achieving-thread-safety">Achieving Thread Safety</a></li>
+  <li><a href="./thread-safe#swift-and-thread-safety">Swift and Thread Safety</a></li>
+</ol>
+
+<p>Determining whether something is Thread Safe is one of the essential aspects to understand when writing code in a multi-threaded environment. In this post, we will explore what Thread Safety is and how to assess it.</p>
+
+<h2 id="thread-safe-concept">Thread Safe Concept</h2>
+
+<p>Thread Safety is elaborated in detail in the following article: <a href="http://web.mit.edu/6.005/www/fa15/classes/20-thread-safety">Thread Safety - MIT</a>. The content below is an excerpt and summary of that article. The original article defines Thread Safety as follows:</p>
+
+<blockquote>
+  <p>A data type or static method is threadsafe if it behaves correctly when used from multiple threads, regardless of how those threads are executed, and without demanding additional coordination from the calling code.</p>
+</blockquote>
+
+<p>In summary, for a data type or static method to be considered Thread Safe, it must satisfy the following conditions:</p>
+
+<ol>
+  <li>It must function correctly regardless of the actions of multiple threads.</li>
+  <li>It does not require additional conditions during its invocation.</li>
+</ol>
+
+<p>The article also adds the following explanations:</p>
+
+<ul>
+  <li>“Behaving correctly” means satisfying the specifications and maintaining the object’s representation invariance.</li>
+  <li>“Without demanding additional coordination” means that the data type does not impose additional conditions on the caller related to timing.</li>
+</ul>
+
+<p>“Representation invariance” refers to something that remains constant in a class. For example, when rolling a die, the result is always a number between 1 and 6. Rolling a single die cannot produce a result outside this range. In this context, the <code class="language-plaintext highlighter-rouge">Dice🎲</code> class’s <code class="language-plaintext highlighter-rouge">throwDice()</code> method can be considered to maintain the <code class="language-plaintext highlighter-rouge">Dice🎲</code> class’s representation invariance. The absence of additional conditions related to timing during invocation means that the data type cannot specify preconditions for the caller regarding timing.</p>
+
+<h2 id="examples-of-thread-safety">Examples of Thread Safety</h2>
+
+<h3 id="1-swift-class-instance">1. Swift Class Instance</h3>
+
+<p>Creating instances of reference types involves memory allocation after deallocation (<code class="language-plaintext highlighter-rouge">alloc</code>). However, in a multi-threaded environment, the <code class="language-plaintext highlighter-rouge">alloc</code>/<code class="language-plaintext highlighter-rouge">dealloc</code> information of reference type instances is not shared across threads.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">Bird</span> <span class="p">{}</span>
+<span class="k">var</span> <span class="nv">single</span> <span class="o">=</span> <span class="kt">Bird</span><span class="p">()</span>
+
+<span class="kt">DispatchQueue</span><span class="o">.</span><span class="nf">global</span><span class="p">()</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="kc">true</span> <span class="p">{</span> <span class="n">single</span> <span class="o">=</span> <span class="kt">Bird</span><span class="p">()</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">while</span> <span class="kc">true</span> <span class="p">{</span> <span class="n">single</span> <span class="o">=</span> <span class="kt">Bird</span><span class="p">()</span> <span class="p">}</span>
+<span class="c1">// error - malloc: Double free of object 0x102887200</span>
+</code></pre></div></div>
+
+<p>The above code quickly crashes when executed. This crash occurs because in a multi-threaded environment, Thread A does not have knowledge of Thread B’s instance deallocation information.</p>
+
+<p>Although Swift’s class instance’s reference count is updated atomically, ensuring that other threads do not access the instance during its creation or destruction, it does not guarantee Thread Safety during instance creation. In other words, before and after the instance creation, other threads can still access the instance. In this case, other threads do not have knowledge of <code class="language-plaintext highlighter-rouge">alloc</code>/<code class="language-plaintext highlighter-rouge">dealloc</code> information, making instance creation and destruction not Thread Safe.</p>
+
+<h3 id="2-file-readwrite">2. File Read/Write</h3>
+
+<p>Considering the Thread Safety of reading and writing data to a file involves thinking about timing issues. The content of a file changes based on the order of <code class="language-plaintext highlighter-rouge">read()</code> and <code class="language-plaintext highlighter-rouge">write()</code> operations. Specifically:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">read()</code> followed by <code class="language-plaintext highlighter-rouge">write()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">write()</code> followed by <code class="language-plaintext highlighter-rouge">read()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">read()</code> during <code class="language-plaintext highlighter-rouge">write()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">write()</code> during <code class="language-plaintext highlighter-rouge">read()</code></li>
+</ul>
+
+<p>In these cases, the result is not guaranteed to be the same. Therefore, file read/write operations are not Thread Safe. The key factor making it not Thread Safe is that the file’s content is mutable. If the file’s data were immutable (i.e., if <code class="language-plaintext highlighter-rouge">write()</code> were not possible), timing issues would be resolved.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">writeContent</span><span class="p">(</span><span class="nv">txtFileUrl</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">savedContent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">newContent</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="n">savedContent</span> <span class="o">+</span> <span class="n">newContent</span>
+    <span class="k">try</span><span class="p">?</span> <span class="n">text</span><span class="o">.</span><span class="nf">write</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="n">txtFileUrl</span><span class="p">,</span> <span class="nv">atomically</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="o">.</span><span class="n">utf8</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">documentsDirectoryURL</span> <span class="o">=</span> <span class="kt">FileManager</span><span class="o">.</span><span class="k">default</span><span class="o">.</span><span class="nf">urls</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="nv">in</span><span class="p">:</span> <span class="o">.</span><span class="n">userDomainMask</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="o">!</span>
+<span class="k">let</span> <span class="nv">txtFileUrl</span> <span class="o">=</span> <span class="n">documentsDirectoryURL</span><span class="o">.</span><span class="nf">appendingPathComponent</span><span class="p">(</span><span class="s">"sample.txt"</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">task</span><span class="p">:</span> <span class="p">(</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span> <span class="n">suffix</span> <span class="nf">in</span>
+    <span class="p">(</span><span class="mi">1</span><span class="o">...</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">forEach</span> <span class="p">{</span> <span class="n">content</span> <span class="k">in</span>
+        <span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"</span><span class="se">\(</span><span class="n">content</span><span class="se">)</span><span class="s">"</span> <span class="o">+</span> <span class="n">suffix</span>
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">savedContent</span> <span class="o">=</span> <span class="k">try</span><span class="p">?</span> <span class="kt">String</span><span class="p">(</span><span class="nv">contentsOf</span><span class="p">:</span> <span class="n">txtFileUrl</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="o">.</span><span class="n">utf8</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nf">writeContent</span><span class="p">(</span><span class="nv">txtFileUrl</span><span class="p">:</span> <span class="n">txtFileUrl</span><span class="p">,</span> <span class="nv">savedContent</span><span class="p">:</span> <span class="n">savedContent</span><span class="p">,</span> <span class="nv">newContent</span><span class="p">:</span> <span class="n">str</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">DispatchQueue</span><span class="o">.</span><span class="nf">global</span><span class="p">()</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+    <span class="nf">task</span><span class="p">(</span><span class="s">"a "</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kt">DispatchQueue</span><span class="o">.</span><span class="nf">global</span><span class="p">()</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+    <span class="nf">task</span><span class="p">(</span><span class="s">"b "</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nf">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"result"</span><span class="p">,</span> <span class="nf">readFile</span><span class="p">(</span><span class="nv">txtFileUrl</span><span class="p">:</span> <span class="n">txtFileUrl</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+<span class="c1">// The desired result is "1a 2a 3a ... 100a 1b 2b 3b ... 100b"</span>
+<span class="cm">/* Example result - The result may vary with each code execution.
+result 1a 2a 3a 4a 5a 6a 7a 8a 9a 10a 11a 12a 13a 14a 15a 16a 15b 16b 17b 18b 19b 20b
+21b 22b 23b 24b 25b 26b 27b 28b 29b 30b 31b 32b 33b 34b 36a 37a 38a 39a 40a
+41a 42a 43a 44a 45a 46a 47a 48a 49a 48b 49b 50b 51b 52b 54a 55a 56a 57a 58a 59a 60a
+61a 62a 63a 64a 65a 65b 66b 67b 68b 69b 70a 71a 72a 73a 73b 74b 75b 76b 77a 78a 79a 80a
+81a 82a 83a 84a 85a 86a 87a 88a 89a 89b
+
+ 90b 91b 92a 93a 94a 95a 96a 97a 98a 99a 100a 100b
+*/</span>
+</code></pre></div></div>
+
+<h2 id="achieving-thread-safety">Achieving Thread Safety</h2>
+
+<p>To achieve Thread Safety, several proposed methods are commonly used. Below are some of the methods proposed to achieve Thread Safety:</p>
+
+<ol>
+  <li>Mutual Exclusion - Use locks or semaphores to ensure that only one thread accesses shared resources.</li>
+  <li>Thread Local Storage - Create storage accessible only to specific threads.</li>
+  <li>Reentrancy - Write code in such a way that it can be executed in the same thread or concurrently in different threads, providing consistent results. This can be achieved by storing local state when a thread enters and using it atomically.</li>
+  <li>Atomic Operation - Ensure that data changes occur atomically when multiple threads access it. (See <a href="https://hcn1519.github.io/en/articles/2019-03/atomic">atomic/non-atomic</a> for reference.)</li>
+  <li>Immutable Object - Make objects immutable after creation to prevent changes.</li>
+</ol>
+
+<p>Source: <a href="https://en.wikipedia.org/wiki/Thread_safety">Wikipedia - Thread Safety</a></p>
+
+<h2 id="swift-and-thread-safety">Swift and Thread Safety</h2>
+
+<p>The following information is based on <a href="https://github.com/apple/swift/blob/master/docs/proposals/Concurrency.rst">swift doc - Concurrency.rst</a>. Please note that the document mentions that this is a not accepted proposal, referring to the rejection of the async-await feature, not the analysis of Swift’s Thread Safety.</p>
+
+<p>In general, Thread Safety arises when shared mutable memory exists. Therefore, Swift has mechanisms in place to prevent sharing memory between threads.</p>
+
+<h3 id="1-copyable-protocol">1. Copyable Protocol</h3>
+
+<p>The “Copyable Protocol” specifies that certain types can be safely copied on a per-thread basis. Types like <code class="language-plaintext highlighter-rouge">Int</code>, <code class="language-plaintext highlighter-rouge">Float</code>, and <code class="language-plaintext highlighter-rouge">Double</code>, which do not contain references, follow the Copyable Protocol. Even types like <code class="language-plaintext highlighter-rouge">String</code> and <code class="language-plaintext highlighter-rouge">Array</code>, which do contain references but are constructed as value types, allow copying on a per-thread basis.</p>
+
+<h3 id="2-reentrant-code">2. Reentrant Code</h3>
+
+<p>“Reentrant code” refers to code that can only be accessed through given arguments, making it inaccessible to global variables and shared resources. Swift allows code to be written in such a way that it can only access logically copied data in a single thread. When accessing global variables or unsafe data, the Swift compiler enforces these restrictions. (Consider using <code class="language-plaintext highlighter-rouge">self</code> explicitly when using DispatchQueue to change queues.)</p>
+
+<h3 id="3-gateway-annotation">3. Gateway Annotation</h3>
+
+<p>Swift always creates new threads to execute functions, thanks to annotations that specify thread creation. In other words, Swift has a Thread Verifier that checks whether Copyable Protocol and Reentrant code conditions are met during the compilation process.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">@_semantics</span><span class="p">(</span><span class="s">"swift.concurrent.launch"</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">createTask</span><span class="o">&lt;</span><span class="kt">ArgsTy</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">args</span> <span class="p">:</span> <span class="kt">ArgsTy</span><span class="p">,</span> <span class="nv">callback</span> <span class="p">:</span> <span class="p">(</span><span class="kt">ArgsTy</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://blogs.msdn.microsoft.com/ericlippert/2009/10/19/what-is-this-thing-you-call-thread-safe/">What is this thing you call “thread safe”?</a></li>
+  <li><a href="https://github.com/apple/swift/blob/master/docs/proposals/Concurrency.rst">swift doc - Concurrency.rst</a></li>
+  <li><a href="https://ko.wikipedia.org/wiki/경쟁_상태">Wikipedia - Race Condition</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Thread_safety">Wikipedia - Thread Safety</a></li>
+  <li><a href="https://stackoverflow.com/questions/7578086/what-does-the-term-rep-invariant-and-rep-ok-means">What does the term rep-invariant and rep ok means?</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        
+        <h2>What to Read More</h2>
+        
+      <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Thread">
+                Thread
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2019-03/atomic">
+              atomic/non atomic
+              <small>01 Mar 2019</small>
+            </a>
+            <small> 
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#Swift">
+                Swift
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#atomic">
+                atomic
+              </a>
+            </div>
+           
+            <div class="tag-chips">
+              <a class="tag-link" href="/en/tags/#OS">
+                OS
+              </a>
+            </div>
+          </small>
+          </h3>
+        </li>
+      </li>
+      
+      
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div class="back-home">
+    <a href="/en">< Home</a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/en/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>
