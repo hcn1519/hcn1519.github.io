@@ -127,7 +127,7 @@ The Render Loop is executed whenever the view's bounds change, a rotation event 
 
 ![스크린샷 2020-08-23 오후 8 31 45](https://user-images.githubusercontent.com/13018877/90977348-afb98600-e57f-11ea-93e8-05a81738dc1a.png)
 
-# References
+## References
 
 - [AutoLayout - Understanding AutoLayout](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/index.html#//apple_ref/doc/uid/TP40010853-CH7-SW1)
 - [AutoLayout - Anatomy of a Constraint](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/AnatomyofaConstraint.html#//apple_ref/doc/uid/TP40010853-CH9-SW1)

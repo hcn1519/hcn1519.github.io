@@ -194,7 +194,7 @@ When using `UIKit`'s `UIViewController`, for instance, users write code in line 
 
 > In Apple's development ecosystem, libraries and frameworks are sometimes distinguished based on resource inclusion. For more details, you can refer to [Understanding Frameworks](https://hcn1519.github.io/articles/2019-11/framework_basic).
 
-# References
+## References
 
 - [InversionOfControl - Martin Fowler](https://martinfowler.com/bliki/InversionOfControl.html)
 - [InversionOfControl - Just hack'em](https://justhackem.wordpress.com/2016/05/14/inversion-of-control/)

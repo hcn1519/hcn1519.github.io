@@ -152,6 +152,6 @@ Swift also supports creating tasks that are not part of a Task Group. In this ca
 Each Task in Swift checks whether it has been canceled at appropriate points during its execution. A canceled Task can either throw an error, return an empty collection or nil, or return a partially completed task. You can check for cancellation using [Task.checkCancellation()](https://developer.apple.com/documentation/swift/task/3814826-checkcancellation) or [Task.isCancelled](https://developer.apple.com/documentation/swift/task/3814832-iscancelled).
 
 
-# References
+## References
 
 - [The Swift Programming Language (5.5) - Concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html)
