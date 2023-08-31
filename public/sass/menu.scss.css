@@ -56,6 +56,7 @@
   overflow: hidden;
   position: fixed;
   transition: all .3s ease-in-out;
+  z-index: 1000;
 }
 
 .menu-container {

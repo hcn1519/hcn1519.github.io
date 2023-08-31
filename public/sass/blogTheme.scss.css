@@ -53,6 +53,7 @@ li.related-posts {
   -webkit-transition: .2s ease-out;
           transition: .2s ease-out;
   background: var(--tag-chips-bg-color);
+  margin-top: 0.3rem;
 }
 
 .tag-chips:hover {
@@ -64,7 +65,9 @@ a {
   -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
         transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
   text-decoration: none !important;
-  font-family: "NotoSansKR-Regular", Helvetica, sans-serif;
+  font-family: 'Mona Sans';
+  font-weight: 400;
+  letter-spacing: -0.3pt;
 }
 .post-title a:hover {
   color: var(--link-color);
@@ -81,9 +84,8 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.25;
   color: var(--header-title-color);
   text-rendering: optimizeLegibility;
-  font-family: "NotoSansKR-Medium", sans-serif;
-  font-weight: 400;
-  letter-spacing: -0.5pt;
+  font-family: 'Mona Sans', sans-serif;
+  font-weight: 700;
 }
 
 blockquote {
@@ -191,22 +193,14 @@ tbody tr:nth-child(odd) th {
   padding: 1rem;
   border-radius: 4pt;
 }
-
-/* 폰트 설정 */
 @font-face {
-  font-family: 'NotoSansKR-Light';
-  src: url("/public/fonts/NotoSansKR-Light.otf");
+  font-family: 'Mona Sans';
+  src:
+    url('Mona-Sans.woff2') format('woff2 supports variations'),
+    url('Mona-Sans.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
   font-display: swap;
-}
-@font-face {
-  font-family: 'NotoSansKR-Regular';
-  src: url("/public/fonts/NotoSansKR-Regular.otf");
-  font-display: swap
-}
-@font-face {
-  font-family: 'NotoSansKR-Medium';
-  src: url("/public/fonts/NotoSansKR-Medium.otf");
-  font-display: swap
 }
 
 /* 원하는 코드 블럭 폰트를 적용하세요 */
@@ -235,8 +229,8 @@ body {
 html {
   font-size: 16px;
   line-height: 1.65;
-  font-family: "NotoSansKR-Light", Helvetica, sans-serif;
-  letter-spacing: -0.5pt;
+  font-family: "Mona Sans", Helvetica, sans-serif;
+  letter-spacing: -0.1pt;
 }
 
 @media (min-width: 38em) {
@@ -266,14 +260,14 @@ h5, h6 {
 p {
   margin-top: 0;
   margin-bottom: 1rem;
-  font-family: "NotoSansKR-Light", Helvetica, sans-serif;
+  font-family: "Mona Sans", Helvetica, sans-serif;
   line-height: 165%;
-  letter-spacing: -0.5pt;
+  letter-spacing: -0.1pt;
 }
 
 strong {
-  font-family: "NotoSansKR-Regular", Helvetica, sans-serif;
-  letter-spacing: -0.7pt;
+  font-family: "Mona Sans", Helvetica, sans-serif;
+  letter-spacing: -0.1pt;
 }
 
 /* Quotes */
@@ -378,13 +372,29 @@ abbr[title] {
 /* Masthead(navigation bar)
  * Super small header above the content for site name and short description.
  */
-
-.masthead {
-  padding-top:    1rem;
-  padding-bottom: 1rem;
-  margin-bottom: 3rem;
-  padding-left: 4rem;
-}
+ @media (prefers-color-scheme: light) {
+  .masthead {
+    padding-top:    1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 3rem;
+    padding-left: 4rem;
+    position: fixed;
+    width: 100%;
+    background-color: #f1f3f4;
+  }  
+ }
+ @media (prefers-color-scheme: dark) {
+  .masthead {
+    padding-top:    1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 3rem;
+    padding-left: 4rem;
+    position: fixed;
+    width: 100%;
+    background-color: #000000;
+  } 
+ }
+ 
 .masthead-title {
   margin-top: 0;
   margin-bottom: 0;
@@ -411,9 +421,22 @@ abbr[title] {
    margin-bottom: 4em;
  }
 
+.page, .posts {
+  padding-top: 7em;
+}
+
+.content .post {
+  padding-top: 7em;
+}
+
+.posts .post {
+  padding-top: 0em;
+}
+
  .page-title,
  .post-title {
    margin-top: 0;
+   margin-right: 0.3rem;
  }
 
  .post-title a:hover {
@@ -427,7 +450,6 @@ abbr[title] {
  .post-date {
    display: inline-block;
    margin-top: 0rem;
-   margin-left: 0.5rem;
    color: #9a9a9a;
  }
  @media(max-width: 415px) {
@@ -451,7 +473,7 @@ abbr[title] {
   overflow: hidden; /* clearfix */
   margin-left: -1rem;
   margin-right: -1rem;
-  font-family: "NotoSansKR-Regular", Helvetica, Arial, sans-serif;
+  font-family: "Mona Sans", Helvetica, sans-serif;
   color: #ccc;
   text-align: center;
 }
@@ -490,7 +512,7 @@ abbr[title] {
 
 /* Gist via GitHub Pages */
 .gist .gist-file {
-  font-family: Menlo, Monaco, "Courier New", monospace !important;
+  font-family: "Menlo", Monaco, "Courier New", monospace !important;
 }
 .gist .markdown-body {
   padding: 15px;

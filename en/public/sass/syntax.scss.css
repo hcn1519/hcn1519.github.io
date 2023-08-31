@@ -153,6 +153,7 @@ pre, code {
   font-family: 'Menlo Regular';
   padding: 0.2em;
   font-size: 0.87em;
+  letter-spacing: -0.5pt;
 }
 
 /* 글 중간에 쓰는 블럭용 */
