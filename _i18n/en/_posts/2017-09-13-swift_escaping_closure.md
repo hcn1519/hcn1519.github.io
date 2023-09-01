@@ -122,8 +122,6 @@ Here's the sequence of how the code works:
 3. The `completion` closure, which is also an escaping closure, is called in order to send the data (persons) back to the original ViewController. It's important to perform UI updates on the main thread, so we use `DispatchQueue.main.async` to ensure this.
 4. Finally, the `completion` closure in `ViewController` is executed. Here, you can check if the data retrieval was successful and update the UI accordingly.
 
----
-
 ## References
 
 * Apple Inc. The Swift Programming Language (Swift 3.1) - Escaping Closure

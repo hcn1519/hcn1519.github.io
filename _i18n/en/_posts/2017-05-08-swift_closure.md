@@ -248,8 +248,6 @@ let oddOrEvenDict = digitNames.map { (key, value) -> [Int: String] in
 
 In the above examples, `oddOrEvenArr` and `oddOrEvenDict` are created by mapping the `digitNames` dictionary into arrays and dictionaries, respectively.
 
----
-
 ## References
 - Apple Inc. The Swift Programming Language (Swift 3.1)
 - Raywenderlich - Closure
