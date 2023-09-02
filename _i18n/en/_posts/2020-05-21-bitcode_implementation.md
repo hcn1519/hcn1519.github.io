@@ -12,15 +12,8 @@ image:
 ## Table of Contents
 
 1. [About Bitcode](./bitcode_implementation#about-bitcode)
-    1. [Bitcode Upload Process](./bitcode_implementation#bitcode-upload-process)
-    1. [Symbolication for Apps with Bitcode Enabled](./bitcode_implementation#symbolication-for-apps-with-bitcode-enabled)
-    1. [bcsymbolmap](./bitcode_implementation#bcsymbolmap)
-1. [Xcode Build Settings for Bitcode](./bitcode_implementation#xcode-build-setting-for-bitcode)
-    1. [ENABLE_BITCODE](./bitcode_implementation#enable_bitcode)
-    1. [BITCODE_GENERATION_MODE](./bitcode_implementation#bitcode_generation_mode)
-1. [Library Bitcode Support](./bitcode_implementation#library-bitcode-support)
-    1. [Checking Binary Bitcode Support](./bitcode_implementation#checking-binary-bitcode-support)
-    1. [Library Bitcode Support via CocoaPods](./bitcode_implementation#library-bitcode-support-via-cocoapods)
+1. [Xcode Build Settings for Bitcode](./bitcode_implementation#xcode-build-settings-for-bitcode)
+1. [Bitcode Support for Library](./bitcode_implementation#bitcode-support-for-library)
 
 In this post, I've compiled information about what you need to know to introduce Bitcode.
 
@@ -90,12 +83,12 @@ You can achieve the same effect as ENABLE_BITCODE using `BITCODE_GENERATION_MODE
 
 > Note: You can also enable bitcode by adding `-fembed-bitcode` directly to Other C Flags.
 
-## Library Bitcode Support
+## Bitcode Support for Library
 
 - The main drawback of bitcode is that if any library you are using does not support bitcode, you cannot enable bitcode in your app.
 - Here are some considerations for library bitcode support:
 
-### Checking Binary Bitcode Support
+### Checking if Binary Support Bitcode
 
 To check if a specific library supports bitcode, you can examine whether the library binary contains LLVM Symbols. However, there can be some confusion about which symbols to check, as there are various [issues](https://stackoverflow.com/a/33105733/5130783) regarding this. In general, you can use the following command to check if a binary supports bitcode:
 
@@ -104,7 +97,7 @@ $ otool -arch arm64 -l MyFramework/MyFramework | grep __LLVM
 $ otool -arch armv7 -l myLib.a | grep __LLVM
 ```
 
-### Library Bitcode Support via CocoaPods
+### Bitcode Support for Library distributed via cocoapods
 
 - Bitcode is handled during compilation, not linking. Therefore, whether a library binary supports bitcode or not determines whether bitcode can be enabled in your app. For libraries distributed as built binaries or frameworks, if they previously did not support bitcode, you need
 
@@ -112,7 +105,7 @@ $ otool -arch armv7 -l myLib.a | grep __LLVM
 - In the case of CocoaPods, libraries vendored as `vendored_framework` or `vendored_libraries` fall into this category. If any one library in your app does not support bitcode, your app cannot use bitcode.
 - However, for libraries built from source via CocoaPods, they are built during your app's build process. Therefore, if you don't explicitly set `ENABLE_BITCODE` to `NO` in your app's PodFile or PodSpec, these libraries will support bitcode.
 
-# References
+## References
 
 - [Understanding and Analyzing Application Crash Reports - Bitcode](https://developer.apple.com/library/archive/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-SYMBOLICATION-BITCODE)
 - [What is app thinning? (iOS, tvOS, watchOS)](https://help.apple.com/xcode/mac/11.0/index.html?localePath=en.lproj#/devbbdc5ce4f)

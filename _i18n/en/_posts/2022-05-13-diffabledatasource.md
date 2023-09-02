@@ -11,16 +11,22 @@ image:
 
 ## Table of Contents
 
-1. [WWDC - Advances in UI Data Sources](./diffableDataSource#1-wwdc---advances-in-ui-data-sources)
-1. [Real-world Application](./diffableDataSource#2-real-world-application)
+1. [WWDC - Advances in UI Data Sources](./diffableDataSource#wwdc---advances-in-ui-data-sources)
+1. [Current State-of-the-Art](./diffableDataSource#current-state-of-the-art)
+1. [Diffable DataSource](./diffableDataSource#diffable-datasource)
+1. [How to Use](./diffableDataSource#how-to-use)
+1. [Real-World Application](./diffableDataSource#real-world-application)
+    1. [Hashable Types](./diffableDataSource#1-hashable-types)
+    1. [Performance](./diffableDataSource#2-performance)
+    1. [Background Queue](./diffableDataSource#3-background-queue)
 
-# WWDC - Advances in UI Data Sources
+## WWDC - Advances in UI Data Sources
 
 The `Diffable Data Source` is an API introduced in iOS 13 to make updates to `UICollectionView` and `UITableView` data sources safer and more convenient. In this article, we'll summarize the key points from WWDC ([Advances in UI Data Sources](https://developer.apple.com/videos/play/wwdc2019/220)) that introduced the `Diffable Data Source` and share our experience applying it in real-world scenarios.
 
 ## Current State-of-the-Art
 
-- Developers used to write DataSource code like the one below to configure `UICollectionView` and `UITableView`:
+Developers used to write DataSource code like the one below to configure `UICollectionView` and `UITableView`:
 
 ![no1](https://user-images.githubusercontent.com/13018877/168228135-ae120e52-5c14-479f-814e-3cf9c3d26409.jpeg)
 
@@ -30,11 +36,9 @@ And to update this DataSource, we had to use methods like `reloadData()` or `per
 
 ## Diffable DataSource
 
-- The `Diffable DataSource` was introduced in iOS 13 to simplify and make UI updates safer, eliminating the need for developers to handle actions like cell insertions and deletions manually. Instead, it relies on applying a `Snapshot` to update data.
+The `Diffable DataSource` was introduced in iOS 13 to simplify and make UI updates safer, eliminating the need for developers to handle actions like cell insertions and deletions manually. Instead, it relies on applying a `Snapshot` to update data.
 
 ![no3](https://user-images.githubusercontent.com/13018877/168228193-7237ae99-6c74-444b-b52d-59a8c4b81d52.jpeg)
-
-### Snapshots
 
 A `Snapshot` is an object that holds the state of your UI. With a `Snapshot`, you can update data without the need for `IndexPath` access.
 
@@ -119,34 +123,32 @@ self?.diffableDataSource.apply(snapshot,
 
 ## Considerations and Additional Information
 
-- Once you've applied the `Diffable Data Source`, do not use methods like `performBatchUpdates()`, `insertItems()`, or `deleteItems()` to update your UI.
+Once you've applied the `Diffable Data Source`, do not use methods like `performBatchUpdates()`, `insertItems()`, or `deleteItems()` to update your UI.
 
 ![no6](https://user-images.githubusercontent.com/13018877/168228354-25666d0d-75de-4876-861c-bd08fce19825.jpeg)
 
-- You can create a new `Snapshot` or use an existing one to update your data.
+You can create a new `Snapshot` or use an existing one to update your data.
 
 ![no7](https://user-images.githubusercontent.com/13018877/168228380-36089083-a6b6-44d6-9f66-b2d677432403.jpeg)
 
-- All data updates are performed through the `Snapshot`. Therefore, the `Snapshot` provides APIs for updating your models.
+All data updates are performed through the `Snapshot`. Therefore, the `Snapshot` provides APIs for updating your models.
 
 ![no8](https://user-images.githubusercontent.com/13018877/168228394-a2ad2e51-42e3-4586-873a-4314e4724d21.jpeg)
 
 ## Performance
 
 - The diffing algorithm used by `Diffable Data Source` is fast.
-- Unlike other reload APIs, the `apply()` method for applying a new `Snapshot` doesn't
-
- have to be executed on the main thread. However, it should always be called on the same queue.
+- Unlike other reload APIs, the `apply()` method for applying a new `Snapshot` doesn't have to be executed on the main thread. However, it should always be called on the same queue.
 
 ![no9](https://user-images.githubusercontent.com/13018877/168228418-136c5999-d77e-4202-8cc9-83546807ede0.jpeg)
 
-# Real-World Application
+## Real-World Application
 
 While `Diffable DataSource` is useful, there are considerations when applying it in real-world projects. Here are a few things we took into account when implementing `Diffable DataSource` in our projects.
 
 ### 1. Hashable Types
 
-### Protocol Type
+#### Protocol Type
 
 Both `SectionIdentifierType` and `ItemIdentifierType` for `Diffable DataSource` must conform to the `Hashable` protocol. When you define a protocol that conforms to `Hashable`, you cannot use that protocol as a type. To address this, you can create an enum with associated values that represent different types conforming to the protocol.
 
@@ -189,7 +191,7 @@ class ViewController: UIViewController {
 
 With this approach, you can use `Diffable DataSource` while accommodating different ViewModel types.
 
-### Concrete Type
+#### Concrete Type
 
 Even when your models are concrete types, you may encounter challenges. `Hashable` requires you to implement `==(lhs:rhs:)` for equatability, which can lead to writing a lot of boilerplate code. To avoid this, you can inject a `UUID` into your models, making it easier to conform to `Hashable`.
 
@@ -226,7 +228,7 @@ func applySnapshot(newItems: [ViewModel]) {
 }
 ```
 
-## 3. Background Queue
+### 3. Background Queue
 
 As mentioned in WWDC, the `apply()` method does not have to run on the main thread. However, if you choose to run it on a different queue, you must explicitly ensure that `apply()` is called on the same queue where the `Diffable DataSource` is being used. Failure to do so will result in warnings and potentially unexpected crashes.
 
