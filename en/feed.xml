@@ -1,19 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="https://hcn1519.github.io/en/feed.xml" rel="self" type="application/atom+xml" /><link href="https://hcn1519.github.io/en/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-09-01T16:12:06+09:00</updated><id>https://hcn1519.github.io/en/feed.xml</id><title type="html">hcn1519 Dev Post</title><subtitle>프로그래밍에 관하여 글을 쓰는 블로그입니다.</subtitle><author><name>Changnam Hong</name></author><entry><title type="html">Updating UIKit Lists Safely with DiffableDataSource</title><link href="https://hcn1519.github.io/en/articles/2022-05/diffabledatasource" rel="alternate" type="text/html" title="Updating UIKit Lists Safely with DiffableDataSource" /><published>2022-05-13T00:53:17+09:00</published><updated>2023-08-31T13:37:18+09:00</updated><id>https://hcn1519.github.io/en/articles/2022-05/diffabledatasource</id><content type="html" xml:base="https://hcn1519.github.io/en/articles/2022-05/diffabledatasource">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="https://hcn1519.github.io/en/feed.xml" rel="self" type="application/atom+xml" /><link href="https://hcn1519.github.io/en/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-09-02T17:15:45+09:00</updated><id>https://hcn1519.github.io/en/feed.xml</id><title type="html">hcn1519 Dev Post</title><subtitle>프로그래밍에 관하여 글을 쓰는 블로그입니다.</subtitle><author><name>Changnam Hong</name></author><entry><title type="html">Updating UIKit Lists Safely with DiffableDataSource</title><link href="https://hcn1519.github.io/en/articles/2022-05/diffabledatasource" rel="alternate" type="text/html" title="Updating UIKit Lists Safely with DiffableDataSource" /><published>2022-05-13T00:53:17+09:00</published><updated>2023-09-02T17:14:59+09:00</updated><id>https://hcn1519.github.io/en/articles/2022-05/diffabledatasource</id><content type="html" xml:base="https://hcn1519.github.io/en/articles/2022-05/diffabledatasource">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;./diffableDataSource#1-wwdc---advances-in-ui-data-sources&quot;&gt;WWDC - Advances in UI Data Sources&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;./diffableDataSource#2-real-world-application&quot;&gt;Real-world Application&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./diffableDataSource#wwdc---advances-in-ui-data-sources&quot;&gt;WWDC - Advances in UI Data Sources&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./diffableDataSource#current-state-of-the-art&quot;&gt;Current State-of-the-Art&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./diffableDataSource#diffable-datasource&quot;&gt;Diffable DataSource&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./diffableDataSource#how-to-use&quot;&gt;How to Use&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./diffableDataSource#real-world-application&quot;&gt;Real-World Application&lt;/a&gt;
+    &lt;ol&gt;
+      &lt;li&gt;&lt;a href=&quot;./diffableDataSource#1-hashable-types&quot;&gt;Hashable Types&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;./diffableDataSource#2-performance&quot;&gt;Performance&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;./diffableDataSource#3-background-queue&quot;&gt;Background Queue&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h1 id=&quot;wwdc---advances-in-ui-data-sources&quot;&gt;WWDC - Advances in UI Data Sources&lt;/h1&gt;
+&lt;h2 id=&quot;wwdc---advances-in-ui-data-sources&quot;&gt;WWDC - Advances in UI Data Sources&lt;/h2&gt;
 
 &lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Diffable Data Source&lt;/code&gt; is an API introduced in iOS 13 to make updates to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UICollectionView&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITableView&lt;/code&gt; data sources safer and more convenient. In this article, we’ll summarize the key points from WWDC (&lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2019/220&quot;&gt;Advances in UI Data Sources&lt;/a&gt;) that introduced the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Diffable Data Source&lt;/code&gt; and share our experience applying it in real-world scenarios.&lt;/p&gt;
 
 &lt;h2 id=&quot;current-state-of-the-art&quot;&gt;Current State-of-the-Art&lt;/h2&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;Developers used to write DataSource code like the one below to configure &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UICollectionView&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITableView&lt;/code&gt;:&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Developers used to write DataSource code like the one below to configure &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UICollectionView&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITableView&lt;/code&gt;:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/168228135-ae120e52-5c14-479f-814e-3cf9c3d26409.jpeg&quot; alt=&quot;no1&quot; /&gt;&lt;/p&gt;
 
@@ -23,13 +30,9 @@
 
 &lt;h2 id=&quot;diffable-datasource&quot;&gt;Diffable DataSource&lt;/h2&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Diffable DataSource&lt;/code&gt; was introduced in iOS 13 to simplify and make UI updates safer, eliminating the need for developers to handle actions like cell insertions and deletions manually. Instead, it relies on applying a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Snapshot&lt;/code&gt; to update data.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Diffable DataSource&lt;/code&gt; was introduced in iOS 13 to simplify and make UI updates safer, eliminating the need for developers to handle actions like cell insertions and deletions manually. Instead, it relies on applying a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Snapshot&lt;/code&gt; to update data.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/168228193-7237ae99-6c74-444b-b52d-59a8c4b81d52.jpeg&quot; alt=&quot;no3&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;snapshots&quot;&gt;Snapshots&lt;/h3&gt;
 
 &lt;p&gt;A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Snapshot&lt;/code&gt; is an object that holds the state of your UI. With a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Snapshot&lt;/code&gt;, you can update data without the need for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IndexPath&lt;/code&gt; access.&lt;/p&gt;
 
@@ -111,21 +114,15 @@
 
 &lt;h2 id=&quot;considerations-and-additional-information&quot;&gt;Considerations and Additional Information&lt;/h2&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;Once you’ve applied the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Diffable Data Source&lt;/code&gt;, do not use methods like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;performBatchUpdates()&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;insertItems()&lt;/code&gt;, or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deleteItems()&lt;/code&gt; to update your UI.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Once you’ve applied the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Diffable Data Source&lt;/code&gt;, do not use methods like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;performBatchUpdates()&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;insertItems()&lt;/code&gt;, or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deleteItems()&lt;/code&gt; to update your UI.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/168228354-25666d0d-75de-4876-861c-bd08fce19825.jpeg&quot; alt=&quot;no6&quot; /&gt;&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;You can create a new &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Snapshot&lt;/code&gt; or use an existing one to update your data.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;You can create a new &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Snapshot&lt;/code&gt; or use an existing one to update your data.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/168228380-36089083-a6b6-44d6-9f66-b2d677432403.jpeg&quot; alt=&quot;no7&quot; /&gt;&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;All data updates are performed through the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Snapshot&lt;/code&gt;. Therefore, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Snapshot&lt;/code&gt; provides APIs for updating your models.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;All data updates are performed through the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Snapshot&lt;/code&gt;. Therefore, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Snapshot&lt;/code&gt; provides APIs for updating your models.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/168228394-a2ad2e51-42e3-4586-873a-4314e4724d21.jpeg&quot; alt=&quot;no8&quot; /&gt;&lt;/p&gt;
 
@@ -133,20 +130,18 @@
 
 &lt;ul&gt;
   &lt;li&gt;The diffing algorithm used by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Diffable Data Source&lt;/code&gt; is fast.&lt;/li&gt;
-  &lt;li&gt;Unlike other reload APIs, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apply()&lt;/code&gt; method for applying a new &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Snapshot&lt;/code&gt; doesn’t&lt;/li&gt;
+  &lt;li&gt;Unlike other reload APIs, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apply()&lt;/code&gt; method for applying a new &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Snapshot&lt;/code&gt; doesn’t have to be executed on the main thread. However, it should always be called on the same queue.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;have to be executed on the main thread. However, it should always be called on the same queue.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/168228418-136c5999-d77e-4202-8cc9-83546807ede0.jpeg&quot; alt=&quot;no9&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;real-world-application&quot;&gt;Real-World Application&lt;/h1&gt;
+&lt;h2 id=&quot;real-world-application&quot;&gt;Real-World Application&lt;/h2&gt;
 
 &lt;p&gt;While &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Diffable DataSource&lt;/code&gt; is useful, there are considerations when applying it in real-world projects. Here are a few things we took into account when implementing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Diffable DataSource&lt;/code&gt; in our projects.&lt;/p&gt;
 
 &lt;h3 id=&quot;1-hashable-types&quot;&gt;1. Hashable Types&lt;/h3&gt;
 
-&lt;h3 id=&quot;protocol-type&quot;&gt;Protocol Type&lt;/h3&gt;
+&lt;h4 id=&quot;protocol-type&quot;&gt;Protocol Type&lt;/h4&gt;
 
 &lt;p&gt;Both &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SectionIdentifierType&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ItemIdentifierType&lt;/code&gt; for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Diffable DataSource&lt;/code&gt; must conform to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Hashable&lt;/code&gt; protocol. When you define a protocol that conforms to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Hashable&lt;/code&gt;, you cannot use that protocol as a type. To address this, you can create an enum with associated values that represent different types conforming to the protocol.&lt;/p&gt;
 
@@ -186,7 +181,7 @@
 
 &lt;p&gt;With this approach, you can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Diffable DataSource&lt;/code&gt; while accommodating different ViewModel types.&lt;/p&gt;
 
-&lt;h3 id=&quot;concrete-type&quot;&gt;Concrete Type&lt;/h3&gt;
+&lt;h4 id=&quot;concrete-type&quot;&gt;Concrete Type&lt;/h4&gt;
 
 &lt;p&gt;Even when your models are concrete types, you may encounter challenges. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Hashable&lt;/code&gt; requires you to implement &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;==(lhs:rhs:)&lt;/code&gt; for equatability, which can lead to writing a lot of boilerplate code. To avoid this, you can inject a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UUID&lt;/code&gt; into your models, making it easier to conform to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Hashable&lt;/code&gt;.&lt;/p&gt;
 
@@ -220,7 +215,7 @@
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;3-background-queue&quot;&gt;3. Background Queue&lt;/h2&gt;
+&lt;h3 id=&quot;3-background-queue&quot;&gt;3. Background Queue&lt;/h3&gt;
 
 &lt;p&gt;As mentioned in WWDC, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apply()&lt;/code&gt; method does not have to run on the main thread. However, if you choose to run it on a different queue, you must explicitly ensure that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apply()&lt;/code&gt; is called on the same queue where the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Diffable DataSource&lt;/code&gt; is being used. Failure to do so will result in warnings and potentially unexpected crashes.&lt;/p&gt;
 
@@ -410,16 +405,13 @@
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html&quot;&gt;The Swift Programming Language (5.5) - Concurrency&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="Swift" /><category term="Language" /><category term="Async" /><category term="Await" /><category term="Concurrency" /><category term="Swift" /><category term="Language" /><category term="Async" /><category term="Await" /><category term="Concurrency" /><category term="Thread" /><summary type="html">Exploring Swift's Async/Await</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/en/%7B%22feature%22=%3E%22swiftLogo.jpg%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/en/%7B%22feature%22=%3E%22swiftLogo.jpg%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Test Spy</title><link href="https://hcn1519.github.io/en/articles/2022-01/test_spy" rel="alternate" type="text/html" title="Test Spy" /><published>2022-01-05T00:53:17+09:00</published><updated>2023-08-31T13:37:18+09:00</updated><id>https://hcn1519.github.io/en/articles/2022-01/test_spy</id><content type="html" xml:base="https://hcn1519.github.io/en/articles/2022-01/test_spy">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="Swift" /><category term="Language" /><category term="Async" /><category term="Await" /><category term="Concurrency" /><category term="Swift" /><category term="Language" /><category term="Async" /><category term="Await" /><category term="Concurrency" /><category term="Thread" /><summary type="html">Exploring Swift's Async/Await</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/en/%7B%22feature%22=%3E%22swiftLogo.jpg%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/en/%7B%22feature%22=%3E%22swiftLogo.jpg%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Test Spy</title><link href="https://hcn1519.github.io/en/articles/2022-01/test_spy" rel="alternate" type="text/html" title="Test Spy" /><published>2022-01-05T00:53:17+09:00</published><updated>2023-09-02T17:14:59+09:00</updated><id>https://hcn1519.github.io/en/articles/2022-01/test_spy</id><content type="html" xml:base="https://hcn1519.github.io/en/articles/2022-01/test_spy">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;./test_spy#1-what-is-spy?&quot;&gt;What is Spy?&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;./test_spy#2-the-process-of Performing Unit Testing with Spy&quot;&gt;The Process of Performing Unit Testing with Spy&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;./test_spy#3-spy를-사용하는-시점&quot;&gt;When to Use Spy&lt;/a&gt;
-    &lt;ol&gt;
-      &lt;li&gt;&lt;a href=&quot;./test_spy#3-2-spy와-clean-swift&quot;&gt;Spy and Clean Swift&lt;/a&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./test_spy#1-what-is-spy&quot;&gt;What is Spy?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./test_spy#2-the-process-of-performing-unit-testing-with-spy&quot;&gt;The Process of Performing Unit Testing with Spy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./test_spy#3-when-to-use-spy&quot;&gt;When to Use Spy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./test_spy#4-spy-and-clean-swift&quot;&gt;Spy and Clean Swift&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;blockquote&gt;
@@ -594,7 +586,7 @@
   &lt;li&gt;When you want assertions to be more visible during testing, and you cannot adequately express the test’s intent with only the expectations of a Mock.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;3-2-spy-and-clean-swift&quot;&gt;3-2. Spy and Clean Swift&lt;/h3&gt;
+&lt;h3 id=&quot;4-spy-and-clean-swift&quot;&gt;4. Spy and Clean Swift&lt;/h3&gt;
 
 &lt;p&gt;When testing UseCases in Clean Swift, using Spy can make writing tests easier. Clean Swift involves the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;interactor&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;presenter&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;viewController&lt;/code&gt; calling methods of the objects they depend on in a one-way direction. Consequently, all methods do not return values, and dependencies exist. Test authors can change the DOC they depend on to Spy instead of checking the state after calling the SUT’s method. This allows you to obtain more diverse information during the testing process.&lt;/p&gt;
 
@@ -627,11 +619,11 @@
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/indirect%20output.html&quot;&gt;indirect output&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/SUT.html&quot;&gt;SUT - System Under Test&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/DOC.html&quot;&gt;DOC - Depended On Component&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="UnitTest" /><category term="TestDouble" /><category term="TestSpy" /><category term="UnitTest" /><category term="TestDouble" /><category term="TestSpy" /><summary type="html">Examining the definition and usage of Test Spy.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/en/%7B%22feature%22=%3E%22unittest.png%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/en/%7B%22feature%22=%3E%22unittest.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Test Stub</title><link href="https://hcn1519.github.io/en/articles/2021-12/test_stub" rel="alternate" type="text/html" title="Test Stub" /><published>2021-12-25T00:53:17+09:00</published><updated>2023-08-31T13:37:18+09:00</updated><id>https://hcn1519.github.io/en/articles/2021-12/test_stub</id><content type="html" xml:base="https://hcn1519.github.io/en/articles/2021-12/test_stub">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="UnitTest" /><category term="TestDouble" /><category term="TestSpy" /><category term="UnitTest" /><category term="TestDouble" /><category term="TestSpy" /><summary type="html">Examining the definition and usage of Test Spy.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/en/%7B%22feature%22=%3E%22unittest.png%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/en/%7B%22feature%22=%3E%22unittest.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Test Stub</title><link href="https://hcn1519.github.io/en/articles/2021-12/test_stub" rel="alternate" type="text/html" title="Test Stub" /><published>2021-12-25T00:53:17+09:00</published><updated>2023-09-02T17:14:59+09:00</updated><id>https://hcn1519.github.io/en/articles/2021-12/test_stub</id><content type="html" xml:base="https://hcn1519.github.io/en/articles/2021-12/test_stub">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;./test_stub#1-what-is-stub?&quot;&gt;What is Stub?&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;./test_stub#2-using-stubs-for-unit-testing&quot;&gt;The Process of Performing Unit Tests with Stubs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./test_stub#2-using-stubs-for-unit-testing&quot;&gt;Using Stubs for Unit Testing&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;./test_stub#3-when-to-use-stubs&quot;&gt;When to Use Stubs&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -652,7 +644,7 @@
 
 &lt;h2 id=&quot;2-using-stubs-for-unit-testing&quot;&gt;2. Using Stubs for Unit Testing&lt;/h2&gt;
 
-&lt;p&gt;As is well-known, &lt;a href=&quot;https://hcn1519.github.io/articles/2021-09/unittest&quot;&gt;typical testing is divided into four phases&lt;/a&gt;: (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setup&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exercise&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;verify&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;teardown&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;As is well-known, &lt;a href=&quot;https://hcn1519.github.io/en/articles/2021-09/unittest&quot;&gt;typical testing is divided into four phases&lt;/a&gt;: (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setup&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exercise&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;verify&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;teardown&lt;/code&gt;).&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;During the Setup phase, the test author decides whether to use Stubs when providing input to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SUT&lt;/code&gt;. In other words, they implement the interfaces of the DOCs on which the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SUT&lt;/code&gt; depends.&lt;/li&gt;
@@ -907,24 +899,23 @@
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/indirect%20input.html&quot;&gt;Indirect Input - xUnit Patterns&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/SUT.html&quot;&gt;SUT - System Under Test&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://xunitpatterns.com/DOC.html&quot;&gt;DOC - Depended On Component&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="UnitTest" /><category term="TestDouble" /><category term="TestStub" /><category term="UnitTest" /><category term="TestDouble" /><category term="TestStub" /><summary type="html">Exploring the definition and usage of Test Stubs.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/en/%7B%22feature%22=%3E%22unittest.png%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/en/%7B%22feature%22=%3E%22unittest.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Introduction to Unit Testing</title><link href="https://hcn1519.github.io/en/articles/2021-09/unittest" rel="alternate" type="text/html" title="Introduction to Unit Testing" /><published>2021-09-04T00:53:17+09:00</published><updated>2023-08-31T13:37:18+09:00</updated><id>https://hcn1519.github.io/en/articles/2021-09/unittest</id><content type="html" xml:base="https://hcn1519.github.io/en/articles/2021-09/unittest">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="UnitTest" /><category term="TestDouble" /><category term="TestStub" /><category term="UnitTest" /><category term="TestDouble" /><category term="TestStub" /><summary type="html">Exploring the definition and usage of Test Stubs.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/en/%7B%22feature%22=%3E%22unittest.png%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/en/%7B%22feature%22=%3E%22unittest.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Introduction to Unit Testing</title><link href="https://hcn1519.github.io/en/articles/2021-09/unittest" rel="alternate" type="text/html" title="Introduction to Unit Testing" /><published>2021-09-04T00:53:17+09:00</published><updated>2023-09-02T17:14:59+09:00</updated><id>https://hcn1519.github.io/en/articles/2021-09/unittest</id><content type="html" xml:base="https://hcn1519.github.io/en/articles/2021-09/unittest">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;./unittest#1-what-is-unit-testing&quot;&gt;What is Unit Testing?&lt;/a&gt;
+  &lt;li&gt;&lt;a href=&quot;./unittest#1-what-is-unit-testing?&quot;&gt;What is Unit Testing?&lt;/a&gt;
     &lt;ol&gt;
-      &lt;li&gt;&lt;a href=&quot;./unittest#solitary-vs-sociable&quot;&gt;Solitary vs. Sociable&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;./unittest#solitary-vs-sociable&quot;&gt;Solitary vs Sociable&lt;/a&gt;&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;./unittest#2-the-purpose-of-unit-testing&quot;&gt;The Purpose of Unit Testing&lt;/a&gt;
     &lt;ol&gt;
       &lt;li&gt;&lt;a href=&quot;./unittest#use-case&quot;&gt;Use Case&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;./unittest#the-purpose-of-unit-testing-and-testing-use-cases&quot;&gt;The Purpose of Unit Testing and Testing Use Cases&lt;/a&gt;&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;./unittest#3-testing-targets-in-unit-testing&quot;&gt;Testing Targets in Unit Testing&lt;/a&gt;
     &lt;ol&gt;
-      &lt;li&gt;&lt;a href=&quot;./unittest#test-isolation-and-test-doubles&quot;&gt;Test Isolation and Test Doubles&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;./unittest#test-doubles&quot;&gt;Test Doubles&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;./unittest#test-isolation-and-test-double&quot;&gt;Test Isolation and Test Double&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;./unittest#test-double&quot;&gt;Test Double&lt;/a&gt;&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;./unittest#4-typical-unit-testing-process&quot;&gt;Typical Unit Testing Process&lt;/a&gt;&lt;/li&gt;
@@ -947,7 +938,7 @@
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;solitary-vs-sociable&quot;&gt;Solitary vs. Sociable&lt;/h3&gt;
+&lt;h3 id=&quot;solitary-vs-sociable&quot;&gt;Solitary vs Sociable&lt;/h3&gt;
 
 &lt;p&gt;When conducting Unit Testing, there are cases where a test can influence the results of other tests if it uses actual objects. For example, if two tests share external resources like a database or file system, the first test could alter the resource’s state, affecting the results of the second test.&lt;/p&gt;
 
@@ -1468,28 +1459,12 @@ A use case is a list of actions or event steps typically defining the interactio
   &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/index.html#//apple_ref/doc/uid/TP40010853-CH7-SW1&quot;&gt;AutoLayout - Understanding AutoLayout&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/AnatomyofaConstraint.html#//apple_ref/doc/uid/TP40010853-CH9-SW1&quot;&gt;AutoLayout - Anatomy of a Constraint&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2018/220&quot;&gt;High Performance AutoLayout&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="iOS," /><category term="WWDC," /><category term="AutoLayout," /><category term="UIKit," /><category term="UIView" /><category term="iOS" /><category term="WWDC" /><category term="AutoLayout" /><category term="UIKit" /><category term="UIView" /><summary type="html">Exploring how to efficiently use AutoLayout from a performance perspective.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/en/%7B%22feature%22=%3E%22iOS.png%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/en/%7B%22feature%22=%3E%22iOS.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Introducing Bitcode</title><link href="https://hcn1519.github.io/en/articles/2020-05/bitcode_implementation" rel="alternate" type="text/html" title="Introducing Bitcode" /><published>2020-05-21T00:53:17+09:00</published><updated>2023-08-28T16:29:07+09:00</updated><id>https://hcn1519.github.io/en/articles/2020-05/bitcode_implementation</id><content type="html" xml:base="https://hcn1519.github.io/en/articles/2020-05/bitcode_implementation">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="iOS," /><category term="WWDC," /><category term="AutoLayout," /><category term="UIKit," /><category term="UIView" /><category term="iOS" /><category term="WWDC" /><category term="AutoLayout" /><category term="UIKit" /><category term="UIView" /><summary type="html">Exploring how to efficiently use AutoLayout from a performance perspective.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/en/%7B%22feature%22=%3E%22iOS.png%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/en/%7B%22feature%22=%3E%22iOS.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Introducing Bitcode</title><link href="https://hcn1519.github.io/en/articles/2020-05/bitcode_implementation" rel="alternate" type="text/html" title="Introducing Bitcode" /><published>2020-05-21T00:53:17+09:00</published><updated>2023-09-02T17:14:59+09:00</updated><id>https://hcn1519.github.io/en/articles/2020-05/bitcode_implementation</id><content type="html" xml:base="https://hcn1519.github.io/en/articles/2020-05/bitcode_implementation">&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#about-bitcode&quot;&gt;About Bitcode&lt;/a&gt;
-    &lt;ol&gt;
-      &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#bitcode-upload-process&quot;&gt;Bitcode Upload Process&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#symbolication-for-apps-with-bitcode-enabled&quot;&gt;Symbolication for Apps with Bitcode Enabled&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#bcsymbolmap&quot;&gt;bcsymbolmap&lt;/a&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#xcode-build-setting-for-bitcode&quot;&gt;Xcode Build Settings for Bitcode&lt;/a&gt;
-    &lt;ol&gt;
-      &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#enable_bitcode&quot;&gt;ENABLE_BITCODE&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#bitcode_generation_mode&quot;&gt;BITCODE_GENERATION_MODE&lt;/a&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#library-bitcode-support&quot;&gt;Library Bitcode Support&lt;/a&gt;
-    &lt;ol&gt;
-      &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#checking-binary-bitcode-support&quot;&gt;Checking Binary Bitcode Support&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#library-bitcode-support-via-cocoapods&quot;&gt;Library Bitcode Support via CocoaPods&lt;/a&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#about-bitcode&quot;&gt;About Bitcode&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#xcode-build-settings-for-bitcode&quot;&gt;Xcode Build Settings for Bitcode&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./bitcode_implementation#bitcode-support-for-library&quot;&gt;Bitcode Support for Library&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;In this post, I’ve compiled information about what you need to know to introduce Bitcode.&lt;/p&gt;
@@ -1573,14 +1548,14 @@ SwiftCodeGeneration normal arm64 (in target 'SomeProject' from project 'SomeProj
   &lt;p&gt;Note: You can also enable bitcode by adding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-fembed-bitcode&lt;/code&gt; directly to Other C Flags.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&quot;library-bitcode-support&quot;&gt;Library Bitcode Support&lt;/h2&gt;
+&lt;h2 id=&quot;bitcode-support-for-library&quot;&gt;Bitcode Support for Library&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;The main drawback of bitcode is that if any library you are using does not support bitcode, you cannot enable bitcode in your app.&lt;/li&gt;
   &lt;li&gt;Here are some considerations for library bitcode support:&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;checking-binary-bitcode-support&quot;&gt;Checking Binary Bitcode Support&lt;/h3&gt;
+&lt;h3 id=&quot;checking-if-binary-support-bitcode&quot;&gt;Checking if Binary Support Bitcode&lt;/h3&gt;
 
 &lt;p&gt;To check if a specific library supports bitcode, you can examine whether the library binary contains LLVM Symbols. However, there can be some confusion about which symbols to check, as there are various &lt;a href=&quot;https://stackoverflow.com/a/33105733/5130783&quot;&gt;issues&lt;/a&gt; regarding this. In general, you can use the following command to check if a binary supports bitcode:&lt;/p&gt;
 
@@ -1588,7 +1563,7 @@ SwiftCodeGeneration normal arm64 (in target 'SomeProject' from project 'SomeProj
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;otool &lt;span class=&quot;nt&quot;&gt;-arch&lt;/span&gt; armv7 &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; myLib.a | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;__LLVM
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;library-bitcode-support-via-cocoapods&quot;&gt;Library Bitcode Support via CocoaPods&lt;/h3&gt;
+&lt;h3 id=&quot;bitcode-support-for-library-distributed-via-cocoapods&quot;&gt;Bitcode Support for Library distributed via cocoapods&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Bitcode is handled during compilation, not linking. Therefore, whether a library binary supports bitcode or not determines whether bitcode can be enabled in your app. For libraries distributed as built binaries or frameworks, if they previously did not support bitcode, you need&lt;/li&gt;
@@ -1600,7 +1575,7 @@ SwiftCodeGeneration normal arm64 (in target 'SomeProject' from project 'SomeProj
   &lt;li&gt;However, for libraries built from source via CocoaPods, they are built during your app’s build process. Therefore, if you don’t explicitly set &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ENABLE_BITCODE&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NO&lt;/code&gt; in your app’s PodFile or PodSpec, these libraries will support bitcode.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/library/archive/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-SYMBOLICATION-BITCODE&quot;&gt;Understanding and Analyzing Application Crash Reports - Bitcode&lt;/a&gt;&lt;/li&gt;
