@@ -204,7 +204,7 @@
 
 <h2 id="1-what-is-unit-testing">1. What is Unit Testing?</h2>
 
-<p>In software development, testing is the act of verifying that a particular functionality works correctly before deploying it. Among these tests, Unit Testing focuses on testing a specific unit of code. The definition of what constitutes a unit can vary between programming languages and individuals. From an object-oriented perspective, a unit can be a single class, while from a procedural perspective, it can be a single function. It could also be a collection of classes, a collection of functions, or a mix of classes and functions. Regardless of how a unit is defined, Unit Testing shares the following characteristics:</p>
+<p>In software development, testing is the act of verifying that a particular functionality works correctly. Among these tests, Unit Testing focuses on testing a specific unit of code. The definition of what constitutes a unit can vary between programming languages and individuals. From an object-oriented perspective, a unit can be a single class, while from a procedural perspective, it can be a single function. It could also be a collection of classes, a collection of functions, or a mix of classes and functions. Regardless of how a unit is defined, Unit Testing shares the following characteristics:</p>
 
 <ol>
   <li>Unit Tests focus on low-level code, testing small parts of the overall software.</li>
@@ -221,7 +221,7 @@
 
 <h3 id="solitary-vs-sociable">Solitary vs Sociable</h3>
 
-<p>When conducting Unit Testing, there are cases where a test can influence the results of other tests if it uses actual objects. For example, if two tests share external resources like a database or file system, the first test could alter the resource’s state, affecting the results of the second test.</p>
+<p>In Unit Testing, there are cases where a test can influence the results of other tests if it uses actual objects. For example, if two tests share external resources like a database or file system, the first test could alter the resource’s state, affecting the results of the second test.</p>
 
 <p>In such situations, you can use objects defined for testing purposes (known as “Test Doubles”) to address the problem. Tests designed to use these testing objects are called “Solitary Tests.” Utilizing Test Doubles can eliminate external resource access during testing. However, if multiple tests use the same external resource and do not perform write operations on it, sharing the resource among tests might be acceptable. Additionally, if the external resource is sufficiently stable and fast, there might be no need to restrict access to it. Tests that run without removing dependencies between units are called “Sociable Tests.”</p>
 
@@ -232,7 +232,7 @@
 
 <h2 id="2-the-purpose-of-unit-testing">2. The Purpose of Unit Testing</h2>
 
-<p>At the surface, Unit Testing involves writing tests for specific units of code and verifying their behavior. However, when you think about it, every unit, whether an object or a function, has a purpose and utility when it’s defined. Therefore, Unit Testing can be considered effective when it tests whether the unit behaves correctly according to its purpose. This purpose becomes especially clear when Unit Testing is applied to test “Use Cases.” Let’s briefly look at what a “Use Case” is before diving deeper.</p>
+<p>At the surface, Unit Testing involves writing tests for specific units of code and verifying their behavior. However, every unit, whether an object or a function, has a purpose and utility when it’s defined. Therefore, Unit Testing can be considered effective when it tests whether the unit behaves correctly according to its purpose. This purpose becomes especially clear when Unit Testing is applied to test “Use Cases.” Let’s briefly look at what a “Use Case” is before diving deeper.</p>
 
 <h3 id="use-case">Use Case</h3>
 
@@ -282,7 +282,7 @@ A use case is a list of actions or event steps typically defining the interactio
 
 <h2 id="3-testing-targets-in-unit-testing">3. Testing Targets in Unit Testing</h2>
 
-<p>In Unit Testing, each <a href="https://en.wikipedia.org/wiki/Test_suite">Test Suite</a> should clearly define what it is testing. In this context, the primary unit being tested is referred to as the “System Under Test” or “SUT.” Additionally, the SUT can have dependencies on other units, which are referred to as “Depended On Components” or “DOC.”</p>
+<p>In Unit Testing, each <a href="https://en.wikipedia.org/wiki/Test_suite">Test Suite</a> should clearly define what it is testing. In this context, the primary unit being tested is referred to as the “System Under Test” or “SUT.” Additionally, the <code class="language-plaintext highlighter-rouge">SUT</code> can have dependencies on other units, which are referred to as “Depended On Components” or “DOC.”</p>
 
 <blockquote>
   <p>Testing-oriented people like to use terms like object-under-test or system-under-test to name such a thing. Either term is an ugly mouthful to say, but as it’s a widely accepted term I’ll hold my nose and use it. Following Meszaros I’ll use System Under Test, or rather the abbreviation SUT.</p>
@@ -294,9 +294,7 @@ A use case is a list of actions or event steps typically defining the interactio
 
 <h3 id="test-isolation-and-test-double">Test Isolation and Test Double</h3>
 
-<p>When testing the SUT, there are cases where the DOC becomes problematic. This is especially true when the DOC is dependent on external resources, making testing challenging. For example, imagine testing a vending machine’s change calculation feature. The vending machine behaves like a typical one but has an added feature: it can update drink prices remotely. In other words, the vending machine’s owner can</p>
-
-<p>remotely change the prices of the drinks.</p>
+<p>When testing the <code class="language-plaintext highlighter-rouge">SUT</code>, there are cases where the <code class="language-plaintext highlighter-rouge">DOC</code> becomes problematic. This is especially true when the <code class="language-plaintext highlighter-rouge">DOC</code> is dependent on external resources, making testing challenging. For example, imagine testing a vending machine’s change calculation feature. The vending machine behaves like a typical one but has an added feature: it can update drink prices remotely. In other words, the vending machine’s owner can remotely change the prices of the drinks.</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">Beverage</span> <span class="p">{</span>
     <span class="k">var</span> <span class="nv">price</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>

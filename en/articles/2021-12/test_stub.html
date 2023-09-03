@@ -194,21 +194,21 @@
 
 <h2 id="1-what-is-stub">1. What is Stub?</h2>
 
-<p>In this article, we will discuss Stub, one of the representative Test Doubles.</p>
+<p>In this article, we will discuss <code class="language-plaintext highlighter-rouge">Stub</code>, one of the representative Test Doubles.</p>
 
-<p>A Stub is an object used to provide ‘indirect input’ to the subject of testing (<code class="language-plaintext highlighter-rouge">SUT</code>, System Under Test). In most cases, objects or functions (Units) are designed to return output based on the input they receive. When we write tests, we naturally verify whether the output matches the input we provide. In this context, the person writing the test constructs various inputs to check if the test appropriately validates the Unit. These provided inputs are referred to as ‘indirect input.’ Furthermore, providing ‘indirect input’ to the <code class="language-plaintext highlighter-rouge">SUT</code> can be structured in two ways: directly injecting it into the Unit or providing it from another object. This other object, referred to as a ‘DOC’ (Depended on Component) because it is an object that the <code class="language-plaintext highlighter-rouge">SUT</code> depends on, and a ‘Stub’ is an object that provides the input from this ‘DOC.’</p>
+<p>A <code class="language-plaintext highlighter-rouge">Stub</code> is an object used to provide ‘indirect input’ to the subject of testing (<code class="language-plaintext highlighter-rouge">SUT</code>, System Under Test). In most cases, objects or functions (Units) are designed to return output based on the input they receive. When we write tests, we naturally verify whether the output matches the input we provide. In this context, a tester constructs various inputs to check if the test appropriately validates the Unit. These provided inputs are referred to as ‘indirect input.’ Furthermore, providing ‘indirect input’ to the <code class="language-plaintext highlighter-rouge">SUT</code> can be structured in two ways: directly injecting it into the Unit or providing it from another object. This other object, referred to as a ‘DOC’ (Depended on Component) because it is an object that the <code class="language-plaintext highlighter-rouge">SUT</code> depends on, and a <code class="language-plaintext highlighter-rouge">Stub</code> is an object that provides the input from this ‘DOC.’</p>
 
 <ul>
   <li>When the behavior of the <code class="language-plaintext highlighter-rouge">SUT</code> depends on input values, these inputs are called ‘indirect input.’</li>
-  <li>A ‘Stub’ is an object used for providing ‘indirect input’ to the <code class="language-plaintext highlighter-rouge">SUT</code>.</li>
+  <li>A <code class="language-plaintext highlighter-rouge">Stub</code> is an object used for providing ‘indirect input’ to the <code class="language-plaintext highlighter-rouge">SUT</code>.</li>
 </ul>
 
 <h2 id="2-using-stubs-for-unit-testing">2. Using Stubs for Unit Testing</h2>
 
-<p>As is well-known, <a href="https://hcn1519.github.io/en/articles/2021-09/unittest">typical testing is divided into four phases</a>: (<code class="language-plaintext highlighter-rouge">setup</code>, <code class="language-plaintext highlighter-rouge">exercise</code>, <code class="language-plaintext highlighter-rouge">verify</code>, <code class="language-plaintext highlighter-rouge">teardown</code>).</p>
+<p><a href="https://hcn1519.github.io/en/articles/2021-09/unittest">Typical testing is divided into four phases</a>: (<code class="language-plaintext highlighter-rouge">setup</code>, <code class="language-plaintext highlighter-rouge">exercise</code>, <code class="language-plaintext highlighter-rouge">verify</code>, <code class="language-plaintext highlighter-rouge">teardown</code>).</p>
 
 <ol>
-  <li>During the Setup phase, the test author decides whether to use Stubs when providing input to the <code class="language-plaintext highlighter-rouge">SUT</code>. In other words, they implement the interfaces of the DOCs on which the <code class="language-plaintext highlighter-rouge">SUT</code> depends.</li>
+  <li>During the Setup phase, the test author decides whether to use <code class="language-plaintext highlighter-rouge">Stub</code>s when providing input to the <code class="language-plaintext highlighter-rouge">SUT</code>. In other words, they implement the interfaces of the DOCs on which the <code class="language-plaintext highlighter-rouge">SUT</code> depends.</li>
   <li>During the Exercise phase, the Stub provides the appropriate indirect input to the <code class="language-plaintext highlighter-rouge">SUT</code> when the <code class="language-plaintext highlighter-rouge">SUT</code> requests it.</li>
   <li>During the Verify phase, the test author checks whether the state of the <code class="language-plaintext highlighter-rouge">SUT</code> is appropriate.</li>
 </ol>
@@ -292,7 +292,7 @@
 
 <p>In this scenario, we want to test the <code class="language-plaintext highlighter-rouge">Subscription.Worker.update(request:completion:)</code> function. More specifically, we want to test whether it correctly converts the subscription information obtained through an HTTP request into a usable model in the app. However, there’s an issue: the <code class="language-plaintext highlighter-rouge">update()</code> function makes a call to <code class="language-plaintext highlighter-rouge">dataTask(with:completionHandler)</code>, making it dependent on an external server. This means that to create various responses, you would need the server to provide them.</p>
 
-<p>In such cases, using a Stub allows you to perform the desired tests without relying on the server.</p>
+<p>In such cases, using a <code class="language-plaintext highlighter-rouge">Stub</code> allows you to perform the desired tests without relying on the server.</p>
 
 <details>
     <summary>View Detailed Code</summary>
@@ -405,7 +405,7 @@
 
 </details>
 
-<p>The main difference between the previous code and the modified code is the ability to inject a Stub. If you use Stub injection, the <code class="language-plaintext highlighter-rouge">update()</code> function will return a <code class="language-plaintext highlighter-rouge">StubResponse</code> that you directly provide, without making actual requests to the URL. In other words, you can provide the response you want directly through the Stub, even if the server does not provide the desired response.</p>
+<p>The main difference between the previous code and the modified code is the ability to inject a <code class="language-plaintext highlighter-rouge">Stub</code>. If you use Stub injection, the <code class="language-plaintext highlighter-rouge">update()</code> function will return a <code class="language-plaintext highlighter-rouge">StubResponse</code> that you directly provide, without making actual requests to the URL. In other words, you can provide the response you want directly through the <code class="language-plaintext highlighter-rouge">Stub</code>, even if the server does not provide the desired response.</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">UIKit</span>
 <span class="kd">import</span> <span class="kt">XCTest</span>
@@ -450,7 +450,7 @@
 
 <h2 id="3-when-to-use-stubs">3. When to Use Stubs</h2>
 
-<p>Stubs can be used when it’s difficult to control the injection of ‘indirect input’ into the <code class="language-plaintext highlighter-rouge">SUT</code>. For example, you can use Stubs to create various responses, such as successful and failed cases, to control the behavior of the <code class="language-plaintext highlighter-rouge">SUT</code>. Additionally, in test environments where accessing certain modules (e.g., a payment module) is challenging, you can configure those modules to provide values through Stubs for testing purposes.</p>
+<p><code class="language-plaintext highlighter-rouge">Stub</code> can be used when it’s difficult to control the injection of ‘indirect input’ into the <code class="language-plaintext highlighter-rouge">SUT</code>. For example, you can use <code class="language-plaintext highlighter-rouge">Stub</code> to create various responses, such as successful and failed cases, to control the behavior of the <code class="language-plaintext highlighter-rouge">SUT</code>. Additionally, in test environments where accessing certain modules (e.g., a payment module) is challenging, you can configure those modules to provide values through <code class="language-plaintext highlighter-rouge">Stub</code> for testing purposes.</p>
 
 <h2 id="references">References</h2>
 

@@ -199,8 +199,8 @@
 </div>
 
 <ul>
-  <li>Bitcode is an <a href="https://en.wikipedia.org/wiki/Intermediate_representation">IR (Intermediate Representation)</a> included in binary builds for App Thinning in the App Store. When bitcode is included in the uploaded binary, the App Store recompiles and links the binary, generating optimized binaries for each device architecture.</li>
-  <li>App users only download the binary for their device’s architecture when bitcode is enabled, reducing the size of the app they need to download.</li>
+  <li>Bitcode is an <a href="https://en.wikipedia.org/wiki/Intermediate_representation">IR (Intermediate Representation)</a> included in binary builds for App Thinning in the App Store. When the uploaded binary includes bitcode, the App Store recompiles and links the binary, generating optimized binaries for each device architecture.</li>
+  <li>App users only download the binary for their device’s architecture when bitcode is enabled, reducing the app size they need to download.</li>
   <li>To summarize, when uploading a binary to the App Store, the following process occurs:</li>
 </ul>
 
@@ -213,15 +213,15 @@
 <h3 id="symbolication-for-apps-with-bitcode-enabled">Symbolication for Apps with Bitcode Enabled</h3>
 
 <ul>
-  <li>Recompilation by the App Store during archiving makes dSYM generated during app development unusable. Matching dSYM with the app binary is based on the UUID included in the binary. Hence, when a rebuild occurs (even if there are no code changes), the dSYM from the previous build cannot match the subsequent one. Therefore, dSYMs generated during archiving cannot be used for symbolication of Crash Reports in the App Store.</li>
+  <li>Recompilation by the App Store during archiving makes dSYM generated during app development unusable. Matching dSYM with the app binary is based on the UUID included in the binary. Hence, when a rebuild occurs (even if there are no code changes), the dSYM from the previous build cannot match the subsequent one. Therefore, dSYMs generated during archiving cannot be used to symbolicate Crash Reports in the App Store.</li>
   <li>Therefore, when uploading dSYMs to Third Party Crash Analysis platforms after enabling bitcode, it is <strong>essential</strong> to download the files from Xcode Organizer or iTunes Connect.</li>
 </ul>
 
 <h3 id="bcsymbolmap">bcsymbolmap</h3>
 
 <ul>
-  <li>During archiving, there is a checkbox in iTunes Connect that decides whether to upload the app’s Symbols. Disabling this checkbox causes Xcode to obfuscate the symbols included in the dSYM of the app before binary upload (e.g., “<em>_hidden#109</em>”). These obfuscated symbols are decrypted using a file called <code class="language-plaintext highlighter-rouge">.bcsymbolmap</code>. Therefore, dSYM files for bitcode-enabled binaries always include the corresponding <code class="language-plaintext highlighter-rouge">.bcsymbolmap</code>.</li>
-  <li>When uploading dSYMs to Third Party Crash Analysis platforms, dSYMs downloaded from Xcode are already decrypted and can be uploaded directly. However, dSYMs downloaded directly from iTunes Connect need to be decrypted manually.</li>
+  <li>During archiving, a checkbox in iTunes Connect decides whether to upload the app’s Symbols. Turning off this checkbox causes Xcode to obfuscate the symbols included in the dSYM of the app before binary upload (e.g., “<em>_hidden#109</em>”). These obfuscated symbols are decrypted using a file called <code class="language-plaintext highlighter-rouge">.bcsymbolmap</code>. Therefore, dSYM files for bitcode-enabled binaries always include the corresponding <code class="language-plaintext highlighter-rouge">.bcsymbolmap</code>.</li>
+  <li>When uploading dSYMs to Third Party Crash Analysis platforms, dSYMs downloaded from Xcode are decrypted and can be uploaded directly. However, dSYMs downloaded directly from iTunes Connect need to be decrypted manually.</li>
 </ul>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xcrun dsymutil <span class="nt">-symbol-map</span> &lt;path to BCSymbolMaps <span class="k">in </span>xcarchive&gt; &lt;path to downloaded dSYM directory&gt;
@@ -229,9 +229,7 @@
 
 <h2 id="xcode-build-settings-for-bitcode">Xcode Build Settings for Bitcode</h2>
 
-<ul>
-  <li>Xcode has options to include full bitcode or markers indicating bitcode during binary builds.</li>
-</ul>
+<p>Xcode has options to include full bitcode or markers indicating bitcode during binary builds.</p>
 
 <h3 id="enable_bitcode">ENABLE_BITCODE</h3>
 
@@ -261,7 +259,7 @@ SwiftCodeGeneration normal arm64 (in target 'SomeProject' from project 'SomeProj
 
 <h3 id="bitcode_generation_mode">BITCODE_GENERATION_MODE</h3>
 
-<p>You can achieve the same effect as ENABLE_BITCODE using <code class="language-plaintext highlighter-rouge">BITCODE_GENERATION_MODE</code> in User Defined Settings. Setting the value to <code class="language-plaintext highlighter-rouge">marker</code> adds the <code class="language-plaintext highlighter-rouge">-embed-bitcode-marker</code> compile flag, and setting it to <code class="language-plaintext highlighter-rouge">bitcode</code> adds the <code class="language-plaintext highlighter-rouge">-embed-bitcode</code> flag. You can change this setting to build with full bitcode if needed for certain cases.</p>
+<p>You can achieve the same effect as ENABLE_BITCODE using <code class="language-plaintext highlighter-rouge">BITCODE_GENERATION_MODE</code> in User-Defined Settings. Setting the value to <code class="language-plaintext highlighter-rouge">marker</code> adds the <code class="language-plaintext highlighter-rouge">-embed-bitcode-marker</code> compile flag, and setting it to <code class="language-plaintext highlighter-rouge">bitcode</code> adds the <code class="language-plaintext highlighter-rouge">-embed-bitcode</code> flag. You can change this setting to build with full bitcode for certain cases.</p>
 
 <p><img width="484" alt="Screenshot 2020-05-22 12 59 59" src="https://user-images.githubusercontent.com/13018877/82578788-d73b3400-9bc7-11ea-9ff4-953814cbead4.png" /></p>
 
@@ -284,16 +282,12 @@ SwiftCodeGeneration normal arm64 (in target 'SomeProject' from project 'SomeProj
 <span class="nv">$ </span>otool <span class="nt">-arch</span> armv7 <span class="nt">-l</span> myLib.a | <span class="nb">grep </span>__LLVM
 </code></pre></div></div>
 
-<h3 id="bitcode-support-for-library-distributed-via-cocoapods">Bitcode Support for Library distributed via cocoapods</h3>
+<h3 id="bitcode-support-for-library-distributed-via-cocoapods">Bitcode Support for Library distributed via Cocoapods</h3>
 
 <ul>
-  <li>Bitcode is handled during compilation, not linking. Therefore, whether a library binary supports bitcode or not determines whether bitcode can be enabled in your app. For libraries distributed as built binaries or frameworks, if they previously did not support bitcode, you need</li>
-</ul>
-
-<p>to enable bitcode and rebuild them before redistributing.</p>
-<ul>
-  <li>In the case of CocoaPods, libraries vendored as <code class="language-plaintext highlighter-rouge">vendored_framework</code> or <code class="language-plaintext highlighter-rouge">vendored_libraries</code> fall into this category. If any one library in your app does not support bitcode, your app cannot use bitcode.</li>
-  <li>However, for libraries built from source via CocoaPods, they are built during your app’s build process. Therefore, if you don’t explicitly set <code class="language-plaintext highlighter-rouge">ENABLE_BITCODE</code> to <code class="language-plaintext highlighter-rouge">NO</code> in your app’s PodFile or PodSpec, these libraries will support bitcode.</li>
+  <li>Bitcode is handled during compilation, not linking. Therefore, whether a library binary supports bitcode or not determines whether bitcode can be enabled in your app. For libraries distributed as built binaries or frameworks, if they previously did not support bitcode, you must allow bitcode and rebuild them before redistributing.</li>
+  <li>In the case of CocoaPods, libraries marked as <code class="language-plaintext highlighter-rouge">vendored_framework</code> or <code class="language-plaintext highlighter-rouge">vendored_libraries</code> fall into this category. If any one library in your app does not support bitcode, your app cannot use bitcode.</li>
+  <li>However, libraries built from source via CocoaPods are built during your app’s build process. Therefore, if you don’t explicitly set <code class="language-plaintext highlighter-rouge">ENABLE_BITCODE</code> to <code class="language-plaintext highlighter-rouge">NO</code> in your app’s PodFile or PodSpec, these libraries will support bitcode.</li>
 </ul>
 
 <h2 id="references">References</h2>
