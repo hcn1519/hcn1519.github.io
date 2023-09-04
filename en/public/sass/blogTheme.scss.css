@@ -25,6 +25,7 @@
 
 body {
   color: var(--main-text-color);
+  background-color: var(--main-bg-color);
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
@@ -58,6 +59,15 @@ li.related-posts {
 
 .tag-chips:hover {
   cursor: pointer;
+}
+
+/* https://stackoverflow.com/a/24298427 */
+[id]::before {
+  content: '';
+  display: block;
+  height:      75px;
+  margin-top: -75px;
+  visibility: hidden;
 }
 
 a {
@@ -300,6 +310,7 @@ img {
 ul, ol, dl {
   margin-top: 0;
   margin-bottom: 0.2rem;
+  padding-inline-start: 1.5rem;
 }
 
 dt {
@@ -345,28 +356,48 @@ abbr[title] {
   position: relative;
   width: 100%;
   background-color: var(--main-bg-color);
+  overflow: auto;
 }
 
 /* page container */
-.container {
+.container.content {
   max-width: 24rem;
   padding-left:  1.6rem;
   padding-right: 1.6rem;
   margin-left:  auto;
   margin-right: auto;
 }
+
+.masthead .container {
+  margin-left: 0rem;
+  margin-right: 2rem;
+}
+
 @media (min-width: 38em) {
-  .container {
+  .container.content {
     max-width: 34rem;
     padding-left:  1rem;
     padding-right: 1rem;
   }
+  .masthead .container {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
 }
-@media (min-width: 56em) {
-  .container {
-    max-width: 56rem;
+
+@media (min-width: 58em) {
+  .container.content {
+    max-width: 58rem;
     padding-left:  1rem;
     padding-right: 1rem;
+  }
+  .container.content {
+    margin-left: 120px;
+    margin-right: auto;
+  }
+  .masthead .container {
+    margin-left: 5rem;
+    margin-right: 15rem;
   }
 }
 
@@ -408,7 +439,6 @@ abbr[title] {
   color: #c0c0c0;
   letter-spacing: 0;
 }
-
 
 /*
  * Posts and pages
