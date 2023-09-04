@@ -7,14 +7,13 @@ categories: Swift ThreadSafe atomic OS Thread Language
 tags: [Swift, ThreadSafe, atomic, OS, Thread]
 image:
   feature: blogThumb.png
+table-of-contents: |
+  ### Table of Contents
+  1. [Thread Safe Concept](./thread-safe#thread-safe-concept)
+  2. [Examples of Thread Safety](./thread-safe#examples-of-thread-safety)
+  3. [Achieving Thread Safety](./thread-safe#achieving-thread-safety)
+  4. [Swift and Thread Safety](./thread-safe#swift-and-thread-safety)
 ---
-
-## Table of Contents
-
-1. [Thread Safe Concept](./thread-safe#thread-safe-concept)
-2. [Examples of Thread Safety](./thread-safe#examples-of-thread-safety)
-3. [Achieving Thread Safety](./thread-safe#achieving-thread-safety)
-4. [Swift and Thread Safety](./thread-safe#swift-and-thread-safety)
 
 Determining whether something is Thread Safe is one of the essential aspects to understand when writing code in a multi-threaded environment. In this post, we will explore what Thread Safety is and how to assess it.
 

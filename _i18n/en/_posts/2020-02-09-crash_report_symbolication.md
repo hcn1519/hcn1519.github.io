@@ -7,14 +7,13 @@ categories: iOS, macOS, BuildSystem, Symbol, CrashReport
 tags: [iOS, macOS, BuildSystem, Symbol, CrashReport]
 image:
   feature: iOS.png
+table-of-contents: |
+  ### Table of Contents
+  1. [Generating Crash Reports](./crash_report_symbolication#1-generating-crash-reports)
+  2. [Symbol and Symbolication](./crash_report_symbolication#2-symbol-and-symbolication)
+  3. [Crash Report Symbolication](./crash_report_symbolication#3-crash-report-symbolication)
+  4. [Appendix](./crash_report_symbolication#4-appendix)
 ---
-
-## Table of Contents
-
-1. [Generating Crash Reports](./crash_report_symbolication#1-generating-crash-reports)
-2. [Symbol and Symbolication](./crash_report_symbolication#2-symbol-and-symbolication)
-3. [Crash Report Symbolication](./crash_report_symbolication#3-crash-report-symbolication)
-4. [Appendix](./crash_report_symbolication#4-appendix)
 
 In this post, we will explore how crash reports are generated in apps and how they can be symbolicated in AppStore Connect.
 

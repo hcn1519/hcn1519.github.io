@@ -7,18 +7,17 @@ categories: iOS, WWDC, DiffableDataSource, UIKit
 tags: [iOS, WWDC, DiffableDataSource, UIKit]
 image:
   feature: iOS.png
+table-of-contents: |
+  ### Table of Contents
+  1. [WWDC - Advances in UI Data Sources](./diffableDataSource#wwdc---advances-in-ui-data-sources)
+  1. [Current State-of-the-Art](./diffableDataSource#current-state-of-the-art)
+  1. [Diffable DataSource](./diffableDataSource#diffable-datasource)
+  1. [How to Use](./diffableDataSource#how-to-use)
+  1. [Real-World Application](./diffableDataSource#real-world-application)
+      1. [Hashable Types](./diffableDataSource#1-hashable-types)
+      1. [Performance](./diffableDataSource#2-performance)
+      1. [Background Queue](./diffableDataSource#3-background-queue)
 ---
-
-## Table of Contents
-
-1. [WWDC - Advances in UI Data Sources](./diffableDataSource#wwdc---advances-in-ui-data-sources)
-1. [Current State-of-the-Art](./diffableDataSource#current-state-of-the-art)
-1. [Diffable DataSource](./diffableDataSource#diffable-datasource)
-1. [How to Use](./diffableDataSource#how-to-use)
-1. [Real-World Application](./diffableDataSource#real-world-application)
-    1. [Hashable Types](./diffableDataSource#1-hashable-types)
-    1. [Performance](./diffableDataSource#2-performance)
-    1. [Background Queue](./diffableDataSource#3-background-queue)
 
 ## WWDC - Advances in UI Data Sources
 

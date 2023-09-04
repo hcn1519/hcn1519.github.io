@@ -8,17 +8,16 @@ date: 2022-04-08 00:30:00
 tags: [Swift, Language, Async, Await, Concurrency, Thread]
 image:
   feature: swiftLogo.jpg
+table-of-contents: |
+  ### Table of Contents
+  1. [Handling Asynchronous Tasks in the Past](./swift_async_await#1-handling-asynchronous-tasks-in-the-past)
+  2. [Defining and Calling Asynchronous Functions](./swift_async_await#2-defining-and-calling-asynchronous-functions)
+  3. [Asynchronous Sequences](./swift_async_await#3-asynchronous-sequences)
+  4. [Calling Asynchronous Functions in Parallel](./swift_async_await#4-calling-asynchronous-functions-in-parallel)
+  5. [Task and Task Groups](./swift_async_await#5-task-and-task-groups)
 ---
 
 In this article, we will explore Async/Await introduced in Swift 5.5.
-
-## Table of Contents
-
-1. [Handling Asynchronous Tasks in the Past](./swift_async_await#1-handling-asynchronous-tasks-in-the-past)
-2. [Defining and Calling Asynchronous Functions](./swift_async_await#2-defining-and-calling-asynchronous-functions)
-3. [Asynchronous Sequences](./swift_async_await#3-asynchronous-sequences)
-4. [Calling Asynchronous Functions in Parallel](./swift_async_await#4-calling-asynchronous-functions-in-parallel)
-5. [Task and Task Groups](./swift_async_await#5-task-and-task-groups)
 
 > This content is based on [The Swift Programming Language (5.5) - Concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html).
 

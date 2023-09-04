@@ -7,6 +7,11 @@ categories: iOS, WWDC, AutoLayout, UIKit, UIView
 tags: [iOS, WWDC, AutoLayout, UIKit, UIView]
 image:
   feature: iOS.png
+table-of-contents: |
+  ### Table of Contents
+  1. [Layout Definition in AutoLayout](./autolayout_performance_optimization#1-layout-definition-in-autolayout)
+  2. [AutoLayout Engine and Layout Updates](./autolayout_performance_optimization#2-autolayout-engine-and-layout-updates)
+  3. [AutoLayout Performance Tips](./autolayout_performance_optimization#3-autolayout-performance-tips)
 ---
 
 ## Introduction
@@ -14,12 +19,6 @@ image:
 In this post, we will explore how to use AutoLayout efficiently from a performance perspective.
 
 > This post references a lot of content from [High Performance AutoLayout](https://developer.apple.com/videos/play/wwdc2018/220).
-
-## Content
-
-1. [Layout Definition in AutoLayout](./autolayout_performance_optimization#1-layout-definition-in-autolayout)
-2. [AutoLayout Engine and Layout Updates](./autolayout_performance_optimization#2-autolayout-engine-and-layout-updates)
-3. [AutoLayout Performance Tips](./autolayout_performance_optimization#3-autolayout-performance-tips)
 
 ## 1. Layout Definition in AutoLayout
 

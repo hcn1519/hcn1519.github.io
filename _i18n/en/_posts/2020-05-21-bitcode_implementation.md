@@ -7,13 +7,12 @@ categories: Bitcode, AppStore, Xcode, iOS, BuildSystem, Symbol, CrashReport
 tags: [Bitcode, AppStore, Xcode, iOS, BuildSystem, Symbol, CrashReport]
 image:
   feature: iOS.png
+table-of-contents: |
+  ### Table of Contents
+  1. [About Bitcode](./bitcode_implementation#about-bitcode)
+  1. [Xcode Build Settings for Bitcode](./bitcode_implementation#xcode-build-settings-for-bitcode)
+  1. [Bitcode Support for Library](./bitcode_implementation#bitcode-support-for-library)
 ---
-
-## Table of Contents
-
-1. [About Bitcode](./bitcode_implementation#about-bitcode)
-1. [Xcode Build Settings for Bitcode](./bitcode_implementation#xcode-build-settings-for-bitcode)
-1. [Bitcode Support for Library](./bitcode_implementation#bitcode-support-for-library)
 
 In this post, I've compiled information about what you need to know to introduce Bitcode.
 

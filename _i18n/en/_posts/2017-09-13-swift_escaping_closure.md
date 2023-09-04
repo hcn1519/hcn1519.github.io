@@ -8,13 +8,13 @@ date: 2017-09-12 00:30:00
 tags: [Swift, Closure, EscapingClosure, Language, Networking]
 image:
   feature: swiftLogo.jpg
+table-of-contents: |
+  ### Table of Contents
+  1. [Concept of Escaping Closures](./swift_escaping_closure#1-concept-of-escaping-closures)
+  1. [Storing Closures Outside Functions](./swift_escaping_closure#2-storing-closures-outside-functions)
+  1. [Async Inside Async](./swift_escaping_closure#3-async-inside-async)
+
 ---
-
-## Table of Contents
-
-1. [Concept of Escaping Closures](./swift_escaping_closure#1-concept-of-escaping-closures)
-1. [Storing Closures Outside Functions](./swift_escaping_closure#2-storing-closures-outside-functions)
-1. [Async Inside Async](./swift_escaping_closure#3-async-inside-async)
 
 ## 1. Concept of Escaping Closures
 

@@ -8,16 +8,15 @@ date: 2017-07-30 00:30:00
 tags: [iOS, URLSession, Networking, UIKit]
 image:
   feature: iOS.png
----
-
-## Table of Contents
-
-1. [URLSession's Request and Response](#urlsession-request-and-response)
-1. [Basic Concepts of URLSession](#basic-concepts-of-urlsession)
+table-of-contents: |
+  ### Table of Contents
+  1. [URLSession's Request and Response](#urlsession-request-and-response)
+  1. [Basic Concepts of URLSession](#basic-concepts-of-urlsession)
     1. [Session](#session)
     1. [Request](#request)
     1. [Task](#task)
-1. [Using URLSession dataTask](#using-urlsession-datatask)
+  1. [Using URLSession dataTask](#using-urlsession-datatask)
+---
 
 To facilitate communication with servers in iOS apps, Apple provides the `URLSession` API. `URLSession` is a fundamental API that underlies popular libraries like Alamofire and SDWebImage for data exchange with servers in iOS app development. `URLSession` supports several protocols, including HTTP, and provides features such as authentication, cookie management, and caching.
 
