@@ -7,23 +7,19 @@ categories: iOS, WWDC, DarkMode, UIKit
 tags: [iOS, WWDC, DarkMode, UIKit]
 image:
   feature: iOS.png
+table-of-contents: |
+  ### Table of Contents        
+  1. UITraitCollection  
+    1. [UITraitCollection.current](./ios_darkmode#1-uitraitcollectioncurrent)
+    1. [traitCollectionDidChange(_:)](./ios_darkmode#2-traitcollectiondidchange)
+    1. [`TraitCollection`을 활용하여 라이트/다크 모드 강제 설정하기](./ios_darkmode#3-raitcollection을-활용하여-라이트다크-모드-강제-설정하기)
+  1. 다크모드 주요 구현 대상
+    1. [색상](./ios_darkmode#1-색상)
+    1. [이미지](./ios_darkmode#2-이미지)
+    1. [기타 Components](./ios_darkmode#3-기타-components)
 ---
 
 다크모드 도입에 있어서 필요한 정보를 조사하면서 실제 구현과 관련된 내용을 정리해보았습니다. 공식 문서 및 영상을 보면서 관련 내용을 같이 참고하시면 좋을 것 같습니다.(해당 내용의 대부분은 [WWDC - Implement Dark Mode](https://developer.apple.com/videos/play/wwdc2019/214/)을 기반으로 작성되었습니다.)
-
-## 목차
-
-#### 1. UITraitCollection
-
-1. [UITraitCollection.current](./ios_darkmode#1-uitraitcollectioncurrent)
-1. [traitCollectionDidChange(_:)](./ios_darkmode#2-traitcollectiondidchange)
-1. [`TraitCollection`을 활용하여 라이트/다크 모드 강제 설정하기](./ios_darkmode#3-raitcollection을-활용하여-라이트다크-모드-강제-설정하기)
-
-#### 2. 다크모드 주요 구현 대상
-
-1. [색상](./ios_darkmode#1-색상)
-1. [이미지](./ios_darkmode#2-이미지)
-1. [기타 Components](./ios_darkmode#3-기타-components)
 
 ## UITraitCollection
 

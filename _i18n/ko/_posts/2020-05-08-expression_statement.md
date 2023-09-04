@@ -5,16 +5,15 @@ date: "2020-05-09 00:53:17 +0900"
 excerpt: "Expression과 Statement에 대해 정리하였습니다."
 categories: Expression, Statement, Language, C, Terminology
 tags: [Expression, Statement, Language, C, Terminology]
+table-of-contents: |
+  ### Table of Contents          
+    1. [Introduction](./expression_statement#introduction)
+    1. [Expression](./expression_statement#expression)
+        1. [Evaluation](./expression_statement#evaluation)
+        1. [Side Effect](./expression_statement#side-effect)
+        1. [Undefined Behavior](./expression_statement#undefined-behavior)
+    1. [Statement](./expression_statement#statement)
 ---
-
-## 목차
-
-1. [Introduction](./expression_statement#introduction)
-1. [Expression](./expression_statement#expression)
-    1. [Evaluation](./expression_statement#evaluation)
-    1. [Side Effect](./expression_statement#side-effect)
-    1. [Undefined Behavior](./expression_statement#undefined-behavior)
-1. [Statement](./expression_statement#statement)
 
 ## Introduction
 

@@ -8,17 +8,16 @@ date:   2022-04-08 00:30:00
 tags: [Swift, Language, Async, Await, Concurrency, Thread]
 image:
   feature: swiftLogo.jpg
+table-of-contents: |
+  ### Table of Contents  
+    1. [기존 Asynchronous 작업 처리 방식](./swift_async_await#1-기존-asynchronous-작업-처리-방식)
+    1. [Asynchronous Functions의 정의와 호출](./swift_async_await#2-asynchronous-functions의-정의와-호출)
+    1. [Asynchronous Sequences](./swift_async_await#3-asynchronous-sequences)
+    1. [Calling Asynchronous Functions in Parallel](./swift_async_await#4-calling-asynchronous-functions-in-parallel)
+    1. [Task and Task Groups](./swift_async_await#5-task-and-task-groups)
 ---
 
 이 글에서는 Swift 5.5에 소개된 Async/Await에 대해 살펴보고자 합니다.
-
-## Table of Contents
-
-1. [기존 Asynchronous 작업 처리 방식](./swift_async_await#1-기존-asynchronous-작업-처리-방식)
-1. [Asynchronous Functions의 정의와 호출](./swift_async_await#2-asynchronous-functions의-정의와-호출)
-1. [Asynchronous Sequences](./swift_async_await#3-asynchronous-sequences)
-1. [Calling Asynchronous Functions in Parallel](./swift_async_await#4-calling-asynchronous-functions-in-parallel)
-1. [Task and Task Groups](./swift_async_await#5-task-and-task-groups)
 
 > 해당 내용은 [The Swift Programming Languages(5.5) - Concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html#)에 기반하여 작성된 내용입니다. 
 

@@ -7,14 +7,13 @@ categories: iOS, WWDC, DiffableDataSource, UIKit
 tags: [iOS, WWDC, DiffableDataSource, UIKit]
 image:
   feature: iOS.png
+table-of-contents: |
+  ### Table of Contents  
+    1. [WWDC - Advances in UI Data Sources](./diffableDataSource#1-wwdc---advances-in-ui-data-sources)
+    1. [실제 적용기](./diffableDataSource#2-실제-적용기)
 ---
 
-## Table of Contents
-
-1. [WWDC - Advances in UI Data Sources](./diffableDataSource#1-wwdc---advances-in-ui-data-sources)
-1. [실제 적용기](./diffableDataSource#2-실제-적용기)
-
-# WWDC - Advances in UI Data Sources
+# 1. WWDC - Advances in UI Data Sources
 
 `Diffable Data Source`는 `UICollectionView`와 `UITableView`의 DataSource 업데이트를 좀 더 안전하고, 편리하게 수행할 수 있도록 만들어진 API입니다. 이 글에서는 iOS 13부터 지원되는 `Diffable Data Source`를 소개하는 WWDC 주요 내용([Advances in UI Data Sources](https://developer.apple.com/videos/play/wwdc2019/220))을 정리하고, 이를 적용한 후기에 대해 작성해보았습니다.
 
@@ -139,7 +138,7 @@ self?.diffableDataSource.apply(snapshot,
 
 ![no9](https://user-images.githubusercontent.com/13018877/168228418-136c5999-d77e-4202-8cc9-83546807ede0.jpeg)
 
-# 실제 적용기
+# 2. 실제 적용기
 
 `Diffable DataSource`는 유용하게 사용할 수 있지만, 적용시 고려해야 할 것들이 있습니다. 여기에서는 `Diffable DataSource`를 실제 프로젝트에 적용하면서 고려했던 내용들을 몇 가지 소개하고자합니다.
 

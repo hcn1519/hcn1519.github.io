@@ -7,14 +7,13 @@ categories: iOS, OS, BuildSystem, Symbol, CrashReport
 tags: [iOS, macOS, OS, BuildSystem, Symbol, CrashReport]
 image:
   feature: iOS.png
+table-of-contents: |
+  ### Table of Contents        
+    1. [크래시 리포트의 생성](./crash_report_symbolication#1-크래시-리포트의-생성)
+    2. [Symbol, Symbolication](./crash_report_symbolication#2-symbol-symbolication)
+    3. [Crash Report Symbolication](./crash_report_symbolication#3-crash-report-symbolication)
+    4. [Appendix](./crash_report_symbolication#4-appendix)
 ---
-
-## 목차
-
-1. [크래시 리포트의 생성](./crash_report_symbolication#1-크래시-리포트의-생성)
-2. [Symbol, Symbolication](./crash_report_symbolication#2-symbol-symbolication)
-3. [Crash Report Symbolication](./crash_report_symbolication#3-crash-report-symbolication)
-4. [Appendix](./crash_report_symbolication#4-appendix)
 
 이번 글에서는 앱에서 크래시 리포트가 어떻게 생성되고, 이를 AppStore Connect에서 확인할 수 있는지 알아보고자 합니다.
 

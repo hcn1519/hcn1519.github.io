@@ -8,13 +8,12 @@ date:   2017-09-12 00:30:00
 tags: [Swift, Closure, EscapingClosure, Language, Networking]
 image:
   feature: swiftLogo.jpg
+table-of-contents: |
+  ### Table of Contents  
+  1. [Escaping Closure 개념](./swift_escaping_closure#1-escaping-closure-개념)
+  1. [클로저를 함수 외부에 저장하기](./swift_escaping_closure#2-클로저를-함수-외부에-저장하기)
+  1. [Async Inside Async](./swift_escaping_closure#3-async-inside-async)
 ---
-
-## Table of Contents
-
-1. [Escaping Closure 개념](./swift_escaping_closure#1-escaping-closure-개념)
-1. [클로저를 함수 외부에 저장하기](./swift_escaping_closure#2-클로저를-함수-외부에-저장하기)
-1. [Async Inside Async](./swift_escaping_closure#3-async-inside-async)
 
 ## 1. Escaping Closure 개념
 

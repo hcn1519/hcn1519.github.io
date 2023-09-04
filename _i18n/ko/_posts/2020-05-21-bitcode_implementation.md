@@ -7,20 +7,19 @@ categories: Bitcode, AppStore, Xcode, iOS, BuildSystem, Symbol, CrashReport
 tags: [Bitcode, AppStore, Xcode, iOS, BuildSystem, Symbol, CrashReport]
 image:
   feature: iOS.png
----
-
-## 목차
-
-1. [About bitcode](./bitcode_implementation#about-bitcode)
+table-of-contents: |
+  ### Table of Contents          
+  1. [About bitcode](./bitcode_implementation#about-bitcode)
     1. [bitcode 업로드 프로세스](./bitcode_implementation#bitcode-업로드-프로세스)
     1. [bitcode가 활성화된 앱의 Symbolication](./bitcode_implementation#bitcode가-활성화된-앱의-symbolication)
     1. [bcsymbolmap](./bitcode_implementation#bcsymbolmap)
-1. [Xcode Build Setting for bitcode](./bitcode_implementation#xcode-build-setting-for-bitcode)
+  1. [Xcode Build Setting for bitcode](./bitcode_implementation#xcode-build-setting-for-bitcode)
     1. [ENABLE_BITCODE](./bitcode_implementation#enable_bitcode)
     1. [BITCODE_GENERATION_MODE](./bitcode_implementation#bitcode_generation_mode)
-1. [Library의 bitcode 지원](./bitcode_implementation#library의-bitcode-지원)
+  1. [Library의 bitcode 지원](./bitcode_implementation#library의-bitcode-지원)
     1. [바이너리의 bitcode 지원 확인하기](./bitcode_implementation#바이너리의-bitcode-지원-확인하기)
     1. [CocoaPods을 통해 배포되는 라이브러리의 bitcode 지원](./bitcode_implementation#cocoaPods을-통해-배포되는-라이브러리의-bitcode-지원)
+---
 
 이번 글에서는 bitcode 도입을 위해 필요한 부분을 정리해보았습니다.
 

@@ -7,6 +7,11 @@ categories: iOS, WWDC, AutoLayout, UIKit, UIView
 tags: [iOS, WWDC, AutoLayout, UIKit, UIView]
 image:
   feature: iOS.png
+table-of-contents: |
+  ### Table of Contents          
+  1. [AutoLayout의 Layout 정의 방식](./autolayout_performance_optimization#1-autolayout의-layout-정의-방식)
+  2. [AutoLayout Engine과 Layout 업데이트](./autolayout_performance_optimization#2-autolayout-engine과-layout-업데이트)
+  3. [AutoLayout Performance Tips](./autolayout_performance_optimization#3-autolayout-performance-tips)
 ---
 
 ## Introduction
@@ -14,12 +19,6 @@ image:
 이 글에서는 성능 관점에서 AutoLayout을 효율적으로 사용하는 방법에 대해 살펴보고자 합니다.
 
 > 이 글은 [High Performance AutoLayout](https://developer.apple.com/videos/play/wwdc2018/220)의 많은 내용을 참고하고 있습니다.
-
-## Content
-
-1. [AutoLayout의 Layout 정의 방식](./autolayout_performance_optimization#1-autolayout의-layout-정의-방식)
-2. [AutoLayout Engine과 Layout 업데이트](./autolayout_performance_optimization#2-autolayout-engine과-layout-업데이트)
-3. [AutoLayout Performance Tips](./autolayout_performance_optimization#3-autolayout-performance-tips)
 
 ## 1. AutoLayout의 Layout 정의 방식
 

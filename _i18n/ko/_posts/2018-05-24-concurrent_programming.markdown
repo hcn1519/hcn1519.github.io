@@ -2,22 +2,23 @@
 layout: post
 title: "Concurrent programming과 GCD"
 date: "2018-05-24 23:04:09 +0900"
+excerpt: "Concurreny에 대한 기본적인 개념을 살펴봅니다."
 categories: Concurrent GCD iOS Thread
 tags: [Concurrency, GCD, iOS, Thread]
+table-of-contents: |
+  ### Table of Contents  
+  1. [과거 이야기(싱글 코어 시절)](./concurrent_programming#과거-이야기(싱글-코어-시절))
+  1. [멀티 코어 프로세서의 시대](./concurrent_programming#멀티-코어-프로세서의-시대)
+  1. [전통적인 접근 방식](./concurrent_programming#1-전통적인-접근-방식)
+  1. [Move away from threads](./concurrent_programming#move-away-from-threads)
+  1. [Grand Central Dispatch(GCD)](./concurrent_programming#grand-central-dispatch(gcd))
+      1. [Dispatch Queue](./concurrent_programming#dispatch-queue)
+      1. [Dispatch Sources](./concurrent_programming#dispatch-sources)
+      1. [Operation Queue](./concurrent_programming#operation-queue)
+  1. [Asynchronous Design Techniques](./concurrent_programming#asynchronous-design-techniques)
+  1. [Tips for improving efficiency](./concurrent_programming#tips-for-improving-efficiency)
+
 ---
-
-## Table of Contents
-
-1. [과거 이야기(싱글 코어 시절)](./concurrent_programming#과거-이야기(싱글-코어-시절))
-1. [멀티 코어 프로세서의 시대](./concurrent_programming#멀티-코어-프로세서의-시대)
-1. [전통적인 접근 방식](./concurrent_programming#1-전통적인-접근-방식)
-1. [Move away from threads](./concurrent_programming#move-away-from-threads)
-1. [Grand Central Dispatch(GCD)](./concurrent_programming#grand-central-dispatch(gcd))
-    1. [Dispatch Queue](./concurrent_programming#dispatch-queue)
-    1. [Dispatch Sources](./concurrent_programming#dispatch-sources)
-    1. [Operation Queue](./concurrent_programming#operation-queue)
-1. [Asynchronous Design Techniques](./concurrent_programming#asynchronous-design-techniques)
-1. [Tips for improving efficiency](./concurrent_programming#tips-for-improving-efficiency)
 
 > 이 글은 애플의 [Concurrency and Application Design](https://developer.apple.com/library/content/documentation/General/Conceptual/ConcurrencyProgrammingGuide/ConcurrencyandApplicationDesign/ConcurrencyandApplicationDesign.html#//apple_ref/doc/uid/TP40008091-CH100-SW1) 문서를 정리한 내용을 담고 있습니다.
 

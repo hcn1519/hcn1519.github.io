@@ -8,17 +8,16 @@ date:   2017-07-15 00:30:00
 tags: [Swift, Foundation, FileManager]
 image:
   feature: swiftLogo.jpg
----
-
-## Table of Contents
-
-1. [기본적인 macOS 파일 시스템](./swift_file_manager#기본적인-macos-파일-시스템)
-1. [FileManager](./swift_file_manager#filemanager)
+table-of-contents: |
+  ### Table of Contents  
+  1. [기본적인 macOS 파일 시스템](./swift_file_manager#기본적인-macos-파일-시스템)
+  1. [FileManager](./swift_file_manager#filemanager)
     1. [Directory 접근하기](./swift_file_manager#directory-접근하기)
     1. [Directory 생성하기](./swift_file_manager#directory-생성하기)
     1. [파일 만들고 쓰기](./swift_file_manager#파일-만들고-쓰기)
     1. [파일 읽기](./swift_file_manager#파일-읽기)
-1. [번외 : iOS 프로젝트에서 로컬 이미지 읽고 보여주기](./swift_file_manager#번외-:-ios-프로젝트에서-로컬-이미지-읽고-보여주기)
+  1. [번외 : iOS 프로젝트에서 로컬 이미지 읽고 보여주기](./swift_file_manager#번외-:-ios-프로젝트에서-로컬-이미지-읽고-보여주기)
+---
 
 이번 포스팅에서는 Swift를 통해 로컬(macOS)에 있는 파일들을 다루는 방법에 대해 알아보고자 합니다.
 
