@@ -17,7 +17,7 @@
   --message-bg-color: #f9f9f9;
   --pagination-item-border-color: #eee;
   --pagination-item-hover-bg-color: #f5f5f5;
-  --masthead-title-color: #505050;
+  --masthead-title-color: #000;
   --table-border-color: #e5e5e5;
   --table-odd-row-bg-color: #f9f9f9;
   --related-border-color: #eee;
@@ -34,8 +34,6 @@ body {
 .post-title,
 .post-title a {
  color: var(--post-title-color);
- -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
-        transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
 }
 
 .tag-chips
@@ -51,8 +49,6 @@ li.related-posts {
   display: inline-block;
   border-radius: 5px;
   padding: 5px;
-  -webkit-transition: .2s ease-out;
-          transition: .2s ease-out;
   background: var(--tag-chips-bg-color);
   margin-top: 0.3rem;
 }
@@ -72,11 +68,7 @@ li.related-posts {
 
 a {
   color: var(--link-color);
-  -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
-        transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
   text-decoration: none !important;
-  font-family: "Mona Sans", Helvetica, sans-serif;
-  font-weight: 400;
   letter-spacing: -0.3pt;
 }
 .post-title a:hover {
@@ -90,12 +82,11 @@ a:hover, a:focus {
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: .5rem;
-  font-weight: bold;
   line-height: 1.25;
   color: var(--header-title-color);
   text-rendering: optimizeLegibility;
-  font-family: "Mona Sans", Helvetica, sans-serif;
-  font-weight: 700;
+  font-family: "Mona Sans SemiBold", Helvetica, sans-serif;
+  letter-spacing: -0.5pt;
 }
 
 blockquote {
@@ -119,6 +110,17 @@ a.pagination-item:hover {
 }
 .masthead-title, .masthead-title a {
   color: var(--masthead-title-color);
+  font-family: "Age";
+  letter-spacing: 0.5pt;
+}
+
+.translation small a {
+  text-align: right;
+  float: right;
+  margin-top: 4.5px;
+  font-family: "Mona Sans", Helvetica, sans-serif;
+  font-size: 10pt;
+  letter-spacing: -0.5pt;
 }
 
 /* Tables */
@@ -184,7 +186,7 @@ tbody tr:nth-child(odd) th {
     --message-bg-color: #343434;
     --pagination-item-border-color: #868585;
     --pagination-item-hover-bg-color: #000000;
-    --masthead-title-color: #888888;
+    --masthead-title-color: #fff;
     --table-border-color: #444444;
     --table-odd-row-bg-color: #333333;
     --related-border-color: #505050;
@@ -203,11 +205,26 @@ tbody tr:nth-child(odd) th {
   padding: 1rem;
   border-radius: 4pt;
 }
+
+@font-face {
+  font-family: 'Age';
+  src: url('/public/fonts/Age-Normal.woff2') format('woff2');
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
+
 @font-face {
   font-family: 'Mona Sans';
-  src:
-    url('Mona-Sans.woff2') format('woff2 supports variations'),
-    url('Mona-Sans.woff2') format('woff2-variations');
+  src: url('/public/fonts/Mona-Sans-Regular.woff2') format('woff2 supports variations');
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mona Sans SemiBold';
+  src: url('/public/fonts/Mona-Sans-SemiBold.woff2') format('woff2');
   font-weight: 200 900;
   font-stretch: 75% 125%;
   font-display: swap;
@@ -436,8 +453,8 @@ abbr[title] {
 .masthead-title small {
   font-size: 75%;
   font-weight: 400;
-  color: #c0c0c0;
-  letter-spacing: 0;
+  color: #0085ED;
+  letter-spacing: 0.5pt;
 }
 
 /*
@@ -505,7 +522,7 @@ abbr[title] {
   overflow: hidden; /* clearfix */
   margin-left: -1rem;
   margin-right: -1rem;
-  font-family: "Mona Sans", Helvetica, sans-serif;
+  font-family: "Mona Sans SemiBold", Helvetica, sans-serif;
   color: #ccc;
   text-align: center;
 }

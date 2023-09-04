@@ -28,9 +28,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   <!-- Primary Meta Tags -->
-  <title>iOS 다크모드 알아보기 - hcn1519 Dev Post</title>
+  <title>iOS 다크모드 알아보기 - hcn1519 DEV</title>
   <meta name="author" content="Changnam Hong">
-  <meta name="title" content="iOS 다크모드 알아보기 - hcn1519 Dev Post">
+  <meta name="title" content="iOS 다크모드 알아보기 - hcn1519 DEV">
   <meta name="description" content="iOS에서 다크모드를 적용하기 위해 알아야 하는 내용을 정리하였습니다.">
   <meta name="theme-color" content="#f1f3f4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
@@ -46,23 +46,16 @@
   <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
   <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
   <!-- Icons -->
-  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
-  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
-  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
-  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
-  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
-  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
-  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
-  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
-  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
-  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
-  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
-  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
-  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
-  <link rel="manifest" href="/public/favicon/manifest.json" async>
-  
-  <link rel="preload" href="Mona-Sans.woff2" as="font" type="/public/fonts/woff2" crossorigin>
-  <link type="application/atom+xml" rel="alternate" href="https://hcn1519.github.io/feed.xml" title="hcn1519 Dev Post" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/public/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/public/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <!-- Fonts -->
+  <link rel="preload" href="/public/fonts/Age-Normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/public/fonts/Mona-Sans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/public/fonts/Mona-Sans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link type="application/atom+xml" rel="alternate" href="https://hcn1519.github.io/feed.xml" title="hcn1519 DEV" />
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
@@ -250,9 +243,9 @@
       <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
-            <a href="" title="Home">CNH</a>
-            <small>Dev Post</small>
-            <span style="font-size: medium;text-align: right;float: right;margin-top: 3.5px;">
+            <a href="" title="Home">HCN</a>
+            <small>DEV</small>
+            <span class="translation">
               <small>
               
               <a href="/en">Read in English</a>
@@ -262,6 +255,21 @@
           </h3>
         </div>
       </div>
+      
+      <aside class="table-of-contents">
+          <h3 id="table-of-contents">Table of Contents</h3>
+<ol>
+  <li>UITraitCollection</li>
+  <li><a href="./ios_darkmode#1-uitraitcollectioncurrent">UITraitCollection.current</a></li>
+  <li><a href="./ios_darkmode#2-traitcollectiondidchange">traitCollectionDidChange(_:)</a></li>
+  <li><a href="./ios_darkmode#3-raitcollection을-활용하여-라이트다크-모드-강제-설정하기"><code class="language-plaintext highlighter-rouge">TraitCollection</code>을 활용하여 라이트/다크 모드 강제 설정하기</a></li>
+  <li>다크모드 주요 구현 대상</li>
+  <li><a href="./ios_darkmode#1-색상">색상</a></li>
+  <li><a href="./ios_darkmode#2-이미지">이미지</a></li>
+  <li><a href="./ios_darkmode#3-기타-components">기타 Components</a></li>
+</ol>
+
+      </aside>
       
       <div class="container content">
         <div class="post">
@@ -290,24 +298,6 @@
   
   
   <p>다크모드 도입에 있어서 필요한 정보를 조사하면서 실제 구현과 관련된 내용을 정리해보았습니다. 공식 문서 및 영상을 보면서 관련 내용을 같이 참고하시면 좋을 것 같습니다.(해당 내용의 대부분은 <a href="https://developer.apple.com/videos/play/wwdc2019/214/">WWDC - Implement Dark Mode</a>을 기반으로 작성되었습니다.)</p>
-
-<h2 id="목차">목차</h2>
-
-<h4 id="1-uitraitcollection">1. UITraitCollection</h4>
-
-<ol>
-  <li><a href="./ios_darkmode#1-uitraitcollectioncurrent">UITraitCollection.current</a></li>
-  <li><a href="./ios_darkmode#2-traitcollectiondidchange">traitCollectionDidChange(_:)</a></li>
-  <li><a href="./ios_darkmode#3-raitcollection을-활용하여-라이트다크-모드-강제-설정하기"><code class="language-plaintext highlighter-rouge">TraitCollection</code>을 활용하여 라이트/다크 모드 강제 설정하기</a></li>
-</ol>
-
-<h4 id="2-다크모드-주요-구현-대상">2. 다크모드 주요 구현 대상</h4>
-
-<ol>
-  <li><a href="./ios_darkmode#1-색상">색상</a></li>
-  <li><a href="./ios_darkmode#2-이미지">이미지</a></li>
-  <li><a href="./ios_darkmode#3-기타-components">기타 Components</a></li>
-</ol>
 
 <h2 id="uitraitcollection">UITraitCollection</h2>
 

@@ -28,9 +28,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   <!-- Primary Meta Tags -->
-  <title>Swift로 파일 다루기 - hcn1519 Dev Post</title>
+  <title>Swift로 파일 다루기 - hcn1519 DEV</title>
   <meta name="author" content="Changnam Hong">
-  <meta name="title" content="Swift로 파일 다루기 - hcn1519 Dev Post">
+  <meta name="title" content="Swift로 파일 다루기 - hcn1519 DEV">
   <meta name="description" content="Swift의 FileManager를 이용하여 Local에 있는 File들을 다루는 법에 대해 알아봅니다.">
   <meta name="theme-color" content="#f1f3f4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
@@ -46,23 +46,16 @@
   <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
   <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
   <!-- Icons -->
-  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
-  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
-  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
-  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
-  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
-  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
-  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
-  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
-  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
-  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
-  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
-  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
-  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
-  <link rel="manifest" href="/public/favicon/manifest.json" async>
-  
-  <link rel="preload" href="Mona-Sans.woff2" as="font" type="/public/fonts/woff2" crossorigin>
-  <link type="application/atom+xml" rel="alternate" href="https://hcn1519.github.io/feed.xml" title="hcn1519 Dev Post" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/public/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/public/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <!-- Fonts -->
+  <link rel="preload" href="/public/fonts/Age-Normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/public/fonts/Mona-Sans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/public/fonts/Mona-Sans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link type="application/atom+xml" rel="alternate" href="https://hcn1519.github.io/feed.xml" title="hcn1519 DEV" />
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
@@ -250,9 +243,9 @@
       <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
-            <a href="" title="Home">CNH</a>
-            <small>Dev Post</small>
-            <span style="font-size: medium;text-align: right;float: right;margin-top: 3.5px;">
+            <a href="" title="Home">HCN</a>
+            <small>DEV</small>
+            <span class="translation">
               <small>
               
               <a href="/en">Read in English</a>
@@ -262,6 +255,20 @@
           </h3>
         </div>
       </div>
+      
+      <aside class="table-of-contents">
+          <h3 id="table-of-contents">Table of Contents</h3>
+<ol>
+  <li><a href="./swift_file_manager#기본적인-macos-파일-시스템">기본적인 macOS 파일 시스템</a></li>
+  <li><a href="./swift_file_manager#filemanager">FileManager</a></li>
+  <li><a href="./swift_file_manager#directory-접근하기">Directory 접근하기</a></li>
+  <li><a href="./swift_file_manager#directory-생성하기">Directory 생성하기</a></li>
+  <li><a href="./swift_file_manager#파일-만들고-쓰기">파일 만들고 쓰기</a></li>
+  <li><a href="./swift_file_manager#파일-읽기">파일 읽기</a></li>
+  <li><a href="./swift_file_manager#번외-:-ios-프로젝트에서-로컬-이미지-읽고-보여주기">번외 : iOS 프로젝트에서 로컬 이미지 읽고 보여주기</a></li>
+</ol>
+
+      </aside>
       
       <div class="container content">
         <div class="post">
@@ -289,22 +296,7 @@
         
   
   
-  <h2 id="table-of-contents">Table of Contents</h2>
-
-<ol>
-  <li><a href="./swift_file_manager#기본적인-macos-파일-시스템">기본적인 macOS 파일 시스템</a></li>
-  <li><a href="./swift_file_manager#filemanager">FileManager</a>
-    <ol>
-      <li><a href="./swift_file_manager#directory-접근하기">Directory 접근하기</a></li>
-      <li><a href="./swift_file_manager#directory-생성하기">Directory 생성하기</a></li>
-      <li><a href="./swift_file_manager#파일-만들고-쓰기">파일 만들고 쓰기</a></li>
-      <li><a href="./swift_file_manager#파일-읽기">파일 읽기</a></li>
-    </ol>
-  </li>
-  <li><a href="./swift_file_manager#번외-:-ios-프로젝트에서-로컬-이미지-읽고-보여주기">번외 : iOS 프로젝트에서 로컬 이미지 읽고 보여주기</a></li>
-</ol>
-
-<p>이번 포스팅에서는 Swift를 통해 로컬(macOS)에 있는 파일들을 다루는 방법에 대해 알아보고자 합니다.</p>
+  <p>이번 포스팅에서는 Swift를 통해 로컬(macOS)에 있는 파일들을 다루는 방법에 대해 알아보고자 합니다.</p>
 
 <h2 id="기본적인-macos-파일-시스템">기본적인 macOS 파일 시스템</h2>
 

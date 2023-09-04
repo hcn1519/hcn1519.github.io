@@ -28,9 +28,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   <!-- Primary Meta Tags -->
-  <title>DiffableDataSource로 안전하게 UIKit List 업데이트하기 - hcn1519 Dev Post</title>
+  <title>DiffableDataSource로 안전하게 UIKit List 업데이트하기 - hcn1519 DEV</title>
   <meta name="author" content="Changnam Hong">
-  <meta name="title" content="DiffableDataSource로 안전하게 UIKit List 업데이트하기 - hcn1519 Dev Post">
+  <meta name="title" content="DiffableDataSource로 안전하게 UIKit List 업데이트하기 - hcn1519 DEV">
   <meta name="description" content="UIKit의 DiffableDataSource를 사용하기 위한 방법에 대해 정리하였습니다.">
   <meta name="theme-color" content="#f1f3f4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
@@ -46,23 +46,16 @@
   <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
   <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
   <!-- Icons -->
-  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
-  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
-  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
-  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
-  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
-  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
-  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
-  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
-  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
-  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
-  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
-  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
-  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
-  <link rel="manifest" href="/public/favicon/manifest.json" async>
-  
-  <link rel="preload" href="Mona-Sans.woff2" as="font" type="/public/fonts/woff2" crossorigin>
-  <link type="application/atom+xml" rel="alternate" href="https://hcn1519.github.io/feed.xml" title="hcn1519 Dev Post" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/public/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/public/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <!-- Fonts -->
+  <link rel="preload" href="/public/fonts/Age-Normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/public/fonts/Mona-Sans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/public/fonts/Mona-Sans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link type="application/atom+xml" rel="alternate" href="https://hcn1519.github.io/feed.xml" title="hcn1519 DEV" />
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
@@ -250,9 +243,9 @@
       <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
-            <a href="" title="Home">CNH</a>
-            <small>Dev Post</small>
-            <span style="font-size: medium;text-align: right;float: right;margin-top: 3.5px;">
+            <a href="" title="Home">HCN</a>
+            <small>DEV</small>
+            <span class="translation">
               <small>
               
               <a href="/en">Read in English</a>
@@ -262,6 +255,15 @@
           </h3>
         </div>
       </div>
+      
+      <aside class="table-of-contents">
+          <h3 id="table-of-contents">Table of Contents</h3>
+<ol>
+  <li><a href="./diffableDataSource#1-wwdc---advances-in-ui-data-sources">WWDC - Advances in UI Data Sources</a></li>
+  <li><a href="./diffableDataSource#2-실제-적용기">실제 적용기</a></li>
+</ol>
+
+      </aside>
       
       <div class="container content">
         <div class="post">
@@ -289,14 +291,7 @@
         
   
   
-  <h2 id="table-of-contents">Table of Contents</h2>
-
-<ol>
-  <li><a href="./diffableDataSource#1-wwdc---advances-in-ui-data-sources">WWDC - Advances in UI Data Sources</a></li>
-  <li><a href="./diffableDataSource#2-실제-적용기">실제 적용기</a></li>
-</ol>
-
-<h1 id="wwdc---advances-in-ui-data-sources">WWDC - Advances in UI Data Sources</h1>
+  <h1 id="1-wwdc---advances-in-ui-data-sources">1. WWDC - Advances in UI Data Sources</h1>
 
 <p><code class="language-plaintext highlighter-rouge">Diffable Data Source</code>는 <code class="language-plaintext highlighter-rouge">UICollectionView</code>와 <code class="language-plaintext highlighter-rouge">UITableView</code>의 DataSource 업데이트를 좀 더 안전하고, 편리하게 수행할 수 있도록 만들어진 API입니다. 이 글에서는 iOS 13부터 지원되는 <code class="language-plaintext highlighter-rouge">Diffable Data Source</code>를 소개하는 WWDC 주요 내용(<a href="https://developer.apple.com/videos/play/wwdc2019/220">Advances in UI Data Sources</a>)을 정리하고, 이를 적용한 후기에 대해 작성해보았습니다.</p>
 
@@ -434,7 +429,7 @@
 
 <p><img src="https://user-images.githubusercontent.com/13018877/168228418-136c5999-d77e-4202-8cc9-83546807ede0.jpeg" alt="no9" /></p>
 
-<h1 id="실제-적용기">실제 적용기</h1>
+<h1 id="2-실제-적용기">2. 실제 적용기</h1>
 
 <p><code class="language-plaintext highlighter-rouge">Diffable DataSource</code>는 유용하게 사용할 수 있지만, 적용시 고려해야 할 것들이 있습니다. 여기에서는 <code class="language-plaintext highlighter-rouge">Diffable DataSource</code>를 실제 프로젝트에 적용하면서 고려했던 내용들을 몇 가지 소개하고자합니다.</p>
 

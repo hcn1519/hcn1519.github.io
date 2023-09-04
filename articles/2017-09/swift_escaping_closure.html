@@ -28,9 +28,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   <!-- Primary Meta Tags -->
-  <title>Swift Escaping Closure 이해하기 - hcn1519 Dev Post</title>
+  <title>Swift Escaping Closure 이해하기 - hcn1519 DEV</title>
   <meta name="author" content="Changnam Hong">
-  <meta name="title" content="Swift Escaping Closure 이해하기 - hcn1519 Dev Post">
+  <meta name="title" content="Swift Escaping Closure 이해하기 - hcn1519 DEV">
   <meta name="description" content="Swift의 Escaping Closure에 대해 알아봅니다.">
   <meta name="theme-color" content="#f1f3f4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
@@ -46,23 +46,16 @@
   <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
   <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
   <!-- Icons -->
-  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
-  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
-  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
-  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
-  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
-  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
-  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
-  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
-  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
-  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
-  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
-  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
-  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
-  <link rel="manifest" href="/public/favicon/manifest.json" async>
-  
-  <link rel="preload" href="Mona-Sans.woff2" as="font" type="/public/fonts/woff2" crossorigin>
-  <link type="application/atom+xml" rel="alternate" href="https://hcn1519.github.io/feed.xml" title="hcn1519 Dev Post" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/public/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/public/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <!-- Fonts -->
+  <link rel="preload" href="/public/fonts/Age-Normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/public/fonts/Mona-Sans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/public/fonts/Mona-Sans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link type="application/atom+xml" rel="alternate" href="https://hcn1519.github.io/feed.xml" title="hcn1519 DEV" />
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
@@ -250,9 +243,9 @@
       <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
-            <a href="" title="Home">CNH</a>
-            <small>Dev Post</small>
-            <span style="font-size: medium;text-align: right;float: right;margin-top: 3.5px;">
+            <a href="" title="Home">HCN</a>
+            <small>DEV</small>
+            <span class="translation">
               <small>
               
               <a href="/en">Read in English</a>
@@ -262,6 +255,16 @@
           </h3>
         </div>
       </div>
+      
+      <aside class="table-of-contents">
+          <h3 id="table-of-contents">Table of Contents</h3>
+<ol>
+  <li><a href="./swift_escaping_closure#1-escaping-closure-개념">Escaping Closure 개념</a></li>
+  <li><a href="./swift_escaping_closure#2-클로저를-함수-외부에-저장하기">클로저를 함수 외부에 저장하기</a></li>
+  <li><a href="./swift_escaping_closure#3-async-inside-async">Async Inside Async</a></li>
+</ol>
+
+      </aside>
       
       <div class="container content">
         <div class="post">
@@ -289,15 +292,7 @@
         
   
   
-  <h2 id="table-of-contents">Table of Contents</h2>
-
-<ol>
-  <li><a href="./swift_escaping_closure#1-escaping-closure-개념">Escaping Closure 개념</a></li>
-  <li><a href="./swift_escaping_closure#2-클로저를-함수-외부에-저장하기">클로저를 함수 외부에 저장하기</a></li>
-  <li><a href="./swift_escaping_closure#3-async-inside-async">Async Inside Async</a></li>
-</ol>
-
-<h2 id="1-escaping-closure-개념">1. Escaping Closure 개념</h2>
+  <h2 id="1-escaping-closure-개념">1. Escaping Closure 개념</h2>
 
 <p>본 글은 Closure에 대한 기본 개념을 알고 있다는 전제 하에 글을 진행합니다. 그러니 Closure에 대한 이해가 부족하다면 <a href="https://hcn1519.github.io/articles/2017-05/swift_closure">Swift Closure</a> 이 글을 먼저 읽고 본 글을 읽어주세요.</p>
 

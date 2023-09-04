@@ -28,9 +28,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   <!-- Primary Meta Tags -->
-  <title>Swift Async Await - hcn1519 Dev Post</title>
+  <title>Swift Async Await - hcn1519 DEV</title>
   <meta name="author" content="Changnam Hong">
-  <meta name="title" content="Swift Async Await - hcn1519 Dev Post">
+  <meta name="title" content="Swift Async Await - hcn1519 DEV">
   <meta name="description" content="Swift의 Async Await에 대해 알아봅니다.">
   <meta name="theme-color" content="#f1f3f4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
@@ -46,23 +46,16 @@
   <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
   <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
   <!-- Icons -->
-  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
-  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
-  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
-  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
-  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
-  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
-  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
-  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
-  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
-  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
-  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
-  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
-  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
-  <link rel="manifest" href="/public/favicon/manifest.json" async>
-  
-  <link rel="preload" href="Mona-Sans.woff2" as="font" type="/public/fonts/woff2" crossorigin>
-  <link type="application/atom+xml" rel="alternate" href="https://hcn1519.github.io/feed.xml" title="hcn1519 Dev Post" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/public/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/public/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <!-- Fonts -->
+  <link rel="preload" href="/public/fonts/Age-Normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/public/fonts/Mona-Sans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/public/fonts/Mona-Sans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link type="application/atom+xml" rel="alternate" href="https://hcn1519.github.io/feed.xml" title="hcn1519 DEV" />
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
@@ -250,9 +243,9 @@
       <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
-            <a href="" title="Home">CNH</a>
-            <small>Dev Post</small>
-            <span style="font-size: medium;text-align: right;float: right;margin-top: 3.5px;">
+            <a href="" title="Home">HCN</a>
+            <small>DEV</small>
+            <span class="translation">
               <small>
               
               <a href="/en">Read in English</a>
@@ -262,6 +255,18 @@
           </h3>
         </div>
       </div>
+      
+      <aside class="table-of-contents">
+          <h3 id="table-of-contents">Table of Contents</h3>
+<ol>
+  <li><a href="./swift_async_await#1-기존-asynchronous-작업-처리-방식">기존 Asynchronous 작업 처리 방식</a></li>
+  <li><a href="./swift_async_await#2-asynchronous-functions의-정의와-호출">Asynchronous Functions의 정의와 호출</a></li>
+  <li><a href="./swift_async_await#3-asynchronous-sequences">Asynchronous Sequences</a></li>
+  <li><a href="./swift_async_await#4-calling-asynchronous-functions-in-parallel">Calling Asynchronous Functions in Parallel</a></li>
+  <li><a href="./swift_async_await#5-task-and-task-groups">Task and Task Groups</a></li>
+</ol>
+
+      </aside>
       
       <div class="container content">
         <div class="post">
@@ -290,16 +295,6 @@
   
   
   <p>이 글에서는 Swift 5.5에 소개된 Async/Await에 대해 살펴보고자 합니다.</p>
-
-<h2 id="table-of-contents">Table of Contents</h2>
-
-<ol>
-  <li><a href="./swift_async_await#1-기존-asynchronous-작업-처리-방식">기존 Asynchronous 작업 처리 방식</a></li>
-  <li><a href="./swift_async_await#2-asynchronous-functions의-정의와-호출">Asynchronous Functions의 정의와 호출</a></li>
-  <li><a href="./swift_async_await#3-asynchronous-sequences">Asynchronous Sequences</a></li>
-  <li><a href="./swift_async_await#4-calling-asynchronous-functions-in-parallel">Calling Asynchronous Functions in Parallel</a></li>
-  <li><a href="./swift_async_await#5-task-and-task-groups">Task and Task Groups</a></li>
-</ol>
 
 <blockquote>
   <p>해당 내용은 <a href="https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html#">The Swift Programming Languages(5.5) - Concurrency</a>에 기반하여 작성된 내용입니다.</p>

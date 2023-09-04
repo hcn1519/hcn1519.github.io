@@ -28,9 +28,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   <!-- Primary Meta Tags -->
-  <title>UnitTest 개념 소개 - hcn1519 Dev Post</title>
+  <title>UnitTest 개념 소개 - hcn1519 DEV</title>
   <meta name="author" content="Changnam Hong">
-  <meta name="title" content="UnitTest 개념 소개 - hcn1519 Dev Post">
+  <meta name="title" content="UnitTest 개념 소개 - hcn1519 DEV">
   <meta name="description" content="UnitTest에 대한 정의와 목적, TestDouble에 대해 살펴봅니다.">
   <meta name="theme-color" content="#f1f3f4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
@@ -46,23 +46,16 @@
   <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
   <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
   <!-- Icons -->
-  <link rel="apple-touch-icon" sizes="57x57" href="/public/favicon/apple-icon-57x57.png" async>
-  <link rel="apple-touch-icon" sizes="60x60" href="/public/favicon/apple-icon-60x60.png" async>
-  <link rel="apple-touch-icon" sizes="72x72" href="/public/favicon/apple-icon-72x72.png" async>
-  <link rel="apple-touch-icon" sizes="76x76" href="/public/favicon/apple-icon-76x76.png" async>
-  <link rel="apple-touch-icon" sizes="114x114" href="/public/favicon/apple-icon-114x114.png" async>
-  <link rel="apple-touch-icon" sizes="120x120" href="/public/favicon/apple-icon-120x120.png" async>
-  <link rel="apple-touch-icon" sizes="144x144" href="/public/favicon/apple-icon-144x144.png" async>
-  <link rel="apple-touch-icon" sizes="152x152" href="/public/favicon/apple-icon-152x152.png" async>
-  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-icon-180x180.png" async>
-  <link rel="icon" type="image/png" sizes="192x192"  href="/public/favicon/android-icon-192x192.png" async>
-  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png" async>
-  <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png" async>
-  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png" async>
-  <link rel="manifest" href="/public/favicon/manifest.json" async>
-  
-  <link rel="preload" href="Mona-Sans.woff2" as="font" type="/public/fonts/woff2" crossorigin>
-  <link type="application/atom+xml" rel="alternate" href="https://hcn1519.github.io/feed.xml" title="hcn1519 Dev Post" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/public/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/public/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <!-- Fonts -->
+  <link rel="preload" href="/public/fonts/Age-Normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/public/fonts/Mona-Sans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/public/fonts/Mona-Sans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link type="application/atom+xml" rel="alternate" href="https://hcn1519.github.io/feed.xml" title="hcn1519 DEV" />
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
@@ -250,9 +243,9 @@
       <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
-            <a href="" title="Home">CNH</a>
-            <small>Dev Post</small>
-            <span style="font-size: medium;text-align: right;float: right;margin-top: 3.5px;">
+            <a href="" title="Home">HCN</a>
+            <small>DEV</small>
+            <span class="translation">
               <small>
               
               <a href="/en">Read in English</a>
@@ -262,6 +255,31 @@
           </h3>
         </div>
       </div>
+      
+      <aside class="table-of-contents">
+          <h3 id="table-of-contents">Table of Contents</h3>
+<ol>
+  <li><a href="./unittest#1-what-is-unittest">What is UnitTest?</a>
+    <ul>
+      <li><a href="./unittest#solitary-vs-sociable">Solitary vs Sociable</a></li>
+    </ul>
+  </li>
+  <li><a href="./unittest#2-unittest의-목적">UnitTest의 목적</a>
+    <ul>
+      <li><a href="./unittest#usecase">UseCase</a></li>
+      <li><a href="./unittest#unittest의-목적과-usecase-테스트">UnitTest의 목적과 UseCase 테스트</a></li>
+    </ul>
+  </li>
+  <li><a href="./unittest#3-unittest에서의-테스트-대상">UnitTest에서의 테스트 대상</a>
+    <ul>
+      <li><a href="./unittest#test-isolation과-test-double">Test Isolation과 Test Double</a></li>
+      <li><a href="./unittest#test-double">Test Double</a></li>
+    </ul>
+  </li>
+  <li><a href="./unittest#4-일반적인-unittest-과정">일반적인 UnitTest 과정</a></li>
+</ol>
+
+      </aside>
       
       <div class="container content">
         <div class="post">
@@ -289,30 +307,7 @@
         
   
   
-  <h2 id="table-of-contents">Table of Contents</h2>
-
-<ol>
-  <li><a href="./unittest#1-what-is-unittest?">What is UnitTest?</a>
-    <ol>
-      <li><a href="./unittest#solitary-vs-sociable">Solitary vs Sociable</a></li>
-    </ol>
-  </li>
-  <li><a href="./unittest#2-unittest의-목적">UnitTest의 목적</a>
-    <ol>
-      <li><a href="./unittest#usecase">UseCase</a></li>
-      <li><a href="./unittest#unittest의-목적과-usecase-테스트">UnitTest의 목적과 UseCase 테스트</a></li>
-    </ol>
-  </li>
-  <li><a href="./unittest#3-unittest에서의-테스트-대상">UnitTest에서의 테스트 대상</a>
-    <ol>
-      <li><a href="./unittest#test-isolation과-test-double">Test Isolation과 Test Double</a></li>
-      <li><a href="./unittest#test-double">Test Double</a></li>
-    </ol>
-  </li>
-  <li><a href="./unittest#4-일반적인-unittest-과정">일반적인 UnitTest 과정</a></li>
-</ol>
-
-<h2 id="1-what-is-unittest">1. What is UnitTest?</h2>
+  <h2 id="1-what-is-unittest">1. What is UnitTest?</h2>
 
 <p>소프트웨어 개발에서 테스트라는 것은 실제 기능을 배포하기 이전에 해당 기능이 요구사항에 맞게 동작하는지를 확인하는 다양한 행위입니다. 그 중에서 UnitTest는 어떤 Unit에 대한 테스트를 수행하는 테스트입니다. 여기서 Unit이 무엇인가에 대한 것은 언어마다, 사람마다 다르다고 얘기합니다. 객체 지향 관점에서 Unit은 하나의 class가 될 수 있고, 절차 지향 관점에서는 하나의 function이 Unit이 될 수 있습니다. 아니면 어떤 class의 집합, funtion의 집합, 혹은 class와 function의 혼용된 집합도 Unit으로 정의될 수도 있습니다. Unit을 어떻게 정의하든지 UnitTest에 대한 특징에는 아래와 같은 것들이 있습니다.</p>
 
