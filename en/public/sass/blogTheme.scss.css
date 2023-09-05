@@ -452,9 +452,7 @@ abbr[title] {
   margin-bottom: 0;
 }
 
-.masthead-title small {
-  font-size: 75%;
-  font-weight: 400;
+.masthead-title span {
   color: #0085ED;
   letter-spacing: 0.5pt;
 }
