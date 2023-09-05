@@ -35,7 +35,7 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }} {% endif %}">
-  <meta property="og:image" content="{% if page.image.feature %}{{ site.baseurl }}/public/assets/{{ page.image.feature }}{% else %}{{ site.baseurl }}/public/assets/blogThumb.png{% endif %}">
+  <meta property="og:image" content="{% if page.image.feature %}{{ site.baseurl }}/public/assets/{{ page.image.feature }}{% else %}{{ site.baseurl }}/public/assets/ogImage.png{% endif %}">
   <meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
   <!-- CSS -->
@@ -43,26 +43,11 @@
   <link rel="stylesheet" href="{{ site.baseurl }}/public/sass/menu.scss.css" async>
   <link rel="stylesheet" href="{{ site.baseurl }}/public/sass/syntax.scss.css" async>
   <!-- Icons -->
-
-  <link rel="apple-touch-icon" sizes="57x57" href="{{ site.baseurl }}/public/favicon/apple-icon-57x57.png" async>
-  <link rel="apple-touch-icon" sizes="60x60" href="{{ site.baseurl }}/public/favicon/apple-icon-60x60.png" async>
-  <link rel="apple-touch-icon" sizes="72x72" href="{{ site.baseurl }}/public/favicon/apple-icon-72x72.png" async>
-  <link rel="apple-touch-icon" sizes="76x76" href="{{ site.baseurl }}/public/favicon/apple-icon-76x76.png" async>
-  <link rel="apple-touch-icon" sizes="114x114" href="{{ site.baseurl }}/public/favicon/apple-icon-114x114.png" async>
-  <link rel="apple-touch-icon" sizes="120x120" href="{{ site.baseurl }}/public/favicon/apple-icon-120x120.png" async>
-  <link rel="apple-touch-icon" sizes="144x144" href="{{ site.baseurl }}/public/favicon/apple-icon-144x144.png" async>
-  <link rel="apple-touch-icon" sizes="152x152" href="{{ site.baseurl }}/public/favicon/apple-icon-152x152.png" async>
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/public/favicon/apple-icon-180x180.png">
-  <link rel="apple-touch-icon" sizes="192x192" href="{{ site.baseurl }}/public/favicon/apple-touch-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="{{ site.baseurl }}/public/favicon/apple-touch-icon-192x192.png" async>
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/public/favicon/apple-touch-icon-180x180.png">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/public/favicon/favicon-32x32.png" async>
-  <link rel="icon" type="image/png" sizes="96x96" href="{{ site.baseurl }}/public/favicon/apple-touch-icon.png" async>
   <link rel="icon" type="image/png" sizes="16x16" href="{{ site.baseurl }}/public/favicon/favicon-16x16.png" async>
-  
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/public/favicon-32x32.png" async>
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ site.baseurl }}/public/favicon-16x16.png" async>
   <link rel="mask-icon" href="{{ site.baseurl }}/public/favicon/safari-pinned-tab.svg" color="#5bbad5" async>
-  <link rel="manifest" href="{{ site.baseurl }}/public/favicon/site.webmanifest" async>
+  <link rel="manifest" href="{{ site.baseurl }}/public/favicon/manifest.json" async>
   <!-- Fonts -->
   <link rel="preload" href="{{ site.baseurl }}/public/fonts/Age-Normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ site.baseurl }}/public/fonts/Mona-Sans-Regular.woff2" as="font" type="font/woff2" crossorigin>
