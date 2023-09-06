@@ -6,7 +6,7 @@ excerpt: "Thread Safe에 대해 알아 봅니다."
 categories: Swift ThreadSafe atomic OS Thread Language
 tags: [Swift, ThreadSafe, atomic, OS, Thread]
 image:
-  feature: blogThumb.png
+  feature: blogThumb-noRadius.png
 table-of-contents: |
   ### Table of Contents        
     1. [Thread Safe 개념](https://hcn1519.github.io/articles/2019-03/thread-safe#thread-safe-개념)

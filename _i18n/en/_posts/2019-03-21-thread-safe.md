@@ -6,7 +6,7 @@ excerpt: "Exploring Thread Safety."
 categories: Swift ThreadSafe atomic OS Thread Language
 tags: [Swift, ThreadSafe, atomic, OS, Thread]
 image:
-  feature: blogThumb.png
+  feature: blogThumb-noRadius.png
 table-of-contents: |
   ### Table of Contents
   1. [Thread Safe Concept](./thread-safe#thread-safe-concept)
