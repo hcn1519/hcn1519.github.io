@@ -404,9 +404,9 @@ abbr[title] {
   }
 }
 
-@media (min-width: 58em) {
+@media (min-width: 51em) {
   .container.content {
-    max-width: 58rem;
+    max-width: 51rem;
     padding-left:  1rem;
     padding-right: 1rem;
   }
