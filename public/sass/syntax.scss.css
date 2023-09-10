@@ -21,7 +21,7 @@
  .highlight .k { color: #d73a49 } /* Keyword */ 
  .highlight .l { color: #de935f } /* Literal */
  .highlight .n { color: #000000 } /* Name */ 
- .highlight .o { color: #9e9d9d } /* Operator */ 
+ .highlight .o { color: #262727 } /* Operator */ 
  .highlight .p { color: #000000 } /* Punctuation */
  .highlight .cm { color: #969896 } /* Comment.Multiline */
  .highlight .cp { color: #969896 } /* Comment.Preproc */
@@ -46,7 +46,7 @@
  .highlight .ni { color: #c5c8c6 } /* Name.Entity */
  .highlight .ne { color: #cc6666 } /* Name.Exception */
  .highlight .nf { color: #0099FF } /* Name.Function */ 
- .highlight .nl { color: #c5c8c6 } /* Name.Label */
+ .highlight .nl { color: #000000 } /* Name.Label */
  .highlight .nn { color: #f0c674 } /* Name.Namespace */
  .highlight .nx { color: #81a2be } /* Name.Other */
  .highlight .py { color: #c5c8c6 } /* Name.Property */
