@@ -7,6 +7,7 @@ categories: iOS CodeSigning ProvisioningProfile Certificate
 tags: [iOS, CodeSigning, ProvisioningProfile, Certificate]
 image:
   feature: iOS.png
+translate: false
 ---
 
 `Code Signing`이라는 것은 종이 계약서에 서명을 남기는 것처럼 코드에 서명을 남기는 작업입니다. 여기서 코드의 범주는 단순히 우리가 작성하는 코드뿐만 아니라, 데이터, 라이브러리, 툴 등 모든 코드로 이뤄진 것들을 포함합니다. 우리가 계약서에 서명을 한다고 하였을 때 중요한 것은 **계약서의 내용**과 계약 내용의 이행을 보장하는 **서명** 자체입니다. 즉, 계약서의 내용은 계약서에 서명한 이후에 바뀌어선 안 됩니다. `Code Signing`도 계약서의 서명과 동일한 동작을 보장해야 합니다. 그래서

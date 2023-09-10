@@ -7,6 +7,7 @@ categories: iOS WWDC Memory Instrument
 tags: [iOS, WWDC, Memory, Instrument]
 image:
   feature: iOS.png
+translate: false
 ---
 
 본 글은 2018년 WWDC의 [iOS Memory Deep Dive](https://developer.apple.com/videos/play/wwdc2018/416) 세션을 정리한 글입니다. 내용을 위주로 정리하였으며, 데모 부분은 별도로 정리하지 않았습니다. 전체 데모를 확인하고자 한다면, 본 세션을 확인해주시기 바랍니다.

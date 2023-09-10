@@ -7,6 +7,7 @@ date: "2018-03-08 18:28:51 +0900"
 tags: [TiledImage, Display, Swift, THStorytellingView, THTiledImageView, UIKit]
 image:
   feature: tiledimage.png
+translate: false
 ---
 
 ## 1. 요구사항: 고해상도 이미지 빠르게 보여주기

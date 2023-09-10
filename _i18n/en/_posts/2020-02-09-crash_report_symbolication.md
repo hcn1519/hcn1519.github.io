@@ -13,6 +13,7 @@ table-of-contents: |
   2. [Symbol and Symbolication](./crash_report_symbolication#2-symbol-and-symbolication)
   3. [Crash Report Symbolication](./crash_report_symbolication#3-crash-report-symbolication)
   4. [Appendix](./crash_report_symbolication#4-appendix)
+translate: true
 ---
 
 In this post, we will explore how crash reports are generated in apps and how they can be symbolicated in AppStore Connect.

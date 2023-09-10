@@ -7,6 +7,7 @@ categories: Swift Memory ARC Language
 tags: [Swift, Memory, ARC, Language]
 image:
   feature: swiftLogo.jpg
+translate: false
 ---
 
 Swift에서는 메모리를 관리할 때 ARC(Automatic Reference Counting)라는 메모리 관리 전략을 사용합니다. 이번 글에서는 이 전략이 어떤 것이고 어떻게 사용되는지에 대해 알아보겠습니다.

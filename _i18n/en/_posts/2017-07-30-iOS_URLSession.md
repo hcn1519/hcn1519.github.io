@@ -16,6 +16,7 @@ table-of-contents: |
     1. [Request](#request)
     1. [Task](#task)
   1. [Using URLSession dataTask](#using-urlsession-datatask)
+translate: true
 ---
 
 To facilitate communication with servers in iOS apps, Apple provides the `URLSession` API. `URLSession` is a fundamental API that underlies popular libraries like Alamofire and SDWebImage for data exchange with servers in iOS app development. `URLSession` supports several protocols, including HTTP, and provides features such as authentication, cookie management, and caching.

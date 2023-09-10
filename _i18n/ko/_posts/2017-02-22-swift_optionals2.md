@@ -8,6 +8,7 @@ date:   2017-02-22 00:30:00
 tags: [Swift, Language, Optional]
 image:
   feature: swiftLogo.jpg
+translate: false
 ---
 
 이 글을 읽기 전에 optional에 대한 기본 개념을 모르시는 분들은 아래 글을 먼저 읽어 주세요. 여기서는 기본적인 optional 개념을 안다는 전제하에 Optional Chaining에 대해서만 서술합니다.

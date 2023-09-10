@@ -8,6 +8,7 @@ date:   2017-03-02 00:30:00
 tags: [Swift, Language, Property]
 image:
   feature: swiftLogo.jpg
+translate: false
 ---
 
 

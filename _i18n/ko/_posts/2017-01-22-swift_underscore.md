@@ -8,6 +8,7 @@ date:   2017-01-22 00:30:00
 tags: [Swift, Language]
 image:
   feature: swiftLogo.jpg
+translate: false
 ---
 
 #### 함수에서의 _ (underscore)

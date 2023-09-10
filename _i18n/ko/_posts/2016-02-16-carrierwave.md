@@ -8,6 +8,7 @@ date:   2016-02-17 00:30:00
 tags: [Rails, Carrierwave, AWS_S3]
 image:
   feature: RailsBanner.jpg
+translate: false
 ---
 {% highlight html %}
 <h5>Carrierwave를 이용하여 AWS S3에 이미지 올리기</h5>

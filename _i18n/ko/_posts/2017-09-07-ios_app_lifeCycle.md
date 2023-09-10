@@ -6,6 +6,7 @@ excerpt: "iOS 앱을 실행하면 일어나는 일들과 이를 설정하는 방
 categories: iOS, LifeCycle, UIApplication, AppDelegate, UIKit
 date:   2017-09-07 00:30:00
 tags: [iOS, LifeCycle, UIApplication, AppDelegate, UIKit]
+translate: false
 ---
 
 

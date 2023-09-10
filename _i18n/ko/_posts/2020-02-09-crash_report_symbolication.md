@@ -13,7 +13,9 @@ table-of-contents: |
     2. [Symbol, Symbolication](./crash_report_symbolication#2-symbol-symbolication)
     3. [Crash Report Symbolication](./crash_report_symbolication#3-crash-report-symbolication)
     4. [Appendix](./crash_report_symbolication#4-appendix)
+translate: true
 ---
+
 
 이번 글에서는 앱에서 크래시 리포트가 어떻게 생성되고, 이를 AppStore Connect에서 확인할 수 있는지 알아보고자 합니다.
 

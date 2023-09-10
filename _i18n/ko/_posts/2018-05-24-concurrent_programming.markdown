@@ -17,7 +17,7 @@ table-of-contents: |
       1. [Operation Queue](./concurrent_programming#operation-queue)
   1. [Asynchronous Design Techniques](./concurrent_programming#asynchronous-design-techniques)
   1. [Tips for improving efficiency](./concurrent_programming#tips-for-improving-efficiency)
-
+translate: true
 ---
 
 > 이 글은 애플의 [Concurrency and Application Design](https://developer.apple.com/library/content/documentation/General/Conceptual/ConcurrencyProgrammingGuide/ConcurrencyandApplicationDesign/ConcurrencyandApplicationDesign.html#//apple_ref/doc/uid/TP40008091-CH100-SW1) 문서를 정리한 내용을 담고 있습니다.

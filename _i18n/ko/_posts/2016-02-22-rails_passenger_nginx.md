@@ -8,6 +8,7 @@ date:   2016-02-25 00:30:00
 tags: [Rails, Passenger, Nginx]
 image:
   feature: nginx.jpg
+translate: false
 ---
 ## 목차
 

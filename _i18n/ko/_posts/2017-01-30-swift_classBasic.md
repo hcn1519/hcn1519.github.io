@@ -8,6 +8,7 @@ date:   2017-01-30 00:30:00
 tags: [Swift, Language, OOP, Class]
 image:
   feature: swiftLogo.jpg
+translate: false
 ---
 
 객체지향 개념을 가지고 있는 언어들은 대부분 <code>class</code>와 <code>object</code>를 가지고 있습니다. Swift도 class 개념을 가지고 있으며, class 구성의 기본인 <code>initializer, getter, setter</code> 개념을 지니고 있습니다. 간단하게 이를 알아보도록 하겠습니다.

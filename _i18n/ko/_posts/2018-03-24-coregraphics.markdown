@@ -7,6 +7,7 @@ categories: CoreGraphics iOS
 tags: [CoreGraphics, iOS]
 image:
   feature: iOS.png
+translate: false
 ---
 
 > 이 시리즈는 애플의 [CoreGraphics](https://developer.apple.com/library/content/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_overview/dq_overview.html#//apple_ref/doc/uid/TP30001066-CH202-CJBBAEEC) 문서를 기반으로 정리한 내용을 담고 있습니다.

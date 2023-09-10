@@ -8,6 +8,7 @@ date:   2016-12-29 00:30:00
 tags: [Rails, Omniauth, Devise]
 image:
   feature: omniauth.png
+translate: false
 ---
 {% highlight html %}
 <h5>Rails SNS 로그인 구현</h5>

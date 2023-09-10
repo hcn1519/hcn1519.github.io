@@ -17,6 +17,7 @@ table-of-contents: |
     1. [파일 만들고 쓰기](./swift_file_manager#파일-만들고-쓰기)
     1. [파일 읽기](./swift_file_manager#파일-읽기)
   1. [번외 : iOS 프로젝트에서 로컬 이미지 읽고 보여주기](./swift_file_manager#번외-:-ios-프로젝트에서-로컬-이미지-읽고-보여주기)
+translate: true
 ---
 
 이번 포스팅에서는 Swift를 통해 로컬(macOS)에 있는 파일들을 다루는 방법에 대해 알아보고자 합니다.

@@ -7,6 +7,7 @@ tags: [Jekyll, BlogTheme]
 image:
   feature: jekyll.jpg
 excerpt: "Welcome to MiniPress"
+translate: false
 ---
 
 

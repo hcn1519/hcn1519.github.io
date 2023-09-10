@@ -8,6 +8,7 @@ date: 2017-05-08 00:30:00
 tags: [Swift, Language, Closure]
 image:
   feature: swiftLogo.jpg
+translate: true
 ---
 
 Closures in Swift, also known as anonymous functions, differ from regular functions. Instead of being declared with the `func` keyword, they take the form of declaring functions as variables. Closures are a powerful feature that aids in writing concise and intuitive code. Let's explore closures by highlighting the differences in how they are used compared to regular functions.

@@ -6,6 +6,7 @@ excerpt: "Big-O notation에 대해 알아봅니다."
 categories: Java Algorithm Coursera Big-O
 date:   2017-01-07 00:30:00
 tags: [Java, Algorithm, Coursera, Big-O, logarithm]
+translate: false
 ---
 
 <p>아래 내용은 Big-O notation을 이해하기 위해 stackOverFlow의 답변 내용을 번역한 것입니다. 본 질문은 다음과 같습니다.</p>

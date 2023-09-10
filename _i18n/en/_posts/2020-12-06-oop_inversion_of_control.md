@@ -13,6 +13,7 @@ table-of-contents: |
   2. [Inversion of Control](./oop_inversion_of_control#2-inversion-of-control)
   3. [Module Extension Through IoC](./oop_inversion_of_control#3-module-extension-through-ioc)
   4. [Libraries and Frameworks from a Control Perspective](./oop_inversion_of_control#4-libraries-and-frameworks-from-a-control-perspective)
+translate: true
 ---
 
 `Inversion of Control` (IoC) refers to a phenomenon where the flow of control is **inverted**, as the name suggests. To understand what it means for control flow to be inverted, it's necessary to first understand what control flow without inversion is. Therefore, in this article, we will first examine what non-inverted control flow is and then explore `Inversion of Control`.

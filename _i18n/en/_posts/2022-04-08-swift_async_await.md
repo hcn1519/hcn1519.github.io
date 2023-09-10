@@ -15,6 +15,7 @@ table-of-contents: |
   3. [Asynchronous Sequences](./swift_async_await#3-asynchronous-sequences)
   4. [Calling Asynchronous Functions in Parallel](./swift_async_await#4-calling-asynchronous-functions-in-parallel)
   5. [Task and Task Groups](./swift_async_await#5-task-and-task-groups)
+translate: true
 ---
 
 In this article, we will explore Async/Await introduced in Swift 5.5.

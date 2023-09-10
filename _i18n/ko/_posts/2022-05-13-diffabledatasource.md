@@ -11,6 +11,7 @@ table-of-contents: |
   ### Table of Contents  
     1. [WWDC - Advances in UI Data Sources](./diffableDataSource#1-wwdc---advances-in-ui-data-sources)
     1. [실제 적용기](./diffableDataSource#2-실제-적용기)
+translate: true
 ---
 
 # 1. WWDC - Advances in UI Data Sources

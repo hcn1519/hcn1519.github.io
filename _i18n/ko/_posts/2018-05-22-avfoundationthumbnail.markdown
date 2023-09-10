@@ -5,6 +5,7 @@ excerpt: "영상에서 썸네일 이미지를 생성하는 방식에 대해 다�
 date: "2018-05-22 00:09:34 +0900"
 categories: AVFoundation UIImagePickerController AVAssetImageGenerator
 tags: [AVFoundation, UIImagePickerController, AVAssetImageGenerator]
+translate: false
 ---
 
 `AVFoundation`은 iOS에서 비디오 혹은 오디오를 다루기 위해 사용되는 프레임워크입니다. 사실 단순히 비디오, 오디오를 재생하는 것은 `AVKit`이라는 좀 더 high level의 프레임워크를 사용하면 되지만, 미디어 파일에 접근하여 파일을 편집하거나 새로운 파일을 만드는 것은 `AVFoundation`을 사용해야 합니다.

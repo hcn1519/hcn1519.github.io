@@ -7,6 +7,7 @@ categories: Swift init Language
 tags: [Swift, init, Language]
 image:
   feature: swiftLogo.jpg
+translate: false
 ---
 
 * [Two Phase Initialization](https://hcn1519.github.io/articles/2019-02/swift-init-class-deep#two-phase-initialization)

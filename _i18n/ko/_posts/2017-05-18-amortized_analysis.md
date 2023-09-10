@@ -6,6 +6,7 @@ excerpt: "분할상황 분석에 대해 알아봅니다."
 categories: Algorithm Coursera
 date:   2017-05-18 00:30:00
 tags: [Algorithm, Amortized Analysis, Coursera]
+translate: false
 ---
 
 

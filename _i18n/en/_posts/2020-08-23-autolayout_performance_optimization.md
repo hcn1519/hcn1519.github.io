@@ -12,6 +12,7 @@ table-of-contents: |
   1. [Layout Definition in AutoLayout](./autolayout_performance_optimization#1-layout-definition-in-autolayout)
   2. [AutoLayout Engine and Layout Updates](./autolayout_performance_optimization#2-autolayout-engine-and-layout-updates)
   3. [AutoLayout Performance Tips](./autolayout_performance_optimization#3-autolayout-performance-tips)
+translate: true
 ---
 
 ## Introduction

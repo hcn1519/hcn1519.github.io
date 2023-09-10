@@ -8,6 +8,7 @@ date:   2017-05-08 00:30:00
 tags: [Swift, Language, Closure]
 image:
   feature: swiftLogo.jpg
+translate: true
 ---
 
 Closure는 익명함수로 알려진 기능으로, 함수를 `func` 키워드로 선언하는 것이 아니라, 함수를 `변수에 선언하는 형태`를 취하고 있습니다. Closure는 코드를 간결하고, 직관적으로 작성하는 데 많은 도움을 주는 기능입니다. 일반 함수와 Closure의 사용 방식의 차이를 통해 Closure에 대해 알아보겠습니다.

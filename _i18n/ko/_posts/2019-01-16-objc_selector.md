@@ -7,6 +7,7 @@ categories: ObjectiveC selector, Language
 tags: [ObjectiveC, selector, Language]
 image:
   feature: objc.png
+translate: false
 ---
 
 # selector

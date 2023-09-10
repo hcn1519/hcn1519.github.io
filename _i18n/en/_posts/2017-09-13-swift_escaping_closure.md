@@ -13,7 +13,7 @@ table-of-contents: |
   1. [Concept of Escaping Closures](./swift_escaping_closure#1-concept-of-escaping-closures)
   1. [Storing Closures Outside Functions](./swift_escaping_closure#2-storing-closures-outside-functions)
   1. [Async Inside Async](./swift_escaping_closure#3-async-inside-async)
-
+translate: true
 ---
 
 ## 1. Concept of Escaping Closures

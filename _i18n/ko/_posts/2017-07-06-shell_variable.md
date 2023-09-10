@@ -8,6 +8,7 @@ date:   2017-07-06 00:30:00
 tags: [Shell, Linux, Language]
 image:
   feature: linux.png
+translate: false
 ---
 
 ## Shell 기본 변수

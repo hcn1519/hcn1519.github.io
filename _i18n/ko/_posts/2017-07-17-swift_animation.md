@@ -8,6 +8,7 @@ date:   2017-07-17 00:30:00
 tags: [Swift, Animate, Transition]
 image:
   feature: swiftLogo.jpg
+translate: false
 ---
 
 ## View의 모양 변화주기(transition)

@@ -7,6 +7,7 @@ categories: iOS, OS, BuildSystem, Library, Framework
 tags: [iOS, macOS, OS, BuildSystem, Library, Framework]
 image:
   feature: iOS.png
+translate: false
 ---
 
 `Static library`는 아카이빙된 object file(`.o` 확장자)의 모음으로 `.a` 확장자 형태의 라이브러리입니다. `Static library`는 `Static archive library`, `static linked shared library`라고도 불립니다.

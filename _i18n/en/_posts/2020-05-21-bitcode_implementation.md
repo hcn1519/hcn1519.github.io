@@ -12,6 +12,7 @@ table-of-contents: |
   1. [About Bitcode](./bitcode_implementation#about-bitcode)
   1. [Xcode Build Settings for Bitcode](./bitcode_implementation#xcode-build-settings-for-bitcode)
   1. [Bitcode Support for Library](./bitcode_implementation#bitcode-support-for-library)
+translate: true
 ---
 
 In this post, I've compiled information about what you need to know to introduce Bitcode.

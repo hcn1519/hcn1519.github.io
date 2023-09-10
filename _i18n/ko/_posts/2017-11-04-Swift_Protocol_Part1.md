@@ -8,6 +8,7 @@ date:   2017-11-11 00:30:00
 tags: [Swift, Protocol, Delegation, Language]
 image:
   feature: swiftLogo.jpg
+translate: false
 ---
 
 이번 포스팅에서는 Swift의 `Protocol` 기본 개념 및 사용법과 이에 기반한 delegation 패턴에 대해 알아 보고자 합니다. 먼저 Protocol의 정의부터 살펴보겠습니다.

@@ -7,7 +7,9 @@ categories: iOS, OS, BuildSystem, Library, Framework
 tags: [iOS, macOS, OS, BuildSystem, Library, Framework]
 image:
   feature: iOS.png
+translate: false
 ---
+
 
 [Static Library](https://hcn1519.github.io/articles/2019-07/static-library)는 컴파일 타임에 executable(실행 바이너리)에 포함되어야 합니다. 이 문제는 앱이 커질 수록 더 큰 문제가 되었고, 이를 해결하기 위해 나온 것이 `Dynamic Library`입니다. `Dynamic Library`는 `Static Library`와는 다르게 앱의 `executable` files에 포함되지 않습니다.  바꿔 말하면, `Dynamic Library`는 앱의 컴파일과 별개로 동작하여, 앱의 컴파일 없이 `Dynamic Library`의 코드는 변경될 수 있습니다.
 

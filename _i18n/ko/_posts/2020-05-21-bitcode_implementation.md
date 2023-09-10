@@ -19,7 +19,9 @@ table-of-contents: |
   1. [Library의 bitcode 지원](./bitcode_implementation#library의-bitcode-지원)
     1. [바이너리의 bitcode 지원 확인하기](./bitcode_implementation#바이너리의-bitcode-지원-확인하기)
     1. [CocoaPods을 통해 배포되는 라이브러리의 bitcode 지원](./bitcode_implementation#cocoaPods을-통해-배포되는-라이브러리의-bitcode-지원)
+translate: true
 ---
+
 
 이번 글에서는 bitcode 도입을 위해 필요한 부분을 정리해보았습니다.
 

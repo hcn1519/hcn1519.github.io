@@ -8,6 +8,7 @@ date:   2017-05-17 00:30:00
 tags: [Swift, Language, StandardIO, CommandLine]
 image:
   feature: swiftLogo.jpg
+translate: false
 ---
 
 알고리즘 문제 같은 것을 풀기 위해 자주 사용되는 `Standard Input`을 Playground 위주로 공부하다보면 Swift에서 어떻게 사용하는지 모르는 경우가 발생합니다. 이번 포스팅에서는 간단히 커맨드라인에서 Swift를 사용하는 것과 표준입출력에 대해 알아보겠습니다.

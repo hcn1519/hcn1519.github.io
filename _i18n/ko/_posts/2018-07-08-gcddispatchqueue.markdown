@@ -7,6 +7,7 @@ categories: Concurrent GCD DispatchQueue iOS OS Thread
 tags: [Concurrency, GCD, DispatchQueue, iOS, OS, Thread]
 image:
   feature: iOS.png
+translate: false
 ---
 
 

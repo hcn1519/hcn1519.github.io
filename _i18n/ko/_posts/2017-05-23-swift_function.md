@@ -8,6 +8,7 @@ date:   2017-05-23 00:30:00
 tags: [Swift, Language, Function]
 image:
   feature: swiftLogo.jpg
+translate: false
 ---
 
 Swift 함수의 기본적인 형태는 다음과 같습니다.

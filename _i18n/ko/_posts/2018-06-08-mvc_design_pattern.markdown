@@ -5,6 +5,7 @@ date: "2018-06-08 19:47:03 +0900"
 excerpt: "MVC Design Pattern과 Cocoa에서 사용하는 MVC에 대해 알아봅니다."
 categories: MVC Cocoa DesignPattern
 tags: [MVC, Cocoa, DesignPattern]
+translate: false
 ---
 
 `MVC` Design Pattern은 정말 널리 알려져 있는 디자인 패턴이지만, 이게 명확히 어떤 개념인지 잘 모르는 경우가 생각보다 많습니다.(저 포함) 그래서 이번 글에서는 `MVC`에 대해서 정리하고자 합니다.

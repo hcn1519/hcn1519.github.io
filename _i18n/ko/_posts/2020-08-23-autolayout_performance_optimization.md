@@ -12,6 +12,7 @@ table-of-contents: |
   1. [AutoLayout의 Layout 정의 방식](./autolayout_performance_optimization#1-autolayout의-layout-정의-방식)
   2. [AutoLayout Engine과 Layout 업데이트](./autolayout_performance_optimization#2-autolayout-engine과-layout-업데이트)
   3. [AutoLayout Performance Tips](./autolayout_performance_optimization#3-autolayout-performance-tips)
+translate: true
 ---
 
 ## Introduction

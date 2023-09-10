@@ -17,6 +17,7 @@ table-of-contents: |
       1. [Hashable Types](./diffableDataSource#1-hashable-types)
       1. [Performance](./diffableDataSource#2-performance)
       1. [Background Queue](./diffableDataSource#3-background-queue)
+translate: true
 ---
 
 ## WWDC - Advances in UI Data Sources

@@ -7,6 +7,7 @@ categories: iOS ProvisioningProfile Certificate Distribution Xcode
 tags: [iOS, ProvisioningProfile, Certificate, Distribution, Xcode]
 image:
   feature: iOS.png
+translate: false
 ---
 
 ## 목차

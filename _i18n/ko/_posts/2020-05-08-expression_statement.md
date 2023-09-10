@@ -13,6 +13,7 @@ table-of-contents: |
         1. [Side Effect](./expression_statement#side-effect)
         1. [Undefined Behavior](./expression_statement#undefined-behavior)
     1. [Statement](./expression_statement#statement)
+translate: false
 ---
 
 ## Introduction

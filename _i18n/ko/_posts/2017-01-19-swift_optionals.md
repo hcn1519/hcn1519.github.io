@@ -8,6 +8,7 @@ date:   2017-01-19 00:30:00
 tags: [Swift, Language, Optional]
 image:
   feature: swiftLogo.jpg
+translate: false
 ---
 
 ## Optionals 기본 개념

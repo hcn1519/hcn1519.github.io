@@ -6,6 +6,7 @@ excerpt: "iOS의 기본 View의 아키텍쳐에 대해 알아봅니다."
 categories: iOS UIView
 date:   2017-06-23 00:30:00
 tags: [iOS, UIView]
+translate: false
 ---
 
 https://developer.apple.com/library/content/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/WindowsandViews/WindowsandViews.html#//apple_ref/doc/uid/TP40009503-CH2-SW1

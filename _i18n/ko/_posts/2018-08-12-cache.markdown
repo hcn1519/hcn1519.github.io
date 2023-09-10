@@ -5,6 +5,7 @@ date: "2018-08-12 23:50:59 +0900"
 excerpt: "캐시 메모리의 일반적인 개념에 대해 알아봅니다."
 categories: Memory Cache
 tags: [Memory, Cache]
+translate: false
 ---
 
 ## 정의

@@ -13,7 +13,7 @@ table-of-contents: |
     1. [제어 흐름의 역전](./oop_inversion_of_control#2-제어-흐름의-역전)
     1. [IoC를 통한 모듈의 확장](./oop_inversion_of_control#3-ioc를-통한-모듈의-확장)
     1. [제어권 관점에서의 Library와 Framework](./oop_inversion_of_control#4-제어권-관점에서의-library와-framework)
-
+translate: true
 ---
 
 `Inversion of Control`은 단어의 뜻 그대로 제어 흐름이 **역전**되는 현상을 말합니다. 제어 흐름이 역전되는 것을 알기 위해서는 제어 흐름이 역전되지 않은 것을 이해할 필요가 있습니다. 따라서, 이 글에서는 역전되지 않은 제어의 흐름이 무엇인지 먼저 살펴보고, 이를 역전하는 `Inversion of Control`에 대해 살펴보겠습니다.

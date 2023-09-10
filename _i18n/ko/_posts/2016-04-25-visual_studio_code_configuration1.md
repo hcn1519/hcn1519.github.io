@@ -8,6 +8,7 @@ date:   2016-04-25 00:30:00
 tags: [Visual_Studio_Code, Editor]
 image:
   feature: overview_languagecoverage.png
+translate: false
 ---
 {% highlight html %}
 <h5>MS VS Code 사용 후기</h5>

@@ -5,6 +5,7 @@ excerpt: "Xcode에서 사용되는 workspace, project, target, scheme 등에 대
 date: "2018-06-12 18:30:34 +0900"
 categories: Xcode
 tags: [Xcode]
+translate: false
 ---
 
 Xcode에서는 프로젝트를 관리하거나 프로젝트를 빌드하는 용도의 파일 혹은 항목들이 있습니다. 이번 글에서는 이에 대해 알아보고자 합니다.

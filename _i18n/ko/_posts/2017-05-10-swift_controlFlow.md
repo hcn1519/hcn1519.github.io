@@ -8,6 +8,7 @@ date:   2017-05-10 00:30:00
 tags: [Swift, Language, ControlFlow, Optional]
 image:
   feature: swiftLogo.jpg
+translate: false
 ---
 
 

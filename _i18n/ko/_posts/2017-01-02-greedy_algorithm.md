@@ -6,6 +6,7 @@ excerpt: "Greedy algorithm에 대해 알아봅니다."
 categories: Java Algorithm Coursera
 date:   2017-01-02 00:30:00
 tags: [Java, Algorithm, Greedy, Coursera]
+translate: false
 ---
 
 <h4>Greedy algorithm이란?</h4>

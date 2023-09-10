@@ -5,6 +5,7 @@ date: "2018-08-28 18:45:41 +0900"
 excerpt: "NSCache에 대해 알아봅니다."
 categories: iOS Memory NSCache Swift
 tags: [iOS, Memory, NSCache, Swift]
+translate: false
 ---
 
 * `NSCache`는 Cocoa에서 사용할 수 있는 캐싱을 위한 클래스입니다. `NSCache`는 `NSDictionary`처럼 `key-value` 형태로 되어 있습니다.

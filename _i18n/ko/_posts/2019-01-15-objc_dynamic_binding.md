@@ -7,6 +7,7 @@ categories: ObjectiveC RunTime Binding Type Language
 tags: [ObjectiveC, RunTime, Language]
 image:
   feature: objc.png
+translate: false
 ---
 
 ## 동적 바인딩

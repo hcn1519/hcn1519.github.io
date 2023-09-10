@@ -8,6 +8,7 @@ date:   2016-10-04 00:30:00
 tags: [Java, Scanner, Validation, Language]
 image:
   feature: errorCheck.PNG
+translate: false
 ---
 
 <p>&nbsp;자바에서는 사용자로부터 콘솔창에서 입력을 받을 때, Scanner라는 클래스를 사용합니다. 이 포스팅에서는 Scanner를 사용할 때 잘못된 입력(예를 들어, 정수형 3을 받아야 하는데 "aaa"같은 String이 들어오는 경우)이 들어오는 것을 방지하는 것에 대해 알아봅니다.</p>

@@ -8,6 +8,7 @@ date:   2017-03-20 00:30:00
 tags: [OS, Thread, Java]
 image:
   feature: thread.png
+translate: false
 ---
 
 ## 여러 작업을 하는 운영체제

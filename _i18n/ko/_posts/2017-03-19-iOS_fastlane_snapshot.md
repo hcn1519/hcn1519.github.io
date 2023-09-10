@@ -8,6 +8,7 @@ date:   2017-03-19 00:30:00
 tags: [iOS, UITest, Fastlane]
 image:
   feature: fastlane.png
+translate: false
 ---
 
 ## Fastlane의 필요성

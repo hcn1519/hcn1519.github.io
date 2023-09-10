@@ -8,6 +8,7 @@ date:   2017-05-03 00:30:00
 tags: [iOS, UIStackView]
 image:
   feature: iOS.png
+translate: false
 ---
 
 **UIStackView** 는 iOS 9에서 나온 개념으로 여러 개의 View를 한 셋트로 만들어주는 역할을 하는 View입니다. 그래서 항상 StackView 안에는 몇 개의 View 들이 있는데, 이를 **arrangedSubViews** 라고 합니다. 이 subView들은 일정한 규칙에 따라 StackView 안에서 배치됩니다. 그리고 이 규칙은 크게 4가지가 있습니다.(axis, alignment, distribution, spacing) 이는 StackView를 스토리보드에서 생성하면 Attribute Indicator 최상단에서 다음과 같이 확인할 수 있습니다.

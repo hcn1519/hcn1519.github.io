@@ -7,6 +7,7 @@ categories: CoreGraphics iOS CGBitmapContext
 tags: [CoreGraphics, iOS, CGBitmapContext]
 image:
   feature: iOS.png
+translate: false
 ---
 
 Core Graphics에서는 화면 drawing을 위해 기본적으로 비트맵 이미지와 이미지 마스크를 사용합니다. 비트맵 이미지라는 것은 픽셀의 집합으로, Core Graphics에서는 `CGBitmapContext`를 사용하여 `CGImage`를 픽셀 단위로 처리할 수 있습니다.

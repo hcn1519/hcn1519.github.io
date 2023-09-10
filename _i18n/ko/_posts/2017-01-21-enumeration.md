@@ -6,6 +6,7 @@ excerpt: "Enumeration에 대해 알아봅니다."
 categories: Java Swift Language
 date:   2017-01-21 00:30:00
 tags: [Java, Swift, Language]
+translate: false
 ---
 
 #### 1. Java Enumeration

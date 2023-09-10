@@ -8,6 +8,7 @@ date:   2017-03-16 00:30:00
 tags: [iOS, l10n]
 image:
   feature: iOS.png
+translate: false
 ---
 
 ## Localization 설정

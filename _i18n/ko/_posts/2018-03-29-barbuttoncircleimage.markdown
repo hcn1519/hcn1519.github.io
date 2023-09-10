@@ -5,6 +5,7 @@ date: "2018-03-29 21:52:11 +0900"
 excerpt: "UIBarButtonItem에 원형 이미지 버튼을 넣는 방법에 대해 알아봅니다."
 categories: Debugging UIBarButtonItem
 tags: [Debugging, UIBarButtonItem]
+translate: false
 ---
 
 이번 글에서는 `UINavigationBar`에 사각형 이미지를 가지고 원형 이미지 버튼을 만드는 방법에 대해 알아보고자 합니다. 그렇게 어려운 내용은 아니지만, 처음에 잘못 접근한 부분이 있어서 이를 기록으로 남깁니다.

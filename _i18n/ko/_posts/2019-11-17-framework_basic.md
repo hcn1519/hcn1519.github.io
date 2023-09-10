@@ -7,7 +7,9 @@ categories: iOS, OS, BuildSystem, Library, Framework
 tags: [iOS, macOS, OS, BuildSystem, Library, Framework]
 image:
   feature: iOS.png
+translate: false
 ---
+
 
 ## 목차
 

@@ -8,6 +8,7 @@ date:   2017-06-02 00:30:00
 tags: [Swift, Language, StandardIO]
 image:
   feature: swiftLogo.jpg
+translate: false
 ---
 
 요즘 알고리즘 문제 사이트에서 문제를 푸는데, Swift로 답안을 제출할 수 있어서 종종 Swift로 답안을 작성합니다. 다만, 대부분 알고리즘 문제들은 콘솔에서 입력을 받기 때문에 콘솔의 입력을 다루는 메소드를 작성해야 합니다. 그런데.. Swift에서는 아직까지 지원하는 메소드가 `readLine()`밖에 없어서 `Int`형 데이터, `Double`형 데이터를 별도로 캐스팅해주어야 하고, 개별 `String`에 접근하려면 라인 전체를 읽고, 이를 잘라서 접근해야만 했습니다.

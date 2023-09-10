@@ -8,6 +8,7 @@ date:   2017-08-01 00:30:00
 tags: [Swift, NotificationCenter, EscapingClosure, Delegate]
 image:
   feature: swiftLogo.jpg
+translate: false
 ---
 
 

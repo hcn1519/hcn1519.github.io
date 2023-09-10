@@ -8,6 +8,7 @@ date:   2017-02-14 00:30:00
 tags: [Swift, Language, OOP, Class]
 image:
   feature: swiftLogo.jpg
+translate: false
 ---
 
 ## Class와 Struct 기본 구조

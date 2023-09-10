@@ -13,6 +13,7 @@ table-of-contents: |
   1. [Escaping Closure 개념](./swift_escaping_closure#1-escaping-closure-개념)
   1. [클로저를 함수 외부에 저장하기](./swift_escaping_closure#2-클로저를-함수-외부에-저장하기)
   1. [Async Inside Async](./swift_escaping_closure#3-async-inside-async)
+translate: true
 ---
 
 ## 1. Escaping Closure 개념

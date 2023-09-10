@@ -17,7 +17,9 @@ table-of-contents: |
     1. [색상](./ios_darkmode#1-색상)
     1. [이미지](./ios_darkmode#2-이미지)
     1. [기타 Components](./ios_darkmode#3-기타-components)
+translate: false
 ---
+
 
 다크모드 도입에 있어서 필요한 정보를 조사하면서 실제 구현과 관련된 내용을 정리해보았습니다. 공식 문서 및 영상을 보면서 관련 내용을 같이 참고하시면 좋을 것 같습니다.(해당 내용의 대부분은 [WWDC - Implement Dark Mode](https://developer.apple.com/videos/play/wwdc2019/214/)을 기반으로 작성되었습니다.)
 

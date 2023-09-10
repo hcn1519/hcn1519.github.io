@@ -8,6 +8,7 @@ date:   2018-01-16 00:30:00
 tags: [Swift, AccessControl, Language]
 image:
   feature: swiftLogo.jpg
+translate: false
 ---
 
 Swift의 접근 제어자(Access Control)에 대해서 간단히 정리해보고자 합니다. 정의를 살펴보면,

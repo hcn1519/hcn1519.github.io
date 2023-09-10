@@ -5,6 +5,7 @@ excerpt: "네트워크 강의 정리 1"
 categories: Network PacketSwitching PacketLoss NetworkDelay
 tags: [Network, PacketSwitching, CircuitSwitching, PacketLoss, NetworkDelay]
 date: "2018-03-15 20:54:59 +0900"
+translate: false
 ---
 
 > 본 내용은 kocw의 한양대학교 이석복 교수님 강의인 [컴퓨터 네트워크](http://www.kocw.net/home/search/kemView.do?kemId=1223614)를 듣고 정리한 내용입니다.

@@ -5,7 +5,9 @@ title:  "Rails에서 form 생성시 parameter 관련 문제"
 excerpt: "Rails에서 form을 만들고 나서 생기는 parmeter 전달과 관련된 문제들을 알아봅니다."
 categories: Rails Parameter
 date:   2016-02-05 13:30:00
+translate: false
 ---
+
 {% highlight html %}
 <h5>Parameter 전송시 나타날 수 있는 문제 3가지</h5>
   <ol>
