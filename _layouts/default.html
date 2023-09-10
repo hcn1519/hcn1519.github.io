@@ -20,20 +20,21 @@
           <h3 class="masthead-title">
             <a href="{{ site.baseurl }}" title="Home">HCN</a>
             <span>{{ site.tagline }}</span>
-          {% if page.translate or page.url == "/" %}
-            <span class="translation">
-              <small>
-              {% if site.lang == "en" %}
-              <a href="{{ site.baseurl_root }}{{ page.url }}">한국어로 보기</a>
-              {% else %}
-              <a href="{{ site.baseurl_root }}/en{{ page.url }}">Read in English</a>
-              {% endif %}
-              </small>
-            </span>
-          {% endif %}
+          
           </h3>
         </div>
       </div>
+      {% if page.translate or page.url == "/" %}
+        <span class="translation">
+          <small>
+          {% if site.lang == "en" %}
+          <a href="{{ site.baseurl_root }}{{ page.url }}">한국어로 보기</a>
+          {% else %}
+          <a href="{{ site.baseurl_root }}/en{{ page.url }}">Read in English</a>
+          {% endif %}
+          </small>
+        </span>
+      {% endif %}
       {% if page.table-of-contents and page.table-of-contents != "" %}
       <aside class="table-of-contents">
           {% include table-of-contents.md %}
