@@ -20,7 +20,7 @@
           <h3 class="masthead-title">
             <a href="{{ site.baseurl }}" title="Home">HCN</a>
             <span>{{ site.tagline }}</span>
-            {% if page.translate %}
+          {% if page.translate or page.url == "/" %}
             <span class="translation">
               <small>
               {% if site.lang == "en" %}
@@ -30,7 +30,7 @@
               {% endif %}
               </small>
             </span>
-            {% endif %}
+          {% endif %}
           </h3>
         </div>
       </div>
