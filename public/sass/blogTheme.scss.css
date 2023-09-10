@@ -456,7 +456,7 @@ abbr[title] {
     position: fixed;
     width: 100%;
     background-color: #f1f3f4;
-    z-index: 10000;
+    z-index: 999;
   }  
  }
  @media (prefers-color-scheme: dark) {
