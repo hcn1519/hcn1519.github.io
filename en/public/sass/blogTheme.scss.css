@@ -114,15 +114,6 @@ a.pagination-item:hover {
   letter-spacing: 0.5pt;
 }
 
-.translation small a {
-  text-align: right;
-  float: right;
-  margin-top: 4.5px;
-  font-family: "Mona Sans", Helvetica, sans-serif;
-  font-size: 10pt;
-  letter-spacing: -0.5pt;
-}
-
 /* Tables */
 table {
   margin-bottom: 1rem;
@@ -413,13 +404,46 @@ abbr[title] {
   .container.content {
     margin-left: 120px;
     margin-right: auto;
+  }  
+}
+
+.translation {
+  position: fixed;    
+  top: 14px;
+  left: 0;
+  color: var(--main-text-color);
+  z-index: 100000;
+}
+@media (min-width: 38em) {
+  .translation {
+    margin-left: 80%;
   }
-  .masthead .container {
-    margin-left: 5rem;
-    margin-right: 15rem;
+}
+@media (min-width: 950px) {
+  .translation {
+    margin-left: 53em;
+  }
+}
+@media (min-width: 1100px) {
+  .translation {
+    margin-left: 59em;
+  }
+}
+@media (max-width: 38em) {
+  .translation {
+    margin-left: 75%;
   }
 }
 
+.translation small a {
+  color: var(--main-text-color);
+  text-align: right;
+  float: right;
+  margin-top: 4.5px;
+  font-family: "Mona Sans", Helvetica, sans-serif;
+  font-size: 10pt;
+  letter-spacing: -0.5pt;
+}
 /* Masthead(navigation bar)
  * Super small header above the content for site name and short description.
  */
@@ -432,7 +456,7 @@ abbr[title] {
     position: fixed;
     width: 100%;
     background-color: #f1f3f4;
-    z-index: 999;
+    z-index: 10000;
   }  
  }
  @media (prefers-color-scheme: dark) {
