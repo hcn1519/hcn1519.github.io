@@ -11,10 +11,6 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div class="wrap">
-      {% include sidebar.html %}
-      <aside class="side-menu-in-desktop">
-        {% include side-menu-in-desktop.html %}
-      </aside>
       <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
@@ -35,13 +31,22 @@
           </small>
         </span>
       {% endif %}
-      {% if page.table-of-contents and page.table-of-contents != "" %}
-      <aside class="table-of-contents">
-          {% include table-of-contents.md %}
-      </aside>
-      {% endif %}
-      <div class="container content">
-        {{ content }}
+      {% include sidebar.html %}
+
+      <div class="column-wrapper">  
+        <aside class="side-menu-in-desktop">
+          {% include side-menu-in-desktop.html %}
+        </aside>
+        <div class="container content">
+          {{ content }}
+        </div>
+        {% if page.table-of-contents and page.table-of-contents != "" %}
+        <div style="flex: 1 1 auto;">
+          <aside class="table-of-contents">
+              {% include table-of-contents.md %}
+          </aside>
+        </div>
+        {% endif %}
       </div>
     </div>
 
