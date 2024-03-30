@@ -2,7 +2,7 @@
 layout: post
 title: "Python Import Mechanism"
 date: "2024-03-25 00:53:17 +0900"
-excerpt: "UIKit의 DiffableDataSource를 사용하기 위한 방법에 대해 정리하였습니다."
+excerpt: "Python의 Module Import에 대해 살펴봅니다."
 categories: Python Module Package
 tags: [Python, Module, Package]
 table-of-contents: |
