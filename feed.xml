@@ -1,4 +1,156 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="https://hcn1519.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://hcn1519.github.io/" rel="alternate" type="text/html" hreflang="ko" /><updated>2023-09-12T15:37:27+09:00</updated><id>https://hcn1519.github.io/feed.xml</id><title type="html">hcn1519 DEV</title><subtitle>hcn1519 Blog</subtitle><author><name>Changnam Hong</name></author><entry><title type="html">DiffableDataSource로 안전하게 UIKit List 업데이트하기</title><link href="https://hcn1519.github.io/articles/2022-05/diffabledatasource" rel="alternate" type="text/html" title="DiffableDataSource로 안전하게 UIKit List 업데이트하기" /><published>2022-05-13T00:53:17+09:00</published><updated>2023-09-10T17:04:29+09:00</updated><id>https://hcn1519.github.io/articles/2022-05/diffabledatasource</id><content type="html" xml:base="https://hcn1519.github.io/articles/2022-05/diffabledatasource">&lt;h1 id=&quot;1-wwdc---advances-in-ui-data-sources&quot;&gt;1. WWDC - Advances in UI Data Sources&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="https://hcn1519.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://hcn1519.github.io/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-03-30T21:19:50+09:00</updated><id>https://hcn1519.github.io/feed.xml</id><title type="html">hcn1519 DEV</title><subtitle>hcn1519 Blog</subtitle><author><name>Changnam Hong</name></author><entry><title type="html">Python Import Mechanism</title><link href="https://hcn1519.github.io/articles/2024-03/python_import_mechanism" rel="alternate" type="text/html" title="Python Import Mechanism" /><published>2024-03-25T00:53:17+09:00</published><updated>2024-03-30T21:16:30+09:00</updated><id>https://hcn1519.github.io/articles/2024-03/python_import_mechanism</id><content type="html" xml:base="https://hcn1519.github.io/articles/2024-03/python_import_mechanism">&lt;p&gt;Python 프로젝트에서 다른 소스코드의 기능을 import하는 과정에서 잦은 에러를 마주치는 것은 흔한 일입니다. Python import system에 익숙하지 않은 개발자들은 이러한 에러를 피하기 위해, 모든 소스코드를 하나의 파일에 넣거나, 스크립트를 모두 하나의 디렉토리에 넣는 작업을 했을 수도 있습니다.&lt;/p&gt;
+
+&lt;p&gt;이 글은 위와 같은 경험이 있는 개발자들의 Python의 import system에 대한 이해를 돕기 위해 작성되었습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;python에서-다른-파일-import시-오류가-많은-이유&quot;&gt;Python에서 다른 파일 import시 오류가 많은 이유&lt;/h2&gt;
+
+&lt;p&gt;파이썬을 사용할 때 개발자는 &lt;strong&gt;경로 제약 없이&lt;/strong&gt; 스크립트를 실행할 수 있습니다. 이는 큰 장점이지만, 한편으로는 여러 파일의 참조를 구성할 때 주요한 기준점인 스크립트 수행 경로가 쉽게 바뀔 수 있다는 것을 의미하기도 합니다. 예를 들어서, 아래와 같은 프로젝트 구조를 생각해보겠습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;foo
+├── bar
+│   └── sample2.py
+└── sample.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;여기에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foo&lt;/code&gt;에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python3 sample.py&lt;/code&gt;를 수행하는 것과 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bar&lt;/code&gt; 디렉토리 안에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python3 ../sample.py&lt;/code&gt;는 동일한 스크립트 파일을 실행합니다. 하지만, 둘의 스크립트 수행 경로는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/foo&lt;/code&gt;와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/foo/bar&lt;/code&gt;로 다르고 이는 큰 차이를 야기합니다. 그렇기 때문에 우리는 여러 소스 파일이 다양한 하위 디렉토리에 나누어진 프로젝트를 진행하고 있다면, 일반적으로 프로젝트 루트에서 프로젝트를 실행하는 것을 전제하고 프로젝트 코드를 구성합니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;python-파일에-다른-파일-import하여-사용하기&quot;&gt;Python 파일에 다른 파일 import하여 사용하기&lt;/h2&gt;
+
+&lt;p&gt;Python은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;import&lt;/code&gt; 문을 통해 다른 스크립트의 기능을 가져올 수 있습니다. Python 스크립트는 동시에 여러 스크립트와 컴파일되지 않기 때문에, 인터프리터는 가져온 정의나 함수를 찾을 때 디렉토리 구조에 의존합니다.&lt;/p&gt;
+
+&lt;p&gt;이 글에서는 import 문을 정의하는 다양한 방법을 다루고자 합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-모든-module을-동일한-디렉토리에-두기&quot;&gt;1. 모든 module을 동일한 디렉토리에 두기&lt;/h3&gt;
+
+&lt;p&gt;다른 정의를 가져오는 가장 쉬운 방법은 모든 스크립트 파일을 동일한 디렉토리에 두는 것입니다. 예를 들어, 아래와 같은 프로젝트가 있다고 가정해보겠습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;directory
+├── message.py
+└── sender.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;각 스크립트는 아래 코드를 포함합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# message.py
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Message from script1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# sender.py
+&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;message&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Sender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Send from script2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;__main__&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sender&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ python3 script2.py
+Message from script1
+Send from script2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이 예제에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sender.py&lt;/code&gt;는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;message&lt;/code&gt;에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Message&lt;/code&gt; 클래스를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;from message import Message&lt;/code&gt; 문을 사용하여 가져옵니다. 위의 예제와 같이, 우리는 간단히 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;from module import name&lt;/code&gt; 형식으로 다른 스크립트의 정의나 문을 추가할 수 있습니다. 여기서 &lt;a href=&quot;https://docs.python.org/3/tutorial/modules.html&quot;&gt;module&lt;/a&gt;은 우리가 가져오고자 하는 기능을 갖춘 확장자(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.py&lt;/code&gt;)가 없는 파일입니다.&lt;/p&gt;
+
+&lt;p&gt;왜 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;import name&lt;/code&gt; 형식으로 import 문을 정의하지 않는지 궁금할 수 있습니다. 이는 사용 가능하지만, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;import&lt;/code&gt; 후에 오는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[name]&lt;/code&gt; 부분은 모듈 또는 패키지(모듈의 모음)이어야 합니다. 그렇기 때문에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;module.name&lt;/code&gt;(예: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;msg = message.Message()&lt;/code&gt;)과 같이 모듈 내의 기능을 사용할 때, 각 함수 또는 클래스의 전체 네임스페이스를 작성해야 접근이 가능합니다. 반면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;from message import Message&lt;/code&gt; 형태의 statement는 별도의 네임스페이스 없이 모듈 내 기능에 접근할 수 있게 합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-의존성-해결을-위해-package-사용&quot;&gt;2. 의존성 해결을 위해 package 사용&lt;/h3&gt;
+
+&lt;p&gt;프로젝트가 커지면 모든 스크립트 파일을 하나의 디렉토리에 넣는 것이 어려워집니다. 아래 디렉토리 구조를 생각해보겠습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;directory
+├── msgs
+│   └── message.py
+└── sender.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이 예에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sender.py&lt;/code&gt;와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;message.py&lt;/code&gt;는 서로 다른 디렉토리에 있습니다. 그래서 위의 예시 파일의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sender.py&lt;/code&gt;를 실행하면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ModuleNotFoundError&lt;/code&gt;가 발생합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ python3 sender.py
+Traceback (most recent call last):
+  File &quot;path/sender.py&quot;, line 2, in &amp;lt;module&amp;gt;
+    from message import Message
+ModuleNotFoundError: No module named 'message'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이 문제를 해결하는 몇 가지 방법이 있습니다. 가장 간단한 방법은 import 문을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;from msgs.message import Message&lt;/code&gt;로 변경하면 됩니다. 이는 msgs 디렉토리를 package로 간주하여 내부의 모듈을 접근하는 방식입니다. &lt;a href=&quot;https://docs.python.org/3/tutorial/modules.html#packages&quot;&gt;Package&lt;/a&gt;는 모듈 네임스페이스를 지원하는 Python의 구조적인 방식으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.&lt;/code&gt;을 연결하는 방식(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package.sub_package.module&lt;/code&gt;)으로 서브 디렉토리 내부 모듈 접근을 지원합니다. Python은 디렉토리가 Python 소스코드 파일을 가지고 있을 때 이를 package로 인식합니다. 이는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__init__.py&lt;/code&gt; 파일을 디렉토리에 추가하여 명시적으로 이를 보여줄 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;directory
+├── msgs
+│   ├── __init__.py
+│   └── message.py
+└── sender.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# sender.py
+&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;msgs.message&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# changed
+&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Sender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Send from script2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;__main__&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sender&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__init__.py&lt;/code&gt;는 import statement를 단순화하는 다양한 syntax sugar를 정의하는 데에 사용되기도 합니다. 예를 들어서, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__init__.py&lt;/code&gt;에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;from message import Message&lt;/code&gt;를 추가할 경우, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;from msgs import Message&lt;/code&gt; 형태로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sender.py&lt;/code&gt;에 statement를 작성할 수 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;3-모듈-검색-경로-수정&quot;&gt;3. 모듈 검색 경로 수정&lt;/h3&gt;
+
+&lt;p&gt;모듈을 가져오는 또 다른 방법은 모듈 검색 경로를 수정하는 것입니다. Python 인터프리터가 스크립트에서 import 문을 감지할 때, 사용자가 가져오려는 모듈을 찾을 때 세 가지 경로를 검색합니다: 현재 실행 중인 스크립트 경로, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PYTHONPATH&lt;/code&gt;, 그리고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sys.path&lt;/code&gt;의 경로입니다. 따라서 이 중 하나를 수정하여 모듈이 있는 경로를 추가하면 해당 모듈을 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;현재 실행 중인 스크립트 경로: 스크립트를 실행하는 경로는 기본적으로 모듈 검색 경로에 포함됩니다. 그렇기 때문에 모듈을 실행하려는 스크립트와 동일한 디렉토리에 넣으면 해당 모듈은 접근 가능합니다.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PYTHONPATH&lt;/code&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PYTHONPATH&lt;/code&gt;는 Python 인터프리터가 실행될 때 모듈을 검색 경로를 저장하는 환경 변수입니다. 다른 환경 변수와 마찬가지로 경로를 갱신하여 현재 세션에 적용할 수 있습니다. 또는 변경 사항을 영구적으로 적용하려면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./zshrc&lt;/code&gt; 또는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./bashrc&lt;/code&gt;에 해당 경로를 export하는 statement를 추가하면 됩니다.&lt;/p&gt;
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PYTHONPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/msgs:&lt;span class=&quot;nv&quot;&gt;$PYTHONPATH&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;런타임에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sys.path&lt;/code&gt; 수정&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Python은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sys.path&lt;/code&gt;에 추가된 경로의 모듈들을 검색합니다. 따라서 모듈이 정의된 경로를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sys.path&lt;/code&gt;에 추가하면 Python이 해당 모듈을 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;path/of/msgs&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;msgs&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Sender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Send from script2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;__main__&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sender&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;best-practices&quot;&gt;Best Practices&lt;/h2&gt;
+
+&lt;p&gt;만약 프로젝트에 하위 디렉터리를 도입하고 싶다면, 권장하는 방법은 모듈과 패키지를 사용하는 것입니다. 프로젝트가 작고 하위 디렉터리가 필요하지 않다면, 모든 파이썬 소스 코드를 하나의 디렉터리에 두는 것이 가장 간단하고 바람직한 방법입니다. 프로젝트에 모듈이 많지 않다면 스크립트 실행시 &lt;a href=&quot;https://docs.python.org/3/using/cmdline.html#cmdoption-m&quot;&gt;-m&lt;/a&gt; 인자로 모듈 경로를 제공하는 것도 하나의 방법이 될 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;개인적으로 모듈 import 문제를 해결하는 데 module search path를 수정하는 것은 프로젝트의 규모가 커질 수록 피해야 하는 방법이라고 생각합니다.그 이유는 환경 변수는 해당 프로젝트 뿐만 아니라 다른 프로젝트도 사용하는 변수이기 때문에 이를 변경하면 다른 프로젝트에 side-effect이 발생할 수 있기 때문입니다. 또한, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sys.path&lt;/code&gt;를 활용하는 방식은 개발자가 직접 런타임에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sys.path.append()&lt;/code&gt; 의 실행을 관리해야 합니다. 이는 일관적이지 않은 모듈 참조 환경을 쉽게 만들어 낼 수 있습니다. 단일 파일에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sys.path.append()&lt;/code&gt;를 모아둔 파일을 항상 실행하도록 하는 것이 이 문제를 해결할 수 있지만, 이는 모든 소스 코드에 불필요한 의존성을 도입하고, 프로젝트에서 새 디렉토리를 만들고 싶을 때마다 해당 파일을 업데이트해야 합니다.&lt;/p&gt;
+
+&lt;h1 id=&quot;참고자료&quot;&gt;참고자료&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.python.org/3/tutorial/modules.html&quot;&gt;Module&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.python.org/3/tutorial/modules.html#packages&quot;&gt;Package&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.python.org/3/reference/import.html#importsystem&quot;&gt;Python import system&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.python.org/3/using/cmdline.html#cmdoption-m&quot;&gt;Command line and environment&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="Python" /><category term="Module" /><category term="Package" /><category term="Python" /><category term="Module" /><category term="Package" /><summary type="html">Python의 Module Import에 대해 살펴봅니다.</summary></entry><entry><title type="html">DiffableDataSource로 안전하게 UIKit List 업데이트하기</title><link href="https://hcn1519.github.io/articles/2022-05/diffabledatasource" rel="alternate" type="text/html" title="DiffableDataSource로 안전하게 UIKit List 업데이트하기" /><published>2022-05-13T00:53:17+09:00</published><updated>2023-09-10T17:04:29+09:00</updated><id>https://hcn1519.github.io/articles/2022-05/diffabledatasource</id><content type="html" xml:base="https://hcn1519.github.io/articles/2022-05/diffabledatasource">&lt;h1 id=&quot;1-wwdc---advances-in-ui-data-sources&quot;&gt;1. WWDC - Advances in UI Data Sources&lt;/h1&gt;
 
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Diffable Data Source&lt;/code&gt;는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UICollectionView&lt;/code&gt;와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITableView&lt;/code&gt;의 DataSource 업데이트를 좀 더 안전하고, 편리하게 수행할 수 있도록 만들어진 API입니다. 이 글에서는 iOS 13부터 지원되는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Diffable Data Source&lt;/code&gt;를 소개하는 WWDC 주요 내용(&lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2019/220&quot;&gt;Advances in UI Data Sources&lt;/a&gt;)을 정리하고, 이를 적용한 후기에 대해 작성해보았습니다.&lt;/p&gt;
 
@@ -1728,309 +1880,4 @@ We don't normally expect operators to modify their operands, since operators in 
   &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Expression_(computer_science)&quot;&gt;Expression (computer science) - Wikipedia&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Statement_(computer_science)&quot;&gt;Statement (computer science) - Wikipedia&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.iso.org/standard/74528.html&quot;&gt;ISO/IEC 9899:2018&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="Expression," /><category term="Statement," /><category term="Language," /><category term="C," /><category term="Terminology" /><category term="Expression" /><category term="Statement" /><category term="Language" /><category term="C" /><category term="Terminology" /><summary type="html">Expression과 Statement에 대해 정리하였습니다.</summary></entry><entry><title type="html">iOS 다크모드 알아보기</title><link href="https://hcn1519.github.io/articles/2020-03/ios_darkmode" rel="alternate" type="text/html" title="iOS 다크모드 알아보기" /><published>2020-03-13T00:53:17+09:00</published><updated>2023-09-10T17:04:29+09:00</updated><id>https://hcn1519.github.io/articles/2020-03/ios_darkmode</id><content type="html" xml:base="https://hcn1519.github.io/articles/2020-03/ios_darkmode">&lt;p&gt;다크모드 도입에 있어서 필요한 정보를 조사하면서 실제 구현과 관련된 내용을 정리해보았습니다. 공식 문서 및 영상을 보면서 관련 내용을 같이 참고하시면 좋을 것 같습니다.(해당 내용의 대부분은 &lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2019/214/&quot;&gt;WWDC - Implement Dark Mode&lt;/a&gt;을 기반으로 작성되었습니다.)&lt;/p&gt;
-
-&lt;h2 id=&quot;uitraitcollection&quot;&gt;UITraitCollection&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/documentation/uikit/uitraitcollection&quot;&gt;UITraitCollection&lt;/a&gt;은 iOS의 인터페이스 환경에 대한 정보를 가지고 있는 객체입니다. 인터페이스 환경 정보에는 iOS 12부터  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;userInterfaceStyle&lt;/code&gt;라는 Property가 추가되었고, 이 값을 통해 라이트/다크 모드에 대해서 판별을 할 수 있습니다.(iOS 12에서는 다크모드가 지원되지 않는데, macOS의 다크모드가 지원되면서 API만 미리 추가된 것으로 보입니다.)&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITraitCollection&lt;/code&gt;은 앱 실행시 1개의 값만 존재하는 것이 아니라, 각각의 View, ViewController마다 존재합니다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITraitCollection&lt;/code&gt; 값은 시스템으로부터 UIScreen으로 전달되고, View 계층 구조 상으로 최하단의 View까지 그 값이 전달됩니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/76678327-343fca00-661a-11ea-8cb2-5894562c8569.png&quot; alt=&quot;dark1&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;UIKit은 특정 UIView 객체를 생성할 때, 적합한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;traitCollection&lt;/code&gt;이 무엇인지 예상하여 값을 설정해줍니다. 즉, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;addSubView&lt;/code&gt; 과정에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;traitCollection&lt;/code&gt;을 설정하지 않아도 상속, 사용자 설정 값 등에 기반하여 값이 알아서 설정됩니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/76678329-373aba80-661a-11ea-910e-bb681c887511.png&quot; alt=&quot;dark2&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;1-uitraitcollectioncurrent&quot;&gt;1. UITraitCollection.current&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/documentation/uikit/uitraitcollection/3238080-current&quot;&gt;UITraitCollection.current&lt;/a&gt;은 iOS 13에서 추가된 static 변수로 현재의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;traitCollection&lt;/code&gt;을 알려줍니다. UIKit은 UIView를 그릴 때 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITraitCollection.current&lt;/code&gt;를 해당 View의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;traitCollection&lt;/code&gt;으로 설정하여 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITraitCollection.current&lt;/code&gt;이 현재의 View에 대한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;traitCollection&lt;/code&gt;을 나타낼 수 있도록 합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BackgroundView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIView&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;draw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;rect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CGRect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// UIKit sets UITraitCollection.current to self.traitCollection&lt;/span&gt;
-        &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;systemBackground&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setFill&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;kt&quot;&gt;UIRectFill&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TraitCollection.current&lt;/code&gt;은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutSubViews()&lt;/code&gt; 호출 이전에 반드시 업데이트 됩니다. 그러므로,  아래와 같은 layout 메소드에서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TraitCollection&lt;/code&gt;이 부모의 것을 획득한 것이 보장됩니다.&lt;/li&gt;
-  &lt;li&gt;그래서 라이트/다크 모드 전환시에 업데이트가 필요한 View는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;viewDidLoad()&lt;/code&gt;가 아니라 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutSubViews()&lt;/code&gt;에서 업데이트가 진행이 되어야 합니다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutSubViews()&lt;/code&gt;는 레이아웃을 그릴 때 반복적으로 호출되는 메소드이므로 코드 작성시 유의해야 합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/76678330-3c980500-661a-11ea-8e49-675ab1ae1a1d.png&quot; alt=&quot;dark3&quot; /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ViewController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIViewController&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;viewWillLayoutSubviews&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;viewWillLayoutSubviews&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;nf&quot;&gt;updateTitle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;updateTitle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#available(iOS 13.0, *)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;traitCollection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userInterfaceStyle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dark&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;라이트 모드&quot;&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;다크 모드&quot;&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;라이트 모드&quot;&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;이 때 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;traitCollection&lt;/code&gt;이 변경될 경우 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;traitCollectionDidChange()&lt;/code&gt;이 호출됩니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/76678332-40c42280-661a-11ea-95f6-07a8dc933471.png&quot; alt=&quot;dark4&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutSubViews()&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;traitCollectionDidChange()&lt;/code&gt; 함수 외부에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self.view&lt;/code&gt;와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITraitCollection.current&lt;/code&gt;는 동일한 값을 보장하지 않습니다.&lt;/li&gt;
-  &lt;li&gt;애플에서는 이와 같은 경우에 다음과 같이 3가지 방식으로 대응할 것을 권장하고 있습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;layer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CALayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;traitCollection&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;traitCollection&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Option 1 - resolvedColor를 통해 traitCollection 반영&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;resolvedColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;resolvedColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;traitCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;layer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;borderColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resolvedColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cgColor&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Option 2 - performAsCurrent 클로저 활용&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;traitCollection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;performAsCurrent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;layer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;borderColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cgColor&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Option 3 - 직접 current TraitCollection 업데이트&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// 이 경우 UITraitCollection은 동작하는 Thread에서만 적용되어 다른 Thread에 영향을 주지 않습니다.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// 이 방식은 performAsCurrent의 내부 동작과 동일합니다.&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;savedTraitCollection&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UITraitCollection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;current&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;UITraitCollection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;traitCollection&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;layer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;borderColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cgColor&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;UITraitCollection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;savedTraitCollection&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;2-traitcollectiondidchange&quot;&gt;2. traitCollectionDidChange&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/documentation/uikit/uitraitenvironment/1623516-traitcollectiondidchange&quot;&gt;traitCollectionDidChange(_:)&lt;/a&gt;은 인터페이스 환경 변화에 대한 옵저빙 메소드로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITraitCollection&lt;/code&gt;이 변경될 때마다 호출이 됩니다.&lt;/li&gt;
-  &lt;li&gt;iOS 13에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;traitCollectionDidChange(_:)&lt;/code&gt;는 초기화 과정에서 모든 traitCollection이 결정된 이후에만 호출되도록 API가 변경되었습니다. 이 때문에, 하위 버전에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;traitCollectionDidChange(_:)&lt;/code&gt;이 호출되던 케이스인데 iOS 13에서는 호출되지 않는 상황이 발생할 수 있습니다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;traitCollection&lt;/code&gt;의 변경은 라이트/다크 모드에 국한된 것이 아니라, sizeClass 변경시에도 호출되기 때문에 아래와 같이 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;userInterfaceStyle&lt;/code&gt; 변경을 확인할 수 있는 별도의 API가 추가되었습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;traitCollectionDidChange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;previousTraitCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UITraitCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;traitCollectionDidChange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;previousTraitCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;traitCollection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;hasDifferentColorAppearance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;comparedTo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;previousTraitCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// Resolve dynamic colors again&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;traitCollectionDidChange(_:)&lt;/code&gt; 호출 시점에 대한 디버깅을 위해 별도의 argument가 추가되었습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/76678335-46ba0380-661a-11ea-926a-f34c76da0fea.png&quot; alt=&quot;dark5&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;3-traitcollection을-활용하여-라이트다크-모드-강제-설정하기&quot;&gt;3. TraitCollection을 활용하여 라이트/다크 모드 강제 설정하기&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;iOS 13부터 UIView와 UIViewController는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;overrideUserInterfaceStyle&lt;/code&gt;이라는 property를 새롭게 제공합니다. 이 값에 대해서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.light&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.dark&lt;/code&gt;와 같이 지정할 경우 그 하위의 SubView까지 스타일 값이 오버라이딩 됩니다.&lt;/li&gt;
-  &lt;li&gt;전체 앱에 대해서 라이트/다크 모드를 강제하려면 Info.plist에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIUserInterfaceStyle&lt;/code&gt; 값을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.light&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.dark&lt;/code&gt;와 같이 설정해주면 됩니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/76678338-49b4f400-661a-11ea-9ee5-68b5da4814d8.png&quot; alt=&quot;dark6&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;다크모드-주요-구현-대상&quot;&gt;다크모드 주요 구현 대상&lt;/h2&gt;
-
-&lt;h3 id=&quot;1-색상&quot;&gt;1. 색상&lt;/h3&gt;
-
-&lt;p&gt;Xcode에서는 아래와 같은 기능을 통해서 라이트/다크 모드에 대한 색상을 설정할 수 있습니다.&lt;/p&gt;
-
-&lt;h4 id=&quot;namedcolor를-통한-지원&quot;&gt;namedColor를 통한 지원&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;namedColor&lt;/code&gt;는 &lt;strong&gt;iOS 11 이상&lt;/strong&gt; 부터 지원되는 기능으로 Asset Catalog를 통해서 UIColor를 정의하여 사용하는 기능입니다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;namedColor&lt;/code&gt;는 일반 이미지처럼 xcasset에 추가할 수 있습니다.&lt;/li&gt;
-  &lt;li&gt;이 때, Attribute Inspector에서 appearance 설정을 Any, Dark, Light 설정시 1개의 이름으로 각 모드별 색상이 적용됩니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;message&quot;&gt;
-    Use the Any Appearance variant to specify the color value to use on older systems that do not support Dark Mode.
-&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/76678341-4f123e80-661a-11ea-8182-80b68c2e458a.png&quot; alt=&quot;dark7&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이렇게 정의된 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;namedColor&lt;/code&gt;는 Interface Builder, 코드에서 각각 다음과 같이 사용할 수 있습니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Interface Builder&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/76678462-95b46880-661b-11ea-86a0-fc0c28f6b21c.png&quot; alt=&quot;dark8&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Code&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;purColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;named&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Pure&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;system-color&quot;&gt;System Color&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;iOS 13에서는 다크 모드를 지원하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;System Color&lt;/code&gt;가 추가 되었습니다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;System Color&lt;/code&gt;도 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;namedColor&lt;/code&gt;와 유사하게 동작하며 라이트/다크 모드에서 설정된 색상 값이 다릅니다.(&lt;a href=&quot;https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/&quot;&gt;색상 표, Human Interface Guidelines - Color&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;System Color&lt;/code&gt;에는 사용 용도에 맞춰서 View의 이름으로 정의된 색상(semantically defined system color)도 존재합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;systemBlue&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;labelColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;System Color&lt;/code&gt; 이외에 기존에 사용되던 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIColor.black&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIColor.white&lt;/code&gt;와 같은 색상은 라이트/다크 모드 전환이 지원되지 않습니다. 그래서 다크 모드가 지원되는 화면에서는 해당 색상들이 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;System Color&lt;/code&gt;로 변경되거나, 적절히 정의된 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;namedColor&lt;/code&gt;로 설정되어야 합니다.&lt;/p&gt;
-
-&lt;h4 id=&quot;resolved-color&quot;&gt;Resolved Color&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;UIColor에는 &lt;a href=&quot;https://developer.apple.com/documentation/uikit/uicolor/3238042-resolvedcolor&quot;&gt;resolvedColor(:UITraitCollection)&lt;/a&gt; extension 메소드가 iOS 13에서 추가되었습니다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resolvedColor&lt;/code&gt;는 시스템의 라이트/다크 모드와 관계 없이 특정 View에 설정된 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITraitCollection&lt;/code&gt;에 맞춰서 정해진 색상을 반환합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// ViewController와 subView의 UITraitCollection.userInterfaceStyle에 따라서 값이 다름&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;vcBGColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;systemBackground&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;resolvedColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;viewController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;traitCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;subViewBGColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;systemBackground&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;resolvedColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;traitCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;dynamic-provider&quot;&gt;Dynamic Provider&lt;/h4&gt;
-
-&lt;p&gt;iOS 13 이상에서 UIColor에 신규 API인 &lt;a href=&quot;https://developer.apple.com/documentation/uikit/uicolor/3238041-init&quot;&gt;UIColor.init(dynamicProvider:)&lt;/a&gt;이 추가되었습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;@available&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iOS&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;13.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dynamicProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;UITraitCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;해당 생성자는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITraitCollection&lt;/code&gt;에 따라서 색상을 리턴할 수 있는 기능을 지원합니다.&lt;/li&gt;
-  &lt;li&gt;코드로 라이트/다크 모드에 대한 분기 처리가 필요할 때 사용할 수 있습니다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dynamicProvider&lt;/code&gt;는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITraitCollection.current&lt;/code&gt;를 사용하여 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;userInterfaceStyle&lt;/code&gt;을 판별하므로 별도의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;traitCollection&lt;/code&gt;을 인자로 넘기지 않고도 색상을 설정할 수 있습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;myColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#available(iOS 13, *)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dynamicProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;traitCollection&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;traitCollection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userInterfaceStyle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dark&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;white&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;black&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// 하위버전&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;black&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Note: dynamicProvider 생성자를 활용해서 생성된 UIColor는 Interface Builder에서 사용할 수 없습니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;2-이미지&quot;&gt;2. 이미지&lt;/h3&gt;
-
-&lt;p&gt;다크모드와 관련된 이미지 API의 경우에도 색상과 거의 동일한 API를 사용합니다. 이미지도 색상과 동일하게 Asset Catalog에서 라이트/다크 모드에 맞춰서 이미지를 노출하도록 설정 할 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/76678469-a1a02a80-661b-11ea-8ab5-23b8606097e2.png&quot; alt=&quot;dark9&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;template-image&quot;&gt;Template Image&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;아이콘과 같은 이미지의 경우에는 이미지의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rendering mode&lt;/code&gt;를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;template Image&lt;/code&gt;로 설정하여 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tintColor&lt;/code&gt;를 주어서 다크모드를 지원하는 방법도 있습니다. 이 방법 사용시에는 라이트/다크 모드에 맞춰서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tintColor&lt;/code&gt;를 적용하면 됩니다.&lt;/li&gt;
-  &lt;li&gt;Template Image도 Asset Catalog 설정, Code 설정 모두 지원합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/13018877/76678472-a5cc4800-661b-11ea-9379-09738bf2c7c4.png&quot; alt=&quot;dark92&quot; /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;named&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;dessert&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;withRenderingMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alwaysTemplate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;resolved-image&quot;&gt;Resolved Image&lt;/h4&gt;
-
-&lt;p&gt;이미지의 경우에도 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITraitCollection&lt;/code&gt;에 맞춰서 나타나는 이미지를 동적으로 변경할 수 있습니다. 다만 이는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIImage&lt;/code&gt;의 extension으로 제공되는 것이 아니라, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIImageAsset&lt;/code&gt;의 extension으로 제공됩니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;참고 - &lt;a href=&quot;https://developer.apple.com/documentation/uikit/uiimage/providing_images_for_different_appearances&quot;&gt;Providing Images for Different Appearances - Apple Article&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;open&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIImageAsset&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;NSObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;NSSecureCoding&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;open&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;traitCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UITraitCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIImage&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Usage&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;named&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;HeaderImage&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;asset&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imageAsset&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;resolvedImage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;asset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;traitCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;symbol-image&quot;&gt;Symbol Image&lt;/h4&gt;
-
-&lt;p&gt;Symbol Image의 경우에는 애플에서 제작한 &lt;a href=&quot;https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/&quot;&gt;SF Symbols&lt;/a&gt; 기반으로 구성된 벡터 이미지입니다. 해당 Symbol을 커스텀해서 앱 디자인에 맞는 심볼을 제공할 수 있습니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;참고 - &lt;a href=&quot;https://developer.apple.com/documentation/uikit/uiimage/configuring_and_displaying_symbol_images_in_your_ui&quot;&gt;Configuring and Displaying Symbol Images in Your UI - Apple Article&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;3-기타-components&quot;&gt;3. 기타 Components&lt;/h3&gt;
-
-&lt;h4 id=&quot;1-statusbar&quot;&gt;1. StatusBar&lt;/h4&gt;
-
-&lt;p&gt;statusBarStyle에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;darkContent&lt;/code&gt; 옵션이 추가되었습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIStatusBarStyle&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Automatically chooses light or dark content based on the user interface style&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;@available&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iOS&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;7.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lightContent&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Light content, for use on dark backgrounds&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;@available&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iOS&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;13.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;darkContent&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Dark content, for use on light backgrounds&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;2-uiactivityindicatorview&quot;&gt;2. UIActivityIndicatorView&lt;/h4&gt;
-
-&lt;p&gt;기존의 색상 이름으로 설정되던 스타일이 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.medium&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.large&lt;/code&gt;로 변경되었습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;UIActivityIndicatorView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;medium&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;UIActivityIndicatorView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;large&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://media.oss.navercorp.com/user/10153/files/e1735d80-5f09-11ea-8c65-cb66b351fc67&quot; alt=&quot;스크린샷 2020-03-05 오후 5 50 56&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;3-attributedstring&quot;&gt;3. AttributedString&lt;/h4&gt;
-
-&lt;p&gt;AttributedString의 경우 &lt;strong&gt;모두&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foregroundColor&lt;/code&gt;를 라이트/다크 모드에 맞게 추가해주어야 합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;NSAttributedString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;font&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIFont&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;systemFont&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ofSize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;36.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;foregroundColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;참고자료&quot;&gt;참고자료&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2019/214/&quot;&gt;WWDC - Implement Dark Mode&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/documentation/xcode/supporting_dark_mode_in_your_interface&quot;&gt;Apple Article - Supporting Dark Mode in Your Interface&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://nshipster.com/dark-mode/&quot;&gt;NSHipster - Dark Mode on iOS 13&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;기타 관련 API 문서 - 해당 링크는 설명 중간에 포함&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="iOS," /><category term="WWDC," /><category term="DarkMode," /><category term="UIKit" /><category term="iOS" /><category term="WWDC" /><category term="DarkMode" /><category term="UIKit" /><summary type="html">iOS에서 다크모드를 적용하기 위해 알아야 하는 내용을 정리하였습니다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22iOS.png%22%7D" /><media:content medium="image" url="https://hcn1519.github.io/%7B%22feature%22=%3E%22iOS.png%22%7D" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;/ul&gt;</content><author><name>Changnam Hong</name></author><category term="Expression," /><category term="Statement," /><category term="Language," /><category term="C," /><category term="Terminology" /><category term="Expression" /><category term="Statement" /><category term="Language" /><category term="C" /><category term="Terminology" /><summary type="html">Expression과 Statement에 대해 정리하였습니다.</summary></entry></feed>

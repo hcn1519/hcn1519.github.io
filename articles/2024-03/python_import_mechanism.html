@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+
+  <!-- Primary Meta Tags -->
+  <title>Python Import Mechanism - hcn1519 DEV</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title" content="Python Import Mechanism - hcn1519 DEV">
+  <meta name="description" content="Python의 Module Import에 대해 살펴봅니다.">
+  <meta name="theme-color" content="#f1f3f4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Python Import Mechanism">
+  <meta property="og:image" content="/public/assets/blogThumb-noRadius.png">
+  <meta property="og:description" content="Python의 Module Import에 대해 살펴봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/public/sass/syntax.scss.css" async>
+  <!-- Icons -->
+  <link rel="icon" type="image/png" href="/icons/android-chrome-512x512.png" sizes="512x512">
+  <link rel="shortcut icon" href="/icons/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon_16x16.png">
+  <link rel="icon" type="image/png" href="/icons/android_chrome_192x192.png" sizes="192x192">
+  <link rel="manifest" href="/icons/site.webmanifest">
+  
+  <!-- Fonts -->
+  <link rel="preload" href="/public/fonts/Age-Normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/public/fonts/Mona-Sans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/public/fonts/Mona-Sans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link type="application/atom+xml" rel="alternate" href="https://hcn1519.github.io/feed.xml" title="hcn1519 DEV" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="" title="Home">HCN</a>
+            <span>DEV</span>
+          
+          </h3>
+        </div>
+      </div>
+      
+        <span class="translation">
+          <small>
+          
+          <a href="/en/articles/2024-03/python_import_mechanism">Read in English</a>
+          
+          </small>
+        </span>
+      
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/">Home</a>
+      </li>
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+
+      <div class="column-wrapper">  
+        <aside class="side-menu-in-desktop">
+          <ul class="menu-list">
+  <li class="menu-item">
+    <a class="menu-link" href="/">Home</a>
+  </li>
+
+  
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+        <li class="menu-item">
+          <a class="menu-link" href="/about">About</a>
+        </li>
+      
+    
+  
+    
+      
+        <li class="menu-item">
+          <a class="menu-link" href="/archives/">Archives</a>
+        </li>
+      
+    
+  
+    
+  
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+  
+    
+      
+        <li class="menu-item">
+          <a class="menu-link" href="/tags/">Tags</a>
+        </li>
+      
+    
+  
+</ul>
+        </aside>
+        <div class="container content">
+          <div class="post">
+  <h2 class="post-title">Python Import Mechanism</h2>
+  <span class="post-date">25 Mar 2024</span>
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <p>Python 프로젝트에서 다른 소스코드의 기능을 import하는 과정에서 잦은 에러를 마주치는 것은 흔한 일입니다. Python import system에 익숙하지 않은 개발자들은 이러한 에러를 피하기 위해, 모든 소스코드를 하나의 파일에 넣거나, 스크립트를 모두 하나의 디렉토리에 넣는 작업을 했을 수도 있습니다.</p>
+
+<p>이 글은 위와 같은 경험이 있는 개발자들의 Python의 import system에 대한 이해를 돕기 위해 작성되었습니다.</p>
+
+<h2 id="python에서-다른-파일-import시-오류가-많은-이유">Python에서 다른 파일 import시 오류가 많은 이유</h2>
+
+<p>파이썬을 사용할 때 개발자는 <strong>경로 제약 없이</strong> 스크립트를 실행할 수 있습니다. 이는 큰 장점이지만, 한편으로는 여러 파일의 참조를 구성할 때 주요한 기준점인 스크립트 수행 경로가 쉽게 바뀔 수 있다는 것을 의미하기도 합니다. 예를 들어서, 아래와 같은 프로젝트 구조를 생각해보겠습니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>foo
+├── bar
+│   └── sample2.py
+└── sample.py
+</code></pre></div></div>
+
+<p>여기에서 <code class="language-plaintext highlighter-rouge">foo</code>에서 <code class="language-plaintext highlighter-rouge">python3 sample.py</code>를 수행하는 것과 <code class="language-plaintext highlighter-rouge">bar</code> 디렉토리 안에서 <code class="language-plaintext highlighter-rouge">python3 ../sample.py</code>는 동일한 스크립트 파일을 실행합니다. 하지만, 둘의 스크립트 수행 경로는 <code class="language-plaintext highlighter-rouge">/foo</code>와 <code class="language-plaintext highlighter-rouge">/foo/bar</code>로 다르고 이는 큰 차이를 야기합니다. 그렇기 때문에 우리는 여러 소스 파일이 다양한 하위 디렉토리에 나누어진 프로젝트를 진행하고 있다면, 일반적으로 프로젝트 루트에서 프로젝트를 실행하는 것을 전제하고 프로젝트 코드를 구성합니다.</p>
+
+<h2 id="python-파일에-다른-파일-import하여-사용하기">Python 파일에 다른 파일 import하여 사용하기</h2>
+
+<p>Python은 <code class="language-plaintext highlighter-rouge">import</code> 문을 통해 다른 스크립트의 기능을 가져올 수 있습니다. Python 스크립트는 동시에 여러 스크립트와 컴파일되지 않기 때문에, 인터프리터는 가져온 정의나 함수를 찾을 때 디렉토리 구조에 의존합니다.</p>
+
+<p>이 글에서는 import 문을 정의하는 다양한 방법을 다루고자 합니다.</p>
+
+<h3 id="1-모든-module을-동일한-디렉토리에-두기">1. 모든 module을 동일한 디렉토리에 두기</h3>
+
+<p>다른 정의를 가져오는 가장 쉬운 방법은 모든 스크립트 파일을 동일한 디렉토리에 두는 것입니다. 예를 들어, 아래와 같은 프로젝트가 있다고 가정해보겠습니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>directory
+├── message.py
+└── sender.py
+</code></pre></div></div>
+
+<p>각 스크립트는 아래 코드를 포함합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># message.py
+</span><span class="k">class</span> <span class="nc">Message</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Message from script1"</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># sender.py
+</span><span class="kn">from</span> <span class="nn">message</span> <span class="kn">import</span> <span class="n">Message</span>
+
+<span class="k">class</span> <span class="nc">Sender</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">Message</span><span class="p">()</span>
+        <span class="n">msg</span><span class="p">.</span><span class="n">foo</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Send from script2"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">sender</span> <span class="o">=</span> <span class="n">Sender</span><span class="p">()</span>
+    <span class="n">sender</span><span class="p">.</span><span class="n">send</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ python3 script2.py
+Message from script1
+Send from script2
+</code></pre></div></div>
+
+<p>이 예제에서 <code class="language-plaintext highlighter-rouge">sender.py</code>는 <code class="language-plaintext highlighter-rouge">message</code>에서 <code class="language-plaintext highlighter-rouge">Message</code> 클래스를 <code class="language-plaintext highlighter-rouge">from message import Message</code> 문을 사용하여 가져옵니다. 위의 예제와 같이, 우리는 간단히 <code class="language-plaintext highlighter-rouge">from module import name</code> 형식으로 다른 스크립트의 정의나 문을 추가할 수 있습니다. 여기서 <a href="https://docs.python.org/3/tutorial/modules.html">module</a>은 우리가 가져오고자 하는 기능을 갖춘 확장자(<code class="language-plaintext highlighter-rouge">.py</code>)가 없는 파일입니다.</p>
+
+<p>왜 <code class="language-plaintext highlighter-rouge">import name</code> 형식으로 import 문을 정의하지 않는지 궁금할 수 있습니다. 이는 사용 가능하지만, <code class="language-plaintext highlighter-rouge">import</code> 후에 오는 <code class="language-plaintext highlighter-rouge">[name]</code> 부분은 모듈 또는 패키지(모듈의 모음)이어야 합니다. 그렇기 때문에 <code class="language-plaintext highlighter-rouge">module.name</code>(예: <code class="language-plaintext highlighter-rouge">msg = message.Message()</code>)과 같이 모듈 내의 기능을 사용할 때, 각 함수 또는 클래스의 전체 네임스페이스를 작성해야 접근이 가능합니다. 반면 <code class="language-plaintext highlighter-rouge">from message import Message</code> 형태의 statement는 별도의 네임스페이스 없이 모듈 내 기능에 접근할 수 있게 합니다.</p>
+
+<h3 id="2-의존성-해결을-위해-package-사용">2. 의존성 해결을 위해 package 사용</h3>
+
+<p>프로젝트가 커지면 모든 스크립트 파일을 하나의 디렉토리에 넣는 것이 어려워집니다. 아래 디렉토리 구조를 생각해보겠습니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>directory
+├── msgs
+│   └── message.py
+└── sender.py
+</code></pre></div></div>
+
+<p>이 예에서 <code class="language-plaintext highlighter-rouge">sender.py</code>와 <code class="language-plaintext highlighter-rouge">message.py</code>는 서로 다른 디렉토리에 있습니다. 그래서 위의 예시 파일의 <code class="language-plaintext highlighter-rouge">sender.py</code>를 실행하면 <code class="language-plaintext highlighter-rouge">ModuleNotFoundError</code>가 발생합니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ python3 sender.py
+Traceback (most recent call last):
+  File "path/sender.py", line 2, in &lt;module&gt;
+    from message import Message
+ModuleNotFoundError: No module named 'message'
+</code></pre></div></div>
+
+<p>이 문제를 해결하는 몇 가지 방법이 있습니다. 가장 간단한 방법은 import 문을 <code class="language-plaintext highlighter-rouge">from msgs.message import Message</code>로 변경하면 됩니다. 이는 msgs 디렉토리를 package로 간주하여 내부의 모듈을 접근하는 방식입니다. <a href="https://docs.python.org/3/tutorial/modules.html#packages">Package</a>는 모듈 네임스페이스를 지원하는 Python의 구조적인 방식으로 <code class="language-plaintext highlighter-rouge">.</code>을 연결하는 방식(<code class="language-plaintext highlighter-rouge">package.sub_package.module</code>)으로 서브 디렉토리 내부 모듈 접근을 지원합니다. Python은 디렉토리가 Python 소스코드 파일을 가지고 있을 때 이를 package로 인식합니다. 이는 <code class="language-plaintext highlighter-rouge">__init__.py</code> 파일을 디렉토리에 추가하여 명시적으로 이를 보여줄 수 있습니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>directory
+├── msgs
+│   ├── __init__.py
+│   └── message.py
+└── sender.py
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># sender.py
+</span><span class="kn">from</span> <span class="nn">msgs.message</span> <span class="kn">import</span> <span class="n">Message</span> <span class="c1"># changed
+</span>
+<span class="k">class</span> <span class="nc">Sender</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">Message</span><span class="p">()</span>
+        <span class="n">msg</span><span class="p">.</span><span class="n">foo</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Send from script2"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">sender</span> <span class="o">=</span> <span class="n">Sender</span><span class="p">()</span>
+    <span class="n">sender</span><span class="p">.</span><span class="n">send</span><span class="p">()</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">__init__.py</code>는 import statement를 단순화하는 다양한 syntax sugar를 정의하는 데에 사용되기도 합니다. 예를 들어서, <code class="language-plaintext highlighter-rouge">__init__.py</code>에 <code class="language-plaintext highlighter-rouge">from message import Message</code>를 추가할 경우, <code class="language-plaintext highlighter-rouge">from msgs import Message</code> 형태로 <code class="language-plaintext highlighter-rouge">sender.py</code>에 statement를 작성할 수 있습니다.</p>
+</blockquote>
+
+<h3 id="3-모듈-검색-경로-수정">3. 모듈 검색 경로 수정</h3>
+
+<p>모듈을 가져오는 또 다른 방법은 모듈 검색 경로를 수정하는 것입니다. Python 인터프리터가 스크립트에서 import 문을 감지할 때, 사용자가 가져오려는 모듈을 찾을 때 세 가지 경로를 검색합니다: 현재 실행 중인 스크립트 경로, <code class="language-plaintext highlighter-rouge">PYTHONPATH</code>, 그리고 <code class="language-plaintext highlighter-rouge">sys.path</code>의 경로입니다. 따라서 이 중 하나를 수정하여 모듈이 있는 경로를 추가하면 해당 모듈을 사용할 수 있습니다.</p>
+
+<ol>
+  <li>현재 실행 중인 스크립트 경로: 스크립트를 실행하는 경로는 기본적으로 모듈 검색 경로에 포함됩니다. 그렇기 때문에 모듈을 실행하려는 스크립트와 동일한 디렉토리에 넣으면 해당 모듈은 접근 가능합니다.</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PYTHONPATH</code>: <code class="language-plaintext highlighter-rouge">PYTHONPATH</code>는 Python 인터프리터가 실행될 때 모듈을 검색 경로를 저장하는 환경 변수입니다. 다른 환경 변수와 마찬가지로 경로를 갱신하여 현재 세션에 적용할 수 있습니다. 또는 변경 사항을 영구적으로 적용하려면 <code class="language-plaintext highlighter-rouge">./zshrc</code> 또는 <code class="language-plaintext highlighter-rouge">./bashrc</code>에 해당 경로를 export하는 statement를 추가하면 됩니다.</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span>/path/to/msgs:<span class="nv">$PYTHONPATH</span>
+</code></pre></div>    </div>
+  </li>
+  <li>런타임에서 <code class="language-plaintext highlighter-rouge">sys.path</code> 수정</li>
+</ol>
+
+<p>Python은 <code class="language-plaintext highlighter-rouge">sys.path</code>에 추가된 경로의 모듈들을 검색합니다. 따라서 모듈이 정의된 경로를 <code class="language-plaintext highlighter-rouge">sys.path</code>에 추가하면 Python이 해당 모듈을 사용할 수 있습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">"path/of/msgs"</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">msgs</span> <span class="kn">import</span> <span class="n">Message</span>
+
+<span class="k">class</span> <span class="nc">Sender</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">Message</span><span class="p">()</span>
+        <span class="n">msg</span><span class="p">.</span><span class="n">foo</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Send from script2"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">sender</span> <span class="o">=</span> <span class="n">Sender</span><span class="p">()</span>
+    <span class="n">sender</span><span class="p">.</span><span class="n">send</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="best-practices">Best Practices</h2>
+
+<p>만약 프로젝트에 하위 디렉터리를 도입하고 싶다면, 권장하는 방법은 모듈과 패키지를 사용하는 것입니다. 프로젝트가 작고 하위 디렉터리가 필요하지 않다면, 모든 파이썬 소스 코드를 하나의 디렉터리에 두는 것이 가장 간단하고 바람직한 방법입니다. 프로젝트에 모듈이 많지 않다면 스크립트 실행시 <a href="https://docs.python.org/3/using/cmdline.html#cmdoption-m">-m</a> 인자로 모듈 경로를 제공하는 것도 하나의 방법이 될 수 있습니다.</p>
+
+<p>개인적으로 모듈 import 문제를 해결하는 데 module search path를 수정하는 것은 프로젝트의 규모가 커질 수록 피해야 하는 방법이라고 생각합니다.그 이유는 환경 변수는 해당 프로젝트 뿐만 아니라 다른 프로젝트도 사용하는 변수이기 때문에 이를 변경하면 다른 프로젝트에 side-effect이 발생할 수 있기 때문입니다. 또한, <code class="language-plaintext highlighter-rouge">sys.path</code>를 활용하는 방식은 개발자가 직접 런타임에 <code class="language-plaintext highlighter-rouge">sys.path.append()</code> 의 실행을 관리해야 합니다. 이는 일관적이지 않은 모듈 참조 환경을 쉽게 만들어 낼 수 있습니다. 단일 파일에서 <code class="language-plaintext highlighter-rouge">sys.path.append()</code>를 모아둔 파일을 항상 실행하도록 하는 것이 이 문제를 해결할 수 있지만, 이는 모든 소스 코드에 불필요한 의존성을 도입하고, 프로젝트에서 새 디렉토리를 만들고 싶을 때마다 해당 파일을 업데이트해야 합니다.</p>
+
+<h1 id="참고자료">참고자료</h1>
+<ul>
+  <li><a href="https://docs.python.org/3/tutorial/modules.html">Module</a></li>
+  <li><a href="https://docs.python.org/3/tutorial/modules.html#packages">Package</a></li>
+  <li><a href="https://docs.python.org/3/reference/import.html#importsystem">Python import system</a></li>
+  <li><a href="https://docs.python.org/3/using/cmdline.html#cmdoption-m">Command line and environment</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    
+    <h2>최근 글</h2>
+    
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-05/diffabledatasource">
+              DiffableDataSource로 안전하게 UIKit List 업데이트하기
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+<div class="back-home">
+    <a href="">< Home</a>
+  </div>
+</div>
+        </div>
+        
+        <div style="flex: 1 1 auto;">
+          <aside class="table-of-contents">
+              <h3 id="table-of-contents">Table of Contents</h3>
+<ol>
+  <li><a href="./python_import_mechanism#python에서-다른-파일-import시-오류가-많은-이유">Python에서 다른 파일 import시 오류가 많은 이유</a></li>
+  <li><a href="./python_import_mechanism#python-파일에-다른-파일-import하여-사용하기">Python 파일에 다른 파일 import하여 사용하기</a>
+    <ol>
+      <li><a href="./python_import_mechanism#1-모든-module을-동일한-디렉토리에-두기">모든 module을 동일한 디렉토리에 두기</a></li>
+      <li><a href="./python_import_mechanism#2-의존성-해결을-위해-package-사용">의존성 해결을 위해 package 사용</a></li>
+      <li><a href="./python_import_mechanism#3-모듈-검색-경로-수정">모듈 검색 경로 수정</a></li>
+    </ol>
+  </li>
+  <li><a href="./python_import_mechanism#best-practices">Best Practices</a></li>
+</ol>
+
+          </aside>
+        </div>
+        
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>
