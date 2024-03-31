@@ -1,16 +1,19 @@
 <head>
   <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5VLL8HQ');</script>
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-5VLL8HQ');</script>
   <!-- End Google Tag Manager -->
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-5VL9R6T5ZN');
@@ -27,21 +30,25 @@
   <!-- Primary Meta Tags -->
   <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="author" content="{{ site.author }}">
-  <meta name="title" content="{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}">
-  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <meta name="title"
+    content="{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta name="description"
+    content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
   <meta name="theme-color" content="#f1f3f4" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-  
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }} {% endif %}">
-  <meta property="og:image" content="{% if page.image.feature %}{{ site.baseurl }}/public/assets/{{ page.image.feature }}{% else %}{{ site.baseurl }}/public/assets/blogThumb-noRadius.png{% endif %}">
-  <meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <meta property="og:image"
+    content="{% if page.image.feature %}{{ site.baseurl }}/public/assets/{{ page.image.feature }}{% else %}{{ site.baseurl }}/public/assets/blogThumb-noRadius.png{% endif %}">
+  <meta property="og:description"
+    content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
   <!-- CSS -->
   <link rel="stylesheet" href="{{ site.baseurl }}/public/sass/blogTheme.scss.css" async>
   <link rel="stylesheet" href="{{ site.baseurl }}/public/sass/menu.scss.css" async>
-  <link rel="stylesheet" href="{{ site.baseurl }}/public/sass/syntax.scss.css" async>
+  <link rel="stylesheet" href="{{ site.baseurl }}/public/sass/syntax.css" async>
   <!-- Icons -->
   <link rel="icon" type="image/png" href="/icons/android-chrome-512x512.png" sizes="512x512">
   <link rel="shortcut icon" href="/icons/favicon.ico">
@@ -50,11 +57,13 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon_16x16.png">
   <link rel="icon" type="image/png" href="/icons/android_chrome_192x192.png" sizes="192x192">
   <link rel="manifest" href="/icons/site.webmanifest">
-  
+
   <!-- Fonts -->
   <link rel="preload" href="{{ site.baseurl }}/public/fonts/Age-Normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="{{ site.baseurl }}/public/fonts/Mona-Sans-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="{{ site.baseurl }}/public/fonts/Mona-Sans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ site.baseurl }}/public/fonts/Mona-Sans-Regular.woff2" as="font" type="font/woff2"
+    crossorigin>
+  <link rel="preload" href="{{ site.baseurl }}/public/fonts/Mona-Sans-SemiBold.woff2" as="font" type="font/woff2"
+    crossorigin>
   {% feed_meta %}
 
   <!-- RSS -->
