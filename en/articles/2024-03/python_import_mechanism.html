@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-5VLL8HQ');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VL9R6T5ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-5VL9R6T5ZN');
+  </script>
+
+  <!-- encoding -->
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+
+  <!-- Primary Meta Tags -->
+  <title>Python Import Mechanism - hcn1519 DEV</title>
+  <meta name="author" content="Changnam Hong">
+  <meta name="title"
+    content="Python Import Mechanism - hcn1519 DEV">
+  <meta name="description"
+    content="Python의 Module Import에 대해 살펴봅니다.">
+  <meta name="theme-color" content="#f1f3f4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Python Import Mechanism">
+  <meta property="og:image"
+    content="/en/public/assets/blogThumb-noRadius.png">
+  <meta property="og:description"
+    content="Python의 Module Import에 대해 살펴봅니다.">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/en/public/sass/blogTheme.scss.css" async>
+  <link rel="stylesheet" href="/en/public/sass/menu.scss.css" async>
+  <link rel="stylesheet" href="/en/public/sass/syntax.css" async>
+  <!-- Icons -->
+  <link rel="icon" type="image/png" href="/icons/android-chrome-512x512.png" sizes="512x512">
+  <link rel="shortcut icon" href="/icons/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon_16x16.png">
+  <link rel="icon" type="image/png" href="/icons/android_chrome_192x192.png" sizes="192x192">
+  <link rel="manifest" href="/icons/site.webmanifest">
+
+  <!-- Fonts -->
+  <link rel="preload" href="/en/public/fonts/Age-Normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/en/public/fonts/Mona-Sans-Regular.woff2" as="font" type="font/woff2"
+    crossorigin>
+  <link rel="preload" href="/en/public/fonts/Mona-Sans-SemiBold.woff2" as="font" type="font/woff2"
+    crossorigin>
+  <link type="application/atom+xml" rel="alternate" href="https://hcn1519.github.io/en/feed.xml" title="hcn1519 DEV" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" async>
+
+</head>
+
+  <body>
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VLL8HQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/en" title="Home">HCN</a>
+            <span>DEV</span>
+          
+          </h3>
+        </div>
+      </div>
+      
+        <span class="translation">
+          <small>
+          
+          <a href="/articles/2024-03/python_import_mechanism">한국어로 보기</a>
+          
+          </small>
+        </span>
+      
+      <nav class="menu">
+  <div class="menu-container">
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" href="/en/">Home</a>
+      </li>
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/en/about">About</a>
+            </li>
+          
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/en/archives/">Archives</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            <li class="menu-item">
+              <a class="menu-link" href="/en/tags/">Tags</a>
+            </li>
+          
+        
+      
+    </ul>
+  </div>
+
+  <a class="menu-toggle">
+    <div class="menu-hamburger"></div>
+  </a>
+</nav>
+
+
+      <div class="column-wrapper">  
+        <aside class="side-menu-in-desktop">
+          <ul class="menu-list">
+  <li class="menu-item">
+    <a class="menu-link" href="/en/">Home</a>
+  </li>
+
+  
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+        <li class="menu-item">
+          <a class="menu-link" href="/en/about">About</a>
+        </li>
+      
+    
+  
+    
+      
+        <li class="menu-item">
+          <a class="menu-link" href="/en/archives/">Archives</a>
+        </li>
+      
+    
+  
+    
+  
+    
+  
+    
+      
+    
+  
+    
+  
+    
+  
+    
+      
+        <li class="menu-item">
+          <a class="menu-link" href="/en/tags/">Tags</a>
+        </li>
+      
+    
+  
+</ul>
+        </aside>
+        <div class="container content">
+          <div class="post">
+  <h2 class="post-title">Python Import Mechanism</h2>
+  <span class="post-date">25 Mar 2024</span>
+  
+
+  
+
+  
+
+  
+  
+
+        
+  
+  
+  <p>Encountering frequent errors while importing functionalities from other source code in a Python project is common. Developers unfamiliar with Python’s import system may mitigate these errors by either consolidating all source code into one file or placing all scripts in a single directory.</p>
+
+<p>This article is written to aid developers with such experiences in understanding Python’s import system better.</p>
+
+<h2 id="reasons-for-frequent-errors-when-importing-other-files-in-python">Reasons for frequent errors when importing other files in Python</h2>
+
+<p>When using Python, developers can execute scripts <strong>without path constraints</strong>. While this is a significant advantage, it also means that the script execution path, which serves as a key reference point when organizing references across multiple files, can easily change. For example, consider the project structure below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>foo
+├── bar
+│   └── sample2.py
+└── sample.py
+</code></pre></div></div>
+
+<p>Here, executing <code class="language-plaintext highlighter-rouge">python3 sample.py</code> from the <code class="language-plaintext highlighter-rouge">foo</code> directory and <code class="language-plaintext highlighter-rouge">python3 ../sample.py</code> from the <code class="language-plaintext highlighter-rouge">bar</code> directory both run the same script file. However, their script execution paths differ, <code class="language-plaintext highlighter-rouge">/foo</code> and <code class="language-plaintext highlighter-rouge">/foo/bar</code>, respectively, which can lead to significant differences. Therefore, when working on projects where multiple source files are divided into various subdirectories, it is generally assumed that the project is executed from the project root, and the project code is organized accordingly.</p>
+
+<h2 id="importing-other-files-into-python-files">Importing other files into Python files</h2>
+
+<p>Python allows importing functionalities from other scripts using the <code class="language-plaintext highlighter-rouge">import</code> statement. Since Python scripts are not compiled simultaneously with multiple scripts, the interpreter relies on the directory structure when locating imported definitions or functions.</p>
+
+<p>This part aims to cover various methods of defining import statements.</p>
+
+<h3 id="1-placing-all-modules-in-the-same-directory">1. Placing all modules in the same directory</h3>
+
+<p>The easiest way to import different definitions is to place all script files in the same directory. For example, let’s consider a project structure like the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>directory
+├── message.py
+└── sender.py
+</code></pre></div></div>
+
+<p>Each script contains the following code:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># message.py
+</span><span class="k">class</span> <span class="nc">Message</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Message from script1"</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># sender.py
+</span><span class="kn">from</span> <span class="nn">message</span> <span class="kn">import</span> <span class="n">Message</span>
+
+<span class="k">class</span> <span class="nc">Sender</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">Message</span><span class="p">()</span>
+        <span class="n">msg</span><span class="p">.</span><span class="n">foo</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Send from script2"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">sender</span> <span class="o">=</span> <span class="n">Sender</span><span class="p">()</span>
+    <span class="n">sender</span><span class="p">.</span><span class="n">send</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ python3 sender.py
+Message from script1
+Send from script2
+</code></pre></div></div>
+
+<p>In this example, <code class="language-plaintext highlighter-rouge">sender.py</code> imports the <code class="language-plaintext highlighter-rouge">Message</code> class from <code class="language-plaintext highlighter-rouge">message</code> using the <code class="language-plaintext highlighter-rouge">from message import Message</code> statement. As shown above, we can simply add definitions or statements from other scripts using the <code class="language-plaintext highlighter-rouge">from module import name</code> format. Here, <a href="https://docs.python.org/3/tutorial/modules.html">module</a> refers to a file without an extension (<code class="language-plaintext highlighter-rouge">.py</code>) containing the functionalities we want to import.</p>
+
+<p>You might wonder why we don’t define import statements using the <code class="language-plaintext highlighter-rouge">import [name]</code> format. While this is possible, the <code class="language-plaintext highlighter-rouge">[name]</code> following the <code class="language-plaintext highlighter-rouge">import</code> must be a module or package (a collection of modules). Therefore, when using the <code class="language-plaintext highlighter-rouge">import [name]</code> form, you need to write the full namespace for each function or class when accessing them within the module (e.g., <code class="language-plaintext highlighter-rouge">msg = message.Message()</code>). On the other hand, the <code class="language-plaintext highlighter-rouge">from message import Message</code> statement allows access to functionalities within the module without a separate namespace.</p>
+
+<h3 id="2-using-packages-to-resolve-dependencies">2. Using packages to resolve dependencies</h3>
+
+<p>As projects grow, putting all script files into a single directory becomes impractical. Let’s consider the directory structure below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>directory
+├── msgs
+│   └── message.py
+└── sender.py
+</code></pre></div></div>
+
+<p>In this example, <code class="language-plaintext highlighter-rouge">sender.py</code> and <code class="language-plaintext highlighter-rouge">message.py</code> are in different directories. Therefore, running <code class="language-plaintext highlighter-rouge">sender.py</code> from the example files above results in a <code class="language-plaintext highlighter-rouge">ModuleNotFoundError</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ python3 sender.py
+Traceback (most recent call last):
+  File "path/sender.py", line 2, in &lt;module&gt;
+    from message import Message
+ModuleNotFoundError: No module named 'message'
+</code></pre></div></div>
+
+<p>There are several ways to solve this problem. The simplest way is to change the import statement to <code class="language-plaintext highlighter-rouge">from msgs.message import Message</code>. This treats the <code class="language-plaintext highlighter-rouge">msgs</code> directory as a package and accesses the module inside it. <a href="https://docs.python.org/3/tutorial/modules.html#packages">Packages</a> are a structured way in Python that supports module namespaces, allowing access to modules within subdirectories by using dots (<code class="language-plaintext highlighter-rouge">package.sub_package.module</code>). Python recognizes a directory as a package when it contains Python source code files. This can be explicitly indicated by adding an <code class="language-plaintext highlighter-rouge">__init__.py</code> file to the directory:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>directory
+├── msgs
+│   ├── __init__.py
+│   └── message.py
+└── sender.py
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># sender.py
+</span><span class="kn">from</span> <span class="nn">msgs.message</span> <span class="kn">import</span> <span class="n">Message</span> <span class="c1"># changed
+</span>
+<span class="k">class</span> <span class="nc">Sender</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">Message</span><span class="p">()</span>
+        <span class="n">msg</span><span class="p">.</span><span class="n">foo</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Send from script2"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">sender</span> <span class="o">=</span> <span class="n">Sender</span><span class="p">()</span>
+    <span class="n">sender</span><span class="p">.</span><span class="n">send</span><span class="p">()</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">__init__.py</code> is also used to define various syntax sugars that simplify import statements. For example, adding <code class="language-plaintext highlighter-rouge">from message import Message</code> to <code class="language-plaintext highlighter-rouge">__init__.py</code> allows writing the statement in <code class="language-plaintext highlighter-rouge">sender.py</code> as <code class="language-plaintext highlighter-rouge">from msgs import Message</code>.</p>
+  <h3 id="3-modifying-module-search-paths">3. Modifying Module Search Paths</h3>
+</blockquote>
+
+<p>Another way to import modules is by modifying the module search paths. When the Python interpreter encounters an import statement in a script, it searches for the module the user wants to import in three locations: the current script’s directory, <code class="language-plaintext highlighter-rouge">PYTHONPATH</code>, and the paths in <code class="language-plaintext highlighter-rouge">sys.path</code>. Therefore, by modifying any of these, you can add the path where the module exists and make the module accessible.</p>
+
+<ol>
+  <li>
+    <p>Current Script’s Directory: By default, the directory where the script is executed is included in the module search path. So, if you place the module in the same directory as the script you’re running, the module will be accessible.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PYTHONPATH</code>: <code class="language-plaintext highlighter-rouge">PYTHONPATH</code> is an environment variable that stores the module search paths when the Python interpreter is invoked. Like other environment variables, you can update it to apply changes for the current session. Alternatively, if you want changes to be permanent, you can add a statement to export the path to <code class="language-plaintext highlighter-rouge">./zshrc</code> or <code class="language-plaintext highlighter-rouge">./bashrc</code>.</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span>/path/to/msgs:<span class="nv">$PYTHONPATH</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Modifying <code class="language-plaintext highlighter-rouge">sys.path</code> at Runtime</p>
+
+    <p>Python searches for modules in the paths added to <code class="language-plaintext highlighter-rouge">sys.path</code>. Therefore, by adding the path where the module is defined to <code class="language-plaintext highlighter-rouge">sys.path</code>, Python can access that module.</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">sys</span>
+ <span class="n">sys</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">"path/of/msgs"</span><span class="p">)</span>
+
+ <span class="kn">from</span> <span class="nn">msgs</span> <span class="kn">import</span> <span class="n">Message</span>
+
+ <span class="k">class</span> <span class="nc">Sender</span><span class="p">:</span>
+     <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+         <span class="n">msg</span> <span class="o">=</span> <span class="n">Message</span><span class="p">()</span>
+         <span class="n">msg</span><span class="p">.</span><span class="n">foo</span><span class="p">()</span>
+         <span class="k">print</span><span class="p">(</span><span class="s">"Send from script2"</span><span class="p">)</span>
+
+ <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+     <span class="n">sender</span> <span class="o">=</span> <span class="n">Sender</span><span class="p">()</span>
+     <span class="n">sender</span><span class="p">.</span><span class="n">send</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>These methods allow you to customize the module search paths according to your project structure and make the required modules accessible to your scripts.</p>
+
+<h2 id="best-practices">Best Practices</h2>
+
+<p>If you intend to introduce subdirectories into your project, the recommended approach is to use modules and packages. However, if your project is small and does not require subdirectories, placing all Python source code in a single directory is the simplest and most desirable method. If your project has only a few modules, providing the module path as an argument using the <a href="https://docs.python.org/3/using/cmdline.html#cmdoption-m">-m</a> option when executing scripts can also be a viable approach.</p>
+
+<p>Personally, I believe that modifying the module search path to resolve module import issues becomes less favorable as the project scales. The reason is that environment variables are shared across projects, so modifying them can lead to side effects in other projects. Additionally, using <code class="language-plaintext highlighter-rouge">sys.path</code> requires developers to manage <code class="language-plaintext highlighter-rouge">sys.path.append()</code> calls at runtime, leading to inconsistent module reference environments. While creating a file where <code class="language-plaintext highlighter-rouge">sys.path.append()</code> calls are centralized and ensuring it is always executed can mitigate this issue, it introduces unnecessary dependencies to all source code and requires updating the file every time a new directory is added to the project.</p>
+
+<p>In conclusion, while modifying the module search path can be a temporary solution for small projects, it is not recommended for larger projects due to potential side effects and maintenance overhead. Instead, leveraging modules and packages is a more robust and scalable approach for organizing Python projects with subdirectories.</p>
+
+<h1 id="references">References</h1>
+<ul>
+  <li><a href="https://docs.python.org/3/tutorial/modules.html">Module</a></li>
+  <li><a href="https://docs.python.org/3/tutorial/modules.html#packages">Package</a></li>
+  <li><a href="https://docs.python.org/3/reference/import.html#importsystem">Python import system</a></li>
+  <li><a href="https://docs.python.org/3/using/cmdline.html#cmdoption-m">Command line and environment</a></li>
+</ul>
+
+
+<div class="related">
+  
+  
+  
+  
+  
+  
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+
+    
+    
+
+    
+
+    
+
+  
+  </ul>
+
+  
+    
+    <h2>Latest Posts</h2>
+    
+    <ul class="related-posts">
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2022-05/diffabledatasource">
+              Updating UIKit Lists Safely with DiffableDataSource
+              <small>13 May 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2022-04/swift_async_await">
+              Swift Async Await
+              <small>08 Apr 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+        <li>
+          <h3>
+            <a href="/en/articles/2022-01/test_spy">
+              Test Spy
+              <small>05 Jan 2022</small>
+            </a>
+          </h3>
+        </li>
+      
+    </ul>
+  
+</div>
+
+
+<script>
+  
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // dark mode
+    
+  }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="hcn1519/hcn1519.github.io"
+        issue-term="og:title"
+        label="gets Comments 🙌"
+        theme=github-dark
+        crossorigin="anonymous"
+        async>
+</script>
+<div class="back-home">
+    <a href="/en">< Home</a>
+  </div>
+</div>
+        </div>
+        
+        <div style="flex: 1 1 auto;">
+          <aside class="table-of-contents">
+              <h3 id="table-of-contents">Table of Contents</h3>
+<ol>
+  <li><a href="./python_import_mechanism#reasons-for-frequent-errors-when-importing-other-files-in-python">Reasons for frequent errors when importing other files in Python</a></li>
+  <li><a href="./python_import_mechanism#importing-other-files-into-python-files">Importing other files into Python files</a>
+    <ol>
+      <li><a href="./python_import_mechanism#1-placing-all-modules-in-the-same-directory">Placing all modules in the same directory</a></li>
+      <li><a href="./python_import_mechanism#2-using-packages-to-resolve-dependencies">Using packages to resolve dependencies</a></li>
+      <li><a href="./python_import_mechanism#3-modifying-module-search-paths">Modifying Module Search Paths</a></li>
+    </ol>
+  </li>
+  <li><a href="./python_import_mechanism#best-practices">Best Practices</a></li>
+</ol>
+
+          </aside>
+        </div>
+        
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/en/public/js/sidebarHamburger.js"></script>
+  </body>
+</html>
