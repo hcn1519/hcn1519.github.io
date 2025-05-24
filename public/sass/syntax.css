@@ -1,17 +1,19 @@
+/* Light Theme Syntax Highlighting */
 @media (prefers-color-scheme: light) {
-
-  /* 글 중간에 쓰는 블럭용 */
+  /* Inline code blocks */
   code {
     background: #f6f8fa;
     color: #101010;
   }
 
+  /* Base highlighting */
   .highlight,
   .highlight .w {
     color: #24292f;
     background-color: #f6f8fa;
   }
 
+  /* Keywords */
   .highlight .k,
   .highlight .kd,
   .highlight .kn,
@@ -25,6 +27,7 @@
     color: #a40f25;
   }
 
+  /* Errors and Diffs */
   .highlight .gr {
     color: #f6f8fa;
   }
@@ -34,43 +37,28 @@
     background-color: #ffebe9;
   }
 
-  .highlight .nb {
-    color: #953800;
-  }
-
-  .highlight .nc {
-    color: #953800;
-  }
-
-  .highlight .no {
-    color: #953800;
-  }
-
-  .highlight .nn {
-    color: #953800;
-  }
-
-  .highlight .sr {
-    color: #116329;
-  }
-
-  .highlight .na {
-    color: #116329;
-  }
-
-  .highlight .nt {
-    color: #116329;
-  }
-
   .highlight .gi {
     color: #116329;
     background-color: #dafbe1;
   }
 
-  .highlight .kc {
-    color: #0550ae;
+  /* Built-ins and Names */
+  .highlight .nb,
+  .highlight .nc,
+  .highlight .no,
+  .highlight .nn {
+    color: #953800;
   }
 
+  /* Strings and Regex */
+  .highlight .sr,
+  .highlight .na,
+  .highlight .nt {
+    color: #116329;
+  }
+
+  /* Constants and Numbers */
+  .highlight .kc,
   .highlight .l,
   .highlight .ld,
   .highlight .m,
@@ -84,26 +72,12 @@
     color: #0550ae;
   }
 
-  .highlight .sb {
-    color: #0550ae;
-  }
-
-  .highlight .bp {
-    color: #0550ae;
-  }
-
-  .highlight .ne {
-    color: #0550ae;
-  }
-
-  .highlight .nl {
-    color: #0550ae;
-  }
-
-  .highlight .py {
-    color: #0550ae;
-  }
-
+  /* Variables and Functions */
+  .highlight .sb,
+  .highlight .bp,
+  .highlight .ne,
+  .highlight .nl,
+  .highlight .py,
   .highlight .nv,
   .highlight .vc,
   .highlight .vg,
@@ -112,21 +86,20 @@
     color: #0550ae;
   }
 
+  /* Operators */
   .highlight .o,
   .highlight .ow {
     color: #0550ae;
   }
 
-  .highlight .gh {
-    color: #0550ae;
-    font-weight: bold;
-  }
-
+  /* Special Highlights */
+  .highlight .gh,
   .highlight .gu {
     color: #0550ae;
     font-weight: bold;
   }
 
+  /* String Variants */
   .highlight .s,
   .highlight .sa,
   .highlight .sc,
@@ -141,20 +114,20 @@
     color: #0a3069;
   }
 
-  .highlight .nd {
-    color: #8250df;
-  }
-
+  /* Decorators and Functions */
+  .highlight .nd,
   .highlight .nf,
   .highlight .fm {
     color: #8250df;
   }
 
+  /* Errors */
   .highlight .err {
     color: #f6f8fa;
     background-color: #82071e;
   }
 
+  /* Comments */
   .highlight .c,
   .highlight .ch,
   .highlight .cd,
@@ -162,22 +135,14 @@
   .highlight .cp,
   .highlight .cpf,
   .highlight .c1,
-  .highlight .cs {
-    color: #6e7781;
-  }
-
-  .highlight .gl {
-    color: #6e7781;
-  }
-
+  .highlight .cs,
+  .highlight .gl,
   .highlight .gt {
     color: #6e7781;
   }
 
-  .highlight .ni {
-    color: #24292f;
-  }
-
+  /* Misc */
+  .highlight .ni,
   .highlight .si {
     color: #24292f;
   }
@@ -193,12 +158,18 @@
   }
 }
 
+/* Dark Theme Syntax Highlighting */
 @media (prefers-color-scheme: dark) {
-
-  /* 글 중간에 쓰는 블럭용 */
+  /* Inline code blocks */
   code.highlighter-rouge {
     color: var(--message-color);
     background-color: var(--message-bg-color);
+  }
+
+  /* Base highlighting */
+  .highlight {
+    color: #c9d1d9;
+    background-color: #161b22;
   }
 
   .highlight table td {
@@ -209,12 +180,7 @@
     margin: 0;
   }
 
-  .highlight,
-  .highlight .w {
-    color: #c9d1d9;
-    background-color: #161b22;
-  }
-
+  /* Keywords */
   .highlight .k,
   .highlight .kd,
   .highlight .kn,
@@ -228,6 +194,7 @@
     color: #ffa557;
   }
 
+  /* Errors and Diffs */
   .highlight .gr {
     color: #f0f6fc;
   }
@@ -237,214 +204,51 @@
     background-color: #67060c;
   }
 
-  .highlight .nb {
-    color: #ffa657;
-  }
-
-  .highlight .nc {
-    color: #ffa657;
-  }
-
-  .highlight .no {
-    color: #ffa657;
-  }
-
+  /* Built-ins and Names */
+  .highlight .nb,
+  .highlight .nc,
+  .highlight .no,
   .highlight .nn {
     color: #ffa657;
   }
-
-  .highlight .sr {
-    color: #7ee787;
-  }
-
-  .highlight .na {
-    color: #7ee787;
-  }
-
-  .highlight .nt {
-    color: #7ee787;
-  }
-
-  .highlight .gi {
-    color: #aff5b4;
-    background-color: #033a16;
-  }
-
-  .highlight .kc {
-    color: #79c0ff;
-  }
-
-  .highlight .l,
-  .highlight .ld,
-  .highlight .m,
-  .highlight .mb,
-  .highlight .mf,
-  .highlight .mh,
-  .highlight .mi,
-  .highlight .il,
-  .highlight .mo,
-  .highlight .mx {
-    color: #79c0ff;
-  }
-
-  .highlight .sb {
-    color: #79c0ff;
-  }
-
-  .highlight .bp {
-    color: #79c0ff;
-  }
-
-  .highlight .ne {
-    color: #79c0ff;
-  }
-
-  .highlight .nl {
-    color: #79c0ff;
-  }
-
-  .highlight .py {
-    color: #79c0ff;
-  }
-
-  .highlight .nv,
-  .highlight .vc,
-  .highlight .vg,
-  .highlight .vi,
-  .highlight .vm {
-    color: #79c0ff;
-  }
-
-  .highlight .o,
-  .highlight .ow {
-    color: #79c0ff;
-  }
-
-  .highlight .gh {
-    color: #1f6feb;
-    font-weight: bold;
-  }
-
-  .highlight .gu {
-    color: #1f6feb;
-    font-weight: bold;
-  }
-
-  .highlight .s,
-  .highlight .sa,
-  .highlight .sc,
-  .highlight .dl,
-  .highlight .sd,
-  .highlight .s2,
-  .highlight .se,
-  .highlight .sh,
-  .highlight .sx,
-  .highlight .s1,
-  .highlight .ss {
-    color: #a5d6ff;
-  }
-
-  .highlight .nd {
-    color: #d2a8ff;
-  }
-
-  .highlight .nf,
-  .highlight .fm {
-    color: #d2a8ff;
-  }
-
-  .highlight .err {
-    color: #f0f6fc;
-    background-color: #8e1519;
-  }
-
-  .highlight .c,
-  .highlight .ch,
-  .highlight .cd,
-  .highlight .cm,
-  .highlight .cp,
-  .highlight .cpf,
-  .highlight .c1,
-  .highlight .cs {
-    color: #8b949e;
-  }
-
-  .highlight .gl {
-    color: #8b949e;
-  }
-
-  .highlight .gt {
-    color: #8b949e;
-  }
-
-  .highlight .ni {
-    color: #c9d1d9;
-  }
-
-  .highlight .si {
-    color: #c9d1d9;
-  }
-
-  .highlight .ge {
-    color: #c9d1d9;
-    font-style: italic;
-  }
-
-  .highlight .gs {
-    color: #c9d1d9;
-    font-weight: bold;
-  }
-
 }
 
+/* Code Block Layout */
 pre,
 code {
-  font-family: 'Menlo Regular';
-  padding: 0.2em;
-  font-size: 0.87em;
-  letter-spacing: -0.5pt;
-}
-
-/* 글 중간에 쓰는 블럭용 */
-code {
-  padding: 3px 2px;
-  margin: 0;
-  border-radius: 4px;
-  white-space: inherit;
+  font-family: "Menlo Regular", Menlo, Monaco, "Courier New", monospace;
+  font-size: 0.9rem;
+  border-radius: 3px;
 }
 
 pre {
-  overflow: auto;
-  display: block;
-  padding: 1em;
-  margin: 0 0 1em;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding: 1rem;
   line-height: 1.4;
-  word-break: break-all;
-  word-wrap: break-word;
-  border-radius: 0;
-  font-weight: normal;
+  overflow-x: auto;
 }
 
 pre code {
-  background: transparent;
-  white-space: pre;
-  overflow: auto;
-  word-wrap: normal;
+  padding: 0;
+  font-size: 100%;
+  color: inherit;
+  background-color: transparent;
 }
 
 .highlight {
-  margin-left: 5px !important;
-  margin-right: 5px !important;
-  border-radius: 5px;
+  margin-bottom: 1rem;
+  border-radius: 4px;
 }
 
-.post>.highlight .lineno {
+.post > .highlight .lineno {
+  color: #999;
   display: inline-block;
   padding: 0 5px;
-  border-right: 1px solid #ccc;
+  border-right: 1px solid #999;
 }
 
-.post>.highlight pre code {
+.post > .highlight pre code {
   display: block;
   white-space: pre;
   overflow-x: auto;
