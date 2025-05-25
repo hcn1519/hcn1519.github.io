@@ -3,7 +3,7 @@
     width: 12rem;
     position: fixed;
     top: 0;
-    right: 0;
+    right: calc((100% - 51rem - 14rem) / 2);
     height: 100%;
     overflow-y: auto;
     padding: 0.5rem;
@@ -14,12 +14,7 @@
 @media (min-width: 1180px) {
   .table-of-contents {
     width: 20rem;
-    position: fixed;
-    margin-left: 65em;
-    top: 0;
-    left: 0;
-    height: 100%;
-    overflow-y: auto;
+    right: calc((100% - 51rem - 22rem) / 2);
     font-size: 0.9rem;
   }
 }
@@ -36,14 +31,6 @@
   padding: 7rem 0rem 0rem 1rem;
 }
 @media (min-width: 45rem) {
-  
-  .side-menu-in-desktop {
-    width: 100px;
-    position: fixed;
-    top: 0;
-    height: 100%;
-    padding: 7rem 0rem 0rem 1rem;
-  }
   .menu {
     display: none;
   }
@@ -54,6 +41,9 @@
   }
   .menu {
     display: block;
+  }
+  .masthead .container {
+    padding-left: 4rem;
   }
 }
 .menu .menu-container {
@@ -117,13 +107,14 @@
   }
 }
 
-.menu{
+.menu {
   height: 3rem;
   width: 3rem;
   overflow: hidden;
   position: fixed;
   z-index: 1000;
   transition: width .3s ease-in-out;
+  left: 1rem;
 }
 
 .menu-container {
